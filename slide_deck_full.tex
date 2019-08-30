@@ -1099,8 +1099,7 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\begin{itemize}
 		\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
 		\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
-		\item $u_i(x,\theta_i) = \theta_i v(k_i) - t_i$;
-		\item $v(\cdot)$ is a weakly increasing function.
+		\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
 	\end{itemize}
 	\item I'll call the above \alert{the Euclidean model} (not standard name).
 	\item We'll derive two \structure{necessary} conditions for $\Gamma$ to be \structure{DSIC} in \structure{Euclidean} model.
@@ -1120,11 +1119,11 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\begin{align*}
 		U_i(\theta_i, \theta_{-i}) &\geq u_i\left(x(\hat{\theta}_i,\theta_{-i}), \theta_i \right)
 		\\ 
-		\visible<2->{ &\equiv \theta_i v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right) - t_i (\hat{\theta}_i,\theta_{-i})}
+		\visible<2->{ &\equiv \theta_i k_i(\hat{\theta}_i,\theta_{-i}) - t_i (\hat{\theta}_i,\theta_{-i})}
 		\\ 
-		\visible<3->{&= \hat{\theta}_i v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right) - t_i (\hat{\theta}_i,\theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right)}
+		\visible<3->{&= \hat{\theta}_i k_i(\hat{\theta}_i,\theta_{-i}) - t_i (\hat{\theta}_i,\theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i})}
 		\\ 
-		\visible<4->{&= U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right)}
+		\visible<4->{&= U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i})}
 	\end{align*}
 	}
 \end{itemize}
@@ -1135,23 +1134,23 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 \begin{itemize}
 	\item In the end:
 	\vspace{-0.5em}\begin{align*}
-		U_i(\theta_i, \theta_{-i}) &\geq U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right)
+		U_i(\theta_i, \theta_{-i}) &\geq U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i}).
 	\end{align*}\vspace{-1em}
 	\item Similarly, type $\hat{\theta}_i$ should not want to report $\theta_i$:
 	\vspace{-0.5em}\begin{align*}
-		U_i(\hat{\theta}_i, \theta_{-i}) &\geq U_i(\theta_i, \theta_{-i}) + \left(\hat{\theta}_i - \theta_i \right) v \left( k_i(\theta_i,\theta_{-i}) \right)
+		U_i(\hat{\theta}_i, \theta_{-i}) &\geq U_i(\theta_i, \theta_{-i}) + \left(\hat{\theta}_i - \theta_i \right) k_i(\theta_i,\theta_{-i}).
 	\end{align*}\vspace{-1em}
 	\pause
 	\item Combining the two \structure<3->{for $\theta_i > \hat{\theta}_i$}, we get
 	{\small \vspace{-0.5em}\begin{align*}
-		v \left( k_i(\theta_i,\theta_{-i}) \right) 
+		k_i(\theta_i,\theta_{-i}) 
 		\geq 
 		\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
 		\geq 
-		v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right),
+		k_i(\hat{\theta}_i,\theta_{-i}),
 	\end{align*}\vspace{-1em}}
 	\pause
-	\item meaning \structure{$v \left( k_i(\theta_i,\theta_{-i}) \right) \geq v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right)$} -- allocation must be \alert{monotone}.
+	\item meaning \structure{$k_i(\theta_i,\theta_{-i}) \geq k_i(\hat{\theta}_i,\theta_{-i})$} -- allocation must be \alert{monotone}.
 	\item DSIC: ``Those who value things more should get more things.''
 	\vspace{-2em}
 \end{itemize}
@@ -1176,21 +1175,21 @@ the second cool result in mechanism design (after revelation principle, not mono
 
 \lyxframe{Payoff Equivalence}
 \begin{itemize}
-	\item $v(k_i(\theta_i,\theta_{-i}))$ is monotone in $\theta_i$, hence continuous a.e.: $\lim_{\hat{\theta}_i \to \theta_i} v(k_i(\hat{\theta}_i,\theta_{-i})) = v(k_i(\theta_i,\theta_{-i}))$.
+	\item $k_i(\theta_i,\theta_{-i})$ is monotone in $\theta_i$, hence continuous a.e.: $\lim_{\hat{\theta}_i \to \theta_i} k_i(\hat{\theta}_i,\theta_{-i}) = k_i(\theta_i,\theta_{-i})$.
 	\pause
 	\item Together with the big inequality 
 	{\small \vspace{-0.5em}\begin{align*}
-		v \left( k_i(\theta_i,\theta_{-i}) \right) 
+		k_i(\theta_i,\theta_{-i})
 		\geq 
 		\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
 		\geq 
-		v \left( k_i(\hat{\theta}_i,\theta_{-i}) \right),
+		k_i(\hat{\theta}_i,\theta_{-i}),
 	\end{align*}\vspace{-1em}}
 	
 	this means that a.e.
 	\pause
 	\vspace{-0.5em}\begin{align*}
-		\frac{\partial U_i(\theta_i,\theta_{-i})}{\partial \theta_i} = \lim_{\hat{\theta}_i \to \theta_i} \frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i }  = v \left( k_i(\theta_i,\theta_{-i}) \right).
+		\frac{\partial U_i(\theta_i,\theta_{-i})}{\partial \theta_i} = \lim_{\hat{\theta}_i \to \theta_i} \frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i }  = k_i(\theta_i,\theta_{-i}).
 	\end{align*}\vspace{-1em}
 \end{itemize}
 \lyxframeend
@@ -1198,18 +1197,28 @@ the second cool result in mechanism design (after revelation principle, not mono
 
 \lyxframe{Payoff Equivalence}
 \begin{itemize}
-	\item So if $v(k(\theta))$ is integrable in $\theta_i$ (e.g. if it's bounded) then for all $\theta_i$
+	\item So if $k(\theta)$ is integrable in $\theta_i$ (e.g. if it's bounded) then for all $\theta_i$
 	\vspace{-0.5em}\begin{align*}
 		\structure{
-		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} v \left( k_i(s,\theta_{-i}) \right) d s
+		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
 		}
 	\end{align*}\vspace{-1em}
 	\item This is \alert{payoff equivalence} a.k.a. envelope condition.
-	\pause
-	\item Given allocation $k$ (doesn't have to be efficient), utility of one type (usually ``lowest'' type) pins down utils of all types of player $i$ given fixed $\theta_{-i}$.
-	\pause
-	\item Equivalently, have only one degree of freedom for $i$'s transfers given $\theta_{-i}$.
-	\item Remind anything?
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Payoff Equivalence}
+\begin{theorem}[Payoff Equivalence for DSIC mechanisms]
+	For any two DSIC DRMs with $x = (k,t)$ and $x' = (k',t')$ respectively, 	
+	\structure{if $k(\theta)=k'(\theta)$} for all $\theta$ \alert{then $t_i(\theta) = t'_i(\theta) + c_i (\theta_{-i})$} for all $\theta$ for some $c_i(\theta_{-i})$.
+\end{theorem}
+\pause
+\begin{itemize} 
+\item Given allocation $k$ (doesn't have to be efficient), utility of one type (usually ``lowest'' type) pins down utils of all types of player $i$ given fixed $\theta_{-i}$.
+\pause
+\item Equivalently, have only one degree of freedom for $i$'s transfers given $\theta_{-i}$.
+\item Remind anything?
 \end{itemize}
 \lyxframeend
 
@@ -1218,12 +1227,14 @@ the second cool result in mechanism design (after revelation principle, not mono
 \begin{itemize}
 	\item Recall Groves' transfers: efficient $k^*$ can be impl-d in DS by
 	\vspace{-0.5em}\begin{align*}
-		t_{i}(\theta)=-\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i})
+		t_{i}(\theta) &= -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i})
+		\\ &= \structure{-\left(\sum_{j\neq i} \theta_j k_j^*(\theta_i, \theta_{-i}) \right)} + h_{i}(\theta_{-i})
 	\end{align*}\vspace{-1em}
 	
 	\structure<1>{for some $h_i(\theta_{-i})$.}
 	\pause
-	\item Payoff equivalence implies that \structure{efficient} $k^*$ in a \structure{Euclidean} model can \alert{ONLY} be implemented by some \structure{Groves'} mechanism.
+	\item Payoff equivalence implies that \alert{efficient} $k^*$ in a \alert{Euclidean} model can \alert{ONLY} be implemented by some \structure{Groves'} mechanism.
+	% Similarity is that there's just one DoF for i's payoffs
 \end{itemize}
 \lyxframeend
 
@@ -1288,7 +1299,7 @@ Start with the general model as before:
 \end{definition}
 \pause
 \begin{itemize}
-	\item Standard Nash eqm reasoning: given that everyone else plays eqm strats, $i$ has no incentive to deviate.
+	\item Standard Nash Eqm reasoning: given that everyone else plays eqm strats, $i$ has no incentive to deviate.
 	\item (This definition is for pure strategies, but there is no problem in allowing for mixed strategies.)
 \end{itemize}
 \vspace{-1em}
@@ -1436,7 +1447,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	
 	\item Reporting truth is a best response to $-i$ reporting truthfully 
 	
-	$\Rightarrow$ truthful reporting is a BNE of the mechanism.
+	$\Rightarrow$ truthful reporting is a BNE of the mechanism. \qed
 \end{itemize}
 \lyxframeend
 
@@ -1477,18 +1488,20 @@ Has the usual Groves' term (the third one); the other three guarantee IR.
 		\item \visible<0>{maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.}
 	\end{itemize}
 \end{theorem}
-Prove EFF and BIC.
+Prove EFF and BIC (hint: analogous to AGV).
 \lyxframeend
 
 
 \lyxframe{Generalized VCG. Proof: IIR}
 Interim expected utility for $\theta_i$ is
-\begin{align*}
-	\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =1}^N v_j (k^*(\theta),\theta_j) - \sum_{j =1}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right] + \underline{U}_i (\bar{\theta}_i)
-	\visible<2>{
-		\geq \underline{U}_i(\theta_i)
-	}
-\end{align*}
+{\small
+	\begin{align*}
+		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =1}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =1}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} \right] + \underline{U}_i (\bar{\theta}_i)
+		\visible<2>{
+			\geq \underline{U}_i(\theta_i)
+		}
+	\end{align*}
+}
 \pause
 since
 \begin{align*}
@@ -1500,7 +1513,7 @@ since
 
 \lyxframe{IR+BB ?}
 \begin{itemize}
-	\item So we have two mechanisms that implement the efficient $k^*$:
+	\item So we have two mechanisms that implement the efficient $k^*$ in \structure{quasilinear} model:
 	\begin{itemize}
 		\item AGV: BIC + BB,
 		\item gVCG: BIC + IIR.
@@ -1519,24 +1532,25 @@ since
 \begin{itemize}
 	\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
 	\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
-	\item $u_i(x,\theta_i) = \theta_i v(k_i) - t_i$;
-	\item $v(\cdot)$ is a weakly increasing function.
+	\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
 \end{itemize}
-%TODO: v(k) should be just k_i, and in DSIC as well
 \lyxframeend
 
 
 \lyxframe{Payoff Equivalence in BIC}
 \begin{theorem}[Payoff Equivalence for BIC mechanisms]
-	content...
+	For any two BIC DRMs with $x = (k,t)$ and $x' = (k',t')$ resp.:
+	 	
+	\structure{if \quad $\mathbb{E}_{\theta_{-i}} k(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
+	
+	\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + c_i$} for all $i,\theta_i$ for some $c_i$.
 \end{theorem}
 \begin{itemize}
-	\item 
+	\item As before, implies that for given $k$ (any, not just the efficient) we only have one degree of freedom for $t_i(\theta)$,
+	\begin{itemize}
+		\item now ``just one'' instead of ``just one given $\theta_{-i}$.
+	\end{itemize}
 \end{itemize}
-\lyxframeend
-
-
-\lyxframe{Generalized VCG}
 \lyxframeend
 
 
