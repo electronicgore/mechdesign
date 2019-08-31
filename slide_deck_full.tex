@@ -1356,30 +1356,8 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \end{itemize}
 \lyxframeend
 
-%TODO: do i need this slide?
-%\lyxframe{Notation}
-%\begin{itemize}
-%	\item Let
-%	\vspace{-0.5em}\begin{align*}
-%	U_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right)
-%	\\
-%	&\,\,= \mathbb{E}_{\theta_{-i}} \left[ v_i \left( k(\hat{\theta}_i, \theta_{-i}), \theta_i \right) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) \right]
-%	\end{align*}\vspace{-1em}
-%	
-%	(different notation from $U_i$ in Euclidean model for DS!)
-%	
-%	and, abusing notation,
-%	\vspace{-0.5em}\begin{align*}
-%	U_i (\theta_i) &:= U_i (\theta_i,\theta_i).
-%	\end{align*}\vspace{-1em}
-%
-%%	\item Also, let
-%%	\vspace{-0.5em}\begin{align*}
-%%		\nu (\theta_i) := \mathbb{E}_{\theta_{-i}} \left[ \theta_i v_i \left( k(\theta_i, \theta_{-i}) \right) \right]
-%%	\end{align*}\vspace{-1em}
-%\end{itemize}
-%\lyxframeend
 
+\subsection{AGV}
 
 \lyxframe{AGV mechanism}
 \begin{itemize}
@@ -1452,9 +1430,11 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \lyxframeend
 
 
+\subsection{gVCG}
+
 \lyxframe{Generalized VCG}
 \begin{itemize}
-	\item Now to another mechanism, gVCG.
+	\item Now to another mechanism, gVCG (\href{https://sites.google.com/site/vjkrishna/research}{Krishna and Perry, 2000}).
 	\item Earlier we normalized everyone's outside options (util from not participating) to zero.
 	\item Now allow for type-dependent outside options $\underline{U}_i (\theta_i)$.
 	\pause\medskip
@@ -1479,7 +1459,7 @@ Has the usual Groves' term (the third one); the other three guarantee IR.
 
 
 \lyxframe{Generalized VCG}
-\begin{theorem}[Krishna and Perry (2015), part 1]
+\begin{theorem}[gVCG part 1]
 	In a \structure{quasilinear} model, gVCG is:
 	\begin{itemize}
 		\item efficient (by construction),
@@ -1488,7 +1468,7 @@ Has the usual Groves' term (the third one); the other three guarantee IR.
 		\item \visible<0>{maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.}
 	\end{itemize}
 \end{theorem}
-Prove EFF and BIC (hint: analogous to AGV).
+Prove BIC (analogous to AGV).
 \lyxframeend
 
 
@@ -1528,6 +1508,8 @@ since
 \lyxframeend
 
 
+\subsection{Euclidean (optimality of gVCG)}
+
 \lyxframe{The Euclidean Model (reminder)}
 \begin{itemize}
 	\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
@@ -1541,21 +1523,59 @@ since
 \begin{theorem}[Payoff Equivalence for BIC mechanisms]
 	For any two BIC DRMs with $x = (k,t)$ and $x' = (k',t')$ resp.:
 	 	
-	\structure{if \quad $\mathbb{E}_{\theta_{-i}} k(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
+	\structure{if \quad $\mathbb{E}_{\theta_{-i}} k_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k_i'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
 	
 	\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + c_i$} for all $i,\theta_i$ for some $c_i$.
 \end{theorem}
 \begin{itemize}
 	\item As before, implies that for given $k$ (any, not just the efficient) we only have one degree of freedom for $t_i(\theta)$,
 	\begin{itemize}
-		\item now ``just one'' instead of ``just one given $\theta_{-i}$.
+		\item now ``just one'' instead of ``just one given $\theta_{-i}$''.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Payoff Equivalence in BIC. Proof}
+\begin{itemize}
+	\item Let 
+	\vspace{-0.5em}\begin{align*}
+	U_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right)
+	\\
+	&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) \right].
+	\end{align*}\vspace{-1em}
+	
+	(different notation from $U_i$ in Euclidean model for DS!)
+	\pause
+	\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
+	\vspace{-0.5em}\begin{align*}
+		\frac{d}{d \theta_i} U_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} U_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} U_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
+		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} k_i (\theta_i, \theta_{-i})
+	\end{align*}\vspace{-1em}
+	
+	The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $U_i (\hat{\theta}_i,\theta_i)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Payoff Equivalence in BIC. Proof}
+\begin{itemize}
+	\item Then by the Fundamental Theorem of Calculus
+	\begin{align*}
+		U_i (\theta_i) &= U_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d U_i}{d \theta_i}(s,s) d s
+		\\&= U_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} k_i(s,\theta_{-i}) d s,
+	\end{align*}
+	meaning that $k$ and $U_i (\bar{\theta}_i)$ pin down utilities $U_i (\theta_i)$ for all $\theta_i$.
+	\item To get $\frac{d U_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ can use the same argument with monotonicity as we did in DSIC payoff equivalence.
+	\begin{itemize}
+		\item Similarly, could have used the envelope theorem in DSIC.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{Generalized VCG}
-\begin{theorem}[Krishna and Perry (2015), part 2]
+\begin{theorem}[gVCG, part 2]
 	In a \alert{Euclidean} model, gVCG is:
 	\begin{itemize}{\color{gray}
 		\item efficient (by construction),
@@ -1564,8 +1584,291 @@ since
 		\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
 	\end{itemize}
 \end{theorem}
-If gCVG is not budget balanced, there does not exist a \{eff,BIC,IIR,BB\} mechanism.
+If gCVG is not ex ante budget balanced, there does not exist a 
+
+\{EFF + BIC + IIR + ex ante BB\} mechanism (so no ex post BB either).
 \lyxframeend
 
+
+\lyxframe{gVCG. Proof: revenue maximizing in Euclidean}
+\begin{itemize}
+	\item Given revenue equivalence, just need to show we cannot decrease $c_i$ for any player w/o violating IIR.
+	\pause
+	\item Decreasing $c_i$ only possible if IR slack for \emph{all} types of $i$.
+	\pause
+	\item But IR binds for $\bar{\theta}_i$: $U_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Myerson-Satterthwaite}
+
+\lyxframe{Application: Bilateral Trade}
+\begin{example}[Bilateral Trade (revisited)]
+	\begin{itemize}
+		\item One indivisible good.
+		\item Two agents: buyer and seller. 
+		\item Private valuations $\theta_b,\theta_s \sim \text{i.i.d.} U[0,1]$ resp.
+		\item Is there an \soutred{efficient, DSIC, ex post IR, ex post BB} (NO)
+		\structure{efficient, BIC, interim IR, ex ante BB} mechanism?
+	\end{itemize}
+\end{example}
+\begin{itemize}
+	\item How can we approach this?
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Myerson-Satterthwaite Theorem}
+\begin{theorem}[Myerson-Satterthwaite]
+	There is no efficient, BIC, interim IR, ex ante BB mechanism in bilateral trade.
+\end{theorem}
+\begin{proof}
+	gVCG is not BB.
+	% Do on the board.
+\end{proof}
+\lyxframeend
+%TODO: more examples? e.g. public good, discrete types? prob before the Euclidean.
+
+
+
+\section{Lecture 5}
+
+\section{Revenue-maximizing (``optimal'') mechanisms}
+
+% Overview of course so far
+\lyxframe{Done so far}
+\begin{itemize}
+	\item Introduced basic notions and criteria:
+	\begin{itemize}
+		\item s.c.f., mechanism, implementation and implementability (DSIC, BIC),
+		\item efficiency, individual rationality, budget balance.
+	\end{itemize}
+	\pause
+	\item Covered some fundamental results in Mechanism Design:
+	\begin{itemize}
+		\item revelation principle (pretty universal),
+		\item payoff/revenue equivalence (Euclidean model, slightly generalizable),
+		\item necessary conditions for implementability (weak preference reversal, monotonicity)
+	\end{itemize}
+	\pause
+	\item Learned to implement the efficient s.c.f.:
+	\begin{itemize}
+		\item DSIC: VCG;
+		\item BIC: AGV, gVCG.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Today}
+\begin{itemize}
+	\item Finished with efficiency.
+	\item Today will look revenue maximization.
+	\begin{itemize}
+		\item Revenue-maximizing mechanisms called ``optimal'' in the literature (optimal for the seller/buyer who design the mechanism)
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Two types (Monopolistic Screening)}
+
+\lyxframe{Setting 1: one buyer, discrete type}
+\begin{itemize}
+	\item Starting simple (Monopolistic Screening / Second-Degree Price Discrimination).
+	\item Designer/seller can set quantities $k$ and prices $t$ for product, has production costs $c(k) = k^2$.
+	\pause[2]
+	\begin{itemize}
+		\item Important that designer has no private information. ``Informed principal'' is a difficult problem.
+	\end{itemize}
+	\pause[0]
+	\item Buyer has \structure{valuation $\theta \in \{ L,H \}$}, private info. $\phi(H) = \phi$, $\phi(L)=1-\phi$.
+	\item Buyer's preferences Euclidean: \structure{$u_b = \theta k - t$}
+	\begin{itemize}
+		\item Is this a Euclidean model? % No, types discrete. Even if it was - can't use known mechs because different objective.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Monopolistic Screening}
+Seller's problem:
+% Problem is now more difficult because now choose k, not just t
+\vspace{-1em}\begin{align*}
+	\max_{(k,t)} & \left\{ \phi (t_H - k_H^2) + (1-\phi) (t_L - k_L^2) \right\}
+	\\ \text{s.t. } & (IC_H):\quad \theta_H k_H - t_H \geq \theta_H k_L - t_L
+	\\ & (IC_L):\quad \theta_L k_H - t_H \leq \theta_L k_L - t_L
+	\\ & (IR_H):\quad \theta_H k_H - t_H \geq 0
+	\\ & (IR_L):\quad \theta_L k_L - t_L \geq 0
+\end{align*}\vspace{-0.5em}
+\pause
+
+How to solve (popular problem):
+\begin{itemize}[<+->]
+	\item show $IC_H$ and $IR_L$ imply $IR_H$;
+	\item show $IC_L$ and $IC_L$ imply $k_H \geq k_L$;
+	\item show $k_H \geq k_L$ and binding $IC_H$ imply $IC_L$;
+	\item show $IC_H$ and $IR_L$ bind;
+	\item solve for optimal $(k,t)$.
+\end{itemize}
+\vspace{-2em}
+% 410-3 2019 ps7 q2
+\lyxframeend
+
+
+\lyxframe{Monopolistic Screening: lessons}
+\begin{itemize}
+	\item Lessons:
+	\begin{itemize}[<+->]
+		\item offering a menu may be optimal to extract value from buyers;
+		\item explains weird non-linear prices you can often encounter; %add photo?
+		\item quantity is distorted downward for low type
+		\item high type gets information rent (pays below valuation);
+		\item IR must bind for at least some type.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Interval of types (Optimal Mechanism)}
+
+\lyxframe{Setting 2: one buyer, interval of types}
+\begin{itemize}
+	\item Designer/seller has one indivisible item for sale. Chooses menu including probability of sale $k(\theta) \in [0,1]$ and payment $t(\theta)$ given report $\theta$, no costs for simplicity.
+	\begin{itemize}
+		\item Nothing changes from when $k$ was quantity, since everyone is risk-neutral.
+	\end{itemize}
+	\item Buyer has \structure{valuation $\theta \sim F[0,\bar{\theta}]$}, private info.
+	\item Buyer's preferences Euclidean: \structure{$u_b = \theta k - t$}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism}
+Solution approach
+\begin{itemize}[<+->]
+	\item Show: if $\theta' \leq \theta''$ then $k(\theta') \leq k(\theta'')$. (use the two ICs)
+	\item Get the envelope representation $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$.
+	\item Recall that $U_b(\theta) = \theta k(\theta) - t(\theta)$, so
+	{\footnotesize
+	\begin{align*}
+		\mathbb{E} U_s &= \mathbb{E}_\theta \left[ t(\theta) \right]
+		\\ &= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
+		\\ \visible<+->{ &= \mathbb{E}_\theta \left[ \theta k(\theta) - \int_0^\theta k(s) ds \right] - U_b(0) }
+		\\ \visible<+->{ &= \int_0^1 \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^1 \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
+		\\ \visible<+->{ &= \int_0^1 \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^1 (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
+		\\ \visible<+->{ &= \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
+	\end{align*}	}
+\vspace{-3em}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism: integration by parts}
+Integration by parts under the microscope:
+\begin{align*}
+	\int_0^1 \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^1 - \int_0^1 F(\theta) k(\theta) d\theta
+	\\ &= \int_0^1 k(\theta) d\theta - \int_0^1 F(\theta) k(\theta) d\theta
+\end{align*}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism}
+\begin{equation*}
+	\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} \only<2->{\soutred{- U_b(0)}}
+\end{equation*}
+\begin{itemize}
+	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
+	\pause
+	\item What do with $U_b(0)$?
+	\begin{itemize}
+		\item Want to minimize since decreases revenue.
+		\item Gotta be $U_b(0) \geq 0$ to satisfy IR for $\theta = 0$. Other types?
+		\pause
+		\item Recall $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$ and $k(\theta) \geq 0$, so $U_b(0) = 0$ fine.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism}
+\begin{equation*}
+\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+\end{equation*}
+\begin{itemize}
+	\item What do with $k$?
+	\begin{itemize}[<+->]
+		\item Define \structure{virtual surplus} $VS(\theta) := \theta - \frac{1-F(\theta)}{\phi(\theta)}$.
+		\item Pointwise maximization: 
+			$k(\theta) = \begin{cases}
+				1 & \text{ if } VS(\theta) \geq 0;
+				\\ 0 & \text{ if } VS(\theta) < 0;
+			\end{cases}$
+		\item Remember that $k(\theta)$ must be monotone! Sufficient condition: $VS(\theta)$ increasing in $\theta$.
+		\item Same as assuming \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-F(\theta)}$. The assumption we usually live with; need suitable distribution $F(\theta)$.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism: Virtual Surplus}
+\begin{itemize}
+	\item What is virtual surplus?
+	\begin{itemize}
+		\item Information rents we have to pay to high types to incentivize them to reveal type honestly.
+	\end{itemize}
+	\item What do if ``unlucky'' and $F(\theta)$ is such that VS is sometimes decreasing?
+	\begin{itemize}
+		\item ``\structure{Ironing}'': find monotone $k(\theta)$ that is ``closest'' to the unconstrained optimum.
+		\item E.g. if VS is globally decreasing then some constant $k$ is optimal.
+		\item No general approach.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism: Lessons}
+\begin{itemize}
+	\item Incentives are costly.
+	\item Even though gains from trade always present, commit to not sell to low types to charge high types more.
+	\item Distribution matters: if more high types then focus on them and sell with lower probability to the low types.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Mechanism: Example}
+\begin{itemize}[<+->]
+	\item Derive the optimal mechanism when $\theta \sim U[0,1]$.
+	\item $VS(\theta) = \theta - \frac{1-F(\theta)}{\phi(\theta)} = 2 \theta - 1$,
+	\item hence optimal $k(\theta) = \mathbb{I} \{\theta \geq 0.5 \}$. Payments?
+	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \theta - 0.5$,
+	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
+	\item Actually cannot do much better than fixed price in this model.
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Many buyers (Optimal Auction)}
+
+\lyxframe{Setting 3: many buyers, interval of types}
+\begin{itemize}
+	\item Designer/seller has one indivisible item for sale. Chooses allocation $k(\theta) \in \varDelta(N)$ and payment profile $t(\theta) \in \mathbb{R}^N$ given report profile $\theta$.
+	\item Buyers have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}]$}, private info.
+	\item Buyer's preferences Euclidean: \structure{$u_b = \theta_i k_i - t_i$}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Auction}
+\begin{itemize}
+	\item We are effectively designing the optimal auction.
+	\begin{itemize}
+		\item Selling the good to the highest bidder is efficient (assuming higher-value buyers bid more),
+		\item so they are revenue-equivalent! (buyer with value zero gets zero)
+	\end{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
 
 \end{document}
