@@ -114,7 +114,7 @@
 
 
 %
-\title{Mechanism Design\\Slide Deck}
+\title{Mechanism Design}
 %
 \author{Egor Starkov}
 
@@ -142,7 +142,6 @@
 \lyxframe{Today}
 \begin{itemize}
 	\item Introductions and course outline
-	\item Illustrative example
 	\item First steps in Mechanism Design
 \end{itemize}
 \lyxframeend
@@ -152,7 +151,7 @@
 \begin{itemize}
 	\item Egor Starkov
 	\item egor.starkov@ku.dk
-	\item Research interests: information economics, dynamic games, industrial organization
+	\item Research interests: information economics, dynamic games, communication
 	\item Office: 26.1.13
 \end{itemize}
 \lyxframeend
@@ -210,7 +209,7 @@ What is expected from you?
 	
 	\item final exam:
 	\begin{itemize}
-		\item one week take home (individual, no groups)
+		\item 24hrs take home (individual, no groups)
 		\item graded on usual scale
 	\end{itemize}
 \end{itemize}
@@ -221,8 +220,8 @@ What is expected from you?
 \begin{itemize}
 	\item textbooks:
 	\begin{description}
-		\item[MWG] Mas-Colell,  Whinston, Green. Microeconomic theory. New York: Oxford University Press, 1995. 
-		\item[B\"{o}rgers] Tilman B\"{o}rgers. An introduction to the theory of mechanism design
+		\item[MWG] Mas-Colell,  Whinston, Green. Microeconomic theory. Oxford University Press, 1995. 
+		\item[B\"{o}rgers] Tilman B\"{o}rgers. An introduction to the theory of mechanism design. Oxford University Press, 2015.
 		\item[RS] Roth \& Sotomayor. Two-Sided Matching: A Study in Game-Theoretic Modeling and Analysis. Cambridge: Cambridge University Press. 1990. \structure{(for a very short part of the class)}
 	\end{description}
 	\item research papers (assigned as we go, mostly in latter part of class)
@@ -331,7 +330,7 @@ What is expected from you?
 \begin{exampleblock}{Interesting question:}
 	\begin{itemize}
 		\item How should the employer \alert<2>{distribute workload}?
-		\item Desired outcome: more skilled people should do more work (because do it faster/better)
+		\item Desired outcome: more skilled people should do more work (because do it faster/better), more skill-intensive work.
 		\item But worker can pretend to be low-skill.
 	\end{itemize}
 \end{exampleblock}
@@ -354,11 +353,11 @@ What is expected from you?
 
 \lyxframe{Problem Set-up}
 \begin{itemize}
-	\item $N$ agents
-	\item collective choice from a set $X$ of alternatives
-	\item each agent $i$ has private information given by their type $\theta_i\in\Theta_{i}$
-	\item the type vector $\theta=(\theta_1,\dots,\theta_{N})$ is distributed according to a distribution $\phi$
-	\item each agent has a utility function $u_{i}(x,\theta_{i})$ that depends on the collective choice and his type
+	\item $N$ agents,
+	\item collective choice from a set $X$ of alternatives,
+	\item each agent $i$ has private information given by their type $\theta_i\in\Theta_{i}$,
+	\item the type vector $\theta=(\theta_1,\dots,\theta_{N})$ is distributed according to a distribution $\phi$,
+	\item each agent has a utility function $u_{i}(x,\theta_{i})$ that depends on the collective choice and his type,
 \end{itemize}
 \lyxframeend
 
@@ -409,7 +408,7 @@ What is expected from you?
 \lyxframe{Example: A public project}
 \begin{exampleblock}{Primitives}
 	\begin{itemize}
-		\item $N$ citizens decide whether to build a Moon base which costs $c$
+		\item $N$ citizens decide whether to build a bridge which costs $c$
 		\item each resident knows how much he values the base himself but does not know the others' valuation
 		\item citizen $i$ has valuation $\theta_{i} \sim i.i.d.U[0,1]$ and wealth $m_{i}$
 		\item if citizen $i$ has to pay $t_{i}$ his utility is $m_{i}+\theta_{i}-t_{i}$
@@ -417,7 +416,7 @@ What is expected from you?
 \end{exampleblock}
 \begin{itemize}
 	\item When is it efficient to build a bridge? (What $f$ do we want?)
-	\item How should the decision and payments be organized? (What is the mechanism?)
+	\item How should the decision and payments be organized? (What is the mechanism that implements it?)
 \end{itemize}
 \lyxframeend
 
@@ -434,21 +433,15 @@ What is expected from you?
 	\end{itemize}
 	\item An efficient s.c.f. is any $f^*(\theta)=(x^*(\theta),t^*(\theta))$ such that 
 	\begin{itemize}
-		\item $x^*(\theta) = \mathbb{N} \{ \sum_{i=1}^{N} \theta_i \geq c \}$;
+		\item $x^*(\theta) = \mathbb{I} \{ \sum_{i=1}^{N} \theta_i \geq c \}$;
 		\item $\sum_{i=1}^{N} t^*_i(\theta) = x^*(\theta) \cdot c$.
 	\end{itemize}
-	%$$f^*(\theta) = 
-	%\begin{cases}
-	%	1 &\text{ if } \sum_{i=1}^{N} \left(m_i + \theta_i\right) - c \geq \sum_{i=1}^{N} m_i;\\
-	%	0 &\text{ if } \sum_{i=1}^{N} \left(m_i + \theta_i\right) - c \leq \sum_{i=1}^{N} m_i.
-	%\end{cases} $$
-	%meaning $f^*(\theta) = \mathbb{N} \{ \sum_{i=1}^{N} \theta_i \geq c \}$.
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{Example: A public project}
-\begin{exampleblock}{Possible mechanism: voluntary contributions}
+\begin{exampleblock}{Possible mechanism: crowdfunding}
 	\begin{itemize}
 		\item everyone announces a contribution $s_{i}\in[0,\infty)$;
 		\item bridge is built if the sum of the contributions is higher than $c$;
@@ -482,6 +475,8 @@ Does it implement [any of] the efficient $f^*$?
 
 
 
+
+\maketitle
 
 \section{Lecture 2}
 
@@ -816,6 +811,8 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 
 
 
+
+\maketitle
 
 \section{Lecture 3}
 
@@ -1257,6 +1254,8 @@ the second cool result in mechanism design (after revelation principle, not mono
 
 
 
+\maketitle
+
 \section{Lecture 4}
 
 \section{Bayesian Implementation}
@@ -1631,6 +1630,8 @@ If gCVG is not ex ante budget balanced, there does not exist a
 %TODO: more examples? e.g. public good, discrete types? prob before the Euclidean.
 
 
+
+\maketitle
 
 \section{Lecture 5}
 
