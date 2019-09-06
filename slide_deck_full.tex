@@ -1,5 +1,5 @@
-%%% These slides are based heavily on earlier versions of this course taught by Christian SchÃ¶tmuller.
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Early slides are based heavily on earlier versions of this course taught by Christian Schötmuller.
 
 \documentclass[english]{beamer}		% just slides
 %\documentclass[english,aspectratio=169]{beamer} % 16:9 slides
@@ -177,17 +177,14 @@ What can you expect?
 \lyxframe{This course}
 What is expected from you?
 \begin{itemize}
-	
 	\item revise your math/game theory if necessary
-	
+	\begin{itemize}
+		\item See notes on absalon for important topics.
+	\end{itemize}
 	\item a little bit of participation in the lecture
-	
 	\item readings and exercises (not handed in) between lectures
-	
 	\item one week take home midterm assignment (groups allowed and recommended)
-	
 	\item 24 hours take home exam (individual)
-	
 \end{itemize}
 \lyxframeend
 
@@ -203,7 +200,7 @@ What is expected from you?
 	\pause
 	\item mandatory midterm:
 	\begin{itemize}
-		\item one week take home (you should work in groups of up to 3 students)
+		\item one week take home (you can work in groups of up to 3 students)
 		\item passing required to participate in the final exam
 	\end{itemize}
 	
@@ -240,6 +237,8 @@ What is expected from you?
 		\item Political economy
 		\item Corporate finance
 		\item Taxation
+		\item Monetary
+		\item Labor
 		\item \ldots{}
 	\end{itemize}
 \end{itemize}
@@ -305,35 +304,48 @@ What is expected from you?
 
 \lyxframe{MD Problem: Private Information}
 \begin{itemize}
-	\item Problem is most interesting when agents have private information.
-	\begin{itemize}
-		\item We (government) don't know people's values for Moon base.
-		\item We don't know firms' costs of building rockets (or if it's even possible).
-	\end{itemize}
-	\pause
-	\item Have to think of how to extract this information because it affects desired outcome.
+	\item MD problem is that of extracting private information from agents.
 	
-	\item If outcome independent of information then no need for mechanism.
+	\item MD does not really deal with inducing particular actions from agents -- because it designs the actions...
 \end{itemize}
 \lyxframeend
 
 
+%\lyxframe{MD Problem: Information Example}
+%\begin{itemize}
+%	\item Problem is most interesting when agents have private information.
+%	\begin{itemize}
+%		\item We (government) don't know people's values for Moon base.
+%		\item We don't know firms' costs of building rockets (or if it's even possible).
+%	\end{itemize}
+%	\pause
+%	\item Have to think of how to extract this information because it affects desired outcome.
+%	
+%	\item If outcome independent of information then no need for mechanism.
+%\end{itemize}
+%\lyxframeend
+
+
 \lyxframe{MD Problem: Information Example}
-\begin{exampleblock}{Boring question:}
+\begin{exampleblock}{Not MD question\only<3>{ (?)}:}
 	\begin{itemize}
-		\item How should the employer \alert<1>{make people come to work}?
-		\item Desired outcome: everyone comes to work.
-		\item Solution: \structure<1>{fire} anyone who misses work.
+		\item How should the employer \alert<1>{make people work}?
+		\item Desired outcome: everyone works.
+		\item Solution: \structure<1>{fire} anyone who doesn't work.
 	\end{itemize}
 \end{exampleblock}
 \pause
-\begin{exampleblock}{Interesting question:}
+\begin{exampleblock}{MD question\only<3>{ (?)}:}
 	\begin{itemize}
-		\item How should the employer \alert<2>{distribute workload}?
-		\item Desired outcome: more skilled people should do more work (because do it faster/better), more skill-intensive work.
-		\item But worker can pretend to be low-skill.
+		\item How should the employer \alert<2>{make skilled people work harder}?
+		\item Workers can pretend to be low-skill.
+		\item Solution: ? pay more for hard work? how much more?
 	\end{itemize}
 \end{exampleblock}
+\pause
+\begin{itemize}
+\item The line is subtle and depends on who you ask.
+\end{itemize}
 \lyxframeend
 
 
@@ -351,13 +363,20 @@ What is expected from you?
 
 \section{Mechanism Design: A General Problem}
 
-\lyxframe{Problem Set-up}
+\lyxframe{General Problem Set-up}
 \begin{itemize}
 	\item $N$ agents,
-	\item collective choice from a set $X$ of alternatives,
-	\item each agent $i$ has private information given by their type $\theta_i\in\Theta_{i}$,
-	\item the type vector $\theta=(\theta_1,\dots,\theta_{N})$ is distributed according to a distribution $\phi$,
-	\item each agent has a utility function $u_{i}(x,\theta_{i})$ that depends on the collective choice and his type,
+	\item collective \structure{choice} from a set $X$ of alternatives,
+	\item each agent $i$ has \structure{type} $\theta_i\in\Theta_{i}$:
+	\begin{itemize}
+		\item describes agent's \structure{information},
+		\item describes agent's \structure{preferences};
+	\end{itemize}
+	\item the type profile $\theta=(\theta_1,\dots,\theta_{N})$ is distributed according to a distribution $F$ with p.d.f. $\phi$,
+	\begin{itemize}
+		\item (often a missing subscript denotes a vector of resp. things)
+	\end{itemize}
+	\item each agent has a \structure{utility} function $u_{i}(x,\theta_{i})$ that depends on the collective choice $x \in X$ and his type $\theta_i$,
 \end{itemize}
 \lyxframeend
 
@@ -411,7 +430,7 @@ What is expected from you?
 		\item $N$ citizens decide whether to build a bridge which costs $c$
 		\item each resident knows how much he values the base himself but does not know the others' valuation
 		\item citizen $i$ has valuation $\theta_{i} \sim i.i.d.U[0,1]$ and wealth $m_{i}$
-		\item if citizen $i$ has to pay $t_{i}$ his utility is $m_{i}+\theta_{i}-t_{i}$
+		\item if built and citizen $i$ has to pay $t_{i}$ his utility is $m_{i}+\theta_{i}-t_{i}$
 	\end{itemize}
 \end{exampleblock}
 \begin{itemize}
@@ -426,15 +445,15 @@ What is expected from you?
 	\item An s.c.f. $f$ is \structure{efficient} if it maximizes welfare:
 	$$f^*(\theta) \in \arg \max_{f} \sum_{i=1}^{N} u_i(f(\theta),\theta_i).$$
 	\pause
-	\item In this example $f(\theta) = (x(\theta), t_1(\theta), ..., t_N(\theta))$, where
+	\item In this example $f(\theta) = (k(\theta), t_1(\theta), ..., t_N(\theta))$, where
 	\begin{itemize}
-		\item $x(\theta) \in \{0,1\}$ is the decision about whether to build or not;
+		\item $k(\theta) \in \{0,1\}$ is the decision about whether to build or not;
 		\item $t(\theta)$ is a vector of payments.
 	\end{itemize}
-	\item An efficient s.c.f. is any $f^*(\theta)=(x^*(\theta),t^*(\theta))$ such that 
+	\item An efficient s.c.f. is any $f^*(\theta)=(k^*(\theta),t^*(\theta))$ such that 
 	\begin{itemize}
-		\item $x^*(\theta) = \mathbb{I} \{ \sum_{i=1}^{N} \theta_i \geq c \}$;
-		\item $\sum_{i=1}^{N} t^*_i(\theta) = x^*(\theta) \cdot c$.
+		\item $k^*(\theta) = \mathbb{I} \{ \sum_{i=1}^{N} \theta_i \geq c \}$;
+		\item $\sum_{i=1}^{N} t^*_i(\theta) = k^*(\theta) \cdot c$.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -475,10 +494,6 @@ Does it implement [any of] the efficient $f^*$?
 
 
 
-
-\maketitle
-
-\section{Lecture 2}
 
 \section{Social Choice Functions}
 
@@ -604,6 +619,8 @@ Fix some s.c.f. $f:\Theta \to X$.
 
 
 
+
+\section{Lecture 2}
 
 \section{Dominant Strategy Mechanism Design}
 
