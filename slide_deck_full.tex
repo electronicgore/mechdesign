@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
-%%% Early slides are based heavily on earlier versions of this course taught by Christian Schötmuller.
+%%% Early slides are based heavily on earlier versions of this course taught by Christian SchÃ¶tmuller.
 
-\documentclass[english]{beamer}		% just slides
+\documentclass[english,handout]{beamer}		% just slides
 %\documentclass[english,aspectratio=169]{beamer} % 16:9 slides
 %\documentclass[english,handout,notes]{beamer}	% slides + notes
 %\documentclass[english,notes=only]{beamer}	% only notes
@@ -11,22 +11,14 @@
 \usepackage{epsfig}
 \usepackage{graphicx}
 \usepackage{subfigure}
-%\usepackage[all,knot]{xy}
-%\xyoption{arc}
 \usepackage{url}
-%\usepackage{multimedia}
 \usepackage{setspace}
 \usepackage{indentfirst}
 \usepackage{color}
 \usepackage{bbm}
-%\usepackage{tikz}
 \usepackage{float}
 \usepackage[latin9]{inputenc}
 \usepackage[normalem]{ulem} % strikeout font (\sout{})
-
-%\usepackage{pgfplots}
-%\usetikzlibrary{calc,patterns,shapes.multipart}
-%\usepackage{verbatim} % gnuplot required
 
 
 \makeatletter
@@ -88,6 +80,10 @@
 \newcommand\soutred{\bgroup\markoverwith
 	{\textcolor{red}{\rule[0.55ex]{2pt}{0.8pt}}}\ULon}
 
+% print lectures selectively
+\newif\iffulldeck
+\fulldecktrue
+% to print only a gi
 
 \makeatother
 
@@ -556,11 +552,13 @@ What s.c.f. $f$ could we want to implement?
 
 \lyxframe{Social Choice}
 \begin{itemize}
-	\item See Geneakoplos' paper for [slightly] more details on Arrow's Thm, and MWG ch.21 for more details on Social Choice theory.
+	\item See Geanakoplos' paper for [slightly] more details on Arrow's Thm, and MWG ch.21 for more details on Social Choice theory.
 	\item Lesson: aggregating preferences is a difficult problem in itself.
 	\item We won't be dealing with this problem in this class, from now on just take $f$ as given.
 \end{itemize}
 \lyxframeend
+
+%TODO 2020: talk about median voter thm with single-peaked preferences here
 
 
 
@@ -620,16 +618,16 @@ Fix some s.c.f. $f:\Theta \to X$.
 
 
 
-\section{Lecture 2}
+\section{Lecture 2: \\ Dominant Strategy Mechanism Design}
 
-\section{Dominant Strategy Mechanism Design}
-
+%TODO 2020: switch from s and S to a and A since there are all actions, not strategies.
 \lyxframe{Recap: Dominant Strategy}
 \begin{itemize}
 	\item strategy $s_i$ is a full contingent plan of play
 	\item strategy $s_i$ is dominant for agent $i$ if it is best \emph{no matter what the other players do}
 \end{itemize}
 \begin{definition}[dominant strategy]
+	Given mechanism $\Gamma=(S,g)$,
 	$s_{i}: \Theta_{i}\rightarrow S_{i}$ is a \structure{dominant strategy} if for all $\theta_{i}\in \Theta_{i}$
 	$$ u_{i}(g(s_{i}(\theta_{i}),s_{-i}),\theta_{i})\geq u_{i}(g(\hat s_{i},s_{-i}),\theta_{i})$$
 	for all $\hat s_{i}\in S_{i}$  and all $s_{-i}\in S_{-i}$.
@@ -688,8 +686,8 @@ Fix some s.c.f. $f:\Theta \to X$.
 	\begin{center}
 		\begin{tabular}{c | c | c |}
 			& C & NC\\ \hline
-			C& -5,-5 &-1,-10\\ \hline
-			NC&-10,-1&-2,-2\\ \hline
+			C& 5,5 &1,10\\ \hline
+			NC&10,1&2,2\\ \hline
 		\end{tabular}
 	\end{center}
 \end{example}
@@ -731,7 +729,9 @@ $$ u_{i}(g(s_{i}^{*}(\theta_{i}), s_{-i}^{*}(\theta_{-i})),\theta_{i})\geq u_i (
 for all $\hat{\theta}_i \in \Theta_i$, $\theta_{-i} \in \Theta_{-i}$. 
 \pause
 Since $g(s^*(\theta)) = f(\theta)$,
-$$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$$
+$$ u_i (f(\theta_i,\hat{\theta}_{-i}),\theta_i) \geq u_i (f(\hat{\theta}_i,\hat{\theta}_{-i}), \theta_i)$$
+for all $\hat{\theta}_{-i} \in \Theta_{-i}$.
+\vspace{-1ex}
 \lyxframeend
 
 
@@ -746,16 +746,22 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 
 
 \lyxframe{DSIC: Examples}
-\begin{example}[Second price sealed bid auction]
-	\begin{itemize}
-		\item bidding one's true valuation, i.e. $bid_{i}(\theta_{i})=\theta_{i}$, is dominant strategy equilibrium
-		\item revelation principle: same outcome can be implemented with a direct mechanism (Check!)
-	\end{itemize}
+\begin{example}[skip]
+	skip
+%	\begin{itemize}
+%		\item have one item, $i$ bidders with valuations $\theta_i$
+%		\item want to allocate item efficiently (to highest $\theta_i$)
+%		\item what do?
+%		\pause
+%		\item Remember second-price auction? It's efficient!
+%		\item Bidding one's true valuation, $bid_{i}(\theta_{i})=\theta_{i}$, is a dominant strategy.
+%		\item Here's your direct mechanism.
+%	\end{itemize}
 \end{example}
 \lyxframeend
 
 
-\lyxframe{DSIC: Examples}
+\lyxframe{DSIC: Example}
 \begin{example}[Communism]
 	\begin{itemize}
 		\item society of $N$ people;
@@ -765,7 +771,6 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 		\item working half day costs 0.5 units
 		\item the government can only observe the income=production but not the type (nor number of hours worked)
 		\item the government can use taxation to redistribute income
-		\pause
 		\item Can the government achieve an equal society in which everyone works full time and has an income of 3?
 	\end{itemize}
 \end{example}
@@ -791,8 +796,9 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\item Well... Remember Arrow's Theorem?
 	\pause
 	\begin{definition}[Dictatorial s.c.f.]
-		The social choice function is dictatorial if there is an agent $i$ (the dictator) such that for all $\theta\in\Theta$
-		$$ f(\theta)\in\{x\in X:\, u_i(x,\theta_i)\geq u_{i}(y,\theta_{i})\;\text{ for all }\;y\in X\}.$$
+		The social choice function is dictatorial if there is an agent $i$ (the dictator) such that for all $\theta\in\Theta$,
+		%$$ f(\theta)\in\{x\in X:\, u_i(x,\theta_i)\geq u_{i}(y,\theta_{i})\;\text{ for all }\;y\in X\}.$$
+		$$ f(\theta)\in \arg \max_{x \in X} u_i(x,\theta_i).$$
 	\end{definition}
 \end{itemize}
 \lyxframeend
@@ -802,11 +808,12 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 \begin{theorem}[Gibbard-Satterthwaite Theorem]
 	Suppose $X$ is finite and contains at least three elements. \\
 	Suppose further that all preferences on $X$ are possible for all $i$.\\ 
-	Then s.c.f. $f$ is DSIC iff it is dictatorial.
+	Then s.c.f. $f$ is \structure{DSIC} \alert{iff} it is \structure{dictatorial}.
 \end{theorem}
 \begin{proof}[Proof]
-	\href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{Svensson, L. G., \& Reffgen, A. (2014). The proof of the Gibbard-Satterthwaite theorem revisited. Journal of Mathematical Economics, 55, 11-14..}
+	\href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{Svensson, L. G., \& Reffgen, A. (2014). The proof of the Gibbard-Satterthwaite theorem revisited. Journal of Mathematical Economics, 55, 11-14.}
 \end{proof}
+Extendable to infinite $X$ as well.
 \lyxframeend
 
 
@@ -828,10 +835,6 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 
 
 
-
-\maketitle
-
-\section{Lecture 3}
 
 \section{DSIC with Quasilinear Preferences}
 
@@ -912,7 +915,7 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\pause
 	\item Agent's problem is now
 		\vspace{-0.5em}\begin{align*}
-		\max_{\hat{\theta}_i} \left\{ \structure{v_i(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}),\theta) + \left( \sum_{j\neq i} v_{j}(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}), \theta_{j}) \right)} - h_{i}(\theta_{-i}) \right\}
+		\max_{\hat{\theta}_i} \left\{ \structure{v_i(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}),\theta_i) + \left( \sum_{j\neq i} v_{j}(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}), \theta_{j}) \right)} - h_{i}(\theta_{-i}) \right\}
 		\end{align*}\vspace{-1em}
 \end{itemize}
 \lyxframeend
@@ -955,7 +958,7 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 
 \lyxframe{VCG Mechanism: Clarke Term}
 \begin{itemize}
-	\item A suggestion for $h_i(\theta_{-i})$ made by Clarke:
+	\item A suggestion for $h_i(\theta_{-i})$ made by Clarke (``pivot mechanism''):
 	\vspace{-0.5em}\begin{align*}
 	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
 	\\ &\text{where } k^*(\theta_{-i}) = \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
@@ -992,7 +995,7 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 \end{example}
 \pause
 \begin{itemize}
-	\item VCG mechanism is the second-price auction.
+	\item VCG mechanism is the second-price auction (efficient and DSIC).
 	\item Also known as the Vickrey auction (the V in VCG).
 \end{itemize}
 \lyxframeend
@@ -1059,7 +1062,8 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\item \structure{ex ante} = $i$ knows nothing;
 	\item \structure{ex interim} = $i$ knows $\theta_i$;
 	\item \structure{ex post} = $i$ knows $\theta_i$ and $\theta_{-i}$.
-	\item ``ex post IR'' concept also exists and is sometimes meaningful
+	\item We'll mostly work with interim IR; 
+	\item ex post IR is also sometimes used in the literature.
 \end{itemize}
 \lyxframeend
 
@@ -1096,7 +1100,8 @@ $$ u_i (f(\theta),\theta_i) \geq u_i (f(\hat{\theta}_i,\theta_{-i}), \theta_i).$
 	\pause
 	\item VCG was not IR, but it's just one mechanism. Can we say anything about other mechanisms?
 	\begin{itemize}
-		\item Not in most general case, but all examples (trade, auction, pub.project) fit a much narrower model where we can.
+		\item Not in most general case*, but all examples (trade, auction, pub.project) fit a much narrower model where we can.
+		\item *though see Prop 23.C.5 in MWG
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -1217,7 +1222,7 @@ the second cool result in mechanism design (after revelation principle, not mono
 		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
 		}
 	\end{align*}\vspace{-1em}
-	\item This is \alert{payoff equivalence} a.k.a. envelope condition.
+	\item This is \alert{payoff equivalence} a.k.a. envelope representation of payoffs a.k.a. Mirrlees condition.
 \end{itemize}
 \lyxframeend
 
@@ -1271,11 +1276,8 @@ the second cool result in mechanism design (after revelation principle, not mono
 
 
 
-\maketitle
 
-\section{Lecture 4}
-
-\section{Bayesian Implementation}
+\section{Lecture 3 \\ Bayesian Implementation}
 
 \lyxframe{DSIC vs BIC}
 \begin{itemize}
@@ -1648,11 +1650,9 @@ If gCVG is not ex ante budget balanced, there does not exist a
 
 
 
-\maketitle
 
-\section{Lecture 5}
 
-\section{Revenue-maximizing (``optimal'') mechanisms}
+\section{Lecture 4 \\ Revenue-maximizing (``optimal'') mechanisms}
 
 % Overview of course so far
 \lyxframe{Done so far}
@@ -1888,5 +1888,18 @@ Integration by parts under the microscope:
 	\item 
 \end{itemize}
 \lyxframeend
+
+
+
+
+
+\section{Lecture 5 \\ Correlated Information}
+
+
+
+
+
+\section{Lecture 6 \\ Dynamic Mechanism Design}
+
 
 \end{document}
