@@ -1375,7 +1375,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \lyxframeend
 
 
-\subsection{AGV}
+\section{AGV}
 
 \lyxframe{AGV mechanism}
 \begin{itemize}
@@ -1448,7 +1448,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \lyxframeend
 
 
-\subsection{gVCG}
+\section{gVCG}
 
 \lyxframe{Generalized VCG}
 \begin{itemize}
@@ -1526,7 +1526,7 @@ since
 \lyxframeend
 
 
-\subsection{Euclidean (optimality of gVCG)}
+\section{Euclidean (optimality of gVCG)}
 
 \lyxframe{The Euclidean Model (reminder)}
 \begin{itemize}
@@ -1558,20 +1558,20 @@ since
 \begin{itemize}
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
-	U_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right)
+	\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right)
 	\\
 	&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) \right].
 	\end{align*}\vspace{-1em}
 	
-	(different notation from $U_i$ in Euclidean model for DS!)
+	(do not confuse with $U_i$ in Euclidean model for DS.)
 	\pause
 	\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
 	\vspace{-0.5em}\begin{align*}
-		\frac{d}{d \theta_i} U_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} U_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} U_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
+		\frac{d}{d \theta_i} \bar{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
 		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} k_i (\theta_i, \theta_{-i})
 	\end{align*}\vspace{-1em}
 	
-	The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $U_i (\hat{\theta}_i,\theta_i)$.
+	The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\bar{U}_i (\hat{\theta}_i,\theta_i)$.
 \end{itemize}
 \lyxframeend
 
@@ -1580,11 +1580,11 @@ since
 \begin{itemize}
 	\item Then by the Fundamental Theorem of Calculus
 	\begin{align*}
-		U_i (\theta_i) &= U_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d U_i}{d \theta_i}(s,s) d s
-		\\&= U_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} k_i(s,\theta_{-i}) d s,
+		\bar{U}_i (\theta_i) &= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
+		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} k_i(s,\theta_{-i}) d s,
 	\end{align*}
-	meaning that $k$ and $U_i (\bar{\theta}_i)$ pin down utilities $U_i (\theta_i)$ for all $\theta_i$.
-	\item To get $\frac{d U_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ can use the same argument with monotonicity as we did in DSIC payoff equivalence.
+	meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
+	\item To get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ can use the same argument with monotonicity as we did in DSIC payoff equivalence.
 	\begin{itemize}
 		\item Similarly, could have used the envelope theorem in DSIC.
 	\end{itemize}
@@ -1614,12 +1614,12 @@ If gCVG is not ex ante budget balanced, there does not exist a
 	\pause
 	\item Decreasing $c_i$ only possible if IR slack for \emph{all} types of $i$.
 	\pause
-	\item But IR binds for $\bar{\theta}_i$: $U_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
+	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
 \end{itemize}
 \lyxframeend
 
 
-\subsection{Myerson-Satterthwaite}
+\section{Myerson-Satterthwaite}
 
 \lyxframe{Application: Bilateral Trade}
 \begin{example}[Bilateral Trade (revisited)]
@@ -1690,7 +1690,7 @@ If gCVG is not ex ante budget balanced, there does not exist a
 \lyxframeend
 
 
-\subsection{Two types (Monopolistic Screening)}
+\section{Two types (Monopolistic Screening)}
 
 \lyxframe{Setting 1: one buyer, discrete type}
 \begin{itemize}
@@ -1749,7 +1749,7 @@ How to solve (popular problem):
 \lyxframeend
 
 
-\subsection{Interval of types (Optimal Mechanism)}
+\section{Interval of types (Optimal Mechanism)}
 
 \lyxframe{Setting 2: one buyer, interval of types}
 \begin{itemize}
@@ -1794,7 +1794,7 @@ Integration by parts under the microscope:
 
 \lyxframe{Optimal Mechanism}
 \begin{equation*}
-	\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} \only<2->{\soutred{- U_b(0)}}
+	\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
 \end{equation*}
 \begin{itemize}
 	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
@@ -1867,12 +1867,41 @@ Integration by parts under the microscope:
 \lyxframeend
 
 
-\subsection{Many buyers (Optimal Auction)}
+%NOTE: slides before here were written with the intent of being used in class. Slides from here onwards were only meant as a reference for students, hence they don't have pauses and the text is more dense.
+%TODO: this could be a nice midterm/final problem if not covered in the slides.
+%\subsection{Principal-agent problem}
+%
+%\lyxframe{Detour (setting 2b): principal-agent problem}
+%\begin{itemize}
+%	\item Principal (employer) and agent (employee).
+%	\item Agent chooses effort $e \in [0,1]$, has private type $\theta \in [0,1]$ about cost of effort \structure{$c(e,\theta) = \theta \cdot e$}.
+%	\item Principal offers a menu of contracts that specify effort $e$ and wage $w$, maximizes profit \structure{$\pi = e-w$}.
+%\end{itemize}
+%\lyxframeend
+%
+%
+%\lyxframe{Principal-agent}
+%\begin{itemize}
+%	\item Difference between optimal selling mechanism and optimal labor contract?
+%	\item None, they are the same model (effort=allocation, wage=transfer).
+%	%TODO: the pic
+%\end{itemize}
+%\lyxframeend
+%
+%
+%\lyxframe{Principal-agent}
+%\begin{itemize}
+%	\item Proceed as in the optimal mechanism.
+%\end{itemize}
+%\lyxframeend
+
+
+\section{Many buyers (Optimal Auction)}
 
 \lyxframe{Setting 3: many buyers, interval of types}
 \begin{itemize}
 	\item Designer/seller has one indivisible item for sale. Chooses allocation $k(\theta) \in \varDelta(N)$ and payment profile $t(\theta) \in \mathbb{R}^N$ given report profile $\theta$.
-	\item Buyers have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}]$}, private info.
+	\item Buyers $i \in \{1,...,N\}$ have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}_i]$}, private info.
 	\item Buyer's preferences Euclidean: \structure{$u_b = \theta_i k_i - t_i$}
 \end{itemize}
 \lyxframeend
@@ -1883,9 +1912,85 @@ Integration by parts under the microscope:
 	\item We are effectively designing the optimal auction.
 	\begin{itemize}
 		\item Selling the good to the highest bidder is efficient (assuming higher-value buyers bid more),
-		\item so they are revenue-equivalent! (buyer with value zero gets zero)
+		\item so all standard auction formats -- first-/second-price, Dutch, English -- are revenue-equivalent! (buyer with value zero gets zero)
 	\end{itemize}
-	\item 
+	\item To get more profit may have to depart from efficiency, e.g. by
+	\begin{itemize}
+		\item setting reservation price,
+		\item discriminating buyers (even if they are ex ante identical!).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Auction}
+\begin{itemize}
+	\item From the perspective of the individual bidder, things are not much different from single-player model, just take expectations over $\theta_{-i}$:
+	\begin{align*}
+		\bar{t}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} t_i(\theta_i,\theta_{-i})
+		\\
+		\bar{k}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} k_i(\theta_i,\theta_{-i})
+		\\
+		\bar{U}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} u_i(x(\theta_i,\theta_{-i}),\theta_i)
+	\end{align*}
+	\item Monotonicity: if $\theta_i' < \theta_i''$ then 
+	$\bar{k}_i(\theta_i') \leq \bar{k}_i(\theta_i'').$
+	\item Envelope representation: 
+	$$\bar{U}_i(\theta_i) = \bar{U}_i(0) + \int_0^{\theta_i} \bar{k}_i(s) ds.$$
+\end{itemize}
+\vspace{-1ex}
+\lyxframeend
+
+
+\lyxframe{Optimal Auction: Seller}
+\begin{align*}
+\mathbb{E} U_s &= \mathbb{E}_\theta \left[ \sum_i t_i(\theta) \right]
+\\ &= \sum_i \mathbb{E}_{\theta} \left[ \theta_i k_i(\theta) - U_i(\theta) \right]
+\\ &= \sum_i \mathbb{E}_{\theta_i} \left[ \theta_i \bar{k}_i(\theta_i) - \bar{U}_i(\theta_i) \right]
+\\  &= ...
+\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \left[ \bar{k}_i(\theta_i) \left( \theta_i - \frac{1-F_i(\theta_i)}{\phi_i(\theta_i)} \right) \right] - \bar{U}_i(0)\right]
+\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \bar{k}_i(\theta_i) \alert{VS_i(\theta_i)} - \bar{U}_i(0) \right]
+\end{align*}
+\lyxframeend
+
+
+\lyxframe{Optimal Auction}
+\begin{itemize}
+	\item As before, set $\bar{U}_i(0) = 0$.
+	{\footnotesize
+	\begin{align*}
+		\mathbb{E} U_s &= \sum_i \mathbb{E}_{\theta_i} \bar{k}_i(\theta_i) VS_i(\theta_i)
+		\\
+		&= \mathbb{E}_{\theta} \sum_i k_i(\theta) VS_i(\theta)
+	\end{align*}
+	}
+	\item Pointwise maximization: for any $\theta$, give the item to $i$ with the highest $VS_i(\theta)$:
+	\begin{align*}
+		k_i(\theta) = 
+		\begin{cases}
+			1 & \text{ if } i = \arg \max_j VS_j(\theta)
+			\\
+			0 & \text { otherwise}
+		\end{cases}
+	\end{align*}
+	(break ties as you wish)
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal Auction: Conclusions}
+\begin{itemize}
+	\item Naive (pointwise) solution works only if the resulting allocations satisfy monotonicity.
+	\item If they don't: ???
+	\begin{itemize}
+		\item Ironing is even more difficult because of joint constraint on allocations: $\sum_i k_i (\theta) \leq 1$.
+	\end{itemize}
+	\item Allocations are inefficient:
+	\begin{itemize}
+		\item Inefficient withholding: $\theta_i > 0$ but $VS_i < 0$ (and $i \in \arg \max_j VS_j$).
+		\item $VS_i$ depend on respective distr-ns of $\theta_i$'s -- asymmetric players are treated asymmetrically.
+		\item In symmetric case, the optimal auction can be implemented as one of standard formats (FPA, SPA, APA, Dutch, English) with reserve price.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
@@ -1894,6 +1999,12 @@ Integration by parts under the microscope:
 
 
 \section{Lecture 5 \\ Correlated Information}
+
+\lyxframe{Optimal Auction}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
 
 
 
