@@ -1981,8 +1981,8 @@ Integration by parts under the microscope:
 \lyxframe{Optimal Auction: Conclusions}
 \begin{itemize}
 	\item Naive (pointwise) solution works only if the resulting allocations satisfy monotonicity.
-	\item If they don't: ???
 	\begin{itemize}
+		\item If they don't: ???
 		\item Ironing is even more difficult because of joint constraint on allocations: $\sum_i k_i (\theta) \leq 1$.
 	\end{itemize}
 	\item Allocations are inefficient:
@@ -1995,17 +1995,203 @@ Integration by parts under the microscope:
 \lyxframeend
 
 
+\lyxframe{Optimal Contests}
+\begin{itemize}
+	\item Related topic: optimal contests.
+	\begin{itemize}
+		\item $N$ contestants exert effort, have private abilities.
+		\item Designer's goal: maximize total effort (e.g. maximize the amount of science that competing reserach teams produce).
+		\item How should designer choose size and number of prizes; winning rules etc? 
+	\end{itemize}
+	\item Will not cover in this class.
+\end{itemize}
+\lyxframeend
+
+
 
 
 
 \section{Lecture 5 \\ Correlated Information}
 
-\lyxframe{Optimal Auction}
+\lyxframe{Independent vs Correlated Information}
+\begin{itemize}
+	\item So far we always assumed types $\theta_i$ \structure{independently} distributed.
+	\begin{itemize}
+		\item Not an innocuous assumption.
+		\item Very important for results.
+	\end{itemize}
+	\item If $\theta_i$ are correlated then each $i$ has some information about all $\theta_j$.
+	\begin{itemize}
+		\item Can use it to cross-check reports of $\theta_j$.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Perfect correlation}
+
+\lyxframe{Correlated information: Radical example}
+\begin{itemize}
+	\item Consider a \structure{quasilinear world} with modification.
+	\item $N$ agents with \structure{perfectly correlated} types: $\theta_i = \vartheta$ $\forall i$.
+	\item Designer does not know $\vartheta \in \mathcal{V}$, only knows the distribution $F$ (as usual).
+	\item Designer wants to implement some allocation $k(\vartheta)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Perfect Correlation}
+\begin{itemize}
+	\item Consider the following direct mechanism:
+	\begin{itemize}
+		\item If all agents' reports agree ($\hat{\theta}_i=\hat{\theta}_j=\hat{\vartheta}$ for all $i,j$) then implement $k(\hat{\vartheta})$ with zero transfers.
+		\item Otherwise implement any $k \in K$ and set $t_i = +\infty$ for all $i$.
+		\item (If the desired s.c.f. $k(\theta)$ prescribes an allocation to mismatching types, can use that instead.)
+	\end{itemize}
+	\item This mechanism truthfully implements $k(\vartheta)$.
+	\begin{itemize}
+		\item Never profitable to deviate alone (then must pay infinity).
+		\item There are also many other equilibria apart from truthful one...
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\subsection{Cremer-McLean}
+
+\lyxframe{Imperfect correlation: setup}
+\begin{itemize}
+	\item Still a \structure{quasilinear world} with modification.
+	\item $N$ agents with private types $\theta_i \in \Theta_i$ ($\Theta_i$ finite).
+	\item Types have some joint distribution: $(\theta_1,...,\theta_N) \sim \phi(\Theta)$.
+	\item Player $i$'s beliefs about $\theta_{-i}$ are derived by Bayes' rule:
+		$$\phi(\theta_{-i}|\theta_i) = \frac{\phi(\theta_{-i},\theta_i)}{\sum_{\theta_{-i}' \in \Theta_{-i}} \phi(\theta_{-i}',\theta_i)} $$
+	\item Designer only knows the distribution $F$, wants to implement some allocation $k(\theta)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Imperfect correlation: a simple example}
+\begin{example}[2x2 example]
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			& H 				& L					\\ \hline
+			H	& $\frac{1}{3}$ 	& $\frac{1}{6}$ 	\\ \hline
+			L	& $\frac{1}{6}$ 	& $\frac{1}{3}$		\\ \hline
+		\end{tabular}
+	\end{center}
+	\begin{itemize}
+		\item 2 agents, 2 types each: $\theta_i \in \{H,L\}$, joint distribution in the table above.
+		\item Each agent thinks $\theta_j = \theta_i$ is twice as likely as otherwise. 
+	\end{itemize}
+\end{example}
+\lyxframeend
+
+
+\lyxframe{Imperfect correlation}
+\begin{itemize}
+	\item A similar idea can be used as with perfect correlation.
+	\item Now $i$ does not know $\theta_j$ perfectly -- can't use this info to cross-verify.
+	\item But can force $i$ to gamble on $\theta_j$.
+	%\item Forget about the allocation rule $k$. Focus on gambles over other's types.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Cremer-McLean condition}
+\begin{itemize}
+	\item Write your beliefs $\phi(\theta_{-i}|\theta_i)$ as a vector $\tilde\phi(\theta_i)$ (for each $\theta_{-i}\in\Theta_{-i}$ one entry in the vector).
+	\item Cremer-McLean condition: no such vector $\tilde\phi(\theta_i)$ is a convex combination of the other vectors in $\{\tilde\phi(\theta_i'):\;\theta_i\neq\theta_i'\in\Theta_i\}$
+\end{itemize}
+
+\begin{definition}[CM condition]
+	The distribution $\phi$ satisfies the \structure{CM condition} if there are no agent $i$ with type $\theta_i\in\Theta_i$ and weights $\lambda_i: \Theta_i\setminus\{\theta_i\} \to \mathbb{R}_+$ such that
+	\begin{equation*}
+	\phi(\theta _{-i}|\theta _i)=\sum_{\theta _i'\in\Theta_i\setminus\{\theta_i\}}\lambda_i(\theta_i')\phi(\theta_{-i}|\theta_i')\qquad\text{for all }\theta_{-i}\in\Theta_{-i}.
+	\end{equation*}
+\end{definition}
+\vspace{-2ex}
+\lyxframeend
+
+
+\lyxframe{Cremer-McLean condition}
+\begin{itemize}
+	\item Stack vectors $\tilde\phi(\theta_i)$ for each type $\theta_i$ into a matrix.
+	\item The condition holds if this matrix has full rank.
+	\item In particular, every type $\theta_i$ must have its own distinct belief about the distribution of $\theta_{-i}$ (but the condition is stronger than this).
+	\item Does the condition hold in the 2x2 example?
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Cremer-McLean result}
+\begin{theorem}[Cremer-McLean]
+	If $\phi$ satisfies the CM condition, then for any mechanism $(k,t)$ there is a direct mechanism $(k,t')$ such that
+	\begin{itemize}
+		\item $(k,t')$ is BIC,
+		\item both mechanisms have the same allocation $k$,
+		\item both mechanisms have the same interim expected payoffs:
+	\end{itemize}
+	\begin{equation*}
+	\sum_{\theta _{-i}\in\Theta _{-i}}t_i(\theta _i,\theta _{-i})\phi(\theta _{-i}|\theta _i)=  \sum_{\theta _{-i}\in\Theta _{-i}}t_i'(\theta _i,\theta _{-i})\phi(\theta _{-i}|\theta _i)
+	\end{equation*}
+\end{theorem}
+\begin{itemize}
+	\item Holds for \emph{any} mechanism $(k,t)$ (IC not required!) and \emph{any} allocation rule $k$.
+\end{itemize}
+\vspace{-2ex}
+\lyxframeend
+
+
+\lyxframe{Proof Idea}
+Forget about the allocation \(k\) and think about how to elicit private information truthfully.
+\begin{example}[Information elicitation]
+	\begin{itemize}
+		\item There is a state of the world $\omega \in \Omega$; expert knows the true distribution $\pi$ of states (but not the state); the designer knows nothing.
+		\item How to extract information about $\pi$ from the expert?
+		\item Consider the following scheme:
+		\begin{itemize}
+			\item the expert announces a probability distribution $\hat{\pi}$;
+			\item when state $\omega$ realizes, the expert is paid $\log(\hat{\pi}(\omega))$
+		\end{itemize}
+		{\footnotesize
+		\begin{align*}
+			\text{Expert's problem: } & \min_{\hat{\pi}}\sum_{\omega\in\Omega} \left(z-log(\hat{\pi}(\omega))\right) \pi(\omega)
+			\\
+			&\text{subject to } \sum_{\omega\in\Omega} \hat{\pi}(\omega)=1.
+		\end{align*}
+		\vspace{-1ex}
+		}
+	\end{itemize}
+	\vspace{-1ex}
+\end{example}
+\vspace{-5ex}
+\lyxframeend
+
+
+\lyxframe{Proof Idea}
+\begin{itemize}
+	\item In our mechanism design problem, consider transfers
+	$$t'_i(\theta_i,\theta_{-i}) = t_i(\theta_i,\theta_{-i}) + C_1 - C_2 \log (\phi(\theta_{-i}|\theta_i)).$$
+	\item If $C_2$ is large enough, $i$'s incentives are dominated by the need to report $\phi(\theta_{-i}|\theta_i)$ correctly (rather than desire to get best $k(\theta)$).
+	\item So set $C_2$ large, then use $C_1$ to adjust the averages as required.
+	\item For full proof (and construction) see original Cremer \& McLean paper or B{\"o}rgers' textbook.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example}
+\begin{itemize}
+	\item Back to 2x2 example...
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Imperfect correlation}
 \begin{itemize}
 	\item 
 \end{itemize}
 \lyxframeend
-
 
 
 
