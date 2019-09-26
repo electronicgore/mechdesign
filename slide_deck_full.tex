@@ -1299,7 +1299,7 @@ the second cool result in mechanism design (after revelation principle, not mono
 \lyxframe{Bayesian Implementation}
 Start with the general model as before:
 \begin{itemize}
-	\item I agents;
+	\item $N$ agents;
 	\item set of alternatives $X$;
 	\item type $\theta_{i}\in\Theta_{i}$ is private information of $i$;
 	\item common prior $\phi \in \varDelta(\Theta)$ about distribution of types;
@@ -1326,7 +1326,7 @@ Start with the general model as before:
 
 \lyxframe{Bayesian Implementation}
 \begin{definition}[Bayesian implementation]
-	\structure{Mechanism} $\Gamma=(S_{1},\dots,S_{I},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $s^*=(s_{1}^*,\dots,s_{I}^*)$ of $\Gamma$ such that $f(\theta)=g(s^{*}(\theta))$ for all $\theta\in \Theta$.
+	\structure{Mechanism} $\Gamma=(S_{1},\dots,S_{N},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $s^*=(s_{1}^*,\dots,s_{N}^*)$ of $\Gamma$ such that $f(\theta)=g(s^{*}(\theta))$ for all $\theta\in \Theta$.
 \end{definition}
 \pause
 \begin{definition}[Bayesian implementability]
@@ -1352,7 +1352,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 
 \lyxframe{Revelation principle}
 \begin{theorem}[Revelation principle for Bayes-Nash equilibrium]
-	\structure{If} there exists a mechanism $\Gamma=(S_{1},\dots,S_{I},g)$ that \structure{implements} $f$ in BNE, 
+	\structure{If} there exists a mechanism $\Gamma=(S_{1},\dots,S_{N},g)$ that \structure{implements} $f$ in BNE, 
 	\alert{then} $f$ is \alert{truthfully implementable} in BNE.
 \end{theorem}
 \lyxframeend
@@ -1397,17 +1397,15 @@ Every player is asked for their type; reporting truthfully is a BNE.
 
 
 \lyxframe{AGV mechanism}
-\begin{itemize}
-	\item AGV is:
+\begin{theorem}
+	In a quasilinear model, AGV is:
 	\begin{itemize}
 		\item efficient (by construction),
 		\item exactly BB,
-		\item BIC,
-		\pause
-		\item not necessarily IR. :(
+		\item BIC.
 	\end{itemize}
-	\item Let's go through the motions for once.
-\end{itemize}
+\end{theorem}
+Not necessarily IR. :(
 \lyxframeend
 
 
@@ -1511,7 +1509,7 @@ since
 
 \lyxframe{IR+BB ?}
 \begin{itemize}
-	\item So we have two mechanisms that implement the efficient $k^*$ in \structure{quasilinear} model:
+	\item So we have two mechanisms that implement the \structure{efficient} $k^*$ in \structure{quasilinear} model:
 	\begin{itemize}
 		\item AGV: BIC + BB,
 		\item gVCG: BIC + IIR.
@@ -1526,7 +1524,7 @@ since
 \lyxframeend
 
 
-\section{Euclidean (optimality of gVCG)}
+\section{Optimality of gVCG \\ in the Euclidean world}
 
 \lyxframe{The Euclidean Model (reminder)}
 \begin{itemize}
@@ -1543,7 +1541,7 @@ since
 	 	
 	\structure{if \quad $\mathbb{E}_{\theta_{-i}} k_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k_i'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
 	
-	\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + c_i$} for all $i,\theta_i$ for some $c_i$.
+	\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + h_i$} for all $i,\theta_i$ for some $h_i$.
 \end{theorem}
 \begin{itemize}
 	\item As before, implies that for given $k$ (any, not just the efficient) we only have one degree of freedom for $t_i(\theta)$,
@@ -1584,10 +1582,8 @@ since
 		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} k_i(s,\theta_{-i}) d s,
 	\end{align*}
 	meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
-	\item To get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ can use the same argument with monotonicity as we did in DSIC payoff equivalence.
-	\begin{itemize}
-		\item Similarly, could have used the envelope theorem in DSIC.
-	\end{itemize}
+	\medskip
+	\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ compared to DSIC proof. Either argument can be used in both proofs.
 \end{itemize}
 \lyxframeend
 
@@ -1610,9 +1606,9 @@ If gCVG is not ex ante budget balanced, there does not exist a
 
 \lyxframe{gVCG. Proof: revenue maximizing in Euclidean}
 \begin{itemize}
-	\item Given revenue equivalence, just need to show we cannot decrease $c_i$ for any player w/o violating IIR.
+	\item Given revenue equivalence, just need to show we cannot decrease $h_i$ for any player w/o violating IIR.
 	\pause
-	\item Decreasing $c_i$ only possible if IR slack for \emph{all} types of $i$.
+	\item Decreasing $h_i$ only possible if IR slack for \emph{all} types of $i$.
 	\pause
 	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
 \end{itemize}
@@ -2028,14 +2024,14 @@ Integration by parts under the microscope:
 \lyxframeend
 
 
-\subsection{Perfect correlation}
+\section{Perfect correlation}
 
-\lyxframe{Correlated information: Radical example}
+\lyxframe{Perfect Correlation}
 \begin{itemize}
 	\item Consider a \structure{quasilinear world} with modification.
-	\item $N$ agents with \structure{perfectly correlated} types: $\theta_i = \vartheta$ $\forall i$.
-	\item Designer does not know $\vartheta \in \mathcal{V}$, only knows the distribution $F$ (as usual).
-	\item Designer wants to implement some allocation $k(\vartheta)$.
+	\item $N$ agents with \structure{perfectly correlated} types: $\theta_i = \omega$ $\forall i$.
+	\item Designer does not know $\omega \in \Omega$, only knows the distribution $F$ (as usual).
+	\item Designer wants to implement some allocation $k(\omega)$.
 \end{itemize}
 \lyxframeend
 
@@ -2044,11 +2040,11 @@ Integration by parts under the microscope:
 \begin{itemize}
 	\item Consider the following direct mechanism:
 	\begin{itemize}
-		\item If all agents' reports agree ($\hat{\theta}_i=\hat{\theta}_j=\hat{\vartheta}$ for all $i,j$) then implement $k(\hat{\vartheta})$ with zero transfers.
+		\item If all agents' reports agree ($\hat{\theta}_i=\hat{\theta}_j=\hat{\omega}$ for all $i,j$) then implement $k(\hat{\omega})$ with zero transfers.
 		\item Otherwise implement any $k \in K$ and set $t_i = +\infty$ for all $i$.
 		\item (If the desired s.c.f. $k(\theta)$ prescribes an allocation to mismatching types, can use that instead.)
 	\end{itemize}
-	\item This mechanism truthfully implements $k(\vartheta)$.
+	\item This mechanism truthfully implements $k(\omega)$.
 	\begin{itemize}
 		\item Never profitable to deviate alone (then must pay infinity).
 		\item There are also many other equilibria apart from truthful one...
@@ -2057,7 +2053,7 @@ Integration by parts under the microscope:
 \lyxframeend
 
 
-\subsection{Cremer-McLean}
+\section{Imperfect correlation}
 
 \lyxframe{Imperfect correlation: setup}
 \begin{itemize}
@@ -2075,14 +2071,14 @@ Integration by parts under the microscope:
 \begin{example}[2x2 example]
 	\begin{center}
 		\begin{tabular}{c | c | c |}
-			& H 				& L					\\ \hline
-			H	& $\frac{1}{3}$ 	& $\frac{1}{6}$ 	\\ \hline
-			L	& $\frac{1}{6}$ 	& $\frac{1}{3}$		\\ \hline
+				& H 				& L					\\ \hline
+			H	& $\frac{1}{6}$ 	& $\frac{1}{3}$ 	\\ \hline
+			L	& $\frac{1}{3}$ 	& $\frac{1}{6}$		\\ \hline
 		\end{tabular}
 	\end{center}
 	\begin{itemize}
 		\item 2 agents, 2 types each: $\theta_i \in \{H,L\}$, joint distribution in the table above.
-		\item Each agent thinks $\theta_j = \theta_i$ is twice as likely as otherwise. 
+		\item Each agent thinks $\theta_j = \theta_i$ is twice less likely than otherwise. 
 	\end{itemize}
 \end{example}
 \lyxframeend
@@ -2147,23 +2143,22 @@ Integration by parts under the microscope:
 Forget about the allocation \(k\) and think about how to elicit private information truthfully.
 \begin{example}[Information elicitation]
 	\begin{itemize}
-		\item There is a state of the world $\omega \in \Omega$; expert knows the true distribution $\pi$ of states (but not the state); the designer knows nothing.
+		\item State of the world $\omega \in \Omega$; expert knows true distribution $\pi$ of states (but not the state); designer knows nothing.
 		\item How to extract information about $\pi$ from the expert?
 		\item Consider the following scheme:
 		\begin{itemize}
 			\item the expert announces a probability distribution $\hat{\pi}$;
 			\item when state $\omega$ realizes, the expert is paid $\log(\hat{\pi}(\omega))$
 		\end{itemize}
-		{\footnotesize
-		\begin{align*}
-			\text{Expert's problem: } & \min_{\hat{\pi}}\sum_{\omega\in\Omega} \left(z-log(\hat{\pi}(\omega))\right) \pi(\omega)
-			\\
-			&\text{subject to } \sum_{\omega\in\Omega} \hat{\pi}(\omega)=1.
-		\end{align*}
-		\vspace{-1ex}
-		}
 	\end{itemize}
-	\vspace{-1ex}
+{\footnotesize
+\begin{align*}
+\text{Expert's problem: } & \max_{\hat{\pi}}\sum_{\omega\in\Omega} \pi(\omega) log(\hat{\pi}(\omega))
+\\
+&\text{subject to } \sum_{\omega\in\Omega} \hat{\pi}(\omega)=1.
+\end{align*}
+\vspace{-1ex}
+}
 \end{example}
 \vspace{-5ex}
 \lyxframeend
@@ -2172,17 +2167,39 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \lyxframe{Proof Idea}
 \begin{itemize}
 	\item In our mechanism design problem, consider transfers
-	$$t'_i(\theta_i,\theta_{-i}) = t_i(\theta_i,\theta_{-i}) + C_1 - C_2 \log (\phi(\theta_{-i}|\theta_i)).$$
-	\item If $C_2$ is large enough, $i$'s incentives are dominated by the need to report $\phi(\theta_{-i}|\theta_i)$ correctly (rather than desire to get best $k(\theta)$).
-	\item So set $C_2$ large, then use $C_1$ to adjust the averages as required.
+	$$t'_i(\theta_i,\theta_{-i}) = t_i(\theta_i,\theta_{-i}) + C_{i,1} - C_{i,2} \log (\phi(\theta_{-i}|\theta_i)).$$
+	\item If $C_{i,2}$ is large enough, $i$'s incentives are dominated by the need to report $\phi(\theta_{-i}|\theta_i)$ correctly (rather than desire to get best $k(\theta)$).
+	\item So set $C_{i,2}$ large, then use $C_{i,1}$ to adjust the averages as required.
 	\item For full proof (and construction) see original Cremer \& McLean paper or B{\"o}rgers' textbook.
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{Example}
+\lyxframe{Conclusion}
 \begin{itemize}
-	\item Back to 2x2 example...
+	\item Cremer-McLean result is a VERY powerful tool to implement literally anything under correlated information.
+	\item Issues:
+	\item Strong-ish condition on $\phi$ --
+	\begin{itemize}
+		\item this method cannot extract private information that does not affect belief about others.
+		\item But we can use it as a first step to extract some info, then proceed as before.
+	\end{itemize}
+	\item With weak correlation $C_{i,2}$ can be HUGE,
+	\begin{itemize}
+		\item leading to extremely large (positive and negative) $t_i(\theta)$.
+		\item Not good if want \emph{ex post} IR, \emph{ex post} BB, and/or \emph{limited liability} ($t_i(\theta)\leq 0$ -- reasonable requirement in some settings, close to ex post IR).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\section{Perfect correlation, multidimensional information, no transfers}
+
+\lyxframe{Setup}
+\begin{itemize}
+	\item Example from Battaglini (2003).
+	\item Two agents, $i \in \{1,2\}$, \emph{both} know state $\omega = (\omega_1,\omega_2)$.
+	\item 
 \end{itemize}
 \lyxframeend
 
