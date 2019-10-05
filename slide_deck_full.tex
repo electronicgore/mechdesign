@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Early slides are based heavily on earlier versions of this course taught by Christian SchÃ¶tmuller.
 
-\documentclass[english,handout]{beamer}		% just slides
+\documentclass[english,handout,10pt]{beamer}		% just slides
 %\documentclass[english,aspectratio=169]{beamer} % 16:9 slides
 %\documentclass[english,handout,notes]{beamer}	% slides + notes
 %\documentclass[english,notes=only]{beamer}	% only notes
@@ -49,14 +49,14 @@
 {\end{list}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usetheme{MedianNU}
+\usetheme{reMedian}
 
 % if want to have dedicated section slides:
 \AtBeginSection[]{
   \begin{frame}
   \vfill
   \centering
-  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+  \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=false]{title}
     \usebeamerfont{title}\insertsectionhead\par%
   \end{beamercolorbox}
   \vfill
@@ -70,20 +70,9 @@
 % notes format
 \setbeamertemplate{note page}[plain]
 
-
-% slide numbers
-\setbeamertemplate{footline}{%
-	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[20pt]{\color{gray}
-				\scriptsize\insertframenumber}}}\hspace*{5pt}}
-
 % red strikeout
 \newcommand\soutred{\bgroup\markoverwith
 	{\textcolor{red}{\rule[0.55ex]{2pt}{0.8pt}}}\ULon}
-
-% print lectures selectively
-\newif\iffulldeck
-\fulldecktrue
-% to print only a gi
 
 \makeatother
 
@@ -106,7 +95,6 @@
 \newtheorem{exercise}{Exercise}
 \numberwithin{exercise}{section}
 \newtheorem{question}[counter]{Question}
-\setbeamertemplate{footline}{} % no slide number on the title page
 
 
 %
@@ -121,11 +109,6 @@
 \beamerdefaultoverlayspecification{<+->}
 
 
-
-% return slide numbers
-\setbeamertemplate{footline}{%
-	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[20pt]{\color{gray}
-				\scriptsize\insertframenumber}}}\hspace*{5pt}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -544,9 +527,8 @@ What s.c.f. $f$ could we want to implement?
 \end{block}
 \begin{block}{Proof}
 	\pause \href{https://link.springer.com/article/10.1007/s00199-004-0556-7}{Geanakoplos, J. (2005). Three brief proofs of Arrow's impossibility theorem. Economic Theory, 26(1), 211-215.}
-	\vspace{9em}
+	\vspace{8em}
 \end{block}
-\vspace{-2em}
 \lyxframeend
 
 
@@ -731,7 +713,6 @@ for all $\hat{\theta}_i \in \Theta_i$, $\theta_{-i} \in \Theta_{-i}$.
 Since $g(s^*(\theta)) = f(\theta)$,
 $$ u_i (f(\theta_i,\hat{\theta}_{-i}),\theta_i) \geq u_i (f(\hat{\theta}_i,\hat{\theta}_{-i}), \theta_i)$$
 for all $\hat{\theta}_{-i} \in \Theta_{-i}$.
-\vspace{-1ex}
 \lyxframeend
 
 
@@ -745,6 +726,7 @@ for all $\hat{\theta}_{-i} \in \Theta_{-i}$.
 \lyxframeend
 
 
+%TODO2020: del (kept in 2019 to maintain slide numbers)
 \lyxframe{DSIC: Examples}
 \begin{example}[skip]
 	skip
@@ -774,7 +756,6 @@ for all $\hat{\theta}_{-i} \in \Theta_{-i}$.
 		\item Can the government achieve an equal society in which everyone works full time and has an income of 3?
 	\end{itemize}
 \end{example}
-\vspace{-2em}
 \lyxframeend
 
 
@@ -852,7 +833,6 @@ Extendable to infinite $X$ as well.
 	\pause\vspace{-1em}
 	\item S.c.f. is $f(\theta) = \left( k(\theta), t_1(\theta), ..., t_N(\theta) \right)$
 \end{itemize}
-\vspace{-2em}
 \lyxframeend
 
 
@@ -876,13 +856,12 @@ Extendable to infinite $X$ as well.
 	\vspace{-0.5em}\begin{align*}
 		x^*(\theta) &= \arg \max_x \sum_{i=1}^N u_i(x,\theta_i) \\
 		&= \arg \max_{(k,t)} \sum_{i=1}^N \left[v_i(k,\theta_i) - t_i\right]
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	\pause
 	\item Transfers just reallocate utility across agents, so focus on \structure{efficient allocation $k^*(\theta)$}:
 	\vspace{-1em}\begin{align*}
 		k^*(\theta) = \arg \max_k \sum_{i=1}^N v_i(k,\theta)
-	\end{align*}\vspace{-1em}
-	\vspace{-2em}
+	\end{align*}
 \end{itemize}
 \lyxframeend
 
@@ -892,11 +871,11 @@ Extendable to infinite $X$ as well.
 	\item What we as designers want:
 		\vspace{-1em}\begin{align*}
 		\max \sum_{i=1}^N v_i(k,\theta_i)
-		\end{align*}\vspace{-1em}
+		\end{align*}
 	\item What agent $i$ wants:
 		\vspace{-1em}\begin{align*}
 		\max v_i(k,\theta_i) - t_i
-		\end{align*}\vspace{-1em}
+		\end{align*}
 	\item How to reconcile the two?
 \end{itemize}
 \lyxframeend
@@ -916,7 +895,7 @@ Extendable to infinite $X$ as well.
 	\item Agent's problem is now
 		\vspace{-0.5em}\begin{align*}
 		\max_{\hat{\theta}_i} \left\{ \structure{v_i(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}),\theta_i) + \left( \sum_{j\neq i} v_{j}(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}), \theta_{j}) \right)} - h_{i}(\theta_{-i}) \right\}
-		\end{align*}\vspace{-1em}
+		\end{align*}
 \end{itemize}
 \lyxframeend
 
@@ -926,7 +905,7 @@ Extendable to infinite $X$ as well.
 	\item Agent's problem is now
 		\vspace{-0.5em}\begin{align*}
 		\max_{\hat{\theta}_i} \left\{ \structure{ \sum_{j=1}^N v_{j}(k^*(\alert{\hat{\theta}_i},\theta_{-i}), \theta_{j}) } - h_{i}(\theta_{-i}) \right\}
-		\end{align*}\vspace{-1em}
+		\end{align*}
 	\item Every agent $i$ maximizes welfare!
 	\begin{itemize}
 		\item Optimal to report true $\hat{\theta}$,
@@ -962,20 +941,20 @@ Extendable to infinite $X$ as well.
 	\vspace{-0.5em}\begin{align*}
 	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
 	\\ &\text{where } k^*(\theta_{-i}) = \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	\pause
 	\item Resulting \alert{VCG transfers}:
 	\vspace{-0.5em}\begin{align*}
 	\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
-	\end{align*}\vspace{-1em}
+	\end{align*}
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{VCG Mechanism: Final Transfers}
-\vspace{-0.5em}\begin{align*}
+\begin{align*}
 \structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
-\end{align*}\vspace{-1em}
+\end{align*}
 \begin{itemize}
 	\item What's the big idea?
 	\item Agent $i$ receives the externality his report imposes on others (mind the signs).
@@ -1027,10 +1006,10 @@ Extendable to infinite $X$ as well.
 \lyxframe{Feature example: bilateral trade}
 \begin{itemize}
 	\item If you did everything correctly, you'll get
-	\vspace{-0.5em}\begin{align*}
+	\begin{align*}
 	t_b^{VCG}(\theta) &= \theta_s \cdot \mathbb{I} \{ \theta_s < \theta_b \} 
 	\\ t_s^{VCG}(\theta) &= \theta_b \cdot \mathbb{I} \{ \theta_s \geq \theta_b \} 
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	\pause
 	\item The seller pays to keep the good and doesn't get anything from selling it. Good deal?
 \end{itemize}
@@ -1171,7 +1150,6 @@ Extendable to infinite $X$ as well.
 	\pause
 	\item meaning \structure{$k_i(\theta_i,\theta_{-i}) \geq k_i(\hat{\theta}_i,\theta_{-i})$} -- allocation must be \alert{monotone}.
 	\item DSIC: ``Those who value things more should get more things.''
-	\vspace{-2em}
 \end{itemize}
 \lyxframeend
 
@@ -1197,19 +1175,19 @@ the second cool result in mechanism design (after revelation principle, not mono
 	\item $k_i(\theta_i,\theta_{-i})$ is monotone in $\theta_i$, hence continuous a.e.: $\lim_{\hat{\theta}_i \to \theta_i} k_i(\hat{\theta}_i,\theta_{-i}) = k_i(\theta_i,\theta_{-i})$.
 	\pause
 	\item Together with the big inequality 
-	{\small \vspace{-0.5em}\begin{align*}
+	{\begin{align*}
 		k_i(\theta_i,\theta_{-i})
 		\geq 
 		\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
 		\geq 
 		k_i(\hat{\theta}_i,\theta_{-i}),
-	\end{align*}\vspace{-1em}}
+	\end{align*}}
 	
 	this means that a.e.
 	\pause
-	\vspace{-0.5em}\begin{align*}
+	\begin{align*}
 		\frac{\partial U_i(\theta_i,\theta_{-i})}{\partial \theta_i} = \lim_{\hat{\theta}_i \to \theta_i} \frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i }  = k_i(\theta_i,\theta_{-i}).
-	\end{align*}\vspace{-1em}
+	\end{align*}
 \end{itemize}
 \lyxframeend
 
@@ -1217,11 +1195,11 @@ the second cool result in mechanism design (after revelation principle, not mono
 \lyxframe{Payoff Equivalence}
 \begin{itemize}
 	\item So if $k(\theta)$ is integrable in $\theta_i$ (e.g. if it's bounded) then for all $\theta_i$
-	\vspace{-0.5em}\begin{align*}
+	\begin{align*}
 		\structure{
 		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
 		}
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	\item This is \alert{payoff equivalence} a.k.a. envelope representation of payoffs a.k.a. Mirrlees condition.
 \end{itemize}
 \lyxframeend
@@ -1248,7 +1226,7 @@ the second cool result in mechanism design (after revelation principle, not mono
 	\vspace{-0.5em}\begin{align*}
 		t_{i}(\theta) &= -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i})
 		\\ &= \structure{-\left(\sum_{j\neq i} \theta_j k_j^*(\theta_i, \theta_{-i}) \right)} + h_{i}(\theta_{-i})
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	
 	\structure<1>{for some $h_i(\theta_{-i})$.}
 	\pause
@@ -1304,7 +1282,7 @@ Start with the general model as before:
 	\item type $\theta_{i}\in\Theta_{i}$ is private information of $i$;
 	\item common prior $\phi \in \varDelta(\Theta)$ about distribution of types;
 	\item each agent uses Bayes' rule to form a belief over other agents' types\\
-	$$\phi(\theta_{-i}|\theta_{i}) = \phi(\theta_{i},\theta_{-i}|\theta_{i}) = \frac{\phi(\theta_{i}, \theta_{-i}) }{\sum_{\tilde\theta_{-i}\in\Theta_{-i}} \phi(\theta_{i},\tilde\theta_{-i})}.$$
+	$$\phi(\theta_{-i}|\theta_{i}) = \phi(\theta_{i},\theta_{-i}|\theta_{i}) = \frac{\phi(\theta_{i}, \theta_{-i}) }{\int_{\tilde\theta_{-i}\in\Theta_{-i}} \phi(\theta_{i},\tilde\theta_{-i}) d\tilde{\theta}_{-i}}.$$
 \end{itemize}
 \lyxframeend
 
@@ -1320,7 +1298,6 @@ Start with the general model as before:
 	\item Standard Nash Eqm reasoning: given that everyone else plays eqm strats, $i$ has no incentive to deviate.
 	\item (This definition is for pure strategies, but there is no problem in allowing for mixed strategies.)
 \end{itemize}
-\vspace{-1em}
 \lyxframeend
 
 
@@ -1381,8 +1358,8 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \begin{itemize}
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
-	\tilde{t}_i (\theta_i) := \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) \right]
-	\end{align*}\vspace{-1em}
+	\tilde{t}_i (\theta_i) := \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) | \theta_i \right]
+	\end{align*}
 	
 	be the ``expected externality'' imposed by $i$ on everyone else.
 	\item \structure<1>{AGV transfers} are given by
@@ -1401,7 +1378,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	In a quasilinear model, AGV is:
 	\begin{itemize}
 		\item efficient (by construction),
-		\item exactly BB,
+		\item exactly ex post BB,
 		\item BIC.
 	\end{itemize}
 \end{theorem}
@@ -1414,7 +1391,7 @@ Not necessarily IR. :(
 	\item Observe that
 	\vspace{-0.5em}\begin{align*}
 	\sum_i t_i^{AGV} (\theta) = \sum_i \left[ \frac{1}{N-1} \sum_{j \neq i} \tilde{t}_j (\theta_j) - \tilde{t}_i (\theta_i) \right].
-	\end{align*}\vspace{-1em}
+	\end{align*}
 	\item For any $j$, RHS has:
 	\begin{itemize}
 		\item $N-1$ terms of the form $\frac{1}{N-1} \tilde{t}_j (\theta_j)$, and
@@ -1430,8 +1407,8 @@ Not necessarily IR. :(
 	\item If $i$ reports $\hat{\theta}_i$ then receives utility
 	{\footnotesize 
 		\vspace{-0.5em}\begin{align*}
-		\mathbb{E}_{\theta_{-i}} \left[ v_i(k^*(\hat{\theta}_i, \theta_{-i}), \theta_i) + \sum_{j \neq i} v_j(k^*(\hat{\theta}_i, \theta_{-i}), \theta_j) \right] - \frac{1}{N-1} \sum_{j \neq i} \tilde{t}_j (\theta_j)
-	 	\end{align*}\vspace{-1em}
+		\mathbb{E}_{\theta_{-i}} \left[ v_i(k^*(\hat{\theta}_i, \theta_{-i}), \theta_i) + \sum_{j \neq i} v_j(k^*(\hat{\theta}_i, \theta_{-i}), \theta_j) | \theta_i \right] - \frac{1}{N-1} \sum_{j \neq i} \tilde{t}_j (\theta_j)
+	 	\end{align*}
 	}
 	\item Last term indep of $\hat{\theta}_i$; 
 	
@@ -1479,9 +1456,9 @@ Has the usual Groves' term (the third one); the other three guarantee IR.
 	In a \structure{quasilinear} model, gVCG is:
 	\begin{itemize}
 		\item efficient (by construction),
-		\item BIC (not DSIC!),
-		\item interim IR;
-		\item \visible<0>{maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.}
+		\item BIC,
+		\item interim IR.
+		\item %\visible<0>{maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.}
 	\end{itemize}
 \end{theorem}
 Prove BIC (analogous to AGV).
@@ -1492,7 +1469,7 @@ Prove BIC (analogous to AGV).
 Interim expected utility for $\theta_i$ is
 {\small
 	\begin{align*}
-		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =1}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =1}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} \right] + \underline{U}_i (\bar{\theta}_i)
+		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =1}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =1}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} | \theta_i \right] + \underline{U}_i (\bar{\theta}_i)
 		\visible<2>{
 			\geq \underline{U}_i(\theta_i)
 		}
@@ -1501,7 +1478,7 @@ Interim expected utility for $\theta_i$ is
 \pause
 since
 \begin{align*}
-	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=1}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
+	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=1}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
 \end{align*}
 % Talk about the meaning of LCT here
 \lyxframeend
@@ -1556,9 +1533,9 @@ since
 \begin{itemize}
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
-	\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right)
+	\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
 	\\
-	&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) \right].
+	&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) | \theta_i \right].
 	\end{align*}\vspace{-1em}
 	
 	(do not confuse with $U_i$ in Euclidean model for DS.)
@@ -1566,7 +1543,7 @@ since
 	\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
 	\vspace{-0.5em}\begin{align*}
 		\frac{d}{d \theta_i} \bar{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
-		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} k_i (\theta_i, \theta_{-i})
+		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} \left[k_i (\theta_i, \theta_{-i}) | \theta_i \right]
 	\end{align*}\vspace{-1em}
 	
 	The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\bar{U}_i (\hat{\theta}_i,\theta_i)$.
@@ -1579,11 +1556,11 @@ since
 	\item Then by the Fundamental Theorem of Calculus
 	\begin{align*}
 		\bar{U}_i (\theta_i) &= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
-		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} k_i(s,\theta_{-i}) d s,
+		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
 	\end{align*}
 	meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
 	\medskip
-	\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} k(\theta_i,\theta_{-i})$ compared to DSIC proof. Either argument can be used in both proofs.
+	\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} \left[k(\theta_i,\theta_{-i}) | \theta_i \right]$ compared to DSIC proof. Either argument can be used in both proofs.
 \end{itemize}
 \lyxframeend
 
@@ -1593,7 +1570,7 @@ since
 	In a \alert{Euclidean} model, gVCG is:
 	\begin{itemize}{\color{gray}
 		\item efficient (by construction),
-		\item BIC (not DSIC!),
+		\item BIC,
 		\item interim IR;}
 		\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
 	\end{itemize}
@@ -1678,7 +1655,7 @@ If gCVG is not ex ante budget balanced, there does not exist a
 \lyxframe{Today}
 \begin{itemize}
 	\item Finished with efficiency.
-	\item Today will look revenue maximization.
+	\item Today will look at revenue maximization.
 	\begin{itemize}
 		\item Revenue-maximizing mechanisms called ``optimal'' in the literature (optimal for the seller/buyer who design the mechanism)
 	\end{itemize}
@@ -1716,17 +1693,15 @@ Seller's problem:
 	\\ & (IR_H):\quad \theta_H k_H - t_H \geq 0
 	\\ & (IR_L):\quad \theta_L k_L - t_L \geq 0
 \end{align*}\vspace{-0.5em}
-\pause
 
 How to solve (popular problem):
 \begin{itemize}[<+->]
 	\item show $IC_H$ and $IR_L$ imply $IR_H$;
-	\item show $IC_L$ and $IC_L$ imply $k_H \geq k_L$;
+	\item show $IC_H$ and $IC_L$ imply $k_H \geq k_L$;
 	\item show $k_H \geq k_L$ and binding $IC_H$ imply $IC_L$;
 	\item show $IC_H$ and $IR_L$ bind;
 	\item solve for optimal $(k,t)$.
 \end{itemize}
-\vspace{-2em}
 % 410-3 2019 ps7 q2
 \lyxframeend
 
@@ -1770,11 +1745,10 @@ Solution approach
 		\mathbb{E} U_s &= \mathbb{E}_\theta \left[ t(\theta) \right]
 		\\ &= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
 		\\ \visible<+->{ &= \mathbb{E}_\theta \left[ \theta k(\theta) - \int_0^\theta k(s) ds \right] - U_b(0) }
-		\\ \visible<+->{ &= \int_0^1 \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^1 \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
-		\\ \visible<+->{ &= \int_0^1 \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^1 (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
-		\\ \visible<+->{ &= \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
+		\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
+		\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
+		\\ \visible<+->{ &= \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
 	\end{align*}	}
-\vspace{-3em}
 \end{itemize}
 \lyxframeend
 
@@ -1782,15 +1756,15 @@ Solution approach
 \lyxframe{Optimal Mechanism: integration by parts}
 Integration by parts under the microscope:
 \begin{align*}
-	\int_0^1 \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^1 - \int_0^1 F(\theta) k(\theta) d\theta
-	\\ &= \int_0^1 k(\theta) d\theta - \int_0^1 F(\theta) k(\theta) d\theta
+	\int_0^{\bar{\theta}} \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^{\bar{\theta}} - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
+	\\ &= \int_0^{\bar{\theta}} k(\theta) d\theta - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
 \end{align*}
 \lyxframeend
 
 
 \lyxframe{Optimal Mechanism}
 \begin{equation*}
-	\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
+	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
 \end{equation*}
 \begin{itemize}
 	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
@@ -1808,7 +1782,7 @@ Integration by parts under the microscope:
 
 \lyxframe{Optimal Mechanism}
 \begin{equation*}
-\mathbb{E} U_s = \int_0^1 k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
 \end{equation*}
 \begin{itemize}
 	\item What do with $k$?
@@ -1845,8 +1819,12 @@ Integration by parts under the microscope:
 \lyxframe{Optimal Mechanism: Lessons}
 \begin{itemize}
 	\item Incentives are costly.
-	\item Even though gains from trade always present, commit to not sell to low types to charge high types more.
-	\item Distribution matters: if more high types then focus on them and sell with lower probability to the low types.
+	\begin{itemize}
+		\item If $\theta$ is an attractive type to imitate, have to distort $\theta$'s allocation $k(\theta)$ compared to first-best (full-info benchmark).
+		\item (That's why $k(\bar{\theta})$ is not distorted.)
+	\end{itemize}
+	\item Even though gains from trade always present, optimal to commit to not sell to low types to charge high types more.
+	\item Distribution $\phi$ matters: if more high types then focus on them and sell with lower probability to the low types.
 \end{itemize}
 \lyxframeend
 
@@ -1858,7 +1836,11 @@ Integration by parts under the microscope:
 	\item hence optimal $k(\theta) = \mathbb{I} \{\theta \geq 0.5 \}$. Payments?
 	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \theta - 0.5$,
 	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
-	\item Actually cannot do much better than fixed price in this model.
+	\item Actually cannot do much better than fixed price in this simple trade model.
+	\begin{itemize}
+		\item Maximizing $\int k(\theta) VS(\theta) d\theta$, linear in $k(\theta)$, so will typically have either a cutoff rule, or constant rule -- unless $VS(\theta)$ non-monotone.
+		\item Consequence of Euclidean payoffs. More interesting results with non-linear payoffs.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
@@ -1910,7 +1892,7 @@ Integration by parts under the microscope:
 		\item Selling the good to the highest bidder is efficient (assuming higher-value buyers bid more),
 		\item so all standard auction formats -- first-/second-price, Dutch, English -- are revenue-equivalent! (buyer with value zero gets zero)
 	\end{itemize}
-	\item To get more profit may have to depart from efficiency, e.g. by
+	\item To get more profit often have to depart from efficiency, e.g. by
 	\begin{itemize}
 		\item setting reservation price,
 		\item discriminating buyers (even if they are ex ante identical!).
@@ -1934,7 +1916,6 @@ Integration by parts under the microscope:
 	\item Envelope representation: 
 	$$\bar{U}_i(\theta_i) = \bar{U}_i(0) + \int_0^{\theta_i} \bar{k}_i(s) ds.$$
 \end{itemize}
-\vspace{-1ex}
 \lyxframeend
 
 
@@ -2106,7 +2087,6 @@ Integration by parts under the microscope:
 	\phi(\theta _{-i}|\theta _i)=\sum_{\theta _i'\in\Theta_i\setminus\{\theta_i\}}\lambda_i(\theta_i')\phi(\theta_{-i}|\theta_i')\qquad\text{for all }\theta_{-i}\in\Theta_{-i}.
 	\end{equation*}
 \end{definition}
-\vspace{-2ex}
 \lyxframeend
 
 
@@ -2135,7 +2115,6 @@ Integration by parts under the microscope:
 \begin{itemize}
 	\item Holds for \emph{any} mechanism $(k,t)$ (IC not required!) and \emph{any} allocation rule $k$.
 \end{itemize}
-\vspace{-2ex}
 \lyxframeend
 
 
@@ -2160,7 +2139,6 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \vspace{-1ex}
 }
 \end{example}
-\vspace{-5ex}
 \lyxframeend
 
 
@@ -2197,14 +2175,122 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \lyxframe{Setup}
 \begin{itemize}
-	\item Example from Battaglini (2003).
-	\item Two agents, $i \in \{1,2\}$, \emph{both} know state $\omega = (\omega_1,\omega_2)$.
-	\item 
+	\item Example based on Battaglini (2003).
+	\item Two \structure{agents}, $i \in \{1,2\}$:
+	\begin{itemize}
+		\item \emph{both} know \structure{state} $\omega = (\omega_1,\omega_2) \in \mathbb{R}^2$;
+		\item each sends \structure{report} $m \in \mathbb{R}^2$ to the principal.
+	\end{itemize}
+	\item \structure{Principal} does not know $\omega$, must choose action $a \in \mathbb{R}^2$ after hearing $(m_1,m_2)$.
+	\item Preferences:
+	\begin{itemize}
+		\item Principal: $u_p (a,\omega) = -(a-\omega)^2$;
+		\item Agent $i$: $u_i (a,\omega) = -(a-(\omega+b_i))^2$;
+		\item Biases $b_i$ commonly known.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{Imperfect correlation}
+\lyxframe{Setup}
+\begin{itemize}
+	\item Not a ``mechanism design problem''...
+	\begin{itemize}
+		\item \alert{no commitment} for principal -- cannot really ``design'' any \structure{incentive structure} for agents.
+	\end{itemize}
+	\item ...but can ask a related question: how to design \structure{communication}?
+	\begin{itemize}
+		\item Choose what information should be contained in agents' reports.
+		
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Remark: Communication and Equilibria}
+\begin{itemize}
+	\item Why is this a meaningful question given lack of commitment?
+	\item Games of communication have \emph{many} equilibria.
+	\begin{itemize}
+		\item If I say gibberish and you ignore everything I say, this is \emph{always} an equilibrium, regardless of the underlying game.
+		\item (You can't hear anything valuable if you try; I can't convey anything meaningful because you won't listen.)
+		\item Due to this logic, from a given equilibrium, only deviations to less informative communication are possible for any player, but not to more informative, even if everyone would like that.
+		\item Produces multiplicity.
+	\end{itemize}
+	\item ``Design of communication'' is effectively an equilibrium selection.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Idea}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+		\begin{center}
+			
+		\end{center}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		{\small
+			\begin{itemize}
+				\item Relative positions of bliss points and indifference curves are fixed; just the absolute location unknown.
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
+
+
+\lyxframe{Idea}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+		\begin{center}
+			
+		\end{center}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		{\small
+			\begin{itemize}
+				\item Ask player $i$ to project the state on a line orthogonal to $b_i$ and report the result.
+				\item Will report honestly.
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
+
+
+\lyxframe{Idea}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+		\begin{center}
+			
+		\end{center}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		{\small
+			\begin{itemize}
+				\item With two players, can learn state perfectly this way.
+				\item (As long as $b_i$ linearly independent.)
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
+
+
+%\lyxframe{Remark: Communication and Equilibria}
+%\begin{itemize}
+%	\item Slightly more formally, the equilibrium looks as follows:
+%	\begin{itemize}
+%		\item Ask both agents to report state $\omega$.
+%		\item If reports coincide, implement $a = \omega$.
+%		\item If reports differ, implement 
+%	\end{itemize}
+%\end{itemize}
+%\lyxframeend
+
+
+\lyxframe{Remark: Communication and Equilibria}
 \begin{itemize}
 	\item 
 \end{itemize}
