@@ -1298,6 +1298,7 @@ Start with the general model as before:
 	\item Standard Nash Eqm reasoning: given that everyone else plays eqm strats, $i$ has no incentive to deviate.
 	\item (This definition is for pure strategies, but there is no problem in allowing for mixed strategies.)
 \end{itemize}
+%TODO2020: mention Che-He-Li-Sun (2019) who show that for any stochastic mechanism there is an equivalent deterministic mechanism.
 \lyxframeend
 
 
@@ -1425,6 +1426,7 @@ Not necessarily IR. :(
 
 \section{gVCG}
 
+%TODO2020: move gVCG to DSIC (since it is, in fact, DSIC); leave only AGV in BIC for cases when really need budget balance.
 \lyxframe{Generalized VCG}
 \begin{itemize}
 	\item Now to another mechanism, gVCG (\href{https://sites.google.com/site/vjkrishna/research}{Krishna and Perry, 2000}).
@@ -1972,6 +1974,9 @@ Integration by parts under the microscope:
 \lyxframeend
 
 
+%TODO2020: mention Manelli & Vincent (2007) for multi-object optimal mechanisms: mechanism fundamentally depends on the prior; in addition to posted price can have random sales, and sometimes k may even be a non-simple function (i.e., strictly monotone on intervals?)
+
+
 \lyxframe{Optimal Contests}
 \begin{itemize}
 	\item Related topic: optimal contests.
@@ -2171,7 +2176,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \lyxframeend
 
 
-\section{Perfect correlation, multidimensional information, no transfers}
+\section{Perfect correlation, no commitment}
 
 \lyxframe{Setup}
 \begin{itemize}
@@ -2224,12 +2229,12 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \lyxframe{Idea}
 \begin{columns}
-	\begin{column}{0.55\textwidth}
+	\begin{column}{0.5\textwidth}
 		\begin{center}
-			
+			\includegraphics[scale=0.18]{pics/battaglini01.png}
 		\end{center}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.5\textwidth}
 		{\small
 			\begin{itemize}
 				\item Relative positions of bliss points and indifference curves are fixed; just the absolute location unknown.
@@ -2242,12 +2247,12 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \lyxframe{Idea}
 \begin{columns}
-	\begin{column}{0.55\textwidth}
+	\begin{column}{0.5\textwidth}
 		\begin{center}
-			
+			\includegraphics[scale=0.18]{pics/battaglini02.png}
 		\end{center}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.5\textwidth}
 		{\small
 			\begin{itemize}
 				\item Ask player $i$ to project the state on a line orthogonal to $b_i$ and report the result.
@@ -2261,16 +2266,18 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \lyxframe{Idea}
 \begin{columns}
-	\begin{column}{0.55\textwidth}
+	\begin{column}{0.5\textwidth}
 		\begin{center}
-			
+			\includegraphics[scale=0.18]{pics/battaglini03.png}
 		\end{center}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.5\textwidth}
 		{\small
 			\begin{itemize}
 				\item With two players, can learn state perfectly this way.
-				\item (As long as $b_i$ linearly independent.)
+				\item (As long as $b_i$ \structure{linearly independent}.)
+				\item More generally, two players are enough to learn the state of any dimensionality $n$, since asking either player allows to learn $n-1$ dimensions of state.
+				\item See Battaglini (2003) for $n$ dimensions and more general preferences.
 			\end{itemize}
 		}
 	\end{column}
@@ -2278,21 +2285,38 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \lyxframeend
 
 
-%\lyxframe{Remark: Communication and Equilibria}
-%\begin{itemize}
-%	\item Slightly more formally, the equilibrium looks as follows:
-%	\begin{itemize}
-%		\item Ask both agents to report state $\omega$.
-%		\item If reports coincide, implement $a = \omega$.
-%		\item If reports differ, implement 
-%	\end{itemize}
-%\end{itemize}
-%\lyxframeend
+\lyxframe{Equilibrium strategies}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.18]{pics/battaglini03.png}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		{\small
+			\begin{itemize}
+				\item Consider basis $(b_1,b_2)$. State $\omega$ has unique coordinates $(\omega_1^*,\omega_2^*)$ in this basis.
+				\item Ask P1 to report $\omega_2^*$. This will determine the position of line $l_2$. I.e., P1 chooses where $l_2$ will intersect $l_1$ (which is fixed given report of P2).
+				\item Then if P2 tells truth, it is optimal for P1 to report truth -- choose such $l_2$ which intersects $l_1$ at point to which $\omega+b_1$ is projected -- this point is the true $\omega$.
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
 
 
-\lyxframe{Remark: Communication and Equilibria}
+\lyxframe{Correlated information: Conclusion}
 \begin{itemize}
-	\item 
+	\item \structure{Correlated information} can be \alert{\textbf{very} easily exploited}; many ways to do so:
+	\begin{itemize}
+		\item If players' preferences conflict -- set them against each other (divide et impera);
+		\item If players' preferences same -- force them to verify each other's reports.
+	\end{itemize}
+	\item Of course there are always issues that can arise:
+	\begin{itemize}
+		\item If players can communicate outside of the mechanism, collusion is a real threat.
+		\item Cross-vefication may require making incredible or infeasible threats.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
