@@ -1,0 +1,10 @@
+#/bin/sh
+
+# to rip only a selected lecture from the full deck (maintaining slide numbers), compile tex with "handout" documentclass option, then run the following
+# with $1-$2 being the page range of the needed lecture, $3 = lec number, $4 = lec name
+# (papersize is {12.8cm,9.6cm} for 3:4 slides, {16cm,9cm} for 16:9 slides).
+pdfjam ./slide_deck_full.pdf "1,$1-$2" --papersize '{12.8cm,9.6cm}' --outfile Lec$3_$4.pdf
+
+
+# the following instead compresses slides to 3 per printed page
+pdfjam ./slide_deck_full.pdf "1,$1-$2" --nup 1x3 --frame true --outfile Lec$3h_$4.pdf
