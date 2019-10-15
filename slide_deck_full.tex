@@ -2000,10 +2000,11 @@ Integration by parts under the microscope:
 	\item So far we always assumed types $\theta_i$ \structure{independently} distributed.
 	\begin{itemize}
 		\item Not an innocuous assumption.
-		\item Very important for results.
+		\item Very important for results (esp. BIC mechanisms -- DSIC are not affected because DS).
 	\end{itemize}
-	\item If $\theta_i$ are correlated then each $i$ has some information about all $\theta_j$.
+	\item What if not? Does it hurt or help?
 	\begin{itemize}
+		\item If $\theta_i$ are correlated then each $i$ has some information about all $\theta_j$.
 		\item Can use it to cross-check reports of $\theta_j$.
 	\end{itemize}
 \end{itemize}
@@ -2164,7 +2165,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 	\item Issues:
 	\item Strong-ish condition on $\phi$ --
 	\begin{itemize}
-		\item this method cannot extract private information that does not affect belief about others.
+		\item this method cannot extract private information which does not affect $i$'s belief about $\theta_{-i}$.
 		\item But we can use it as a first step to extract some info, then proceed as before.
 	\end{itemize}
 	\item With weak correlation $C_{i,2}$ can be HUGE,
@@ -2215,7 +2216,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \lyxframe{Remark: Communication and Equilibria}
 \begin{itemize}
 	\item Why is this a meaningful question given lack of commitment?
-	\item Games of communication have \emph{many} equilibria.
+	\item Games of \structure{communication} have \alert{\textbf{many} equilibria}.
 	\begin{itemize}
 		\item If I say gibberish and you ignore everything I say, this is \emph{always} an equilibrium, regardless of the underlying game.
 		\item (You can't hear anything valuable if you try; I can't convey anything meaningful because you won't listen.)
@@ -2325,5 +2326,95 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \section{Lecture 6 \\ Dynamic Mechanism Design}
 
+\lyxframe{Dynamic Problems}
+\begin{itemize}
+	\item Models considered so far were static: one report, one outcome.
+	\begin{itemize}
+		\item Although we hinted towards dynamic incentives when discussing interim vs ex post IC/IR constraints.
+	\end{itemize}
+	\item There are many dynamic problems in the real world:
+	\begin{itemize}
+		\item Dynamic pricing when buyers' tastes evolve (e.g. experience goods);
+		\item Procurement from firms with changing costs;
+		\item Design of tax and social security systems;
+		\item Dynamic labor contracts
+	\end{itemize}
+	\item How to develop dynamic mechanisms? Will see today.
+	\item This lecture mostly follows Bergemann and Välimäki (2019).
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Dynamic Problems}
+\begin{itemize}
+	\item First, what defines a dynamic problem? Why can it not be seen as a sequence of independent static problems? 
+	\item The possible \structure{linkages} across periods include:
+	\begin{enumerate}
+		\item \alert{Information} -- future info evolves from (so depends on) past info and possibly past allocations.
+		\item \alert{Preferences} -- usually evolve gradually. For our purposes, this is only relevant through serial correlation of information.
+		\item \alert{Allocations} -- set of feasible allocations today may depend on past outcomes (example: sale of fixed number of items over many periods).
+	\end{enumerate}
+	\item The most important for our purposes is, of course, information.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Dynamic Model}
+\begin{itemize}
+	\item \structure{Periods} $t \in \{1,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
+	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i \subset \mathbb{R}$, indep. across $i$.
+	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}$.
+	\item Players' \structure{utilities}: $u_i(k_t,p_t,\theta_t) = v_i(k_t,\theta_{i,t}) - p_{i,t}$.
+	\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_i(\theta_{i,t+1} | \theta_{i,t},k_t).$$
+	\item Set of \structure{feasible} allocations evolves as $K_{t+1} = g(K_t,k_t)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Evolving Types}
+Possible interpretations of evolving types:
+\begin{itemize}
+	\item Exogenous evolution ($\theta_{t+1} \perp k$);
+	\begin{itemize}
+		\item Example: procuring goods over time from a firm with stochastically evolving costs $\theta_{i,t+1} = \gamma \theta_{i,t} + \varepsilon_{i,t+1}$.
+	\end{itemize}
+	\item Endogenous evolution (depending on $k_t$);
+	\begin{itemize}
+		\item Example: worker assigned to training by $k_t$ will improve their future productivity $\theta_{i,t+1}$.
+	\end{itemize}
+	\item Random arrival;
+	\begin{itemize}
+		\item Players can arrive at the mechanism at random times.
+		\item Can model that by setting $\theta_{i,t} = 0$ whenever $i$ is not in the market/mechanism.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Dynamic Model: Assumptions}
+To fix ideas, assume the following for today:
+\begin{itemize}
+	\item The designer can \structure{commit} to the whole future mechanism at $t=0$.
+	\item All past reports and allocations are publicly observed.
+	\item Player $i$ at time $t$ observes their type $\theta_{i,t}$ but not future types.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Direct Mechanisms}
+\begin{itemize}
+	\item As usual, we have the revelation principle (Sugaya and Wolitzky, 2017).
+	\item So can focus on mechanisms which ask players to report their types every period.
+	\item Reporting strategies given by $\rho_i = \{r_{i,t}\}_{t=1}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of public histories $h_t = {k_s,r_{i,s}}_{s < t}$.
+	\item A dynamic direct mechanism is $(\kappa,\pi) = \{k_t,p_t\}_{t=1}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Dynamic Problems}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
 
 \end{document}
