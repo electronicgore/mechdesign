@@ -2365,8 +2365,8 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i \subset \mathbb{R}$, indep. across $i$.
 	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}$.
 	\item Players' \structure{utilities}: $u_i(k_t,p_t,\theta_t) = v_i(k_t,\theta_{i,t}) - p_{i,t}$.
-	\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_i(\theta_{i,t+1} | \theta_{i,t},k_t).$$
-	\item Set of \structure{feasible} allocations evolves as $K_{t+1} = g(K_t,k_t)$.
+	\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_{i,t}(\theta_{i,t+1} | \theta_{i,t},k_t).$$
+	\item Set of \structure{feasible allocations} evolves as $K_{t+1} = g(K_t,k_t)$.
 \end{itemize}
 \lyxframeend
 
@@ -2395,6 +2395,7 @@ Possible interpretations of evolving types:
 To fix ideas, assume the following for today:
 \begin{itemize}
 	\item The designer can \structure{commit} to the whole future mechanism at $t=0$.
+	\item Binding contracts -- won't look at players' per-period IR constraints, only at $t=0$ at most.
 	\item All past reports and allocations are publicly observed.
 	\item Player $i$ at time $t$ observes their type $\theta_{i,t}$ but not future types.
 \end{itemize}
@@ -2460,58 +2461,197 @@ To fix ideas, assume the following for today:
 \\
 &\text{\footnotesize $i$'s marginal contribution}	& M_i(\theta_t,K_t)	&\equiv W(\theta_t,K_t) - W_{-i}(\theta_t,K_t)
 \\
-&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= m_i(\theta_t,K_t) + \delta \mathbb{E} M_i(\theta_t,K_t).
+&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= \structure{m_i(\theta_t,K_t)} + \delta \mathbb{E} M_i(\theta_t,K_t).
 \\
 &\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_i(\theta_t,K_t).
 \end{align*}
 \begin{itemize}
 	\item The dynamic pivot mechanism is given by \structure{$\kappa = \kappa^*$} and \structure{$\rho = \{ p_{i,t}^* \}_{t=0}^T$}.
 	\item Note that $i$ must pay his \structure{flow marginal contribution} rather than simply $w(k^*)-w(k^*_{-i})$.
-	\item This is because $i$ by influencing today's allocation $k_t$, $i$ will also affect future types of other players and the set of available allocation -- have to account for that.
+	\item This is because $i$ by influencing today's allocation $k_t$, $i$ will also affect future types of other players and the set of available allocations -- have to account for that.
 \end{itemize}
 \lyxframeend
 
 
 \section{Dynamic Revenue Maximization}
 
-\lyxframe{}
+\lyxframe{Dynamic Revenue Maximization}
 \begin{itemize}
-	\item 
+	\item Second canonical question: what is the optimal mechanism?
+	\begin{itemize}
+		\item Main example: dynamic pricing (there's huge literature, more or less related to DMD).
+		\item With binding contracts: mobile service, loans, insurance
+	\end{itemize}
+	\item Will focus on one-buyer case; extension to many buyers is not particularly insightful.
+	\item Again, insights from static models carry over after reasonable modifications.
+	\begin{itemize}
+		\item Now we want to distinguish between info that the buyer has \structure{before} signing up for a mechanism
+		\item and which they acquire \alert{after} signing the contract.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Flashback: Static Model}
 \begin{itemize}
-	\item 
+	\item In the static optimal mechanism, seller's expected revenue was
+	$$ \mathbb{E}R = \mathbb{E}_\theta \left[ v(k(\theta),\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial v(k(\theta),\theta)}{\partial \theta} \right] $$
+	(we derived this for special case $v(k,\theta) = k\theta$ and $\frac{\partial v(k,\theta)}{\partial \theta}=k$)
+	\item Had to trade off max social surplus $v(k,\theta)$ (i.e., efficiency) against information rents.
+	\begin{itemize}
+		\item Had to leave some money to the buyer to incentivize truthful reporting.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Static Model -- Posterior Information}
 \begin{itemize}
-	\item 
+	\item Now suppose that buyer only learns $\theta$ \structure{after} signing up for the mechanism, i.e., timing is:
+	\begin{enumerate}
+		\item designer offers $(k,p)$;
+		\item buyer accepts or not;
+		\item buyer learns $\theta$ and sends report $\hat{\theta}$;
+		\item $(k(\hat{\theta}),p(\hat{\theta}))$ is implemented.
+	\end{enumerate}
+	\item What is the optimal contract?
+	\begin{itemize}
+		\item Designer's problem is
+		\begin{align*}
+			\max_{(k,p)} &\;\left\{ \mathbb{E}_\theta p \right\}
+			\\
+			\text{s.t. } (IC): &\; v(k(\theta),\theta) - p(\theta) \geq v(k(\theta),\hat{\theta}) - p(\hat{\theta}) \quad \forall\hat{\theta}
+			\\
+			(IR): &\; \mathbb{E}_\theta \left[v(k,\theta) - p\right]
+		\end{align*}
+		\item Solution: choose efficient $k^*$ and charge $p(\theta) \equiv p = \mathbb{E}_\theta \left[v(k^*(\theta),\theta)\right]$
+		\item Perfect information extraction; no information rents to the buyer; full efficiency.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Dynamics and Information}
 \begin{itemize}
-	\item 
+	\item The previous insight translates to dynamics: the designer can extract buyer's all future info at no cost.
+	\item The idea is the same: ``sell'' the item to the buyer at ex ante expected value.
+	\item The formal argument in the literature:
+	\begin{enumerate}
+		\item Solve the dynamic problem as if all future info is \alert{public}.
+		\item Solve the full problem.
+		\item Observe that the two solutions miraculously coincide (at least in terms of designer's revenue).
+		\item[?] ...if they do.
+	\end{enumerate}
+	\item Pavan, Segal, Toikka (2014) provide some necessary conditions for the above to work.
+	\item Therefore, only need to worry about extracting the buyer's initial type $\theta_0$ -- we are back to the static problem.
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Caveat}
 \begin{itemize}
-	\item 
+	\item In direct mechanism, usually ask player to report their type. 
+	\item But future \structure{information} is not the same as future \alert{types}. We can extract info -- does it mean we can extract types?
+	\begin{itemize}
+		\item Example: if $\theta_t = \theta_0$ for all $t$ then future types do not contain any future information. 
+		\item How should a direct dynamic mechanism respond to report $\hat{\theta}_1 \neq \hat{\theta}_0$?
+	\end{itemize}
+	\item Solution: separate types from information through \structure{orthogonalization}.
+	\begin{itemize}
+		\item Suppose $\theta_{t+1} \sim F_{t+1} (\theta_{t+1} | \theta_t)$.
+		\item Let $\varepsilon_{t+1} \equiv F_{t+1} (\theta_{t+1} | \theta_t)$. Then $\varepsilon_{t+1} \sim U[0,1]$ and independent of $\theta_t$.
+		\item In a direct mechanism, ask player to report $\theta_0$ in period $0$ and $\varepsilon_{t}$ in period $t$, then recover $\theta_{t+1}$ from these reports.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Virtual Surplus}
 \begin{itemize}
-	\item 
+	\item Optimal $k$ maximizes virtual surplus = social surplus -- information rents.
+	\begin{itemize}
+		\item This pins down optimal mechanism $(k,t+C)$ up to the constant $C$.
+		\item $C$ is determined from IR at $t=0$ -- skip the step of finding it.
+	\end{itemize}
+	\item In static model, virtual surplus is
+	$$ VS(\theta) = v(k(\theta),\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial v(k(\theta),\theta)}{\partial \theta} $$
+	\item Now in dynamics, social surplus is $$S(k,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
+	%$$ VS(\theta_0) = S(k,\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial S(k,\theta)}{\partial \theta_0} $$
+	Calculating $VS(\theta_0) = S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}$ requires understanding how $S$ depends on $\theta_0$ (the only source of inforents).
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Virtual Surplus}
+\begin{align*}
+	\frac{\partial S(k,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+\end{align*}
+\begin{itemize}
+	\item Let $I_t(\theta_t | \theta^{t-1}, k_{t-1}) \equiv \frac{\partial \theta_t}{\partial \theta_0}$ be \structure{impulse response function}, where $\theta^t \equiv (\theta_0, \theta_1,...,\theta_t)$.
+	\item $I_t$ shows the effect of $\theta_0$ on $\theta_t$ given fixed realization of uncertainty $\{\varepsilon_s\}_{s\leq t}$.
+	\item Can compute that $$I_t(\theta_t | \theta^{t-1}, k_{t-1}) = -\prod_{s=1}^t \frac{\frac{\partial F_s(\theta_s | \theta^{s-1}, k_{s-1})}{\partial \theta_{s-1}}}{\phi_s(\theta_s | \theta^{s-1}, k_{s-1})}.$$
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Virtual Surplus}
+Then
+\begin{align*}
+	\frac{\partial S(k,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+	\\
+	&= \sum_{t\geq 0} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1}) \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t}
+\end{align*}
+so the whole virtual surplus is
+\begin{align*}
+	S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
+	&= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
+\end{align*}
+To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximize over $k$.
+\lyxframeend
+
+
+\lyxframe{Dynamic Revenue Maximization: Conclusions}
+\begin{align*}
+\max_k \mathbb{E}_\varepsilon \left[ S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+\end{align*}
+\begin{itemize}
+	\item Still a difficult problem, for the same reasons as for efficient $k^*$.
+	\item \structure{Insight}: if $|I_t|$ decreasing with $t$, i.e., $\theta_0$ contains little information about $\theta_t$ for large $t$ then optimal $k_t$ converges to the efficient $k^*_t$.
+	\item \structure{\textbf{Distortions vanish over time.}}
+	\item See Bergemann and Välimäki (2019, ch.5) for applications.
+\end{itemize}
+\lyxframeend
+
+
+
+
+\section{Lecture 7 \\ Topics in Dynamic Mechanism Design}
+
+\lyxframe{What now?}
+\begin{itemize}
+	\item Relax some of the assumptions and see what changes.
+	\item No general theory, just some special cases.
+	\item Will see a common theme though on the flip side of dynamic mechanisms.
+\end{itemize}
+\lyxframeend
+
+
+\section{Thomas and Worrall (1990)}
+
+\lyxframe{Dynamic Insurance}
+\begin{itemize}
+	\item One risk-neutral principal, one \alert{risk-averse} agent, common discount factor $\delta$.
+	\item Agent receives random exogenous income $y_t \sim i.i.d. F[\underline{y},\bar{y}]$.
+	\begin{itemize}
+		\item Concave utility $u(y)$, so optimal to smooth consumption.
+	\end{itemize}
+	\item Principal designs insurance contract.
+	\begin{itemize}
+		\item Perfect commitment on both sides -- no IR.
+		\item But must incentivize truthful reporting of income $y_t$ -- IC.
+		\item %TODO: efficient or rev-max?
+	\end{itemize}
+	\item Departure from baseline: no allocations $k$, risk-aversion (no quasilinearity in money).
 \end{itemize}
 \lyxframeend
 
