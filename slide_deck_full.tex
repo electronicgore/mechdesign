@@ -2361,7 +2361,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 
 \lyxframe{Dynamic Model}
 \begin{itemize}
-	\item \structure{Periods} $t \in \{1,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
+	\item \structure{Periods} $t \in \{0,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
 	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i \subset \mathbb{R}$, indep. across $i$.
 	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}$.
 	\item Players' \structure{utilities}: $u_i(k_t,p_t,\theta_t) = v_i(k_t,\theta_{i,t}) - p_{i,t}$.
@@ -2405,16 +2405,115 @@ To fix ideas, assume the following for today:
 \begin{itemize}
 	\item As usual, we have the revelation principle (Sugaya and Wolitzky, 2017).
 	\item So can focus on mechanisms which ask players to report their types every period.
-	\item Reporting strategies given by $\rho_i = \{r_{i,t}\}_{t=1}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of public histories $h_t = {k_s,r_{i,s}}_{s < t}$.
-	\item A dynamic direct mechanism is $(\kappa,\pi) = \{k_t,p_t\}_{t=1}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
+	\item Reporting strategies given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of public histories $h_t = \{k_s,r_{i,s}\}_{s < t}$.
+	\item A dynamic direct mechanism is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{Dynamic Problems}
+\lyxframe{Dynamic Implementation}
+\begin{itemize}
+	\item Looking for a truthful equilibrium in a direct mechanism.
+	\item ``Equilibrium'' is a sketchy term in dynamic incomplete-info games.
+	\begin{itemize}
+		\item There is at least a dozen different equilibrium concepts and refinements in use.
+		\item Main concern in general: off-equilibrium-path beliefs. What should a player believe after observing an event they considered impossible? Different answers can strongly affect the predicted outcome.
+		\item Not a big problem in mechdesign.
+	\end{itemize}
+	\item Just look at standard \structure{Perfect Bayesian Equilibria}.
+	\begin{itemize}
+		\item Each player chooses report to maximize expected util, expecting others to report truthfully.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\section{Efficient Dynamic Implementation}
+
+\lyxframe{Efficient Allocation}
+\begin{itemize}
+	\item Suppose we want to implement the \structure{efficient allocation} $\kappa^*$.
+	\item But what is $\kappa^*$ in a dynamic problem?
+	$$ \kappa^* \in \arg \max_{\{k_t \in K_t\}_{t=0}^T} \mathbb{E} \left\{ \sum_{t=0}^T \delta^t \sum_{i=0}^N v_i(k_t,\theta_{i,t}) \right\}$$
+	\item Today's allocation $k_t$ will affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
+	\item Even finding the efficient allocation can in general be a difficult optimal control problem.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Efficient Implementation}
+\begin{itemize}
+	\item Ok, suppose we found $\kappa^*$, what next?
+	\item In static setting we used VCG aka the pivot mechanism: each player had to pay the externality they imposed on everyone else:
+	$$ p_i(\theta) = -\sum_{j \neq i} v_j \left( k^*(\theta),\theta_j \right) + \sum_{j \neq i} v_j \left( k^*_{-i}(\theta_{-i}),\theta_j \right) $$
+	\item The idea translates almost verbatim to the dynamics.
+	\item Enter \structure{dynamic pivot mechanism}! (Bergemann and Välimäki, 2010)
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Dynamic Pivot Mechanism}
+\begin{align*}
+&\text{Flow social surplus}	& w(k_t,\theta_t)	&\equiv \sum_{i=0}^N v_i(k_t,\theta_{i,t}).
+\\
+&\text{Welfare}	& W(\theta_t,K_t)	&\equiv \max_{k_t \in K_t} \left\{ w(k_t,\theta_t) + \delta \mathbb{E} W(\theta_{t+1},K_{t+1}) \right\}.
+\\
+&\text{\footnotesize $i$'s marginal contribution}	& M_i(\theta_t,K_t)	&\equiv W(\theta_t,K_t) - W_{-i}(\theta_t,K_t)
+\\
+&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= m_i(\theta_t,K_t) + \delta \mathbb{E} M_i(\theta_t,K_t).
+\\
+&\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_i(\theta_t,K_t).
+\end{align*}
+\begin{itemize}
+	\item The dynamic pivot mechanism is given by \structure{$\kappa = \kappa^*$} and \structure{$\rho = \{ p_{i,t}^* \}_{t=0}^T$}.
+	\item Note that $i$ must pay his \structure{flow marginal contribution} rather than simply $w(k^*)-w(k^*_{-i})$.
+	\item This is because $i$ by influencing today's allocation $k_t$, $i$ will also affect future types of other players and the set of available allocation -- have to account for that.
+\end{itemize}
+\lyxframeend
+
+
+\section{Dynamic Revenue Maximization}
+
+\lyxframe{}
 \begin{itemize}
 	\item 
 \end{itemize}
 \lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
 
 \end{document}
