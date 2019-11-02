@@ -19,6 +19,7 @@
 \usepackage{float}
 \usepackage[latin9]{inputenc}
 \usepackage[normalem]{ulem} % strikeout font (\sout{})
+\usepackage{multirow} % multirow cells in tables
 
 
 \makeatletter
@@ -2084,7 +2085,7 @@ Integration by parts under the microscope:
 \lyxframe{Cremer-McLean condition}
 \begin{itemize}
 	\item Write your beliefs $\phi(\theta_{-i}|\theta_i)$ as a vector $\tilde\phi(\theta_i)$ (for each $\theta_{-i}\in\Theta_{-i}$ one entry in the vector).
-	\item Cremer-McLean condition: no such vector $\tilde\phi(\theta_i)$ is a convex combination of the other vectors in $\{\tilde\phi(\theta_i'):\;\theta_i\neq\theta_i'\in\Theta_i\}$
+	\item Cremer-McLean condition: no such vector $\tilde\phi(\theta_i)$ is a linear combination of the other vectors in $\{\tilde\phi(\theta_i'):\;\theta_i\neq\theta_i'\in\Theta_i\}$
 \end{itemize}
 
 \begin{definition}[CM condition]
@@ -2153,7 +2154,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 	\item In our mechanism design problem, consider transfers
 	$$t'_i(\theta_i,\theta_{-i}) = t_i(\theta_i,\theta_{-i}) + C_{i,1} - C_{i,2} \log (\phi(\theta_{-i}|\theta_i)).$$
 	\item If $C_{i,2}$ is large enough, $i$'s incentives are dominated by the need to report $\phi(\theta_{-i}|\theta_i)$ correctly (rather than desire to get best $k(\theta)$).
-	\item So set $C_{i,2}$ large, then use $C_{i,1}$ to adjust the averages as required.
+	\item So set $C_{i,2}$ large, then use $C_{i,1}$ to adjust the averages as required to satisfy IR.
 	\item For full proof (and construction) see original Cremer \& McLean paper or B{\"o}rgers' textbook.
 \end{itemize}
 \lyxframeend
@@ -2188,10 +2189,11 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 		\item each sends \structure{report} $m \in \mathbb{R}^2$ to the principal.
 	\end{itemize}
 	\item \structure{Principal} does not know $\omega$, must choose action $a \in \mathbb{R}^2$ after hearing $(m_1,m_2)$.
-	\item Preferences:
+	\item Preferences: squared Euclidean distance between $a$ and resp. bliss points
 	\begin{itemize}
-		\item Principal: $u_p (a,\omega) = -(a-\omega)^2$;
-		\item Agent $i$: $u_i (a,\omega) = -(a-(\omega+b_i))^2$;
+		\item Principal: $u_p (a,\omega) = -\left(\left\|a-\omega\right\| \right)^2$;
+		\item Agent $i$: $u_i (a,\omega) = -\left(\left\|a-(\omega+b_i)\right\| \right)^2$;
+		\item where $\left\|x\right\| = \sqrt{x_1^2 + x_2^2}$ for $x = (x_1,x_2) \in \mathbb{R}^2$.
 		\item Biases $b_i$ commonly known.
 	\end{itemize}
 \end{itemize}
@@ -2290,15 +2292,15 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \begin{columns}
 	\begin{column}{0.5\textwidth}
 		\begin{center}
-			\includegraphics[scale=0.18]{pics/battaglini03.png}
+			\includegraphics[scale=0.18]{pics/battaglini04.png}
 		\end{center}
 	\end{column}
 	\begin{column}{0.5\textwidth}
 		{\small
 			\begin{itemize}
-				\item Consider basis $(b_1,b_2)$. State $\omega$ has unique coordinates $(\omega_1^*,\omega_2^*)$ in this basis.
-				\item Ask P1 to report $\omega_2^*$. This will determine the position of line $l_2$. I.e., P1 chooses where $l_2$ will intersect $l_1$ (which is fixed given report of P2).
-				\item Then if P2 tells truth, it is optimal for P1 to report truth -- choose such $l_2$ which intersects $l_1$ at point to which $\omega+b_1$ is projected -- this point is the true $\omega$.
+				\item Consider basis $(c_1,c_2)$ where $b_i \perp c_i \in \mathbb{R}^2$. State $\omega$ has unique coordinates $(o^1,o^2)$ in this basis, i.e. $w = o^1 \cdot c_1 + o^2 \cdot c_2$.
+				\item Ask P1 to report $o^1$. This will determine the position of line $l_2$. I.e., P1 chooses where $l_2$ will intersect $l_1$ (which is fixed given report of P2).
+				\item Then if P2 tells truth, it is optimal for P1 to report truth -- choose such $l_2$ which intersects $l_1$ at point to which $\omega+b_1$ is projected (in original basis) -- this point is the true $\omega$.
 			\end{itemize}
 		}
 	\end{column}
@@ -2631,7 +2633,8 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 \begin{itemize}
 	\item Relax some of the assumptions and see what changes.
 	\item No general theory, just some special cases.
-	\item Will see a common theme though on the flip side of dynamic mechanisms.
+	\item Will go very quickly: no solving models, just setup and results.
+	\item Will see a common theme emerging.
 \end{itemize}
 \lyxframeend
 
@@ -2640,18 +2643,74 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 
 \lyxframe{Dynamic Insurance}
 \begin{itemize}
-	\item One risk-neutral principal, one \alert{risk-averse} agent, common discount factor $\delta$.
-	\item Agent receives random exogenous income $y_t \sim i.i.d. F[\underline{y},\bar{y}]$.
+	\item One risk-neutral lender (designer), one \alert{risk-averse} borrower (agent), common discount factor $\beta$.
+	\item Agent receives random exogenous income $\theta_t \sim i.i.d. F[\underline{\theta},\bar{\theta}]$.
 	\begin{itemize}
-		\item Concave utility $u(y)$, so optimal to smooth consumption.
+		\item \structure{Concave} utility $u(c)$, so would like to insure.
+		\item Special assumption: $u(\underline{c}) = -\infty$, where $\underline{c}>0$ is subsistence level.
 	\end{itemize}
 	\item Principal designs insurance contract.
 	\begin{itemize}
+		\item Agent reports $\theta_t$ in every period, mechanism pays him $b_t(\theta_t, \theta_{t-1}, ...)$
 		\item Perfect commitment on both sides -- no IR.
 		\item But must incentivize truthful reporting of income $y_t$ -- IC.
-		\item %TODO: efficient or rev-max?
+		\item See $b_t$ as a loan contract -- should be exactly ex ante BB.
+		\item Goal: efficiency (maximize agent's expected utility = provide best insurance possible).
 	\end{itemize}
-	\item Departure from baseline: no allocations $k$, risk-aversion (no quasilinearity in money).
+	%\item Departure from baseline: no allocations $k$, risk-aversion (no quasilinearity in money).
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Agent's incentives}
+\begin{itemize}
+	\item At all $t$, agent maximizes lifetime utility 
+	$$V_t \equiv \sum_{s=t}^\infty \beta^s u(\theta_s + b_s).$$
+	\item (Principal chooses contract at $t=0$ which maximizes $V_0$.)
+	\item Let $g^t = (\hat{\theta}_0, ..., \hat{\theta}_t)$ be history of past reports.
+	\item Then agent's IC at $g^{t-1}$ is:
+	\begin{align*}
+		u(\theta_t + b_t(g^{t-1},{\theta}_t)) +\beta V_{t+1}(g^{t-1},{\theta}_t) \geq 
+		\\
+		\geq u(\theta_t + b_t(g^{t-1},\hat{\theta}_t)) +\beta V_{t+1}(g^{t-1},\hat{\theta}_t).
+	\end{align*}
+	for all $\theta_t,\hat{\theta}_t$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Relation to standard model}
+\begin{itemize}
+	\item Note that there are no allocations, only money across periods.
+	\item One way to relate to our standard quasilinear model:
+	\medskip
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\emph{usual model} 	& \emph{this model} \\ \hline
+			allocation $k$ 	& today's transfer $b_t$\\ \hline
+			transfer $t$ 	& continuation util $V_{t+1}$\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	\item The main intertemporal linkage comes from the need to deliver on promised $V_{t+1}$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Efficient contract}
+\begin{itemize}
+	\item Moving on to the results.
+	\item In the optimal contract, at every $g^{t-1}$:
+	\begin{itemize}
+		\item $b_t$ is decreasing in $\hat{\theta}_t$ (insurance);
+		\item $V_{t+1}$ is increasing in $\hat{\theta}_t$ (IC).
+		\item In particular, $b_t(\underline{\theta}) > 0 > b_t(\overline{\theta})$; $V_{t+1}(\underline{\theta}) < V_t < V_{t+1}(\overline{\theta})$.
+	\end{itemize}
+	\bigskip
+	\item \alert{Immiseration} result: 
+	$$\lim_{t\to \infty} V_t \overset{a.s.}{=} -\infty$$
+	\item Cool result. Mathematical proof is easy but unintuitive, will not cover.
 \end{itemize}
 \lyxframeend
 
