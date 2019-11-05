@@ -1,0 +1,237 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Exercises: Lec 5} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\solutionsfalse
+%\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	
+These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}[Review Questions]
+	\begin{itemize}
+		\item Consider the results and mechanisms we have seen in the course so far. Which of them rely on the independence of players' types?
+		\item How can the designer use correlation of players' types to elicit their private information?
+		\item What assumption on the distribution of types is needed to for Cremer-McLean transfers to be effective at eliciting information?
+		\item How can perfectly correlated information be elicited from the agents without the use of transfers?
+	\end{itemize}
+	
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	Consider the 2x2 example from lecture. There are two players, $i=1,2$. Each of them has one of two types, $\theta_i \in \{H,L\}$. The joint distribution of types is given by
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			& H 				& L					\\ \hline
+			H	& $\frac{1}{6}$ 	& $\frac{1}{3}$ 	\\ \hline
+			L	& $\frac{1}{3}$ 	& $\frac{1}{6}$		\\ \hline
+		\end{tabular}
+	\end{center}
+	Both players have quasilinear utilities.
+	
+	First explore the problem of information elicitation (without the need to support any underlying allocation). 
+	\begin{enumerate}
+		\item Compute the players' interim beliefs $\phi(\theta_{-i} | \theta_i)$.
+		\item Compute the truth-revealing transfers $\hat{t}_i(\theta) = -\ln(\phi(\theta_{-i} | \theta_i))$.
+		\item Verify that a direct mechanism in which each player reports their type $\theta_i$ and pays $\hat{t}_i(\theta)$ is BIC (when coupled with some constant allocation rule $k$).
+	\end{enumerate}
+
+	Now suppose that the society of these two individuals chooses whether to adopt a new bank holiday called ``National Equality Day'', so the ``real outcome'' is $k \in \{1,0\}$ (where $1$ means bank holiday and $0$ means none). The holiday should only be adopted if all citizens are, in fact, equal, i.e. the desired allocation is $\tilde{k}(\theta) = \mathbb{I} \{\theta_1 = \theta_2\}$. Each citizen receives utility 1 if the holiday is adopted and 0 otherwise.
+	\begin{enumerate}[resume]
+		\item Is $\tilde{k}$ efficient?
+		\item Show that $\tilde{k}$ cannot be sustained without transfers, i.e. that a mechanism $(\tilde{k},t)$ with $t(\theta)=0$ for all $\theta$ is not BIC.
+		\item Consider transfers $t_i(\theta_i,\theta_{-i}) = C_1 + C_2 \hat{t} (\theta_i,\theta_{-i})$. Derive conditions on values of $C_1,C_2$ for which a direct mechanism $(\tilde{k},t)$ is BIC.
+		\item Derive conditions on values of $C_1,C_2$ for which a direct mechanism $(\tilde{k},t)$ is interim IR and ex ante BB.
+		\item Give an example of a BIC, interim IR and ex ante BB mechanism that implements $\tilde{k}$.
+	\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+...
+\fi
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	Construct a perfectly revealing equilibrium in the Battaglini(2003) model with agents' biases $b_1 = (1, -3)$ and $b_2 = (-4, 2)$. (Describe agents' reporting strategies as functions of state and the principal's decision strategy as a function of reports.)
+	
+	\ifsolutions
+	\section*{Solution}
+	...
+	\fi
+\end{ex}
+
+
+
+%%%------------------------------------------------------------------------------------------------
+%
+%\begin{ex}
+%	Consider the optimal auction problem in which there are two bidders whose valuations $v_i \in [0,1]$ are uniformly distributed but perfectly correlated, i.e. $v_1 = v_2$ with probability 1.  Construct a DSIC mechanism with the following properties:
+%	\begin{enumerate}
+%		\item Bidder 2 wins the object regardless of the type profile.
+%		\item Both bidders earn zero utility at every type profile.
+%	\end{enumerate}
+%	
+%	\ifsolutions
+%	\section*{Solution}
+%	Consider the following allocation:
+%	\[q_1(v_1,v_2)=0\]
+%	\[q_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if }\quad v_2\neq v_1\\
+%	1 & \quad\text{otherwise}\quad
+%	
+%	\end{array}
+%	\right.\]
+%	\[t_1(v_1,v_2)=0\]
+%	\[t_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{if}\quad v_2\neq v_1\\
+%	v_1 & \quad\text{otherwise}\quad\end{array}\right.\]
+%	Note that for bidder 1 it is weakly dominant to say his valuation: he never gets the good so he might as well say $v_1$. For player 2, we have exactly the same situation: given the message sent by agent 1, he is indifferent between saying the truth and not, so telling the truth is weakly dominant. Agent 2 gets the good always and both bidders have 0 utility at every profile.
+%	\fi
+%\end{ex}
+
+\end{document}

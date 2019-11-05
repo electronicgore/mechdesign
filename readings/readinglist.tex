@@ -1,0 +1,240 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Reading List} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+	{\huge Mechanism Design: Reading List}
+\end{center}
+\bigskip
+
+General references:
+\begin{description}
+	\item[MWG] Mas-Colell, Andreu, Michael Dennis Whinston, and Jerry R. Green. Microeconomic theory. New York: Oxford university press, 1995. 
+	\item[B\"{o}rgers] B\"{o}rgers, Tilman. An introduction to the theory of mechanism design. Oxford University Press, 2015.
+	\item[RS] Roth, Alvin E., and Marilda Sotomayor. Two-Sided Matching: A Study in Game-Theoretic Modeling and Analysis. Cambridge: Cambridge University Press. 1990.
+	\item[(*)] items marked with a star indicate optional readings that will not be covered in class.
+\end{description}
+\medskip
+
+\subsection{Mechanism Design Problem (week 1)}
+\begin{itemize}
+	\item MWG 23.A-B.
+	\item B{\"o}rgers ch.1.
+\end{itemize}
+
+\subsection{Social Choice (week 1)}
+\begin{itemize}
+	\item MWG 21.
+	\item Geanakoplos, John. "Three brief proofs of Arrow’s impossibility theorem." Economic Theory 26.1 (2005): 211-215. \url{https://link.springer.com/article/10.1007/s00199-004-0556-7}
+\end{itemize}
+
+\subsection{Dominant Strategy Implementation (weeks 2-3)}
+\begin{itemize}
+	\item MWG 23.C.
+	\item B{\"o}rgers ch.8 (general), ch.7 (quasilinear efficient), ch.4 (examples).
+	\item (*) Svensson, Lars-Gunnar, and Alexander Reffgen. "The proof of the Gibbard–Satterthwaite theorem revisited." Journal of Mathematical Economics 55 (2014): 11-14.
+	
+	\url{https://www.sciencedirect.com/science/article/pii/S0304406814001177}
+\end{itemize}
+
+\subsection{Bayesian Implementation (week 4)}
+\begin{itemize}
+	\item MWG 23.D-E.
+	\item B{\"o}rgers ch.3 (selected settings), ch.6.1-6.3 (monotonicity, rev.eq.).
+	\item Krishna, Vijay, and Motty Perry. "Efficient Mechanism Design." (2000). Unpublished.
+	
+	\url{https://drive.google.com/file/d/0B9qyCPfbmExnbmE1OTk5OGJmQzA/view}
+\end{itemize}
+
+\subsection{Optimal Mechanisms (weeks 5-6)}
+\begin{itemize}
+	\item MWG 23.F.
+	\item B{\"o}rgers ch.2 (monopolistic screening), ch.3 (trade, auctions).
+	\item (*) Manelli, Alejandro M., and Daniel R. Vincent. "Multidimensional mechanism design: Revenue maximization and the multiple-good monopoly." Journal of Economic theory 137.1 (2007): 153-185. \url{https://www.sciencedirect.com/science/article/pii/S0022053107000348}
+	\item (*) Olszewski, Wojciech, and Ron Siegel. "Performance-maximizing large contests." Theoretical Economics (forthcoming).
+	
+	\url{https://econtheory.org/ojs/index.php/te/article/viewForthcomingFile/3588/24803/1}
+\end{itemize}
+
+\subsection{Correlated Information (week 8)}
+\begin{itemize}
+	\item B{\"o}rgers ch.6.4.
+	\item Cremer, Jacques, and Richard P. McLean. "Full extraction of the surplus in Bayesian and dominant strategy auctions." Econometrica: Journal of the Econometric Society (1988): 1247-1257.
+	
+	\url{https://www.jstor.org/stable/1913096}
+	\item Battaglini, Marco. "Multiple referrals and multidimensional cheap talk." Econometrica 70.4 (2002): 1379-1401. \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00336}
+\end{itemize}
+
+\subsection{Dynamic Mechanism Design (week 9)}
+\begin{itemize}
+	\item B{\"o}rgers ch.11.
+	\item Bergemann, Dirk, and Juuso Välimäki. "Dynamic mechanism design: An introduction." Journal of Economic Literature 57.2 (2019): 235-74. \url{https://www.aeaweb.org/articles?id=10.1257/jel.20180892}
+	\item (*) Gershkov, Alex, and Benny Moldovanu. Dynamic Allocation and Pricing: A Mechanism Design Approach. MIT Press, 2014. 
+\end{itemize}
+
+\subsection{Dynamic Mechanism Design: Topics (week 10)}
+\begin{itemize}
+	\item (\emph{risk-aversion}) Thomas, Jonathan, and Tim Worrall. "Income fluctuation and asymmetric information: An example of a repeated principal-agent problem." Journal of Economic Theory 51.2 (1990): 367-390. \url{https://www.sciencedirect.com/science/article/pii/002205319090023D}
+	\item (\emph{no transfers}) Guo, Yingni, and Johannes Hörner. "Dynamic mechanisms without money." Working paper (2018). 
+	
+	\url{http://yingniguo.com/wp-content/uploads/2018/07/Dynamic-Allocation-without-Money.pdf}
+	\item (\emph{no transfers or commitment}) Li, Jin, Niko Matouschek, and Michael Powell. "Power dynamics in organizations." American Economic Journal: Microeconomics 9.1 (2017): 217-41.
+	
+	\url{https://www.aeaweb.org/articles?id=10.1257/mic.20150138}
+\end{itemize}
+
+\subsection{Matching (weeks 11-12)}
+\begin{itemize}
+	\item RS ch.1-5
+\end{itemize}
+
+\subsection{Information Design (weeks 13-14)}
+\begin{itemize}
+	\item Bergemann, Dirk, and Stephen Morris. "Information design: A unified perspective." Journal of Economic Literature 57.1 (2019): 44-95. \url{https://www.aeaweb.org/articles?id=10.1257/jel.20181489}
+\end{itemize}
+
+\bigskip
+The list will be expanded and updated as we progress through the course.
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}

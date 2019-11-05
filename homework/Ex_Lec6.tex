@@ -1,0 +1,206 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Exercises: Lec 6} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\solutionsfalse
+%\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	
+These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}[Review Questions]
+	\begin{itemize}
+		\item What are the possible dynamic linkages that might prevent us from splitting a dynamic mechanism design problem into a collection of independent static problems?
+		\item How does the solution to the static problem of efficient implementation extend to the dynamic problem? What are the main challenges?
+		\item 
+	\end{itemize}
+	
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	Consider a problem of climate change, modelled as follows. There are two generations (players) $i=1,2$ and two periods $t=1,2$; each player $i$ only exists in their respective period $t=i$.\footnote{The distinction between indices $i$ and $t$ is somewhat arbitrary in this problem. The problem tries to stick to the more appropriate of the two indices in all cases, but they are often interchangeable. The double index $i,t$ is collapsed to a single one wherever required.} 
+	Each player has some type $\theta_i \sim \text{i.i.d.} U[0,1]$, and their utilities are given by:
+	\begin{align*}
+		u_1 (\theta_1,k_1) &= \theta_1 k_1 - k_1^2 - p_1
+		\\
+		u_2 (\theta_2,k_1,k_2) &= \theta_2 k_2 - (k_1+k_2)^2 - p_2,
+	\end{align*}
+	in periods when they exist, and zero in other periods.
+	Here allocation $k_t \in \mathbb{R_+}$ represents the level of fossil fuels usage at time $t$, $\theta_i$ is the value that generation $i$ extracts from burning fossils at time $t=i$, and the quadratic term represents the global losses stemming from this usage. Note that this includes past usage: player $2$ suffers from usage $k_1$.
+	
+	Your goal is to derive the efficient mechanism. You can think of the designer as some international organization (e.g., the UN), and of transfers as some kind of globally agreed upon carbon tax. We will use the dynamic pivot mechanism.\footnote{This problem does not strictly fit into the general model we set up in class due to the explicit dependence of $u_2$ on $k_1$, but all same methods are still applicable. Further, you can omit dependence of all objects on $K_t$, since the set $K_t$ of feasible allocations does not change over time in this problem.}
+	Follow closely the expressions on slide 172. Assume that there is no discounting ($\delta = 1$).
+	\begin{enumerate}
+		\item Write down the flow social surplus function for $t=2$. Write down the welfare function for $t=2$. Find the efficient allocation $k^*_2$ for the time-$2$ generation.
+		\item Find the transfers $p^{DPM}_2$ for the time-$2$ generation as prescribed by the dynamic pivot mechanism. \emph{(Hint: player $2$ is the only player in existence from $t=2$ onwards. What externalities does he impose on other existing players? What externalities is he subject to? What does this imply for $p^{DPM}_2$?)}
+		\item Write down the flow social surplus function for $t=1$. Write down the welfare function for $t=1$. (Keep in mind that it should account for the effect of $k_1$ on future generation.) Find the efficient allocation $k^*_1$ for the time-$1$ generation.
+		\item Write down the marginal contributions of player $1$ in both periods. Find flow marginal contributions of player $1$. Find the optimal payments for player $1$.
+		\item Verify that mechanism is ``online'', i.e., each player is only required to make payments in those periods in which they are alive.
+	\end{enumerate}
+
+	\ifsolutions
+	\subsection*{Solution}
+	...
+	\fi
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	...
+	
+	\ifsolutions
+	\subsection*{Solution}
+	...
+	\fi
+\end{ex}
+
+
+
+
+\end{document}

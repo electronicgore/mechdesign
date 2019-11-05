@@ -1,0 +1,443 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}\\} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle \\ \firstxmark} % Top center head
+\rhead{\instructor \\ \theprofessor \\} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Midterm} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\solutionsfalse
+\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+	{\Huge Midterm
+	\ifsolutions (with Solutions) \fi}
+\end{center}
+\bigskip
+
+\ifsolutions
+The solutions below are meant to explain a possible way to solve the given problems. They are not meant to present an answer that would receive maximal grade for each question, and neither should they be understood as a grading rubric.
+\else
+You can work on the midterm in groups of up to three students. Write up your responses to questions below, and submit them to Absalon (one file per group). Show your work and explain your answers. The deadline to submit the responses is Oct 25, 12:00 (noon). Satisfactory performance on this midterm is a prerequisite to participating in the final exam.
+
+Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in a problem, please report it to me by midnight on Oct 18 and I will issue a correction if required. If you think there is a typo, and the deadline has passed, attempt to fix it yourself as best you can and proceed with the remainder of the problem. 
+\fi
+
+\begin{ex}
+A lecturer for a course decides (before the course starts) on the evaluation strategy for the course. His objective is maximizing the amount of effort students exert in the course. All students dislike exerting effort for the sake of it, but realize that through effort they acquire knowledge of the topic. The value of such knowledge is each student's private information and students are independent in their valuations. All students also prefer getting a good grade for the course to getting a bad grade. No monetary payments are allowed between the lecturer and the students.
+
+Your task is to formalize the lecturer's problem above as a mechanism design problem.
+\begin{enumerate}
+	\item Describe the environment formally. Make your description general enough to allow applying by any lecturer to any course.
+	\begin{enumerate}
+		\item Describe the set of players (excluding the designer).
+		\item Describe the set of types for each player.
+		\item Describe the set of possible outcomes. Can you fit the problem in a quasilinear world? If yes, what are the \emph{allocations} and what are the \emph{transfers} in this problem? If not, argue why not.
+		\item Describe the players' utility functions. What can you plausibly assume about them based on the problem description and common sense? Are they continuous/increasing/decreasing/concave/convex in types and/or outcomes?
+		\item Describe the designer's objective function.
+	\end{enumerate}
+	\item Discuss the requirements to the mechanism in this setting. What properties should it satisfy and why? (I.e., what are the constraints that the designer faces when maximizing his objective function?)
+	\item Now narrow your scope down to a particular course (e.g., Mechanism Design in Fall 2019). What real-world data would you need to make the description above concrete? (Meaning, to put numbers where the letters and abstract functions stand in general notation -- e.g., to identify type spaces and utility functions.) What aspects of the setting cannot be identified and must be assumed?
+	\item Imagine you have the required data and assume some particular functional forms for your primitives.
+	\item How would you proceed about solving this problem? Proceed as far into solving the problem as you can.
+	%Solve the problem the best you can. Your ideal answer should provide a direct mechanism which asks for students' valuations (on some scale) and outputs the prescribed outcome (in concrete units -- e.g., grades, kroners, hours per week, numbers of homeworks, some combination of the above etc).
+\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item The set of players is $\{1,...,N\}$, where $N$ is the number of students in the class (lecturer is the designer, so we do not include them in the player set). Each player $i \in \{1,...,N\}$ has some private type $\theta_i \in \Theta_i$, which determines their benefit from effort within the course, where $\Theta_i$ is arbitrary in general.%, but for concreteness we can assume $\Theta_i = [\underline{\theta},\bar{\theta}]$.
+	
+	An outcome is a pair $(k,t)$, where $k \in \mathbb{R}^N_+$ (an allocation) prescribes the level of effort for each student, and $t \in T^N$ is a vector of grades for each student, with $T$ being the set of possible grades. For simplicity, we ignore all constraints on grades (such as discreteness and boundedness) and let $T = \mathbb{R}_+$. Grades in this problem serve as monetary transfers from the standard settings in terms of incentive provision.
+	
+	The students' utility functions can be modelled as, e.g., 
+	$$u_i((k,t),\theta) = v(k_i,\theta_i) - c(k_i) + t_i.$$ 
+	Higher grades $t_i$ are more desirable by all students; $c$ describes costs of effort given type, and $v$ describes the innate benefit of effort (as perceived by the student).
+	
+	The above already assumes the students' utility is quasilinear in grades, which would be a standard assumption in this case (doesn't make it innocuous). Here grades serve as payments, while effort is an allocation (swapping roles is also fine -- see part 5). We have also assumed that both cost $c$ and benefit $v$ from effort are the same for all students.
+	Benefit $v$ is increasing in both arguments, while cost $c$ is increasing in $k$. It is intuitive to think that $c$ is at least weakly convex in $k$, i.e., the marginal cost of effort is increasing. On that note, another standard assumption for a theoretical model would be to assume that $v-c$ is [at least quasi-]concave in $k$, so that there is a unique optimum $k^*$ for each type $\theta$, but in a mechanism design problem we do not need this assumption as much as if this was just a game (since we can use transfers to manipulate payoffs).
+	
+	The lecturer's objective function is, in general, some $u_l (k,t) = \mathbb{E}_\theta v_l(k_1(\theta),...,k_N(\theta))$ that is symmetric in $(k_1,...,k_N)$ -- the lecturer is not supposed to have favorites. The problem also does not mention that the lecturer cares about students' grades, so we assume that he doesn't. The shape of $v_l$ may vary -- one lecturer may want all students to exert some minimal amount of effort ($v_l = \min_i k_i $), another only wants to produce one star student ($v_l = \max_i k_i$). The default choice would be $v_l = \sum_i k_i$.
+	
+	\item The first choice we have to make is DSIC vs BIC. Resorting to the story, one would think that the timing is such that a student reports their type $\theta_i$ and receives an effort prescription $k_i$ at the beginning of the semester, and only learns their $t_i$ at the end. Since we want to make students follow through on their $k_i$, it is enough to guarantee incentives at the point they learn $k_i$. So if $k_i^*$ in the optimal mechanism is very revealing of others' types then DSIC is effectively necessary, while otherwise BIC is good enough.\footnote{This is a bad criterion: it prescribes a criterion based on the result. But you can try looking for an optimal BIC mechanism and see whether is the resulting $k^*$ fits the requirement, and proceed to searching a DSIC mechanism otherwise. Alternatively, you can also note that this problem has no linkages across students, so the distinction between BIC and DSIC does not really matter.}
+	
+	The necessity of IR depends on your interpretation of the problem and the administrative requirements. If the course is not mandatory and the lecturer is concerned with attracting students then interim IR is necessary. Further, if students can costlessly drop the class after learning their prescribed $(k_i,t_i)$ (but before exering $k_i$) then ex post IR is necessary.
+	
+	An analog of BB -- but not BB as we defined it in the class -- can arise if the department asks the lecturer to grade on a curve (so a distribution of $t_i$ must fit some requirement). Finally, there is no requirement of efficiency, since the objective is maximizing students' effort.
+	
+	\item Here you can list any kind of information that would allow you to narrow down and/or calibrate your assumptions on $N, \Theta_i, v$, and $c$. Number of students in the class is the trivial one. Some information on $v$ and $c$ can be gauged from past students' surveys regarding this and similar classes, if they included questions like "how interested were you in this class prior to taking it?" and "how much of your time did preparation for this class require?" These would also help estimate the distribution of types.
+	
+	\item The assumptions that you must take a stand on -- possibly grounding your decision on the data available to you, -- can look something like "$\theta_i \sim U[0,1]$; $u_i = \theta_i k_i - k_i + t_i$; $u_l = \mathbb{E}_\theta \sum_i k_i$, where $k_i \in \mathbb{R}$ is hours worked on the course per week and $t_i$ is grade on the standard scale."
+	
+	\item Note that this problem has no linkages across students (outcome of one should has no reason to depend on types of others), so we look at the problem of maximizing each student's effort separately. In such single-student problem, the lecturer offers a menu $(k(\theta),t(\theta))$ to each student in an attempt to maximize $u_l = \mathbb{E}_\theta k(\theta)$. 
+	
+	This problem looks close to that of search for the optimal mechanism, except the lecturer maximizes $k$ instead of $t$. However, we have assumed that the utility is linear in $(k,t)$, which enables the following trick. Instead of the player's utility function $u_i((k,t),\theta_i)$ we can use a scaled utility function $w_i((t,k),\theta_i) \equiv \frac{u_i((k,t),\theta_i)}{1-\theta_i}$. Working with this $w_i$ and using the standard arguments -- except with $k$ and $t$ swapped throughout, -- we can obtain
+	\begin{itemize}
+		\item \emph{Monotonicity}: in an IC mechanism, $t(\theta)$ must be weakly increasing in $\theta$;
+		\item \emph{Envelope Representation}: $W_i(\theta) = W_i(0) + \int_0^\theta \frac{t(s)}{(1-s)^2} ds$, where $W_i(\theta) \equiv w_i((k_i(\theta),t_i(\theta)),\theta_i)$.
+	\end{itemize}
+	
+	Note that $W_i(\theta) \geq W_i(0)$, so to satisfy IR it is sufficient to satisfy IR of the lowest type.
+	The envelope representation implies that $k(\theta) = -W_i(0) - \int_0^\theta \frac{t(s)}{(1-s)^2} ds + \frac{t(\theta)}{1-\theta}$. In the end, the lecturer's problem is:
+	\begin{align*}
+		\max_{k,W_i(0)} & \left\{ \int_0^1 k(\theta) d\theta \right\}
+		\\
+		\Leftrightarrow \max_{k,W_i(0)} & \left\{ -W_i(0) - \int_0^1 \int_0^\theta \frac{t(s)}{(1-s)^2} ds d\theta + \int_0^1 \frac{t(\theta)}{1-\theta} d\theta \right\}
+		\\
+		\Leftrightarrow \max_{k,W_i(0)} & \left\{ -W_i(0) \right\},
+	\end{align*}
+	where the two integrals cancel each other out (integrate the first one by parts to verify this). Therefore, in an IC mechanism the lecturer cannot induce positive effort from any type. This conclusion is specific to linear payoffs, which, in turn, was a necessary assumption to solve the problem the way we did it, so all in all this is by no means the only correct answer in this problem.
+\end{enumerate}
+\fi
+\end{ex}
+
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+
+\begin{ex}
+Consider a Cournot duopoly with a inverse demand function $P(Q)=1-Q$ where $Q$ is aggregate quantity. Suppose that each firm $i=1,2$ has constant marginal cost $\theta_i$. This marginal cost is drawn uniformly from $[0,\frac{1}{2}]$. The realizations for the two firms are independent. Suppose that the firms observe their cost level, but not their rival’s cost level prior to choosing their quantity.  
+
+\smallskip
+Imagine that the two firms are able to collude by committing to a collusive “mechanism” whose outcomes are assignments of a quantity and a transfer payment to each of the two firms as a function of the announcements by the two firms of their cost type.  Let $(k_i(\theta),t_i(\theta))$ denote the output level and transfer assigned to firm $i$ if the announced profile of types (costs) is $\theta = (\theta_1, \theta_2)$.
+
+\medskip
+\begin{enumerate}
+	\item We can use the VCG mechanism to implement the \emph{profit}-maximizing production decisions in dominant strategies.\footnote{Problem text originally asked about revenue-maximizing decisions. This was a typo; profit-maximizing decisions were implied.} 
+	Explain why. (Given that collusion is not usually perceived as an efficient outcome.)
+	\item Derive the VCG mechanism for this setting.
+	\begin{enumerate}
+		\item Find the profit-maximizing output profile $k^*(\theta)$.
+		\item Find the output profile $k^{-i}(\theta_{-i})$ that maximizes profit of firm $-i$ given its type $\theta_{-i}$.
+		\item Find the VCG transfers and describe the VCG mechanism.
+	\end{enumerate}
+	\item \label{part:irbb} Argue why the collusive mechanism should or should not be budget balanced and/or individually rational for the firms. If it should, argue which notions of IR and BB are the most reasonable to demand in this setting.
+	\item Is the VCG mechanism budget balanced? Is it individually rational assuming firms' outside options are zero (i.e., each firm's choice is between participating in the agreement and leaving the industry)?
+	\item Now suppose instead that either firm can reject the mechanism's prescription once it has been announced (at ex post stage), in which case firms go back to playing Cournot outcome. In which cases -- i.e., for which realizations of $(\theta_1,\theta_2)$ -- would a firm want to back out of the agreement? Give formal conditions and explain them the best you can.
+	
+	(Assume that firms are not strategic about this contingency when making their reports to the mechanism, so truthful reporting is still an equilibrium.)
+	%\item Suppose that the firms asked you to design a mechanism that is exactly ex ante BB and interim IR (because of or despite your response in part \ref{part:irbb}), and at least BIC. The firms have also revealed their true outside options to be $\underline{U}_i (\theta_i)=\frac{1-\theta_i}{4}$ from not participating in the mechanism. Derive the gVCG mechanism to either fulfill the firms' request, or demonstrate its infeasibility. (Your answer should indicate which of the two it is.)
+\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item The objective is maximizing the sum of utilities of mechanism participants (i.e., firms), as it is in the efficient mechanisms. Consumers are not participating in the mechanism, so VCG does not account for their utilities.
+	\item Given cost profile $\theta$, the profit-maximizing output profile is given by
+	\begin{align*}
+		k^*(\theta) = \arg \max_{(k_1,k_2)} \left\{ (k_1 + k_2) \cdot (1 - k_1 - k_2) - k_1 \theta_1 - k_2 \theta_2 \right\}.
+	\end{align*}
+	Attempting the usual approach yields two first-order conditions that are impossible to satisfy simultaneously (unless $\theta_1 = \theta_2)$.
+	%\begin{align*}
+	%	1 - 2(k_1^*(\theta) + k_2^*(\theta)) - \theta_1 = 0;
+	%	\\
+	%	1 - 2(k_1^*(\theta) + k_2^*(\theta)) - \theta_2 = 0.
+	%\end{align*}
+	However, one can split the problem into two: finding an optimal $Q = k_1 + k_2$ and allocating it among the two firms. Starting with the latter, it is easy to see that to maximize the sum of profits, it is best to let the firm with the lowest cost $\theta_i$ produce $k_i = Q$ and the other firm produce $k_j = 0$.	
+	The optimal $Q$ is then found as a maximizer of $Q\cdot (1-Q) - \theta_i Q$, so in the end,
+	\begin{align*}
+		k_i^*(\theta) =
+		\begin{cases}
+			\frac{1-\theta_i}{2} & \text{ if } \theta_i < \theta_j;
+			\\
+			\frac{1-\theta_i}{4} & \text{ if } \theta_i = \theta_j;
+			\\
+			0 & \text{ otherwise.}
+		\end{cases}
+	\end{align*}
+	(any other split in case of tie works as well).
+	
+	The optimal output $k^{-i}(\theta_{-i})$ that maximizes the sum of profits of mechanism participants except for $i$ -- i.e., maximizes profit of firm $j\neq i$, -- is given by $k^{-i}_i = 0$ for firm $i$ and the monopoly output $k^{-i}_j = \frac{1-\theta_j}{2}$ for firm $j$.
+	
+	The VCG transfer can then be computed using the standard formula to be
+	\begin{align*}
+		t_i^{VCG}(\theta) =
+		\begin{cases}
+		\frac{(1-\theta_j)^2}{4} & \text{ if } \theta_i < \theta_j;
+		\\
+		\frac{(1-\theta_j)^2}{8}  & \text{ if } \theta_i = \theta_j;
+		\\
+		0 & \text{ otherwise.}
+		\end{cases}
+	\end{align*}
+	(To clarify: $t_i$ is the payment firm $i$ makes to the mechanism, and it does not include market profits.)
+	
+	The VCG mechanism is then a direct mechanism characterized by a pair $(k^*,t^{VCG})$.
+	
+	\item 
+	The collusive agreement should be beneficial for both firms, so individual rationality, at least in the interim sense, is definitely a desired property. Whether it should be strengthened to ex post IR depends on whether firms can make some kind of enforceable binding agreement -- if yes then interim IR is fine, otherwise ex post IR is needed to make sure that each firm complies with the mechanism's prescriptions when they are revealed. Enforceability of contracts is usually guaranteed by courts and the legal system -- but collusion is illegal, so going to court is not an option in our case, thus ex post IR is likely a more reasonable requirement.\footnote{A curious scheme, however, was proposed by Francesco Squintani in as-of-yet unpublished manuscript. In this scheme the firms make a collusive agreement like the mechanism we describe, and in addition sign a perfectly legal contract that is very costly for both firms. On equilibrium path both firms follow the informal agreement and ignore the formal contract. If one firm deviates, the other goes to court seeking damages from the deviant for not delivering on the formal contract.}
+	
+	Budget balance is less obvious. It would be nice if the mechanism was exactly budget balanced, of course. However, it is not the end of the world if it was not. If the mechanism runs a surplus, the firms can invest the resulting money in a joint venture or try to find some other way to put it to use without distorting incentives. If the mechanism is expected to run a deficit, when signing the agreement the firms could make lumpsum contributions to a trust fund which would cover the deficit. In the end, the case can be made in favor of either option.
+	
+	\item The VCG mechanism always runs a budget surplus: $t_1(\theta)+t_2(\theta) = \frac{(1-\max \theta_i)^2}{4}$, so it is weakly but not exactly budget balanced, ex post and, thus, ex ante.
+	
+	It is also ex post IR. Firm $i$'s profit under this collusive mechanism is
+	\begin{align*}
+		\pi_i^{VCG}(\theta) =
+		\begin{cases}
+		\frac{(1-\theta_i)^2}{4} - \frac{(1-\theta_j)^2}{4} >0 & \text{ if } \theta_i < \theta_j;
+		\\
+		\frac{(1-\theta_i)^2}{8} - \frac{(1-\theta_j)^2}{8} =0 & \text{ if } \theta_i = \theta_j;
+		\\
+		0 & \text{ otherwise.}
+		\end{cases}
+	\end{align*}
+	
+	\item Firm $i$'s profit under Cournot competition is $\pi_i^C (\theta) = \frac{(1 +\theta_j - 2\theta_i)^2}{9}$. This is assuming that costs are commonly known after being announced by the mechanism. This profit is greater than $\pi_i^{VCG}(\theta)$ if:
+	\begin{itemize}
+		\item either $\theta_i > \theta_j$,
+		\item or $\theta_i < \theta_j$ and $4+13\theta_j^2 - 10 \theta_j - 16 \theta_j \theta_i + 2 \theta_i - 25 \theta_i^2 > 0$.
+	\end{itemize}
+	The former condition is straightforward: if $i$ has the higher marginal cost then it is told to not produce by the mechanism, which together with zero transfer implies zero profit. Cournot competition, on the other hand, almost always yields positive profit, and is hence a more appealing option.\footnote{The only exception is the case $\theta_i=\frac{1}{2}$, $\theta_j = 0$.}
+	Therefore, at least one firm would almost always want to back out of the agreement.
+	
+	To get a complete picture, it is also interesting to explore the second condition above. It holds if $\theta_i$ is low enough (to see this, either plot it using your favorite software, or figure out which part of the saddle we are looking at with $\theta \in [0,\frac{1}{2}]^2$). I.e., if a firm's costs are very low then it is better off defeating the competitor in a fair fight than paying him off in a mechanism. 
+	
+	In the end, mechanism participation is only optimal for $i$ if its costs are high but the opponent's costs are even higher.
+\end{enumerate}
+\fi
+\end{ex}
+
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+
+\begin{ex}
+% source: Schotmuller midterm 2017, q5
+This exercise is about optimal regulation of a monopolist. You can for example think of a private garbage disposal company. The municipality that contracts with the company has to determine how often the garbage is collected per month and what price the company is paid. For simplicity, we assume that the possible numbers of monthly collections $q$ is continuous (i.e. we neglect integer problems and allow q to be any positive real number). Citizens value garbage disposal at $u(q) = q$. The company has costs of $c(q, \theta) = (1 + \theta)q^2$, where $\theta$ is its private information, and the municipality thinks that $\theta$ is distributed uniformly on $[0, 1]$. The municipality maximizes the expected value of consumer valuation minus the price it has to pay. The firm maximizes its profits.
+
+\smallskip
+Focus on mechanisms where the municipality announces a menu of contracts $\{q(\theta), t(\theta)\}$. The company then announces a type $\hat{\theta} \in [0,1]$ or decides to not participate (which gives it a payoff of zero). It then has to procure $q(\hat{\theta}) \geq 0$ and receives payment $t(\hat{\theta})$. The municipality wants to design the contracts in such a way that it is optimal for the company to report $\theta$ truthfully.
+
+\medskip
+\begin{enumerate}
+	\item Can the municipality do better by considering more elaborate mechanisms?
+	\item Denote the company's profit under the optimal mechanism by 
+	$$U_f(\theta) = t(\theta) - (1+\theta) q^2(\theta) $$
+	Show that the following must hold in any mechanism where announcing its true type is optimal for the company:
+	\begin{enumerate}
+		\item $U_f(\theta) = U_f(1) + \int_{\theta}^{1} q^2(s) ds$;
+		\item $q(\theta)$ is weakly decreasing in $\theta$.
+	\end{enumerate}
+	\item Using the above, show that the objective function of the municipality can be written as 
+	$$U_m = \int_0^1 \left[ q(\theta) - (1+2\theta) q^2(\theta) \right] d\theta - U_f(1).$$
+	\item What is $U_f(1)$ in the optimal contract? Show that the optimal menu of allocations is $q^*(\theta) = \frac{1}{2+4\theta}$.
+	\item What is the optimal payment scheme $t^*(\theta)$?
+	\item What would be the optimal allocation schedule $q^{fb}(\theta)$ if the municipality could observe the company's $\theta$?
+	\item Compare $q^{fb}$ with the constrained-optimal $q^*$ you found above -- how are they different? Why are they different?
+\end{enumerate}
+
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item No, the revelation principle implies that the outcome of any arbitrary mechanism can be replicated in a direct revelation mechanism discussed in the problem.
+	
+	\item Retrace the steps made in the slides to prove payoff equivalence.\footnote{Note that the proof in the slides is written for Euclidean setting, which this problem does not fit into. However, we can still make a similar argument to get the same conclusions.}
+	In particular, consider the incentive compatibility condition of type $\theta$ which requires that it must be better for him to report $\theta$ rather than any $\hat{\theta} < \theta$:
+	\begin{align*}
+		U_f(\theta) &\geq t(\hat{\theta}) - (1+\theta) q^2(\hat{\theta})
+		\\ \Leftrightarrow
+		U_f(\theta) &\geq t(\hat{\theta}) - (1+\hat{\theta}) q^2(\hat{\theta}) - (\theta - \hat{\theta})q^2(\hat{\theta})
+		\\ \Leftrightarrow 
+		U_f(\theta) &\geq U_f(\hat{\theta}) - (\theta - \hat{\theta})q^2(\hat{\theta})
+	\end{align*}
+	Together with the symmetric IC condition of type $\hat{\theta}$, the above can be rewritten as
+	\begin{align*}
+		-q^2(\theta) \geq \frac{U_f(\theta) - U_f(\hat{\theta})}{\theta - \hat{\theta}} \geq -q^2(\hat{\theta})
+	\end{align*}
+	Firstly, this immediately implies that $-q^2(\theta) \geq -q^2(\hat{\theta})$, meaning $q(\theta) \leq q(\hat{\theta})$ (since $q \geq 0$). Secondly, taking the limit as $\hat{\theta} \to \theta$, we obtain that $\frac{d}{d\theta}U_f(\theta) = -q^2(\theta)$, so we can use the Fundamental Theorem of Calculus to write $U_f(\theta)$ as\footnote{Note that here we take $\theta=1$ as the ``default'' type -- as opposed to $\theta=0$ in the lecture. The FTC works with any of them. The intuitive reason for choosing $\theta=1$ is that he is the ``least valuable'' type, namely the one with the highest costs and also the one with the most binding IR constraint. The related representational reason is that with this choice we can write $U_f(\theta)$ as the sum of positive amounts, without any minuses -- meaning $\theta=1$ is the one who receives the lowest utility in equilibrium and, therefore, the one for whom the IR constraint is binding under optimal menu.}
+	\begin{align} \label{envelope}
+		U_f(\theta) = U_f(1) + \int_{\theta}^{1} q^2(s) ds.
+	\end{align}
+	
+	\item By definition of $U_f(\theta)$ and payoff equivalence shown above,
+	\begin{align}
+		\nonumber
+		U_f(\theta) &= t(\theta) - (1+\theta) q^2(\theta) = U_f(1) + \int_{\theta}^{1} q^2(s) ds
+		\\ \Rightarrow \label{eq:transf}
+		t(\theta) &= (1+\theta) q^2(\theta) + \int_{\theta}^{1} q^2(s) ds + U_f(1)
+	\end{align}
+	Plugging this into the objective function of the municipality, $U_m = \mathbb{E} [q(\theta) - t(\theta)]$, we get
+	\begin{align*}
+		U_m &= \mathbb{E} \left[ q(\theta) - (1+\theta) q^2(\theta) - \int_{\theta}^{1} q^2(s) ds \right] - U_f(1)
+		\\
+		&= \int_0^1 \left[ q(\theta) - (1+\theta) q^2(\theta) - \int_{\theta}^{1} q^2(s) ds \right] d\theta - U_f(1).
+	\end{align*}
+	Using integration by parts, we can say that
+	\begin{align}
+		\nonumber
+		\int_0^1 \int_{\theta}^{1} q^2(s) ds d\theta &= \left. \left[\theta \cdot \int_{\theta}^{1} q^2(s) ds\right] \right|_{\theta=0}^1 - \int_0^1 (-q^2(\theta)) \theta d\theta
+		\\ \nonumber
+		&= \int_0^1 \theta q^2(\theta) d\theta,
+		\\ \Rightarrow \label{eq:um}
+		U_m &= \int_0^1 \left[ q(\theta) - (1+2\theta) q^2(\theta) \right] d\theta - U_f(1).
+	\end{align}
+	
+	\item Since the envelope representation \eqref{envelope} implies $U_f(\theta) \geq U_f(1)$ for all $\theta$, it is optimal to set $U_f(1) = 0$. If $U_f(1)$ were positive, the municipality could decrease all $t(\theta)$ by some constant without affecting the company's incentives, and this would generate higher $U_m$.
+	
+	To find the optimal allocation $q^*(\theta) = \frac{1}{2 + 4 \theta}$, maximize the integrand in \eqref{eq:um} for every $\theta$. Note that $q^*(\theta)$ is indeed weakly decreasing in $\theta$, as required.
+	
+	\item Plugging the $q^*(\theta)$ and $U_f(1)$ found above into \eqref{eq:transf}, we get
+	\begin{align*}
+		t^*(\theta) &= (1+\theta) (q^*(\theta))^2 + \int_{\theta}^{1} (q^*(s))^2 ds + U_f(1)
+		\\
+		&= -\frac{1}{24} + \frac{3+4\theta}{8 (1+2\theta)^2}.
+	\end{align*}
+	
+	\item If $\theta$ was observable, the municipality could pay $t(\theta) = (1+\theta)q^2(\theta)$ so as to make the company exactly indifferent between participating and not, meaning the first-best allocation is
+	\begin{align*}
+		q^{fb} (\theta) &= \arg \max_q \left\{ q - (1+\theta) q^2 \right\}
+		\\
+		&= \frac{1}{2+2\theta}.
+	\end{align*}
+	
+	\item One can see that $q^{fb}(\theta) > q^*(\theta)$ for all $\theta >0$ and $q^{fb}(0)=q^*(0)$. This aligns with the idea of ``no distortion at the top'' -- the ``most valuable'' type receives the first-best allocation. Allocations of the other types are distorted so as to provide incentives more efficiently.
+	
+	In particular, in our problem the lower types want to mimic the higher types (since they will get larger payment to cover allegedly higher costs) and not the other way around.\footnote{Type $\theta=0$ then has the strongest incentives to mimic other types and no one has the incentives to mimic him. The latter is another reason for assigning undistorted allocation to $\theta=0$.}
+	Allocation $q(\theta)$ is then distorted downward so as to reduce the benefit that types $\hat{\theta} < \theta$ can get from reporting $\theta$ -- in particular, lower $q$ means that the effective cost saving from being $\hat{\theta}$ as opposed to $\theta$ is decreased, so the incentives to mimic are also slightly mitigated (which makes it easier to offset them using payments).
+\end{enumerate}
+\fi
+\end{ex}
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}
