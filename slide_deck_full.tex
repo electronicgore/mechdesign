@@ -2154,7 +2154,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 	\item In our mechanism design problem, consider transfers
 	$$t'_i(\theta_i,\theta_{-i}) = t_i(\theta_i,\theta_{-i}) + C_{i,1} - C_{i,2} \log (\phi(\theta_{-i}|\theta_i)).$$
 	\item If $C_{i,2}$ is large enough, $i$'s incentives are dominated by the need to report $\phi(\theta_{-i}|\theta_i)$ correctly (rather than desire to get best $k(\theta)$).
-	\item So set $C_{i,2}$ large, then use $C_{i,1}$ to adjust the averages as required to satisfy IR.
+	\item So set $C_{i,2}$ large, then use $C_{i,1}$ to adjust the averages as required.
 	\item For full proof (and construction) see original Cremer \& McLean paper or B{\"o}rgers' textbook.
 \end{itemize}
 \lyxframeend
@@ -2398,6 +2398,9 @@ To fix ideas, assume the following for today:
 \begin{itemize}
 	\item The designer can \structure{commit} to the whole future mechanism at $t=0$.
 	\item Binding contracts -- won't look at players' per-period IR constraints, only at $t=0$ at most.
+	\begin{itemize}
+		\item In quasilinear model, can ask agent to put collateral at $t=0$, to be repaid at a later date -- this would eliminate incentives to quit mechanism after $t=0$ (if such option exists).
+	\end{itemize}
 	\item All past reports and allocations are publicly observed.
 	\item Player $i$ at time $t$ observes their type $\theta_{i,t}$ but not future types.
 \end{itemize}
@@ -2406,10 +2409,10 @@ To fix ideas, assume the following for today:
 
 \lyxframe{Direct Mechanisms}
 \begin{itemize}
-	\item As usual, we have the revelation principle (Sugaya and Wolitzky, 2017).
+	\item As usual, we have the \structure{revelation principle} (Sugaya and Wolitzky, 2017).
 	\item So can focus on mechanisms which ask players to report their types every period.
 	\item Reporting strategies given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of public histories $h_t = \{k_s,r_{i,s}\}_{s < t}$.
-	\item A dynamic direct mechanism is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
+	\item A \structure{dynamic direct mechanism} is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
 \end{itemize}
 \lyxframeend
 
@@ -2426,6 +2429,7 @@ To fix ideas, assume the following for today:
 	\item Just look at standard \structure{Perfect Bayesian Equilibria}.
 	\begin{itemize}
 		\item Each player chooses report to maximize expected util, expecting others to report truthfully.
+		\item In general in PBE: We can assume anything we want about off-path beliefs to sustain eqm. In our problem: won't need to.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -2437,9 +2441,11 @@ To fix ideas, assume the following for today:
 \begin{itemize}
 	\item Suppose we want to implement the \structure{efficient allocation} $\kappa^*$.
 	\item But what is $\kappa^*$ in a dynamic problem?
-	$$ \kappa^* \in \arg \max_{\{k_t \in K_t\}_{t=0}^T} \mathbb{E} \left\{ \sum_{t=0}^T \delta^t \sum_{i=0}^N v_i(k_t,\theta_{i,t}) \right\}$$
-	\item Today's allocation $k_t$ will affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
-	\item Even finding the efficient allocation can in general be a difficult optimal control problem.
+	$$ \kappa^* \in \arg \max_{\{k_t\}_{t=0}^T} \mathbb{E} \left\{ \sum_{t=0}^T \delta^t \sum_{i=0}^N v_i(k_t,\theta_{i,t}) \right\}$$
+	\item Today's allocation $k_t$ may affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
+	\item Also remember that $k_t : \Theta \times H_t \to K_t$ is a highly-dimensional object in itself.
+	\item So simply finding $\kappa^*$ is in general a difficult optimal control problem.
+	\item REMARK: \alert{ex post efficiency} is \alert{unattainable} in dynamics -- $k_t$ must be chosen before $\theta_{t+s}$ learned. \structure{Interim efficiency} is the best we can hope for.
 \end{itemize}
 \lyxframeend
 
@@ -2475,6 +2481,7 @@ To fix ideas, assume the following for today:
 \lyxframeend
 
 
+
 \section{Dynamic Revenue Maximization}
 
 \lyxframe{Dynamic Revenue Maximization}
@@ -2484,7 +2491,7 @@ To fix ideas, assume the following for today:
 		\item Main example: dynamic pricing (there's huge literature, more or less related to DMD).
 		\item With binding contracts: mobile service, loans, insurance
 	\end{itemize}
-	\item Will focus on one-buyer case; extension to many buyers is not particularly insightful.
+	\item Will focus on one-buyer case.
 	\item Again, insights from static models carry over after reasonable modifications.
 	\begin{itemize}
 		\item Now we want to distinguish between info that the buyer has \structure{before} signing up for a mechanism
@@ -2528,6 +2535,7 @@ To fix ideas, assume the following for today:
 		\end{align*}
 		\item Solution: choose efficient $k^*$ and charge $p(\theta) \equiv p = \mathbb{E}_\theta \left[v(k^*(\theta),\theta)\right]$
 		\item Perfect information extraction; no information rents to the buyer; full efficiency.
+		\item Remark: this solution would not work with $N>1$ buyers (why?)
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -2535,30 +2543,34 @@ To fix ideas, assume the following for today:
 
 \lyxframe{Dynamics and Information}
 \begin{itemize}
-	\item The previous insight translates to dynamics: the designer can extract buyer's all future info at no cost.
-	\item The idea is the same: ``sell'' the item to the buyer at ex ante expected value.
-	\item The formal argument in the literature:
+	\item So we can argue that the designer can extract all buyer's \structure{future} info at no cost.
+	\begin{itemize}
+		\item Same idea: ``sell'' the item (subscription) to the buyer at ex ante expected value.
+		\item Then only buyer's \alert{initial} info $\theta_0$ then matters for IC.
+	\end{itemize}
+	\item The literature is currently at the stage ``let's hope that this is the case''. More formally, the protocol is:
 	\begin{enumerate}
-		\item Solve the dynamic problem as if all future info is \alert{public}.
-		\item Solve the full problem.
-		\item Observe that the two solutions miraculously coincide (at least in terms of designer's revenue).
-		\item[?] ...if they do.
+		\item Solve the dynamic problem \alert{as if} all future info is \alert{public}.
+		\item Get some allocation and transfers.
+		\item Check whether the resulting mechanism satisfies dynamic IC (at $t>0$).
+		\item Pray that it does.
 	\end{enumerate}
-	\item Pavan, Segal, Toikka (2014) provide some necessary conditions for the above to work.
-	\item Therefore, only need to worry about extracting the buyer's initial type $\theta_0$ -- we are back to the static problem.
+	\item Pavan, Segal, Toikka (2014) provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
+	\item We today take the ``pray that it does'' approach and only worry about extracting the buyer's initial type $\theta_0$ -- we are \structure{back} to the \structure{static problem}.
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{Caveat}
 \begin{itemize}
-	\item In direct mechanism, usually ask player to report their type. 
-	\item But future \structure{information} is not the same as future \alert{types}. We can extract info -- does it mean we can extract types?
+	\item We say we can ignore future information (work as if it's public), only need to extract the information agent already has at the time of contracting.
+	\item This is \textbf{not} same as: ``ignore future types, focus on extracting $\theta_0$'',
 	\begin{itemize}
-		\item Example: if $\theta_t = \theta_0$ for all $t$ then future types do not contain any future information. 
-		\item How should a direct dynamic mechanism respond to report $\hat{\theta}_1 \neq \hat{\theta}_0$?
+		\item because $\theta_0$ is (in general) correlated with future $\theta_t$,
+		\item so $\theta_0$ contains some information about $\theta_t$,
+		\item so we \textbf{cannot} work as if know $\theta_t$ for $t \geq 1$.
 	\end{itemize}
-	\item Solution: separate types from information through \structure{orthogonalization}.
+	\item Solution: separate \alert{types} from \alert{information} through \structure{orthogonalization}.
 	\begin{itemize}
 		\item Suppose $\theta_{t+1} \sim F_{t+1} (\theta_{t+1} | \theta_t)$.
 		\item Let $\varepsilon_{t+1} \equiv F_{t+1} (\theta_{t+1} | \theta_t)$. Then $\varepsilon_{t+1} \sim U[0,1]$ and independent of $\theta_t$.
@@ -2570,14 +2582,14 @@ To fix ideas, assume the following for today:
 
 \lyxframe{Virtual Surplus}
 \begin{itemize}
-	\item Optimal $k$ maximizes virtual surplus = social surplus -- information rents.
+	\item Optimal $k$ maximizes \alert{virtual surplus} = \structure{social surplus} -- information rents.
 	\begin{itemize}
 		\item This pins down optimal mechanism $(k,t+C)$ up to the constant $C$.
 		\item $C$ is determined from IR at $t=0$ -- skip the step of finding it.
 	\end{itemize}
-	\item In static model, virtual surplus is
-	$$ VS(\theta) = v(k(\theta),\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial v(k(\theta),\theta)}{\partial \theta} $$
-	\item Now in dynamics, social surplus is $$S(k,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
+	\item In \alert{static} model, \alert{virtual surplus} is
+	$$ VS(\theta) = \structure{v(k(\theta),\theta)} - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial \structure{v(k(\theta),\theta)}}{\partial \theta} $$
+	\item Now in \structure{dynamics}, \structure{social surplus} is $$S(k,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
 	%$$ VS(\theta_0) = S(k,\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial S(k,\theta)}{\partial \theta_0} $$
 	Calculating $VS(\theta_0) = S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}$ requires understanding how $S$ depends on $\theta_0$ (the only source of inforents).
 \end{itemize}
@@ -2647,15 +2659,15 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 	\item Agent receives random exogenous income $\theta_t \sim i.i.d. F[\underline{\theta},\bar{\theta}]$.
 	\begin{itemize}
 		\item \structure{Concave} utility $u(c)$, so would like to insure.
+		\item DARA: [weakly] decreasing absolute risk-aversion $-\frac{u''(c)}{u'(c)}$.
 		\item Special assumption: $u(\underline{c}) = -\infty$, where $\underline{c}>0$ is subsistence level.
 	\end{itemize}
 	\item Principal designs insurance contract.
 	\begin{itemize}
+		\item Goal: minimize cost of providing (ex ante expected) util $V_0$ to agent.
 		\item Agent reports $\theta_t$ in every period, mechanism pays him $b_t(\theta_t, \theta_{t-1}, ...)$
 		\item Perfect commitment on both sides -- no IR.
-		\item But must incentivize truthful reporting of income $y_t$ -- IC.
-		\item See $b_t$ as a loan contract -- should be exactly ex ante BB.
-		\item Goal: efficiency (maximize agent's expected utility = provide best insurance possible).
+		\item But must incentivize truthful reporting of income $\theta_t$ -- IC.
 	\end{itemize}
 	%\item Departure from baseline: no allocations $k$, risk-aversion (no quasilinearity in money).
 \end{itemize}
@@ -2666,7 +2678,6 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 \begin{itemize}
 	\item At all $t$, agent maximizes lifetime utility 
 	$$V_t \equiv \sum_{s=t}^\infty \beta^s u(\theta_s + b_s).$$
-	\item (Principal chooses contract at $t=0$ which maximizes $V_0$.)
 	\item Let $g^t = (\hat{\theta}_0, ..., \hat{\theta}_t)$ be history of past reports.
 	\item Then agent's IC at $g^{t-1}$ is:
 	\begin{align*}
@@ -2707,12 +2718,27 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 		\item $V_{t+1}$ is increasing in $\hat{\theta}_t$ (IC).
 		\item In particular, $b_t(\underline{\theta}) > 0 > b_t(\overline{\theta})$; $V_{t+1}(\underline{\theta}) < V_t < V_{t+1}(\overline{\theta})$.
 	\end{itemize}
-	\bigskip
-	\item \alert{Immiseration} result: 
-	$$\lim_{t\to \infty} V_t \overset{a.s.}{=} -\infty$$
-	\item Cool result. Mathematical proof is easy but unintuitive, will not cover.
+	\item First-best (cheapest way to deliver util $V_t$) would be to provide full insurance, but have to trade efficiency against info rents, so incomplete insurance in the optimum. (Standard opt.mech logic)
+	\item (NEW) Can trade off levels: raise all $b_t$ while lowering all $V_{t+1}$ or vice versa. 
 \end{itemize}
 \lyxframeend
+
+
+\lyxframe{Immiseration}
+\begin{theorem}[Immiseration]
+	$$\lim_{t\to \infty} V_t \overset{a.s.}{=} -\infty$$
+\end{theorem}
+\begin{itemize}
+	\item In the limit, consumption and utility converge to $\bar{c}$ and $-\infty$ resp.
+	\item Neat mathematical result, but I haven't found any good intuitive explanations of where it comes from. So here's my best guess at why this works:
+	\begin{itemize}
+		\item Principal prefers to raise all $b_t$ while lowering all $V_{t+1}$
+		\item ...because giving high $b_t$ cheaper than promising high $V_{t+1}$
+		\item ...because high util promise $\Rightarrow$ high $b_{t+1}$ $\Rightarrow$ less risk-aversion in that region (DARA) $\Rightarrow$ more info rents...?
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
 
 
 \end{document}
