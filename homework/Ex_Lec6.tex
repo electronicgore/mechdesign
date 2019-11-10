@@ -96,7 +96,7 @@
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
 
 
 
@@ -114,7 +114,7 @@
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
-\setlength{\parskip}{0 pt}
+\setlength{\parskip}{5 pt}
 
 
 
@@ -151,7 +151,8 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\begin{itemize}
 		\item What are the possible dynamic linkages that might prevent us from splitting a dynamic mechanism design problem into a collection of independent static problems?
 		\item How does the solution to the static problem of efficient implementation extend to the dynamic problem? What are the main challenges?
-		\item 
+		\item In the optimal mechanism problems, why can we sometimes disregard the problem of extracting the information that the agent receives after the point of contracting and focus on the problem of extracting the information that he already has?
+		%\item 
 	\end{itemize}
 	
 \end{ex}
@@ -192,11 +193,35 @@ These exercises are for your own practice and are not to be handed in. Some exer
 %%------------------------------------------------------------------------------------------------
 
 \begin{ex}
-	...
+	Let us consider the problem of designing a revenue-maximizing (optimal) mechanism that we explored, and enrich it with minimal dynamics. In particular, suppose that the buyer receives some information about their value between the moments of contracting and transaction. How would the seller be able to exploit this? 
+	
+	Formal setup of the model follows. A seller designs a profit-maximizing mechanism to sell a single indivisible item to one buyer. There are two periods: $t = 0,1$; the good is to be transferred at $t=1$ (and there are no allocation decisions to be made at $t=0$). At $t=0$ the buyer's type is given by $\theta_0 \sim F_0 [\underline{\theta},\bar{\theta}]$; at $t=1$ it changes to $\theta_1 \in [\underline{\theta},\bar{\theta}]$ according to some conditional distribution $F(\theta_1|\theta_0)$. Type $\theta_1$ represents the buyer's final valuation for the item, but it is not observed by either buyer or seller at $t=0$.
+	
+	In a direct mechanism, at $t=0$ the buyer reports $\tilde{\theta}_0$, at $t=1$ the buyer reports $\tilde{\theta}_1$, after which the item is transferred to the buyer with probability $k(\tilde{\theta}_0,\tilde{\theta}_1)$, and the buyer pays $p(\tilde{\theta}_0,\tilde{\theta}_1)$ (irrespectively of whether they got the item). The buyer's payoff is then $u_b(\theta_1,k,p) = \theta_1 k - p$, and the seller's payoff is $u_s(\theta_1,k,p) = p$. (Neither player receives any payoff at $t=0$.)
+	
+	Consider the relaxed problem in which the seller gets to learn all new \emph{information} that the buyer receives at $t=1$ (e.g., the seller observes $\varepsilon_1 = F(\theta_1|\theta_0)$). In what follows, you may use the expressions given in the slides without derivations.
+	
+	\begin{enumerate}
+		\item What is the social surplus (gains from trade) in this problem?
+		\item Write down the virtual surplus as a function of $(\theta_0,\theta_1)$. How does it differ from that in the static model?
+		\item What is the optimal allocation rule (assuming $VS(\theta_0,\theta_1)$ is increasing in both arguments)? How does it differ from that in the static model?
+	\end{enumerate} 
+
+	Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \varepsilon$ with $\varepsilon \sim U[-1,1]$.
+	
+	\begin{enumerate}[resume]
+		\item Show that impulse response function $I_1 (\theta_1, \theta_0) = \frac{-\frac{\partial F(\theta_1|\theta_0)}{\partial \theta_0 }}{f(\theta_1 | \theta_0)}$ evaluates to $I_1 (\theta_1, \theta_0) = 2$.
+		\item Show that virtual surplus evaluates to $VS(\theta_0, \theta_1)$. Derive the optimal allocation rule $k(\theta_0, \theta_1)$ which maximizes the expected profit given by $\mathbb{E}_{(\theta_0, \theta_1)} \left[ k(\theta_0, \theta_1) \cdot VS(\theta_0, \theta_1) \right]$.
+		\item Discuss how the expected allocation $Ek(\theta_0) \equiv \mathbb{E}_{\theta_1} \left[ k^*(\theta_0, \theta_1) | \theta_0 \right]$ differs in this problem from the static case (where the buyer's valuation is given by $\theta_0 \sim U[0,1]$).
+		\item The buyer's expected utility under the optimal mechanism, $U_0(\theta_0) \equiv \mathbb{E}_{\theta_1} \left[ u_b(\theta_1,k(\theta_0, \theta_1),p(\theta_0, \theta_1)) \mid \theta_0 \right]$, has the envelope representation $\frac{d U_0(\theta_0)}{d\theta_0} = \mathbb{E}_{\theta_1} \left[ I_1(\theta_1,\theta_0) \frac{\partial u_b(\theta_1,k,p)}{\partial \theta_1} \mid \theta_0 \right]$.
+		Compute the expected utility $U_0(\theta_0)$.
+		\item Use $U_0(\theta_0)$ to derive [expected] optimal payments $p(\theta_0)$. How do they compare to payments in the static model (where the buyer's valuation is given by $\theta_0 \sim U[0,1]$)?
+		\item Assume now that $\varepsilon$ is not observable. Consider a mechanism $(k,p)$, where $k$ is the optimal allocation rule you derived, and $p$ is the payment rule you derived, assuming $p(\theta_0, \theta_1) = p(\theta_0)$ for all $\theta_1$ Would this mechanism be incentive compatible for the buyer?
+	\end{enumerate}
 	
 	\ifsolutions
 	\subsection*{Solution}
-	...
+	See Bergemann and V{\"a}lim{\"a}ki (2019), section 5.1.
 	\fi
 \end{ex}
 

@@ -2342,7 +2342,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 		\item Dynamic labor contracts
 	\end{itemize}
 	\item How to develop dynamic mechanisms? Will see today.
-	\item This lecture mostly follows Bergemann and Välimäki (2019).
+	\item This lecture mostly follows Bergemann and V{\"a}lim{\"a}ki (2019).
 \end{itemize}
 \lyxframeend
 
@@ -2365,7 +2365,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 \begin{itemize}
 	\item \structure{Periods} $t \in \{0,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
 	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i \subset \mathbb{R}$, indep. across $i$.
-	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}$.
+	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}^N$.
 	\item Players' \structure{utilities}: $u_i(k_t,p_t,\theta_t) = v_i(k_t,\theta_{i,t}) - p_{i,t}$.
 	\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_{i,t}(\theta_{i,t+1} | \theta_{i,t},k_t).$$
 	\item Set of \structure{feasible allocations} evolves as $K_{t+1} = g(K_t,k_t)$.
@@ -2429,6 +2429,7 @@ To fix ideas, assume the following for today:
 	\item Just look at standard \structure{Perfect Bayesian Equilibria}.
 	\begin{itemize}
 		\item Each player chooses report to maximize expected util, expecting others to report truthfully.
+		\item Beliefs are updated using Bayes' rule whenever possible (i.e., on equilibrium path).
 		\item In general in PBE: We can assume anything we want about off-path beliefs to sustain eqm. In our problem: won't need to.
 	\end{itemize}
 \end{itemize}
@@ -2442,7 +2443,10 @@ To fix ideas, assume the following for today:
 	\item Suppose we want to implement the \structure{efficient allocation} $\kappa^*$.
 	\item But what is $\kappa^*$ in a dynamic problem?
 	$$ \kappa^* \in \arg \max_{\{k_t\}_{t=0}^T} \mathbb{E} \left\{ \sum_{t=0}^T \delta^t \sum_{i=0}^N v_i(k_t,\theta_{i,t}) \right\}$$
-	\item Today's allocation $k_t$ may affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
+	\item Must optimize over the whole path $\{k_t\}_{t=0}^T$ rather than period-by-period.
+	\begin{itemize}
+		\item Today's allocation $k_t$ may affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
+	\end{itemize}
 	\item Also remember that $k_t : \Theta \times H_t \to K_t$ is a highly-dimensional object in itself.
 	\item So simply finding $\kappa^*$ is in general a difficult optimal control problem.
 	\item REMARK: \alert{ex post efficiency} is \alert{unattainable} in dynamics -- $k_t$ must be chosen before $\theta_{t+s}$ learned. \structure{Interim efficiency} is the best we can hope for.
@@ -2456,7 +2460,7 @@ To fix ideas, assume the following for today:
 	\item In static setting we used VCG aka the pivot mechanism: each player had to pay the externality they imposed on everyone else:
 	$$ p_i(\theta) = -\sum_{j \neq i} v_j \left( k^*(\theta),\theta_j \right) + \sum_{j \neq i} v_j \left( k^*_{-i}(\theta_{-i}),\theta_j \right) $$
 	\item The idea translates almost verbatim to the dynamics.
-	\item Enter \structure{dynamic pivot mechanism}! (Bergemann and Välimäki, 2010)
+	\item Enter \structure{dynamic pivot mechanism}! (Bergemann and V{\"a}lim{\"a}ki, 2010)
 \end{itemize}
 \lyxframeend
 
@@ -2515,8 +2519,9 @@ To fix ideas, assume the following for today:
 
 
 \lyxframe{Static Model -- Posterior Information}
+\begin{example}
 \begin{itemize}
-	\item Now suppose that buyer only learns $\theta$ \structure{after} signing up for the mechanism, i.e., timing is:
+	\item Suppose that buyer only learns $\theta$ \structure{after} signing up for the mechanism, i.e., timing is:
 	\begin{enumerate}
 		\item designer offers $(k,p)$;
 		\item buyer accepts or not;
@@ -2538,6 +2543,7 @@ To fix ideas, assume the following for today:
 		\item Remark: this solution would not work with $N>1$ buyers (why?)
 	\end{itemize}
 \end{itemize}
+\end{example}
 \lyxframeend
 
 
@@ -2643,8 +2649,8 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 
 \lyxframe{What now?}
 \begin{itemize}
-	\item Relax some of the assumptions and see what changes.
-	\item No general theory, just some special cases.
+	\item Will look at dynamic mechanisms within some special settings.
+	\item \structure{Beyond} the models we looked at, not \alert{within}.
 	\item Will go very quickly: no solving models, just setup and results.
 	\item Will see a common theme emerging.
 \end{itemize}
@@ -2656,10 +2662,11 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 \lyxframe{Dynamic Insurance}
 \begin{itemize}
 	\item One risk-neutral lender (designer), one \alert{risk-averse} borrower (agent), common discount factor $\beta$.
+	\item Time $t=0,1,...$.
 	\item Agent receives random exogenous income $\theta_t \sim i.i.d. F[\underline{\theta},\bar{\theta}]$.
 	\begin{itemize}
 		\item \structure{Concave} utility $u(c)$, so would like to insure.
-		\item DARA: [weakly] decreasing absolute risk-aversion $-\frac{u''(c)}{u'(c)}$.
+		%\item DARA: [weakly] decreasing absolute risk-aversion $-\frac{u''(c)}{u'(c)}$.
 		\item Special assumption: $u(\underline{c}) = -\infty$, where $\underline{c}>0$ is subsistence level.
 	\end{itemize}
 	\item Principal designs insurance contract.
@@ -2719,7 +2726,7 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 		\item In particular, $b_t(\underline{\theta}) > 0 > b_t(\overline{\theta})$; $V_{t+1}(\underline{\theta}) < V_t < V_{t+1}(\overline{\theta})$.
 	\end{itemize}
 	\item First-best (cheapest way to deliver util $V_t$) would be to provide full insurance, but have to trade efficiency against info rents, so incomplete insurance in the optimum. (Standard opt.mech logic)
-	\item (NEW) Can trade off levels: raise all $b_t$ while lowering all $V_{t+1}$ or vice versa. 
+	%\item (NEW) Can trade off levels: raise all $b_t$ while lowering all $V_{t+1}$ or vice versa. 
 \end{itemize}
 \lyxframeend
 
@@ -2730,14 +2737,165 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 \end{theorem}
 \begin{itemize}
 	\item In the limit, consumption and utility converge to $\bar{c}$ and $-\infty$ resp.
-	\item Neat mathematical result, but I haven't found any good intuitive explanations of where it comes from. So here's my best guess at why this works:
+	\item Neat mathematical result, but I haven't found any good intuitive explanations of where it comes from and after some thorough thinking cannot offer any correct intuition of my own.
+	\item Moving on...
+\end{itemize}
+\lyxframeend
+
+
+\section{Guo and H{\"o}rner (2018)}
+
+\lyxframe{Dynamic Allocation without Money}
+\begin{itemize}
+	\item One principal, one agent.
+	\item Time $t=0,1,...$
+	\item In each period: agent's type $v \in \{L,H\}$, principal chooses $a \in \{0,1\}$. Utilities (P,A):
+	\medskip
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+					& $v = H$ 	& $v=L$ \\ \hline
+			$a=0$	& $(0,0)$ 	& $(0,0)$	\\ \hline
+			$a=1$	& $(H-c,H)$ 	& $(L-c,L)$	\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	with $H > c > L$.
+	\item Idea: principal can provide funding for agent's project, it is costly for the principal, but agent always wants more funding.
+	\item Key feature -- persistence: $\mathbb{P}(v_{t+1} = v_t) = \rho > 1$.
+	\item Principal's goal: max own discounted util subject to IC.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Connection}
+\begin{itemize}
+	\item Like Thomas and Worrall, but there had only transfers, no allocations. Here only allocations, no transfers.
+	\item Same idea behind IC: induce truthtelling today by varying future utility promises.
+	\medskip
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\emph{usual model} 	& \emph{this model} \\ \hline
+			allocation $k$ 	& today's allocation $a_t$\\ \hline
+			transfer $t$ 	& continuation util $V_{t+1}$\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	\item Opt. mech: if agent does not require funding today, allow to claim more funding in the future. For $v=H$ agent, funding today is more valuable than in the future (since $\mathbb{E} v_{t+s} < H$), for $v=L$ future funding is more valuable $\Rightarrow$ IC.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Polatization}
+\begin{itemize}
+	\item Let $U_t \equiv (1-\delta) \mathbb{E} \left[\sum_{s \geq t} \delta^{s-t} a_t v_t\right]$. Note $U_t \in \left[0,\bar{U}\right]$ for some $\bar{U}$.
+	
+	\begin{theorem}[Polarisation]
+		Under the optimal mechanism, $U_t \to \{0, \bar{U}\}$ as $t \to \infty$.
+	\end{theorem}
+
+	\item $U_t$ is a martingale bounded on both sides -- both boundaries are absorbing, and $U_t$ hits one of them sooner or later.
+\end{itemize}
+\lyxframeend
+
+
+\section{Li, Matouschek, Powell (2017)}
+
+\lyxframe{Power Dynamics in Organizations}
+\begin{itemize}
+	\item One principal, one agent.
+	\item Time $t=0,1,...$
+	\item In each period: principal chooses $a \in \{0,1,2,3\}$. Utilities (P,A):
+	\medskip
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			& principal 	& agent \\ \hline
+			$a=0$ (default)	& $0$ 	& $0$	\\ \hline
+			$a=1$ (agent-preferred)	& $b$ 	& $B$	\\ \hline
+			$a=2$ (principal-preferred)	& $B$ 	& $b$	\\ \hline
+			$a=3$ (nuke humanity)	& $-\infty$	& $-\infty$ \\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	with $B > b > 0$.
+	\item Principal-preferred project \structure{only available} at any $t$ \structure{with probability $p$}. Only the agent knows whether $a=2$ is available at a given $t$. Agent suggests a project to principal at every $t$.
+	\item Principal's goal: maximize expected util subject to agent's IC.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Possible Modes}
+\begin{itemize}
+	\item Centralization
 	\begin{itemize}
-		\item Principal prefers to raise all $b_t$ while lowering all $V_{t+1}$
-		\item ...because giving high $b_t$ cheaper than promising high $V_{t+1}$
-		\item ...because high util promise $\Rightarrow$ high $b_{t+1}$ $\Rightarrow$ less risk-aversion in that region (DARA) $\Rightarrow$ more info rents...?
+		\item Principal always chooses the default $a=0$.
+	\end{itemize}
+	\item Cooperative Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements principal-preferred $a=2$ when available, agent-preferred $a=1$ otherwise.
+		\item The ``best'' outcome.
+	\end{itemize}
+	\item Restricted Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements principal-preferred $a=2$ when available, default $a=0$ otherwise.
+	\end{itemize}
+	\item Unrestricted Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements agent-preferred $a=1$ always.
+	\end{itemize}
+	\item Total Annihilation
+	\begin{itemize}
+		\item Principal implements $a=3$; only used as off-path threat.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
+
+
+\lyxframe{Polatization}
+\begin{theorem}
+	In the optimal relational contract, the principal chooses cooperative empowerment for the first $\tau$ periods, where $\tau$ is random and finite with probability one.
+	
+	For $t > \tau$, the relationship results in unrestricted empowerment, restricted empowerment, or centralization forever
+\end{theorem}
+\begin{itemize}
+	\item The relationship inevitably slips out of cooperative mode into one of the uncooperative ones:
+	\begin{itemize}
+		\item either the agent gets \alert{unlimited power},
+		\item or the principal \structure{loses trust} in him.
+		\item Although convergence to restricted empowerment (semi-cooperative outcome) is possible...
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Conclusion}
+\begin{itemize}
+	\item Lessons from the three papers:
+	\begin{itemize}
+		\item relying on promises of future utility for incentive provision leads to huge asymptotic inefficiencies.
+	\end{itemize}
+	\item Drastically different from the quasilinear setting we considered,
+	\begin{itemize}
+		\item where inefficiencies vanished over time...
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+
+
+\section{Lecture 8 \\ Matching Models}
+
+\lyxframe{Mathing}
+\begin{itemize}
+	\item We are now completely leaving the realm of ``mechanism design'' as it is usually defined.
+	\begin{itemize}
+		\item (Please keep your arms, hands, legs, feet and head inside the ride vehicle at all times.)
+	\end{itemize}
+	\item Matching: huge field
+\end{itemize}
+\lyxframeend
+
 
 
 
