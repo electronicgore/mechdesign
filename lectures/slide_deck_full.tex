@@ -2467,7 +2467,7 @@ To fix ideas, assume the following for today:
 
 \lyxframe{Dynamic Pivot Mechanism}
 \begin{align*}
-&\text{Flow social surplus}	& w(k_t,\theta_t)	&\equiv \sum_{i=0}^N v_i(k_t,\theta_{i,t}).
+&\text{Flow social surplus}	& w(k_t,\theta_t)	&\equiv \sum_{i=1}^N v_i(k_t,\theta_{i,t}).
 \\
 &\text{Welfare}	& W(\theta_t,K_t)	&\equiv \max_{k_t \in K_t} \left\{ w(k_t,\theta_t) + \delta \mathbb{E} W(\theta_{t+1},K_{t+1}) \right\}.
 \\
@@ -2738,7 +2738,7 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 \begin{itemize}
 	\item In the limit, consumption and utility converge to $\bar{c}$ and $-\infty$ resp.
 	\item Neat mathematical result, but I haven't found any good intuitive explanations of where it comes from and after some thorough thinking cannot offer any correct intuition of my own.
-	\item Moving on...
+	\item Popular paper, has quite some citations and influential follow-up papers.
 \end{itemize}
 \lyxframeend
 
@@ -2761,7 +2761,7 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 	\medskip
 	with $H > c > L$.
 	\item Idea: principal can provide funding for agent's project, it is costly for the principal, but agent always wants more funding.
-	\item Key feature -- persistence: $\mathbb{P}(v_{t+1} = v_t) = \rho > 1$.
+	\item Persistence: $\mathbb{P}(v_{t+1} = v_t) = \rho \geq 1/2$.
 	\item Principal's goal: max own discounted util subject to IC.
 \end{itemize}
 \lyxframeend
@@ -2776,12 +2776,12 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 		\begin{tabular}{| c | c |}
 			\hline
 			\emph{usual model} 	& \emph{this model} \\ \hline
-			allocation $k$ 	& today's allocation $a_t$\\ \hline
+			allocation $k$ 	& today's \structure{allocation $a_t$}\\ \hline
 			transfer $t$ 	& continuation util $V_{t+1}$\\ \hline
 		\end{tabular}
 	\end{center}
 	\medskip
-	\item Opt. mech: if agent does not require funding today, allow to claim more funding in the future. For $v=H$ agent, funding today is more valuable than in the future (since $\mathbb{E} v_{t+s} < H$), for $v=L$ future funding is more valuable $\Rightarrow$ IC.
+	\item Opt. mech: if agent does not require funding today, allow to claim more funding in the future. For $v=H$ agent, funding today is more valuable than in the future (since $\mathbb{E} v_{t+s} < H$), for $v=L$ future funding is more valuable than today $\Rightarrow$ IC.
 \end{itemize}
 \lyxframeend
 
@@ -2808,18 +2808,19 @@ To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximiz
 	\item In each period: principal chooses $a \in \{0,1,2,3\}$. Utilities (P,A):
 	\medskip
 	\begin{center}
-		\begin{tabular}{c | c | c |}
-			& principal 	& agent \\ \hline
-			$a=0$ (default)	& $0$ 	& $0$	\\ \hline
-			$a=1$ (agent-preferred)	& $b$ 	& $B$	\\ \hline
-			$a=2$ (principal-preferred)	& $B$ 	& $b$	\\ \hline
-			$a=3$ (nuke humanity)	& $-\infty$	& $-\infty$ \\ \hline
+		\begin{tabular}{c c | c | c |}
+			& & principal 	& agent \\ \hline
+			$a=0$ & (default)	& $0$ 	& $0$	\\ \hline
+			$a=1$ & (agent-preferred)	& $b$ 	& $B$	\\ \hline
+			$a=2$ & (principal-preferred)	& $B$ 	& $b$	\\ \hline
+			$a=3$ & (nuke humanity)	& $-\infty$	& $-\infty$ \\ \hline
 		\end{tabular}
 	\end{center}
 	\medskip
 	with $B > b > 0$.
 	\item Principal-preferred project \structure{only available} at any $t$ \structure{with probability $p$}. Only the agent knows whether $a=2$ is available at a given $t$. Agent suggests a project to principal at every $t$.
 	\item Principal's goal: maximize expected util subject to agent's IC.
+	\item Principal cannot commit to future contracts.
 \end{itemize}
 \lyxframeend
 
