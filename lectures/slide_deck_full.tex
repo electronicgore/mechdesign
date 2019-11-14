@@ -2623,11 +2623,23 @@ Then
 \end{align*}
 so the whole virtual surplus is
 \begin{align*}
-	S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
+	VS(\theta_0) = S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
 	&= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
 \end{align*}
-To find optimal mechanism, take expectation over $\{\varepsilon_t\}$ and maximize over $k$.
 \lyxframeend
+
+
+\lyxframe{Optimal Mechanism}
+\begin{itemize}
+	\item To find optimal allocation, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $k$.
+	\item Then find expected (as of $t=0$) payments from the envelope representation of the buyer's expected utility:
+	\begin{align*}
+		\frac{d U_{b,0} (\theta_0)}{d \theta_0} = \mathbb{E} \left[ \sum_{t=0}^{T} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1})\frac{\partial v(k_t,\theta_t)}{\partial \theta_t} \mid \theta_0 \right].
+	\end{align*}
+	\item Usually these payments will have to be spread out over time and future reports to ensure IC at $t > 0$. No good recipe here.
+\end{itemize}
+\lyxframeend
+
 
 
 \lyxframe{Dynamic Revenue Maximization: Conclusions}
