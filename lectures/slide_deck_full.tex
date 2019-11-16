@@ -89,6 +89,7 @@
 \setbeamertemplate{theorems}[numbered]
 \newtheorem{counter}{counter}
 \newtheorem{proposition}[counter]{Proposition}
+\newtheorem{proposition*}{Proposition}
 \newtheorem{remark}[counter]{Remark}
 \newtheorem{conjecture*}{Conjecture}
 \newtheorem{assumption*}{Assumption}
@@ -2552,7 +2553,7 @@ To fix ideas, assume the following for today:
 	\item So we can argue that the designer can extract all buyer's \structure{future} info at no cost.
 	\begin{itemize}
 		\item Same idea: ``sell'' the item (subscription) to the buyer at ex ante expected value.
-		\item Then only buyer's \alert{initial} info $\theta_0$ then matters for IC.
+		\item Then only buyer's \alert{initial} info $\theta_0$ matters for IC.
 	\end{itemize}
 	\item The literature is currently at the stage ``let's hope that this is the case''. More formally, the protocol is:
 	\begin{enumerate}
@@ -2623,7 +2624,8 @@ Then
 \end{align*}
 so the whole virtual surplus is
 \begin{align*}
-	VS(\theta_0) = S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
+	VS(\theta_0) &= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
+	\\
 	&= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
 \end{align*}
 \lyxframeend
@@ -2631,12 +2633,19 @@ so the whole virtual surplus is
 
 \lyxframe{Optimal Mechanism}
 \begin{itemize}
-	\item To find optimal allocation, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $k$.
-	\item Then find expected (as of $t=0$) payments from the envelope representation of the buyer's expected utility:
+	\item To find optimal \structure{allocation}, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $k$.
+	\begin{align*}
+	\max_k \mathbb{E}_\varepsilon \left[ S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+	\end{align*}
+	\item Still a difficult problem, for the same reasons as for efficient $k^*$.
+	\item Then find expected (as of $t=0$) \structure{payments} from the envelope representation of the buyer's expected utility:
 	\begin{align*}
 		\frac{d U_{b,0} (\theta_0)}{d \theta_0} = \mathbb{E} \left[ \sum_{t=0}^{T} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1})\frac{\partial v(k_t,\theta_t)}{\partial \theta_t} \mid \theta_0 \right].
 	\end{align*}
-	\item Usually these payments will have to be spread out over time and future reports to ensure IC at $t > 0$. No good recipe here.
+	\item Note that these payments can be redistributed across periods and histories since both seller and buyer are risk-neutral.
+	\begin{itemize}
+		\item Will usually have to do it to ensure IC at $t > 0$. No good recipe here.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
@@ -2647,7 +2656,7 @@ so the whole virtual surplus is
 \max_k \mathbb{E}_\varepsilon \left[ S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
 \end{align*}
 \begin{itemize}
-	\item Still a difficult problem, for the same reasons as for efficient $k^*$.
+	%\item Still a difficult problem, for the same reasons as for efficient $k^*$.
 	\item \structure{Insight}: if $|I_t|$ decreasing with $t$, i.e., $\theta_0$ contains little information about $\theta_t$ for large $t$ then optimal $k_t$ converges to the efficient $k^*_t$.
 	\item \structure{\textbf{Distortions vanish over time.}}
 	\item See Bergemann and Välimäki (2019, ch.5) for applications.
@@ -2800,7 +2809,9 @@ so the whole virtual surplus is
 
 \lyxframe{Polatization}
 \begin{itemize}
-	\item Let $U_t \equiv (1-\delta) \mathbb{E} \left[\sum_{s \geq t} \delta^{s-t} a_t v_t\right]$. Note $U_t \in \left[0,\bar{U}\right]$ for some $\bar{U}$.
+	\item Let $U_t \equiv (1-\delta) \mathbb{E} \left[\sum_{s \geq t} \delta^{s-t} a_t v_t\right]$ denote agent's util. 
+	
+	Note $U_t \in \left[0,\bar{U}\right]$ for some $\bar{U}$.
 	
 	\begin{theorem}[Polarisation]
 		Under the optimal mechanism, $U_t \to \{0, \bar{U}\}$ as $t \to \infty$.
@@ -2832,7 +2843,7 @@ so the whole virtual surplus is
 	with $B > b > 0$.
 	\item Principal-preferred project \structure{only available} at any $t$ \structure{with probability $p$}. Only the agent knows whether $a=2$ is available at a given $t$. Agent suggests a project to principal at every $t$.
 	\item Principal's goal: maximize expected util subject to agent's IC.
-	\item Principal cannot commit to future contracts.
+	\item Principal \alert{cannot commit} to future contracts (so this is just a repeated game).
 \end{itemize}
 \lyxframeend
 
@@ -2871,7 +2882,7 @@ so the whole virtual surplus is
 	For $t > \tau$, the relationship results in unrestricted empowerment, restricted empowerment, or centralization forever
 \end{theorem}
 \begin{itemize}
-	\item The relationship inevitably slips out of cooperative mode into one of the uncooperative ones:
+	\item The relationship inevitably slips out of the cooperative mode into one of the uncooperative ones:
 	\begin{itemize}
 		\item either the agent gets \alert{unlimited power},
 		\item or the principal \structure{loses trust} in him.
@@ -2899,16 +2910,255 @@ so the whole virtual surplus is
 
 \section{Lecture 8 \\ Matching Models}
 
-\lyxframe{Mathing}
+\lyxframe{Matching}
 \begin{itemize}
 	\item We are now completely leaving the realm of ``mechanism design'' as it is usually defined.
 	\begin{itemize}
 		\item (Please keep your arms, hands, legs, feet and head inside the ride vehicle at all times.)
 	\end{itemize}
-	\item Matching: huge field
+	\item Matching: huge field, old field, broad field, still somewhat active field. We are merely dipping toes into this vast sea.
+	\item These notes follow Roth and Sotomayor, ch.2,4.
 \end{itemize}
 \lyxframeend
 
+
+\lyxframe{Classic Model: ``Marriage''}
+\begin{itemize}
+	\item Set $M = \{m_1, m_2, ..., m_n\}$ of men, set $W = \{w_1, w_2, ..., w_p\}$ of women.
+	\item Every man $m_i$ has strict [ordinal] preferences $\succ_{m_i}$ over $W \cup \{m_i\}$; every woman $w_j$ has preferences $\succ_{w_i}$ over $M \cup \{w_j\}$.
+	\begin{itemize}
+		\item the latter options mean ``staying single''.
+	\end{itemize}
+	\begin{definition}
+		A \structure{matching} is a one-to-one mapping $\structure{\mu}: M \cup W \to M \cup W$ such that:
+		\begin{itemize}
+			\item $\mu(m) \in W \cup \{m\}$ for any $m \in M$;
+			\item $\mu(w) \in M \cup \{w\}$ for any $w \in W$;
+			\item $\mu(\mu(x)) = x$ for any $x \in M \cup W$.
+		\end{itemize}
+	\end{definition}
+	\item A matching $\mu$ prescribes who should be married to whom.
+	\item Goal: finding a ``good'' matching given players' preferences.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Stories}
+\begin{itemize}
+	\item One of the original motivations for the model was U.S. medical internships market (was a horrible mess in the 1940s-50s). 
+	\item Current academic job markets in Econ and related fields also fit the model quite nicely (and are a less horrible mess).
+	\item Another application: allocating heterogeneous workers across projects (think consulting firm) or resources across branches (think large production company).
+	\begin{itemize}
+		\item Different projects require for (``prefer'') different skills / resources;
+		\item workers have preferences over projects (e.g., like/dislike certain topics);
+		\item resources' ``preferences'' can take form of, e.g., transportation costs to various production plants.
+	\end{itemize}
+	\item Special case: when only one side has meaningful preferences, while other side's preferences are either absent, or perfectly aligned. Examples:
+	\begin{itemize}
+		\item school admissions;
+		\item kidney exchange;
+		\item allocation of items without transfers/payments.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Properties of Matchings}
+\begin{definition}
+	Matching \alert{$\mu$} is \alert{individually rational} if any player $x \in M \cup W$ prefers their match $\mu(x)$ to staying single, i.e., $\mu(x) \succ_x x$.
+\end{definition}
+\begin{definition}
+	Fix matching $\mu$. A \alert{blocking pair} is \alert{$(m,w)$} such that both $m \in M$ and $w \in W$ prefer each other to their prescribed matches, i.e., $m \succ_w \mu(w)$ and $w \succ_m \mu(m)$.
+\end{definition}
+\begin{definition}
+	Matching \structure{$\mu$} is \structure{stable} if it is individually rational and has no blocking pairs.
+\end{definition}
+\lyxframeend
+
+
+\lyxframe{Stability: example}
+\begin{example}
+	\begin{itemize}
+		\item Consider the following example.
+		\item Three men $M = (m_1,m_2,m_3)$; three women $W = (w_1,w_2,w_3)$.
+		\item Preferences:
+		\begin{align*}
+			m_1:& \ w_2 \succ_{m_1} w_1 \succ_{m_1} w_3 	& w_1:& \ m_1 \succ_{w_1} m_3 \succ_{w_1} m_2
+			\\
+			m_2:& \ w_1 \succ_{m_2} w_3 \succ_{m_2} w_2 	& w_2:& \ m_3 \succ_{w_2} m_1 \succ_{w_2} m_2
+			\\
+			m_3:& \ w_1 \succ_{m_3} w_2 \succ_{m_3} w_3 	& w_3:& \ m_1 \succ_{w_3} m_3 \succ_{w_3} m_2
+		\end{align*}
+		(no one wants to stay single)
+		\item Matching $\mu = \left( (w_1,m_1), (w_2,m_2), (w_3,m_3) \right)$ is \alert{not stable} -- $(m_1,w_2)$ is a blocking pair ($(m_3,w_2)$ is another).
+		\item Matching $\mu' = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}.
+	\end{itemize}
+\end{example}
+\lyxframeend
+
+
+\lyxframe{Stability}
+\begin{itemize}
+	\item Stability is effectively an equilibrium concept for matching problems.
+	\begin{itemize}
+		\item No one wants to ``deviate'' from the ``equilibrium outcome''.
+		\item Although this is not a game -- we have not introduced actions/strategies, so ``deviations'' are not in game-theoretic sense.
+	\end{itemize}
+	\item Note that we are not dealing with any private information.
+	\begin{itemize}
+		\item Contrary to everything until now.
+		\item Players' preferences are commonly known -- goal is just to find the stable/``equilibrium'' matching.
+		\item But we'll get to incomplete information eventually.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Stability and existence}
+\begin{theorem}[Gale and Shapley]
+	A stable matching exists for every marriage market.
+\end{theorem}
+\begin{itemize}
+	\item Nice, but specific to the exact model. Breaks down in most extensions, e.g.:
+	\begin{itemize}
+		\item roommate problem/one-sided matching -- group of people need to split in twos to be roommates, have preferences over whom to live with;
+		\item three-sided matching -- tanks, damage-dealers, and healers need to split in triples for quest dungeons, have preferences over party-members;
+		\item many-to-one matching -- firms and workers; firms have preferences over sets of workers rather than individual employess;
+		\item peer effects -- as above, but now workers also have preferences over potential colleagues, rather than the firm itself.
+		\item See RS ch.2.3 for particular examples.
+	\end{itemize}
+	\item Also, we would want to know how this stable matching looks...
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{How to Find Your Stable Matching}
+\begin{block}{[Men-Proposing] Deferred Acceptance Algorithm}
+	\begin{itemize}
+		\item Consider a dynamic environment with stages $t=0,1,...$.
+		\item At stage $0$ all men propose to their favorite women.
+		\item If a woman has received one offer, she holds onto it.
+		\item If a woman has receiver more than one offer, she chooses her favorite, holds onto this proposal, and rejects all other men. (Can reject all if staying single is better than all offers.)
+		\item At stage $1$ all rejected men propose to their next-favorite women. Men who were not rejected do nothing.
+		\item Women compare all new offers to what they have from the previous stage; pick best, reject the rest.
+		\item The algorithm iterates until no new offers are made. At that stage marriages are finalized. The resulting matching is stable.
+	\end{itemize}
+\end{block}
+\lyxframeend
+
+
+\lyxframe{Deferred Acceptance: Example}
+\begin{example}
+	\begin{itemize}
+		\item Preferences:
+		{\footnotesize
+		\begin{align*}
+		m_1:& \ w_2 \succ_{m_1} w_1 \succ_{m_1} w_3 	& w_1:& \ m_1 \succ_{w_1} m_3 \succ_{w_1} m_2
+		\\
+		m_2:& \ w_1 \succ_{m_2} w_3 \succ_{m_2} w_2 	& w_2:& \ m_3 \succ_{w_2} m_1 \succ_{w_2} m_2
+		\\
+		m_3:& \ w_1 \succ_{m_3} w_2 \succ_{m_3} w_3 	& w_3:& \ m_1 \succ_{w_3} m_3 \succ_{w_3} m_2
+		\end{align*}
+		}
+		\item At stage $0$ 
+		\begin{itemize}
+			\item $m_1$ proposes to $w_2$; $m_2$ and $m_3$ propose to $w_1$.
+			\item $w_2$ has one offer -- keeps it.
+			\item $w_1$ has two offers -- keeps $m_3$, rejects $m_2$.
+		\end{itemize}
+		\item At stage $1$: 
+		\begin{itemize}
+			\item $m_1$ and $m_3$ have outstanding offers, so do nothing.
+			\item $m_2$ proposes to $w_3$.
+			\item all women have one offer each -- keep all.
+		\end{itemize}
+		\item At stage $2$:
+		\begin{itemize}
+			\item All men have outstanding offers, so no new offers made.
+			\item Matching is finalized.
+		\end{itemize}
+		\item Resulting matching $\mu = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}.
+	\end{itemize}
+\end{example}
+\lyxframeend
+
+
+\lyxframe{Deferred Acceptance and Stability}
+\begin{block}{Claim}
+	Mathing $\mu$ produced by DA algorithm is \structure{stable}.
+\end{block}
+\begin{proof}
+	\begin{itemize}
+		\item Note that in DA, a man would never propose to a woman he doesn't like, and a woman would always reject a man she doesn't like.
+		\begin{itemize}
+			\item So mathing produced by DA is \structure{individually rational}.
+		\end{itemize}
+		\item Now suppose there is a \alert{blocking pair} $(m,w)$ in the resulting matching $\mu$.
+		\begin{itemize}
+			\item Man $m$ likes $w$ more than his match $\mu(m)$. According to the algorithm, he must have proposed to $w$ and got rejected.
+			\item Woman $w$ rejected man $m$, so she must have had a better offer in hand. Her resulting matching must be better than what she had at that stage, so $\mu(w) \succ m$, a \alert{contradiction}. \qedhere
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+\lyxframeend
+
+
+\lyxframe{So Many Stable Matchings}
+\begin{itemize}
+	\item In the algorithm above men were proposing to women.
+	\item But we can run the algorithm in reverse, with women proposing to men.
+	\item ...and possibly get another stable matching.
+	\item Can we say anything about the whole set of stable matchings?
+	\item Yes, quite a lot.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Best Matchings Worst Matchings}
+\begin{definition}
+	A stable matching \alert{$\mu$} is \alert{M\structure{(W)}-optimal} if every man \structure{(woman)} likes [their match in] it at least as well as [in] any other stable matching.
+	
+	A stable matching \alert{$\mu$} is \alert{M\structure{(W)}-worst} if every man \structure{(woman)} likes it less than any other stable matching.
+\end{definition}
+\begin{theorem}
+	Matching $\mu_{MDA}$ produced by men-proposing DA algorithm is M-optimal and W-worst.
+	
+	Matching $\mu_{WDA}$ produced by women-proposing DA algorithm is W-optimal and M-worst.
+\end{theorem}
+\lyxframeend
+
+
+\lyxframe{Best Matchings Worst Matchings}
+\begin{itemize}
+	\item The theorem above contains some insights that generalize nicely:
+	\begin{enumerate}
+		\item all men agree on which stable matchings are best and worst, same for all women;
+		\item men's and women's preferences over stable mathings are opposed.
+	\end{enumerate}
+	\item There exist other stable matchings, which cannot be obtained through DA algorithm.
+	\begin{itemize}
+		\item Very surprisingly, they organize in a very nice \structure{lattice} structure.
+		\item All are contained ``between'' $\mu_{MDA}$ and $\mu_{WDA}$ in terms of players' preferences.
+		\item Won't cover here, see RS ch.2.3 and ch.3 for more details.
+		\item One corollary: if $\mu_{MDA} = \mu_{WDA}$ then this is the unique stable matching.
+	\end{itemize}
+	\item Plenty of other fun results, e.g.:
+	\begin{itemize}
+		\item Set of singles is the same in all stable matchings.
+		\item Adding a new man to the market harms all men and helps all women.
+		\item Iteratively satisfying blocking pairs leads to a stable matching.
+		\item And many more, see RS.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Strategic Aspects}
+\begin{itemize}
+	\item Let us finally return to mechanism design angle.
+	\item Suppose players' preferences $\succ$ are not known to the designer.
+\end{itemize}
+\lyxframeend
 
 
 
