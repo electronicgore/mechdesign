@@ -3152,11 +3152,124 @@ so the whole virtual surplus is
 \end{itemize}
 \lyxframeend
 
+%TODO: mention here mathing with transfers, many-to-one, etc?
+
+\section{Matching with Private Information about Preferences}
 
 \lyxframe{Strategic Aspects}
 \begin{itemize}
 	\item Let us finally return to mechanism design angle.
 	\item Suppose players' preferences $\succ$ are not known to the designer.
+	%\begin{itemize}
+	%	\item Commonly known across players for now (will see why this matters later); 
+	%	\item but let's say we cannot use cross-verification mechanisms.
+	%\end{itemize}
+	\item We have a nice algorithm (DA) which obtains stable matchings and is decentralized by design. A reasonable question then is:
+	\begin{block}{Question 1}
+		In a game induced by DA algorithm, is it optimal for players to play according to their true preferences?
+	\end{block}
+	\item Stability implies that no one wants to rematch after the outcome is announced. But misrepresenting own preferences may affect which stable matching is selected.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Good News and Bad News}
+\begin{exampleblock}{Good News}
+	In a game induced by the Deferred Acceptance algorithm, it is a dominant strategy for players on the proposing side to play truthfully.
+\end{exampleblock}
+
+\begin{alertblock}{Bad News}
+	It is generally not optimal for players on the receiving side to play truthfully.
+\end{alertblock}
+\lyxframeend
+
+
+\lyxframe{DA is not DSIC: Example}
+\begin{example}
+	\begin{itemize}
+		\item Two men, two women
+		\item Preferences (including the options to stay single):
+		{\footnotesize 
+		\begin{align*}
+			m_1:& \ w_1 \succ_{m_1} w_2 \succ_{m_1} m_1 	& w_1:& \ m_2 \succ_{w_1} m_1 \succ_{w_1} w_1
+			\\
+			m_2:& \ w_2 \succ_{m_2} w_1 \succ_{m_2} m_2 	& w_2:& \ m_1 \succ_{w_2} m_2 \succ_{w_2} w_2
+		\end{align*}
+		}
+		\item Two stable matchings: 
+		\begin{itemize}
+			\item $\alert{\mu} = \left( (m_1,w_1), (m_2,w_2)  \right)$;
+			\item $\alert{\nu} = \left( (m_1,w_2), (m_2,w_1)  \right)$;
+		\end{itemize}
+		\item M-DA leads to matching $\mu$.
+		\item However, $w_2$ can play \structure{as if} her preferences are $m_1 \succ'_{w_2} w_2 \succ'_{w_2} m_2$,
+		i.e., she always rejects $m_2$'s offer.
+		\item Easy to see that then the algorithm will produce matching $\nu$, preferred by $w_2$ to $\mu$, so this is a profitable deviation.
+	\end{itemize}
+\end{example}
+\lyxframeend
+
+
+\lyxframe{Beyond DA}
+\begin{itemize}
+	\item So, DA does not work as a mechanism that extracts players' private information.
+	\item We have to go beyond it and ask:
+	\begin{block}{Question 2}
+		Does there exist a DSIC mechanism that leads to a stable matching in a marriage model?
+	\end{block}
+	\item Answer: \alert{NO}.
+	\item The previous example is a \structure{universal counterexample}:
+	\begin{itemize}
+		\item If in that problem your mechanism chooses matching $\mu$, then $w_2$ will always have that same deviation that switches outcome to $\nu$ instead.
+		\item If your mechanism chooses $\nu$, then $m_2$ will have a similar deviation that switches the outcome to $\mu$.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Beyond DA: going formal}
+\begin{theorem}[Roth]
+	No stable matching mechanism exists for which stating the true preferences is a dominant strategy for every agent.
+\end{theorem}
+\begin{theorem}
+	No stable matching mechanism exists for which stating the true preferences is a best response for every agent if all other agents are reporting truthfully.
+\end{theorem}
+{\small 
+The above statements mean that for every mechanism there is some combination of players and preferences where a deviation exists (that was our example). The below is a stronger statement, that applies to any such combination.
+}
+\begin{theorem}
+	Under any mechanism, if more than one stable matching exists, then at least one player can profitably misrepresent their preferences.
+\end{theorem}
+\lyxframeend
+
+
+\lyxframe{``Incomplete'' Information...?}
+\begin{itemize}
+	\item Let's look closer at the logic used in our reasoning.
+	\item Each player \alert{knew} the consequences of misreporting their preferences! 
+	\begin{itemize}
+		\item It's as if \structure{all} players knew \structure{everyone's} preferences! And only the designer is ignorant...
+		\item But we know that this kind of environment is not a problem for the designer! (Remember cross-verification mechanisms? The only subtlety is that we need a suitable threat for mismatching reports.)
+	\end{itemize}
+	\item While DSIC amounts to exactly the above ($i$'s report must be optimal \structure{regardless} of everyone else's reports), BIC allows for more:
+	\begin{itemize}
+		\item In BIC mechanism, truthtelling must be optimal for $i$ \structure{on average}, across all possible preferences of other players (given that they report the truth).
+		\item A Bayesian player chooses their report \structure{before} learning others' preferences.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Incomplete Information!}
+\begin{itemize}
+	\item Let us consider the following, more familiar environment.
+	\begin{itemize}
+		\item Each player $i$ has \structure{private} type $\theta_i \in \Theta_i$;
+		\item all players report their types to a direct mechanism $\Gamma$;
+		\item $\Gamma$ prescribes a matching $\mu(\theta)$;
+		\item we want $\mu(\theta)$ to be stable.
+		\item (Previously we implicitly had that $\theta_i$ was known by all players, but not by designer.)
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
