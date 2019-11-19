@@ -2917,7 +2917,7 @@ so the whole virtual surplus is
 		\item (Please keep your arms, hands, legs, feet and head inside the ride vehicle at all times.)
 	\end{itemize}
 	\item Matching: huge field, old field, broad field, still somewhat active field. We are merely dipping toes into this vast sea.
-	\item These notes follow Roth and Sotomayor, ch.2,4.
+	\item These notes follow Roth and Sotomayor, ch.2 and 4.
 \end{itemize}
 \lyxframeend
 
@@ -3210,7 +3210,7 @@ so the whole virtual surplus is
 \lyxframeend
 
 
-\lyxframe{Beyond DA}
+\lyxframe{Private types: Beyond DA}
 \begin{itemize}
 	\item So, DA does not work as a mechanism that extracts players' private information.
 	\item We have to go beyond it and ask:
@@ -3227,7 +3227,7 @@ so the whole virtual surplus is
 \lyxframeend
 
 
-\lyxframe{Beyond DA: going formal}
+\lyxframe{Private types: going formal}
 \begin{theorem}[Roth]
 	No stable matching mechanism exists for which stating the true preferences is a dominant strategy for every agent.
 \end{theorem}
@@ -3235,15 +3235,15 @@ so the whole virtual surplus is
 	No stable matching mechanism exists for which stating the true preferences is a best response for every agent if all other agents are reporting truthfully.
 \end{theorem}
 {\small 
-The above statements mean that for every mechanism there is some combination of players and preferences where a deviation exists (that was our example). The below is a stronger statement, that applies to any such combination.
+The above statements mean that for every mechanism there is \structure{some collection} of players and their preferences where a deviation exists (that was our example). The below is a stronger statement, that applies to \alert{any} such \alert{collection}.
 }
 \begin{theorem}
-	Under any mechanism, if more than one stable matching exists, then at least one player can profitably misrepresent their preferences.
+	Under any mechanism, if more than one stable matching exists in a given marriage problem, then at least one player can profitably misrepresent their preferences.
 \end{theorem}
 \lyxframeend
 
 
-\lyxframe{``Incomplete'' Information...?}
+\lyxframe{``Private'' Types...?}
 \begin{itemize}
 	\item Let's look closer at the logic used in our reasoning.
 	\item Each player \alert{knew} the consequences of misreporting their preferences! 
@@ -3260,7 +3260,7 @@ The above statements mean that for every mechanism there is some combination of 
 \lyxframeend
 
 
-\lyxframe{Incomplete Information!}
+\lyxframe{Private Types! (Version 2)}
 \begin{itemize}
 	\item Let us consider the following, more familiar environment.
 	\begin{itemize}
@@ -3270,7 +3270,78 @@ The above statements mean that for every mechanism there is some combination of 
 		\item we want $\mu(\theta)$ to be stable.
 		\item (Previously we implicitly had that $\theta_i$ was known by all players, but not by designer.)
 	\end{itemize}
+	\item Now when player chooses what type $\hat{\omega}_i$ to report, they no longer know for sure the consequences of their deviation.
+	\item To justify stability as a requirement, assume that all types are revealed after the mechanism is run. Then everyone learns everyone's realized preferences (types), and blocking pairs can be formed. We want no blocking pairs to exist.
 \end{itemize}
+\lyxframeend
+
+
+\lyxframe{Impossibility (version 2)}
+\begin{theorem}[Roth]
+	There is no mechanism such that [at least one of] its equilibrium outcome is stable for all realizations of players' types.
+\end{theorem}
+\begin{itemize}
+	\item Require at least two players on each side of the market.
+	\item Proof uses an example similar to what we used to show DA is not DSIC.
+	\item Stability implied as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run, only announcing matching or reports can break this result.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Stability and Private Types (version 3)}
+\begin{itemize}
+	\item The last remark in prev.slide makes you wonder: is stability an appropriate concept under incomplete information?
+	\item It doesn't make sense to assume that true types are revealed. Reports maybe, but that is not the same.
+	\item Sometimes nothing stops a player from \structure{trying} to form a blocking pair even if they do not know whether the potential ``partner in crime'' would want this (i.e., even if types not announced).
+	\begin{itemize}
+		\item If this is a threat, we do actually need stability w.r.t. true preferences.
+		\item But why do even need a mechanism in this case? Just let the agents match on their own.
+	\end{itemize}
+	\item But if there are costs to such proposals and nothing is announced ex post except for the matching $\mu$, then some weaker form of stability may suffice.
+	\begin{itemize}
+		\item Idea: even if $m$ and $w$ prefer each other to their prescribed matches $\mu(m)$ and $\mu(w)$, they \structure{do not know} that they prefer each other -- and so do not form a blocking pair.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Stability and Private Types (version 3)}
+\begin{itemize}
+	\item There exists a notion of stability that incorporates players' incomplete knowledge of each other's preferences when trying to form blocking pairs...
+	\begin{itemize}
+		\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{Liu, Mailath, Postlewaite, Samuelson (2014)},
+		\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{Pomatto (2019 WP)}.
+	\end{itemize}
+	\item ...but it is not very pleasant to work with,
+	\item and there are no results as to whether these ``stable'' matchings can be obtained in a mechanism.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Private Types: Summary}
+\begin{itemize}
+	\item If all players know all preferences but the designer knows none:
+	\begin{itemize}
+		\item in DA some players on the receiving side want to misreport, so DA is not DSIC;
+		\item more generally, there cannot exist any DSIC stable mechanisms.
+	\end{itemize}
+	\item If players only know own preferences ex interim, but learn others' preferences ex post:
+	\begin{itemize}
+		\item result for DSIC stable mechanisms carries over from the previous case;
+		\item there is no BIC stable mechanism either.
+	\end{itemize}
+	\item If players only know own preferences ex interim and only learn the matching $\mu$ ex post:
+	\begin{itemize}
+		\item if the cost of trying to make a [blocking] pair is small then the results from the previous case apply;
+		\item otherwise the standard notion of stability may be too strong and relaxing it \structure{may} allow us to come up with an IC slightly-less-stable mechanism, but we don't really know.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\section{Item Allocation as a Matching Problem}
+
+\lyxframe{Coming soon...}
 \lyxframeend
 
 
