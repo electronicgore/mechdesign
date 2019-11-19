@@ -2579,8 +2579,8 @@ To fix ideas, assume the following for today:
 	\end{itemize}
 	\item Solution: separate \alert{types} from \alert{information} through \structure{orthogonalization}.
 	\begin{itemize}
-		\item Suppose $\theta_{t+1} \sim F_{t+1} (\theta_{t+1} | \theta_t)$.
-		\item Let $\varepsilon_{t+1} \equiv F_{t+1} (\theta_{t+1} | \theta_t)$. Then $\varepsilon_{t+1} \sim U[0,1]$ and independent of $\theta_t$.
+		\item Suppose $\theta_{t+1} \sim F_{t+1} (\theta_{t+1} | \theta_t, k_t)$.
+		\item Let $\varepsilon_{t+1} \equiv F_{t+1} (\theta_{t+1} | \theta_t, k_t)$. Then $\varepsilon_{t+1} \sim U[0,1]$ and independent of $\theta_t$.
 		\item In a direct mechanism, ask player to report $\theta_0$ in period $0$ and $\varepsilon_{t}$ in period $t$, then recover $\theta_{t+1}$ from these reports.
 	\end{itemize}
 \end{itemize}
@@ -2589,23 +2589,23 @@ To fix ideas, assume the following for today:
 
 \lyxframe{Virtual Surplus}
 \begin{itemize}
-	\item Optimal $k$ maximizes \alert{virtual surplus} = \structure{social surplus} -- information rents.
+	\item Optimal allocation $\kappa$ maximizes \alert{virtual surplus} = \structure{social surplus} -- information rents.
 	\begin{itemize}
-		\item This pins down optimal mechanism $(k,t+C)$ up to the constant $C$.
+		\item This pins down optimal mechanism $(\kappa,\pi+C)$ up to the constant $C$.
 		\item $C$ is determined from IR at $t=0$ -- skip the step of finding it.
 	\end{itemize}
 	\item In \alert{static} model, \alert{virtual surplus} is
 	$$ VS(\theta) = \structure{v(k(\theta),\theta)} - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial \structure{v(k(\theta),\theta)}}{\partial \theta} $$
-	\item Now in \structure{dynamics}, \structure{social surplus} is $$S(k,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
-	%$$ VS(\theta_0) = S(k,\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial S(k,\theta)}{\partial \theta_0} $$
-	Calculating $VS(\theta_0) = S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}$ requires understanding how $S$ depends on $\theta_0$ (the only source of inforents).
+	\item Now in \structure{dynamics}, \structure{social surplus} is $$S(\kappa,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
+	%$$ VS(\theta_0) = S(\kappa,\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0} $$
+	Calculating $VS(\theta_0) = S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0}$ requires understanding how $S$ depends on $\theta_0$ (the only source of inforents).
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{Virtual Surplus}
 \begin{align*}
-	\frac{\partial S(k,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+	\frac{\partial S(\kappa,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
 \end{align*}
 \begin{itemize}
 	\item Let $I_t(\theta_t | \theta^{t-1}, k_{t-1}) \equiv \frac{\partial \theta_t}{\partial \theta_0}$ be \structure{impulse response function}, where $\theta^t \equiv (\theta_0, \theta_1,...,\theta_t)$.
@@ -2618,26 +2618,26 @@ To fix ideas, assume the following for today:
 \lyxframe{Virtual Surplus}
 Then
 \begin{align*}
-	\frac{\partial S(k,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+	\frac{\partial S(\kappa,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
 	\\
 	&= \sum_{t\geq 0} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1}) \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t}
 \end{align*}
 so the whole virtual surplus is
 \begin{align*}
-	VS(\theta_0) &= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(k,\theta)}{\partial \theta_0}
+	VS(\theta_0) &= S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0}
 	\\
-	&= S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
+	&= S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
 \end{align*}
 \lyxframeend
 
 
 \lyxframe{Optimal Mechanism}
 \begin{itemize}
-	\item To find optimal \structure{allocation}, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $k$.
+	\item To find optimal \structure{allocation}, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $\kappa$.
 	\begin{align*}
-	\max_k \mathbb{E}_\varepsilon \left[ S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+	\max_\kappa \mathbb{E}_\varepsilon \left[ S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
 	\end{align*}
-	\item Still a difficult problem, for the same reasons as for efficient $k^*$.
+	\item Still a difficult problem, for the same reasons as for efficient $\kappa^*$.
 	\item Then find expected (as of $t=0$) \structure{payments} from the envelope representation of the buyer's expected utility:
 	\begin{align*}
 		\frac{d U_{b,0} (\theta_0)}{d \theta_0} = \mathbb{E} \left[ \sum_{t=0}^{T} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1})\frac{\partial v(k_t,\theta_t)}{\partial \theta_t} \mid \theta_0 \right].
@@ -2653,10 +2653,9 @@ so the whole virtual surplus is
 
 \lyxframe{Dynamic Revenue Maximization: Conclusions}
 \begin{align*}
-\max_k \mathbb{E}_\varepsilon \left[ S(k,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+\max_\kappa \mathbb{E}_\varepsilon \left[ S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
 \end{align*}
 \begin{itemize}
-	%\item Still a difficult problem, for the same reasons as for efficient $k^*$.
 	\item \structure{Insight}: if $|I_t|$ decreasing with $t$, i.e., $\theta_0$ contains little information about $\theta_t$ for large $t$ then optimal $k_t$ converges to the efficient $k^*_t$.
 	\item \structure{\textbf{Distortions vanish over time.}}
 	\item See Bergemann and Välimäki (2019, ch.5) for applications.
