@@ -2921,19 +2921,20 @@ so the whole virtual surplus is
 \lyxframeend
 
 
-\lyxframe{Classic Model: ``Marriage''}
+\lyxframe{Classic Model: Two-Sided Matching (``Marriage'')}
 \begin{itemize}
 	\item Set $M = \{m_1, m_2, ..., m_n\}$ of men, set $W = \{w_1, w_2, ..., w_p\}$ of women.
-	\item Every man $m_i$ has strict [ordinal] preferences $\succ_{m_i}$ over $W \cup \{m_i\}$; every woman $w_j$ has preferences $\succ_{w_i}$ over $M \cup \{w_j\}$.
+	\item Every man $m_i$ has strict [ordinal] preferences $\succ_{m_i}$ over $W \cup \{m_i\}$; every woman $w_j$ has preferences $\succ_{w_j}$ over $M \cup \{w_j\}$.
 	\begin{itemize}
-		\item the latter options mean ``staying single''.
+		\item the latter options in either case mean ``staying single''.
+		\item All preferences are \alert{commonly known}.
 	\end{itemize}
 	\begin{definition}
 		A \structure{matching} is a one-to-one mapping $\structure{\mu}: M \cup W \to M \cup W$ such that:
 		\begin{itemize}
-			\item $\mu(m) \in W \cup \{m\}$ for any $m \in M$;
-			\item $\mu(w) \in M \cup \{w\}$ for any $w \in W$;
-			\item $\mu(\mu(x)) = x$ for any $x \in M \cup W$.
+			\item $\mu(m) \in W \cup \{m\}$ for any $m \in M$ -- men are matched to women or stay single;
+			\item $\mu(w) \in M \cup \{w\}$ for any $w \in W$ -- women are matched to men or stay single;
+			\item $\mu(\mu(x)) = x$ for any $x \in M \cup W$ -- every person is matched to the person who is matched to them.
 		\end{itemize}
 	\end{definition}
 	\item A matching $\mu$ prescribes who should be married to whom.
@@ -3022,9 +3023,9 @@ so the whole virtual surplus is
 	\begin{itemize}
 		\item roommate problem/one-sided matching -- group of people need to split in twos to be roommates, have preferences over whom to live with;
 		\item three-sided matching -- tanks, damage-dealers, and healers need to split in triples for quest dungeons, have preferences over party-members;
-		\item many-to-one matching -- firms and workers; firms have preferences over sets of workers rather than individual employess;
+		\item many-to-one matching -- firms and workers; firms have preferences over sets of workers rather than individual employees; need strong conditions on firms' preferences for theorem to hold.
 		\item peer effects -- as above, but now workers also have preferences over potential colleagues, rather than the firm itself.
-		\item See RS ch.2.3 for particular examples.
+		\item See RS ch.2.3 for particular examples of nonexistence.
 	\end{itemize}
 	\item Also, we would want to know how this stable matching looks...
 \end{itemize}
@@ -3135,13 +3136,35 @@ so the whole virtual surplus is
 		\item men's and women's preferences over stable mathings are opposed.
 	\end{enumerate}
 	\item There exist other stable matchings, which cannot be obtained through DA algorithm.
+	\item Very surprisingly, they organize in a very nice \structure{lattice} structure w.r.t. players' preferences...
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Lattice Structure of the Set of Stable Matchings}
+\begin{itemize}
+	\item If there exist stable matchings $\mu'$ and $\mu''$ then there also exist stable matchings $\bar{\mu}$ and $\underline{\mu}$ such that for all $m \in M$ and $w \in W$:
+	\begin{align*}
+		\bar{\mu}(m) &= \max_{\succ_m} \{\mu'(m), \mu''(m)\}	&
+		\bar{\mu}(w) &= \min_{\succ_w} \{\mu'(w), \mu''(w)\}
+		\\
+		\underline{\mu}(m) &= \min_{\succ_m} \{\mu'(m), \mu''(m)\}	&
+		\underline{\mu}(w) &= \max_{\succ_w} \{\mu'(w), \mu''(w)\}
+	\end{align*}
+	(i.e., in $\bar{\mu}$ every $m$ gets the best match among those he can have in $\mu'$ and $\mu''$, and every $w$ gets the worst of the two; vice versa for $\underline{\mu}$).
+	\item See RS ch.2.3 and ch.3 for more details.
+	\item Some corollaries of this lattice structure:
 	\begin{itemize}
-		\item Very surprisingly, they organize in a very nice \structure{lattice} structure.
-		\item All are contained ``between'' $\mu_{MDA}$ and $\mu_{WDA}$ in terms of players' preferences.
-		\item Won't cover here, see RS ch.2.3 and ch.3 for more details.
-		\item One corollary: if $\mu_{MDA} = \mu_{WDA}$ then this is the unique stable matching.
+		\item All stable matchings are contained ``between'' $\mu_{MDA}$ and $\mu_{WDA}$ in terms of players' preferences.
+		\item If $\mu_{MDA} = \mu_{WDA}$ then this is the unique stable matching.
 	\end{itemize}
-	\item Plenty of other fun results, e.g.:
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Structure of the Set of Stable Matchings}
+\begin{itemize}
+	\item Plenty of other fun results regarding structure of this set, e.g.:
 	\begin{itemize}
 		\item Set of singles is the same in all stable matchings.
 		\item Adding a new man to the market harms all men and helps all women.
@@ -3152,6 +3175,8 @@ so the whole virtual surplus is
 \lyxframeend
 
 %TODO: mention here mathing with transfers, many-to-one, etc?
+
+
 
 \section{Matching with Private Information about Preferences}
 
@@ -3294,7 +3319,7 @@ The above statements mean that for every mechanism there is \structure{some coll
 	\item Sometimes nothing stops a player from \structure{trying} to form a blocking pair even if they do not know whether the potential ``partner in crime'' would want this (i.e., even if types not announced).
 	\begin{itemize}
 		\item If this is a threat, we do actually need stability w.r.t. true preferences.
-		\item But why do even need a mechanism in this case? Just let the agents match on their own.
+		\item But why do we even need a mechanism in this case? Just let the agents match on their own.
 	\end{itemize}
 	\item But if there are costs to such proposals and nothing is announced ex post except for the matching $\mu$, then some weaker form of stability may suffice.
 	\begin{itemize}
@@ -3340,8 +3365,154 @@ The above statements mean that for every mechanism there is \structure{some coll
 
 \section{Item Allocation as a Matching Problem}
 
-\lyxframe{Coming soon...}
+\lyxframe{Item Allocation}
+\begin{itemize}
+	\item Consider now a special case of the marriage problem.
+	\item There are a set $I$ of players and set $X$ of items.
+	\begin{itemize}
+		\item Player $i$ has preferences $\succ_i$ over $X$;
+		%\item Items have no preferences over whom to be allocated to.
+		\item Items have \structure{common} preferences $\succ_X$ over players $I$.
+	\end{itemize}
+	\item The designer knows $\succ_X$, does not know $\succ_i$.
+	\item The designer wants to allocate items to players (at most one item per player) so as to create a stable matching.
+\end{itemize}
 \lyxframeend
+
+
+\lyxframe{Common preferences}
+\begin{itemize}
+	\item Here $\succ_X$ can be seen as the \structure{designer's} preference over players.
+	\begin{itemize}
+		\item Players with higher priority get to choose first.
+	\end{itemize}
+	\item Alternative interpretation:
+	\begin{itemize}
+		\item $I$ are slots available in schools/universities. Universities usually have common preferences over school graduates, given by exam scores.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Deferred Acceptance}
+\begin{itemize}
+	\item We already know an algorithm that solves this problem: Deferred Acceptance (I-DA).
+	\begin{itemize}
+		\item Let players pick items in the order of their (players') priority $\succ_X$. First the $\succ_X$-best player $i$ picks his most preferred $x \in X$, then the second player chooses among the remaining $x \in X$ etc.
+		\item Can omit the ``holding on to an offer'' part -- later offers are never preferred by $\succ_X$ to early offers.
+		\item We know it is a dominant strategy for players to pick truthfully.
+	\end{itemize}
+	\item But we also know that the resulting matching is $X$-worst among stable. If $\succ_X$ is the designer's preference then it is also the worst for the designer. Can do better?
+	\begin{itemize}
+		\item According to the general results from before, X-DA would be better, but it is not IC for players $I$.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Uniqueness}
+\begin{theorem}
+	If one side of the marriage market has common preferences then the stable matching is \alert{unique}.
+\end{theorem}
+\begin{itemize}
+	\item X-DA yields the same outcome as I-DA: first all items send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining items send offers to $\succ_X$-second player etc
+	\item So the lattice structure of the set of stable matchings implies that the stable matching produced by X-DA / I-DA is the unique stable matching.
+	\item So nothing can beat I-DA in this problem.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Fair Allocations}
+\begin{itemize}
+	\item What if we \structure{do not have} any priority list \structure{$\succ_X$} and instead want to treat all players $i \in I$ equally?
+	\begin{itemize}
+		\item Note: this takes us beyond the standard marriage model, where many results required that all preferences on both sides are strict.
+	\end{itemize}
+	\item Substitute stability with Pareto-Optimality:
+	\begin{itemize}
+		\item Mathing $\mu$ is \structure{Pareto-Optimal} if no set of players can trade among themselves to [weakly] improve all of their utilities.
+		\item Related to stability; is a weaker form of efficiency (as we defined it in mechanism design).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Fair Allocations: Shapley-Scarf model}
+\begin{itemize}
+	\item There are a set $I$ of players and set $X$ of items.
+	\begin{itemize}
+		\item Player $i$ has preferences $\succ_i$ over $X$;
+		\item Items have no preferences over whom to be allocated to.
+		%\item Items have \structure{common} preferences $\succ_X$ over players $I$.
+	\end{itemize}
+	\item The designer does not know $\succ_i$.
+	\item The designer wants to allocate items to players (at most one item per player) so as to create a Pareto-optimal matching.
+	\item There is some initial matching $\mu_0$.
+\end{itemize}
+\lyxframeend
+
+
+
+\lyxframe{TTC Algorithm}
+\begin{itemize}
+	\item The algorithm we can use here: \structure{Top Trading Cycles}.
+	\begin{itemize}
+		\item In marriage model, we were looking for a stable matching -- one with no blocking pairs. One way to get it was to start from a random matching and iteratively resolve blocking pairs.
+		\item Same idea: start from the initial allocation and let players trade.
+	\end{itemize}
+	\item Begin with matching $\mu_0$ (if there's no initial matching - pick $\mu_0$ at random).
+	\begin{itemize}
+		\item Pick any player $i_0$. Ask them to point to person $i_1$ who currently holds $i_0$'s favorite item. Analogously, ask $i_1$ to point to $i_2$ etc. When some $i_N$ points to $i_0$, the cycle closes. Conduct the trades: $i_1$ gives their item to $i_0$, who gives their item to $i_N$ etc.
+		\item Remove players $\{i_0,...,i_N\}$ and their items from the game. Start the next cycle with the remaining players and items.
+		\item Any player is allowed to point to themselves if they already have the most desired item. This would be a one-player cycle.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{TTC Algorithm}
+\begin{theorem}[Roth '82]
+	It is a dominant strategy for all players to follow their true preferences in TTC.
+\end{theorem}
+\begin{theorem}
+	TTC algorithm is the only mechanism in Shapley-Scarf model which is:
+	\begin{enumerate}
+		\item incentive compatible;
+		\item Pareto-optimal;
+		\item individually rational relative to $\mu_0$.
+	\end{enumerate}
+\end{theorem}
+\lyxframeend
+
+
+\lyxframe{Item Allocation in Matching: Conclusion}
+\begin{itemize}
+	\item TTC algorithm is widely used in the real world.
+	\begin{itemize}
+		\item Has been applied to school choice and kidney exchange.
+	\end{itemize}
+	\item Rule of thumb:
+	\begin{itemize}
+		\item if you have a marriage market and both sides have preferences, use DA (not ideal but as good as it gets);
+		\item if only one side of the market has meaningful preferences, use TTC.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+
+\section{Matching and Money}
+
+\lyxframe{}
+\begin{itemize}
+	\item 
+\end{itemize}
+\lyxframeend
+
+
+
+
+
 
 
 
