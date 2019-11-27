@@ -3174,8 +3174,6 @@ so the whole virtual surplus is
 \end{itemize}
 \lyxframeend
 
-%TODO: mention here mathing with transfers, many-to-one, etc?
-
 
 
 \section{Matching with Private Information about Preferences}
@@ -3368,14 +3366,13 @@ The above statements mean that for every mechanism there is \structure{some coll
 \lyxframe{Item Allocation}
 \begin{itemize}
 	\item Consider now a special case of the marriage problem.
-	\item There are a set $I$ of players and set $X$ of items.
+	\item There are a set $I$ of players and set $X$ of objects.
 	\begin{itemize}
 		\item Player $i$ has preferences $\succ_i$ over $X$;
-		%\item Items have no preferences over whom to be allocated to.
-		\item Items have \structure{common} preferences $\succ_X$ over players $I$.
+		\item Objects have \structure{common} preferences $\succ_X$ over players $I$.
 	\end{itemize}
 	\item The designer knows $\succ_X$, does not know $\succ_i$.
-	\item The designer wants to allocate items to players (at most one item per player) so as to create a stable matching.
+	\item The designer wants to allocate objects to players (at most one item per player) so as to create a stable matching.
 \end{itemize}
 \lyxframeend
 
@@ -3398,7 +3395,7 @@ The above statements mean that for every mechanism there is \structure{some coll
 \begin{itemize}
 	\item We already know an algorithm that solves this problem: Deferred Acceptance (I-DA).
 	\begin{itemize}
-		\item Let players pick items in the order of their (players') priority $\succ_X$. First the $\succ_X$-best player $i$ picks his most preferred $x \in X$, then the second player chooses among the remaining $x \in X$ etc.
+		\item Let players pick objects in the order of their (players') priority $\succ_X$. First the $\succ_X$-best player $i$ picks his most preferred $x \in X$, then the second player chooses among the remaining $x \in X$ etc.
 		\item Can omit the ``holding on to an offer'' part -- later offers are never preferred by $\succ_X$ to early offers.
 		\item We know it is a dominant strategy for players to pick truthfully.
 	\end{itemize}
@@ -3415,7 +3412,7 @@ The above statements mean that for every mechanism there is \structure{some coll
 	If one side of the marriage market has common preferences then the stable matching is \alert{unique}.
 \end{theorem}
 \begin{itemize}
-	\item X-DA yields the same outcome as I-DA: first all items send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining items send offers to $\succ_X$-second player etc
+	\item X-DA yields the same outcome as I-DA: first all objects send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining objects send offers to $\succ_X$-second player etc
 	\item So the lattice structure of the set of stable matchings implies that the stable matching produced by X-DA / I-DA is the unique stable matching.
 	\item So nothing can beat I-DA in this problem.
 \end{itemize}
@@ -3439,14 +3436,13 @@ The above statements mean that for every mechanism there is \structure{some coll
 
 \lyxframe{Fair Allocations: Shapley-Scarf model}
 \begin{itemize}
-	\item There are a set $I$ of players and set $X$ of items.
+	\item There are a set $I$ of players and set $X$ of objects.
 	\begin{itemize}
 		\item Player $i$ has preferences $\succ_i$ over $X$;
-		\item Items have no preferences over whom to be allocated to.
-		%\item Items have \structure{common} preferences $\succ_X$ over players $I$.
+		\item Objects have no preferences over whom to be allocated to.
 	\end{itemize}
 	\item The designer does not know $\succ_i$.
-	\item The designer wants to allocate items to players (at most one item per player) so as to create a Pareto-optimal matching.
+	\item The designer wants to allocate objects to players (at most one object per player) so as to create a Pareto-optimal matching.
 	\item There is some initial matching $\mu_0$.
 \end{itemize}
 \lyxframeend
@@ -3462,9 +3458,9 @@ The above statements mean that for every mechanism there is \structure{some coll
 	\end{itemize}
 	\item Begin with matching $\mu_0$ (if there's no initial matching - pick $\mu_0$ at random).
 	\begin{itemize}
-		\item Pick any player $i_0$. Ask them to point to person $i_1$ who currently holds $i_0$'s favorite item. Analogously, ask $i_1$ to point to $i_2$ etc. When some $i_N$ points to $i_0$, the cycle closes. Conduct the trades: $i_1$ gives their item to $i_0$, who gives their item to $i_N$ etc.
-		\item Remove players $\{i_0,...,i_N\}$ and their items from the game. Start the next cycle with the remaining players and items.
-		\item Any player is allowed to point to themselves if they already have the most desired item. This would be a one-player cycle.
+		\item Pick any player $i_0$. Ask them to point to person $i_1$ who currently holds $i_0$'s favorite object. Analogously, ask $i_1$ to point to $i_2$ etc. When some $i_N$ points to $i_k$ ($0\leq k < N$), the cycle closes. Conduct the trades: $i_k$ gives their object to $i_N$, who gives their object to $i_{N-1}$ etc.
+		\item Remove players $\{i_k,...,i_N\}$ and their objects from the game. Start the next cycle with the remaining players and objects.
+		\item Any player is allowed to point to themselves if they already have the most desired object. This would be a one-player cycle.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -3503,15 +3499,71 @@ The above statements mean that for every mechanism there is \structure{some coll
 
 \section{Matching and Money}
 
-\lyxframe{}
+\lyxframe{Matching and Money}
 \begin{itemize}
-	\item 
+	\item The models we had so far (marriage, object allocation) were framed without transfers/money.
+	\item Many people think that this non-monetary nature is one of the characteristic properties of matching models.
+	\item Few know that you can actually do matching with money.
+	\item One example follows (using RS ch.6.2).
+	\item See RS ch.7-9 for more.
 \end{itemize}
 \lyxframeend
 
 
+\lyxframe{Kelso and Crawford (1982)}
+\begin{itemize}
+	\item Set of firms $F = \{f_1, ..., f_n\}$; set of workers $W = \{w_1, ..., w_m\}$.
+	\item \structure{Many-to-one}: each firm can hire any number of workers; each worker can only work for one firm.
+	\begin{itemize}
+		\item This is for simplicity; firms can have limited number of spots in principle.
+	\end{itemize}
+	\item \structure{Worker} $i$ has disutility $\sigma_{ij}$ from working for firm $j$ -- i.e., accepts this job only if offered wage of at least $\sigma_{ij}$.
+	\begin{itemize}
+		\item Worker $i$'s utility from working for $j$ is quasilinear: \alert{$u_i(j,s_{ij}) = s_{ij} - \sigma_{ij}$}, where $s_{ij}$ is the wage paid by firm $j$ to the worker.
+	\end{itemize}
+	\item \structure{Firm} $j$ receives profit $y_{ij}$ from hiring worker $i$.
+	\begin{itemize}
+		\item Firm's profit function is additively separable: profit from hiring set $C \subseteq W$ of workers at respective wages $\{s_{ij}\}_{i \in C}$ is \alert{$\pi(C,s) = \sum_{i \in C} (y_{ij} - s_{ij})$}.
+		\item This is \alert{restrictive}. We can look at slightly more general profit functions, but for stable matchings to exist we need profit functions to satisfy certain (restrictive) assumptions.
+	\end{itemize}
+	\item Assume further that money/wages are integer (rather than real) -- i.e., there is no unit smaller than 1DKK.
+\end{itemize}
+\lyxframeend
 
 
+\lyxframe{KC '82: Modified DA algorithm}
+\begin{itemize}
+	\item A stable matching can be obtained using a modified DA algorithm which proceeds as follows.
+	\begin{itemize}
+		\item Let $s_{ij}(0) = \sigma_{ij}$ be the initial wage offers.
+		\item At every stage $t$ every firm $j$ makes offer $s_{ij}(t)$ to every worker $j$ such that $y_{ij} > s_{ij}(t)$
+		\item Every $i$ holds on to the best offer, rejects the rest.
+		\item If $j$'s offer to $i$ was rejected, set $s_{ij}(t+1) = s_{ij}(t) + 1$.
+		\item (Otherwise, set $s_{ij}(t+1) = s_{ij}(t)$.)
+		\item Iterate the algorithm until no new offers are made.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{KC '82}
+\begin{itemize}
+	\item This modified DA algorithm yields a \structure{stable} matching.
+	\begin{itemize}
+		\item Offers from $j$ to $i$ dry out when firm $j$ can no longer afford worker $i$ -- i.e., after $i$ has a better offer from someone else -- i.e., when hiring $i$ is no longer IR for $j$.
+		\item No blocking pairs by the usual Gale-Shapley argument.
+		\item Note also that in the end, every $i$ is matched to $j^*(i) = \arg \max_j (y_{ij}-\sigma_{ij})$ -- i.e., matching is \structure{efficient} (surplus-maximizing).
+	\end{itemize}
+	\item Apply this model to \structure{item allocation} (where now any player can get any number of items): 
+	\begin{itemize}
+		\item let $y_{ij}$ be each player $j$'s valuation of item $i$;
+		\item let $\sigma_{ij} = 0$ for all $i,j$.
+		\item Then the algorithm above is an English (ascending-price) auction
+		\item which, in turn, is equivalent to the second-price auction (\structure{VCG} mechanism).
+	\end{itemize}
+	\item See RS 6.2 for a more general treatment of this model and RS 7-9 for models with money as a continuous variable (use very different tools to obtain similar results).
+\end{itemize}
+\lyxframeend
 
 
 
