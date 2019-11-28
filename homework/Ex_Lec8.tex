@@ -1,0 +1,226 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Exercises: Lec 8} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{5 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\solutionsfalse
+%\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	
+These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}[Review Questions]
+	\begin{itemize}
+		\item What is a stable matching? Why is stability a desirable concept?
+		\item Is the Deferred Acceptance algorithm incentive compatible for the players (i.e., is it optimal to play truthfully)? Do there exist incentive compatible mechanisms? How does your answer depend on the information available to the players?
+		\item What mechanisms can we use for the item allocation problem? Why do they not work for the more general marriage problem?
+	\end{itemize}
+	
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	This problem is meant to demonstrate the power of DA algorithm, which finds a stable matching in \emph{any} marriage market. 
+	
+	Consider a market with four men and four women. Come up with arbitrary preferences for all players (i.e., a ranking for each player of all players on the other side of the market and the option to stay single).
+	\begin{enumerate}
+		\item Find a stable matching generated by men-proposing DA algorithm.
+		\item Find a stable matching generated by women-proposing DA algorithm.
+		\item Are there any other stable matchings?
+		\item Suppose a men-proposing DA algorithm is run. Is there a profitable deviation for any of the women -- i.e., can any woman misreport her preferences to the mechanism to improve her matching? 
+		
+		(\emph{Hint: such a deviation exists if and only if you have more than one stable matching, which happens if and only if the outcomes of W-DA and M-DA algorithms are different.})
+	\end{enumerate}
+
+	\ifsolutions
+	\subsection*{Solution}
+	...
+	\fi
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}
+	This problem demonstrates how marriage model can be extended to allow many-to-one matchings, which turns it into a ``college admissions model''.
+	
+	There is a market with four students $S = \{s_1, ..., s_4\}$ and three colleges $C= \{c_1, c_2, c_3\}$. College $c_1$ can admit two students (its \emph{quota} is $q_1=2$); the remaining two colleges can admit one student each ($q_2=q_3=1$). Players' preferences (ordinal rankings, written best to worst) are given by
+	\begin{align*}
+		\succ_{s_1}: &\ c_3, c_1, c_2	&	\succ_{c_1}: &\ s_1, s_2, s_3, s_4
+		\\
+		\succ_{s_2}: &\ c_2, c_1, c_3	&	\succ_{c_2}: &\ s_1, s_2, s_3, s_4
+		\\
+		\succ_{s_3}: &\ c_1, c_3, c_2	&	\succ_{c_3}: &\ s_3, s_1, s_2, s_4
+		\\
+		\succ_{s_4}: &\ c_1, c_2, c_3
+	\end{align*}
+	
+	Your goal is to find a stable matching in this problem. The only difference from the marriage model we considered in class is that college $c_1$ can admit \emph{two} students. The trick is to represent the two available spots in $c_1$ as two independent players which have the same preferences over students and which rank equally against other colleges among the students.
+	
+	In particular, consider instead a market with the same four students but now four colleges $C' = \{c_{1.1}, c_{1.2}, c_2, c_3\}$ (each with quota $q_i=1$, as in the marriage model), and preferences are given by 
+	\begin{align*}
+	\succ_{s_1}: &\ c_3, c_{1.1}, c_{1.2}, c_2	&	\succ_{c_{1.1}}: &\ s_1, s_2, s_3, s_4
+	\\
+	\succ_{s_2}: &\ c_2, c_{1.1}, c_{1.2}1, c_3	&	\succ_{c_{1.2}}: &\ s_1, s_2, s_3, s_4
+	\\
+	\succ_{s_3}: &\ c_{1.1}, c_{1.2}, c_3, c_2	&	\succ_{c_2}: &\ s_1, s_2, s_3, s_4
+	\\
+	\succ_{s_4}: &\ c_{1.1}, c_{1.2}, c_2, c_3	&	\succ_{c_3}: &\ s_3, s_1, s_2, s_4
+	\end{align*}
+	
+	\begin{enumerate}
+		\item Use the college-proposing DA algorithm to find a stable matching.
+		\item Matching $\mu$ generated by the C-DA algorithm is \emph{weakly} Pareto-optimal for the set $C'$ of players. However, there is another stable matching $\mu' = \{ (c_1, s_2, s_4), (c_2, s_1), (c_3, s_3) \}$ which is strictly preferred to $\mu$ by all colleges in $C$. How can you explain this contradiction?
+	\end{enumerate}
+	\ifsolutions
+	\subsection*{Solution}
+		See proof of Thm 5.10 in RS.
+	\fi
+\end{ex}
+
+
+
+
+\end{document}
