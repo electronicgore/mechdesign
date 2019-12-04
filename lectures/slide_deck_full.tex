@@ -3540,7 +3540,7 @@ The above statements mean that for every mechanism there is \structure{some coll
 	\item A stable matching can be obtained using a modified DA algorithm which proceeds as follows.
 	\begin{itemize}
 		\item Let $s_{ij}(0) = \sigma_{ij}$ be the initial wage offers.
-		\item At every stage $t$ every firm $j$ makes offer $s_{ij}(t)$ to every worker $j$ such that $y_{ij} > s_{ij}(t)$
+		\item At every stage $t$ every firm $j$ makes offer $s_{ij}(t)$ to every worker $i$ such that $y_{ij} > s_{ij}(t)$
 		\item Every $i$ holds on to the best offer, rejects the rest.
 		\item If $j$'s offer to $i$ was rejected, set $s_{ij}(t+1) = s_{ij}(t) + 1$.
 		\item (Otherwise, set $s_{ij}(t+1) = s_{ij}(t)$.)
@@ -3569,6 +3569,588 @@ The above statements mean that for every mechanism there is \structure{some coll
 \end{itemize}
 \lyxframeend
 
+
+
+
+\section{Lecture 9 \\ Information Design}
+
+\lyxframe{What is Information Design?}
+\begin{itemize}
+	\item In Mechanism design, we have:
+	\begin{itemize}
+		\item \alert{fixed} information and set of outcomes;
+		\item \structure{choose} the game that agents play (available actions and their mapping to outcomes).
+	\end{itemize}
+	\item Information design (a.k.a. ``Bayesian Persuasion'') flips the problem completely:
+	\begin{itemize}
+		\item now have a fixed game (actions and outcomes);
+		\item can choose the information that players have about their payoffs.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Setting}
+\begin{itemize}
+	\item There is some \structure{state} $\omega \in \Omega$, unknown to everyone initially, common prior $\phi_0 \in \varDelta(\Omega)$.
+	\item \alert{Players} $i \in \{1,...,N\}$ (we will mostly look at $N=1$);
+	\begin{itemize}
+		\item each player chooses an \structure{action} $a_i \in A_i$;
+		\item player's \structure{utility} function is $v_i(a, \omega)$, where $a = (a_1, ..., a_N)$.
+	\end{itemize}
+	\item \alert{Designer's} \structure{objective} function is $\pi(a, \omega)$.
+	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Theta \to \varDelta(M^N)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Experiments}
+\begin{itemize}
+	\item Designer chooses an \structure{experiment} $\mu: \Theta \to \varDelta(M^N)$.
+	\item Experiment $\mu$ generates for each player a signal $m_i$ from the state $\omega$.
+	\item Examples:
+	\begin{itemize}
+		\item Perfectly revealing signals: $m_i = \omega$.
+		\item Pooling signals: $m_i = 1$ if $\omega \geq 0$ and $m_i = 0$ if $\omega < 0$.
+		\item Mixed signals: $m_i = L$ if $\omega = L$ and $m_i = 
+		\begin{cases}
+			L & \text{ w.p. }1/2; \\ R & \text{ w.p. }1/2
+		\end{cases}$
+		if $\omega=R$.
+		\item Uninformative signals: $m_i \sim F(M)$ where c.d.f. $F$ is independent of $\omega$.
+	\end{itemize}
+	\item Distinction is made between \structure{private persuasion} where the designer can send a private signal to each player and \alert{public persuasion} where only public signals are available.
+	\begin{itemize}
+		\item Public signals are available under private persuasion, but not vice versa.
+		\item Private persuasion is thus always weakly better for the designer.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Experiments}
+\begin{itemize}
+	\item It is absolutely crucial that the designer \alert{does not know $\omega$} when choosing $\mu$.
+	\item Also like in mechanism design, the designer publicly commits to $\mu$ -- any change in $\mu$ is observed by all players.
+	\item This commitment power allows the designer to commit ex ante to something that is not necessarily optimal ex post:
+	\begin{itemize}
+		\item e.g., can commit to telling all truth and nothing but truth -- even if some facts may come up that he'd rather conceal;
+		\item or vice versa, can commit to giving no hints to players -- even if really want to reveal the state sometimes.
+	\end{itemize}
+	\item Without commitment -- if designer chooses a message after learning $\omega$ -- we have a communication problem (rather than information design problem).
+	\begin{itemize}
+		\item These are much more difficult, mostly due to externalities across states.
+		\item E.g. a manager wants to boast high earnings to investors but does not want to reveal if earnings low. Without commitment, always reveals when earnings are high. Then if investors hear nothing, they infer that earnings are low -- communication in high-earning state imposes an informational externality on low-earning state.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Where is Information Design?}
+\begin{itemize}
+	\item Examples of such problems (from Kamenica's 2019 survey):
+	\begin{itemize}
+		\item financial sector stress tests (Goldstein \& Leitner 2018, Inostroza \&
+Pavan 2018, Orlov et al. 2018b), 
+		
+		\item grading in schools (Boleslavsky \& Cotton 2015, Ostrovsky \&
+Schwarz 2010), 
+		
+		\item employee feedback (Habibi 2018, Smolin 2017), 
+		
+		\item law enforcement deployment
+(Hernandez \& Neeman2017, Lazear 2006, Rabinovich et al. 2015), 
+		
+		\item censorship (Gehlbach \& Sonin
+2014), 
+		
+		\item entertainment (Ely et al. 2015), 
+		
+		\item financial over-the-counter markets (Duffie et al. 2017),
+		
+		\item voter coalition formation (Alonso \& Camara 2016b), 
+		
+		\item research procurement (Yoder 2018), 
+		
+		\item contests (Feng \& Lu 2016, Zhang \& Zhou 2016), 
+		
+		\item medical testing (Schweizer \& Szech 2019), 
+		
+		\item medical
+research (Kolotilin 2015), 
+		
+		\item matching platforms (Romanyuk \& Smolin 2019), 
+		
+		\item price discrimination
+(Bergemann et al. 2015), 
+		
+		\item financing (Szydlowski 2016), 
+		
+		\item insurance (Garcia \& Tsur 2018), 
+		
+		\item transparency in organizations (Jehiel 2015), 
+		
+		\item routing software (Das et al.2017, Kremer et al.2014).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Two interpretations of Information Design}
+\begin{itemize}
+	\item There are two schools of thought in InfoDesign literature.
+	\item The first takes the \structure{literal interpretation}, as presented above:
+	\begin{itemize}
+		\item there is some designer, who decides how to provide information.
+		\item School led by Kamenica, most applications take this stand (even when commitment makes no sense in a particular application).
+	\end{itemize}
+	\item The alternative is a \structure{metaphorical interpretation}:
+	\begin{itemize}
+		\item Suppose we are looking at some game or real-world interaction, but do not know what information is available to players.
+		\item InfoDesign tools allow to describe the full set of possible outcomes for all possible information structures. 
+		\item No explicit designer in this story.
+		\item Note that in this story all players have common knowledge of the information structure in place, it is only us (the external observer) who do not know it. (Although there are sophisticated epistemologic arguments for why this is without loss.)
+		\item Agenda pushed heavily by Morris.
+	\end{itemize}
+	\item The two also propose somewhat different approaches to solving the model, we will cover both.
+\end{itemize}
+\lyxframeend
+
+
+
+\section{Illustrative Example}
+
+\lyxframe{Illustrative example}
+\begin{itemize}
+	\item Let $\omega \in \{G,B\}$; let $\phi_0 = \mathbb{P} \{ \omega = G \}$ denote the common prior belief (probability that the state is good);
+	\item let $N=1$ (one player), $A = \{G,B\}$ (two actions);
+	\item the player's utility is $v(a,\omega) = \mathbb{I} (a=\omega)$.
+	\begin{itemize}
+		\item Player wants his action to match the state.
+	\end{itemize}
+	\item The designer's objective function is $\pi(a,\omega) = \mathbb{I} (a=G)$.
+	\begin{itemize}
+		\item Designer wants player to play $a=G$ regardless of state.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: timing}
+\begin{itemize}
+	\item To be clear, the timing in this example (as well as in the general model) is as follows:
+	\begin{enumerate}
+		\item designer chooses $\mu$ and publicly commits to it
+		\item state $\omega$ is determined
+		\item message $m$ to the player is drawn according to $\mu(m|\omega)$
+		\item player observes $m$ and chooses decision $a$
+		\item payoffs are realized
+	\end{enumerate}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: actions}
+\begin{itemize}
+	\item Start from the end:
+	\item Let $\phi$ denote the player's \structure{posterior belief} (after she observes $m$). What action does she choose?
+	\item Denote $\hat{a}(\phi) \equiv \arg \max \mathbb{E}_{\phi(\omega)} [v(a,\omega)]$. If there are many optimal actions, choose the best for the designer.
+	\item In our example:
+	\begin{equation*}
+		\hat{a}(\phi) = \begin{cases}
+			G & \text{ if } \phi \geq 1/2;
+			\\
+			B & \text{ if } \phi < 1/2.
+		\end{cases}
+	\end{equation*}
+	\begin{itemize}
+		\item For the first time ever the tie-breaking rule is fixed -- we are choosing the designer-best action ($G$).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: posteriors}
+\begin{itemize}
+	\item The posterior $\phi$ completely defines the designer's objective function: let
+	\begin{equation*}
+		\Pi (\phi) \equiv \pi(\hat{a}(\phi)) = \begin{cases}
+		1 & \text{ if } \phi \geq 1/2;
+		\\
+		0 & \text{ if } \phi < 1/2.
+		\end{cases}
+	\end{equation*}
+	\item By choosing an experiment $(\mu,M)$ the designer induces some distribution over posteriors $\phi$.
+	\begin{itemize}
+		\item What if he could choose any distribution?
+		\item Would ideally want $\phi \geq 1/2$ always (after any message $m$).
+		\item So if $\phi_0 \geq 1/2$ the principal can do nothing (choose experiment that does nothing) and that would be optimal.
+		\item But the ideal is unattainable if $\phi_0 < 1/2$ because beliefs must be \alert{consistent}.
+	\end{itemize}
+	\item \structure{Belief consistency}: $\mathbb{E} \phi = \phi_0$ (Law of iterated expectations).
+	
+	The expectation is taken from the ex ante perspective.
+	\begin{itemize}
+		\item \alert{Remark}: always keep track of perspective. In ID you have ex ante expectations, expectations conditional on $m$, expectations conditional on $\omega$...
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: optimal distribution}
+\begin{itemize}
+	\item Let us try to find the \structure{best distribution} of posteriors $\phi$ such that $\mathbb{E} \phi = \phi_0 < 1/2$.
+	\begin{itemize}
+		\item It only matters for the designer whether $\phi < 1/2$ or $\phi \geq 1/2$.
+		\item So suppose there are two possible posteriors: $\phi_1 < 1/2$ and $\phi_2 \geq 1/2$, which are induced with respective probabilities $\tau_1$ and $\tau_2 = 1 - \tau_1$. 
+		\item Consistency pins the probabilities exactly:
+		\begin{align} \nonumber
+			\tau_1 \phi_1 + (1-\tau_1) \phi_2 = \phi_0
+			\\ \label{eq:ID_cons}
+			\Leftrightarrow \tau_1 = \frac{\phi_2 - \phi_0}{\phi_2 - \phi_1}
+		\end{align}
+		(Note that it also implies that $\phi_1 < \phi_0$.)
+	\end{itemize}
+	\item The designer gets payoff $1$ whenever $\phi_2$ is induced and $0$ in case of $\phi_1$:
+	\vspace{-1em}\begin{align*}
+		\mathbb{E}_\phi \Pi (\phi) = \tau_1 \cdot 0 + (1-\tau_1) \cdot 1 = 1-\tau_1
+	\end{align*}\vspace{-1em}
+	\begin{itemize}
+		\item So want to choose $(\phi_1,\phi_2)$ so as to minimize $\tau_1$ subject to \eqref{eq:ID_cons}, $\phi_1 \in [0, \phi_0)$, and $\phi_2 \in [1/2, 1]$.
+		\item Easiest done by staring at \eqref{eq:ID_cons} and finding $\phi_1 = 0$, $\phi_2 = 1/2$.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: from distribution to experiment}
+\begin{itemize}
+	\item So the optimal distribution is: induce posterior $\phi_1 = 0$ with probability $\tau_1 = 1-2\phi_0$ and posterior $\phi_2 = 1/2$ with probability $\tau_2 = 2 \phi_0$.
+	\begin{itemize}
+		\item This yields utility $2 \phi_0$ to the designer.
+	\end{itemize}
+	\item Can we implement this distribution \alert{as an experiment} $(\mu,M)$?
+	\begin{itemize}
+		\item Have two posteriors so use two messages: $M = \{g,b\}$, where $b$ will induce posterior $\phi_1$, and $g$ corresponds to $\phi_2$.
+		\item Let $p(m|\omega)$ denote the probability that message $m$ is sent in state $\omega$. We then need to solve the following system w.r.t. $p(m|\omega)$:
+		\begin{align*}
+			\frac{\phi_0 p(b|G)}{\phi_0 p(b|G) + (1-\phi_0) p(b|B)} &= \phi_1 = 0
+			\\
+			\frac{\phi_0 p(g|G)}{\phi_0 p(g|G) + (1-\phi_0) p(g|B)} &= \phi_2 = 1/2
+			\\
+			p(b|B) + p(g|B) &= 1
+			\\
+			p(b|G) + p(g|G) &= 1
+		\end{align*}
+		First two equalities ensure that messages $b$ and $g$ induce exactly the right posteriors (and follow from Bayes' rule); the last two are feasibility constraints (one of the two messages must always be sent).
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Example: optimal experiment}
+\begin{itemize}
+	\item The solution is given by:
+	\begin{align*}
+		p(g|B) &= \frac{\phi_0}{1-\phi_0} = 1-p(b|B)
+		\\
+		p(g|G) &= 1 = 1-p(b|G)
+	\end{align*}
+	\begin{itemize}
+		\item i.e., in state $\omega=G$ always send $m=g$;
+		\item in state $\omega=B$ mix between sending $m=g$ w.p. $\frac{\phi_0}{1-\phi_0}$ and $m=b$ w.p. $\frac{1-2\phi_0}{1-\phi_0}$,
+	\end{itemize}
+	\item In other words, the optimal strategy is:
+	\begin{itemize}
+		\item if \structure{state favorable} to designer then disclose it \structure{truthfully};
+		\item if \alert{state bad} for designer then try to \alert{obfuscate} it.
+		\item Need \alert{commitment} to mix in $\omega=B$: message $m=g$ gives higher payoff, so without commitment the designer would never send $m=b$.
+	\end{itemize}
+	\item Player:
+	\begin{itemize}
+		\item is granted full confidence when taking action that is undesirable for designer;
+		\item is made barely indifferent when taking action desired by the designer.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+
+\section{General Approach A: Concavification}
+
+\lyxframe{Setting (reminder)}
+\begin{itemize}
+	\item There is some \structure{state} $\omega \in \Omega$, unknown to everyone initially, common prior $\phi_0 \in \varDelta(\Omega)$.
+	\item \alert{Players} $i \in \{1,...,N\}$ (we will mostly look at $N=1$);
+	\begin{itemize}
+		\item each player chooses an \structure{action} $a_i \in A_i$;
+		\item player's \structure{utility} function is $v_i(a, \omega)$, where $a = (a_1, ..., a_N)$.
+	\end{itemize}
+	\item \alert{Designer's} \structure{objective} function is $\pi(a, \omega)$.
+	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Theta \to \varDelta(M^N)$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Actions are irrelevant}
+\begin{itemize}
+	\item Restrict attention to \alert{public experiments}
+	\begin{itemize}
+		\item so all players always receive same message $m$ and end up with \structure{same posterior} belief $\phi \in \varDelta (\Theta)$.
+		\item I do not think this general approach can easily account for private experiments.
+	\end{itemize}
+	\item Let $\hat{a}(\phi)$ denote an equilibrium (BNE) strategy profile in a game where all $i$ share belief $\phi$.
+	\begin{itemize}
+		\item Same as in the example, except now want equilibrium rather than just maximizer.
+		\item If many equilibria, select designer-best.
+	\end{itemize}
+	\item Define $\Pi (\phi) \equiv \mathbb{E}_{\phi(\omega)} \left[\pi (\hat{a}(\phi), \omega)\right]$.
+	\begin{itemize}
+		\item Again, posterior $\phi$ completely defines the designer's objective function.
+		\item Expectation needed because $\pi$ depends on $\omega$ in general.
+		\item Expectation is w.r.t posterior $\phi$. Why not prior $\phi_0$?
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Posteriors}
+\begin{itemize}
+	\item Let $\phi_k = \phi (\omega | m_k)$ denote the player's posterior belief over states upon observing message $m_k$:
+	\begin{align*}
+		\phi_k (\omega) = \frac{\phi_0(\omega) \mu(m_k|\omega)}{\sum_{\omega' \in \Omega} \phi_0 (\omega') \mu(m_k | \omega')}
+	\end{align*}
+	\item Let $Q \in \varDelta(\varDelta(\Theta))$ denote the \structure{distribution over posteriors} $\phi_k$ induced by experiment $\mu$ (from the ex ante perspective).
+	\item Belief consistency / LIE: $\mathbb{E}_Q \phi_k = \phi_0$
+	\begin{itemize}
+		\item from the ex ante perspective.
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Direct Experiments}
+\begin{itemize}
+	\item Note that messages' \structure{only} purpose is to induce some posterior. So we can w.l.o.g. focus on experiments which directly tell the player what posterior she must have upon hearing this message:
+	\begin{definition}[Direct Experiment A]
+		A \structure{direct} experiment is $(\mu,M)$ such that $M = \varDelta(\Theta)$.
+	\end{definition}
+	\item For the player to actually arrive at beliefs prescribed by a direct experiment, the experiment must be consistent:
+\end{itemize}
+\begin{definition}
+	A direct experiment $(\mu,\varDelta(\Theta))$ is \alert{consistent} if $\mathbb{E}_Q m_k = \phi_0$.
+\end{definition}
+\lyxframeend
+
+
+\lyxframe{Revelation Principle}
+\begin{theorem}[Revelation Principle A]
+	\begin{itemize}
+		\item For \structure{any experiment} $(\mu,M)$ there exists an equivalent \alert{credible consistent} experiment $(\mu,\varDelta(\Theta))$.
+		
+		\item For any consistent \structure{distribution} $Q \in \varDelta(\varDelta(\Theta))$ there exists \alert{an experiment} $(\mu,M)$ that induces it.
+	\end{itemize}
+\end{theorem}
+\begin{itemize}
+	\item So instead of maximizing over all possible experiments $(\mu,M)$ we can maximize over all distributions $Q$, which is a slightly easier problem.
+	\item This is what we did in the example, but now we know this is a way we can always go.
+	\item From this point onwards, I will also call any consistent distribution $Q$ an experiment.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Concavification}
+\begin{itemize}
+	\item So how do we find the optimal experiment $Q$?
+	\item Using the following scary object:
+	\begin{definition}[Concave closure]
+		Function $\Pi^*(\phi)$ is a \alert{concave closure} of function $\Pi(\phi)$ if it is the pointwise smallest concave function among those that satisfy $\Pi^*(\phi) \geq \Pi(\phi)$ for all $\phi$.
+	\end{definition}
+	\item Equivalent definition:
+	\begin{align*}
+		\Pi^*(\phi) \equiv \sup \{ z | (\phi,z) \in co(\Pi) \}
+	\end{align*}
+	where $co(\Pi)$ is the convex hull of the graph of $\Pi$.
+	%\item Recall that $\Pi(\phi)$ is the designer's payoff from inducing posterior $\phi$. Call its concavification $\Pi^*(\phi)$ the \structure{value function} of the designer. Why? See next slide.
+	\item Equivalent definition: $\Pi^*$ is the shape that the blanket takes when you throw it over $\Pi$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Concavification: example}
+\begin{center}
+	\includegraphics[scale=0.25]{pics/ID_concav.png}
+	(Notation is different but you get the idea.)
+\end{center}
+\lyxframeend
+
+
+\lyxframe{Optimal experiment: payoff}
+\begin{theorem}
+	The payoff the designer obtains from the optimal experiment is given by $\Pi^*(\phi_0)$, where $\Pi^*$ is the concave closure of $\Pi(\phi)$.
+\end{theorem}
+\begin{itemize}
+	\item If $\Pi^*(\phi_0) = \Pi(\phi_0)$ then trivial (uninformative) experiment is optimal.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal experiment: cookbook}
+\begin{itemize}
+	\item If $\Pi^*(\phi_0) > \Pi(\phi_0)$ then you need to find a set of points \structure{$\{\phi_1, ..., \phi_k\}$} ``closest'' to $\phi_0$ such that:
+	\begin{itemize}
+		\item $\phi_0 \in co\left(\{\phi_1, ..., \phi_k\}\right)$;
+		\item $\Pi^*(\phi_k) = \Pi(\phi_k)$;
+	\end{itemize}
+	\item these will be the \structure{posteriors(=messages)} in the optimal experiment $Q$. 
+	\item You should then be able to find the \structure{ex ante probabilities $\tau_k$} of each posterior from consistency: $\phi_0 = \sum_k \tau_k \phi_k$,
+	\begin{itemize}
+		\item check also that $\Pi^*(\phi_0) = \sum_k \tau_k \Pi^*(\phi_k)$, otherwise your points are not ``closest'' to $\phi_0$ among those that satisfy the requirements.
+	\end{itemize}
+	\item and finally use all $(\tau_k,\phi_k)$ to derive the \structure{conditional probabilities $p(m_k | \omega)$} of sending each message $m_k$ in each state $\omega$ (Bayes' rule + feasibility, as we did in the example).
+	\item Congratulations, you have just information designed.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Back to example}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\begin{tikzpicture}[xscale=5,yscale=4.5,
+			piline/.style={line width=0.4mm, red}
+			]
+			\draw[->] (0,0) -- (1.1,0) node[below left]{$\phi$};
+			\draw[->] (0,0) -- (0,1.3);% node[below left]{$\Pi^*(\phi)$};
+			\draw (0,0) node[left]{\footnotesize $0$};
+			
+			% Plot
+			% Pi
+			\draw[piline] (0,0) -- (0.5,0);
+			\draw[red,dotted] (0.5,0) -- (0.5,1);
+			\draw[piline] (0.5,1) -- (1,1);
+			
+			\draw[line width=0.6mm, violet, opacity=0.7, dashed] (0,0) -- (0.5,1.01) -- (1,1.01);
+			
+			% Ticks
+			% x axis
+			\draw (0.5,0) coordinate(q1) node[below ]{$\frac{1}{2}$};
+			\draw (q1) ++(0,-0.02) -- ++(0,0.02);
+			
+			\draw (1,0) coordinate(q3) node[below]{$1$};
+			\draw (q3) ++(0,-0.02) -- ++(0,0.02);
+			\draw[dotted] (1,0) -- (1,1);
+			
+			% y axis
+			\draw (0,1) coordinate(u2) node[left]{\footnotesize $1$};
+			\draw (u2) ++(-0.02,0) -- ++(0.02,0);
+			\draw[dotted] (u2) -- (1,1);
+			
+			%Legend
+			\matrix [draw, fill=white, below right] at (0.05,1.35) {
+				\draw [piline] ++(-0.3,0) -- ++(0.6,0) node[black,right] {$\Pi(\phi)$}; \\
+				\draw [line width=0.6mm, violet, opacity=0.7, dashed] ++(-0.3,0) -- ++(0.6,0) node[black,right,opacity=1] {$\Pi^*(\phi)$}; \\
+			};
+		
+			\filldraw[blue] (0.7,1) circle(0.015);
+			\draw[blue,dotted] (0.7,1) -- (0.7,0) node[below]{$\phi_0$};
+			\end{tikzpicture}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		{\small
+			\begin{itemize}
+				\item If $\phi_0 \geq 1/2$ then $\Pi^*(\phi_0) = \Pi(\phi_0)$,
+				\item so trivial mechanism is optimal.
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
+
+
+\lyxframe{Back to example}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\begin{tikzpicture}[xscale=4.5,yscale=4.5,
+			piline/.style={line width=0.4mm, red}
+			]
+			\draw[->] (0,0) -- (1.1,0) node[below left]{$\phi$};
+			\draw[->] (0,0) -- (0,1.3);% node[below left]{$\Pi^*(\phi)$};
+			\draw (0,0) node[left]{\footnotesize $0$};
+			
+			% Plot
+			% Pi
+			\draw[piline] (0,0) -- (0.5,0);
+			\draw[red,dotted] (0.5,0) -- (0.5,1);
+			\draw[piline] (0.5,1) -- (1,1);
+			
+			\draw[line width=0.6mm, violet, opacity=0.7, dashed] (0,0) -- (0.5,1.01) -- (1,1.01);
+			
+			% Ticks
+			% x axis
+			\draw (0.5,0) coordinate(q1) node[below]{$\frac{1}{2}$};
+			\draw (q1) ++(0,-0.02) -- ++(0,0.02);
+			
+			\draw (1,0) coordinate(q3) node[below]{$1$};
+			\draw (q3) ++(0,-0.02) -- ++(0,0.02);
+			\draw[dotted] (1,0) -- (1,1);
+			
+			% y axis
+			\draw (0,1) coordinate(u2) node[left]{\footnotesize $1$};
+			\draw (u2) ++(-0.02,0) -- ++(0.02,0);
+			\draw[dotted] (u2) -- (1,1);
+			
+			%Legend
+			\matrix [draw, fill=white, below right] at (0.05,1.35) {
+				\draw [piline] ++(-0.3,0) -- ++(0.6,0) node[black,right] {$\Pi(\phi)$}; \\
+				\draw [line width=0.6mm, violet, opacity=0.7, dashed] ++(-0.3,0) -- ++(0.6,0) node[black,right,opacity=1] {$\Pi^*(\phi)$}; \\
+			};
+		
+			\filldraw[blue] (0.3,0.6) coordinate(p0) circle(0.015);
+			\draw[blue,dotted] (p0) -- (0.3,0) node[below]{$\phi_0$};
+			\draw[->,blue] (p0) to[bend left] (0.45,0.98);
+			\filldraw[blue] (0.5,1) circle(0.015);
+			\draw[->,blue] (p0) to[bend right] (0.01,0.05);
+			\filldraw[blue] (0,0) circle(0.015);
+			\end{tikzpicture}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		{\small
+			\begin{itemize}
+				\item If $\phi_0 < 1/2$ then $\Pi^*(\phi_0) > \Pi(\phi_0)$.
+				\item The ``closest'' points such that $\Pi^*(\phi) = \Pi(\phi)$ are $\phi_1 = 0$ and $\phi_2 = 1/2$
+				\item which is exactly what we found while solving the example.
+			\end{itemize}
+		}
+	\end{column}
+\end{columns}
+\lyxframeend
+
+
+\section{General Approach B: Correlated Equilibria}
+
+\lyxframe{Introduction}
+\begin{itemize}
+	\item Kamenica's ``concavification'' approach yields a nice visual representation of what ``Bayesian persuasion'' entails.
+	\item But it is not very convenient to use in applications.
+	\begin{itemize}
+		\item Easy to draw a picture for one-dimensional belief $\phi$ (two states),
+		\item you can draw one in three dimensions (three states),
+		\item but with more states things become problematic.
+	\end{itemize}
+	\item But there is another, more boring but also more effective approach that links Information Design to an old literature on Correlated Equilibria.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{}
+\begin{itemize}
+	\item item
+\end{itemize}
+\lyxframeend
 
 
 

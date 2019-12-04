@@ -82,41 +82,41 @@
 
 \newif\ifsolutions
 
-%----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-% Set up the header and footer
-\pagestyle{fancy}
-\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
-\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
-\rhead{\instructor \\ \theprofessor} % Top right header
-\lfoot{\lastxmark} % Bottom left footer
-\cfoot{} % Bottom center footer
-\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
-\renewcommand\headrulewidth{0.4pt} % Size of the header rule
-\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
-
-
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
 
 
 
 
 
-%----------------------------------------------------------------------------------------
-%	NAME AND CLASS SECTION
-%----------------------------------------------------------------------------------------
-
-\newcommand{\hmwkTitle}{Exercises: Lec 2b} % Assignment title
-\newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2019} % TA
-\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
-
-%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
-\setlength{\parskip}{0 pt}
 
 
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Exercises: Lec 2b} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{5 pt}
+
+\newtheorem{lemma}{Lemma}
 
 
 
@@ -136,12 +136,20 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\solutionsfalse
-%\solutionstrue
+%\solutionsfalse
+\solutionstrue
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
+
+
+\ifsolutions
+	\begin{center}
+		{\Huge Problem Set for Lecture 2(b)(with Solutions)}
+	\end{center}
+
+	\emph{The solutions below brought to you by Hannah Barth and Inga Reymann. Notes in cursive added by Egor.}
+\fi
+
 	
 These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer.
 
@@ -155,19 +163,92 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		\item In which sense is monotonicity requirement (for an s.c.f. to be DSIC in a Euclidean model) related to WPRP condition from the general model?
 		\item What is the main driving force behind revenue equivalence? Does it imply that the expected revenue and players' expected payoffs are fixed given a social choice function?
 	\end{itemize}
-	
 \end{ex}
 
 
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Implementability conditions]
+\begin{ex}[P2: Implementability conditions]
 	In the Euclidean world we showed that monotonicity and the Mirrlees conditions were necessary for an indirect utility function to arise from a DSIC mechanism. Show sufficiency:  for any indirect utility function $U$ that satisfies monotonicity and the Mirrlees condition there is a DSIC social choice function which yields $U$.
 	
 	\ifsolutions
-	\section*{Solution}
-	See the lemma in ``implementability in auctions'' problem.
+	\subsection*{Solution 1 (Hannah \& Inga)}
+	
+	DSIC means that you report your true type $\theta$, DSIC condition: 
+	$$U_i(\theta_i,\theta_{-i}) \geq \ U_i(\hat\theta_i,\theta_i)$$
+	
+	Then it is better to report your true type than to report a fake type.
+	
+	Monotonicity:
+	
+	$$k(\theta_i,\theta_{-i})\geq \ k_i(\hat\theta_i, \theta_{-i})  \quad \text{if} \quad \theta_i \geq\ \hat\theta_i $$
+	
+	which implies that the agent who values the good more, will also get more of the allocations.
+	
+	Indirect utility functions are of the type:
+	
+	$$U_i(\theta_i,\theta_{-i})=u_i(x(\theta_i,\theta_{-i}),\theta_i)$$
+	
+	%where $x(\theta_i,\theta_{-i})$ refers to the best possible combination of allocations and transfers. 
+	
+	In order to show sufficiency, we can start with the monotonicity condition
+	
+	$$k(\theta_i,\theta_{-i})\geq \ k_i(\hat\theta_i, \theta_{-i}) $$
+	
+	The indirect utility function follows the Euclidean form:
+	$u_i(x(\theta_i,\theta_{-i}),\theta_i)=\theta_i*k(\theta_i)-t_i(\theta_i),$
+	which can be rearranged to
+	$k(\theta_i)=\frac{u_i(x(\theta_i,\theta_{-i}),\theta_i)+t_i(\theta_i)}{\theta_i}.$
+	Plugging it in yields:
+	
+	$$\frac{u_i(x(\theta_i,\theta_{-i}),\theta_i) + t_i(\theta_i)}{\theta_i}\geq \ k_i(\hat\theta_i, \theta_{-i}) $$
+	$$u_i(x(\theta_i,\theta_{-i}),\theta_i) + t_i(\theta_i) \geq \ \theta_{i} k_i(\hat\theta_i, \theta_{-i}) $$
+	$$u_i(x(\theta_i,\theta_{-i}),\theta_i) \geq \ \theta_{i}k_i(\hat\theta_i, \theta_{-i})-t_i(\hat\theta)+t_i(\hat\theta) -t_i(\theta_i) $$
+	$$u_i(x(\theta_i,\theta_{-i}),\theta_i) \geq \ u_i(x(\hat\theta_i,\theta_-i),\theta_i)+t_i(\hat\theta) -t_i(\theta_i) $$
+	
+	$$U_i(\theta_i,\theta_{-i}) \geq \ u_i(x(\hat\theta_i,\theta_-i),\theta_i)+t_i(\hat\theta) -t_i(\theta_i) $$
+	
+	where $u_i(x(\hat\theta_i,\theta_-i),\theta_i)$ is the case where you report a false type.
+	
+	We can do the same for other types $\hat\theta_i$:
+	
+	$$k(\theta_i,\theta_{-i})\geq \ k_i(\hat\theta_i, \theta_{-i}) $$
+	
+	The indirect utility function for $\hat\theta_i$ is:	
+	$u_i(x(\hat\theta_i,\theta_{-i}),\hat\theta_i)=\hat\theta_{i}k(\hat\theta_i)-t_i(\hat\theta_i),$
+	which can be rearranged to:
+	$k(\hat\theta_i)=\frac{u_i(x(\hat\theta_i,\theta_{-i}),\hat\theta_i)+t_i(\hat\theta_i)}{\hat\theta_i}.$
+	Plugging it in results in:
+	
+	$$k(\theta_i,\theta_{-i})\geq \ \frac{u_i(x(\hat\theta_i,\theta_{-i}))+t_i(\hat\theta_i)}{\hat\theta_i} $$
+	
+	$$\hat\theta_{i}k(\theta_i,\theta_{-i})\geq \ u_i(x(\hat\theta_i,\theta_{-i}),\hat\theta_i)+t_i(\hat\theta_i) $$
+	
+	$$\hat\theta_{i}k(\theta_i,\theta_{-i})-t_i(\hat\theta_i)\geq \ u_i(x(\hat\theta_i,\theta_{-i}),\hat\theta_i) $$
+	$$\hat\theta_{i}k(\theta_i,\theta_{-i})-t_i(\hat\theta_i)\geq \ U_i(\hat\theta_i,\theta_{-i}) $$\\
+	
+	What we basically have to show:
+	
+	$$U_i(\theta_i,\theta_{-i}) \geq \ u_i(x(\hat\theta_i,\theta_-i),\theta_i)+t_i(\hat\theta) -t_i(\theta_i) \geq\ \hat\theta_{i}k(\theta_i,\theta_{-i})-t_i(\hat\theta_i)\geq \ U_i(\hat\theta_i,\theta_{-i}) $$
+	
+	so basically just
+	
+	$$u_i(x(\hat\theta_i,\theta_-i),\theta_i)+t_i(\hat\theta) -t_i(\theta_i) \geq\ \hat\theta_{i}k(\theta_i,\theta_{-i})-t_i(\hat\theta_i) $$
+	
+	which collapses to
+	
+	$$\theta k(\hat\theta,\theta_{-i})-t_i(\hat\theta)+t_i(\hat\theta) -t_i(\theta_i) \geq\ \hat\theta_{i}k(\theta_i,\theta_{-i})-t_i(\hat\theta_i) $$
+	
+	$$\theta k(\hat\theta,\theta_{-i}) -t_i(\theta_i) \geq\ \hat\theta_i*k(\theta_i,\theta_{-i})-t_i(\hat\theta_i) $$
+	
+	
+	...
+	
+	\emph{Note: the solution is not complete. The trick was to extract transfers from the envelope representation.}
+	
+	\subsection*{Solution 2 (Egor)}
+	See the lemma in solution 2 to ``P5: implementability in auctions'' in this problem set.
 	\fi
 \end{ex}
 
@@ -175,12 +256,29 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Budget balance]
+\begin{ex}[P3: Budget balance]
 	Prove that if a mechanism is ex post budget balanced then it is also ex ante budget balanced.
 	
 	\ifsolutions
-	\section*{Solution}
-	If any
+	\subsection*{Solution}
+	Ex post budget balance means that the sum of all transfers is zero with probability one. Ex ante budget balance means that the expected sum of all transfers is zero.
+	
+	Ex post budget balance requires budget balance for all $\theta$:
+	\begin{align} \label{eq:BB_post}
+		\sum_i t_i(\theta) \geq 0
+	\end{align}
+	
+	Ex ante budget balance requires budget balance on average:
+	\begin{align} \nonumber
+		\mathbb{E}_\theta \left[ \sum_i t_i(\theta) \right] \geq 0
+		\\  \label{eq:BB_ante}
+		\Leftrightarrow \int_{\theta \in \Theta} \left[ \sum_i t_i(\theta) \right] dF(\theta) \geq 0
+	\end{align}
+	
+	Ex post BB condition \eqref{eq:BB_post} implies that the expression in brackets in \eqref{eq:BB_ante} is nonnegative with probability 1, therefore the integral of these values w.r.t. $\theta$ is nonnegative as well.
+	%Ex post budget balance is therefore more restrictive than ex ante budget balance.
+	
+	Ex post budget balance implies ex ante budget balance, but not vice versa.
 	\fi
 \end{ex}
 
@@ -188,12 +286,37 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Bilateral trade]
+\begin{ex}[P4: Bilateral trade]
 	Is there an efficient, DSIC, ex post IR, ex post BB mechanism in the bilateral trade setting (slides 68/83)? (Hint: Start from VCG and invoke revenue equivalence.)
 	
 	\ifsolutions
-	\section*{Solution}
-	If any
+	\subsection*{Solution}
+	A mechanism is 
+	
+	\begin{itemize}
+		\item ex post individual rational, if $u_i(\theta_i,\theta_{-i}) \geq\ 0$
+		
+		\item ex post budget balanced, if $\sum_{i=1}^{N} t_i(\theta) \geq\ 0 $
+		
+		\item ex post efficient, if there is only trade if $\theta_s<\theta_b$
+		
+	\end{itemize}
+	
+	
+	Start from VCG mechanism and invoke revenue equivalence.
+	
+	Revenue equivalence = any mechanism that results in the same outcomes (allocations and transfers) also has the same revenue. \emph{Note: while the statement is factually correct, it does not allow to answer the problem, since transfers are not fixed.}
+	
+	A VCG mechanism is not individual rational for the seller (outside option is to keep the good).\\
+	
+	The outcomes in the VCG mechanism are:
+	
+	$$t_b^{VCG}\theta=\theta_s*\mathbb{I} [\theta_s<\theta_b]$$
+	$$t_s^{VCG}\theta=\theta_b*\mathbb{I} [\theta_s\geq\ \theta_b]$$
+	
+	The seller pays to keep the good (if his valuation is higher) and doesn't get anything when selling it. Therefore, this mechanism is not individual rational for the seller.
+	
+	At the moment, no one wants to participate in the mechanism. The transfers have to be increased in order to make it attractive for the participants. The transfers cannot be increased though because then the budget balance will break down. Therefore we can conclude, that there does not exist a DSIC mechanism which is efficient, ex post IR and ex post BB in the bilateral trade setting.
 	\fi
 \end{ex}
 
@@ -201,7 +324,7 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Implementation in Auctions]
+\begin{ex}[P5: Implementation in Auctions]
 	Consider the auction environment with two buyers.  Suppose that each buyer $i$ has willingness to pay
 	$v_i$ drawn from the set $[0,1].$
 	\begin{enumerate}
@@ -221,61 +344,64 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\end{enumerate}
 	
 	\ifsolutions
-	\section*{Solution}
+	\subsection*{Solution}
 	Before solving the exercise we will show the following claim. Consider the environment as the one in the instructions, where the utility of type $v_i$ when he announces $v_i^{'}$ and his rival announces $v_{-i}$ is:
-	\begin{eqnarray}
+	\begin{align*}
 	U_{i}(v_i^{'}|v_{i})=v_iq_i(v_{i}^{'},v_{-i})-t_i(v_{i}^{'},v_{-i})\\
 	U_i(v_{i})=U_i(v_i|v_i)
-	\end{eqnarray}
+	\end{align*}
 	where $q_i(v_{i}^{'},v_{-i})\in[0,1]$ is the probability that $i$ gets the good when the announcements are $(v_i^{'},v_{-i})$ and $t_i(v_{i}^{'},v_{-i})$ are the payments that need to be done by $i$ in that case.
-	\begin{lem}
-		A mechanism $(q(\cdot),t(\cdot))$ is DSIC if for all $i,v_{-i}$ $q_{i}(\cdot,v_{-i})$ is weakly increasing. Moreover,
-		\begin{eqnarray}\label{int}
+	\begin{lemma}
+		A mechanism $(q(\cdot),t(\cdot))$ is DSIC if and only if for all $i$ and $v_{-i}$ the allocation $q_{i}(\cdot,v_{-i})$ is weakly increasing and
+		\begin{align}\label{int}
 		U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
-		\end{eqnarray}
-		Moreover, if $q(\cdot)$ is such that for all $i,v_{-i}$ $q_{i}(\cdot,v_{-i})$ is weakly increasing and satisfies (\ref{int}), then it is DSIC.
-	\end{lem}
+		\end{align}
+		%Moreover, if $q(\cdot)$ is such that for all $i,v_{-i}$ $q_{i}(\cdot,v_{-i})$ is weakly increasing and satisfies (\ref{int}), then it is DSIC.
+	\end{lemma}
 	\begin{proof}
 		\begin{description}
-			\item [($\Rightarrow$)] Suppose $(q(\cdot),t(\cdot))$ is DSIC. Then, for all $i,v_i$ it holds that:
-			\begin{eqnarray}
+			\item [($\Rightarrow$)] \emph{Note: we have done this part during lectures.}
+			
+			Suppose $(q(\cdot),t(\cdot))$ is DSIC. Then, for all $i,v_i$ it holds that:
+			\begin{align*}
 			U_i(v_i)\geq U_i(v_i^{'}|v_i)\\
 			U_i(v_{i}^{'})\geq U_i(v_i|v_i^{'})
-			\end{eqnarray}
+			\end{align*}
 			Note that: $U_i(v_i^{'}|v_i)=U_i(v_{i}^{'}|v_{i}^{'})+(v_i-v_i^{'})q_i(v_i^{'},v_{-i})$ and $U_i(v_i|v_i^{'})=U_i(v_{i}|v_{i})+(v_i^{'}-v_i)q_i(v_i,v_{-i})$. Then we may rewrite the above inequalities as:
-			\begin{eqnarray}
+			\begin{align*}
 			U_i(v_i)\geq U_i(v_i^{'}|v_i)=U_i(v_{i}^{'}|v_{i}^{'})+(v_i-v_i^{'})q_i(v_i^{'},v_{-i})\\
 			U_i(v_{i}^{'})\geq U_i(v_i|v_i^{'})=U_i(v_{i}|v_{i})+(v_i^{'}-v_i)q_i(v_i,v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			Rearranging, we obtain that:
-			\begin{eqnarray}
+			\begin{align*}
 			(v_i-v_{i}^{'})q_i(v_i^{'},v_{-i})\leq U_i(v_i)-U_{i}(v_i^{'})\leq (v_i-v_{i}^{'})q_i(v_i,v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			Assume, wlog, that $v_i>v_i^{'}$. Then, the above inequality implies that $q_i(v_i,v_{-i})\geq q_i(v_i^{'},v_{-i})$ as desired. Moreover, rearranging the inequality we get that:
-			\begin{eqnarray}
+			\begin{align*}
 			q_i(v_i^{'},v_{-i})\leq \frac{U_i(v_i)-U_{i}(v_i^{'})}{(v_i-v_{i}^{'})}\leq q_i(v_i,v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			and taking limits as $v_{i}^{'}\rightarrow v_i$ we get that:
-			\begin{eqnarray}
+			\begin{align*}
 			U_i^{'}(v_i)= q_i(v_i,v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			And hence, we may write $U_i(v_i)$ as:
-			\begin{eqnarray}
+			\begin{align*}
 			U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
-			\end{eqnarray}
+			\end{align*}
 			for $\underbar{v}_i<v_i$.
+			
 			\item [($\Leftarrow$)] Assume you have an allocation $q(\cdot)$ that is weakly increasing and satisfies (\ref{int}). Then, construct transfers as:
-			\begin{eqnarray}
+			\begin{align*}
 			t_i(v_i,v_{-i})=v_iq_i(v_i,v_{-i})-U_i(\underbar{v}_{i})-\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
-			\end{eqnarray}
+			\end{align*}
 			We will show that $(q,t)$ is DSIC. Fix $v_{-i}$ and let $v_i>v_{i}^{'}$. Then:
-			\begin{eqnarray}
+			\begin{align*}
 			U_i(v_i)-U_{i}(v_i^{'})= \int_{v^{'}_{i}}^{v_i}q_{i}(u,v_{-i})du\geq \int_{v^{'}_{i}}^{v_i}q_{i}(v_{i}^{'},v_{-i})du=(v_i-v_i^{'})q_i(v_i^{'},v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			where we used the monotonicity of $q_i$ to get the inequality. Hence,
-			\begin{eqnarray}
+			\begin{align*}
 			U_i(v_i)\geq v_iq_i(v_i^{'},v_{-i})-(v_i^{'}q_i(v_i^{'},v_{-i})-U_i(v_i^{'}))=v_iq_i(v_i^{'},v_{-i})-t_i(v_i^{'},v_{-i})
-			\end{eqnarray}
+			\end{align*}
 			where we used the constructed transfers to get the last equality. Hence, the mechanism is DSIC.
 		\end{description}
 	\end{proof}
@@ -300,9 +426,9 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\right.
 	\]
 	\newline\indent From the lemma above we know that we have no hope of implementing the allocation if it is not monotone. However, it is very easy to check (just observe the drawing) that fixing the type of the other player, the probability of getting the good weakly increases with the player's type. Now we have to construct the transfers to implement this in dominant strategies. We will make use once again of the lemma, mainly of the result that:
-	\begin{eqnarray}\label{transfer}
+	\begin{align} \label{transfer}
 	t_i(v_i,v_{-i})=v_iq_i(v_i,v_{-i})-U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
-	\end{eqnarray}
+	\end{align}
 	are the transfers that work.
 	\newline\indent Let's start with $t_1(v_1,v_2)$. Note that if $v_2>\tilde{v}_2$, no matter what type player 1 announces $q_1(\cdot,v_2)=0$. Hence, $t_1(v_1,v_2)=0$ for $v_2>\tilde{v}_2$. Consider now $v_2\in[\hat{v}_2,\tilde{v}_2]$. In that case, $q_1(v_1,v_2)=1$ if and only if $v_1\geq\frac{v_2-b_1}{a_1}$. Then,  for $v_2\in[\hat{v}_2,\tilde{v}_2]$:
 	
@@ -313,9 +439,9 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\right.
 	\]
 	where the last part comes from using (\ref{transfer}) and noticing that $\underbar{v}_1=\frac{v_2-b_1}{a_1}$ and setting $U_1(\underbar{v}_1)=0$:
-	\begin{eqnarray}
+	\begin{align*}
 	t_1(v_1,v_2)=v_1-\int_{\frac{v_2-b_1}{a_1}}^{v_1}1 du=\frac{v_2-b_1}{a_1}
-	\end{eqnarray}
+	\end{align*}
 	Finally, consider $v_2\leq\hat{v}_2$. In that case, $q_1(\cdot,v_2)=0$ for $v_1\leq \frac{b_2-v_2}{a_2}=\underbar{v}_1$. Then, in that case:
 	
 	\[t_1(v_1,v_2)=\left\{\begin{array}{cc} 0 & \quad\text{ if }\quad  v_1\leq\frac{b_2-v_2}{a_2}\\
@@ -347,32 +473,5 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 %%------------------------------------------------------------------------------------------------
 
-%TODO: this is for correlated types
-%\begin{ex}[Asymmetric Auctions]
-%	Consider the optimal auction problem in which there are two bidders whose valuations $v_i \in [0,1]$ are uniformly distributed but perfectly correlated, i.e. $v_1 = v_2$ with probability 1.  Construct a DSIC mechanism with the following properties:
-%	\begin{enumerate}
-%		\item Bidder 2 wins the object regardless of the type profile.
-%		\item Both bidders earn zero utility at every type profile.
-%	\end{enumerate}
-%	
-%	\ifsolutions
-%	\section*{Solution}
-%	Consider the following allocation:
-%	\[q_1(v_1,v_2)=0\]
-%	\[q_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if }\quad v_2\neq v_1\\
-%	1 & \quad\text{otherwise}\quad
-%	
-%	\end{array}
-%	\right.\]
-%	\[t_1(v_1,v_2)=0\]
-%	\[t_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{if}\quad v_2\neq v_1\\
-%	v_1 & \quad\text{otherwise}\quad\end{array}\right.\]
-%	Note that for bidder 1 it is weakly dominant to say his valuation: he never gets the good so he might as well say $v_1$. For player 2, we have exactly the same situation: given the message sent by agent 1, he is indifferent between saying the truth and not, so telling the truth is weakly dominant. Agent 2 gets the good always and both bidders have 0 utility at every profile.
-%	\fi
-%\end{ex}
-
-
-
-%%------------------------------------------------------------------------------------------------
 
 \end{document}
