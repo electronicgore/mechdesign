@@ -99,7 +99,7 @@
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
 
 
 
@@ -117,7 +117,7 @@
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
-\setlength{\parskip}{0 pt}
+\setlength{\parskip}{5 pt}
 
 
 
@@ -139,12 +139,23 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\solutionsfalse
-%\solutionstrue
+%\solutionsfalse
+\solutionstrue
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
+	
+	
+\ifsolutions
+	\begin{center}
+		
+		{\Huge Problem Set for Lecture 4
+			(with Solutions)}
+	\end{center}
+	
+	\emph{The solutions are brought to you by Hannah Barth and Inga Reymann. Notes in cursive added by Egor.}
+\fi
 	
 These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
 
@@ -184,46 +195,84 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	
 \ifsolutions
 \section*{Solution}
-\begin{enumerate}[leftmargin=*]
-	
-	\item Calculate virtual surplus $VS(\theta) = v(\theta) - \theta - \frac{F(\theta)}{f(\theta)}$: 
-	\begin{align*}
-	VS(\theta) &= 
-	\begin{cases}
-	\frac{3\theta}{2} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
+\paragraph{1}
+
+The expected utility of the buyer can be written as:
+$$ \mathbb{E}U^B(\hat{\theta}|\theta)=\mathbb{E}_\theta[v(\theta)k(\hat{\theta})-t(\hat{\theta})]$$
+
+Rearranging $U^S$ to $t(\theta)=U^S(\hat{\theta}|\theta)+\theta k(\theta)$ and plugging it into the expected utility of the buyer:
+
+$$ \mathbb{E}U^B(\theta)=\mathbb{E}_\theta[v(\theta)k(\theta)-U^S(\theta)-\theta k(\theta)]$$
+
+Now, using the envelope theorem yields:
+\begin{align*}
+	\mathbb{E}U^B(\theta) &=\mathbb{E}_\theta[(v(\theta)-\theta)k(\theta)-U^S(1)-\int_\theta^1k(s)ds]
 	\\
-	\frac{5\theta}{2} - \frac{1}{3} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
-	\end{cases}
+	&=\mathbb{E}_\theta[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds]-U^S(1)
 	\\
-	\Leftrightarrow
-	VS(\theta) &= 
-	\begin{cases}
-	-\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
+	&=\int_0^1 \left[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds \right] \phi(\theta)d\theta-U^S(1)
 	\\
-	\frac{\theta}{2} - \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
-	\end{cases}
-	\end{align*}
-	Pointwise optimization prescribes setting $q(\theta) = 1$ if $VS(\theta) \geq 0$ and $q(\theta) = 0$ otherwise. In this problem this would result in allocation $q(\theta) = \mathbb{I} \left\{ \theta \geq \frac{2}{3} \right\}$, which is not weakly decreasing as monotonicity requires. Therefore, let us look at constant allocations $q(\theta) = \bar{q}$ instead. By linearity of buyer's payoff in $\bar{q}$ in that case, one of $\bar{q} \in \{0,1\}$ must be optimal.
-	
-	Allocation rule corresponding to $\bar{q} = 0$ prescribes no trade w.p. 1, hence buyer's payoff is zero. Allocation rule $\bar{q} = 1$ prescribes trade w.p. 1 at a constant price, hence this price must be $\bar{t} = \max \theta$ for all seller types to be willing to sell. Buyer's expected payoff is then equal to 
-	\begin{align*}
-	\mathbb{E} \left[ v(\theta) - 1 \right] &= \int_0^{\frac{1}{3}} \frac{3\theta}{2} d\theta + \int_{\frac{1}{3}}^{1} \left[ \frac{5 \theta}{2} - \frac{1}{3} \right] d\theta -1 = \frac{35}{36} - 1 < 0,
-	\end{align*}
-	hence no trade ($q(\theta) = 0$ for all $\theta$) is optimal.
-	
-	
-	\item In this case we have
-	\begin{align*}
-	VS(\theta) &= 
-	\begin{cases}
-	\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
+	&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_\theta^1k(s) \phi(\theta) ds d\theta-U^S(1)
 	\\
-	-\frac{\theta}{2} + \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
-	\end{cases}
-	\end{align*}
-	Pointwise maximization yields $q(\theta) = \mathbb{I} \left\{ \theta \leq \frac{2}{3} \right\}$. Monotonicity is not violated (the allocation is weakly decreasing in $\theta$), hence this allocation is implementable.
+	&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_0^\theta k(s) \phi(\theta) d\theta ds-U^S(1)
+	\\
+	&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1 k(s) \left[\int_0^\theta \phi(\theta) d\theta \right] ds-U^S(1)
+	\\
+	&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta-\int_0^1 k(\theta) F(\theta) d\theta -U^{S}(1)
+	\\
+	&=\int_0^1 \left(v(\theta)-\theta-\frac{F(\theta)}{\phi(\theta)} \right) k(\theta)\phi(\theta)d\theta -U^S(1)
+\end{align*}
+
+
+\paragraph{2}
+
+Explain each component of $VS(\theta)$.
+
+$$ VS(\theta)=v(\theta)-\theta-\frac{F(\theta)}{\phi(\theta)} $$
+
+$VS(\theta)$ is the virtual surplus gained by the buyer in this model. $v(\theta)$ is the buyer's valuation, $\theta$ is the seller's valuation which is equal to the quality of the item which is privately known by the seller. The buyer does not know $\theta$ exactly, but he assumes that $\theta$ is a random variable with some cumulative distribution function $F(\theta)$ and probability distribution function $\phi(\theta)$.
+
+\emph{Term $v(\theta) - \theta$ represents the \textbf{surplus} generated by trade, this is what the buyer would maximize if he could extract the information about $\theta$ from the seller at no cost. The term $\frac{F(\theta)}{\phi(\theta)}$ is the \textbf{information rent} that must be left to the seller in order to incentivize truthtelling. The buyer thus maximizes surplus net of information rents.}
+
+\paragraph{3}
+
+Calculate virtual surplus $VS(\theta) = v(\theta) - \theta - \frac{F(\theta)}{f(\theta)}$: 
+\begin{align*}
+VS(\theta) &= 
+\begin{cases}
+\frac{3\theta}{2} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
+\\
+\frac{5\theta}{2} - \frac{1}{3} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
+\end{cases}
+\\
+\Leftrightarrow
+VS(\theta) &= 
+\begin{cases}
+-\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
+\\
+\frac{\theta}{2} - \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
+\end{cases}
+\end{align*}
+Pointwise optimization prescribes setting $q(\theta) = 1$ if $VS(\theta) \geq 0$ and $q(\theta) = 0$ otherwise. In this problem this would result in allocation $q(\theta) = \mathbb{I} \left\{ \theta \geq \frac{2}{3} \right\}$, \emph{which is not weakly decreasing as monotonicity requires.\footnote{Note that in this inverted problem, seller's IC requires that allocation $k$ is \emph{decreasing} in $\theta$ rather than increasing.} Therefore, let us look at constant allocations $q(\theta) = \bar{q}$ instead. By linearity of buyer's payoff in $\bar{q}$ in that case, one of $\bar{q} \in \{0,1\}$ must be optimal.}
+
+\emph{Allocation rule corresponding to $\bar{q} = 0$ prescribes no trade w.p. 1, hence buyer's payoff is zero. Allocation rule $\bar{q} = 1$ prescribes trade w.p. 1 at a constant price, hence this price must be $\bar{t} = \max \theta$ for all seller types to be willing to sell. Buyer's expected payoff is then equal to }
+\begin{align*}
+\mathbb{E} \left[ v(\theta) - 1 \right] &= \int_0^{\frac{1}{3}} \frac{3\theta}{2} d\theta + \int_{\frac{1}{3}}^{1} \left[ \frac{5 \theta}{2} - \frac{1}{3} \right] d\theta -1 = \frac{35}{36} - 1 < 0,
+\end{align*}
+\emph{hence no trade ($q(\theta) = 0$ for all $\theta$) is optimal.}
 	
-\end{enumerate}
+
+\paragraph{4}	
+ In this case we have
+\begin{align*}
+VS(\theta) &= 
+\begin{cases}
+\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
+\\
+-\frac{\theta}{2} + \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
+\end{cases}
+\end{align*}
+Pointwise maximization yields $q(\theta) = \mathbb{I} \left\{ \theta \leq \frac{2}{3} \right\}$. \emph{Monotonicity is not violated (the allocation is weakly decreasing in $\theta$), hence this allocation is implementable.}
 \fi
 \end{ex}
 
