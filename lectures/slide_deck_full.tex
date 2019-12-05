@@ -3599,14 +3599,14 @@ The above statements mean that for every mechanism there is \structure{some coll
 		\item player's \structure{utility} function is $v_i(a, \omega)$, where $a = (a_1, ..., a_N)$.
 	\end{itemize}
 	\item \alert{Designer's} \structure{objective} function is $\pi(a, \omega)$.
-	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Theta \to \varDelta(M^N)$.
+	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Omega \to \varDelta(M^N)$.
 \end{itemize}
 \lyxframeend
 
 
 \lyxframe{Experiments}
 \begin{itemize}
-	\item Designer chooses an \structure{experiment} $\mu: \Theta \to \varDelta(M^N)$.
+	\item Designer chooses an \structure{experiment} $\mu: \Omega \to \varDelta(M^N)$.
 	\item Experiment $\mu$ generates for each player a signal $m_i$ from the state $\omega$.
 	\item Examples:
 	\begin{itemize}
@@ -3726,11 +3726,11 @@ research (Kolotilin 2015),
 	\item let $N=1$ (one player), $A = \{G,B\}$ (two actions);
 	\item the player's utility is $v(a,\omega) = \mathbb{I} (a=\omega)$.
 	\begin{itemize}
-		\item Player wants his action to match the state.
+		\item Player wants her action to match the state.
 	\end{itemize}
 	\item The designer's objective function is $\pi(a,\omega) = \mathbb{I} (a=G)$.
 	\begin{itemize}
-		\item Designer wants player to play $a=G$ regardless of state.
+		\item Designer wants player to choose $a=G$ regardless of state.
 	\end{itemize}
 \end{itemize}
 \lyxframeend
@@ -3887,7 +3887,7 @@ research (Kolotilin 2015),
 		\item player's \structure{utility} function is $v_i(a, \omega)$, where $a = (a_1, ..., a_N)$.
 	\end{itemize}
 	\item \alert{Designer's} \structure{objective} function is $\pi(a, \omega)$.
-	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Theta \to \varDelta(M^N)$.
+	\item Designer chooses an \structure{experiment} $(\mu,M)$ where $\mu: \Omega \to \varDelta(M^N)$.
 \end{itemize}
 \lyxframeend
 
@@ -3896,7 +3896,7 @@ research (Kolotilin 2015),
 \begin{itemize}
 	\item Restrict attention to \alert{public experiments}
 	\begin{itemize}
-		\item so all players always receive same message $m$ and end up with \structure{same posterior} belief $\phi \in \varDelta (\Theta)$.
+		\item so all players always receive same message $m$ and end up with \structure{same posterior} belief $\phi \in \varDelta (\Omega)$.
 		\item I do not think this general approach can easily account for private experiments.
 	\end{itemize}
 	\item Let $\hat{a}(\phi)$ denote an equilibrium (BNE) strategy profile in a game where all $i$ share belief $\phi$.
@@ -3920,7 +3920,7 @@ research (Kolotilin 2015),
 	\begin{align*}
 		\phi_k (\omega) = \frac{\phi_0(\omega) \mu(m_k|\omega)}{\sum_{\omega' \in \Omega} \phi_0 (\omega') \mu(m_k | \omega')}
 	\end{align*}
-	\item Let $Q \in \varDelta(\varDelta(\Theta))$ denote the \structure{distribution over posteriors} $\phi_k$ induced by experiment $\mu$ (from the ex ante perspective).
+	\item Let $Q \in \varDelta(\varDelta(\Omega))$ denote the \structure{distribution over posteriors} $\phi_k$ induced by experiment $\mu$ (from the ex ante perspective).
 	\item Belief consistency / LIE: $\mathbb{E}_Q \phi_k = \phi_0$
 	\begin{itemize}
 		\item from the ex ante perspective.
@@ -3933,12 +3933,12 @@ research (Kolotilin 2015),
 \begin{itemize}
 	\item Note that messages' \structure{only} purpose is to induce some posterior. So we can w.l.o.g. focus on experiments which directly tell the player what posterior she must have upon hearing this message:
 	\begin{definition}[Direct Experiment A]
-		A \structure{direct} experiment is $(\mu,M)$ such that $M = \varDelta(\Theta)$.
+		A \structure{direct} experiment is $(\mu,M)$ such that $M = \varDelta(\Omega)$.
 	\end{definition}
 	\item For the player to actually arrive at beliefs prescribed by a direct experiment, the experiment must be consistent:
 \end{itemize}
 \begin{definition}
-	A direct experiment $(\mu,\varDelta(\Theta))$ is \alert{consistent} if $\mathbb{E}_Q m_k = \phi_0$.
+	A direct experiment $(\mu,\varDelta(\Omega))$ is \alert{consistent} if $\mathbb{E}_Q m_k = \phi_0$.
 \end{definition}
 \lyxframeend
 
@@ -3946,9 +3946,9 @@ research (Kolotilin 2015),
 \lyxframe{Revelation Principle}
 \begin{theorem}[Revelation Principle A]
 	\begin{itemize}
-		\item For \structure{any experiment} $(\mu,M)$ there exists an equivalent \alert{credible consistent} experiment $(\mu,\varDelta(\Theta))$.
+		\item For \structure{any experiment} $(\mu,M)$ there exists an equivalent \alert{credible consistent} experiment $(\mu,\varDelta(\Omega))$.
 		
-		\item For any consistent \structure{distribution} $Q \in \varDelta(\varDelta(\Theta))$ there exists \alert{an experiment} $(\mu,M)$ that induces it.
+		\item For any consistent \structure{distribution} $Q \in \varDelta(\varDelta(\Omega))$ there exists \alert{an experiment} $(\mu,M)$ that induces it.
 	\end{itemize}
 \end{theorem}
 \begin{itemize}
@@ -3980,14 +3980,15 @@ research (Kolotilin 2015),
 \lyxframe{Concavification: example}
 \begin{center}
 	\includegraphics[scale=0.25]{pics/ID_concav.png}
+	
 	(Notation is different but you get the idea.)
 \end{center}
 \lyxframeend
 
 
 \lyxframe{Optimal experiment: payoff}
-\begin{theorem}
-	The payoff the designer obtains from the optimal experiment is given by $\Pi^*(\phi_0)$, where $\Pi^*$ is the concave closure of $\Pi(\phi)$.
+\begin{theorem}[Kamenica \& Gentzkow]
+	The payoff the designer obtains from the optimal experiment is given by $\Pi^*(\phi_0)$, where $\Pi^*$ is the concave closure of $\Pi$.
 \end{theorem}
 \begin{itemize}
 	\item If $\Pi^*(\phi_0) = \Pi(\phi_0)$ then trivial (uninformative) experiment is optimal.
@@ -3997,17 +3998,17 @@ research (Kolotilin 2015),
 
 \lyxframe{Optimal experiment: cookbook}
 \begin{itemize}
-	\item If $\Pi^*(\phi_0) > \Pi(\phi_0)$ then you need to find a set of points \structure{$\{\phi_1, ..., \phi_k\}$} ``closest'' to $\phi_0$ such that:
+	\item If $\Pi^*(\phi_0) > \Pi(\phi_0)$ then you need to find a set of points \structure{$\{\phi_1, ..., \phi_K\}$} such that:
 	\begin{itemize}
-		\item $\phi_0 \in co\left(\{\phi_1, ..., \phi_k\}\right)$;
+		\item $\phi_0 \in co\left(\{\phi_1, ..., \phi_k\}\right)$, meaning $\phi_0 = \sum_k \tau_k \phi_k$ for some weights $\tau_k$ ($\tau_k \geq 0$, $\sum_k \tau_k = 1$);
 		\item $\Pi^*(\phi_k) = \Pi(\phi_k)$;
+		\item $\Pi^*(\phi_0) = \sum_k \tau_k \Pi^*(\phi_k)$.
 	\end{itemize}
-	\item these will be the \structure{posteriors(=messages)} in the optimal experiment $Q$. 
-	\item You should then be able to find the \structure{ex ante probabilities $\tau_k$} of each posterior from consistency: $\phi_0 = \sum_k \tau_k \phi_k$,
+	\item These $\phi_k$ will be the \structure{posteriors(=messages)} in the optimal experiment $Q$.
+	\item You can then use all $(\tau_k,\phi_k)$ to derive the \structure{conditional probabilities $p(m_k | \omega)$} of sending each message $m_k$ in each state $\omega$;
 	\begin{itemize}
-		\item check also that $\Pi^*(\phi_0) = \sum_k \tau_k \Pi^*(\phi_k)$, otherwise your points are not ``closest'' to $\phi_0$ among those that satisfy the requirements.
+		\item use Bayes' rule + feasibility, as we did in the example.
 	\end{itemize}
-	\item and finally use all $(\tau_k,\phi_k)$ to derive the \structure{conditional probabilities $p(m_k | \omega)$} of sending each message $m_k$ in each state $\omega$ (Bayes' rule + feasibility, as we did in the example).
 	\item Congratulations, you have just information designed.
 \end{itemize}
 \lyxframeend
@@ -4121,8 +4122,8 @@ research (Kolotilin 2015),
 		{\small
 			\begin{itemize}
 				\item If $\phi_0 < 1/2$ then $\Pi^*(\phi_0) > \Pi(\phi_0)$.
-				\item The ``closest'' points such that $\Pi^*(\phi) = \Pi(\phi)$ are $\phi_1 = 0$ and $\phi_2 = 1/2$
-				\item which is exactly what we found while solving the example.
+				\item Decompose $\phi_0$ into points such that $\Pi^*(\phi) = \Pi(\phi)$, namely $\phi_1 = 0$ and $\phi_2 = 1/2$
+				\item which is exactly what we did when solving the example.
 			\end{itemize}
 		}
 	\end{column}
@@ -4137,20 +4138,114 @@ research (Kolotilin 2015),
 	\item Kamenica's ``concavification'' approach yields a nice visual representation of what ``Bayesian persuasion'' entails.
 	\item But it is not very convenient to use in applications.
 	\begin{itemize}
+		\item Concavification is a very graphical concept.
 		\item Easy to draw a picture for one-dimensional belief $\phi$ (two states),
-		\item you can draw one in three dimensions (three states),
+		\item in principle you can draw one in three dimensions (three states),
 		\item but with more states things become problematic.
 	\end{itemize}
 	\item But there is another, more boring but also more effective approach that links Information Design to an old literature on Correlated Equilibria.
+	\begin{itemize}
+		\item You can read more about it in Bergemann \& Morris (2019) survey.
+	\end{itemize}
 \end{itemize}
 \lyxframeend
 
 
-\lyxframe{}
+\lyxframe{Revelation Principle B}
 \begin{itemize}
-	\item item
+	\item In the previous approach, message $m$ prescribed the \structure{posterior belief} that a player must update to upon receiving that message.
+	\item Now let it prescribe an \alert{action} that a player must take: 
+	
+	A \alert{decision rule} is $\sigma: \Omega \to \varDelta(A)$.
+	\begin{itemize}
+		\item Given state $\omega$, give an action recommendation to every player.
+		\item Recommendations may be random given state, and be \structure{correlated} across players.
+	\end{itemize}
+	\item We will use decision rules as yet another representation of an experiment, along with $(\mu,M)$ -- message distribution, and $Q$ -- distribution of posteriors.
+	\begin{itemize}
+		\item Every experiment induces some decision rule. Need to understand which decision rules can be implemented using some experiment.
+	\end{itemize}
+	\item Remark: we are no longer constrained to public experiments, now assume that messages are \structure{private}.
 \end{itemize}
 \lyxframeend
+
+
+\lyxframe{Obedience}
+\begin{definition}
+	Decision rule $\sigma$ satisfies \alert{obedience} if for all $i$ and $a_i,a'_i \in A_i$:
+	\begin{align*}
+		\sum_{a_{-i},\omega} v_i ((a_i,a_{-i}), \omega) \sigma ((a_i,a_{-i}) | \omega) \phi(\omega) \geq
+		\\
+		\geq \sum_{a_{-i},\omega} v_i ((a'_i,a_{-i}), \omega) \sigma ((a_i,a_{-i}) | \omega) \phi(\omega) 
+	\end{align*} 
+\end{definition}
+\begin{itemize}
+	\item In words, when $i$ receives a recommendation to play $a_i$, following it must be better than playing any other $a'_i$.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Optimal experiment}
+\begin{theorem}[Bergemann \& Morris]
+	A decision rule $\sigma$ can be induced by an experiment if and only if $\sigma$ satisfies obedience.
+\end{theorem}
+\begin{itemize}
+	\item The designer's problem then is choosing an obedient $\sigma$ that maximizes
+	\begin{align*}
+		\pi^* (\sigma) \equiv  \sum_{a,\omega} \pi(a,\omega) \sigma (a | \omega) \phi(\omega)
+	\end{align*}
+	\item This is a linear programming problem (both objective and obedience constraints are linear in $\sigma$), so trivial to solve in general.
+	\begin{itemize}
+		\item At least when $\Omega$ and $A$ are finite sets.
+	\end{itemize}
+	\item Linear programming is easy, unlike concavification, so can extend this approach easily:
+	\begin{itemize}
+		\item already allowed us to look at private messages and not only public;
+		\item can allow for players' private information (IC constraints also linear);
+	\end{itemize}
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Back to example}
+\begin{itemize}
+	\item In the example, the designer's problem is:
+	\begin{align*}
+		\max_{\sigma} & \left\{ \phi_0 \sigma(G|G) + (1-\phi_0) \sigma(G|B) \right\}
+		\\
+		\text{s.t. } & \phi_0 \sigma(G|G) \geq (1-\phi_0) \sigma(G|B)
+		\\
+		&	(1-\phi_0) \sigma(B|B) \geq \phi_0 \sigma(B|G)
+		\\
+		&	\sigma(G|G) + \sigma(B|G) = 1
+		\\
+		&	\sigma(G|B) + \sigma(B|B) = 1
+	\end{align*}
+	(the latter two are, as usual, feasibility constraints on $\sigma$)
+	
+	\item Solution: $\sigma(G|G) = 1$, $\sigma(B|B) = \frac{1-2\phi_0}{1-\phi_0}$. Again, same as we had.
+\end{itemize}
+\lyxframeend
+
+
+\lyxframe{Conclusions}
+\begin{itemize}
+	\item We have seen two approaches to mechanism design (equivalent when both are applicable).
+	\item Insight from example: 
+	\begin{itemize}
+		\item make player take undesirable action only if completely confident it is the right one;
+		\item make player barely indifferent when taking the desirable action.
+	\end{itemize}
+	\item What we have not seen:
+	\begin{itemize}
+		\item With many players, sometimes optimal to correlate messages positively (i.e. public experiments optimal), sometimes negatively -- depends on the game.
+		\item Dynamic problems are also interesting (how to optimally reveal over time the information that arrives dynamically).
+	\end{itemize}
+	\item Hot field but it is not that easy to find a real-life setting to which it could apply, because of \alert{commitment}.
+\end{itemize}
+\lyxframeend
+
+
 
 
 
