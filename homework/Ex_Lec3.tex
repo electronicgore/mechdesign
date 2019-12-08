@@ -100,7 +100,7 @@
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
 
 
 
@@ -118,7 +118,7 @@
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
-\setlength{\parskip}{0 pt}
+\setlength{\parskip}{5 pt}
 
 
 
@@ -140,12 +140,23 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\solutionsfalse
-%\solutionstrue
+%\solutionsfalse
+\solutionstrue
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
+	
+	
+\ifsolutions
+	\begin{center}
+		
+		{\Huge Problem Set for Lecture 3
+			(with Solutions)}
+	\end{center}
+	
+	\emph{The solutions below brought to you by Philip Christiansen and Emil Chrisander. Where necessary, I also present older solutions available to me (instead of or in addition to those by Philip and Emil). Notes in cursive added by Egor.}
+\fi
 	
 These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
 
@@ -168,8 +179,27 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	Figure out whether gVCG is DSIC or not.
 	
 	\ifsolutions
-	\section*{Solution}
+	\section*{Solution (Philip)}
 	
+	Let notation be as in \textit{Efficient Mechanism Design} by Krishna \& Morgan (2000). Suppose the social choice function is ex post efficient, i.e. $\kappa^*\left(t\right)$ satisfies
+	\begin{align*}
+	\sum_{i=1}^I t_i\left(\kappa^*\left(t\right)\right)\geqslant\sum_{i=1}^I t_i\left(\kappa\left(t\right)\right)\quad\forall \kappa\in K
+	\end{align*}
+	Suppose truth is not a dominant strategy for some player $i$. This implies there exists some report, $s_i$, such that\footnote{the form of the ex post expected payoff is given in \textit{Efficient Mechanism Design} by Krishna \& Morgan (2000) on the middle of page 10}
+	\begin{align*}
+	\text{SW}\left(s_i,t_{-i}\right)-\text{SW}\left(s_i,t_{-i}\right)+\text{IR}_i\left(s_i\right)&\geqslant \text{SW}\left(t\right)-\text{SW}\left(s_i,t_{i-i}\right)+\text{IR}_i\left(s_i\right)\Longleftrightarrow\\
+	\text{SW}\left(s_i,t_{-i}\right)&\geqslant\text{SW}\left(t\right)
+	\end{align*}
+	which is a contradiction in that the social choice function is ex post efficient.
+	
+	
+	\section*{Solution (Emil)}
+	
+	According to page 10 in Krishna, Vijay, and Motty Perry: \textit{”Efficient Mechanism Design.” (2000)}: "It is routine to verify that truth-telling is a weakly dominant strategy in the generalized VCG mechanism and thus it is also incentive compatible."
+	
+	\noindent I will not present the formal proof as one may simply check this out in their paper. However, I will present the intuition of the proof. Recall, that the VCG transfer is exactly the externality that player \textit{i} exerts on other agents from reporting $\theta_i$ rather than a default of 0. That is, player \textit{i} receives the difference in social welfare from reporting $\theta_i$ rather than a default of 0. Intuitively, it therefore makes good sense that it VCG is in fact DSIC, since player \textit{i} can not choose a strategy that gives a larger pay off than the difference in social welfare (unless the player is a dictator and takes all social welfare, while forcing all other players to stay in the mechanism). Since the default option of 0 is of no special importance for the DSIC to hold, the gVCG is also DSIC.
+	
+	\noindent One may also speculate whether gVCG can be BB and DSIC, now that it has such generous transfers. The short answer is NO. According to Krishna et al (2000): "We know from the work of Green and Laffont (1977) that no dominant strategy mechanism can always balance the budget." 
 	\fi
 \end{ex}
 
@@ -181,8 +211,61 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	Prove the Myerson-Satterthwaite theorem by verifying that generalized VCG mechanism is not budget balanced in the bilateral trade setting.
 	
 	\ifsolutions
-	\section*{Solution}
+	\section*{Solution (merged)}
 	
+	This proof follows the approach outlined on page 16 and 17 in Krishna, Vijay, and Motty Perry: \textit{”Efficient Mechanism Design.” (2000)}. Our setting in the bilateral trade includes two players: the seller (in possession of a single indivisible item) and the buyer. The seller's valuation for the item is given by his private type $\theta_S \in \Theta_S$, and the buyer's valuation is given by his private type $\theta_B \in \Theta_B$. The outside options are given by $\bar{U}_S({\theta}_S)={\theta}_S$ and $\bar{U}_B({\theta}_B)=0$ respectively. The utilities of the two players are Euclidean and are given by:
+	\begin{align*}
+	u_S &= v(k,\theta_S)-t_S(\theta)=\theta_S (1-k)-t_S(\theta)
+	\\
+	u_B &= v(k,\theta_B)-t_B(\theta)=\theta_B k-t_B(\theta)
+	\end{align*}
+	where $k(\theta) \in [0,1]$ is the probability of trade given type profile $\theta$. It is straight-forward to see that the efficient allocation, $k^*$, is given by:
+	\begin{align*}
+	k^*= \begin{cases}
+	1 & \text{ if } \theta_S \leq \theta_B \\ 
+	0 & \text{ if } \theta_S > \theta_B
+	\end{cases}
+	\end{align*}
+	Our next step is to construct the gVCG transfers that implement the efficient allocation. They are given by:
+	\begin{align*}
+	t_S^{gVCG} = v_B(k^*(\Bar{\theta}_S,\theta_B),\theta_B) + v_S(k^*(\Bar{\theta}_S,\theta_B),\Bar{\theta}_S) - \\
+	-v_B(k^*(\theta_S,\theta_B),\theta_B) - \Bar{U}_S(\Bar{\theta}_S)
+	\\
+	t_B^{gVCG} = v_S(k^*(\Bar{\theta}_B,\theta_S),\theta_S) + v_B(k^*(\Bar{\theta}_B,\theta_S),\Bar{\theta}_B) - \\
+	-v_S(k^*(\theta_B,\theta_S),\theta_S) - \Bar{U}_B(\Bar{\theta}_B)
+	\end{align*}
+	Noticing that the first two terms reduce to $v_b(k^*(\theta))+v_s(k^*(\theta)) = \max \{\theta_b,\theta_s\}$ and plugging in the efficient allocation $k^*$ and the outside options $\bar{U}$, we get
+	\begin{align*}
+	t_S^{gVCG} &= \max\{\bar{\theta}_S,\theta_B\} - \theta_B k^*(\theta_S,\theta_B) - \bar{\theta}_S
+	\\
+	t_B^{gVCG} &= \max\{\bar{\theta}_B,\theta_S\} - \theta_S \left(1 - k^*(\theta_S,\theta_B)\right) - \bar{\theta}_B
+	\end{align*}
+	
+	The least charitable types $\bar{\theta}_i$ of each player are defined as (their derivation for this problem is omitted in Krishna \& Perry):
+	\begin{align*}
+	\bar{\theta}_i &\in \arg \min_{\theta_i \in \Theta_i} \left\{ \mathbb{E}_{\theta_{-i}} \left[ v_B (k^*(\theta_i,\theta_{-i}),\theta_j) + v_S (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right] \right\}
+	\\
+	\Rightarrow \bar{\theta}_B &\in \arg \min_{\theta_B \in [0,1]} \left\{ \mathbb{E}_{\theta_S} \left[ \max\{\theta_B,\theta_S\} \right] \right\} 
+	= \arg \min_{\theta_B \in [0,1]} \left\{ \theta_B^2 + (1-\theta_B) \frac{\theta_B+1}{2} \right\}	
+	\\
+	&= \arg \min_{\theta_B \in [0,1]} \left\{\frac{1}{2}(1+\theta_B^2) \right\} = \{ 0 \};
+	\\
+	\bar{\theta}_S &\in \arg \min_{\theta_S \in [0,1]} \left\{ \mathbb{E}_{\theta_B} \left[ \max\{\theta_B,\theta_S\} - \theta_S \right] \right\} = \arg \min_{\theta_S \in [0,1]} \left\{ \frac{1}{2} + \frac{\theta_S^2}{2} - \theta_S \right\} = \{1\}
+	\end{align*}
+	so in the end we have $\bar{\theta}_B = 0$, $\bar{\theta}_S = 1$. Plugging these into the respective expressions for transfers, we get the following (because $\max\{\bar{\theta}_S,\theta_B\} = \max\{1,\theta_B\} = 1$, and $\max\{\bar{\theta}_B,\theta_S\} = \max\{0,\theta_S\} = \theta_S$):
+	\begin{align*}
+	t_S^{gVCG} &= - \theta_B k^*(\theta_S,\theta_B)
+	\\
+	t_B^{gVCG} &= \theta_S k^*(\theta_S,\theta_B)
+	\end{align*}
+	Recall that BB (budget balance) is defined as $t_S+t_B\geq0$. The sum of gVCG transfers is:
+	\begin{align*}
+	t_S+t_B= \begin{cases}
+	\theta_S - \theta_B <0 &  \theta_S \leq \theta_B \\ 
+	0 & \theta_S > \theta_B
+	\end{cases}
+	\end{align*}
+	Hence, we have now shown that the gVCG mechanism is not budget balanced (ex ante or ex post). However, it is the mechanism that yields the highest expected revenue $\mathbb{E}_\theta \left(t_S(\theta) + t_B(\theta)\right)$ among all mechanisms that are efficient, BIC, and interim IR. Therefore, there does not exist a mechanism for the bilateral trade problem which is efficient, BIC, interim IR, and ex ante BB.
 	\fi
 \end{ex}
 
@@ -197,9 +280,127 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		\item Describe the AGV mechanism that implements the efficient $k^*$ in this setting. Is it IR?
 		\item Describe the gVCG mechanism (including the least charitable type) that implements the efficient $k^*$ in this setting. Is it BB?
 	\end{enumerate}
+
 	\ifsolutions
-	\section*{Solution}
+	\section*{Solution (Philip)}
+	\subsection*{4.1}
+	Denote the set of alternatives as $K=\lbrace 1,2\rbrace$ where $k=1$ means that player 1 gets item, and $k=2$ means that player 2 gets the item. \emph{The efficient allocation is $k=1$ if $\theta_1 > \theta_2$ and $k=2$ if $\theta_1 < \theta_2$; with ties broken arbitrarily.}
+	\subsection*{4.2}
+	\emph{Note: the notation used here comes from KM and differs from what we use: here $t$ and $s$ are types, and $\mu$ denotes transfers.}
 	
+	From Page 13 in \textit{Efficient Mechanism Design} by Krishna \& Morgan (2000), we see that
+	\begin{align*}
+	\mu_1\left(t\right)&=\mathbb{E}_{s_1}\left[s_1\left(\kappa^*\left(t_2,s_1\right)\right)\right]-\mathbb{E}_{s_2}\left[s_2\left(\kappa^*\left(t_1,s_2\right)\right)\right]\\
+	\mu_2\left(t\right)&=\mathbb{E}_{s_2}\left[s_2\left(\kappa^*\left(t_1,s_2\right)\right)\right]-\mathbb{E}_{s_1}\left[s_1\left(\kappa^*\left(t_2,s_1\right)\right)\right]
+	\end{align*}
+	The question is now whether it is IR for, say, player $i$ to participate in the mechanism.
+	\begin{align*}
+	\mathcal{U}_1\left(\kappa^*,\mu,t_1\right)&=\mathbb{E}_{t_2}\left[t_1\left(\kappa^*\left(s_1,t_2\right)\right)-\mu_1\left(s_1,t_2\right)\right]\\
+	&=\mathbb{E}_{t_2}\left[t_1\left(\kappa^*\left(s_1,t_2\right)\right)-\mathbb{E}_{s_1}\left[s_1\left(\kappa^*\left(t_2,s_1\right)\right)\right]+\mathbb{E}_{s_2}\left[s_2\left(\kappa^*\left(t_1,s_2\right)\right)\right]\right]\
+	\end{align*}
+	When player 2 is reporting truthfully, then player 1's expected utility of reporting $s_1$ is equal to
+	\begin{align*}
+	\mathcal{U}_1\left(\kappa^*,\mu,t\right)&=\mathbb{E}_{t_2}\left[t_1\left(\kappa^*\left(s_1,t_2\right)\right)+t_2\left(\kappa^*\left(s_1,t_2\right)\right)\right]-\mathbb{E}_{t_2}\left[\mathbb{E}_{s_1}\left[s_1\left(\kappa^*\left(t_2,s_1\right)\right)\right]\right]\\
+	&=\mathbb{E}_{t_2}\left[t_1\left(\kappa^*\left(s_1,t_2\right)\right)+t_2\left(\kappa^*\left(s_1,t_2\right)\right)-s_1\left(\kappa^*\left(t_2,s_1\right)\right)\right]
+	\end{align*}
+	Since the designer knows not the valuations of the participants, a mechanism that implements the efficient $\kappa^*$ must induce the players to report truthfully. Suppose both players report their true types. From the above equation it follows that for each player, it is IR to report their true type.\\
+	If player 1 looses, he has no incentive to deviate from his report because a deviation to a higher report will give him an expected payoff which is weakly less than 0. What if player 1 wins? Then player 1 would have liked to have reported $t_2+\varepsilon$ for some small $\varepsilon>0$. Therefore, reporting truthfully is not a dominant strategy which is in line with Krishna \& Morgan (2000) that you cannot have budget balance in a DSIC equilibrium. Therefore, player 1 will bid below his true valuation in equilibrium. Since IR is satisfied when player 1 reports truthfully and because player 1's reporting strategy in equilibrium gives him a higher expected payoff than reporting truthfully, this equilibrium strategy must be IR as well.
+	\subsection*{4.3.}
+	From Theorem 1 in \textbf{Efficient Mechanism Design} by Krishna \& Morgan (2000), we know that the gVCG mechanism will be efficient, IC and IR. We note that $\forall i\in\lbrace 1,2\rbrace:\Theta_i=\left[0,1\right]\Longrightarrow \Theta_1\cap\Theta_2\neq\emptyset$, so by Proposition 3.12 in B{\"o}rgers, the gVCG mechanism will not be budget balanced.
+	
+	\emph{Note: this is incorrect. Myerson-Satterthwaite Theorem (3.12 in B\"orgers) only applies to the setting with one buyer and one seller with unknown valuation. In this problem we have two buyers, while seller is not a player in the mechanism (think that the designer is the seller), which is a different setting. See Emil's solution below for a derivation of gVCG and discussion of whether it is BB.}
+	
+	
+	\section*{Solution (Emil)}
+	
+	\emph{Note: this solution looks at VCG instead of AGV mechanism.}
+	
+	The efficient allocation must be to let the player with the highest valuation of the good receive the good, since this maximizes the social welfare. Thus, formally the efficient allocation is:
+	\begin{align*}
+	k^*= \begin{cases}
+	[1,0] & \theta_1 > \theta_2 \\ 
+	[\frac{1}{2},\frac{1}{2}] & \theta_1 = \theta_2 \\
+	[0,1] & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	
+	\noindent Recall that the transfer in VCG (with Clark term) is given as\footnote{This is the definition from the textbook MWG Mas-Colell, Andreu, Michael Dennis Whinston, and Jerry R. Green.  Microeconomic theory.  New York:  Oxford university press, 1995. that lets transfers enter the utility function positively (i.e. $u=\theta k + t$)}:
+	\begin{align*}
+	t_i^{VCG}(\theta_i) = \sum_{j\neq i}v_j(k^*(\theta),\theta_j) - \sum_{j\neq i}v_j(k^*_{-i}(\theta_{-i}),\theta_j)
+	\end{align*}
+	
+	\noindent The first term is the sum of utility of the other players in the efficient allocation when player i \textit{does} participates in the mechanism. The latter term is the sum of utility of the other players in the efficient allocation when player i \textit{does not} participates in the mechanism. The VCG transfers are straight forward to derive in this two player auction setting:
+	\begin{align*}
+	t_1^{VCG} & ({\theta})= \begin{cases} 
+	0-\theta_2=-\theta_2 & \theta_1 > \theta_2 \\ 
+	\frac{1}{2}\theta_2-\theta_2=-\frac{1}{2}\theta_2 & \theta_1 = \theta_2 \\
+	\theta_2-\theta_2=0 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	\begin{align*}
+	t_2^{VCG} & ({\theta})= \begin{cases} 
+	\theta_1-\theta_1=0 & \theta_1 > \theta_2 \\ 
+	\frac{1}{2}\theta_1-\theta_1=-\frac{1}{2}\theta_1 & \theta_1 = \theta_2 \\
+	0-\theta_1=-\theta_1 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	
+	\noindent The observant reader may notice that the VCG transfers equal to a second-price auction. For the IR to be fulfilled, the players have to receive a utility which is weakly positive. If we assume quasi-linear utility, the utility in the VCG mechanism is given by:
+	\begin{align*}
+	u_1 & ({\theta})= \begin{cases} 
+	\theta_1-\theta_2>0 & \theta_1 > \theta_2 \\ 
+	\frac{1}{2}\theta_1-\frac{1}{2}\theta_2=0 & \theta_1 = \theta_2 \\
+	0-0=0 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	\begin{align*}
+	u_2 & ({\theta})= \begin{cases} 
+	0-0=0 & \theta_1 > \theta_2 \\ 
+	\frac{1}{2}\theta_2-\frac{1}{2}\theta_1=0 & \theta_1 = \theta_2 \\
+	\theta_2-\theta_1>0 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	\noindent Since $u_1$ and $u_2$ are weakly positive for every $\theta  \in \Theta$ we can conclude that the VCG mechanism is IR in this two player auction setting (with quasi-linear utility). We now proceed to examine the gVCG mechanism. \\
+	
+	\noindent Recall, that for the gVCG we need to define $\Bar{\theta}$, the least charitable type for both players. It is straight-forward to see that these have to be type 0 for both players, since they receive the lowest valuation from participating in the mechanism. \emph{Note: this is NOT an accurate description of least charitable types. It is true, however, that $\theta_i=0$ will be the LCT in this problem.} Hence, $\Bar{\theta}=(0,0)$. The gVCG transfers are given by\footnote{This is the definition from the lecture notes which let transfers enter negatively in utility (i.e. $u=\theta k - t$).}:
+	
+	\begin{align*}
+	t_1^{gVCG} = v_2(k^*(\Bar{\theta}_1,\theta_2),\theta_2) + v_1(k^*(\Bar{\theta}_1,\theta_2),\Bar{\theta}_1) \\
+	-v_2(k^*(\theta_1,\theta_2),\theta_2) - \Bar{U}_1(\Bar{\theta}_1)
+	\end{align*}
+	\begin{align*}
+	t_2^{gVCG} = v_1(k^*(\Bar{\theta}_2,\theta_1),\theta_1) + v_2(k^*(\Bar{\theta}_2,\theta_1),\Bar{\theta}_2) \\
+	-v_1(k^*(\theta_2,\theta_1),\theta_1) - \Bar{U}_2(\Bar{\theta}_2)
+	\end{align*}
+	\noindent By inserting the efficient allocation rule $k^*$ we obtain the following gVCG transfers: 
+	\begin{align*}
+	t_1^{gVCG} & ({\theta})= \begin{cases} 
+	\theta_2 + 0 - 0 - 0 = \theta_2 & \theta_1 > \theta_2 \\ 
+	\theta_2 + 0 - \frac{1}{2}\theta_1 - 0 = \frac{1}{2}\theta_2 & \theta_1 = \theta_2 \\
+	\theta_2 + 0 - \theta_2 - 0 = 0 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	\begin{align*}
+	t_2^{gVCG} & ({\theta})= \begin{cases} 
+	\theta_1 + 0 - \theta_1 - 0 = 0 & \theta_1 > \theta_2 \\ 
+	\theta_1 + 0 - \frac{1}{2}\theta_2 - 0 = \frac{1}{2}\theta_1 & \theta_1 = \theta_2 \\
+	\theta_1 + 0 - 0 - 0 = \theta_1 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	
+	\noindent Thus, we obtain the same transfers under VCG and gVCG\footnote{notice that they have different sign. This is a direct consequence of different definition of how transfers enter the utility function in the text book and lecture notes.}. This is unsurprising since our default outside type is 0 in this case. Hence, the gVCG is in fact exact same mechanism as VCG according to the definition of gVCG by Krishna et al (2000). To examine whether the gVCG mechanism is BB we calculate the sum of the transfers:
+	
+	\begin{align*}
+	BB=t_1^{gVCG} + t_2^{gVCG} = \begin{cases} 
+	\theta_2 + 0  = \theta_2 & \theta_1 > \theta_2 \\ 
+	\frac{1}{2}\theta_1 + \frac{1}{2}\theta_2  = \theta_2 & \theta_1 = \theta_2 \\
+	0 + \theta_1 - 0 = \theta_1 & \theta_1 < \theta_2
+	\end{cases}
+	\end{align*}
+	
+	\noindent Since the sum of transfers are weakly greater than 0 for every $\theta \in \Theta$ we conclude that the gVCG (and VCG) mechanism is not BB in the two player auction setting. It is noteworthy to mention that the mechanism would become BB if we added a seller to the auction, who would receive the sum of the transfers from the two buyers.
+	
+	\emph{Note: gVCG \textbf{is} BB (it generates surplus), but not ``exactly BB''. Further, note that introducing the seller to the mechanism is not meant in the same way as the bilateral trade model seller, since in this problem seller is known to have no value for the item.}
 	\fi
 \end{ex}
 
@@ -208,78 +409,103 @@ These exercises are for your own practice and are not to be handed in. Some exer
 %%------------------------------------------------------------------------------------------------
 
 \begin{ex}
-	A seller possesses a single indivisible object for which there are two potential buyers.    Each buyer $i \in \{1,2\}$ has value$v_i$ for the good and the seller has an opportunity cost $c$ from selling the good.  Utility is quasi-linear in money  so if buyer $i$ purchases the good at price $p$ his final utility is$v_i-p$, and the seller's utility is $p-c$.
-	Each agent has zero utility if he does not trade and zero is therefore also the reservation utility of each agent.
-	Each $v_i$ is drawn independently from the same distribution $F$ which has support $[0,\bar v]$, and $c$ is drawn independently from a distribution $G$ which has support $[0,\bar c]$.  Assume that $F$ and $G$ satisfy all of the conditions necessary for the revenueequivalence theorem and our characterization results in class.
+	A seller possesses a single indivisible object for which there are two potential buyers.    Each buyer $i \in \{1,2\}$ has value
+$v_i$ for the good and the seller has an opportunity cost $c$ from selling the good.  Utility is quasi-linear in money  so if buyer $i$ purchases the good at price $p$ his final utility is
+$v_i-p$, and the seller's utility is $p-c$.
+	Each agent has zero utility if he does not trade and zero is therefore also the reservation utility of each agent.
+
+	Each $v_i$ is drawn independently from the same distribution $F$ which has full support on $[0,\bar v]$, and $c$ is drawn independently from a distribution $G$ which has support $[0,\bar c]$.  Assume that $F$ and $G$ satisfy all of the conditions necessary for the revenue
+equivalence theorem and our characterization results in class.
+
 	
 	\medskip
-	A mechanism consists of two functions $q(c, v_1, v_2)$ and $t(c, v_1, v_2)$ where, as a function of the agents' types, $q(c, v_1, v_2)$ is the allocation rule that gives the probabilities that the good will be allocated to each of the three agents and $t(c, v_1, v_2)$ gives the list of transfers paid to each of the three agents.Say that a mechanism \emph{feasible} if it is Bayesian incentive compatible, interim individually rational, and ex-post exactly budget-balanced.
+	A mechanism consists of two functions $q(c, v_1, v_2)$ and $t(c, v_1, v_2)$ where, as a function of the agents' types, 
+$q(c, v_1, v_2)$ is the allocation rule that gives the probabilities that the good will be allocated to each of the three agents and $t(c, v_1, v_2)$ gives the list of transfers paid to each of the three agents.
+Say that a mechanism is \emph{feasible} if it is Bayesian incentive compatible, interim individually rational, and ex-post exactly budget-balanced.
+
 	
-	\begin{enumerate}
-		\item What is the efficient allocation rule?
-		\item Assume $\bar c = \bar v$.  Show that there does not exist a feasible mechanism that implements the efficient allocation rule.
-		\item Now assume $\bar v > \bar c$.  Show that the following is a sufficient condition for the existence of a fesible mechanism thatimplements the efficient allocation rule.
+	\begin{enumerate}
+
+		\item What is the efficient allocation rule?
+
+		\item Assume $\bar c = \bar v$.  Show that there does not exist a feasible mechanism that implements the efficient allocation rule.
+
+		\item Now assume $\bar v > \bar c$.  Show that the following is a sufficient condition for the existence of a fesible mechanism that
+implements the efficient allocation rule.
 		$$ \mathbb{E}(\min\{v_1, v_2\}) \geq \bar c. $$
-		\item Again assume $\bar{v} > \bar{c}$, but now suppose that there are $N$ potential buyers with values drawn independently from $F$.  Prove that for any $F$ and $G$ there is a $\bar N$ such that whenever $N > \bar{N}$  there exists a feasible mechanism thatimplements the efficient allocation rule.
+		\item Again assume $\bar{v} > \bar{c}$, but now suppose that there are $N$ potential buyers with values drawn independently from $F$.  Prove that for any $F$ and $G$ there is a $\bar N$ such that whenever $N > \bar{N}$  there exists a feasible mechanism that
+implements the efficient allocation rule.
+
 	\end{enumerate}
 	
 	
 	\ifsolutions
 	\section*{Solution}
-%	\begin{enumerate}[leftmargin=*,label=(\alph*)]
-%		\item The efficient allocations must satisfy
-%		\begin{align*}
-%			q(c,v_1,v_2) = 
-%			\begin{cases}
-%				(1,0,0) &\text{ if } c > v_1,v_2 \\
-%				(0,1,0) &\text{ if } v_1 > c,v_2 \\
-%				(0,0,1) &\text{ if } v_2 > c,v_1.
-%			\end{cases}
-%		\end{align*}
-%		Ties can be broken arbitrarily.
-%		
-%		\item Let's use the Krishna--Perry theorem. The least charitable types are $0$ for the buyers and $\bar{c}$ for the seller. The VCG mechanism with least charitable default types has the following transfers:
-%		%
-%		\begin{itemize}
-%			
-%			\item when no trade occurs, there are no transfers
-%			
-%			\item when trade occurs between the seller and buyer $i$, $i$ pays $v_{-i} \join c$, the seller receives $v_i \meet \bar{c}$, and $-i$ has transfer zero.
-%			
-%		\end{itemize}
-%		
-%		When $c=0$ and $v_i > v_{-i}$, trade occurs, with the buyer paying $v_{-i} < \bar{v} =\bar{c}$ and the seller receiving $\bar{c}$. So there is a budget deficit.
-%		
-%		Since the Krishna--Perry mechanism has maximal revenue among efficient, BIC and IIR mechanisms, this shows that no efficient mechanism is feasible.
-%		
-%		
-%		\item Let's use the same mechanism. The budget surplus is zero conditional on no trade, and
-%		%
-%		\begin{equation*}
-%		[ v_1 \meet v_2 ] \join c - [ v_1 \join v_2 ] \meet \bar{c}
-%		\geq [ v_1 \meet v_2 ] - \bar{c} 
-%		\end{equation*}
-%		%
-%		conditional on trade. So the expected budget surplus is bounded below by
-%		%
-%		\begin{equation*}
-%		\E( [ v_1 \meet v_2 ] - \bar{c} | v_1 \join v_2 \geq c )
-%		\geq \E( [ v_1 \meet v_2 ] - \bar{c} )
-%		\geq 0 .
-%		\end{equation*}
-%		
-%		So the Krishna--Perry mechanism runs an expected budget surplus. By a theorem from class, it follows that there is a feasible efficient mechanism.
-%		
-%		
-%		\item By analogous reasoning, the expected budget surplus is bounded below by
-%		%
-%		\begin{equation*}
-%		\E\left( v^{(2)} - \bar{c} \right) ,
-%		\end{equation*}
-%		%
-%		where $v^{(2)}$ is the second order statistic (the second-highest value). Since $(\bar{c},\bar{v})$ has positive probability under $F$ ($F$ being absolutely continuous), this bound can be made arbitrarily close to $\bar{v} - \bar{c}$ by taking $N$ large enough; in particular, $N$ can be chosen large enough to make it non-negative.
-%		
-%	\end{enumerate}
+	
+	\begin{enumerate}[\label=(\alph{enumi})]
+		\item The efficient allocations must satisfy
+		\begin{align*}
+			q(c,v_1,v_2) = 
+			\begin{cases}
+				(1,0,0) &\text{ if } c > v_1,v_2 \\
+				(0,1,0) &\text{ if } v_1 > c,v_2 \\
+				(0,0,1) &\text{ if } v_2 > c,v_1.
+			\end{cases}
+		\end{align*}
+		Ties can be broken arbitrarily.
+		
+		\item Let's use the Krishna--Perry theorem. The least charitable types are $0$ for the buyers and $\bar{c}$ for the seller (the derivation is the same as in P3). The gVCG mechanism has the following transfers:
+		%
+		\begin{itemize}
+			
+			\item when no trade occurs, there are no transfers
+			
+			\item when trade occurs between the seller and buyer $i$, $i$ pays $v_{-i} \join c$, the seller receives $v_i \meet \bar{c}$, and $-i$ has transfer zero.\footnote{This solution uses the following notation: $a \join b \equiv \max \{a,b\}$ and $a \meet b \equiv \min \{a,b\}$.}
+			
+		\end{itemize}
+		
+		%When $c=0$ and $v_i > v_{-i}$, trade occurs, with the buyer paying $v_{-i} < \bar{v} =\bar{c}$ and the seller receiving $\bar{c}$. So there is a budget deficit.
+		If $\bar{v}=\bar{c}$ then $v_i \meet \bar{c} = v_i$, so this mechanism yields weakly negative revenue: %assuming wlog that $v_i > v_{-i}$, we get
+		\begin{align*}
+			\sum_i t_i (\theta) = \begin{cases}
+				0 &\text{ if } c > v_1,v_2 \\
+				v_2 \join c - v_1 < 0 &\text{ if } v_1 > c,v_2 \\
+				v_1 \join c - v_2 < 0 &\text{ if } v_2 > c,v_1.
+			\end{cases}
+		\end{align*}
+		
+		Since gVCG mechanism has maximal revenue among efficient, BIC and IIR mechanisms, this implies that any other mechanism that is efficient, BIC, and interim IR will run an expected deficit. If there is no ex ante BB mechanism then there is no ex post BB mechanism either (deficit in expectation means that there must be deficit for at least some type realizations). Therefore, no feasible mechanism exists in this case.
+		
+		
+		\item Let's use the same mechanism. The budget surplus is zero conditional on no trade, and
+		%
+		\begin{equation*}
+		[ v_1 \meet v_2 ] \join c - [ v_1 \join v_2 ] \meet \bar{c}
+		\geq [ v_1 \meet v_2 ] - \bar{c} 
+		\end{equation*}
+		%
+		conditional on trade. So the expected budget surplus is bounded below by
+		%
+		\begin{equation*}
+		\mathbb{E}( [ v_1 \meet v_2 ] - \bar{c} | v_1 \join v_2 \geq c )
+		\geq \mathbb{E}( [ v_1 \meet v_2 ] - \bar{c} )
+		\geq 0 .
+		\end{equation*}
+		
+		So the gVCG mechanism runs an expected budget surplus, and we can make the mechanism exactly ex ante budget balanced by distributing the expected revenue among players. %By a theorem from class, it follows that there is a feasible efficient mechanism.
+		
+		\emph{Note: this is actually not a complete solution, since gVCG is only ex ante budget balanced, but not ex post budget balanced (as required by ``feasibility''). However, I suspect that the problem meant to require ex ante budget balance.}
+		
+		
+		\item By analogous reasoning, the expected budget surplus is bounded below by
+		%
+		\begin{equation*}
+		\mathbb{E}\left( v^{(2)} - \bar{c} \right) ,
+		\end{equation*}
+		%
+		where $v^{(2)}$ is the second order statistic (the second-highest value). Since $v \in (\bar{c},\bar{v})$ with positive probability under $F$, the expected value $\mathbb{E} v^{(2)}$ can be made arbitrarily close to $\bar{v}$ by taking $N$ large enough; in particular, $N$ can be chosen large enough to make it higher than $\bar{c}$.
+		
+	\end{enumerate}
 	\fi
 \end{ex}
 

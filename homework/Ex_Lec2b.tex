@@ -25,6 +25,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage[USenglish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{tikz}
 
 
 % Margins
@@ -171,7 +172,7 @@
 (with Solutions)}
 	\end{center}
 
-	\emph{The solutions below brought to you by Hannah Barth and Inga Reymann. Where necessary, I also present older solutions available to me (instead or in addition to those by Hannah and Inga). Notes in cursive added by Egor.}
+	\emph{The solutions below brought to you by Hannah Barth and Inga Reymann. Where necessary, I also present older solutions available to me (instead of or in addition to those by Hannah and Inga). Notes in cursive added by Egor.}
 \fi
 
 	
@@ -306,59 +307,59 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\subsection*{Solution (Ludvig Sinander)}
 	Consider the Euclidean environment (e.g. like the one in ``P5: Implementation in Auctions''), where the utility of type $v_i$ when he announces $v'_i$ and his rival announces $v_{-i}$ is:
 	\begin{align*}
-	U_{i}(v'_i|v_{i})=v_iq_i(v'_i,v_{-i})-t_i(v'_i,v_{-i})\\
+	U_{i}(v'_i|v_{i})=v_i k_i(v'_i,v_{-i})-t_i(v'_i,v_{-i})\\
 	U_i(v_{i})=U_i(v_i|v_i)
 	\end{align*}
-	where $q_i(v'_i,v_{-i})\in[0,1]$ is the probability that $i$ gets the good when the announcements are $(v'_i,v_{-i})$ and $t_i(v'_i,v_{-i})$ are the payments that need to be done by $i$ in that case.
+	where $k_i(v'_i,v_{-i})\in[0,1]$ is the probability that $i$ gets the good when the announcements are $(v'_i,v_{-i})$ and $t_i(v'_i,v_{-i})$ are the payments that need to be done by $i$ in that case.
 	\begin{lemma}
-		A mechanism $(q(\cdot),t(\cdot))$ is DSIC if and only if for all $i$ and $v_{-i}$ the allocation $q_{i}(\cdot,v_{-i})$ is weakly increasing and
+		A mechanism $(k(\cdot),t(\cdot))$ is DSIC if and only if for all $i$ and $v_{-i}$ the allocation $k_{i}(\cdot,v_{-i})$ is weakly increasing and
 		\begin{align}\label{int}
-		U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
+		U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}k_{i}(u,v_{-i})du
 		\end{align}
 	\end{lemma}
 	\begin{proof}
 		\begin{description}
 			\item [($\Rightarrow$)] \emph{Note: we have done this part during lectures, so this part is here just for sake of completeness.}
 			
-			Suppose $(q(\cdot),t(\cdot))$ is DSIC. Then, for all $i,v_i$ it holds that:
+			Suppose $(k(\cdot),t(\cdot))$ is DSIC. Then, for all $i,v_i$ it holds that:
 			\begin{align*}
 			U_i(v_i)\geq U_i(v'_i|v_i)\\
 			U_i(v'_i)\geq U_i(v_i|v'_i)
 			\end{align*}
-			Note that: $U_i(v'_i|v_i)=U_i(v'_i|v'_i)+(v_i-v'_i)q_i(v'_i,v_{-i})$ and $U_i(v_i|v'_i)=U_i(v_{i}|v_{i})+(v'_i-v_i)q_i(v_i,v_{-i})$. Then we may rewrite the above inequalities as:
+			Note that: $U_i(v'_i|v_i)=U_i(v'_i|v'_i)+(v_i-v'_i)k_i(v'_i,v_{-i})$ and $U_i(v_i|v'_i)=U_i(v_{i}|v_{i})+(v'_i-v_i)k_i(v_i,v_{-i})$. Then we may rewrite the above inequalities as:
 			\begin{align*}
-			U_i(v_i)\geq U_i(v'_i|v_i)=U_i(v'_i|v'_i)+(v_i-v'_i)q_i(v'_i,v_{-i})\\
-			U_i(v'_i)\geq U_i(v_i|v'_i)=U_i(v_{i}|v_{i})+(v'_i-v_i)q_i(v_i,v_{-i})
+			U_i(v_i)\geq U_i(v'_i|v_i)=U_i(v'_i|v'_i)+(v_i-v'_i)k_i(v'_i,v_{-i})\\
+			U_i(v'_i)\geq U_i(v_i|v'_i)=U_i(v_{i}|v_{i})+(v'_i-v_i)k_i(v_i,v_{-i})
 			\end{align*}
 			Rearranging, we obtain that:
 			\begin{align*}
-			(v_i-v'_i)q_i(v'_i,v_{-i})\leq U_i(v_i)-U_{i}(v'_i)\leq (v_i-v'_i)q_i(v_i,v_{-i})
+			(v_i-v'_i)k_i(v'_i,v_{-i})\leq U_i(v_i)-U_{i}(v'_i)\leq (v_i-v'_i)k_i(v_i,v_{-i})
 			\end{align*}
-			Assume, wlog, that $v_i>v'_i$. Then, the above inequality implies that $q_i(v_i,v_{-i})\geq q_i(v'_i,v_{-i})$ as desired. Moreover, rearranging the inequality we get that:
+			Assume, wlog, that $v_i>v'_i$. Then, the above inequality implies that $k_i(v_i,v_{-i})\geq k_i(v'_i,v_{-i})$ as desired. Moreover, rearranging the inequality we get that:
 			\begin{align*}
-			q_i(v'_i,v_{-i})\leq \frac{U_i(v_i)-U_{i}(v'_i)}{(v_i-v'_i)}\leq q_i(v_i,v_{-i})
+			k_i(v'_i,v_{-i})\leq \frac{U_i(v_i)-U_{i}(v'_i)}{(v_i-v'_i)}\leq k_i(v_i,v_{-i})
 			\end{align*}
 			and taking limits as $v'_i\rightarrow v_i$ we get that:
 			\begin{align*}
-			U_i^{'}(v_i)= q_i(v_i,v_{-i})
+			U_i^{'}(v_i)= k_i(v_i,v_{-i})
 			\end{align*}
 			And hence, we may write $U_i(v_i)$ as:
 			\begin{align*}
-			U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
+			U_{i}(v_i)=U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}k_{i}(u,v_{-i})du
 			\end{align*}
 			for $\underbar{v}_i<v_i$.
 			
-			\item [($\Leftarrow$)] Assume you have an allocation $q(\cdot)$ that is weakly increasing and satisfies (\ref{int}). Then, construct transfers as:
+			\item [($\Leftarrow$)] Assume you have an allocation $k(\cdot)$ that is weakly increasing and satisfies (\ref{int}). Then, construct transfers as:
 			\begin{align*}
-			t_i(v_i,v_{-i})=v_iq_i(v_i,v_{-i})-U_i(\underbar{v}_{i})-\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
+			t_i(v_i,v_{-i})=v_ik_i(v_i,v_{-i})-U_i(\underbar{v}_{i})-\int_{\underbar{v}_{i}}^{v_i}k_{i}(u,v_{-i})du
 			\end{align*}
-			We will show that $(q,t)$ is DSIC. Fix $v_{-i}$ and let $v_i>v'_i$. Then:
+			We will show that $(k,t)$ is DSIC. Fix $v_{-i}$ and let $v_i>v'_i$. Then:
 			\begin{align*}
-			U_i(v_i)-U_{i}(v'_i)= \int_{v^{'}_{i}}^{v_i}q_{i}(u,v_{-i})du\geq \int_{v^{'}_{i}}^{v_i}q_{i}(v'_i,v_{-i})du=(v_i-v'_i)q_i(v'_i,v_{-i})
+			U_i(v_i)-U_{i}(v'_i)= \int_{v^{'}_{i}}^{v_i}k_{i}(u,v_{-i})du\geq \int_{v^{'}_{i}}^{v_i}k_{i}(v'_i,v_{-i})du=(v_i-v'_i)k_i(v'_i,v_{-i})
 			\end{align*}
-			where we used the monotonicity of $q_i$ to get the inequality. Hence,
+			where we used the monotonicity of $k_i$ to get the inequality. Hence,
 			\begin{align*}
-			U_i(v_i)\geq v_iq_i(v'_i,v_{-i})-(v'_iq_i(v'_i,v_{-i})-U_i(v'_i))=v_iq_i(v'_i,v_{-i})-t_i(v'_i,v_{-i})
+			U_i(v_i)\geq v_ik_i(v'_i,v_{-i})-(v'_ik_i(v'_i,v_{-i})-U_i(v'_i))=v_ik_i(v'_i,v_{-i})-t_i(v'_i,v_{-i})
 			\end{align*}
 			where we used the constructed transfers to get the last equality. Hence, the mechanism is DSIC.
 		\end{description}
@@ -532,16 +533,20 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		\item Is there any DSIC allocation rule that picks alternatives from the set $\{0,1,2\}$ that could not be represented
 		by a drawing that follows the instructions given above?
 	\end{enumerate}
+
+	\emph{Note: I only realized ex post that solving this problem properly requires using the envelope representation that we did not cover until Lecture 4.}
 	
 	
 	\ifsolutions
 	\subsection*{Solution}
 	\begin{figure}
 		\begin{center}
-			\includegraphics[scale=0.4,trim=0 150 0 150, clip]{./Ps2b_pic}
+			\includegraphics[scale=0.5,trim=0 150 0 150, clip]{./Ps2b_pic}
 		\end{center}
 		\caption{Solution by Hannah \& Inga} \label{fig:f1}
 	\end{figure}
+	
+	\emph{Note: this solution is not correct. Read it and see if you can identify the mistake.}
 	
 	This solution uses Figure \ref{fig:f1}.
 	Allocation rule that can be derived from the chart:
@@ -556,7 +561,7 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	
 	For a DSIC mechanism, it has to be true that no one wants to report a false type. Therefore, it must hold that:
 	
-	$u_1(x(v_1,v_2),v_1) \geq\ u_1(x(v_1,v_2))$\\
+	$u_1(x(v_1,v_2),v_1) \geq\ u_1(x(v_1,v_2))$
 	
 	We know that the VCG mechanism is a DSIC mechanism. Therefore, we use a second price auction setup to determine the payment rule here:
 	
@@ -572,41 +577,46 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	v_1 \quad \text{if} \quad v_{2} \geq v_{1} \quad \text{and} \quad v_{1}+v_{2} \geq 1 
 	\end{cases}$$
 	
-	This payment rule induces the players to reveal their true valuations.\\
+	This payment rule induces the players to reveal their true valuations.
 	
+	%Is there any DSIC allocation rule that picks alternatives from the set $\{0,1,2\}$ that could not be represented by a drawing that follows the instructions given above?
 	
-	Is there any DSIC allocation rule that picks alternatives from the set $\{0,1,2\}$ that could not be represented by a drawing that follows the instructions given above?
+	%...
 	
-	...
+	\emph{Note: VCG transfers implement the \textbf{efficient} allocation $k$. The allocation $k$ in Figure \ref{fig:f1} is not efficient, hence VCG transfers do not complement it to a DSIC mechanism. E.g., if $v_2=0$ then player $1$ with true type $v_1 < 1$ does not get the item. But he can profitably misreport his type as $v_1=1$ and receive the item for free.}
 	
 	
 	
 	\subsection*{Solution (Ludvig Sinander)}
+
 	\begin{figure}
 		\begin{center}
-			\includegraphics[scale=0.4]{./ps2}
+			\includegraphics[scale=0.45]{./ps2}
 		\end{center}
 		\caption{Solution by Ludvig} \label{fig:2}
 	\end{figure}
-	We will work with Figure \ref{fig:2}. Of course, there will be some things that are specific to the drawing, but the way we will solve the exercise (mainly, by using the result above) should illustrate the general procedure for different figures. Based on the figure, we construct the following allocation:
-	\[q_1(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if } v_2+a_2v_1\leq b_2\quad \text{ or }\quad v_2\geq b_1+a_1v_1\\
+
+	We will work with Figure \ref{fig:2}. Of course, there will be some things that are specific to the drawing, but the way we will solve the exercise should illustrate the general procedure for different figures. Based on the figure, we construct the following allocation:
+	\[k_1(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if } v_2+a_2v_1\leq b_2\quad \text{ or }\quad v_2\geq b_1+a_1v_1\\
 	1 & \quad\text{otherwise}\quad
 	
 	\end{array}
 	\right.
 	\]
-	\[q_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if } v_2+a_2v_1\leq b_2\quad \text{ or }\quad v_2\leq b_1+a_1v_1\\
+	\[k_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{ if } v_2+a_2v_1\leq b_2\quad \text{ or }\quad v_2\leq b_1+a_1v_1\\
 	1 & \quad\text{otherwise}\quad
 	
 	\end{array}
 	\right.
 	\]
-	\newline\indent From the lemma above we know that we have no hope of implementing the allocation if it is not monotone. However, it is very easy to check (just observe the drawing) that fixing the type of the other player, the probability of getting the good weakly increases with the player's type. Now we have to construct the transfers to implement this in dominant strategies. We will make use once again of the lemma, mainly of the result that:
+	
+	We know that the allocation must be monotone for it to be implementable. However, it is very easy to check (just observe the drawing) that fixing the type of the other player, the probability of getting the good weakly increases with the player's type. Now we have to construct the transfers to implement this in dominant strategies. We will make use of the envelope representation of utility (see, e.g., P2 in this problem set), mainly of the result that:
 	\begin{align} \label{transfer}
-	t_i(v_i,v_{-i})=v_iq_i(v_i,v_{-i})-U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i}q_{i}(u,v_{-i})du
+	t_i(v_i,v_{-i})=v_i k_i(v_i,v_{-i})-U_i(\underbar{v}_{i})+\int_{\underbar{v}_{i}}^{v_i} k_{i}(u,v_{-i})du
 	\end{align}
 	are the transfers that work.
-	\newline\indent Let's start with $t_1(v_1,v_2)$. Note that if $v_2>\tilde{v}_2$, no matter what type player 1 announces $q_1(\cdot,v_2)=0$. Hence, $t_1(v_1,v_2)=0$ for $v_2>\tilde{v}_2$. Consider now $v_2\in[\hat{v}_2,\tilde{v}_2]$. In that case, $q_1(v_1,v_2)=1$ if and only if $v_1\geq\frac{v_2-b_1}{a_1}$. Then,  for $v_2\in[\hat{v}_2,\tilde{v}_2]$:
+	
+	Let's start with $t_1(v_1,v_2)$. Note that if $v_2>\tilde{v}_2$, no matter what type player 1 announces $k_1(\cdot,v_2)=0$. Hence, $t_1(v_1,v_2)=0$ for $v_2>\tilde{v}_2$. Consider now $v_2\in[\hat{v}_2,\tilde{v}_2]$. In that case, $k_1(v_1,v_2)=1$ if and only if $v_1\geq\frac{v_2-b_1}{a_1}$. Then for $v_2\in[\hat{v}_2,\tilde{v}_2]$:
 	
 	\[t_1(v_1,v_2)=\left\{\begin{array}{cc} 0 & \quad\text{ if }\quad  v_1\leq\frac{v_2-b_1}{a_1}\\
 	\frac{v_2-b_1}{a_1} & \quad\text{otherwise}\quad
@@ -618,7 +628,7 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\begin{align*}
 	t_1(v_1,v_2)=v_1-\int_{\frac{v_2-b_1}{a_1}}^{v_1}1 du=\frac{v_2-b_1}{a_1}
 	\end{align*}
-	Finally, consider $v_2\leq\hat{v}_2$. In that case, $q_1(\cdot,v_2)=0$ for $v_1\leq \frac{b_2-v_2}{a_2}=\underbar{v}_1$. Then, in that case:
+	Finally, consider $v_2\leq\hat{v}_2$. In that case, $k_1(\cdot,v_2)=0$ for $v_1\leq \frac{b_2-v_2}{a_2}=\underbar{v}_1$. Then, in that case:
 	
 	\[t_1(v_1,v_2)=\left\{\begin{array}{cc} 0 & \quad\text{ if }\quad  v_1\leq\frac{b_2-v_2}{a_2}\\
 	\frac{b_2-v_2}{a_2} & \quad\text{otherwise}\quad
@@ -626,8 +636,10 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\end{array}
 	\right.
 	\]
-	\newline\indent Notice that, apart from the result of the lemma saying it is the case, it is clear why the mechanism is DSIC: whether the player pays or not depends on his announcement, but not how much he pays. In this much, it is like a SPA.
-	\newline\indent We can calculate the transfers for player 2 in a similar manner. Consider $v_1<\hat{v}_1$. Then, $q_2(v_1,v_2)=0$ if $v_2\leq b_2-a_2 v_1$. Then,
+	
+	Notice that, apart from the result of the lemma saying it is the case, it is clear why the mechanism is DSIC: whether the player pays or not depends on his announcement, but not how much he pays. In this much, it is like a SPA.
+	
+	We can calculate the transfers for player 2 in a similar manner. Consider $v_1<\hat{v}_1$. Then, $k_2(v_1,v_2)=0$ if $v_2\leq b_2-a_2 v_1$. Then,
 	
 	\[t_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \quad\text{ if }\quad  v_2\leq b_2-a_2 v_1\\
 	b_2-a_2 v_1 & \quad\text{otherwise}\quad
@@ -635,13 +647,51 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\end{array}
 	\right.
 	\]
-	On the other hand, if $v_1\geq\hat{v}_1$, we have that $q_2(v_1,v_2)=0$ if $v_2\leq a_1v_1+b_1$. Then:
+	On the other hand, if $v_1\geq\hat{v}_1$, we have that $k_2(v_1,v_2)=0$ if $v_2\leq a_1v_1+b_1$. Then:
 	\[t_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \quad\text{ if }\quad  v_2\leq b_1+a_1 v_1\\
 	b_1+a_1 v_1 & \quad\text{otherwise}\quad
 	
 	\end{array}
 	\right.
 	\]
+	
+	
+	
+	\subsection*{Solution (Egor)}
+	Neither of the solutions above addresses the last part of the question: whether there exists a DSIC allocation rule that cannot be represented by a drawing described in the problem. The answer is yes, one example is as follows.
+	Consider the allocation depicted in Figure \ref{fig:3}, which is given by (the exact numbers do not matter):
+	\begin{align*}
+		k(v_1,v_2) = \begin{cases}
+			1 & \text{ if } v_1 \geq \max\{ 0.7 - v_2, \ 0.2 + v_2 \};
+			\\
+			2 & \text{ if } v_2 \geq \max\{ 0.7 - v_1, \ 0.2 + v_1 \};
+			\\
+			0 & \text{ otherwise.}
+		\end{cases}
+	\end{align*}
+	
+	This allocation is again monotone for each player ($k_i$ weakly increasing in $v_i$ given fixed $v_j$). We can construct the transfers that DSIC-implement it in the same way as we did in the main problem above (using \eqref{transfer}).
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[scale=7.5]
+		\filldraw[yellow, opacity=0.6] (0,0) -| (1,1) -| (0,0);
+		\filldraw[red, opacity=0.6] (0,0.7) -- (0.25,0.45) -- (0.8,1) -| (0,0.7);
+		\filldraw[blue, opacity=0.6] (0.7,0) -- (0.45,0.25) -- (1,0.8) |- (0.7,0);
+		
+		\draw(0.2,0.2) node{$k=0$};
+		\draw(0.2,0.8) node{$k=2$};
+		\draw(0.8,0.2) node{$k=1$};
+		
+		% axes 
+		\draw[->] (0,0) -- (1.1,0) node[below left]{$v_1$};
+		\draw[->] (0,0) -- (0,1.1) node[below left]{$v_2$};
+		
+		% bounding box
+		\draw[dotted] (1,0) |- (0,1);
+		\end{tikzpicture}
+		\caption{nondescript DSIC allocation} \label{fig:3}
+	\end{figure}
 	\fi
 \end{ex}
 
