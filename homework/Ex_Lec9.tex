@@ -1,0 +1,211 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Exercises: Lec 9} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{5 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\solutionsfalse
+%\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	
+These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}[Review Questions]
+	\begin{itemize}
+		\item What are the literal and the metaphorical interpretations of information design?
+		\item What are the two approaches to solving information design problems?
+		\item What is the geometric intuition behind the concave closure representing the maximal payoff of the designer?
+	\end{itemize}
+	
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+\begin{ex}[P2: Information Design]
+	Consider the following information design problem. There are two possible states, $\omega \in \{L,R\}$, the common prior belief that the state is $R$ is $\phi_0 = \mathbb{P}(\omega = R) = 1/2$. There is one player (receiver) and two actions $a \in \{u,d\}$ available to him. The receiver's payoffs as a function of state are given by the function $v(a,\omega)$, which is defined as
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			$v(a,\omega)$ 		& $\omega = L$ 	& $\omega = R$ \\ \hline
+			$a=u$	& $3$ 	& $0$	\\ \hline
+			$a=d$	& $0$ 	& $1$	\\ \hline
+		\end{tabular}
+	\end{center}
+	There is a designer who (before getting to observe $\omega$) designs an experiment that will send a message to the receiver, which may be informative about the true state $\omega$. The designer's payoff coincides with that of the receiver, with one exception: the designer receives a bribe of $4$ if action $a=d$ is chosen in state $\omega=L$. In other words, the designer's payoff function $\pi(a,\omega)$ is given by
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			$\pi(a,\omega)$ 		& $\omega = L$ 	& $\omega = R$ \\ \hline
+			$a=u$	& $3$ 	& $0$	\\ \hline
+			$a=d$	& $4$ 	& $1$	\\ \hline
+		\end{tabular}
+	\end{center}
+	
+	\begin{enumerate}
+		\item Derive the receiver's optimal action rule $\hat{a}(\phi)$, which maximizes his expected payoff, as a function of $\phi$, his posterior belief about the state after observing message $m$ generated by the experiment ($\phi = \mathbb{P} (\omega=R | m)$).
+		\item Derive and plot the designer's payoff function $\Pi(\phi) \equiv \mathbb{E}_{\phi(\omega)} \left[\pi (\hat{a}(\phi), \omega)\right]$ as a function of the receiver's posterior $\phi$.
+		\item Derive and plot (on the same graph) the concave closure $\Pi^* (\phi)$ of the receiver's payoff function $\Pi(\phi)$.
+		\item By looking at the plots of $\Pi(\phi)$ and $\Pi^* (\phi)$ and recalling that $\phi_0 = 1/2$, answer the following: what is the set of posteriors $\{\phi_1, \phi_2, ...\}$ induced by the optimal experiment (the one that maximizes the designer's expected payoff)? What is the designer's payoff from the optimal experiment?
+		\item Use the ``correlated equilibria approach'' to find the optimal experiment. In particular, find a decision rule $\sigma: \{L,R\} \to \varDelta(\{u,d\})$ (so $\sigma(u|\omega)+\sigma(d|\omega)=1$ for any $\omega$) which maximizes the designer's expected payoff as given by
+		\begin{equation*}
+			\pi^* (\sigma) \equiv  \sum_{a,\omega} \pi(a,\omega) \sigma (a | \omega) \phi(\omega)
+		\end{equation*}
+		subject to the obedience constraint: for any $a,a' \in \{u,d\}$,
+		\begin{align*}
+		\sum_{\omega} v (a, \omega) \sigma (a | \omega) \phi(\omega) 
+		\geq \sum_{\omega} v_i (a', \omega) \sigma (a | \omega) \phi(\omega) .
+		\end{align*} 
+	\end{enumerate}
+	
+
+	\ifsolutions
+	\subsection*{Solution}
+	
+	\fi
+\end{ex}
+
+
+
+%%------------------------------------------------------------------------------------------------
+
+
+
+
+\end{document}
