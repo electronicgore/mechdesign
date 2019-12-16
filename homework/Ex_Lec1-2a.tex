@@ -96,7 +96,7 @@
 \renewcommand\headrulewidth{0.4pt} % Size of the header rule
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\setlength\parindent{12pt}
 
 
 
@@ -114,7 +114,7 @@
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
-\setlength{\parskip}{0 pt}
+\setlength{\parskip}{5 pt}
 
 
 
@@ -136,14 +136,25 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\solutionsfalse
-%\solutionstrue
+%\solutionsfalse
+\solutionstrue
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
 	
-These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer.
+	
+	\ifsolutions
+	\begin{center}
+		
+		{\Huge Problem Set for Lectures 1-2(a)
+			(with Solutions)}
+	\end{center}
+	
+	%\emph{The solutions below brought to you by Hannah Barth and Inga Reymann. Where necessary, I also present older solutions available to me (instead of or in addition to those by Hannah and Inga). Notes in cursive added by Egor.}
+	\fi
+	
+These exercises are for your own practice and are not to be handed in. Some exercises are open ended in that they may not have a unique correct answer. If you think there is a typo in the problem, attempt to amend it and proceed as best you can.
 
 %\begin{ex}[Second-price auction]
 %	\emph{(From lecture.)} A second-price auction is described as following. There are $N$ players with private valuations $\theta_i \in \Theta_i \subseteq \mathbb{R}_+$ for some item that is to be allocated. All players simultaneously submit their bids $b_i \in \mathbb{R}_+$ to the auctioneer. Player $i$ with the highest bid gets the item and pays $t_i = \max_{j \neq i} b_j$ to the auctioneed, so his (player $i$'s) utility is $\theta_i - t_i$. All other players get nothing and pay nothing, so their utility is zero.
@@ -182,7 +193,7 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Social Choice]
+\begin{ex}[P2: Social Choice]
 	Consider a social choice problem between two alternatives in $X = \{l, r\}$ (could be a ``left-leaning policy'' and a ``right-leaning policy'').
 	\begin{enumerate}
 		\item What \emph{ordinal} preferences (rankings $\succsim_i$) can an individual have over $X$?
@@ -195,40 +206,95 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		\item Now consider a society of three citizens, $i=1,2,3$. Give an example of a social preference that satisfies the three axioms from slide 31 and is not dictatorial.
 	\end{enumerate}
 	
+	\ifsolutions
+	\subsection*{Solution}
+	
+	\fi
 \end{ex}
 
 
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Voting]
+\begin{ex}[P3: Voting]
 	Consider the voting process we had for the lecture format. Does it implement the efficient outcome (in dominant strategies)? Write the setting down as a mechanism design problem and provide a reasonably formal proof if yes, or give a counterexample if no.
 	
+	\ifsolutions
+	\subsection*{Solution}
+	The voting was related to the choice between three lecture formats, with two, one, or no breaks during the three-academic-hour lecture. All students had to assign an integer number between $-3$ and $3$ to each of the three alternatives; the alternative with the highest sum of votes was adopted.
+	
+	We now describe this setting as a mechanism design problem and show that it does not implement the efficient outcome.
+	
+	The set of alternatives is $X = \{0,1,2\}$. The players are indexed by $i = 1,2, ..., N$. Each player receives utility $u_i(x) \in \mathbb{R}$ if alternative $x \in X$ is chosen. 
+	
+	The goal is to check whether a given mechanism $\Gamma = (S, g)$ implements the efficient allocation 
+	$$f^* = \arg \max_x \left\{ \sum_{i=1}^N u_i(x) \right\}$$ 
+	for any profile of utilities $u_i$. The mechanism is given by strategy sets $S_i = \{-3, -2, -1, 0, 1, 2, 3\}^X$ for each player $i$ and the outcome function $g(s) = \arg \max_{x \in X} \left\{ \sum_{i=1}^N s_i(x) \right\}$.
+	
+	To show that this mechanism does not implement the efficient allocation in dominant strategies, it is enough to find a single profile of utilities ...
+	\fi
 \end{ex}
 
 
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Weak Preference Reversal Property]
+\begin{ex}[P4: Weak Preference Reversal Property]
 	Prove that if s.c.f. $f$ satisfies the weak preference reversal property from slide 51 then $f$ is DSIC.
 	
+	\ifsolutions
+	\subsection*{Solution (Hannah Barth and Inga Reymann)}
+	
+	\textbf{Weak preference reversal property:}
+	Consider an agent $i \in N$ and let $\theta_i', \theta_i'' \in \Theta_i$ be any two possible types. Given $\theta_{-i} \in \Theta_{-i}$, we say that the social choice function f satisfies the weak preference reversal property for agent $i$ and for types $\theta_i', \theta_i''$ if the following inequalities are satisfied: 
+	
+	$$u_i(f(\theta_i', \theta_{-i}), \theta_i') \geq\ u_i(f(\theta_i'', \theta_{-i}), \theta_i')$$
+	
+	$$u_i(f(\theta_i', \theta_{-i}),\theta_i'') \leq\ u_i(f(\theta_i'', \theta_{-i}), \theta_i '')$$
+	
+	\textbf{Revelation principle:}
+	A mechanism implements a social choice function $f$ in dominant strategies if there is a strategy profile $(s_1^*,...,s_N^*)$ that constitutes a dominant-strategy equilibrium of the mechanism and is such that 
+	$$g(s_1^*(\theta_1),...s_N^*(\theta_N))=f(\theta) \quad \forall \quad \theta_i\in \Theta_i \quad \text{and} \quad \forall i$$
+	
+	The fact that $(s_1^*,...,s_N^*)$ is a dominant-strategy equilibrium implies that
+	$$u_i(g(s_i^*(\theta_i'),s_{-i}^*(\theta_{-i})),\theta_i')\geq u_i(g(s_i^*(\theta_i''),s^*_{-i}(\theta_{-i})),\theta_i') \quad \forall \quad \theta_i',\theta_i''\in \Theta$$
+	And because $g(s^*(\theta))=f(\theta)$, it holds that:
+	$$u_i(f(\theta',\theta_{-i}),\theta_i')\geq u_i(f(\theta_i'',\theta_{-i}),\theta_i')$$
+	which is equivalent to the statement of the weak preference reversal property.
+	\fi
 \end{ex}
 
 
 
 %%------------------------------------------------------------------------------------------------
 
-\begin{ex}[Judicial Design]
-	A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If heis convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has apayoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for alighter sentence.  Inparticular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendanta payoff of $-r.$
+\begin{ex}[P5: Judicial Design]
+	A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If he
+is convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has a
+payoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for a
+lighter sentence.  In
+particular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendant
+a payoff of $-r.$
+
 	
-	The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privatelyknown probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial andbe convicted with probability $1 - \theta$.
+	The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privately
+known probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial and
+be convicted with probability $1 - \theta$.
+
 	
-	Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choicefunction is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ meansthat type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargaingiving him a sentence with payoff $-r$.DA thinks $\theta$ has full support on $[0,1]$.
+	Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choice
+function is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ means
+that type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargain
+giving him a sentence with payoff $-r$.
+DA thinks $\theta$ has full support on $[0,1]$.
 	
-	\begin{enumerate}
-		\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatiblefor the defendant.
-		\item What is the set of all incentive-compatible social choice functions?You can proceed in the following steps:
+	\begin{enumerate}
+
+		\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatible
+for the defendant.
+
+		\item What is the set of all incentive-compatible social choice functions?
+You can proceed in the following steps:
 		\begin{itemize}
 			\item Show that in any IC $f$ at most one plea bargain $r$ is available.
 			\item Show that $f$ must be of cutoff type, with the suspect taking the plea if $\theta < \bar{\theta}$ and going to court otherwise.
@@ -239,17 +305,23 @@ These exercises are for your own practice and are not to be handed in. Some exer
 
 
 	\ifsolutions
-	\section*{Solution}
+	\subsection*{Solution}
 	By going to trial a defendant of type $\theta$ receives (expected) utility of $-(1-\theta)$, while from accepting a plea bargain his utility is $-r$. This implies that the IC constraint is $f(\theta)=r \Rightarrow -r\geq -(1-\theta) ~\&~ \forall \theta' \neq \theta ~ f(\theta') \geq f(\theta)$
-	
-	We will characterize the set of IC social choice functions by a series of claims. For simplicity we will initially assume that $\theta$ has full support on $[0,1]$, and then correct for other cases.
-	\begin{itemize}
+	
+
+	We will characterize the set of IC social choice functions by a series of claims. 
+	%For simplicity we will initially assume that $\theta$ has full support on $[0,1]$, and then correct for other cases.
+
+	\begin{itemize}
+
 		\item[claim 1] $f(\bullet)$ has at most one value on the real line.
 		
-		Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
+		Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
+
 		\item[claim 2] $f(\bullet)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
-		
-		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
+		\\
+		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
+
 		Proof: assume $\theta'>\theta , f(\theta)=T, f(\theta')=r$. By IC for $\theta$ we know that $-r\leq -(1-\theta)$. However as $-(1-\theta')>-(1-\theta)$ this implies that $-(1-\theta')>-r$ and we don't have IC for $\theta'$.
 		
 		\item[claim 3] $u(-f(\bar{\theta}),\bar{\theta})\geq -(1-\bar{\theta})$
@@ -258,14 +330,19 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		
 		\item[claim 4] $r= 1-\bar{\theta}$
 		
-		Proof: $r\leq 1-\bar{\theta}$ follows directly from the last claim, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better of by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain contradicting IC for that type.
-	\end{itemize}
-	These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function
-	\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
-	T & \text{if } \theta\geq\bar{\theta} \end{cases} \]
+		Proof: $r\leq 1-\bar{\theta}$ follows directly from the last claim, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better of by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain contradicting IC for that type.
+
+	\end{itemize}
+
+	These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function
+
+	\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
+
+	T & \text{if } \theta\geq\bar{\theta} \end{cases} \]
+
 	is incentive compatible.
 	
-	As long as the support of types has measure one, the arguments above hold. However, if there is a interval $(a,b)$ with a zero probability, then when we set $\bar{\theta}=a$ any $r\in [a-(b-a),a]$ can be used. This is the case as claim four no longer holds, and we just need to get IC for type $b$. The same argument also holds for closed or half closed intervals.
+	%As long as the support of types has measure one, the arguments above hold. However, if there is a interval $(a,b)$ with a zero probability, then when we set $\bar{\theta}=a$ any $r\in [a-(b-a),a]$ can be used. This is the case as claim four no longer holds, and we just need to get IC for type $b$. The same argument also holds for closed or half closed intervals.
 	\fi
 \end{ex}
 
