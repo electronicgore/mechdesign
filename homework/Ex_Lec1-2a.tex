@@ -209,6 +209,7 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\ifsolutions
 	\subsection*{Solution}
 	
+	Currently missing
 	\fi
 \end{ex}
 
@@ -231,7 +232,10 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	$$f^* = \arg \max_x \left\{ \sum_{i=1}^N u_i(x) \right\}$$ 
 	for any profile of utilities $u_i$. The mechanism is given by strategy sets $S_i = \{-3, -2, -1, 0, 1, 2, 3\}^X$ for each player $i$ and the outcome function $g(s) = \arg \max_{x \in X} \left\{ \sum_{i=1}^N s_i(x) \right\}$.
 	
-	To show that this mechanism does not implement the efficient allocation in dominant strategies, it is enough to find a single profile of utilities ...
+	There are many ways to break this mechanism. One way is by assuming that each player's utility from any alternative can be arbitrarily high or low, i.e. $u_i(x) \in (-\infty, \infty)$.\footnote{The same argument could be made, using slightly more effort, if utilities have full support on a finite interval, e.g., $u_i(x) \in [0,1]$.} 
+	Then for any players' strategy (where $i$'s strategy $\sigma_i$ maps $i$'s utilities $u_i$ into votes $s_i$) we can find a utility profile -- or, as we shall call this, type profile -- for which the outcome of the game is not efficient. Note that this argument does not even touch upon the strategy profile being an equilibrium -- it merely says that the strategy space of the game is not rich enough to accomodate efficiency for all possible utilities.
+	
+	In this solution, however, we will follow another path, and show that even when $u_i(x) \in \{-3, -2, -1, 0, 1, 2, 3\}$, truthful voting (defined as choosing $s_i(x) = u_i(x)$) is not a dominant strategy equilibrium of the game. To do this we need to find a single utility profile for which one of the players would like to deviate ex post -- i.e., after learning other players' votes, this player would like to change their votes. In particular, let $N=2$, $u_2 = (0,0,2)$ and $u_1 = (1,0,0)$. Assuming that player $2$ votes truthfully, if player $1$ votes truthfully then $x=2$ is chosen by the mechanism. If, however, player $1$ votes $s_1 = (3,0,0)$ then $x=1$ is chosen, which is better for player $1$ given her true preferences. Therefore, truthful reporting is not a dominant strategy equilibrium of the game. No other strategy profile yields the efficient outcome, so the mechanism does not implement the efficient outcome in dominant strategies.
 	\fi
 \end{ex}
 

@@ -285,15 +285,18 @@ These exercises are for your own practice and are not to be handed in. Some exer
 		u_{i}(\hat{\theta}_{i}, \theta_{-i}|\theta_{i})=\mathbb{I}\{\hat{\theta}_{i}=\theta_{-i}\}-t_{i}(\hat{\theta}_{i},\theta_{-i}) \nonumber\\
 		=\mathbb{I}\{\hat{\theta}_{i}=\theta_{-i}\}-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i},\theta_{-i})
 		\end{align}
-		For player type $\theta_{i}=H$, BIC therefore requires that:
+		For player type $\theta_{i}=H$, BIC therefore requires that: (\emph{Note: earlier version of this solution had minor typos in (23) and (24).})
 		\begin{align}
 		\phi(\theta_{-i}=H|\theta_{i}=H)(1-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=H))+\nonumber\\
-		\phi(\theta_{-i}=L|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L)) \geq \nonumber\\ \phi(\theta_{-i}=H|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=H)) + \nonumber\\ \phi(\theta_{-i}=L|\theta_{i}=H)(1-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=L))\\
+		\phi(\theta_{-i}=L|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L)) \geq \nonumber\\ \phi(\theta_{-i}=H|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=H)) + \nonumber\\ \phi(\theta_{-i}=L|\theta_{i}=H)(1-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=L))
+		\\
 		\rightarrow 
 		\frac{1}{3}(1-C_{1}-C_{2}ln(3))+\frac{2}{3}(0-C_{1}-C_{2}ln(3)+C_{2}ln(2)) \geq \nonumber\\ 
-		\frac{2}{3}(0-C_{1}-C_{2}ln(3)) + \frac{1}{3}(1-C_{1}-C_{2}ln(3)+C_{2}ln(2))\\
+		\frac{2}{3}(1-C_{1}-C_{2}ln(3)) + \frac{1}{3}(0-C_{1}-C_{2}ln(3)+C_{2}ln(2))
+		\\
 		\rightarrow
-		\frac{1}{3}-C_{1}-C_{2}ln(3)+\frac{2}{3}ln(2) \geq  \frac{2}{3}-C_{1}-C_{2}ln(3)+\frac{1}{3}ln(2)\\
+		\frac{1}{3}-C_{1}-C_{2}\left(ln(3)+\frac{2}{3}ln(2)\right) \geq  \frac{2}{3}-C_{1}-C_{2}\left(ln(3)+\frac{1}{3}ln(2)\right)
+		\\
 		\frac{1}{3}C_{2}ln(2) \geq \frac{1}{3}\\
 		C_{2}\geq \frac{1}{ln(2)}, C_{1}\in\mathbb{R}
 		\end{align}
