@@ -204,156 +204,159 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	
 	\paragraph{1)}
 	Since only generation 2 is alive at $t=2$ the flow social surplus function simply equals the utility function of generation 2, minus transfers:
-	\begin{align*}
+	\begin{align}
 	w_{t=2}\left(\theta,k\right) = v_{2}(\theta_{2},k_{1},k_{2})=\theta_{2}k_{2}-(k_{1}+k_{2})^{2}.
-	\end{align*}
+	\end{align}
 	Furthermore, since the period 2 is also the last period of the game the welfare function at time 2 also equals the flow surplus at this time:
-	\begin{align*}
+	\begin{align}
 	W_{t=2}\left(\theta,k\right)=\max_{k_{2}} w_{t=2}\left(\theta,k\right). 
-	\end{align*}
+	\end{align}
 	The derivative w.r.t. $k_2$ is:
-	\begin{align*}
+	\begin{align}
 		\frac{\partial w_{t=2} \left( \theta,k \right) }{ \partial k_{2} } = \theta_{2} - 2 (k_{1}+k_{2}).
-	\end{align*}
+	\end{align}
 	Equating with zero and solving yields the optimal $k_2^*$:\footnote{If emissions are restricted to be positive, $k>0$, corner solutions are possible depending on the realizations of $\theta$. In the following we abstract from this and focus on inner solutions.}
-	\begin{align*}
+	\begin{align}
 		\theta_{2}-2(k_{1}+k_{2}^{*})=0 \\
 		\Leftrightarrow k_{2}^{*}=\frac{\theta_{2}-2k_{1}}{2} \\
 		\Leftrightarrow k_{2}^{*}=\frac{1}{2}\theta_{2}-k_{1}
-	\end{align*}
+	\end{align}
 	
 	
 	\paragraph{2)}
 	As player $2$ is the only player alive at $t=2$ he imposes no externalities on other players. As such, the prescribed payment $p_{2}^{DPM}$ is simply zero. To see this more formally, consider the marginal contribution of generation 2:
-	\begin{align*}
+	\begin{align}
 	M_{i=2,t=2}(\theta,k)=W_{t=2}(\theta,k)-W_{t=2,-2}(\theta,k)
-	\end{align*}
+	\end{align}
 	Since generation 2 is the only one alive at t=2 it holds that $W_{t=2,-2}=0$. Therefore, the marginal contribution is simply equal to the welfare $W_{t=2}$. 
 	The marginal contribution, $M_{2}$, is equal to the flow marginal contribution, $m_{2}$, since t=2 is the last time period. The payment at time 2 when applying the dynamic pivot mechanism is then given by:
 	
-	\begin{align*}
+	\begin{align}
 	p_2^*(\theta,k^*)&=v_{i=2}(\theta,k^*)-m_{i=2}(\theta,k^*) \\
 	&= \theta_{2}k^*_{2}-(k^*_{1}+k^*_{2})^{2} -\left(\theta_{2}k_{2}^{*}-(k_{1}^{*}+k_{2}^{*})^{2}\right) \\
 	&= 0 
-	\end{align*}
+	\end{align}
 	Where the latter equality holds as $v_{2}(\theta,k^*)=m_2(\theta,k^*)$
 	
 	
 	\paragraph{3)}
 	The flow social surplus equals the utility of player 1, as he is the only player alive at time $t=1$:
-	\begin{align*}
+	\begin{align}
 	w_{t=1}\left(\theta_{1},k_{1}\right)=v_{1}(\theta_{1},k_{1})=\theta_{1}k_{1}-k_{1}^{2}.
-	\end{align*}
+	\end{align}
 	The welfare function differs, however, as it also takes into account future welfare, and evaluates this at the efficient allocation:
-	\begin{align*}
+	\begin{align}
 	W_{t=1}\left(\theta,k\right)&=\max_{k_{1},k_{2}}\left\{ w_{t=1}\left(\theta_{1},k_{1}\right)+\mathbb{E}\left[W_{t=2}\left(\theta,k\right)\right]\right\}  \\
 	&=\max_{k_{1},k_{2}}\left\{ \theta_{1}k_{1}-k_{1}^{2}+\mathbb{E}\left[\theta_{2}k_{2}-(k_{1}+k_{2})^{2}\right]\right\}, 
-	\end{align*}
+	\end{align}
 	where we apply that there is zero discounting of future welfare ($\delta=1$). 
 	The efficient $k_1$ is found by maximizing welfare:
-	\begin{align*}
+	\begin{align}
 	\frac{\partial W_{t=1}\left(\theta,k\right)}{\partial k_{1}}=\theta_{1}-2k_{1}^{*}-\mathbb{E}\left[2(k_{1}^{*}+k^{*}_{2})\right]=0 \\
 	\Leftrightarrow\theta_{1}-2k_{1}^{*}-2k_{1}^{*}-2\mathbb{E}k^{*}_{2}=0 \\
 	\Leftrightarrow k_{1}^{*}=\frac{\theta_{1}-2\mathbb{E}k^{*}_{2}}{4} \\
 	\Leftrightarrow k_{1}^{*}=\frac{1}{4}\theta_{1}-\frac{1}{2}\mathbb{E}(k^{*}_{2})
-	\end{align*}
+	\end{align}
 	Using the optimal $k_2$ from above yields: 
-	\begin{align*}
+	\begin{align}
 	k_{1}^{*}=\frac{1}{4}\theta_{1}-\frac{1}{2}\mathbb{E}(k_{2}^{*})=\frac{1}{4}\theta_{1}-\frac{1}{2}\mathbb{E}\left(\frac{1}{2}\theta_{2}-k_{1}\right) \\ 
 	\Leftrightarrow k_{1}^{*}=\frac{1}{4}\theta_{1}-\frac{1}{8}+\frac{1}{2}k_{1}^{*} \\
 	\Leftrightarrow k_{1}^{*}=\frac{1}{2}\theta_{1}-\frac{1}{4}
-	\end{align*}
+	\end{align}
 	
 	
 	
 	\paragraph{4)}
 	We start by considering period 2. Welfare is: 
-	\begin{align*}
+	\begin{align}
 	W_{t=2}\left(\theta,k\right)=\theta_{2}k_{2}^{*}-(k_{1}^{*}+k_{2}^{*})^{2},
-	\end{align*}
+	\end{align}
 	where:
-	\begin{align*}
+	\begin{align}
 	k_{2}^{*}=\frac{1}{2}\theta_{2}-k_{1}^{*}=\frac{1}{2}\theta_{2}-\left(\frac{1}{2}\theta_{1}-\frac{1}{4}\right)=\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right).
-	\end{align*}
+	\end{align}
 	Inserting this, welfare equals: 
-	\begin{align*}
-	W_{t=2}\left(\theta,k\right)=\theta_{2}k_{2}^{*}-(k_{1}^{*}+k_{2}^{*})^{2} \\
-	=\theta_{2}\left(\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right)\right)-(\frac{1}{2}\theta_{1}-\frac{1}{4}+\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right))^{2} \\  
-	=\theta_{2}\left(\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right)\right)-(\frac{1}{2}\theta_{2})^{2} \\
+	\begin{align}
+	W_{t=2}\left(\theta,k\right)=\theta_{2}k_{2}^{*}-(k_{1}^{*}+k_{2}^{*})^{2} 
+	\\
+	=\theta_{2}\left(\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right)\right) - \left( \frac{1}{2}\theta_{1}-\frac{1}{4}+\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right) \right)^{2} 
+	\\  
+	=\theta_{2}\left(\frac{1}{4}+\frac{1}{2}\left(\theta_{2}-\theta_{1}\right)\right) - \left( \frac{1}{2}\theta_{2} \right)^{2} 
+	\\
 	=\frac{1}{4}\theta_{2}^2-\frac{1}{2}\theta_{2}\theta_{1}+\frac{1}{4}\theta_{2}
-	\end{align*}
+	\end{align}
 	In the absence of the negative externality imposed by player 1 welfare is:
-	\begin{align*}
+	\begin{align}
 	W_{t=2,-1}\left(\theta,k\right)=\theta_{2}k_{2}^{*}\left(k_{1}=0\right)-\left(k_{2}^{*}\left(k_{1}=0\right)\right)^{2},
-	\end{align*}
+	\end{align}
 	where $k_{2}^{*}\left(k_{1}=0\right)=\frac{1}{2}\theta_{2}-0=\frac{1}{2}\theta_{2}$. Inserting yields: 
-	\begin{align*}
+	\begin{align}
 	W_{t=2,-1}\left(\theta,k\right)=\theta_{2}k_{2}^{*}\left(k_{1}=0\right)-\left(k_{2}^{*}\left(k_{1}=0\right)\right)^{2} \\
 	=\theta_{2}\frac{1}{2}\theta_{2}-\left(\frac{1}{2}\theta_{2}\right)^{2}=\frac{1}{4}\theta_{2}^{2}
-	\end{align*}
+	\end{align}
 	
 	
 	
 	\noindent 
 	The marginal contribution (which equals the flow marginal contribution because period 2 is the terminal period) is then: 
-	\begin{align*}
+	\begin{align}
 	M_{i=1,t=2}=m_{i=1,t=2} = W_{t=2}\left(\theta,k\right)-W_{t=2,-1}\left(\theta,k\right) \\
 	=\frac{1}{4}\theta_{2}^{2}-\frac{1}{2}\theta_{2}\theta_{1}+\frac{1}{4}\theta_{1}-\left[\frac{1}{4}\theta_{2}^{2}\right] \\
 	=\frac{1}{4}\theta_{2}-\frac{1}{2}\theta_{2}\theta_{1}
-	\end{align*}
+	\end{align}
 	The optimal tax of generation 1 in period 2 is then given by:
-	\begin{align*}
+	\begin{align}
 	p_{i=1,t=2} = v_{i=1,t=2} - m_{i=1,t=2} =  - \frac{1}{4}\theta_{2}+\frac{1}{2}\theta_{2}\theta_{1}
-	\end{align*}
+	\end{align}
 	Next, we move on to analyzing the payments in period 1. Welfare is given as the expression found above:
-	\begin{align*}
+	\begin{align}
 	W_{t=1}\left(\theta,k\right)=\max_{k_{1},k_{2}}\left\{ \theta_{1}k_{1}-k_{1}^{2}+\mathbb{E}\left[\theta_{2}k_{2}-(k_{1}+k_{2})^{2}\right]\right\}
-	\end{align*}
+	\end{align}
 	And the optimal allocations were $k_1^*=\frac{1}{2}\theta_1-\frac{1}{4}$ and $k_2^*=\frac{1}{2}\theta_2-k_1$. By inserting this we get that welfare equals:
-	\begin{align*}
+	\begin{align}
 	W_{t=1}(\theta,k)=  \theta_{1}k_{1}^*-(k_{1}^*) ^{2}+\mathbb{E}\left[\theta_{2}k_{2}^*-(k_{1}^*+k_{2}^*)^{2}\right]
 	\\=  \theta_1(\frac{1}{2}\theta_1-\frac{1}{4})-(\frac{1}{2}\theta_1-\frac{1}{4}) ^{2}+\mathbb{E}\left[\theta_{2}k_{2}^*-(k_1^*+k_{2}^*)^{2}\right]
 	\\=  \frac{1}{4}\theta_1^2-\frac{1}{16}+\mathbb{E}\left[\theta_{2}k_{2}^*-(k_1^*+k_{2}^*)^{2}\right]
 	\\=  \frac{1}{4}\theta_1^2-\frac{1}{16}+\mathbb{E}\left[\theta_{2}k_{2}^*-(k_1^*+\frac{1}{2}\theta_2-k_1^*)^{2}\right]
 	\\=  \frac{1}{4}\theta_1^2+\frac{1}{8}-\frac{1}{4}\theta_1
-	\end{align*}
+	\end{align}
 	The welfare when player 1 do not participate is:
-	\begin{align*}
+	\begin{align}
 	W_{t=1,-1} = E[\theta_2k_2^*-(k_2^*)^2]=E[\frac{1}{2}\theta_2^2-\frac{1}{4}\theta_2^2]=\frac{1}{4}E[\theta_2^2]=\frac{1}{16}
-	\end{align*}
+	\end{align}
 	And the marginal gain is then:
-	\begin{align*}
+	\begin{align}
 	M_{t=1,i=1}= W_{i=1,t=1}-W_{-i,t=1}=\frac{1}{4}\theta_1^2+\frac{1}{8}-\frac{1}{4}\theta_1 - \frac{1}{16} = \frac{1}{4}\theta_1^2-\frac{1}{4}\theta_1 +\frac{1}{16}
-	\end{align*}
+	\end{align}
 	To calculate the optimal tax we next have to decompose the marginal contribution into flow terms. The marginal contribution is decomposed as:
-	\begin{align*}
+	\begin{align}
 	M_{i=1,t=1} = m_{i=1,t=1}+E[M_{i=1,t=2}]
-	\end{align*}
+	\end{align}
 	where $m_{i=1,t=1}$ is the flow marginal contribution, used to calculate the optimal tax. This can be calculated residually as:
-	\begin{align*}
+	\begin{align}
 	m_{i=1,t=1}=M_{i=1,t=1}-E[M_{i=1,t=2}]
-	\\=\frac{1}{4}\theta_1^2-\frac{1}{4}\theta_1+\frac{1}{16}-E[\frac{1}{4}\theta_2+\frac{1}{2}\theta_1\theta_2]
+	\\=\frac{1}{4}\theta_1^2-\frac{1}{4}\theta_1+\frac{1}{16}-E \left[ \frac{1}{4}\theta_2+\frac{1}{2}\theta_1\theta_2 \right]
 	\\=\frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16}
-	\end{align*}
+	\end{align}
 	The payment of player 1 is then given by:
-	\begin{align*}
-	p_{i=1,t=1} = \theta_1k_1^*-(k_1^*)^2 - [ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16}] \\
-	=\theta_1(\frac{1}{2}\theta_1-\frac{1}{4})-(\frac{1}{2}\theta_1-\frac{1}{4})^2-[ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16}] \\
+	\begin{align}
+	p_{i=1,t=1} = \theta_1k_1^*-(k_1^*)^2 - \left[ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16} \right] \\
+	=\theta_1 \left( \frac{1}{2}\theta_1-\frac{1}{4} \right) - \left(\frac{1}{2}\theta_1-\frac{1}{4} \right)^2- \left[ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16} \right] \\
 	=\frac{1}{2}\theta_1.
-	\end{align*}
+	\end{align}
 	
 	
 	
 	\paragraph{5)}
 	Since player 2 do not impose any externalities on other than himself, he does not have to make any payments. Player 1 does, however, have to make a payment in period 1, which we showed in subsection 4. We also showed that in period 2, where only player 2 is alive, the payment of player 1 should be:
 	
-	\begin{align*}
+	\begin{align}
 	p_{i=1,t=2}= \frac{1}{2}\theta_2\theta_1-\frac{1}{4}\theta_2
-	\end{align*}
+	\end{align}
 	Since $\theta_i$ are uniformly distributed we have that:
-	\begin{align*}
+	\begin{align}
 	E[p_{i=1,t=2}]= E[\frac{1}{2}\theta_2\theta_1-\frac{1}{4}\theta_2]=\frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2}-\frac{1}{4}\cdot\frac{1}{2}=0 
-	\end{align*}
+	\end{align}
 	Thus, in expectation, none of the players will have to make transfers in periods where they are not alive.
 	
 	\emph{Note: the mechanism is indeed not online according to the definition in the problem.}
