@@ -332,23 +332,25 @@ These exercises are for your own practice and are not to be handed in. Some exer
 	\begin{align}
 	M_{i=1,t=1} = m_{i=1,t=1}+E[M_{i=1,t=2}]
 	\end{align}
-	where $m_{i=1,t=1}$ is the flow marginal contribution, used to calculate the optimal tax. This can be calculated residually as:
+	where $m_{i=1,t=1}$ is the flow marginal contribution, used to calculate the optimal tax. This can be calculated residually as:\footnote{\emph{Note: earlier version of these solutions had a typo (wrong sign) in eq.(44).}}
 	\begin{align}
 	m_{i=1,t=1}=M_{i=1,t=1}-E[M_{i=1,t=2}]
-	\\=\frac{1}{4}\theta_1^2-\frac{1}{4}\theta_1+\frac{1}{16}-E \left[ \frac{1}{4}\theta_2+\frac{1}{2}\theta_1\theta_2 \right]
-	\\=\frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16}
+	\\=\frac{1}{4}\theta_1^2-\frac{1}{4}\theta_1+\frac{1}{16}-E \left[ \frac{1}{4} \theta_2 - \frac{1}{2} \theta_1\theta_2 \right]
+	\\=\frac{1}{4}\theta_1^2 - \frac{1}{16}
 	\end{align}
 	The payment of player 1 is then given by:
 	\begin{align}
-	p_{i=1,t=1} = \theta_1k_1^*-(k_1^*)^2 - \left[ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16} \right] \\
-	=\theta_1 \left( \frac{1}{2}\theta_1-\frac{1}{4} \right) - \left(\frac{1}{2}\theta_1-\frac{1}{4} \right)^2- \left[ \frac{1}{4}\theta_1^2-\frac{1}{2}\theta_1-\frac{1}{16} \right] \\
-	=\frac{1}{2}\theta_1.
+	p_{i=1,t=1} = \theta_1k_1^*-(k_1^*)^2 - \left[ \frac{1}{4}\theta_1^2 - \frac{1}{16} \right] 
+	\\
+	=\theta_1 \left( \frac{1}{2}\theta_1-\frac{1}{4} \right) - \left(\frac{1}{2}\theta_1-\frac{1}{4} \right)^2- \left[ \frac{1}{4}\theta_1^2 - \frac{1}{16} \right] 
+	\\
+	=0.
 	\end{align}
 	
 	
 	
 	\paragraph{5)}
-	Since player 2 do not impose any externalities on other than himself, he does not have to make any payments. Player 1 does, however, have to make a payment in period 1, which we showed in subsection 4. We also showed that in period 2, where only player 2 is alive, the payment of player 1 should be:
+	Since player 2 do not impose any externalities on other than himself, he does not have to make any payments. Player 1 does not have to make a payment in period 1, which we showed in subsection 4. However, we showed that in period 2, where only player 2 is alive, the payment of player 1 should be:
 	
 	\begin{align}
 	p_{i=1,t=2}= \frac{1}{2}\theta_2\theta_1-\frac{1}{4}\theta_2
@@ -406,73 +408,74 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 	
 	\paragraph{2)}
 	The general virtual surplus is given by: 
-	\begin{gather*}
+	\begin{gather}
 	VS\left(\theta_{0},\theta_{1}\right)=S\left(k,\theta\right)-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}\sum_{t}\delta^{t}I_{t}\frac{\partial v_{t}}{\partial\theta_{t}},    
-	\end{gather*}
+	\end{gather}
 	Since $v_{0}=0$ the sum simplifies. Furthermore, since $\frac{\partial v_{1}}{\partial\theta_{1}}=k$ and $S\left(k,\theta_{1}\right)=\delta\theta_{1}k$ we get: 
-	\begin{gather*}
+	\begin{gather}
 	VS\left(\theta_{0},\theta_{1}\right)=\delta\theta_{1}k-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}\delta I_{1}k \\
 	\Leftrightarrow VS\left(\theta_{0},\theta_{1}\right)=\delta k\left[\theta_{1}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}I_{1}\right]
-	\end{gather*}
+	\end{gather}
 	$I_{1}$ denotes the impulse response in period 1 given by:  
-	\begin{gather*}
+	\begin{gather}
 	I_{1}=-\frac{\frac{\partial F\left(\theta_{1}\left|\theta_{0}\right.\right)}{\partial\theta_{0}}}{\phi_{1}\left(\theta_{1}\left|\theta_{0}\right.\right)},  
-	\end{gather*}
+	\end{gather}
 	The virtual surplus function differs from the static case by two objects. First, the social surplus entering the VS is the total discounted social surplus for the entire time path, which is why the discount factor $\delta$ appears in the expression. The reason is of course that the mechanism now has to account for the fact that actions in a given period affect future periods as well. Secondly, the impulse response function $I$ now enters. The reason why is that $\theta$ is a Markov process, i.e. $\theta_1$ depends on $\theta_0$. Thus, a shock to $\theta_0$ will not only affect the optimal allocation today but also all future periods. Consequently, since we are in a dynamic setting, this has to be taken into account which is why the second term differs from the static setting by including the impulse response function.  
 	
 	
 	\paragraph{3)}
-	The optimal allocation rule solves the problem: 
-	\begin{align*}
-	k^\star=\arg\max_{k} \quad  &\mathbb{E_{\varepsilon}}VS\left(\theta_{0},\theta_{1}\right) \\
-	= \arg\max_{k}  \quad  &\mathbb{E_{\varepsilon}}\delta k\left[\theta_{1}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}I_{1}\right],
-	\end{align*} 
+	The optimal allocation rule solves the problem:\footnote{\emph{Note: a previous version of the solutions had extraneous expectations in this question.}}
+	\begin{align}
+	k^\star=\arg\max_{k} \quad  & VS\left(\theta_{0},\theta_{1}\right) \\
+	= \arg\max_{k}  \quad  & \delta k\left[\theta_{1}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}I_{1}\right],
+	\end{align} 
 	i.e. it is the allocation $k$ that maximizes the expected virtual surplus. 
-	Since this is linearly increasing in $k$ it is optimal to choose $k=1$ if $\mathbb{E_{\varepsilon}}\left[\theta_{1}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}I_{1}\right]>0$ and otherwise $k=0$. The equivalent expression for the static model is: 
-	\begin{gather*}
-	k^\star=\arg\max_{k} \quad \mathbb{E_{\theta}}k\left[\theta-\frac{1-F\left(\theta\right)}{\phi\left(\theta\right)}\right].    
-	\end{gather*} 
-	The optimal allocation in the static setting is then $k=1$ if $\mathbb{E_{\theta}}\left[\theta-\frac{1-F\left(\theta\right)}{\phi\left(\theta\right)}\right]>0$ and $k=0$ otherwise. The main difference between the optimal allocation in the static and dynamic case respectively is then the presence of the impulse response function. The second term is the information rent, which 
-	the seller must "leave" for the buyer to provide incentives to real types (i.e. extract information). In a dynamic setting, the information rent might be smaller $(I<1)$ or larger $(I>1)$ than the static setting. The degree of uncertainty will determine this: If the uncertainty of $\theta$ in the static setting is smaller than the uncertainty of $\theta_1$ conditional on $\theta_0$ in the dynamic setting then the impulse response will be larger than one.
+	Since this is linearly increasing in $k$ it is optimal to choose $k=1$ if $ \left[\theta_{1}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}I_{1}\right]>0$ and otherwise $k=0$. The equivalent expression for the static model is: 
+	\begin{gather}
+	k^\star=\arg\max_{k} \, \left[\theta-\frac{1-F\left(\theta\right)}{\phi\left(\theta\right)}\right] k.
+	\end{gather} 
+	The optimal allocation in the static setting is then $k=1$ if $\left[\theta-\frac{1-F\left(\theta\right)}{\phi\left(\theta\right)}\right]>0$ and $k=0$ otherwise. The main difference between the optimal allocation in the static and dynamic case respectively is then the presence of the impulse response function. The second term is the information rent, which 
+	the seller must "leave" for the buyer to provide incentives to real types (i.e. extract information). In a dynamic setting, the information rent might be smaller $(I<1)$ or larger $(I>1)$ than the static setting. 
+	%The degree of uncertainty will determine this: If the uncertainty of $\theta$ in the static setting is smaller than the uncertainty of $\theta_1$ conditional on $\theta_0$ in the dynamic setting then the impulse response will be larger than one.
 	
 	
 	\paragraph{4)}
 	The impulse response in period $1$ is given by:
-	\begin{gather*}
+	\begin{gather}
 	I_{1}=-\frac{\frac{\partial F\left(\theta_{1}\left|\theta_{0}\right.\right)}{\partial\theta_{0}}}{\phi_{1}\left(\theta_{1}\left|\theta_{0}\right.\right)}.
-	\end{gather*}
+	\end{gather}
 	
-	\begin{gather*}
+	\begin{gather}
 	\phi_1(\theta_1|\theta_0)=\frac{1}{1+\theta_0-(\theta_0-1)}=\frac{1}{2}
-	\end{gather*}
+	\end{gather}
 	
-	\begin{gather*}
+	\begin{gather}
 	F(\theta_1|\theta_0)=\frac{\theta_1-(\theta_0-1)}{(\theta_0+1)-(\theta_0-1)}=\frac{\theta_1-(\theta_0-1)}{2}
-	\end{gather*}
+	\end{gather}
 	
-	\begin{gather*}
+	\begin{gather}
 	\frac{\partial F(\theta_1|\theta_0)}{\partial \theta_0}
 	=-\frac{1}{2}
-	\end{gather*}
+	\end{gather}
 	
 	Collect terms:
 	
-	\begin{gather*}
+	\begin{gather}
 	I_t = - \frac{-\frac{1}{2}}{\frac{1}{2}}=1
-	\end{gather*}
+	\end{gather}
 	
 	\paragraph{5)}
 	Since $\theta_0$ is distributed in accordance with $U\left[0,1\right]$ we have $\phi_{0}\left(\theta_{0}\right)=1 ,F_{0}\left(\theta_{0}\right)=\frac{\theta_{0}-0}{1-0}=\theta_{0}$. Along with $I_{1}=1$ this gives the following VS:
-	\begin{align*}
+	\begin{align}
 	VS&=\delta k\left[\theta_{1}-1\cdot \left(1-\theta_{0}\right)\right] \\
 	&=\delta k\left[\theta_{1}+\theta_{0}-1\right].
-	\end{align*} 
+	\end{align} 
 	The expected payoff is then given by: 
-	\begin{align*}
+	\begin{align}
 	\mathbb{E}_{\theta_{0},\theta_{1}}\left[\delta k\left[\theta_{1}+\theta_{0}-1\right]\right]
-	\end{align*}
+	\end{align}
 	Since this objective function is monotonously increasing in $k$ the optimal allocation $k$ follows a cut-off rule: 
-	\begin{gather*}
+	\begin{gather}
 	k\left(\theta_{0},\theta_{1}\right)=\begin{cases}
 	\begin{array}{c}
 	1,\\
@@ -481,19 +484,19 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 	\text{if} \quad \theta_{1}+\theta_{0}\geq1\\
 	\text{if} \quad \theta_{1}+\theta_{0}<1
 	\end{array}\end{cases}
-	\end{gather*}
+	\end{gather}
 	
 	
 	
 	\paragraph{6)}
 	In the static case virtual surplus is given by: 
-	\begin{align*}
+	\begin{align}
 	VS_{static}&=k\left[\theta_{0}-\frac{1-F_{0}\left(\theta_{0}\right)}{\phi_{0}\left(\theta_{0}\right)}\right] \\
 	&=k\left[\theta_{0}-\frac{1-\theta_{0}}{1}\right] \\
 	&=k\left[2\theta_{0}-1\right]    
-	\end{align*}
+	\end{align}
 	This implies the following optimal allocation: 
-	\begin{gather*}
+	\begin{gather}
 	k^{Static}\left(\theta_{0}\right)=\begin{cases}
 	\begin{array}{c}
 	1,\\
@@ -502,23 +505,23 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 	\text{if} \quad \theta_{0}\geq\frac{1}{2}\\
 	\text{if} \quad \theta_{0}<\frac{1}{2}
 	\end{array}\end{cases}
-	\end{gather*}
+	\end{gather}
 	The allocation in the static case is very similar to the dynamic. When $\varepsilon=0$, they coincide. However, when $\varepsilon$ is different from zero the static allocation rule is different from the dynamic. The intuition is that in the dynamic case the buyer has an opportunity to reduce the information rent if he learns new information between $t=0$ and $t=1$. However, in our case the information he learns has mean zero ($\varepsilon$) so on average the buyer learns no new information, and the impulse response function evaluates to 1 such that we are effectively back in the static case. 
 	
 	
 	\paragraph{7)}
 	We know from the fundamental theorem of calculus that we can write $\frac{dU_{0}\left(\theta_{0}\right)}{d\theta_{0}}=\mathbb{E}_{\theta_{1}}\left[I_{1}(\theta_{0},\theta_{1})\frac{\partial u_{b}\left(\theta_{1},k,p\right)}{\partial\theta_{1}}\left|\theta_{0}\right.\right]$ as:
-	\begin{align*}
+	\begin{align}
 		U_0(\theta_0)=\underline{U}+\int_0^{\theta_0}\frac{\partial U_0(s)}{\partial s}ds
-	\end{align*}
+	\end{align}
 	where $\underline{U}$ is the lower bound, which is equal to the utility of the outside option. The outside option of not buying the project is zero, which is inserted next. The derivative is given by:
-	\begin{align*}
+	\begin{align}
 		\frac{\partial U_0(\theta_0)}{\partial \theta_0} = \mathbb{E}_{\theta_1}[I_1(\theta_0,\theta_1)\frac{\partial u_b(\theta_1,k,p)}{\partial \theta_1}|\theta_0]
 		=\mathbb{E}_{\theta_1}[k(\theta_{1},\theta_{0})|\theta_0] 
-	\end{align*}
+	\end{align}
 	Where it is used that $I_1(\theta_0,\theta_1)=1$ and $\frac{\partial u_b}{\partial \theta_1} = k$ from the envelope theorem. %The term $k(\theta_{1},\theta_{0})$ is given by: 
 	Using the distributions of $\theta_0$ and $\varepsilon$ we get:
-	\begin{align*}
+	\begin{align}
 		\mathbb{E}_{\theta_{1}}[k(\theta_{1},\theta_{0})|\theta_{0}]
 		& = \mathbb{P}_{\theta_1} \left[ \theta_0 + \theta_1 \geq 1 | \theta_0 \right]
 		\\
@@ -529,7 +532,7 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 		& = 1 - \frac{(1 - \theta_0) - (\theta_0 - 1)}{2}
 		\\
 		& = \theta_0
-	\end{align*}
+	\end{align}
 %	=\begin{cases}
 %	\begin{array}{c}
 %	1,\\
@@ -547,24 +550,24 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 %	&=\theta_{0}-\frac{1}{2} 
 %	\end{align*}
 	In the end, we get
-	\begin{align*}
+	\begin{align}
 		U_0(\theta_0) &= \underline{U} + \int_0^{\theta_0} \mathbb{E}_{\theta_{1}}[k(\theta_{1},s)|s] \ \phi_0(s) \ ds
 		\\
 		&= 0 + \int_0^{\theta_0} s\ ds
 		\\
 		&= \frac{\theta_0^2}{2}
-	\end{align*}
+	\end{align}
 	
 	
 	
 	
 	\paragraph{8)  }
 	From the definition of $U_0$ we have: 
-	\begin{align*}
+	\begin{align}
 		U_{0}(\theta_{0})&=\mathbb{E}_{\theta_{1}}[u_{b}|\theta_{0}] \\
 		&=\mathbb{E}_{\theta_{1}}[\theta_{1}k\left(\theta_{0},\theta_{1}\right)-p\left(\theta_{0},\theta_{1}\right)|\theta_{0}] \\
 		&=\mathbb{E}_{\theta_{1}}[\theta_{1}k\left(\theta_{0},\theta_{1}\right)|\theta_{0}]-p\left(\theta_{0}\right),
-	\end{align*}
+	\end{align}
 	where $p\left(\theta_{0}\right)\equiv\mathbb{E}_{\theta_{1}}[p\left(\theta_{0},\theta_{1}\right)|\theta_{0}]$ denotes expected transfers. 
 %	For $\theta_{0}<\frac{1}{2}$ we have $U_{0}(\theta_{0})=0,\mathbb{E}_{\theta_{1}}[k(\theta_{0},\theta_{1})|\theta_{0}]=0$ such that $p\left(\theta_{0}\right)=0$. If, on the other hand, we have $\theta_{0}\geq\frac{1}{2}$ then $U_{0}(\theta_{0})=\theta_{0}-\frac{1}{2},\mathbb{E}_{\theta_{1}}[k(\theta_{0},\theta_{1})|\theta_{0}]=1$ such that:
 %	\begin{align*}
@@ -584,7 +587,7 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 %	\end{array}\end{cases}
 %	\end{gather*}
 	Computing the expectation yields:
-	\begin{align*}
+	\begin{align}
 		\mathbb{E}_{\theta_{1}}[\theta_{1}k\left(\theta_{0},\theta_{1}\right)|\theta_{0}] 
 		&= \mathbb{E}_{\theta_{1}} \left[\theta_{1} \cdot \mathbb{I}[\theta_0+\theta_1 \geq 1] \mid \theta_{0}\right]
 		\\
@@ -595,13 +598,13 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 		&= \left. \frac{\theta_1^2}{4} \right|_{\theta_1 = 1-\theta_0}^{\theta_0+1} = \frac{1}{4} \left[ (1+\theta_0)^2 - (1-\theta_0)^2 \right]
 		\\
 		&= \theta_0.
-	\end{align*}
+	\end{align}
 	Combining this with the expression for the expected utility derived in the previous question, we get that
-	\begin{align*}
+	\begin{align}
 		p(\theta_0) &= \mathbb{E}_{\theta_{1}}[\theta_{1}k\left(\theta_{0},\theta_{1}\right)|\theta_{0}] - U_0(\theta_0)
 		\\
 		&= \theta_0 - \frac{\theta_0^2}{2}
-	\end{align*}
+	\end{align}
 	
 	Back in the static model the fixed-price mechanism was optimal, with $p_{static}(\theta_0) = \frac{1}{2}$. The seller thus gets slightly less revenue in the dynamic mechanism when $\theta_0 \geq \frac{1}{2}$, but gets more when $\theta_0 < \frac{1}{2}$, and is better off on average.
 	
@@ -609,12 +612,12 @@ Suppose now in addition that $\theta_0 \sim U[0,1]$ and $\theta_1 = \theta_0 + \
 	\paragraph{9)}
 	%Bergemann and Välimäki (2019) on the reading list\footnote{Bergemann, Dirk, and Juuso Välimäki. ”Dynamic mechanism design: An introduction.” Journal of Economic Literature 57.2 (2019): 235-74. https://www.aeaweb.org/articles?id=10.1257/jel.20180892} argue that incentive compatibility in dominant strategies is too demanding to obtain in practice in dynamic mechanisms, and instead consider the following ex-post incentive compatibility constraint: 
 	Suppose the consumer has reported $\theta_0$ truthfully and consider the IC constraint at $t=1$, which is
-	\begin{align*}
+	\begin{align}
 	u_{b}\left(\theta_{0},\theta_{1}\right) &\geq u_{b}\left(\theta_{0},\tilde{\theta}_{1}\right),
 	\\
 	\Leftrightarrow \theta_{1}k\left(\theta_{0},\theta_{1}\right)-p\left(\theta_{0}\right) &\geq \theta_{1}k\left(\theta_{0},\tilde{\theta}_{1}\right)-p\left(\theta_{0}\right) \\
 	\Leftrightarrow k\left(\theta_{0},\theta_{1}\right) &\geq k\left(\theta_{0},\tilde{\theta}_{1}\right). 
-	\end{align*}
+	\end{align}
 	where $\tilde{\theta}_{1}$ is the buyers report of $\theta_1$. 
 	%Ex-post IC is then fulfilled of the final report of $\theta$ at the end of the game is a truthful report. The intuition is that it is $\theta_1$ that matters for utility in the end.
 	
