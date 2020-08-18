@@ -1,0 +1,390 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{subfig}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+%\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newtheorem{theorem}{Theorem}
+
+\newif\ifsolutions
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}\\} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle \\ \firstxmark} % Top center head
+\rhead{\instructor \\ \theprofessor \\} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Math Review} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2020} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{5 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\solutionsfalse
+\solutionstrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+	{\Huge Math Review}
+\end{center}
+\bigskip
+
+
+This note is meant to remind you of relevant mathematical tools and methods that we will be actively using throughout the course. The presentation is formal enough for our purposes but omits some other important details. The topics are not connected with one another, so you may only read sections that are relevant to you, in any order.
+
+
+\section{Crash course on probability theory}
+
+The primary goal of this section is to remind you how to work with continuously distributed random variables. It does so by building analogies to relevant rules for discrete random variables. To illustrate the rules, we will use two following random variables:
+\begin{itemize}
+	\item $x \in \{1,2,3\}$ with probability distribution function $p(x) = x/6$, meaning that $x=1$ with probability $1/6$; $x=2$ w.p. $2/6$ and $x=3$ w.p. $3/6$.
+	\item $y \in [0,1]$ with probability density function $f(y)=2y$.
+\end{itemize}
+Probability density function is the analog of probability distribution function for continiously distributed random variables. We need it because in most continuous distributions, the \emph{probability} of any given value occurring is exactly zero (unless this distribution has \emph{atoms} -- values that occur with strictly positive probability). 
+
+One way to interpret pdf $f(y)$ (``pdf'' will always refer to density, not distribution function) is saying it represents \emph{relative likelihoods}. For example, $y=0.5$ with density $f(0.5)=1$ is twice more likely to occur than $y=0.25$ with density $f(0.25)=0.5$, but twice less likely than $y=1$. Finally, just like probabilities of all values $x$ can take must sum up to one: $\sum_{x \in \{1,2,3\}} p(x) = 1$, the density over the range of $y$ must integrate to one: $\int_{0}^1 f(y) dy = 1$.
+
+
+\subsection{Mathematical expectations}
+
+How can we find the mathematical expectation -- average value -- of a random variable? For discrete random variables, we weigh each value with the probability of that value occurring:
+\begin{align*}
+	\mathbb{E}[x] &= \sum_{x \in \{1,2,3\}} x \cdot p(x)
+	\\
+	&= 1 \cdot \frac{1}{6} + 2 \cdot \frac{2}{6} + 3 \cdot \frac{3}{6}
+	\\
+	&= \frac{14}{6} \approx 2.33
+\end{align*}
+Note the slight abuse of notation: when writing $\mathbb{E}[x]$ we use $x$ to denote the random variable itself (a distribution that has not yet realized any given value), while in $\sum_{x} x \cdot p(x)$ we use $x$ to refer to various values that this random variable may take.
+
+To find an expectation of a continuous random variable, we do the exact same thing, except we use integral instead of the sum (since an integral is pretty much a sum of a continuum of infinitesimally small terms):
+\begin{align*}
+	\mathbb{E}[y] &= \int_0^1 \left[y \cdot f(y)\right] dy
+	\\
+	&= \int_0^1 \left[2y^2 \right] dy
+	\\
+	&= \left. \frac{2}{3} y^3 \right|_{y=0}^{1} = \frac{2}{3} - 0 = \frac{2}{3}
+\end{align*}
+
+
+\subsection{Events}
+
+An \emph{event} is a collection of realizations of a random variable. For example, if air temperature $t$ as measured in degrees Celsius is the only unknown (random) variable, then the event ``it will be warm tomorrow'' means ``$t \geq 15$ tomorrow''.
+
+If we know the distribution of the random variable, we can calculate probabilities of events. For example, probability of event $E_x = \{x \geq 2\}$ is given by
+\begin{align*}
+	P(E_x) = \sum_{x \in E_x} p(x) = \frac{1}{3} + \frac{1}{2} = \frac{5}{6}
+\end{align*}
+For continuous random variables, we again substitute the sum with the integral. For example, probability of event $E_y = \{y \geq 0.5\}$ is
+\begin{align*}
+	P(E_y) = \int_{y=0.5}^1 f(y) dy  = \int_{y=0.5}^1 2y dy = y^2 |_{y=0.5}^1 = 1 - 0.25 = 0.75
+\end{align*}
+
+
+\subsection{Bayes' rule and Conditional expectations}
+
+We often need to calculate the conditional expectation of a random variable given some event. E.g., we do not know the exact realization of $x$, but we know that $x \geq 2$. Then we can find the expectation of $x$ conditional on $x \geq 2$ by weighing all possible values of $x \geq 2$ by their respective conditional probabilities (you may recognize this expression as the Bayes' rule)
+\begin{align*}
+	p(x|x\geq 2) = \frac{p(x)}{P\{x \geq 2\}},
+\end{align*}
+thus obtaining 
+\begin{align*}
+	\mathbb{E}[x|x\geq 2] = \sum_{x\geq 2} \frac{p(x)}{P\{x\geq 2\}} \cdot x.
+\end{align*}
+Note that the denominator does not depend on the realization of $x$, so we can take it out of the sum. This means the conditional expectation is equivalent to weighing all possible values of $x \geq 2$ by their respective probabilities, and then normalizing the resulting sum by the probability of the whole event $x \geq 2$:
+\begin{align*}
+	\mathbb{E}[x|x\geq 2] &= \frac{\sum_{x\geq 2} x \cdot p(x)}{P\{x\geq 2\}} 
+	\\
+	&= \frac{\sum_{x\geq 2} x \cdot p(x)}{\sum_{x\geq 2} p(x)} = \frac{\frac{1}{3}\cdot 2 + \frac{1}{2} \cdot 3}{\frac{1}{3} + \frac{1}{2}} = \frac{13}{5} = 2.6
+\end{align*}
+
+For continuous random variables, we again simply substitute the integrals in place of sums in all expressions above. Taking the same event $E_y = \{y \geq 0.5\}$ as an example, we have
+\begin{align*}
+	\mathbb{E}[y|E_y] 
+	= \frac{\int_{y \in E_y} \left[y \cdot f(y)\right] dy}{\int_{y \in E_y} f(y) dy} 
+	= \frac{\int_{0.5}^1 2y^2 dy}{\int_{0.5}^1 2y dy} 
+	= \frac{\left.\frac{2}{3} y^3\right|_{y=0.5}^1}{y^2|_{y=0.5}^1} 
+	= \frac{\frac{2}{3}\cdot \left(1-\frac{1}{8}\right)}{1-\frac{1}{4}}
+	= \frac{7}{9}
+\end{align*}
+
+
+\subsection{Expectations of functions}
+
+What if you need to calculate an expectation of some function $u(y)$? You do the very same thing: you weigh various values of $u(y)$ by the probabilities of respective realizations of $y$. The general formula is
+\begin{align*}
+	\mathbb{E}[u(y)|E_y]
+	= \frac{\int_{y \in E_y} \left[u(y) \cdot f(y)\right] dy}{\int_{y \in E_y} f(y) dy}.
+\end{align*}
+(Can you see how it simplifies in case of an uncondional expectation? Can you see how it will look like for a discrete distribution?)
+
+To summarize all lessons of this sections, consider the following slightly elaborate example. Suppose that you can pay $\$0.5$ to participate in a lottery which pays $w=y^2$ if $y \geq 1/2$ and pays $w=0$ otherwise. How do you compute the average payoff of such a lottery?
+\begin{align*}
+	\mathbb{E}[w] &= P\left(y \geq \frac{1}{2}\right) \cdot \mathbb{E}\left[y^2 \mid y \geq \frac{1}{2}\right] + P\left(y < \frac{1}{2}\right) \cdot \mathbb{E}\left[0 \mid y < \frac{1}{2}\right]
+	\\
+	&= \int_{\frac{1}{2}}^1 f(y) dy \cdot \frac{\int_{\frac{1}{2}}^1 \left[y^2 \cdot f(y)\right] dy \cdot}{\int_{\frac{1}{2}}^1 f(y) dy \cdot} + \int_0^{\frac{1}{2}} f(y) dy \cdot \frac{\int_0^{\frac{1}{2}} \left[0 \cdot f(y)\right] dy \cdot}{\int_0^{\frac{1}{2}} f(y) dy \cdot}
+	\\
+	&= \int_{\frac{1}{2}}^1 \left[y^2 \cdot f(y)\right] dy + 0 = \int_{\frac{1}{2}}^1 2y^3 dy
+	\\
+	&= \left. \frac{1}{2}y^4 \right|_{y=0.5}^1 = \frac{1}{2} \left(1 - \frac{1}{16}\right) = \frac{15}{32}
+\end{align*}
+So if you are risk-neutral and, thus, evaluate lotteries by their expected payoff, then lottery $w$ is not worth taking, because its average payoff is $\frac{15}{32}$, which is less than the price $\frac{1}{2}=\frac{16}{32}$ required to buy it.
+
+
+
+
+\section{Leibniz rule}
+
+The Leibniz rule tells you how to take the derivative of a function that is an integral. We will only use one very special case of it. Therefore, I show you this special case and give the full rule only for sake of completeness below.
+
+What we wat to look at are functions like
+\begin{align*}
+	f(x) = \int_0^x g(y) dy.
+\end{align*}
+
+What is the derivative of $f$? The Leibniz rule says that
+\begin{align*}
+	f'(x)=g(x)
+\end{align*}
+
+The way you should think about this is that the integral is the area below the curve. So, draw some function $g$ now. Seriously, do it! The integral $\int_0^x g(y) dy$ is the area between the axis and the function $g$ from $0$ to some $x$ (take some $x > 0$ and shade this area in the graph you just drew). The derivative of $f$ with respect to $x$ answers to the following question: How does the size of the shaded area change if you make $x$ a bit bigger? From the graph, it should be clear that the area gets approximately $g(x) \cdot dx$ bigger if you increase $x$ by $dx$. This means that $f'(x) = g(x)$ (one marginal unit increase in $x$ increases $f$ by $g(x)$).
+
+Similar intuition implies that the derivative of
+\begin{align*}
+	h(x) &= \int_x^1 g(y) dy
+	\\
+	\text{is }
+	h'(x) &= -g(x).
+\end{align*}
+
+The full Leibniz rule (that we will not really use) says that the derivative of
+\begin{align*}
+	f(x) &= \int_{a(x)}^{b(x)} g(x,y) dy
+	\\
+	\text{is } f'(x) &= -a'(x)g(x,a(x)) + b'(x) g(x,b(x)) + \int_{a(x)}^{b(x)} g'_x(x,y) dy.
+\end{align*}
+
+
+
+\section{Fundamental Theorem of Calculus}
+
+This theorem states what you almost surely know, at least informally: ``integration and taking derivatives are opposite operations''. The theorem consists of two parts, relating to the two possible directions of the ``round trip'': part 1 is about the derivative of the integral, while part 2 is about the integral of a derivative.
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+	\,
+	\begin{enumerate}
+		\item Let $f:[a,b] \to \mathbb{R}$ be bounded and continuous almost everywhere. For any $x \in [a,b]$, define $F(x)$ as
+		\begin{align} \label{eq:FTC}
+			F(x) = F(a) + \int_a^x f(y) dy.
+		\end{align}
+		Then $F$ is continuous on $[a,b]$, and its derivative $F'(x)$ exists and equals $f(x)$ at all continuity points of $f$.
+		
+		\item Let $F:[a,b] \to \mathbb{R}$ be continuously differentiable. For any $x \in [a,b]$, define $f(x)$ as $f(x)=F'(x)$. Then \eqref{eq:FTC} holds.
+	\end{enumerate}
+\end{theorem}
+
+
+
+
+\section{Integration by parts}
+
+Integration is difficult, okay?\footnote{\url{https://xkcd.com/2117/}} Integration by parts is one trick that sometimes helps make it a little easier. For example, if you are asked to compute 
+$$\int_4^5 xe^x dx,$$ finding the ``antiderivative'' of $xe^x$ is not a trivial task. But you can use integration by parts to walk around it. The rule itself looks as
+\begin{align} \label{eq:IBP}
+	\int_a^b u(x) v'(x) dx = [u(x)v(x)]|_a^b - \int_a^b u'(x) v(x) dx,
+\end{align}
+where $u$ and $v$ are some functions of $x$. 
+
+Let us try to apply it to our problem. Set $u(x)=x$ and $v'(x)=e^x$, then $u'(x)=1$ and $v(x)=e^x$ (since $\frac{d}{dx}e^x = e^x$). Plugging all of these in, we get that
+\begin{align*}
+	\int_4^5 xe^x dx &= \left.\left[xe^x\right]\right|_4^5 - \int_4^5 e^x dx
+	\\
+	&=5e^5 - 4e^4 - \left. e^x \right|_4^5
+	\\
+	&=5e^5 - 4e^4 - \left(e^5 - e^4\right) = 4e^5 - 3e^4
+\end{align*}
+How did we know how to split $xe^x$ into $u(x)$ and $v'(x)$? Trial and error really.
+
+For another example, see if you can use integration by parts to calculate $\int_a^b x^2 \log (x) dx$.
+
+
+\subsection{Double integral example}
+
+Integration by parts can sometimes transform double integrals to simple integrals. For example, consider the following integral:
+\begin{align*}
+	\int_0^1 \left(2x \int_a^x f(y) dy\right) dx,
+\end{align*}
+where $f(y)$ is some arbitrary function. Here we can set $u(x) = \int_a^x f(y) dy$ and $v'(x) = 2x$, which would yield $u'(x) = f(x)$ (remember Leibniz rule?) and $v(x) = x^2$. Plugging all of these into the integration by parts expression yields
+\begin{align*}
+	\int_0^1 \left(2x \int_a^x f(y) dy\right) dx &= \left.\left[ x^2 \int_a^x f(y)dy \right]\right|_{x=0}^1 - \int_0^1 f(x) x^2 dx
+	\\
+	&= \int_a^1 f(y) dy - \int_0^1 f(x) x^2 dx,
+\end{align*}
+which looks much nicer! Note also that both $x$ and $y$ in the final expression are just integration variables which we can relabel freely. For example, we can relabel $y$ to $x$ so that the final answer is
+\begin{align*}
+	\int_a^1 f(x) dx - \int_0^1 f(x) x^2 dx.
+\end{align*}
+
+
+\subsection{Why does integration by parts work?}
+
+If integration by parts looks arbitrary and mysterious, it is only because it disguised itself well. Truth is you know it well, since it is nothing more than product differentiation rule:
+\begin{align*}
+	\left( u(x)v(x) \right)' = u'(x) v(x) + u(x) v'(x)
+\end{align*}
+To see the connection, integrate both sides from $a$ to $b$:
+\begin{align*}
+	\int_a^b \left( u(x)v(x) \right)' dx = \int_a^b u'(x) v(x) dx + \int_a^b u(x) v'(x) dx.
+\end{align*}
+Here we already split the right-hand side integral into two. Notice that on the left-hand side we have an integral of the derivative -- the two operations which ``cancel each other out'' (see the fundamental theorem of calculus). Meaning that what we have on the LHS is exactly
+\begin{align*}
+	\int_a^b \left( u(x)v(x) \right)' dx = [u(x)v(x)]|_a^b.
+\end{align*}
+So by rearranging the terms a bit we get precisely the integration by parts rule \eqref{eq:IBP}:
+\begin{align*}
+	[u(x)v(x)]|_a^b &= \int_a^b u'(x) v(x) dx + \int_a^b u(x) v'(x) dx
+	\\
+	\Leftrightarrow \int_a^b u(x) v'(x) dx &= [u(x)v(x)]|_a^b - \int_a^b u'(x) v(x) dx.
+\end{align*}
+
+
+
+
+%\section{Implicit Function Theorem}
+%
+%Often we just know that the optimal decision satisfies a first order condition, but we cannot solve this first order condition explicitly. This does not mean that we cannot say anything about the solution itself!
+%
+%Consider the following example that we will encounter at some point. The first order condition that determines $q(\theta)$ is given by
+%\begin{align} \label{eq:foc}
+%	v_q(q,\theta) - c - \frac{1-F(\theta)}{f(\theta)} v_{q\theta}(q,\theta) = 0.
+%\end{align}
+%Suppose all functions are smooth and are such that \eqref{eq:foc} has a unique solution $q(\theta)$ for every $\theta$.\footnote{Sufficient for this would be the assumptions that $v_{qq} < 0$ and $v_{qq\theta} \leq 0$.}
+
+
+
+
+
+\end{document}
