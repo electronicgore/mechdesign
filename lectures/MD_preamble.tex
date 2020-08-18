@@ -1,0 +1,69 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger and Peter Norman Sorensen.
+
+\DeclareGraphicsExtensions{.eps, .pdf,.png,.jpg,.mps,}
+\usetheme{reMedian}
+\usepackage{parskip}
+\makeatother
+
+\renewcommand{\baselinestretch}{1.1} 
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{bbm}
+\usepackage{color}
+
+\usepackage{tikz}
+\usepackage{tikzscale}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw, inner sep=-20pt] (char) {#1};}}
+\usetikzlibrary{automata,positioning}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usepackage{graphicx}
+
+\usepackage{setspace}
+\thinmuskip=1mu
+\medmuskip=1mu 
+\thickmuskip=1mu 
+
+
+\usecolortheme{default}
+\usepackage{verbatim}
+\usepackage[normalem]{ulem}
+
+\usepackage{apptools}
+\AtAppendix{
+	\setbeamertemplate{frame numbering}[none]
+}
+\usepackage{natbib}
+
+\def\lyxframeend{} % In case there is a superfluous frame end
+\long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+\def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+\def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+\def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+\def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+\long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+	\frame<#1>[#2][#3]{\frametitle{#4}#5}}
+
+%\usepackage[export]{adjustbox}[2011/08/13]
+%\usepackage[round]{natbib}
+%\usepackage{multicol}
+%\usepackage{mathrsfs}
+%\usepackage{epsfig}
+%\usepackage{epstopdf}
+%\usepackage{subfigure}
+%\usepackage{indentfirst}
+%\usepackage{float}
+%\usepackage{multirow} % multirow cells in tables
+%\theoremstyle{definition} 
+
+%\newtheorem{thm}{Theorem}
+%\newtheorem{claim}{Claim}
+%\newtheorem{proposition}{Proposition}
+
+%\usepackage{appendixnumberbeamer}
