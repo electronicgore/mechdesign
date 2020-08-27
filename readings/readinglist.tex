@@ -59,7 +59,7 @@
 \newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
 
 \newcommand{\homeworkProblemName}{}
-\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is ``Problem #''
 \stepcounter{homeworkProblemCounter} % Increase counter for number of problems
 \renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
 \section{\homeworkProblemName} % Make a section in the document with the custom problem count
@@ -145,51 +145,66 @@
 \end{center}
 \bigskip
 
+The primary reference in each section usually contains the most complete treatment of the topic, possibly complemented by one or more other ``primary'' references. Sources listed as ``alternatives'' are substitutes, usually either imperfect ones (so give a narrower coverage), or less accessible ones (harder to read, harder to get the source). 
+
+Items marked with a star indicate optional readings that may be briefly mentioned but not extensively covered in class.
+
 General references:
 \begin{description}
 	\item[MWG] Mas-Colell, Andreu, Michael Dennis Whinston, and Jerry R. Green. Microeconomic theory. New York: Oxford university press, 1995. 
-	\item[B\"{o}rgers] B\"{o}rgers, Tilman. An introduction to the theory of mechanism design. Oxford University Press, 2015.
+	\item[B{\"o}rgers] B{\"o}rgers, Tilman. An introduction to the theory of mechanism design. Oxford University Press, 2015.
+	%\item[Diamantaras] Diamantaras, Cardamone, Campbell, Deacle, and Delgado. A toolbox for economic design. Macmillan, 2009.
 	\item[RS] Roth, Alvin E., and Marilda Sotomayor. Two-Sided Matching: A Study in Game-Theoretic Modeling and Analysis. Cambridge: Cambridge University Press. 1990.
-	\item[(*)] items marked with a star indicate optional readings that may be briefly mentioned but not extensively covered in class.
 \end{description}
 \medskip
 
-\subsection{Mechanism Design Problem (week 1)}
+\subsection{Introduction and Mechanism Design Problem (week 1)}
 \begin{itemize}
-	\item MWG 23.A-B.
 	\item B{\"o}rgers ch.1.
-\end{itemize}
-
-\subsection{Social Choice (week 1)}
-\begin{itemize}
-	\item MWG 21.
-	\item (*) Geanakoplos, John. "Three brief proofs of Arrow’s impossibility theorem." Economic Theory 26.1 (2005): 211-215. \url{https://link.springer.com/article/10.1007/s00199-004-0556-7}
-\end{itemize}
-
-\subsection{Dominant Strategy Implementation (weeks 2-3)}
-\begin{itemize}
-	\item MWG 23.C.
-	\item B{\"o}rgers ch.8 (general), ch.7 (quasilinear efficient), ch.4 (examples).
-	\item (*) Svensson, Lars-Gunnar, and Alexander Reffgen. "The proof of the Gibbard–Satterthwaite theorem revisited." Journal of Mathematical Economics 55 (2014): 11-14.
 	
-	\url{https://www.sciencedirect.com/science/article/pii/S0304406814001177}
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item MWG 23.A-B.
+	\end{itemize}
 \end{itemize}
 
-\subsection{Bayesian Implementation (week 4)}
+\subsection{Efficient Implementation with Transfers (weeks 2-4)}
 \begin{itemize}
-	\item MWG 23.D-E.
-	\item B{\"o}rgers ch.3 (selected settings), ch.6.1-6.3 (monotonicity, rev.eq.).
-	\item Krishna, Vijay, and Motty Perry. "Efficient Mechanism Design." (2000). Unpublished.
+	\item B{\"o}rgers ch.: 7.1-7.3 (DSIC efficient mechanisms), 3 and 4 (examples).
+	
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item MWG 23.C-E.
+	\end{itemize}
+	\item Krishna, Vijay, and Motty Perry. ``Efficient Mechanism Design.'' (2000). Unpublished.
 	
 	\url{https://drive.google.com/file/d/0B9qyCPfbmExnbmE1OTk5OGJmQzA/view}
 \end{itemize}
 
-\subsection{Optimal Mechanisms (weeks 5-6)}
+\subsection{Arbitrary DSIC Social Choice Rules (with and without transfers) (week 5)}
 \begin{itemize}
-	\item MWG 23.F.
-	\item B{\"o}rgers ch.2 (monopolistic screening), ch.3 (trade, auctions).
-	\item (*) Manelli, Alejandro M., and Daniel R. Vincent. "Multidimensional mechanism design: Revenue maximization and the multiple-good monopoly." Journal of Economic theory 137.1 (2007): 153-185. \url{https://www.sciencedirect.com/science/article/pii/S0022053107000348}
-	\item (*) Olszewski, Wojciech, and Ron Siegel. "Performance-maximizing large contests." Theoretical Economics (forthcoming).
+	\item B{\"o}rgers ch.: 7.4 and 5 (transfers), 8 (no transfers)
+	
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item MWG 21, 23.C
+	\end{itemize}
+	\item (*) Geanakoplos, John. ``Three brief proofs of Arrow’s impossibility theorem.'' Economic Theory 26.1 (2005): 211-215. \url{https://link.springer.com/article/10.1007/s00199-004-0556-7}
+	\item (*) Svensson, Lars-Gunnar, and Alexander Reffgen. ``The proof of the Gibbard–Satterthwaite theorem revisited.'' Journal of Mathematical Economics 55 (2014): 11-14.
+	
+	\url{https://www.sciencedirect.com/science/article/pii/S0304406814001177}
+\end{itemize}
+
+\subsection{Optimal Mechanisms (weeks 6-7)}
+\begin{itemize}
+	\item B{\"o}rgers ch.: 6.1-3 (BIC mechanisms and revenue equivalence), 2-4 (actual optimal mechanisms, esp. 3.2).
+	
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item MWG 23.F.
+	\end{itemize}
+	\item (*) Manelli, Alejandro M., and Daniel R. Vincent. ``Multidimensional mechanism design: Revenue maximization and the multiple-good monopoly.'' Journal of Economic theory 137.1 (2007): 153-185. \url{https://www.sciencedirect.com/science/article/pii/S0022053107000348}
+	\item (*) Olszewski, Wojciech, and Ron Siegel. ``Performance‐maximizing large contests.'' Theoretical Economics 15.1 (2020): 57-88.
 	
 	\url{https://econtheory.org/ojs/index.php/te/article/viewForthcomingFile/3588/24803/1}
 \end{itemize}
@@ -197,49 +212,60 @@ General references:
 \subsection{Correlated Information (week 8)}
 \begin{itemize}
 	\item B{\"o}rgers ch.6.4.
-	%\item Cremer, Jacques, and Richard P. McLean. "Full extraction of the surplus in Bayesian and dominant strategy auctions." Econometrica: Journal of the Econometric Society (1988): 1247-1257.
-	%
-	%\url{https://www.jstor.org/stable/1913096}
-	\item Battaglini, Marco. "Multiple referrals and multidimensional cheap talk." Econometrica 70.4 (2002): 1379-1401. \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00336}
+	
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item Cremer, Jacques, and Richard P. McLean. ``Full extraction of the surplus in Bayesian and dominant strategy auctions.'' Econometrica: Journal of the Econometric Society (1988): 1247-1257.
+		
+		\url{https://www.jstor.org/stable/1913096}
+	\end{itemize}
+	\item Battaglini, Marco. ``Multiple referrals and multidimensional cheap talk.'' Econometrica 70.4 (2002): 1379-1401. \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00336}
 \end{itemize}
 
-\subsection{Dynamic Mechanism Design (week 9)}
+\subsection{Dynamic Mechanism Design (weeks 9-10)}
 \begin{itemize}
-	\item Bergemann, Dirk, and Juuso Välimäki. "Dynamic mechanism design: An introduction." Journal of Economic Literature 57.2 (2019): 235-74. \url{https://www.aeaweb.org/articles?id=10.1257/jel.20180892}
-	\item B{\"o}rgers ch.11.
+	\item Bergemann, Dirk, and Juuso Välimäki. ``Dynamic mechanism design: An introduction.'' Journal of Economic Literature 57.2 (2019): 235-74. 
+	\url{https://www.aeaweb.org/articles?id=10.1257/jel.20180892}
+	
+	\textbf{Alternatives:}
+	\begin{itemize}
+		\item B{\"o}rgers ch.11.
+	\end{itemize}
+	\item Topics:
+	\begin{itemize}
+		\item (\emph{risk-aversion}) Thomas, Jonathan, and Tim Worrall. ``Income fluctuation and asymmetric information: An example of a repeated principal-agent problem.'' Journal of Economic Theory 51.2 (1990): 367-390. \url{https://www.sciencedirect.com/science/article/pii/002205319090023D}
+		\item (\emph{no transfers}) Guo, Yingni, and Johannes Hörner. ``Dynamic mechanisms without money.'' Working paper (2018). 
+		
+		\url{http://yingniguo.com/wp-content/uploads/2018/07/Dynamic-Allocation-without-Money.pdf}
+		\item (\emph{no transfers or commitment}) Li, Jin, Niko Matouschek, and Michael Powell. ``Power dynamics in organizations.'' American Economic Journal: Microeconomics 9.1 (2017): 217-41.
+		
+		\url{https://www.aeaweb.org/articles?id=10.1257/mic.20150138}
+	\end{itemize}
 	\item (*) Gershkov, Alex, and Benny Moldovanu. Dynamic Allocation and Pricing: A Mechanism Design Approach. MIT Press, 2014. 
-\end{itemize}
-
-\subsection{Dynamic Mechanism Design: Topics (week 10)}
-\begin{itemize}
-	\item (\emph{risk-aversion}) Thomas, Jonathan, and Tim Worrall. "Income fluctuation and asymmetric information: An example of a repeated principal-agent problem." Journal of Economic Theory 51.2 (1990): 367-390. \url{https://www.sciencedirect.com/science/article/pii/002205319090023D}
-	\item (\emph{no transfers}) Guo, Yingni, and Johannes Hörner. "Dynamic mechanisms without money." Working paper (2018). 
-	
-	\url{http://yingniguo.com/wp-content/uploads/2018/07/Dynamic-Allocation-without-Money.pdf}
-	\item (\emph{no transfers or commitment}) Li, Jin, Niko Matouschek, and Michael Powell. "Power dynamics in organizations." American Economic Journal: Microeconomics 9.1 (2017): 217-41.
-	
-	\url{https://www.aeaweb.org/articles?id=10.1257/mic.20150138}
 \end{itemize}
 
 \subsection{Matching (weeks 11-12)}
 \begin{itemize}
 	\item RS ch.2,4
 	\item (*) RS ch.3,5-9
-	\item (*) Liu, Q., Mailath, G. J., Postlewaite, A., \& Samuelson, L.  "Stable matching with incomplete information." Econometrica 82.2 (2014): 541-587. \url{https://doi.org/10.3982/ECTA11183}
+	\item (*) Liu, Q., Mailath, G. J., Postlewaite, A., \& Samuelson, L.  ``Stable matching with incomplete information.'' Econometrica 82.2 (2014): 541-587. \url{https://doi.org/10.3982/ECTA11183}
 \end{itemize}
 
 \subsection{Information Design (weeks 13-14)}
 \begin{itemize}
-	\item Bergemann, Dirk, and Stephen Morris. "Information design: A unified perspective." Journal of Economic Literature 57.1 (2019): 44-95. 
+	\item Bergemann, Dirk, and Stephen Morris. ``Information design: A unified perspective.'' Journal of Economic Literature 57.1 (2019): 44-95. 
 	
 	\url{https://www.aeaweb.org/articles?id=10.1257/jel.20181489}
-	\item Kamenica, Emir. "Bayesian persuasion and information design." Annual Review of Economics 11 (2018).
+%	\item Kamenica, Emir. ``Bayesian persuasion and information design.'' Annual Review of Economics 11 (2018).
+%	
+%	\url{https://www.annualreviews.org/doi/abs/10.1146/annurev-economics-080218-025739}
+	\item Kamenica, Emir, and Matthew Gentzkow. "Bayesian persuasion." American Economic Review 101.6 (2011): 2590-2615.
 	
-	\url{https://www.annualreviews.org/doi/abs/10.1146/annurev-economics-080218-025739}
+	\url{https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2590}
 \end{itemize}
 
-%\bigskip
-%The list will be expanded and updated as we progress through the course.
+\bigskip
+The list may be expanded and updated as we progress through the course.
 
 
 %%-----------------------------------------------------------------------------------------------------

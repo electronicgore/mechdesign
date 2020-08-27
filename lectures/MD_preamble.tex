@@ -1,5 +1,4 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
-%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger and Peter Norman Sorensen.
 
 \DeclareGraphicsExtensions{.eps, .pdf,.png,.jpg,.mps,}
 \usetheme{reMedian}
@@ -41,6 +40,7 @@
 }
 \usepackage{natbib}
 
+% To use LyX frames from old version:
 \def\lyxframeend{} % In case there is a superfluous frame end
 \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
 \def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
@@ -49,21 +49,3 @@
 \def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
 \long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
 	\frame<#1>[#2][#3]{\frametitle{#4}#5}}
-
-%\usepackage[export]{adjustbox}[2011/08/13]
-%\usepackage[round]{natbib}
-%\usepackage{multicol}
-%\usepackage{mathrsfs}
-%\usepackage{epsfig}
-%\usepackage{epstopdf}
-%\usepackage{subfigure}
-%\usepackage{indentfirst}
-%\usepackage{float}
-%\usepackage{multirow} % multirow cells in tables
-%\theoremstyle{definition} 
-
-%\newtheorem{thm}{Theorem}
-%\newtheorem{claim}{Claim}
-%\newtheorem{proposition}{Proposition}
-
-%\usepackage{appendixnumberbeamer}
