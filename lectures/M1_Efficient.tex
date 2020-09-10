@@ -1,0 +1,602 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[english,10pt
+,aspectratio=169
+%,handout
+%,notes
+]{beamer}
+\input{MD_preamble.tex}
+
+
+\title{Mechanism Design}
+
+\subtitle{1: Efficient Mechanisms}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Fall 2020}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+\note{
+	\begin{itemize}
+		\item Last time we talked about seemingly nothing at all. Some concepts, some logistics, some introductions and technical difficulties -- and we finished early.
+		\item We actually covered some core ideas and concepts. Today we will define those concepts formally.
+		\item It will seem like repetition. But it's not.
+		When you want to draw a plot in mathematica -- you know that `x' is a variable that should be on horizontal axis. But the computer does not. You need to put a line of code saying ``x is a variable''. Math is like computer. To use all the cool stuff from future lectures we need to introduce all the formal mathematical objects that it can work with. Today we'll do that.
+		\item %2020 only
+		Question last time: what's the line between CT and MD? MD is focused on shaping \emph{interactions} between many agents.
+	\end{itemize}
+}
+
+
+
+\begin{frame}
+	(math exercise from notes)
+\end{frame}
+\note{
+	\begin{itemize}
+		\item asked to read mathreview -- how many did that?
+		\begin{itemize}
+			\item introduce quick survey protocol (1s in chat)
+		\end{itemize}
+		\item $\int_a^b x^2 \log (x) dx$: $u=\log(x)$, $dv = x^2 dx$, so $du = 1/x dx$, $v = \frac{x^3}{3}$ and
+		\begin{align*}
+			\int_a^b x^2 \log (x) dx 
+			&= \left(\frac{x^3}{3}\log(x) \right)|_a^b - \int_a^b \frac{x^2}{3} dx
+			\\
+			&= \left(\frac{x^3}{3}\log(x) - \frac{x^3}{9} \right)|_a^b
+		\end{align*}
+	\end{itemize}
+}
+
+
+\section{Defining a Mechanism}
+
+%2020: talk about how MD differs from CT in that it's more social
+
+\begin{frame}{What is a mechanism?}
+	Let's reverse engineer from a simpler question:
+	\textbf{What is a game?}
+	\begin{enumerate}
+		\item Set of players $i \in\{ 1,...,N\}$
+		\item Set of actions $A_i$ for every $i$; set of action profiles $A \equiv \times_{i \in N} A_i$
+		\item Collection of utility functions $u_i: A \to \mathbb{R}$
+	\end{enumerate}
+	(This is a \emph{normal-form game}. All extensive-form games (``trees'') and incomplete-information games can be represented as normal-form games.)
+	
+	Which parts of this definition are fixed at a higher level, and which can we \emph{design} as a part of a \emph{mechanism}?
+\end{frame}
+
+
+\begin{frame}{Problem environment}
+	\centering
+	\includegraphics[scale=0.7]{pics/L2/game_vs_mech}
+\end{frame}
+
+
+\begin{frame}{General Problem Set-up}
+	In our MD problem, the following environment will be \textbf{fixed}:
+	\begin{itemize}
+		\item $N$ agents,
+		\item set $X$ of \alert{outcomes},
+		\item each agent $i$ has \alert{type} $\theta_i\in\Theta_{i}$:
+		\begin{itemize}
+			\item describes agent's \structure{information},
+			\item describes agent's \structure{preferences};
+		\end{itemize}
+		\item the type profile $\theta=(\theta_1,\dots,\theta_{N})$ is distributed according to a distribution $F$ with p.d.f. $\phi$,
+		\begin{itemize}
+			\item (often a missing subscript denotes a vector of respective objects)
+			\item distribution $F$ is commonly known and agreed upon
+		\end{itemize}
+		\item each agent has a \alert{utility} function $u_{i}(x,\theta_{i})$ that depends on the collective choice $x \in X$ and his type $\theta_i$,
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Social Choice Function}
+	\begin{definition}[Social choice function]
+		A \alert{social choice function} is a function \alert{$f:\Theta_{1}\times \dots\times\Theta_{N}\rightarrow X$} that assigns to each profile of types $(\theta_{1},\dots,\theta_{N})$ a collective choice $f(\theta_{1},\dots,\theta_{N})\in X$.
+	\end{definition}
+	\begin{itemize}
+		\item gives a desired outcome as a function of the agents' types
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Mechanism}
+	\begin{itemize}
+		\item a mechanism is a game played by the agents
+		\item each agent has an action set $A_{i}$ in this game
+	\end{itemize}
+	\begin{definition}[mechanism]
+		A \alert{mechanism} $\Gamma=(A_{1},\dots,A_{N},g(\cdot))$ is a collection of: 
+		\begin{itemize}
+			\item N \structure{strategy sets} $(A_{1},\dots,A_{N})$ and 
+			\item an \structure{outcome function} $g:A_{1}\times\dots\times A_{N}\rightarrow X$.
+		\end{itemize}
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}{Implementation}
+	\begin{definition}[implementation]
+		Mechanism $\alert{\Gamma}=(A_{1},\dots,A_{N},g(\cdot))$ \alert{implements} the s.c.f. $\alert{f}$ if there is \structure{an equilibrium} strategy profile $(a_{1}^{*},\dots,a_{N}^{*})$ of the Bayesian game induced by $\Gamma$ \structure{such that} 
+		$$\structure{g}(a_{1}^{*}(\theta_{1}),\dots,a_{N}^{*}(\theta_{N})) = \structure{f} (\theta_{1},\dots,\theta_{N})$$ 
+		for all $(\theta_{1},\dots,\theta_{N})\in\Theta_{1}\times\dots \times\Theta_{N}$.
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}{Summary of definitions}
+	\begin{itemize}
+		\item S.c.f. $f$ describes what we want to achieve;
+		\item Mechanism $\Gamma = (S,g)$ describes what we do and how;
+		\item Implementability says whether we have achieved our goal.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Full problem setup}
+	\centering
+	\includegraphics[scale=0.7]{pics/L2/game_vs_mech2}
+\end{frame}
+
+
+\begin{frame}
+	(mechanism proposals)
+\end{frame}
+
+
+
+\section{Revelation Principle}
+
+\begin{frame}{Revelation Principle}
+	\begin{itemize}
+		\item Main cheat in Mechanism Design! No need to bruteforce through uncountable numbers of different games! It is enough to just... \visible<1>{(\href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{{click to see more}})}
+		\pause
+		\item Instead of making players play the game, ask them for their $\theta_i$ and promise to play on their behalf!
+		\item Requires that the designer has commitment power.
+		\begin{itemize}
+			\item Strong assumption, sometimes reasonable(?)
+			\item The necessary evil for our purposes.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Revelation Principle: Definitions}
+	Fix some s.c.f. $f:\Theta \to X$.
+	\begin{definition}[Direct revelation mechanism]
+		A \structure{direct revelation mechanism} for $f$ is a mechanism in which $A_i = \Theta_i$ for all $i$ and $g(\theta) = f(\theta)$
+	\end{definition}
+	
+	\begin{definition}[Truthuful implementation]
+		S.c.f. $f$ is \structure{truthfully implementable} if it can be implemented by a direct revelation mechanism.
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}{Revelation Principle: Statement}
+	\begin{block}{Revelation principle (blanket statement)}
+		Suppose there exists a mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ that implements the social choice function $f$.\\ Then $f$ is \structure{truthfully implementable}.
+	\end{block}
+	\medskip
+	\begin{itemize}
+		\item The statement above is informal.
+		\begin{itemize}
+			\item ``Implementation'' requires ``an equilibrium'', which can mean a million different things.
+		\end{itemize}
+		\item We will now focus on specific equilibrium concepts.
+	\end{itemize}
+\end{frame}
+\note{
+	\begin{itemize}
+		\item We cannot fool agents by designing a very complicated game -- because they are rational and will compute the optimal strategy regardless
+		\begin{itemize}
+			\item This is, in part, to impose discipline our models -- if can deceive or confuse players then why not just do that.
+			\item Economics is the science about being ``technically truthfull'' -- can never lie in equilibrium.
+		\end{itemize}
+		\item We need a formal equilibrium concept, so let's introduce one...
+		\begin{itemize}
+			\item Who knows which eqm concepts?
+		\end{itemize}
+	\end{itemize}
+}
+
+
+
+
+\section{Dominant Strategy Implementation}
+
+%TODO 2020: switch from s and S to a and A since there are all actions, not strategies.
+\begin{frame}{Recap: Dominant Strategy}
+	\begin{itemize}
+		\item strategy $a_i$ is a full contingent plan of play
+		\item strategy $a_i$ is \alert{dominant} for agent $i$ if it is best \emph{no matter what the other players do}
+	\end{itemize}
+	\begin{definition}[dominant strategy]
+		Given mechanism $\Gamma=(A,g)$,
+		$a_{i}: \Theta_{i}\rightarrow A_{i}$ is a \structure{dominant strategy} if for all $\theta_{i}\in \Theta_{i}$
+		$$ u_{i}(g(a_{i}(\theta_{i}),a_{-i}),\theta_{i})\geq u_{i}(g(\hat a_{i},a_{-i}),\theta_{i})$$
+		for all $\hat a_{i}\in A_{i}$  and all $a_{-i}\in A_{-i}$.
+	\end{definition}
+	\begin{itemize}
+		\item our definition slightly different from the standard -- does not require strict inequality
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dominant Strategy Equilibrium}
+	\begin{itemize}
+		\item in a \alert{dominant strategy equilibrium} every player plays a dominant strategy
+	\end{itemize}
+	\begin{definition}[dominant strategy equilibrium]
+		A strategy profile $(a_1^*,\dots,a_N^*)$ is a \structure{dominant strategy equilibrium} of mechanism  $\Gamma=(A_{1},\dots,A_{N},g)$ if for all $i$ and all $\theta_{i}\in \Theta_{i}$
+		$$ u_{i}(g(a_{i}^{*}(\theta_{i}),a_{-i}),\theta_{i}) \geq u_{i}(g(\hat a_{i},a_{-i}), \theta_{i})$$
+		for all $\hat a_{i}\in A_{i}$ and all $a_{-i}\in A_{-i}$.
+	\end{definition}
+
+	Now let's finally be formal about all our definitions.
+\end{frame}
+
+
+\begin{frame}{Dominant Strategy Implementation}
+	\begin{itemize}
+		\item A mechanism \alert{implements $f$ in dominant strategies} if
+		\begin{itemize}
+			\item the game induced by the mechanism has a dominant strategy equilibrium
+			\item the outcome in this equilibrium coincides with $f$
+		\end{itemize}
+	\end{itemize}
+	\begin{definition}[implementation in dominant strategies]
+		A mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ \structure{implements} the social choice function $f$ \structure{in dominant strategies} if there exists a dominant strategy equilibrium $(a_1^*,\dots,a_N^*)$ of $\Gamma$ such that $g(a_1^*(\theta_{1}),\dots,a_N^*(\theta_{N}))=f(\theta)$ for all $\theta\in\Theta$.
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}{Good Implementation Concept?}
+	\begin{itemize}
+		\item very robust equilibrium concept
+		\begin{itemize}
+			\item no need to predict what the other players will play
+			\item no need to know the type distribution $\phi$
+			\item works even if
+			\begin{itemize}
+				\item players don't know $\phi$ or even if players believe in different $\phi_{i}$ (protects from players' model misspecification)
+				\item players think that other players are not rational
+			\end{itemize}
+		\end{itemize}
+		\item not a panacea
+		\begin{itemize}
+			\item does not rule out other weird Nash Equilibria (remember SPA)
+			\item is not necessarily collusion-proof
+			\item does not protect from designer's model misspecification
+		\end{itemize}
+	\end{itemize}
+	Bottom line: it's as good as they get, but far from perfect.
+\end{frame}
+
+
+\begin{frame}{Dominant Strategy Incentive Compatibility}
+	\begin{theorem}[Revelation Principle for Dominant Strategies]
+		Suppose there exists a mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ that implements the social choice function $f$ in dominant strategies.\\ Then $f$ is \structure{truthfully implementable} in dominant strategies.
+	\end{theorem}
+	\medskip
+	\begin{definition}[Dominant Strategy Incentive Compatibility]
+		``$f$ is \alert{dominant strategy incentive compatible} (DSIC)''\\ 
+		means the exact same thing as \\
+		``$f$ is \structure{truthfully implementable in dominant strategies}''.
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}{DS Revelation Principle: Proof}
+	Let $\Gamma$ implement $f$ in dominant strategies, i.e. there is a strategy profile  $(a_1^*,\dots,a_N^*)$ such that $g(a_1^*(\theta_{1}),\dots,a_N^*(\theta_{N}))=f(\theta)$ for all $\theta$, and for all $i$ and  $\theta_{i}\in\Theta_{i}$,
+	$$ u_{i}(g(a_{i}^{*}(\theta_{i}),a_{-i}),\theta_{i})\geq u_{i}(g(\hat a_{i},a_{-i}),\theta_{i})$$
+	for all $\hat a_{i}\in A_{i}$ and all $a_{-i}\in A_{-i}$. 
+	
+	Then
+	$$ u_{i}(g(a_{i}^{*}(\theta_{i}), a_{-i}^{*}(\theta_{-i})),\theta_{i})\geq u_i (g(a^*_i(\hat{\theta}_i), a_{-i}^{*}(\theta_{-i})), \theta_i)$$
+	for all $\hat{\theta}_i \in \Theta_i$, $\theta_{-i} \in \Theta_{-i}$. 
+	
+	Since $g(a^*(\theta)) = f(\theta)$,
+	$$ u_i (f(\theta_i,\hat{\theta}_{-i}),\theta_i) \geq u_i (f(\hat{\theta}_i,\hat{\theta}_{-i}), \theta_i)$$
+	for all $\hat{\theta}_{-i} \in \Theta_{-i}$.
+\end{frame}
+
+
+\begin{frame}{Revelation Principle: Is it cool or is it cool?}
+	\begin{itemize}
+		\item Allows to quickly check whether a given $f$ is [DS] implementable.
+		\item If yes, gives you a mechanism to implement it.
+		\item If not, helps you describe a set of implementable s.c.f. and pick second best.
+		\item \emph{Yours today for \soutred{only \$49.99+shipping} FREE with a qualifying Mechanism Design course!}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DSIC: Example}
+\begin{example}[Communism]
+	\begin{itemize}
+		\item society of $N$ people;
+		\item each person's productivity either high $\theta^h$ or low $\theta^l$, equal shares of society;
+		\item a $\theta^{h}$ ($\theta^{l}$) type produces 4 (2) units per full day
+		\item working full day costs 1 unit to the person
+		\item working half day costs 0.5 units
+		\item the government can only observe the income=production but not the type (nor number of hours worked)
+		\item the government can use taxation to redistribute income
+		\item Can the government achieve an equal society in which everyone works full time and has an income of 3?
+	\end{itemize}
+\end{example}
+\end{frame}
+
+%TODO: move this to ``arbitrary scf''
+%\begin{frame}{DSIC: Weak Preference Reversal Property}
+%\begin{itemize}
+%	\item ``To each their own'': different types should get their most preferred option among the available ones:
+%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}')$$
+%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') \leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'')$$
+%	\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$.
+%	\item Obviously a necessary condition for DSIC. Can show it's also sufficient, meaning in the end Preference Reversal is equivalent to $f$ being DSIC.
+%\end{itemize}
+%\end{frame}
+
+
+
+\section{Efficient quasilinear mechanisms: VCG}
+
+\begin{frame}{Quasilinear Preferences}
+\begin{itemize}
+	\item Instead of allowing all possible preferences, adopt a special structure.
+	\item Instead of $x \in X$ describing everything related to outcome, split it into:
+	\begin{itemize}
+		\item $\alert{k(\theta) \in K}$, ``real/material outcome'' a.k.a. \structure{allocation}
+		\item $\alert{t(\theta) \in \mathbb{R}^N}$, \structure{transfers/payments}
+	\end{itemize}
+	\item Instead of arbitrary $u_i(x,\theta)$ focus on \structure{quasilinear preferences}:
+	$$\alert{ u_i(x,\theta_i) = v_i(k,\theta_i) - t_i }$$
+	\vspace{-1em}
+	\item S.c.f. is $f(\theta) = \left( k(\theta), t_1(\theta), ..., t_N(\theta) \right)$
+\end{itemize}
+\end{frame}
+\note{
+	Everything before was very abstract. Let's get to particulars and implement efficient scf. To make things easier, focus on quasilinear setting (allow numeraire=money=transferable utility).
+}
+
+
+\begin{frame}{Quasilinear Preferences}
+\begin{itemize}
+	\item Restrictions include:
+	\begin{itemize}
+		\item Monetary transfers always available,
+		\item utility is linear in money,
+		\item marginal utility of money is constant across types and people.
+	\end{itemize}
+	\item All three are sometimes restrictive, the latter two especially. But let's roll with it.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Efficient Implementation}
+\begin{itemize}
+	\item A frequent question: ``Dr.Professor, how can we as society implement \structure{the efficient outcome}?''
+	\item Reminder: efficient outcome $x^*(\theta) = (k^*(\theta),t^*(\theta))$ is 
+	\vspace{-0.5em}\begin{align*}
+	x^*(\theta) &= \arg \max_x \sum_{i=1}^N u_i(x,\theta_i) \\
+	&= \arg \max_{(k,t)} \sum_{i=1}^N \left[v_i(k,\theta_i) - t_i\right]
+	\end{align*}
+	\item Transfers just reallocate utility across agents, so focus on \structure{efficient allocation $k^*(\theta)$}:
+	\vspace{-1em}\begin{align*}
+	k^*(\theta) = \arg \max_k \sum_{i=1}^N v_i(k,\theta)
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Efficient Implementation}
+\begin{itemize}
+	\item What we as designers want:
+	\vspace{-1em}\begin{align*}
+	\max \sum_{i=1}^N v_i(k,\theta_i)
+	\end{align*}
+	\item What agent $i$ wants:
+	\vspace{-1em}\begin{align*}
+	\max v_i(k,\theta_i) - t_i
+	\end{align*}
+	\item How to reconcile the two?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{VCG Mechanism: Groves' Transfers}
+\begin{itemize}
+	\item More formally, the problem of agent $i$ of type $\theta_i$ is:
+	\vspace{-0.5em}\begin{align*}
+	\max_{\hat{\theta}_i} \left\{  v_i(k^*(\hat{\theta}_i,\theta_{-i}),\theta_i) - t_i(\hat{\theta}_i,\theta_{-i}) \right\}
+	\end{align*}\vspace{-1em}
+	\item Try \alert<1>{Groves' transfers}:
+	\vspace{-0.5em}\begin{align*}
+	\structure<1>{ t_{i}(\theta)=-\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i}) }
+	\end{align*}\vspace{-1em}
+	\item Agent's problem is now
+	\vspace{-0.5em}\begin{align*}
+	\max_{\hat{\theta}_i} \left\{ \structure{v_i(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}),\theta_i) + \left( \sum_{j\neq i} v_{j}(k^*(\alert<3>{\hat{\theta}_i},\theta_{-i}), \theta_{j}) \right)} - h_{i}(\theta_{-i}) \right\}
+	\end{align*}
+\end{itemize}
+\end{frame}
+\note{
+	Note on interpretation: the happier you make others, the less you have to pay
+}
+
+
+\begin{frame}{VCG Mechanism: Groves' Transfers}
+\begin{itemize}
+	\item Agent's problem is now
+	\vspace{-0.5em}\begin{align*}
+	\max_{\hat{\theta}_i} \left\{ \structure{ \sum_{j=1}^N v_{j}(k^*(\alert{\hat{\theta}_i},\theta_{-i}), \theta_{j}) } - h_{i}(\theta_{-i}) \right\}
+	\end{align*}
+	\item Every agent $i$ maximizes welfare!
+	\begin{itemize}
+		\item Optimal to report true $\hat{\theta}$,
+		\item for any $\theta_{-i}$.
+	\end{itemize}
+	\item Crucial that $h_i(\theta_{-i})$ does not depend on $i$'s report.
+\end{itemize}
+\end{frame}
+%TODO: VCG proof?
+
+
+\begin{frame}{VCG Mechanism: Example}
+\begin{exampleblock}{Back to Moon Base}
+	\begin{itemize}
+		\item $N$ citizens decide whether to build a Moon base which costs $c$
+		\item citizen $i$ has private valuation $\theta_{i}$ for the base and quasilinear utility
+		
+		(so if base built then $v_i = \theta_i$, otherwise $v_i = 0$)
+	\end{itemize}
+\end{exampleblock}
+\begin{itemize}
+	\item What are Groves' transfers{\tiny\texttrademark}? (Take $h_i(\theta_{-i}) \equiv 0$.)
+	% $$ t_i(\theta) = - \mathbb{I} \left\{\sum_{j=1}^N \theta_j \geq c \right\} \cdot \sum_{j \neq i} \theta_j $$
+	\item The incentives are there... but at what cost?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{VCG Mechanism: Clarke Term}
+\begin{itemize}
+	\item A suggestion for $h_i(\theta_{-i})$ made by Clarke (``pivot mechanism''):
+	\vspace{-0.5em}\begin{align*}
+	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
+	\\ &\text{where } k^*(\theta_{-i}) = \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
+	\end{align*}
+	\item Resulting \alert{VCG transfers}:
+	\vspace{-0.5em}\begin{align*}
+	\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+	\end{align*}
+\end{itemize}
+\end{frame}
+\note{
+	\begin{itemize}
+		\item If you ``say nothing'', presumably some outcome is still implemented.
+		\item So if you decide to ``say anything'', it is to tilt the decision in your direction at the expense of everyone else.
+		\item So you must pay exactly the externality you impose on everyone else.
+	\end{itemize}
+}
+
+
+\begin{frame}{VCG Mechanism: Final Transfers}
+\begin{align*}
+\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+\end{align*}
+\begin{itemize}
+	\item What's the big idea?
+	\item Agent $i$ receives the externality his report imposes on others (mind the signs).
+	\item What are VCG transfers in the Moon Base question?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{VCG Mechanism: Example}
+\begin{example}[Auction]
+	\begin{itemize}
+		\item One indivisible item to be allocated among $N$ bidders.
+		\item Bidder $i$'s valuation is \structure{$\theta_i$} (private info).
+		%\item Want to allocate the item efficiently (to whoever values it most).
+		\item What is the VCG mechanism?
+	\end{itemize}
+\end{example}
+\begin{itemize}
+	\item VCG mechanism is the second-price auction (efficient and DSIC).
+	\item Also known as the Vickrey auction (the V in VCG).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{VCG aftermath}
+\begin{itemize}
+	\item We have an easy recipe to implement the \structure{efficient} outcome in \structure{dominant} strategies.
+	\item Any problems?
+\end{itemize}
+\end{frame}
+\note{
+	\begin{itemize}
+		\item It may not be budget balanced or, more generally, maximize revenue...
+		\item All DSE issues apply (collusion, misspecification, (complexity))
+	\end{itemize}
+}
+
+
+\begin{frame}{Exercises}
+	(problem set on absalon)
+	\begin{enumerate}
+		\item Design an efficient attendance mechanism for our course.
+		\item Solve a problem on VCG.
+	\end{enumerate}
+\end{frame}
+
+
+% Now let's talk about whether sum of utilities is a good measure of welfare...
+
+%\section{Social Choice Functions}
+%
+%
+%\begin{frame}{Detour: Social Choice Theory}
+%\begin{itemize}
+%	\item Sum of utilities is just one measure of welfare -- others are available.
+%	\item Further: utilities $u_i$ are nice for exploring intrapersonal trade-offs when making decisions;
+%	\item not so good for interpersonal comparisons -- how to measure relative preference intensity?
+%	\item What do?
+%	\item Social Choice Theory (\& Welfare Economics) deal with aggregating individual preferences into social preference.
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Social Choice: Axiomatic Approach}
+%\begin{itemize}
+%	\item If cardinal utilities bad -- can work with ordinal preference relations $\succsim_i$.
+%	\item Can impose axioms on how \structure{individual preferences} $\succsim_i$ should map into \structure{social preference} relation $\succsim$ (and/or corresponding social choice function $f$).
+%	\item Possible reasonable axioms:
+%\end{itemize}
+%\begin{description}
+%	\item[(A1)] \structure{Domain}: any collection of individual preferences $\left(\succsim_1, ..., \succsim_N \right)$ can be aggregated into $\succsim$.
+%	\item[(A2)] \structure{Unanimity}: if $a \succsim_i b$ for all $i$ then $a \succsim b$.
+%	\item[(A3)] \structure{Independence of Irrelevant Alternatives}: if $\succsim_i$ and $\succsim'_i$ rank alternatives $a$ and $b$ the same for all $i$ then so should $\succsim$ and $\succsim'$.
+%\end{description}
+%\end{frame}
+%
+%
+%\begin{frame}{Social Choice: Axiomatic Approach}
+%\begin{block}{Arrow's Theorem}
+%	With more than three alternatives, if $\succsim$ satisfies (A1)-(A3) then it is dictatorial, i.e. $\exists i: a \succsim b \Leftrightarrow a \succsim_i b$.
+%\end{block}
+%\begin{block}{Proof}
+%	\href{https://link.springer.com/article/10.1007/s00199-004-0556-7}{Geanakoplos, J. (2005). Three brief proofs of Arrow's impossibility theorem. Economic Theory, 26(1), 211-215.}
+%	\vspace{8em}
+%\end{block}
+%\end{frame}
+%
+%
+%\begin{frame}{Social Choice}
+%\begin{itemize}
+%	\item See Geanakoplos' paper for [slightly] more details on Arrow's Thm, and MWG ch.21 for more details on Social Choice theory.
+%	\item Lesson: aggregating preferences is a difficult problem in itself.
+%	\item We won't be dealing with this problem in this class, from now on just take $f$ as given.
+%\end{itemize}
+%\end{frame}
+%
+%%TODO 2020: talk about median voter thm with single-peaked preferences here
+
+
+
+\end{document}
