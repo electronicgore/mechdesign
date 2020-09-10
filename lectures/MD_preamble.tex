@@ -40,6 +40,13 @@
 }
 \usepackage{natbib}
 
+
+% red strikeout
+\newcommand\soutred{\bgroup\markoverwith
+	{\textcolor{red}{\rule[0.55ex]{2pt}{0.8pt}}}\ULon}
+
+
+
 % To use LyX frames from old version:
 \def\lyxframeend{} % In case there is a superfluous frame end
 \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%

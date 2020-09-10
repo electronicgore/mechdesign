@@ -138,13 +138,6 @@
 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\solutionsfalse
-\solutionstrue
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
 
 \begin{center}
@@ -160,8 +153,8 @@ This note is meant to remind you of relevant mathematical tools and methods that
 
 The primary goal of this section is to remind you how to work with continuously distributed random variables. It does so by building analogies to relevant rules for discrete random variables. To illustrate the rules, we will use two following random variables:
 \begin{itemize}
-	\item $x \in \{1,2,3\}$ with probability distribution function $p(x) = x/6$, meaning that $x=1$ with probability $1/6$; $x=2$ w.p. $2/6$ and $x=3$ w.p. $3/6$.
-	\item $y \in [0,1]$ with probability density function $f(y)=2y$.
+	\item $x \in \{1,2,3\}$ with \emph{probability distribution function} $p(x) = x/6$, meaning that $x=1$ with probability $1/6$; $x=2$ w.p. $2/6$ and $x=3$ w.p. $3/6$.
+	\item $y \in [0,1]$ with \emph{probability density function} $f(y)=2y$.
 \end{itemize}
 Probability density function is the analog of probability distribution function for continiously distributed random variables. We need it because in most continuous distributions, the \emph{probability} of any given value occurring is exactly zero (unless this distribution has \emph{atoms} -- values that occur with strictly positive probability). 
 
@@ -178,7 +171,7 @@ How can we find the mathematical expectation -- average value -- of a random var
 	\\
 	&= \frac{14}{6} \approx 2.33
 \end{align*}
-Note the slight abuse of notation: when writing $\mathbb{E}[x]$ we use $x$ to denote the random variable itself (a distribution that has not yet realized any given value), while in $\sum_{x} x \cdot p(x)$ we use $x$ to refer to various values that this random variable may take.
+%Note the slight abuse of notation: when writing $\mathbb{E}[x]$ we use $x$ to denote the random variable itself (a distribution that has not yet realized any given value), while in $\sum_{x} x \cdot p(x)$ we use $x$ to refer to various values that this random variable may take.
 
 To find an expectation of a continuous random variable, we do the exact same thing, except we use integral instead of the sum (since an integral is pretty much a sum of a continuum of infinitesimally small terms):
 \begin{align*}
@@ -192,7 +185,7 @@ To find an expectation of a continuous random variable, we do the exact same thi
 
 \subsection{Events}
 
-An \emph{event} is a collection of realizations of a random variable. For example, if air temperature $t$ as measured in degrees Celsius is the only unknown (random) variable, then the event ``it will be warm tomorrow'' means ``$t \geq 15$ tomorrow''.
+An \emph{event} is a collection of realizations of a random variable. For example, if air temperature $t$ (in C) is the only unknown (random) variable, then the event ``it will be warm tomorrow'' means something like ``$t \geq 15$ tomorrow''.
 
 If we know the distribution of the random variable, we can calculate probabilities of events. For example, probability of event $E_x = \{x \geq 2\}$ is given by
 \begin{align*}
@@ -200,7 +193,7 @@ If we know the distribution of the random variable, we can calculate probabiliti
 \end{align*}
 For continuous random variables, we again substitute the sum with the integral. For example, probability of event $E_y = \{y \geq 0.5\}$ is
 \begin{align*}
-	P(E_y) = \int_{y=0.5}^1 f(y) dy  = \int_{y=0.5}^1 2y dy = y^2 |_{y=0.5}^1 = 1 - 0.25 = 0.75
+	P(E_y) = \int_{y \in E_y} f(y) dy = \int_{y=0.5}^1 f(y) dy  = \int_{y=0.5}^1 2y dy = y^2 |_{y=0.5}^1 = 1 - 0.25 = 0.75
 \end{align*}
 
 
@@ -221,7 +214,7 @@ Note that the denominator does not depend on the realization of $x$, so we can t
 	&= \frac{\sum_{x\geq 2} x \cdot p(x)}{\sum_{x\geq 2} p(x)} = \frac{\frac{1}{3}\cdot 2 + \frac{1}{2} \cdot 3}{\frac{1}{3} + \frac{1}{2}} = \frac{13}{5} = 2.6
 \end{align*}
 
-For continuous random variables, we again simply substitute the integrals in place of sums in all expressions above. Taking the same event $E_y = \{y \geq 0.5\}$ as an example, we have
+For continuous random variables, we again simply substitute the sums for integrals. Taking the same event $E_y = \{y \geq 0.5\}$ as an example, we have
 \begin{align*}
 	\mathbb{E}[y|E_y] 
 	= \frac{\int_{y \in E_y} \left[y \cdot f(y)\right] dy}{\int_{y \in E_y} f(y) dy} 
@@ -241,7 +234,7 @@ What if you need to calculate an expectation of some function $u(y)$? You do the
 \end{align*}
 (Can you see how it simplifies in case of an uncondional expectation? Can you see how it will look like for a discrete distribution?)
 
-To summarize all lessons of this sections, consider the following slightly elaborate example. Suppose that you can pay $\$0.5$ to participate in a lottery which pays $w=y^2$ if $y \geq 1/2$ and pays $w=0$ otherwise. How do you compute the average payoff of such a lottery?
+To summarize all lessons of this sections, consider the following slightly elaborate example. Suppose that you can pay $\$0.5$ to participate in a lottery which pays $w=y^2$ if $y \geq 1/2$ and pays $w=0$ otherwise ($y$ here has the same distribution as above). How do you compute the average payoff of such a lottery?
 \begin{align*}
 	\mathbb{E}[w] &= P\left(y \geq \frac{1}{2}\right) \cdot \mathbb{E}\left[y^2 \mid y \geq \frac{1}{2}\right] + P\left(y < \frac{1}{2}\right) \cdot \mathbb{E}\left[0 \mid y < \frac{1}{2}\right]
 	\\
@@ -270,7 +263,7 @@ What is the derivative of $f$? The Leibniz rule says that
 	f'(x)=g(x)
 \end{align*}
 
-The way you should think about this is that the integral is the area below the curve. So, draw some function $g$ now. Seriously, do it! The integral $\int_0^x g(y) dy$ is the area between the axis and the function $g$ from $0$ to some $x$ (take some $x > 0$ and shade this area in the graph you just drew). The derivative of $f$ with respect to $x$ answers to the following question: How does the size of the shaded area change if you make $x$ a bit bigger? From the graph, it should be clear that the area gets approximately $g(x) \cdot dx$ bigger if you increase $x$ by $dx$. This means that $f'(x) = g(x)$ (one marginal unit increase in $x$ increases $f$ by $g(x)$).
+The way you should think about this is that the integral of a function is the area below the graph of this function. So, draw some function $g$ now. Seriously, do it! The integral $\int_0^x g(y) dy$ is the area between the axis and the function $g$ from $0$ to some $x$ (take some $x > 0$ and shade this area in the graph you just drew). The derivative of $f$ with respect to $x$ answers to the following question: How does the size of the shaded area change if you make $x$ a bit bigger? From the graph, it should be clear that the area gets approximately $g(x) \cdot dx$ bigger if you increase $x$ by $dx$. This means that $f'(x) = g(x)$ (one marginal unit increase in $x$ increases $f$ by $g(x)$).
 
 Similar intuition implies that the derivative of
 \begin{align*}
@@ -312,7 +305,7 @@ This theorem states what you almost surely know, at least informally: ``integrat
 \section{Integration by parts}
 
 Integration is difficult, okay?\footnote{\url{https://xkcd.com/2117/}} Integration by parts is one trick that sometimes helps make it a little easier. For example, if you are asked to compute 
-$$\int_4^5 xe^x dx,$$ finding the ``antiderivative'' of $xe^x$ is not a trivial task. But you can use integration by parts to walk around it. The rule itself looks as
+$$\int_4^5 xe^x dx,$$ finding the ``antiderivative'' of $xe^x$ is not a trivial task. But you can use integration by parts to go around it. The rule itself looks as
 \begin{align} \label{eq:IBP}
 	\int_a^b u(x) v'(x) dx = [u(x)v(x)]|_a^b - \int_a^b u'(x) v(x) dx,
 \end{align}
@@ -326,7 +319,7 @@ Let us try to apply it to our problem. Set $u(x)=x$ and $v'(x)=e^x$, then $u'(x)
 	\\
 	&=5e^5 - 4e^4 - \left(e^5 - e^4\right) = 4e^5 - 3e^4
 \end{align*}
-How did we know how to split $xe^x$ into $u(x)$ and $v'(x)$? Trial and error really.
+How did we know how to split $xe^x$ into $u(x)$ and $v'(x)$? Trial and error really. (what happens if you go the other way?)
 
 For another example, see if you can use integration by parts to calculate $\int_a^b x^2 \log (x) dx$.
 
@@ -355,7 +348,7 @@ If integration by parts looks arbitrary and mysterious, it is only because it di
 \begin{align*}
 	\left( u(x)v(x) \right)' = u'(x) v(x) + u(x) v'(x)
 \end{align*}
-To see the connection, integrate both sides from $a$ to $b$:
+To see the connection, integrate both sides of this expression from $a$ to $b$:
 \begin{align*}
 	\int_a^b \left( u(x)v(x) \right)' dx = \int_a^b u'(x) v(x) dx + \int_a^b u(x) v'(x) dx.
 \end{align*}
