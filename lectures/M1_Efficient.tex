@@ -3,7 +3,7 @@
 \documentclass[english,10pt
 ,aspectratio=169
 ,handout
-%,notes
+,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
@@ -219,6 +219,7 @@
 \section{Dominant Strategy Implementation}
 
 %TODO 2020: switch from s and S to a and A since there are all actions, not strategies.
+%TODO2021: was that the right call?
 \begin{frame}{Recap: Dominant Strategy}
 	\begin{itemize}
 		\item strategy $a_i$ is a full contingent plan of play
@@ -328,6 +329,7 @@
 \end{frame}
 
 
+%TODO2021: bad example, since there are inalienable actions (work amounts)
 \begin{frame}{DSIC: Example}
 \begin{example}[Communism]
 	\begin{itemize}
@@ -343,38 +345,26 @@
 \end{example}
 \end{frame}
 
-%TODO: move this to ``arbitrary scf''
-%\begin{frame}{DSIC: Weak Preference Reversal Property}
-%\begin{itemize}
-%	\item ``To each their own'': different types should get their most preferred option among the available ones:
-%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}')$$
-%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') \leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'')$$
-%	\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$.
-%	\item Obviously a necessary condition for DSIC. Can show it's also sufficient, meaning in the end Preference Reversal is equivalent to $f$ being DSIC.
-%\end{itemize}
-%\end{frame}
 
 
-
-\section{Efficient quasilinear mechanisms: VCG}
+\section{VCG}
 
 \begin{frame}{Quasilinear Preferences}
-\begin{itemize}
-	\item Instead of allowing all possible preferences, adopt a special structure.
-	\item Instead of $x \in X$ describing everything related to outcome, split it into:
-	\begin{itemize}
-		\item $\alert{k(\theta) \in K}$, ``real/material outcome'' a.k.a. \structure{allocation}
-		\item $\alert{t(\theta) \in \mathbb{R}^N}$, \structure{transfers/payments}
-	\end{itemize}
-	\item Instead of arbitrary $u_i(x,\theta)$ focus on \structure{quasilinear preferences}:
-	$$\alert{ u_i(x,\theta_i) = v_i(k,\theta_i) - t_i }$$
-	\vspace{-1em}
-	\item S.c.f. is $f(\theta) = \left( k(\theta), t_1(\theta), ..., t_N(\theta) \right)$
-\end{itemize}
+	\begin{alertblock}{Assumption: Quasilinear setting}
+		\begin{itemize}
+			\item Instead of allowing all possible preferences, adopt a special structure.
+			\item Instead of $x \in X$ describing everything related to outcome, split it into:
+			\begin{itemize}
+				\item $\alert{k(\theta) \in K}$, ``real/material outcome'' a.k.a. \structure{allocation}
+				\item $\alert{t(\theta) \in \mathbb{R}^N}$, \structure{transfers/payments}
+			\end{itemize}
+			\item Instead of arbitrary $u_i(x,\theta)$ focus on \structure{quasilinear preferences}:
+			$$\alert{ u_i(x,\theta_i) = v_i(k,\theta_i) - t_i }$$
+			\vspace{-1em}
+			\item S.c.f. is $f(\theta) = \left( k(\theta), t_1(\theta), ..., t_N(\theta) \right)$
+		\end{itemize}
+	\end{alertblock}
 \end{frame}
-\note{
-	Everything before was very abstract. Let's get to particulars and implement efficient scf. To make things easier, focus on quasilinear setting (allow numeraire=money=transferable utility).
-}
 
 
 \begin{frame}{Quasilinear Preferences}
@@ -383,7 +373,7 @@
 	\begin{itemize}
 		\item Monetary transfers always available,
 		\item utility is linear in money,
-		\item marginal utility of money is constant across types and people.
+		\item marginal utility of money is constant across types and people and independent of allocation.
 	\end{itemize}
 	\item All three are sometimes restrictive, the latter two especially. But let's roll with it.
 \end{itemize}
@@ -395,22 +385,28 @@
 	\item A frequent question: ``Dr.Professor, how can we as society implement \structure{the efficient outcome}?''
 	\item Reminder: efficient outcome $x^*(\theta) = (k^*(\theta),t^*(\theta))$ is 
 	\vspace{-0.5em}\begin{align*}
-	x^*(\theta) &= \arg \max_x \sum_{i=1}^N u_i(x,\theta_i) \\
-	&= \arg \max_{(k,t)} \sum_{i=1}^N \left[v_i(k,\theta_i) - t_i\right]
+	x^*(\theta) &= \arg \max_x \sum_{i=0}^N u_i(x,\theta_i) 
+	= \arg \max_{(k,t)} \sum_{i=0}^N \left[v_i(k,\theta_i) - t_i\right]
 	\end{align*}
 	\item Transfers just reallocate utility across agents, so focus on \structure{efficient allocation $k^*(\theta)$}:
 	\vspace{-1em}\begin{align*}
-	k^*(\theta) = \arg \max_k \sum_{i=1}^N v_i(k,\theta)
+	k^*(\theta) = \arg \max_k \sum_{i=0}^N v_i(k,\theta)
 	\end{align*}
+	\item Note that we can include $i=0$ into welfare calculations. This can capture designer's preferences or any social costs/benefits not captured by individual agents (e.g., cost of implementing a public project)
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Efficient Implementation}
 \begin{itemize}
+	\item How do we do that?
+	\begin{itemize}
+		\item We already know that it's enough to consider direct revelation mechanisms.
+		\item We have the desired allocation rule $k^*$, but we can design the transfers $t$ -- the problem is not just ``check whether s.c.f. $x^*$ is IC'', but ``is there such $t$ that $k^*$ is IC?''
+	\end{itemize}
 	\item What we as designers want:
 	\vspace{-1em}\begin{align*}
-	\max \sum_{i=1}^N v_i(k,\theta_i)
+	\max \sum_{i=0}^N v_i(k,\theta_i)
 	\end{align*}
 	\item What agent $i$ wants:
 	\vspace{-1em}\begin{align*}
@@ -438,7 +434,9 @@
 \end{itemize}
 \end{frame}
 \note{
-	Note on interpretation: the happier you make others, the less you have to pay
+	Note on interpretation: the happier you make others, the less you have to pay.
+	\\
+	The next slide is a direct continuation of this one.
 }
 
 
@@ -446,11 +444,11 @@
 \begin{itemize}
 	\item Agent's problem is now
 	\vspace{-0.5em}\begin{align*}
-	\max_{\hat{\theta}_i} \left\{ \structure{ \sum_{j=1}^N v_{j}(k^*(\alert{\hat{\theta}_i},\theta_{-i}), \theta_{j}) } - h_{i}(\theta_{-i}) \right\}
+	\max_{\hat{\theta}_i} \left\{ \structure{ \sum_{j \in N} v_{j}(k^*(\alert{\hat{\theta}_i},\theta_{-i}), \theta_{j}) } - h_{i}(\theta_{-i}) \right\}
 	\end{align*}
-	\item Every agent $i$ maximizes welfare!
+	\item Every agent $i$ chooses report $\hat{\theta}_i$ to maximize welfare!
 	\begin{itemize}
-		\item Optimal to report true $\hat{\theta}$,
+		\item Optimal to report true $\hat{\theta}_i$,
 		\item for any $\theta_{-i}$.
 	\end{itemize}
 	\item Crucial that $h_i(\theta_{-i})$ does not depend on $i$'s report.
@@ -474,6 +472,16 @@
 	\item The incentives are there... but at what cost?
 \end{itemize}
 \end{frame}
+\note{
+	Assign as in-class problem:
+	\begin{itemize}
+		\item $N = 7M$ citizens decide whether to build a Moon base which costs $500M$ DKK.
+		\item Every citizen has private valuation $\theta_i$ and qlin util
+		\item Calculate the efficient scf $k^*(\theta)$
+		\item Calculate Groves' transfers in case everyone values base at $\theta_i = 100$ DKK, taking $h_i(\theta_{-i})=0$.
+		\item Answer: $699,999,900$ DKK paid to every citizen
+	\end{itemize}
+}
 
 
 \begin{frame}{VCG Mechanism: Clarke Term}
@@ -494,6 +502,7 @@
 		\item If you ``say nothing'', presumably some outcome is still implemented.
 		\item So if you decide to ``say anything'', it is to tilt the decision in your direction at the expense of everyone else.
 		\item So you must pay exactly the externality you impose on everyone else.
+		\item Sometimes though your report may make others happier: e.g. if a class is only organized if at least 10 people sign up, then you signing up may make others happier -- then you get paid.
 	\end{itemize}
 }
 
@@ -504,13 +513,19 @@
 \end{align*}
 \begin{itemize}
 	\item What's the big idea?
-	\item Agent $i$ receives the externality his report imposes on others (mind the signs).
-	\item $i$'s transfer is non-zero only if his presence affects the decision $k$.
-	\item Note that $i$ cannot misreport $\theta_i$ and get lower transfer without also changing $k$.
+	\begin{itemize}
+		\item Agent $i$ receives the externality his report imposes on others (mind the signs).
+		\item $i$'s transfer is non-zero only if his presence affects the decision $k$.
+		\item Note that $i$ cannot misreport $\theta_i$ and get lower transfer without also changing $k$.
+	\end{itemize}
 	\item What are VCG transfers in the Moon Base question?
 \end{itemize}
 \end{frame}
-
+\note{
+	Only read the third bullet in first group, others covered in previous note.
+	
+	In the Moon Base VCG mechanism, no one pays anything because no single agent is pivotal.
+}
 
 \begin{frame}{VCG Mechanism: Example}
 \begin{example}[Auction]
@@ -526,23 +541,34 @@
 	\item Also known as the Vickrey auction (the V in VCG).
 \end{itemize}
 \end{frame}
+\note{
+	Assign this as a problem in class:
+	\begin{itemize}
+		\item One item, $N$ bidders, each value the item at $\theta_i$
+		\item so $v_i(k,\theta_i) = \theta_i k_i$, where $k_i$ is the prob. that $i$ gets the item ($\sum_{i=0}^{N}k_i = 1$)
+		\item Calculate formally the efficient $k^*$ and the VCG transfers that support it
+		\item (Even if know the answer -- forget it and apply the concepts)
+	\end{itemize}
+}
 
 
 \begin{frame}{VCG aftermath}
 \begin{itemize}
 	\item We have an easy recipe to implement the \structure{efficient} outcome in \structure{dominant} strategies.
-	\item Note $k^*$ may account the designer's ($i=0$) utility over outcomes. %TODO: move it somewhere else?
 	\item Any problems?
 \end{itemize}
 \end{frame}
 \note{
+	If have time in lecture, continue straight to next slide/topic. Otherwise, what is meant is:
 	\begin{itemize}
 		\item It may not be budget balanced or, more generally, maximize revenue...
+		\item All revelation principles apply (privacy, principal's commitment)
 		\item All DSE issues apply (collusion, misspecification, (complexity))
 	\end{itemize}
 }
 
 
+%NOTE to self: if you want to rearrange these sections (IR-BB-PE-BIC-gVCG-AGV) - DON'T, unless you have a VERY GOOD REASON TO! I spent three days reshuffling these, and this order is close enough to optimal!
 \section{Individual Rationality and Budget Balance}
 
 \begin{frame}{Feature example: bilateral trade}
@@ -577,14 +603,17 @@
 		A mechanism $\Gamma$ is:
 		\begin{itemize}
 			\item \structure{interim} \alert{individually rational} if
-			$\mathbb{E}_{\theta_{-i}} \left[u_i(\theta_i,\theta_{-i})\right] \geq 0$ for all $\theta_i$;
+			$\mathbb{E}_{\theta_{-i}} \left[u_i(\theta_i,\theta_{-i})\right] \geq \underline{U}_i(\theta_i)$ for all $\theta_i$;
 			\item \structure{ex post} \alert{individually rational} if
-			$u_i(\theta_i,\theta_{-i}) \geq 0$ for all $\theta$.
+			$u_i(\theta_i,\theta_{-i}) \geq \underline{U}_i(\theta_i)$ for all $\theta$.
 		\end{itemize}
 		
 		
 	\end{definition}
-	\item (substitute $0$ by $i$'s outside option if non-zero)
+	\item $\underline{U}_i(\theta_i)$ is the outside option of type $\theta_i$
+	\begin{itemize}
+		\item (in bilateral trade: $\underline{U}_s(\theta_s) = \theta_s$)
+	\end{itemize}
 	\item expectation means that distribution of $\theta$s now matters!
 \end{itemize}
 \end{frame}
@@ -605,11 +634,12 @@
 \begin{itemize}
 	\item VCG for bilateral trade example is not IR for seller (outside option = keep the good).
 	\pause\medskip
-	\item If we want mechanism to be IR, easy solution is to decrease $t_i(\theta)$ by a million $\forall \theta$.
+	\item If we want mechanism to be IR, easy solution is to decrease $t_i(\theta)$ by a lot, for all $\theta$.
 	\item But that's expensive -- want mechanism to be \structure{budget balanced}:
 	\pause
 	\begin{definition}[BB]
 		\begin{itemize}
+			%NOTE: here t0 is NOT included because the designer is the sink for any transfer imbalance
 			\item Mechanism $\Gamma$ is \structure{ex ante} \alert{budget balanced} if $\mathbb{E}_\theta \left[ \sum_{i=1}^N t_i (\theta) \right] \geq 0$;
 			\item Mechanism $\Gamma$ is \structure{ex post} \alert{budget balanced} if $\sum_{i=1}^N t_i (\theta) \geq 0$ for all $\theta$.
 		\end{itemize}
@@ -623,15 +653,12 @@
 \begin{frame}{IR vs BB}
 \begin{itemize}
 	\item Fundamental tension between IR and BB.
-	\item Back to bilateral trade example: does there exist a mechanism that is
-	\begin{itemize}
-		\item efficient,
-		\item DSIC,
-		\item IR,
-		\item BB?
-	\end{itemize}
+	\item We want to ask the following question (within our \structure{bilateral trade} example, in particular):
+	\begin{exampleblock}{}
+		Does there exist a mechanism that is: \structure{efficient, DSIC, IR, BB}?
+	\end{exampleblock}
 	\pause
-	\item VCG was not IR, but it's just one mechanism. Can we say anything about other mechanisms?
+	\item We know VCG was not IR, but that's just one mechanism. Can we say whether any other mechanisms satisfy all requirements?
 	\begin{itemize}
 		\item Not in most general case*, but all examples (trade, auction, pub.project) fit a much narrower model where we can.
 		\item *though see Prop 23.C.5 in MWG
@@ -643,19 +670,21 @@
 
 
 
-\section{Monotonicity and Payoff Equivalence}
+%NOTE to self: if you want to rearrange these sections (IR-BB-PE-BIC-gVCG-AGV) - DON'T, unless you have a VERY GOOD REASON TO! I spent three days reshuffling these, and this order is close enough to optimal!
+\section{Payoff Equivalence}
 
-%TODO: cut the euclidean stuff out?
 \begin{frame}{The Euclidean model}
-\begin{itemize}
-	\item Make the following assumptions on top of quasilinearity:
+\begin{alertblock}{Assumption: Euclidean setting}
+	Make the following assumptions on top of quasilinearity:
 	\begin{itemize}
 		\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
 		\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
 		\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
 	\end{itemize}
+\end{alertblock}
+\begin{itemize}
 	\item I'll call the above \alert{the Euclidean model} (not standard name).
-	\item We'll derive two \structure{necessary} conditions for $\Gamma$ to be \structure{DSIC} in \structure{Euclidean} model.
+	\item We'll derive \structure{Payoff-equivalence} as a necessary condition for $\Gamma$ to be \structure{DSIC} in \alert{Euclidean} model. It's a cool property on its own and will help answer the question about BB/IR mechanisms later.
 	\item Given $\Gamma$, denote $U_i(\theta_i, \theta_{-i}) := u_i\left(x(\theta_i, \theta_{-i}), \theta_i \right)$.
 \end{itemize}
 % Examples of non-Euclidean setting -- multiproduct auction, social choice between multiple alternatives.
@@ -665,9 +694,7 @@
 \begin{frame}{Monotonicity}
 \begin{itemize}
 	\item Assume $\Gamma$ is a \structure{direct} mechanism (or consider its direct equivalent).
-	\item Play a bit with $i$'s IC (truthtelling constraint): 
-	
-	for any $i,\theta_i,\hat{\theta}_i,\theta_{-i}$,
+	\item Play a bit with $i$'s IC (truthtelling constraint): for any $i,\theta_i,\hat{\theta}_i,\theta_{-i}$,
 	{ \footnotesize
 		\begin{align*}
 			U_i(\theta_i, \theta_{-i}) &\geq u_i\left(x(\hat{\theta}_i,\theta_{-i}), \theta_i \right)
@@ -679,12 +706,6 @@
 			\visible<4->{&= U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i})}
 		\end{align*}
 	}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Monotonicity}
-\begin{itemize}
 	\item In the end:
 	\vspace{-0.5em}\begin{align*}
 		U_i(\theta_i, \theta_{-i}) &\geq U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i}).
@@ -693,35 +714,29 @@
 	\vspace{-0.5em}\begin{align*}
 		U_i(\hat{\theta}_i, \theta_{-i}) &\geq U_i(\theta_i, \theta_{-i}) + \left(\hat{\theta}_i - \theta_i \right) k_i(\theta_i,\theta_{-i}).
 	\end{align*}\vspace{-1em}
-	\pause
-	\item Combining the two \structure<3->{for $\theta_i > \hat{\theta}_i$}, we get
-	{\small \vspace{-0.5em}\begin{align*}
-			k_i(\theta_i,\theta_{-i}) 
-			\geq 
-			\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
-			\geq 
-			k_i(\hat{\theta}_i,\theta_{-i}),
-		\end{align*}\vspace{-1em}}
-	\pause
-	\item meaning \structure{$k_i(\theta_i,\theta_{-i}) \geq k_i(\hat{\theta}_i,\theta_{-i})$} -- allocation must be \alert{monotone}.
-	\item DSIC: ``Those who value things more should get more things.''
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Monotonicity}
-\structure{Monotonicity}:
 \begin{itemize}
-	\item is necessary for $f$ to be DSIC in Euclidean settings
-	\item is related to ``weak preference reversal property'' we saw for general mechanisms.
-	\item has versions for settings more general than Euclidean and less general than quasilinear (B{\"o}rgers 5.3-5.7).
-	\begin{itemize}
-		\item $\Theta_i$ being one-dimensional is the most important assumption in getting such conditions.
-	\end{itemize}
+	\pause
+	\item Combining the two \structure<3->{for $\theta_i > \hat{\theta}_i$}, we get
+	{\small \vspace{-0.5em}\begin{align}
+		\label{eq:k_mon}
+			k_i(\theta_i,\theta_{-i}) 
+			\geq 
+			\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
+			\geq 
+			k_i(\hat{\theta}_i,\theta_{-i}),
+		\end{align}\vspace{-1em}}
+	\pause
+	\item meaning \structure{$k_i(\theta_i,\theta_{-i}) \geq k_i(\hat{\theta}_i,\theta_{-i})$} -- allocation must be \alert{monotone}.
+	\item DSIC: ``Those who value things more should get more things.''
+	\item \alert{Monotonicity} is \structure{necessary} for $f$ to be \structure{DSIC} in \alert{Euclidean} settings.
+	\item From monotonicity we can build up to \alert{payoff equivalence}, 
+	the second cool result in mechanism design (after revelation principle, not monotonicity).
 \end{itemize}
-From \structure{monotonicity} we can build up to \structure{payoff equivalence}, 
-
-the second cool result in mechanism design (after revelation principle, not monotonicity).
 \end{frame}
 
 
@@ -729,31 +744,17 @@ the second cool result in mechanism design (after revelation principle, not mono
 \begin{itemize}
 	\item $k_i(\theta_i,\theta_{-i})$ is monotone in $\theta_i$, hence continuous a.e.: $\lim_{\hat{\theta}_i \to \theta_i} k_i(\hat{\theta}_i,\theta_{-i}) = k_i(\theta_i,\theta_{-i})$.
 	\pause
-	\item Together with the big inequality 
-	{\begin{align*}
-			k_i(\theta_i,\theta_{-i})
-			\geq 
-			\frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i } 
-			\geq 
-			k_i(\hat{\theta}_i,\theta_{-i}),
-	\end{align*}}
-	
-	this means that a.e.
+	\item Together with the big inequality \eqref{eq:k_mon}	this means that a.e. we have
 	\pause
 	\begin{align*}
 		\frac{\partial U_i(\theta_i,\theta_{-i})}{\partial \theta_i} = \lim_{\hat{\theta}_i \to \theta_i} \frac{ U_i(\theta_i, \theta_{-i}) - U_i(\hat{\theta}_i, \theta_{-i}) }{ \theta_i - \hat{\theta}_i }  = k_i(\theta_i,\theta_{-i}).
 	\end{align*}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Payoff Equivalence}
-\begin{itemize}
+	\pause
 	\item So if $k(\theta)$ is integrable in $\theta_i$ (e.g. if it's bounded) then for all $\theta_i$
 	\begin{align*}
-		\structure{
-			U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
-		}
+	\structure{
+		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
+	}
 	\end{align*}
 	\item This is \alert{payoff equivalence} a.k.a. envelope representation of payoffs a.k.a. Mirrlees condition.
 \end{itemize}
@@ -761,8 +762,9 @@ the second cool result in mechanism design (after revelation principle, not mono
 
 
 \begin{frame}{Payoff Equivalence}
-\begin{theorem}[Payoff Equivalence for DSIC mechanisms]
-	For any two DSIC DRMs with $x = (k,t)$ and $x' = (k',t')$ respectively, 	
+\begin{theorem}[Payoff Equivalence for DSIC Euclidean mechanisms]
+	In the Euclidean setting, for any two DSIC DRMs with $x = (k,t)$ and $x' = (k',t')$ respectively:
+	\\ 	
 	\structure{if $k(\theta)=k'(\theta)$} for all $\theta$ \alert{then $t_i(\theta) = t'_i(\theta) + c_i (\theta_{-i})$} for all $\theta$ for some $c_i(\theta_{-i})$.
 \end{theorem}
 \pause
@@ -786,8 +788,35 @@ the second cool result in mechanism design (after revelation principle, not mono
 	\structure<1>{for some $h_i(\theta_{-i})$.}
 	\pause
 	\item Payoff equivalence implies that \alert{efficient} $k^*$ in a \alert{Euclidean} model can \alert{ONLY} be implemented by some \structure{Groves'} mechanism.
-	% Similarity is that there's just one DoF for i's payoffs
+	% Similarity is that there's just one DoF for i's payoffs given theta_{-i}
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence: Beyond Euclidean}
+	Both monotonicity and payoff equvalence hold beyond the Euclidean setting:
+	\begin{itemize}
+		\item various forms of \alert{monotonicity} are necessary and sufficient for DSIC in quasilinear setting;
+		\item \alert{payoff equivalence} of DSIC mechanisms is generalizable beyond Euclidean (but you cannot get to general quasilinear setting);
+		\item see B{\"o}rgers for details:
+		\begin{itemize}
+			\item ch.5: single-player problems,
+			\item ch.7: DSIC results building on ch.5.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence (DSIC): Conclusion}
+	\begin{itemize}
+		\item So what does payoff equivalence tell us?
+		\item Efficient allocation $k^*$ can \textbf{only} be implemented using Groves' transfers...
+		\begin{itemize}
+			\item ...but $h_i(\theta_{-i})$ still provides a lot of flexibility!
+			\item So it's hard to know whether VCG is the best mechanism or there are others.
+		\end{itemize}
+		\item So let us \emph{weaken} our implementation concept to obtain a \textbf{stronger} version of payoff equivalence.
+	\end{itemize}
 \end{frame}
 
 
@@ -805,32 +834,49 @@ the second cool result in mechanism design (after revelation principle, not mono
 \end{example}
 %do on the board
 \end{frame}
+\note{ 
+	Assign as in-class problem:
+	\begin{itemize}
+		\item setup as on the slide. Write out detailed VCG transfers as below.
+		\item Give a hint: start with VCG and change $h_i(\theta_{-i})$ until the resulting mechanism is ex post IR. Will it be BB?
+	\end{itemize}
+	Answer: 
+	\begin{itemize}
+		\item In VCG:
+		\begin{itemize}
+			\item Groves' transfers: $t_b^G = -\theta_s \cdot \mathbb{I}\{\text{no trade}\}$; \quad $t_s^G = -\theta_b \cdot \mathbb{I}\{\text{trade}\}$ for seller; 
+			\item Clarke's transfers: $h_b(\theta_s)=\theta_s$; \quad $h_s(\theta_b)=\theta_b$;
+			\item $t_b(\theta)=\theta_s \cdot \mathbb{I}\{\text{trade}\}$; \quad $t_s(\theta)=\theta_b \cdot \mathbb{I}\{\text{no trade}\}$
+		\end{itemize}
+		\item In IR mechanism: start from same Groves' transfers, then taking $\mathbb{I}_T = \mathbb{I} \{\theta_b>\theta_s \}$:
+		\begin{itemize}
+			\item $u_b(\theta) = \theta_b \mathbb{I}_T + \theta_s(1-\mathbb{I}_T) - h_b(\theta_s)$ (draw to see that setting $h_b(\theta_s)=\theta_s$ sets $u_b$ to zero if no trade)
+			\item $u_s(\theta) = \theta_s(1-\mathbb{I}_T) + \theta_b \mathbb{I}_T - h_s(\theta_b)$ (draw to see that setting $h_s(\theta_b)=0$ sets $u_s = \theta_s$ (IR) if no trade)
+		\end{itemize}
+	\end{itemize}
+}
 
 
 
-
-
+%NOTE to self: if you want to rearrange these sections (IR-BB-PE-BIC-gVCG-AGV) - DON'T, unless you have a VERY GOOD REASON TO! I spent three days reshuffling these, and this order is close enough to optimal!
 \section{Bayesian Implementation}
 
 \begin{frame}{DSIC vs BIC}
 \begin{itemize}
-	\item We've done DS implementation so far. Robust but demanding.
-	\item Now: believe that agents are Bayesian, use standard Bayes-Nash Equilibrium as solution concept.
-	\pause
-	\item Weaker equilibrium concept, so
+	\item We've done DS implementation so far. Robust but demanding. Can we get more mileage by relaxing the equilibrium notion?
+	\item Now: use standard \structure{Bayes-Nash Equilibrium} as solution concept. Weaker equilibrium concept, so:
 	\begin{itemize}
-		\item less confident it will produce the intended outcome, but
-		\item can implement more s.c.f-ns. 
+		\item we are less confident it will produce the intended outcome, but
+		\item it can implement more(?) s.c.f-ns. 
 		\item (there's a literature studying whether sets of DSIC and BIC s.c.f-ns are equal in special settings)
 	\end{itemize}
-	\item Now prior $\phi$ about the distribution of types becomes more relevant (though we already used it when talking about revenue)
+	%\item Now prior $\phi$ about the distribution of types becomes more relevant (though we already used it when talking about revenue)
 \end{itemize}
-%TODO: can say a few more words that DSIC is not much more restrictive than BIC, and on the other hand that DSIC is not a guarantee either (e.g. funky eqa in SPA)
 \end{frame}
 
 
 \begin{frame}{Bayesian Implementation}
-Start with the general model as before:
+Start with the \alert{general model} as before:
 \begin{itemize}
 	\item $N$ agents;
 	\item set of alternatives $X$;
@@ -844,14 +890,16 @@ Start with the general model as before:
 
 \begin{frame}{Bayes-Nash Equilibrium}
 \begin{definition}[Bayes-Nash equilibrium]
-	The \structure{strategy profile} $s^* =(s_{1}^*,\dots,s_{N}^*)$ with $s_i^*: \Theta_i \to S_i$ is a \alert{Bayesian Nash equilibrium} of the mechanism $\Gamma=(S_{1},\dots,S_{N},g)$ if, for all $i$ and all $\theta_{i}\in\Theta_{i}$,
-	$$E_{\theta_{-i}}\left[u_{i}(g(s_i^*(\theta_i),s_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]\geq E_{\theta_{-i}}\left[u_{i}(g(\hat s_i,s_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]$$
-	for all $\hat s_{i}\in S_{i}$.
+	The \structure{strategy profile} $a^* =(a_{1}^*,\dots,a_{N}^*)$ with $a_i^*: \Theta_i \to S_i$ is a \alert{Bayesian Nash equilibrium} of the mechanism $\Gamma=(S_{1},\dots,S_{N},g)$ if, for all $i$ and all $\theta_{i}\in\Theta_{i}$,
+	$$E_{\theta_{-i}}\left[u_{i}(g(a_i^*(\theta_i),a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]\geq E_{\theta_{-i}}\left[u_{i}(g(\hat a_i,a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]$$
+	for all $\hat a_{i}\in S_{i}$.
 \end{definition}
 \pause
 \begin{itemize}
-	\item Standard Nash Eqm reasoning: given that everyone else plays eqm strats, $i$ has no incentive to deviate.
-	\item (This definition is for pure strategies, but there is no problem in allowing for mixed strategies.)
+	\item Standard NE reasoning: if everyone else plays eqm strats, $i$ has no incentive to deviate.
+	\item (This definition is for pure strategies, but there is no problem in allowing mixed strategies.)
+	\item Expectations are taken w.r.t. distribution $F(\theta)$
+	\item BTW: we assumed that allocation and transfers are \emph{deterministic} given reports. \href{https://doi.org/10.3982/ECTA14698}{\uline{Chen, He, Li, and Sun (2019)}} show that this is often without loss of generality.
 \end{itemize}
 %TODO2020: mention Che-He-Li-Sun (2019) who show that for any stochastic mechanism there is an equivalent deterministic mechanism.
 \end{frame}
@@ -859,7 +907,7 @@ Start with the general model as before:
 
 \begin{frame}{Bayesian Implementation}
 \begin{definition}[Bayesian implementation]
-	\structure{Mechanism} $\Gamma=(S_{1},\dots,S_{N},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $s^*=(s_{1}^*,\dots,s_{N}^*)$ of $\Gamma$ such that $f(\theta)=g(s^{*}(\theta))$ for all $\theta\in \Theta$.
+	\structure{Mechanism} $\Gamma=(S_{1},\dots,S_{N},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $a^*=(a_{1}^*,\dots,a_{N}^*)$ of $\Gamma$ such that $f(\theta)=g(a^{*}(\theta))$ for all $\theta\in \Theta$.
 \end{definition}
 \pause
 \begin{definition}[Bayesian implementability]
@@ -870,7 +918,7 @@ Start with the general model as before:
 
 \begin{frame}{Truthful Bayesian Implementation}
 \begin{definition}[Truthful Bayesian implementation]
-	\structure{S.c.f. $f$} is \alert{truthfully implementable in BNE} (=Bayesian Incentive Compatible, \alert{BIC}) if $s_{i}^*(\theta_{i})=\theta_{i}$ is a BNE of the direct revelation mechanism $\Gamma=(\Theta_{1},\dots,\Theta_{N},f)$. 
+	\structure{S.c.f. $f$} is \alert{truthfully implementable in BNE} (=Bayesian Incentive Compatible, \alert{BIC}) if $a_{i}^*(\theta_{i})=\theta_{i}$ is a BNE of the direct revelation mechanism $\Gamma=(\Theta_{1},\dots,\Theta_{N},f)$. 
 	\bigskip
 	
 	That is, for all $i,\theta_{i}$, and $\hat{\theta}_{i}\in\Theta_{i}$,
@@ -891,27 +939,196 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \end{frame}
 
 
-\begin{frame}{BIC: Efficient Mechanisms}
-\begin{itemize}
-	\item Skip general settings, focus on \alert{quasilinear} straight away.
+%\begin{frame}{BIC: Efficient Mechanisms}
+%\begin{itemize}
+%	\item Now restrict ourselves to \alert{quasilinear} setting again.
+%	\begin{itemize}
+%		\item $u_i(\theta) = v(k(\theta),\theta_i) - t_i(\theta)$
+%	\end{itemize}
+%	\item Mission same: find mechanism that implements the \structure{efficient} $k^*(\theta)$. Ideally the one that is IR and/or BB.
+%	\begin{itemize}
+%		\item It is now more suitable to consider interim perspective rather than ex post -- so look for interim IR, ex ante BB.
+%	\end{itemize}
+%	\pause
+%	\item We'll look at two mechanisms:
+%	\begin{itemize}
+%		\item \structure{generalized VCG} mechanism -- guarantees IR
+%		\item \structure{AGV} mechanism (d'Aspremont and Gerard-Varet, 1979) -- for when you absolutely need BB;
+%	\end{itemize}
+%\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Payoff Equivalence in BIC}
+	Now constrain ourselves again to the \alert{Euclidean} setting to show payoff equivalence.
+	\begin{theorem}[Payoff Equivalence for BIC mechanisms]
+		For any two BIC DRMs with $x = (k,t)$ and $x' = (k',t')$ resp.:
+		
+		\structure{if \quad $\mathbb{E}_{\theta_{-i}} k_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k_i'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
+		
+		\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + h_i$} for all $i,\theta_i$ for some $h_i$.
+	\end{theorem}
 	\begin{itemize}
-		\item $u_i(\theta) = v(k(\theta),\theta_i) - t_i(\theta)$
+		\item As before, implies that for given $k$ (any, not just the efficient) we only have one degree of freedom for $t_i(\theta)$,
+		\begin{itemize}
+			\item now ``just one'' instead of ``just one given $\theta_{-i}$''.
+		\end{itemize}
 	\end{itemize}
-	\item Mission same: find mechanism that implements the \structure{efficient} $k^*(\theta)$.
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence in BIC. Proof}
+	\begin{itemize}
+		\item Let 
+		\vspace{-0.5em}\begin{align*}
+		\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
+		\\
+		&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) | \theta_i \right].
+		\end{align*}\vspace{-1em}
+		
+		(do not confuse with $U_i$ in Euclidean model for DS.)
+		\pause
+		\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
+		\vspace{-0.5em}\begin{align*}
+		\frac{d}{d \theta_i} \bar{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
+		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} \left[k_i (\theta_i, \theta_{-i}) | \theta_i \right]
+		\end{align*}\vspace{-1em}
+		
+		The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\bar{U}_i (\hat{\theta}_i,\theta_i)$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence in BIC. Proof}
+	\begin{itemize}
+		\item Then by the Fundamental Theorem of Calculus
+		\begin{align*}
+		\bar{U}_i (\theta_i) &= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
+		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
+		\end{align*}
+		meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
+		\medskip
+		\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} \left[k(\theta_i,\theta_{-i}) | \theta_i \right]$ compared to DSIC proof. Either argument can be used in both proofs.
+	\end{itemize}
+\end{frame}
+
+
+%NOTE to self: if you want to rearrange these sections (IR-BB-PE-BIC-gVCG-AGV) - DON'T, unless you have a VERY GOOD REASON TO! I spent three days reshuffling these, and this order is close enough to optimal!
+\section{gVCG}
+
+\begin{frame}{Generalized VCG}
+	\begin{itemize}
+		\item As it turns out, VCG can be (interim) IR with a slight modification... And it will be (ex ante) revenue-maximizing among all such mechanisms in that case.
+		\item Enter \alert{generalized VCG} (\href{https://sites.google.com/site/vjkrishna/research}{\uline{Krishna and Perry, 2000}}).
+		\pause\medskip
+		\item Define \structure{least charitable type} $\bar{\theta}_i$ as
+		\begin{align*}
+		\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
+		\end{align*}
+		(expectation taken w.r.t the common prior $\phi \in \varDelta(\Theta)$)
+	\end{itemize}
+	%LCT intuition will become clear later...
+\end{frame}
+
+
+\begin{frame}{Generalized VCG}
+	GVCG mechanism is a DRM with the efficient allocation $k^*(\theta)$ and payments
+	\begin{align*}
+	t_i^{GVCG} (\theta) =& \sum_{j \neq i} v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\bar{\theta}_i,\theta_{-i}),\bar{\theta}_i) -
+	\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\bar{\theta}_i)
+	\end{align*}
 	\pause
-	\item We'll look at two:
+	Has the usual Groves' term (the third one); the other three guarantee IR.
 	\begin{itemize}
-		\item \structure{AGV} mechanism (d'Aspremont and Gerard-Varet, 1979);
-		\item \structure{generalized VCG} mechanism
+		\item The first term is similar to Clarke's term, but with $k^*(\bar{\theta}_i,\theta_{-i})$ instead of $k^*(\theta_{-i})$
+		\item $2^{nd}$ and $4^{th}$ is the net utility that LCT $\bar{\theta}_i$ gets from participating in the mechanism -- need to also pay it to all other types
 	\end{itemize}
+\end{frame}
+
+
+%NOTE: the two theorems are not equivalent because QLIN vs EUCL settings!
+\begin{frame}{Generalized VCG}
+	\begin{theorem}[gVCG, part 1]
+		In a \structure{quasilinear} model, gVCG is:
+		\begin{itemize}
+			\item efficient (by construction),
+			\item DSIC,
+			\item interim IR.
+			\item %maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
+		\end{itemize}
+	\end{theorem}
+	Prove DSIC on your own (analogous to VCG).
+\end{frame}
+
+
+\begin{frame}{Generalized VCG. Proof: IIR}
+	Interim expected utility for $\theta_i$ is
+	\begin{align*}
+		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =0}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =0}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} | \theta_i \right] + \underline{U}_i (\bar{\theta}_i)
+		\visible<2>{
+			\geq \underline{U}_i(\theta_i)
+		}
+	\end{align*}
+	\pause
+	since
+	\begin{align*}
+	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
+	\end{align*}
+	%TODO: Talk about the meaning of LCT here
+\end{frame}
+
+
+\begin{frame}{Generalized VCG. Proof: revenue maximizing in Euclidean}
+\begin{itemize}
+	\item Given revenue equivalence, just need to show we cannot decrease $h_i$ for any player w/o violating IIR.
+	\pause
+	\item Decreasing $h_i$ only possible if IR slack for \emph{all} types of $i$.
+	\pause
+	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
 \end{itemize}
 \end{frame}
 
 
+\begin{frame}{Generalized VCG}
+	\begin{theorem}[gVCG]
+		In a \alert{Euclidean} model, gVCG is:
+		\begin{itemize}{\color{gray}
+				\item efficient (by construction),
+				\item DSIC,
+				\item interim IR;}
+			\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
+		\end{itemize}
+	\end{theorem}
+	If gCVG is not ex ante budget balanced, there does not exist a \\
+	\{EFF + BIC + IIR + ex ante BB\} mechanism (so no ex post BB either).
+\end{frame}
+
+
+\begin{frame}{Application: Bilateral Trade}
+	\begin{example}[Bilateral Trade (revisited)]
+		\begin{itemize}
+			\item One indivisible good.
+			\item Two agents: buyer and seller. 
+			\item Private valuations $\theta_b,\theta_s \sim \text{i.i.d.} U[0,1]$ resp.
+			\item Is there an \soutred{efficient, DSIC, ex post IR, ex post BB}
+			\structure{efficient, BIC, interim IR, ex ante BB} mechanism?
+		\end{itemize}
+	\end{example}
+	\begin{itemize}
+		\item No, because gVCG is not BB. 
+		(This is the \structure{Myerson-Satterthwaite Theorem})
+	\end{itemize}
+\end{frame}
+
+
+
+
+%NOTE to self: if you want to rearrange these sections (IR-BB-PE-BIC-gVCG-AGV) - DON'T, unless you have a VERY GOOD REASON TO! I spent three days reshuffling these, and this order is close enough to optimal!
 \section{AGV}
 
 \begin{frame}{AGV mechanism}
 \begin{itemize}
+	\item One last mechanism before we go -- in case you care about BB, but not IR.
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
 		\tilde{t}_i (\theta_i) := \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) | \theta_i \right]
@@ -930,8 +1147,8 @@ Every player is asked for their type; reporting truthfully is a BNE.
 
 
 \begin{frame}{AGV mechanism}
-\begin{theorem}
-	In a quasilinear model, AGV is:
+\begin{theorem}[AGV]
+	In a \alert{quasilinear} model, AGV is:
 	\begin{itemize}
 		\item efficient (by construction),
 		\item exactly ex post BB,
@@ -979,204 +1196,23 @@ Not necessarily IR. :(
 \end{frame}
 
 
-\section{gVCG}
 
-%TODO2020: move gVCG to DSIC (since it is, in fact, DSIC); leave only AGV in BIC for cases when really need budget balance.
-\begin{frame}{Generalized VCG}
+
+
+\begin{frame}{Bottom line}
 \begin{itemize}
-	\item Now to another mechanism, gVCG (\href{https://sites.google.com/site/vjkrishna/research}{Krishna and Perry, 2000}).
-	\item Earlier we normalized everyone's outside options (util from not participating) to zero.
-	\item Now allow for type-dependent outside options $\underline{U}_i (\theta_i)$.
-	\pause\medskip
-	\item Define \structure{least charitable type} $\bar{\theta}_i$ as
-	\begin{align*}
-		\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=1}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
-	\end{align*}
-\end{itemize}
-%LCT intuition will become clear later...
-\end{frame}
-
-
-\begin{frame}{Generalized VCG}
-GVCG mechanism is a DRM with the efficient allocation $k^*(\theta)$ and payments
-\begin{align*}
-	t_i^{GVCG} (\theta) =& \sum_{j \neq i} v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\bar{\theta}_i,\theta_{-i}),\bar{\theta}_i)
-	\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\bar{\theta}_i)
-\end{align*}
-\pause
-Has the usual Groves' term (the third one); the other three guarantee IR.
-\end{frame}
-
-
-\begin{frame}{Generalized VCG}
-\begin{theorem}[gVCG part 1]
-	In a \structure{quasilinear} model, gVCG is:
-	\begin{itemize}
-		\item efficient (by construction),
-		\item BIC,
-		\item interim IR.
-		\item %\visible<0>{maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.}
-	\end{itemize}
-\end{theorem}
-Prove BIC (analogous to AGV).
-\end{frame}
-
-
-\begin{frame}{Generalized VCG. Proof: IIR}
-Interim expected utility for $\theta_i$ is
-{\small
-	\begin{align*}
-		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =1}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =1}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} | \theta_i \right] + \underline{U}_i (\bar{\theta}_i)
-		\visible<2>{
-			\geq \underline{U}_i(\theta_i)
-		}
-	\end{align*}
-}
-\pause
-since
-\begin{align*}
-	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=1}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
-\end{align*}
-% Talk about the meaning of LCT here
-\end{frame}
-
-
-\begin{frame}{IR+BB ?}
-\begin{itemize}
-	\item So we have two mechanisms that implement the \structure{efficient} $k^*$ in \structure{quasilinear} model:
+	\item We have two mechanisms that implement the \structure{efficient} $k^*$ in \alert{quasilinear} model:
 	\begin{itemize}
 		\item AGV: BIC + BB,
 		\item gVCG: BIC + IIR.
 	\end{itemize}
-	\pause
-	\item Can we have \structure{EFF + BIC + BB + IR}? 
-	\begin{itemize}
-		\item At least with weak ex ante BB and interim IR?
-		\item At least in a \alert{Euclidean} model?
-	\end{itemize}
+	\item In the \alert{Euclidean} model, gVCG is also [ex ante-]revenue-maximizing
+	\item Revenue equivalence is powerful, but needs more structure than just quasilinear model.
 \end{itemize}
 \end{frame}
 
 
-\section{Optimality of gVCG in the Euclidean world}
 
-\begin{frame}{The Euclidean Model (reminder)}
-\begin{itemize}
-	\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
-	\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
-	\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Payoff Equivalence in BIC}
-\begin{theorem}[Payoff Equivalence for BIC mechanisms]
-	For any two BIC DRMs with $x = (k,t)$ and $x' = (k',t')$ resp.:
-	
-	\structure{if \quad $\mathbb{E}_{\theta_{-i}} k_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} k_i'(\theta_i, \theta_{-i})$} for all $i,\theta_i$,
-	
-	\alert{then $\mathbb{E}_{\theta_{-i}} t_i(\theta_i, \theta_{-i}) = \mathbb{E}_{\theta_{-i}} t'_i(\theta_i, \theta_{-i}) + h_i$} for all $i,\theta_i$ for some $h_i$.
-\end{theorem}
-\begin{itemize}
-	\item As before, implies that for given $k$ (any, not just the efficient) we only have one degree of freedom for $t_i(\theta)$,
-	\begin{itemize}
-		\item now ``just one'' instead of ``just one given $\theta_{-i}$''.
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Payoff Equivalence in BIC. Proof}
-\begin{itemize}
-	\item Let 
-	\vspace{-0.5em}\begin{align*}
-		\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
-		\\
-		&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) | \theta_i \right].
-	\end{align*}\vspace{-1em}
-	
-	(do not confuse with $U_i$ in Euclidean model for DS.)
-	\pause
-	\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
-	\vspace{-0.5em}\begin{align*}
-		\frac{d}{d \theta_i} \bar{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
-		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} \left[k_i (\theta_i, \theta_{-i}) | \theta_i \right]
-	\end{align*}\vspace{-1em}
-	
-	The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\bar{U}_i (\hat{\theta}_i,\theta_i)$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Payoff Equivalence in BIC. Proof}
-\begin{itemize}
-	\item Then by the Fundamental Theorem of Calculus
-	\begin{align*}
-		\bar{U}_i (\theta_i) &= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
-		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
-	\end{align*}
-	meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
-	\medskip
-	\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} \left[k(\theta_i,\theta_{-i}) | \theta_i \right]$ compared to DSIC proof. Either argument can be used in both proofs.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Generalized VCG}
-\begin{theorem}[gVCG, part 2]
-	In a \alert{Euclidean} model, gVCG is:
-	\begin{itemize}{\color{gray}
-			\item efficient (by construction),
-			\item BIC,
-			\item interim IR;}
-		\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
-	\end{itemize}
-\end{theorem}
-If gCVG is not ex ante budget balanced, there does not exist a 
-
-\{EFF + BIC + IIR + ex ante BB\} mechanism (so no ex post BB either).
-\end{frame}
-
-
-\begin{frame}{gVCG. Proof: revenue maximizing in Euclidean}
-\begin{itemize}
-	\item Given revenue equivalence, just need to show we cannot decrease $h_i$ for any player w/o violating IIR.
-	\pause
-	\item Decreasing $h_i$ only possible if IR slack for \emph{all} types of $i$.
-	\pause
-	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
-\end{itemize}
-\end{frame}
-
-
-\section{Myerson-Satterthwaite Theorem}
-
-\begin{frame}{Application: Bilateral Trade}
-\begin{example}[Bilateral Trade (revisited)]
-	\begin{itemize}
-		\item One indivisible good.
-		\item Two agents: buyer and seller. 
-		\item Private valuations $\theta_b,\theta_s \sim \text{i.i.d.} U[0,1]$ resp.
-		\item Is there an \soutred{efficient, DSIC, ex post IR, ex post BB} (NO)
-		\structure{efficient, BIC, interim IR, ex ante BB} mechanism?
-	\end{itemize}
-\end{example}
-\begin{itemize}
-	\item How can we approach this?
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Myerson-Satterthwaite Theorem}
-\begin{theorem}[Myerson-Satterthwaite]
-	There is no efficient, BIC, interim IR, ex ante BB mechanism in bilateral trade.
-\end{theorem}
-\begin{proof}
-	gVCG is not BB.
-	% Do on the board.
-\end{proof}
-\end{frame}
-%TODO: more examples? e.g. public good, discrete types? prob before the Euclidean.
 
 %\begin{frame}{Exercises}
 %	(problem set on absalon)
@@ -1186,6 +1222,18 @@ If gCVG is not ex ante budget balanced, there does not exist a
 %	\end{enumerate}
 %\end{frame}
 
+
+
+%%TODO: move this to ``arbitrary scf''
+%\begin{frame}{DSIC: Weak Preference Reversal Property}
+%\begin{itemize}
+%	\item ``To each their own'': different types should get their most preferred option among the available ones:
+%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}')$$
+%	$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') \leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'')$$
+%	\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$.
+%	\item Obviously a necessary condition for DSIC. Can show it's also sufficient, meaning in the end Preference Reversal is equivalent to $f$ being DSIC.
+%\end{itemize}
+%\end{frame}
 
 % Now let's talk about whether sum of utilities is a good measure of welfare...
 
