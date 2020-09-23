@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 cp $1.pdf $1_slides.pdf
 echo ----
