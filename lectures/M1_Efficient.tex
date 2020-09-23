@@ -425,7 +425,7 @@
 	\end{align*}\vspace{-1em}
 	\item Try \alert<1>{Groves' transfers}:
 	\vspace{-0.5em}\begin{align*}
-	\structure<1>{ t_{i}(\theta)=-\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i}) }
+	\structure<1>{ t^G_{i}(\theta) \equiv -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + h_{i}(\theta_{-i}) }
 	\end{align*}\vspace{-1em}
 	\item Agent's problem is now
 	\vspace{-0.5em}\begin{align*}
@@ -458,7 +458,7 @@
 
 
 \begin{frame}{VCG Mechanism: Example}
-\begin{exampleblock}{Back to Moon Base}
+\begin{exampleblock}{Example (Moon Base)}
 	\begin{itemize}
 		\item $N$ citizens decide whether to build a Moon base which costs $c$
 		\item citizen $i$ has private valuation $\theta_{i}$ for the base and quasilinear utility
@@ -685,7 +685,7 @@
 \begin{itemize}
 	\item I'll call the above \alert{the Euclidean model} (not standard name).
 	\item We'll derive \structure{Payoff-equivalence} as a necessary condition for $\Gamma$ to be \structure{DSIC} in \alert{Euclidean} model. It's a cool property on its own and will help answer the question about BB/IR mechanisms later.
-	\item Given $\Gamma$, denote $U_i(\theta_i, \theta_{-i}) := u_i\left(x(\theta_i, \theta_{-i}), \theta_i \right)$.
+	\item Given $\Gamma$, denote $U_i(\theta_i, \theta_{-i}) \equiv u_i\left(x(\theta_i, \theta_{-i}), \theta_i \right)$.
 \end{itemize}
 % Examples of non-Euclidean setting -- multiproduct auction, social choice between multiple alternatives.
 \end{frame}
@@ -704,9 +704,8 @@
 			\visible<3->{&= \hat{\theta}_i k_i(\hat{\theta}_i,\theta_{-i}) - t_i (\hat{\theta}_i,\theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i})}
 			\\ 
 			\visible<4->{&= U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i})}
-		\end{align*}
-	}
-	\item In the end:
+		\end{align*}	}
+	\item \pause[5] In the end:
 	\vspace{-0.5em}\begin{align*}
 		U_i(\theta_i, \theta_{-i}) &\geq U_i(\hat{\theta}_i, \theta_{-i}) + \left(\theta_i - \hat{\theta}_i \right) k_i(\hat{\theta}_i,\theta_{-i}).
 	\end{align*}\vspace{-1em}
@@ -720,8 +719,7 @@
 
 \begin{frame}{Monotonicity}
 \begin{itemize}
-	\pause
-	\item Combining the two \structure<3->{for $\theta_i > \hat{\theta}_i$}, we get
+	\item Combining the two \structure<2->{for $\theta_i > \hat{\theta}_i$}, we get
 	{\small \vspace{-0.5em}\begin{align}
 		\label{eq:k_mon}
 			k_i(\theta_i,\theta_{-i}) 
@@ -873,6 +871,9 @@
 	%\item Now prior $\phi$ about the distribution of types becomes more relevant (though we already used it when talking about revenue)
 \end{itemize}
 \end{frame}
+\note{(video script):
+	So far we have talked about dominant strategy implementation. This is a strong implementation concept, but not the only one. Today we will introduce another one of those, called Bayesian implementation.
+}
 
 
 \begin{frame}{Bayesian Implementation}
@@ -881,18 +882,37 @@ Start with the \alert{general model} as before:
 	\item $N$ agents;
 	\item set of alternatives $X$;
 	\item type $\theta_{i}\in\Theta_{i}$ is private information of $i$;
-	\item common prior $\phi \in \varDelta(\Theta)$ about distribution of types;
+	\item common prior belief $\phi \in \varDelta(\Theta)$ about distribution of types;
+	\item utility functions $u_i(x,\theta_i)$;
 	\item each agent uses Bayes' rule to form a belief over other agents' types\\
 	$$\phi(\theta_{-i}|\theta_{i}) = \phi(\theta_{i},\theta_{-i}|\theta_{i}) = \frac{\phi(\theta_{i}, \theta_{-i}) }{\int_{\tilde\theta_{-i}\in\Theta_{-i}} \phi(\theta_{i},\tilde\theta_{-i}) d\tilde{\theta}_{-i}}.$$
 \end{itemize}
 \end{frame}
+\note{(video script):
+	In particular, this framework is defined in terms of a set of agents, a set of types for every agent, an arbitrary set of outcomes that we are choosing among (coupled with a s.c.f., which I did not write down), and a common prior belief over type profiles, shared by all agents.
+	We also have agents' utility functions that map outcomes and type profiles into utility values.
+	
+	With Bayesian Implementation, we take an interim perspective, rather than ex post perspective in case of DS implementation, meaning that we now have to keep track of the beliefs that every type of every player has about other players' types. To that end, we assume that all players start with a common prior belief over type profiles and then employ Bayes' rule to update this belief once they observe their own type.
+	
+	In particular, Bayes' rule says that the probability $\phi$ that
+	player $i$ assigns to profile of other players' types $\theta_{-i}$
+	given their own type $\theta_{i}$ is given by the ratio of: the joint
+	probability of types $\theta_{i}$ and $\theta_{-i}$ occuring simultaneously
+	and the total probability of type $\theta_{i}$ occurring, which is
+	given by the integral of the p.d.f. $\phi(\theta)$ over all possible
+	profiles of other players' types, $\tilde{\theta}_{-i}$.
+	
+	Now that we have defined the setting we work in, the next step towards
+	introducing an implementation concept, is introducing the equilibrium
+	concept that will be used in this implementation concept.
+}
 
 
 \begin{frame}{Bayes-Nash Equilibrium}
 \begin{definition}[Bayes-Nash equilibrium]
-	The \structure{strategy profile} $a^* =(a_{1}^*,\dots,a_{N}^*)$ with $a_i^*: \Theta_i \to S_i$ is a \alert{Bayesian Nash equilibrium} of the mechanism $\Gamma=(S_{1},\dots,S_{N},g)$ if, for all $i$ and all $\theta_{i}\in\Theta_{i}$,
+	The \structure{strategy profile} $a^* =(a_{1}^*,\dots,a_{N}^*)$ with $a_i^*: \Theta_i \to A_i$ is a \alert{Bayes-Nash equilibrium} of the mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ if, for all $i$ and all $\theta_{i}\in\Theta_{i}$,
 	$$E_{\theta_{-i}}\left[u_{i}(g(a_i^*(\theta_i),a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]\geq E_{\theta_{-i}}\left[u_{i}(g(\hat a_i,a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]$$
-	for all $\hat a_{i}\in S_{i}$.
+	for all $\hat a_{i}\in A_{i}$.
 \end{definition}
 \pause
 \begin{itemize}
@@ -901,19 +921,51 @@ Start with the \alert{general model} as before:
 	\item Expectations are taken w.r.t. distribution $F(\theta)$
 	\item BTW: we assumed that allocation and transfers are \emph{deterministic} given reports. \href{https://doi.org/10.3982/ECTA14698}{\uline{Chen, He, Li, and Sun (2019)}} show that this is often without loss of generality.
 \end{itemize}
-%TODO2020: mention Che-He-Li-Sun (2019) who show that for any stochastic mechanism there is an equivalent deterministic mechanism.
 \end{frame}
+\note{(video script):
+	The equilibrium concept we will be using here is Bayes-Nash Equilibrium.
+	This equilibrium is composed by a strategy profile $a^{*}$, -- where
+	each player's strategy maps their types into their action set, which
+	is prescribed by the mechanism, -- and this strategy profile is such
+	that every type of every player must find it optimal to play the equilibrium
+	action rather than any other action.
+	
+	The utility here comes from the outcome implemented following a given
+	action profile, according to the outcome function $g$, which is specified
+	as a part of the mechanism. The agents' decision criterion that we
+	employ here is expected utility, where the expectation is taken over
+	other players' types $\theta_{-i}$, which are not known to agent
+	$i$ when he selects an action, and the expectation is taken w.r.t.
+	agent $i$'s belief that we have just seen.
+}
+
 
 
 \begin{frame}{Bayesian Implementation}
 \begin{definition}[Bayesian implementation]
-	\structure{Mechanism} $\Gamma=(S_{1},\dots,S_{N},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $a^*=(a_{1}^*,\dots,a_{N}^*)$ of $\Gamma$ such that $f(\theta)=g(a^{*}(\theta))$ for all $\theta\in \Theta$.
+	\structure{Mechanism} $\Gamma=(A_{1},\dots,A_{N},g)$ \alert{implements \structure{s.c.f. $f$} in Bayes-Nash equilibrium} if there is a BNE $a^*=(a_{1}^*,\dots,a_{N}^*)$ of $\Gamma$ such that $f(\theta)=g(a^{*}(\theta))$ for all $\theta\in \Theta$.
 \end{definition}
 \pause
 \begin{definition}[Bayesian implementability]
 	\structure{S.c.f. $f$} is \alert{implementable in BNE} if there exists $\Gamma$ which implements it in BNE.
 \end{definition}
 \end{frame}
+\note{(video script):
+	Now that we have our equilibrium concept, we can introduce the implementation
+	concept.
+	
+	We will say that mechanism $\Gamma$ implements s.c.f. $f$ in Bayes-Nash
+	equilibrium if the game induced by mechanism $\Gamma$ has a BNE that
+	leads to the same outcome as the one prescribed by $f$, for any type
+	profile $\theta$.
+	
+	We will then say that a social choice function $f$ is implementable
+	in BNE if there exists some mechanism $\Gamma$ that implements it
+	in BNE. To clarify, the first definition has to do with whether a
+	given mechanism $\Gamma$ implements a given s.c.f., while the second
+	definition asks whether there is any mechanism $\Gamma$ that implements
+	a given s.c.f..
+}
 
 
 \begin{frame}{Truthful Bayesian Implementation}
@@ -929,14 +981,37 @@ Start with the \alert{general model} as before:
 \pause
 Every player is asked for their type; reporting truthfully is a BNE.
 \end{frame}
+\note{(video script):
+	Now that we have introduced our new implementation concept, we can
+	also restate the revelation principle for Bayesian mechanisms. The
+	first definition on this path is that of truthful implementation.
+	
+	In particular, we will call a given s.c.f. truthfully implementable
+	in BNE or, as we will call it more often, Bayesian Incentive Compatible,
+	if it is implemented in BNE by a DRM -- meaning that truthful reporting
+	is a BNE of the direct revelation mechanism for this s.c.f..
+	
+	In other words, scf $f$ is BIC if the following condition holds: ...
+	
+	for all players and their types, the
+	expected utility from reporting own type truthfully to the mechanism
+	is at least as large as from any possible misreport.
+}
 
 
 \begin{frame}{Revelation principle}
 \begin{theorem}[Revelation principle for Bayes-Nash equilibrium]
-	\structure{If} there exists a mechanism $\Gamma=(S_{1},\dots,S_{N},g)$ that \structure{implements} $f$ in BNE, 
+	\structure{If} there exists a mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ that \structure{implements} $f$ in BNE, 
 	\alert{then} $f$ is \alert{truthfully implementable} in BNE.
 \end{theorem}
 \end{frame}
+\note{(video script):
+	Now we state the revelation principle.
+	
+	Its statement is analogous to the revelation principle for DSIC mechanisms. It says that if some scf f is implemented by some mechanism $\Gamma$ in BNE then it can also be implemented in BNE by a direct mechanism.
+	
+	The proof of the statement is completely analogous to the proof for dominant strategies and consists of showing that if Bayesian IC constraints are satisfied for some mechanism then they would also be satisfied for a direct mechanism. We will therefore not go through this proof in detail.
+}
 
 
 %\begin{frame}{BIC: Efficient Mechanisms}
@@ -981,7 +1056,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\begin{itemize}
 		\item Let 
 		\vspace{-0.5em}\begin{align*}
-		\bar{U}_i (\hat{\theta}_i,\theta_i) &:= \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
+		\bar{U}_i (\hat{\theta}_i,\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
 		\\
 		&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) | \theta_i \right].
 		\end{align*}\vspace{-1em}
@@ -1034,7 +1109,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \begin{frame}{Generalized VCG}
 	GVCG mechanism is a DRM with the efficient allocation $k^*(\theta)$ and payments
 	\begin{align*}
-	t_i^{GVCG} (\theta) =& \sum_{j \neq i} v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\bar{\theta}_i,\theta_{-i}),\bar{\theta}_i) -
+	t_i^{GVCG} (\theta) \equiv& \sum_{j \neq i} v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\bar{\theta}_i,\theta_{-i}),\bar{\theta}_i) -
 	\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\bar{\theta}_i)
 	\end{align*}
 	\pause
@@ -1070,11 +1145,26 @@ Every player is asked for their type; reporting truthfully is a BNE.
 		}
 	\end{align*}
 	\pause
-	since
+	The inequality above is the IIR constraint, and it holds since
 	\begin{align*}
 	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
 	\end{align*}
 	%TODO: Talk about the meaning of LCT here
+\end{frame}
+
+
+\begin{frame}{Generalized VCG}
+	\begin{theorem}[gVCG, part 2]
+		In a \alert{Euclidean} model, gVCG is:
+		\begin{itemize}{\color{gray}
+				\item efficient (by construction),
+				\item DSIC,
+				\item interim IR;}
+			\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
+		\end{itemize}
+	\end{theorem}
+	If gCVG is not ex ante budget balanced, there does not exist a \\
+	\{EFF + BIC + IIR + ex ante BB\} mechanism (so no ex post BB either).
 \end{frame}
 
 
@@ -1086,21 +1176,6 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\pause
 	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
 \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Generalized VCG}
-	\begin{theorem}[gVCG]
-		In a \alert{Euclidean} model, gVCG is:
-		\begin{itemize}{\color{gray}
-				\item efficient (by construction),
-				\item DSIC,
-				\item interim IR;}
-			\item maximizes expected revenue among all mechanisms that are BIC, IIR, and implement the efficient $k^*$.
-		\end{itemize}
-	\end{theorem}
-	If gCVG is not ex ante budget balanced, there does not exist a \\
-	\{EFF + BIC + IIR + ex ante BB\} mechanism (so no ex post BB either).
 \end{frame}
 
 
@@ -1131,13 +1206,13 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\item One last mechanism before we go -- in case you care about BB, but not IR.
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
-		\tilde{t}_i (\theta_i) := \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) | \theta_i \right]
+		\tilde{t}_i (\theta_i) \equiv \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) | \theta_i \right]
 	\end{align*}
 	
 	be the ``expected externality'' imposed by $i$ on everyone else.
 	\item \structure<1>{AGV transfers} are given by
 	\vspace{-0.5em}\begin{align*}
-		\structure<1>{t_i^{AGV} (\theta) = \alert<2>{\frac{1}{N-1} \sum_{j \neq i} \tilde{t}_j (\theta_j)} \structure<2>{- \tilde{t}_i (\theta_i)}}.
+		\structure<1>{t_i^{AGV} (\theta) \equiv \alert<2>{\frac{1}{N-1} \sum_{j \neq i} \tilde{t}_j (\theta_j)} \structure<2>{- \tilde{t}_i (\theta_i)}}.
 	\end{align*}\vspace{-1em}
 	\pause
 	\item \structure{The second term} is the averaged version of Groves' transfer,
