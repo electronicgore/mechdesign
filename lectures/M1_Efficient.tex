@@ -1078,10 +1078,10 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\begin{itemize}
 		\item Then by the Fundamental Theorem of Calculus
 		\begin{align*}
-		\bar{U}_i (\theta_i) &= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
-		\\&= \bar{U}_i (\bar{\theta}_i) + \int_{\bar{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
+		\bar{U}_i (\theta_i) &= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
+		\\&= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
 		\end{align*}
-		meaning that $k$ and $\bar{U}_i (\bar{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
+		meaning that $k$ and $\bar{U}_i (\underline{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
 		\medskip
 		\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} \left[k(\theta_i,\theta_{-i}) | \theta_i \right]$ compared to DSIC proof. Either argument can be used in both proofs.
 	\end{itemize}
@@ -1096,9 +1096,9 @@ Every player is asked for their type; reporting truthfully is a BNE.
 		\item As it turns out, VCG can be (interim) IR with a slight modification... And it will be (ex ante) revenue-maximizing among all such mechanisms in that case.
 		\item Enter \alert{generalized VCG} (\href{https://sites.google.com/site/vjkrishna/research}{\uline{Krishna and Perry, 2000}}).
 		\pause\medskip
-		\item Define \structure{least charitable type} $\bar{\theta}_i$ as
+		\item Define \structure{least charitable type} $\tilde{\theta}_i$ as
 		\begin{align*}
-		\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
+		\tilde{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
 		\end{align*}
 		(expectation taken w.r.t the common prior $\phi \in \varDelta(\Theta)$)
 	\end{itemize}
@@ -1109,14 +1109,14 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \begin{frame}{Generalized VCG}
 	GVCG mechanism is a DRM with the efficient allocation $k^*(\theta)$ and payments
 	\begin{align*}
-	t_i^{GVCG} (\theta) \equiv& \sum_{j \neq i} v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\bar{\theta}_i,\theta_{-i}),\bar{\theta}_i) -
-	\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\bar{\theta}_i)
+	t_i^{GVCG} (\theta) \equiv& \sum_{j \neq i} v_j (k^*(\tilde{\theta}_i,\theta_{-i}),\theta_j) + v_i (k^*(\tilde{\theta}_i,\theta_{-i}),\tilde{\theta}_i) -
+	\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\tilde{\theta}_i)
 	\end{align*}
 	\pause
 	Has the usual Groves' term (the third one); the other three guarantee IR.
 	\begin{itemize}
-		\item The first term is similar to Clarke's term, but with $k^*(\bar{\theta}_i,\theta_{-i})$ instead of $k^*(\theta_{-i})$
-		\item $2^{nd}$ and $4^{th}$ is the net utility that LCT $\bar{\theta}_i$ gets from participating in the mechanism -- need to also pay it to all other types
+		\item The first term is similar to Clarke's term, but with $k^*(\tilde{\theta}_i,\theta_{-i})$ instead of $k^*(\theta_{-i})$
+		\item $2^{nd}$ and $4^{th}$ is the net utility that LCT $\tilde{\theta}_i$ gets from participating in the mechanism -- need to also pay it to all other types
 	\end{itemize}
 \end{frame}
 
@@ -1139,7 +1139,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \begin{frame}{Generalized VCG. Proof: IIR}
 	Interim expected utility for $\theta_i$ is
 	\begin{align*}
-		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =0}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =0}^N v_j (k^*(\bar{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \bar{\theta}_i} | \theta_i \right] + \underline{U}_i (\bar{\theta}_i)
+		\mathbb{E}_{\theta_{-i}} \left[ \sum_{j =0}^N v_j (k^*(\theta),\theta_j) - \left. \sum_{j =0}^N v_j (k^*(\tilde{\theta}_i,\theta_{-i}),\theta_j) \right|_{\theta_i = \tilde{\theta}_i} | \theta_i \right] + \underline{U}_i (\tilde{\theta}_i)
 		\visible<2>{
 			\geq \underline{U}_i(\theta_i)
 		}
@@ -1147,7 +1147,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\pause
 	The inequality above is the IIR constraint, and it holds since
 	\begin{align*}
-	\bar{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
+	\tilde{\theta}_i \in \arg \min_{\theta_i \in \Theta_i} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) | \theta_i \right]
 	\end{align*}
 	%TODO: Talk about the meaning of LCT here
 \end{frame}
@@ -1174,7 +1174,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\pause
 	\item Decreasing $h_i$ only possible if IR slack for \emph{all} types of $i$.
 	\pause
-	\item But IR binds for $\bar{\theta}_i$: $\bar{U}_i (\bar{\theta}_i) = \underline{U}_i (\bar{\theta}_i)$ (verify). \qed
+	\item But IR binds for $\tilde{\theta}_i$: $\bar{U}_i (\tilde{\theta}_i) = \underline{U}_i (\tilde{\theta}_i)$ (verify). \qed
 \end{itemize}
 \end{frame}
 
