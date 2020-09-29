@@ -489,11 +489,11 @@
 	\item A suggestion for $h_i(\theta_{-i})$ made by Clarke (``pivot mechanism''):
 	\vspace{-0.5em}\begin{align*}
 	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
-	\\ &\text{where } k^*(\theta_{-i}) = \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
+	\\ &\text{where } k^*(\theta_{-i}) \in \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
 	\end{align*}
 	\item Resulting \alert{VCG transfers}:
 	\vspace{-0.5em}\begin{align*}
-	\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+	\structure{ t_{i}^{VCG}(\theta) } \equiv -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
 	\end{align*}
 \end{itemize}
 \end{frame}
@@ -677,7 +677,7 @@
 \begin{alertblock}{Assumption: Euclidean setting}
 	Make the following assumptions on top of quasilinearity:
 	\begin{itemize}
-		\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i]$, full support;
+		\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i] \subseteq \mathbb{R}$, full support;
 		\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
 		\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
 	\end{itemize}
@@ -1036,6 +1036,8 @@ Every player is asked for their type; reporting truthfully is a BNE.
 
 \begin{frame}{Payoff Equivalence in BIC}
 	Now constrain ourselves again to the \alert{Euclidean} setting to show payoff equivalence.
+	\\
+	Assume further that types are independent across players: $\theta_i \perp \theta_{-i}$ for all $i$.
 	\begin{theorem}[Payoff Equivalence for BIC mechanisms]
 		For any two BIC DRMs with $x = (k,t)$ and $x' = (k',t')$ resp.:
 		
@@ -1081,10 +1083,36 @@ Every player is asked for their type; reporting truthfully is a BNE.
 		\bar{U}_i (\theta_i) &= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
 		\\&= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,
 		\end{align*}
-		meaning that $k$ and $\bar{U}_i (\underline{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$.
+		meaning that $k$ and $\bar{U}_i (\underline{\theta}_i)$ pin down utilities $\bar{U}_i (\theta_i)$ for all $\theta_i$. $\square$
 		\medskip
 		\item Remark: here we used a different argument to get $\frac{d \bar{U}_i (\theta_i,\theta_{i})}{d \theta_i} = \mathbb{E}_{\theta_{-i}} \left[k(\theta_i,\theta_{-i}) | \theta_i \right]$ compared to DSIC proof. Either argument can be used in both proofs.
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence in BIC. Generalization}
+	The proof is nice and illustrative in Euclidean setting. \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00233}{\uline{Krishna and Maenner (2001)}} present a more general result for the following setting:
+	\begin{itemize}
+		\item quasilinear setting;
+		\item independent types;
+		\item $\Theta_i \subseteq \mathbb{R}^{K_i}$ is a convex set for every $i$ 
+		\item $v_i(k,\theta_i)$ is convex in $\theta_i$ for all $i$.
+	\end{itemize}
+	(I believe, you can relax convexity to connectedness)
+\end{frame}
+
+
+\begin{frame}{Ex ante and ex post revenue in BIC}
+	One cool thing about BIC mechanisms is that ex post BB is free if you have ex ante BB:
+	\begin{theorem}
+		For every direct mechanism $\Gamma = (\Theta, (k,t))$ that is BIC and \alert{ex ante BB}, there exists a direct mechanism $\Gamma' = (\Theta, (k',t'))$ which is:
+		\begin{itemize}
+			\item BIC,
+			\item \alert{ex post BB},
+			\item equivalent to $\Gamma$ in the sense of: $k'(\theta) = k(\theta)$ for all $\theta$ and $\mathbb{E}_{\theta_{-i}} t'(\theta_i,\theta_{-i}) = \mathbb{E}_{\theta_{-i}} t(\theta_i,\theta_{-i})$ for all $i$ and $\theta_i$.
+		\end{itemize}
+	\end{theorem}
+	For proof, see Prop 3.6 in B{\"o}rgers.
 \end{frame}
 
 
@@ -1155,7 +1183,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 
 \begin{frame}{Generalized VCG}
 	\begin{theorem}[gVCG, part 2]
-		In a \alert{Euclidean} model, gVCG is:
+		In a \alert{Euclidean} model with independent players' types, gVCG is:
 		\begin{itemize}{\color{gray}
 				\item efficient (by construction),
 				\item DSIC,
