@@ -1,0 +1,283 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[english,10pt
+,aspectratio=169
+%,handout
+%%%%,notes
+]{beamer}
+\input{MD_preamble.tex}
+
+
+\title{Mechanism Design}
+
+\subtitle{2: Mechanisms for arbitrary s.c.f.s}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Fall 2020}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+
+
+\section{Social Choice Theory}
+
+
+\begin{frame}{Social Choice Theory}
+\begin{itemize}
+	\item Sum of utilities is just one measure of welfare -- and pretty arbitrary at that.
+	\begin{itemize}
+		\item utilities $u_i$ are nice for exploring \alert{intra}personal trade-offs when making decisions;
+		\item not so good for \alert{inter}personal comparisons -- how can we even measure relative preference intensity?
+	\end{itemize}
+	\item Can we have a better preference aggregator?
+	\item \structure{Social Choice Theory} (\& Welfare Economics) deal with aggregating individual preferences into social preference.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Social choice: Goal}
+\begin{itemize}
+	\item Adopt the \alert{general} setting.
+	\item We do not like cardinal utilities -- can instead work with ordinal preference relations $\succsim_i$.
+	\begin{exampleblock}{The goal}
+		Given the environment ($N,\{\Theta_i\},X,\{\succsim_i(\theta)\}$), find a s.c.f. $f$ -- or, more generally, a social preference relation $\succsim_S(\theta)$ over $X$ -- that would be worthy of the name ``efficient''
+	\end{exampleblock}
+	\item But what are the requirements that a good efficient $f$ must satisfy?
+	\begin{itemize}
+		\item Previously, we wanted to maximize sum of utilities. What do we want now?
+	\end{itemize}
+	\item Since we are not talking about incentives at the moment, I will omit $\theta$s in what follows.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Social choice: Axiomatic approach}
+	\begin{itemize}
+		\item Can impose \alert{axioms} on how a collection of $\{\succsim_i\}$ should map into $\succsim_S$ or $f$.
+		\item Possible reasonable axioms:
+	\end{itemize}
+	\begin{description}
+		\item[(A1)] \structure{Domain}: any collection of individual preferences $\left(\succsim_1, ..., \succsim_N \right)$ can be aggregated into $\succsim_S$.
+		\item[(A2)] \structure{Unanimity}: if $a \succsim_i b$ for all $i$ then $a \succsim_S b$.
+		\item[(A3)] \structure{Independence of Irrelevant Alternatives}: if $\succsim_i$ and $\succsim'_i$ rank alternatives $a$ and $b$ the same for all $i$ then so should $\succsim_S$ and $\succsim'_S$.
+	\end{description}
+\end{frame}
+
+
+\begin{frame}{Social choice: Arrow's theorem}
+	\begin{theorem}[Arrow]
+		With more than three alternatives, if $\succsim_S$ satisfies (A1)-(A3) then it is dictatorial, i.e. $\exists i: a \succsim_S b \Leftrightarrow a \succsim_i b$.
+	\end{theorem}
+	\begin{itemize}
+		\item The same is true for s.c.f.s if we rephrase the axioms appropriately. (See MWG Prop 21.E.1.)
+		\item See \href{https://link.springer.com/article/10.1007/s00199-004-0556-7}{\uline{Geanakoplos (2005)}} for [slightly] more details on Arrow's Thm and a proof or three.
+		\item Arrow's Thm is a sad result for us. Were our axioms too strong?
+		\begin{itemize}
+			\item We can relax requirements to $\succsim_S$ -- e.g., say it only needs to be acyclical, but not transitive. But in that case some form of dictatorship still arises (oligarchy, veto power...)
+			\item Also, A1 is actually very strong once you think of it -- let's try to relax that.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Social choice: Single-peaked preferences}
+	\begin{itemize}
+		\item Suppose now that the alternatives are ordered in some sense: \\
+		$X = (x_1, x_2, ..., x_M)$ with $x_1 < x_2 < ... < x_M$.
+		\item Suppose also that preferences are single-peaked w.r.t. that order:
+		\begin{exampleblock}{}
+			Preference relation $\succsim_i$ is \structure{single-peaked} if $\exists x^*$ s.t. for any $x_k < x_l\leq x^*$, $x_l \succsim_i x_k$, and for any $x^* \leq x_k < x_l$, $x_k \succsim_i x_l$.
+		\end{exampleblock}
+	\end{itemize}
+	In this environment  we can construct both a reasonable social preference $\succsim_S$ that satisfies all the axioms, and a mechanism that implements it.
+\end{frame}
+
+
+\begin{frame}{Social choice: Majority voting}
+	\begin{theorem}[MWG 21.D.1-2]
+		In the general setting with single-peaked preferences and odd number of players $N$, \alert{pairwise majority voting} generates a well-defined social preference $\succsim_S$.
+		\\
+		S.c.f. $f_S$ based on such $\succsim_S$ will always select the peak of the median voter.
+	\end{theorem}
+	\begin{itemize}
+		\item You can verify that PMV satisfies (A1)-(A3).
+		
+		\item This gives us a natural notion of \structure{efficiency} which says \\
+		``Social preference is $x_k \succsim_S x_l$ if and only if for the \structure{majority} of $i$,  $x_k \succsim_i x_l$''.
+		
+		\item Note that PMV always generates some $\succsim_S$, but without single-peaked preferences it may be nonsensical. E.g., it can be intransitive: $x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$ (a \structure{Condorcet paradox}).
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Social choice: conclusion}
+	\begin{itemize}
+		\item Choosing as a society is hard.
+		\item There is no single good recipe to always make the efficient choice
+		\item ...so in the past weeks we worked with a notion of efficiency, with which we can actually work.
+		\begin{itemize}
+			\item We selected some rule according to which $f^*(\theta)$ (or $x^*(\theta)$ or $k^*(\theta)$) must be constructed and tried to implement that
+			\item instead of debating what this rule must be.
+			\item But this is an open debate as well.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Testing Implementability}
+
+\begin{frame}{Testing Implementability}
+	\begin{itemize}
+		\item Forget all about efficiency and social choice.
+		\item Suppose we have some s.c.f. $f(\theta)$ that we want to implement. Question now is:
+		\begin{exampleblock}{}
+			How can we check whether a given s.c.f. $f(\theta)$ is implementable?
+		\end{exampleblock} 
+		\item In the course so far, we have seen two answers already.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DSIC: Weak Preference Reversal Property}
+	\begin{itemize}
+		\item \textbf{Answer 1}: \structure{revelation principle}. Construct a DRM and check all players' \alert{IC conditions}. I.e., that for all $i,\theta_i',\theta_i'',\theta_{-i}$ it holds that
+		$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}').$$
+		
+		\item Note that they imply the following \structure{preference reversal}: for all $i,\theta_i',\theta_i'',\theta_{-i}$,
+		\begin{equation*}
+			\begin{cases}
+				u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'),
+				\\
+				u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') \leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'').
+			\end{cases}
+		\end{equation*}
+		\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$ for $f$ to be DSIC. 
+		\item ``To each their own'': different types should get their most preferred option among the available one.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: Euclidean}
+	\begin{itemize}
+		\item \textbf{Answer 2}: \structure{monotonicity}.
+		\item In a Euclidean setting, $k(\theta)$ is implementable only if it is weakly monotone (increasing).
+		\item Turns out, this is a sharp characterization: \\
+		if $k(\theta)$ is monotone, there exist transfers $t$ such that $\Gamma = (\Theta, (k,t))$ is DSIC.
+		\begin{itemize}
+			\item To prove: use the envelope representation of payoffs to construct transfers; can then show that the resulting mechanism is DSIC.
+		\end{itemize}
+		\item This characterization is extendable to more general settings, although the statements get uglier.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: quasilinear}
+	One example of this.
+	\begin{exampleblock}{Definition (weak monotonicity)}
+		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
+		\begin{equation*}
+			v_{i}(k(\alert{\theta_{i}'}, \theta_{-i}), \alert{\theta_{i}'}) - 
+			v_{i}(k(\alert{\theta_{i}''}, \theta_{-i}), \alert{\theta_{i}'}) 
+			\geq 
+			v_{i}(k(\alert{\theta_{i}'}, \theta_{-i}), \alert{\theta_{i}''}) - 
+			v_{i}(k(\alert{\theta_{i}''}, \theta_{-i}), \alert{\theta_{i}''}) 
+		\end{equation*}
+	\end{exampleblock}
+	\begin{theorem}[Necessity of weak monotonicity in qlin setting]
+		In a quasilinear setting: if $k$ is DSIC then $k$ is weakly monotone.
+	\end{theorem}
+	So $k$ must be weakly monotone to be implementable, but weak monotonicity does not guarantee implementability. But we can strengthen this...
+\end{frame}
+
+
+\begin{frame}{Monotonicity: quasilinear}
+	\begin{exampleblock}{Definition (cyclical monotonicity)}
+		Allocation $k$ is \alert{cyclically monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
+		\begin{equation*}
+			\sum_{m=1}^{M-1}
+			\left[
+			v_{i}(k(\alert{\theta_{i}^m}, \theta_{-i}), \alert{\theta_{i}^{m+1}}) - 
+			v_{i}(k(\alert{\theta_{i}^{m+1}}, \theta_{-i}), \alert{\theta_{i}^m}) 
+			\right] 
+			\leq 0
+		\end{equation*}
+	\end{exampleblock}
+	\begin{theorem}[Rochet, 1987]
+		In a quasilinear setting: $k$ is DSIC if and only if $k$ is cyclically monotone.
+	\end{theorem}
+	\textbf{Note}: ``Weak monotonicity'' = ``cyclical monotonicity for $M=3$''.
+	See B{\"o}rgers, ch.5.3-5.4 for proofs or references to proofs (for $N=1$). See rest of ch.5 for other kinds of monotonicity for quasilinear setting.
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general}
+	Without transfers, interesting results come up... (\textbf{Assume} $X$ is finite and $\Theta_i$ are rich enough to contain all possible preferences over $X$ for all $i$.)
+	\begin{exampleblock}{Definition (outcome monotonicity)}
+		In a general setting, outcome $x$ is \alert{monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
+		\begin{itemize}
+			\item if for all $i$ and all $x \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x,\theta')$, it also holds that $u_i(x(\theta'),\theta'') \geq u_i(x,\theta'')$,
+			\item then $x(\theta'')=x(\theta')$
+		\end{itemize}
+	\end{exampleblock}
+	In words, if $x(\theta')$ is ``higher up'' in preferences under $\theta''$ than it is under $\theta'$, and it was chosen under $\theta'$, then it must definitely be chosen under $\theta''$.
+	\begin{theorem}[Necessity of monotonicity in general setting]
+		In a general setting: if $x$ is DSIC and $x(\Theta)=X$ then $x$ is monotone.
+	\end{theorem}
+	(This is not THE interesting part yet. The next result is.)
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general}
+	\begin{exampleblock}{Definition (dictatorial s.c.f.)}
+		S.c.f. $f$ is \alert{dictatorial} if there exists $i \in N$ s.t. for all type profiles $\theta$:
+		$$ f(\theta) \in \arg \max_x u_i(x,\theta_i)$$
+	\end{exampleblock}
+	\begin{theorem}[Gibbard-Satterthwaite, 1973,'75]
+		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+		\centering
+		$x$ is \alert{DSIC} if and only if $x$ is \alert{dictatorial}.
+	\end{theorem}
+	\begin{itemize}
+		\item \textbf{Note}: restriction $x(\Theta)=X$ is immaterial: if $x(\Theta) \subset X$ then only preferences over alternatives in $x(\Theta)$ are relevant, and the society ex ante agrees to rule out everything else. We will still have a dictatorship on $x(\Theta)$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general}
+	\begin{theorem}[Monotonicity implies dictatorship]
+		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+		\centering
+		if $x$ is monotone then $x$ is dictatorial.
+	\end{theorem}
+	\begin{itemize}
+		\item The missing link is the following:
+		\item \textbf{Note}: all three results for the general setting hold with ordinal preferences ($\succsim_i$) too, do not rely on cardinal utilities $u_i$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general}
+	\begin{itemize}
+		\item Note parallels between GS theorem and Arrow theorem.
+		\item GS thm is extendable to infinite $X$.
+		\item The source of evil in GS thm is again the domain assumption: we often know \emph{something} about some players' preferences, so ``all possible preferences over $X$'' may be too rich for $\Theta_i$.
+		\begin{itemize}
+			\item We have already seen that once we restrict preferences (e.g. to quasilinear -- assuming ``everyone always likes money'') then there exist non-dictatorial DSIC implementable s.c.f.s (outcome functions) $f(\theta)$.
+			\item Single-peaked preferences, in particular, also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
+		\end{itemize}
+		\item For a proof of GS thm, see B{\"o}rgers, ch.8.2, or \href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{\uline{Svensson and Reffgen (2014)}}
+	\end{itemize}
+\end{frame}
+
+
+\end{document}
