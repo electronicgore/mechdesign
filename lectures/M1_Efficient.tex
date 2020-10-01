@@ -3,7 +3,7 @@
 \documentclass[english,10pt
 ,aspectratio=169
 %,handout
-%%,notes
+%%%%,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
@@ -679,6 +679,7 @@
 	\begin{itemize}
 		\item $\theta_i \in \Theta_{i} = [\underline{\theta}_i, \bar{\theta}_i] \subseteq \mathbb{R}$, full support;
 		\item $k \in K \subseteq \mathbb{R}^N$, $K$ compact, convex set;
+		%TODO2021: convexity of K is never actually used, is it?
 		\item $u_i(x,\theta_i) = \theta_i k_i - t_i$.
 	\end{itemize}
 \end{alertblock}
@@ -1105,11 +1106,11 @@ Every player is asked for their type; reporting truthfully is a BNE.
 \begin{frame}{Ex ante and ex post revenue in BIC}
 	One cool thing about BIC mechanisms is that ex post BB is free if you have ex ante BB:
 	\begin{theorem}
-		For every direct mechanism $\Gamma = (\Theta, (k,t))$ that is BIC and \alert{ex ante BB}, there exists a direct mechanism $\Gamma' = (\Theta, (k',t'))$ which is:
+		In a \alert{quasilinear} setting, for every direct mechanism $\Gamma = (\Theta, (k,t))$ that is BIC and \alert{ex ante BB}, there exists a direct mechanism $\Gamma' = (\Theta, (k',t'))$ which is:
 		\begin{itemize}
 			\item BIC,
 			\item \alert{ex post BB},
-			\item equivalent to $\Gamma$ in the sense of: $k'(\theta) = k(\theta)$ for all $\theta$ and $\mathbb{E}_{\theta_{-i}} t'(\theta_i,\theta_{-i}) = \mathbb{E}_{\theta_{-i}} t(\theta_i,\theta_{-i})$ for all $i$ and $\theta_i$.
+			\item equivalent to $\Gamma$ in the sense of: $k'(\theta) = k(\theta)$ for all $\theta$ and $\mathbb{E}_{\theta_{-i}} t'_i(\theta_i,\theta_{-i}) = \mathbb{E}_{\theta_{-i}} t_i(\theta_i,\theta_{-i})$ for all $i$ and $\theta_i$.
 		\end{itemize}
 	\end{theorem}
 	For proof, see Prop 3.6 in B{\"o}rgers.
