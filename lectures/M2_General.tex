@@ -3,14 +3,14 @@
 \documentclass[english,10pt
 ,aspectratio=169
 %,handout
-%%%%,notes
+%%%%%%,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
 
 \title{Mechanism Design}
 
-\subtitle{2: Mechanisms for arbitrary s.c.f.s}
+\subtitle{2: Implementability of arbitrary s.c.f.s}
 
 \author{Egor Starkov}
 
@@ -74,17 +74,17 @@
 
 
 \begin{frame}{Social choice: Arrow's theorem}
-	\begin{theorem}[Arrow]
+	\begin{theorem}[Arrow, 1950]
 		With more than three alternatives, if $\succsim_S$ satisfies (A1)-(A3) then it is dictatorial, i.e. $\exists i: a \succsim_S b \Leftrightarrow a \succsim_i b$.
 	\end{theorem}
 	\begin{itemize}
 		\item The same is true for s.c.f.s if we rephrase the axioms appropriately. (See MWG Prop 21.E.1.)
-		\item See \href{https://link.springer.com/article/10.1007/s00199-004-0556-7}{\uline{Geanakoplos (2005)}} for [slightly] more details on Arrow's Thm and a proof or three.
+		\item See \href{https://link.springer.com/article/10.1007/s00199-004-0556-7}{\uline{Geanakoplos (2005)}} for [slightly] more details on Arrow's Thm and a proof (or three).
 		\item Arrow's Thm is a sad result for us. Were our axioms too strong?
-		\begin{itemize}
-			\item We can relax requirements to $\succsim_S$ -- e.g., say it only needs to be acyclical, but not transitive. But in that case some form of dictatorship still arises (oligarchy, veto power...)
-			\item Also, A1 is actually very strong once you think of it -- let's try to relax that.
-		\end{itemize}
+		%\begin{itemize}
+			%\item We can relax requirements to $\succsim_S$ -- e.g., say it only needs to be acyclical, but not transitive. But in that case some form of dictatorship still arises (oligarchy, veto power...)
+		%\end{itemize}
+		\item A1 is actually very strong once you think of it -- let's try to relax that.
 	\end{itemize}
 \end{frame}
 
@@ -167,13 +167,14 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: Euclidean}
+\begin{frame}{Monotonicity: Euclidean setting}
 	\begin{itemize}
 		\item \textbf{Answer 2}: \structure{monotonicity}.
-		\item In a Euclidean setting, $k(\theta)$ is implementable only if it is weakly monotone (increasing).
+		\item In a Euclidean setting, $k(\theta)$ is implementable only if it is monotone (weakly increasing).
 		\item Turns out, this is a sharp characterization: \\
 		if $k(\theta)$ is monotone, there exist transfers $t$ such that $\Gamma = (\Theta, (k,t))$ is DSIC.
 		\begin{itemize}
+			\item Monotonicity may require $k(\theta)$ to be either weakly increasing, or weakly decreasing, depending on the problem.
 			\item To prove: use the envelope representation of payoffs to construct transfers; can then show that the resulting mechanism is DSIC.
 		\end{itemize}
 		\item This characterization is extendable to more general settings, although the statements get uglier.
@@ -181,7 +182,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: quasilinear}
+\begin{frame}{Monotonicity: quasilinear setting}
 	One example of this.
 	\begin{exampleblock}{Definition (weak monotonicity)}
 		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
@@ -200,7 +201,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: quasilinear}
+\begin{frame}{Monotonicity: quasilinear setting}
 	\begin{exampleblock}{Definition (cyclical monotonicity)}
 		Allocation $k$ is \alert{cyclically monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
 		\begin{equation*}
@@ -220,13 +221,14 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general}
-	Without transfers, interesting results come up... (\textbf{Assume} $X$ is finite and $\Theta_i$ are rich enough to contain all possible preferences over $X$ for all $i$.)
+\begin{frame}{Monotonicity: general setting}
+	Without transfers, interesting results come up... \\
+	\textbf{Assume} $X$ is finite and $\Theta_i$ are rich enough to contain all possible preferences over $X$ for all $i$.
 	\begin{exampleblock}{Definition (outcome monotonicity)}
 		In a general setting, outcome $x$ is \alert{monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
 		\begin{itemize}
-			\item if for all $i$ and all $x \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x,\theta')$, it also holds that $u_i(x(\theta'),\theta'') \geq u_i(x,\theta'')$,
-			\item then $x(\theta'')=x(\theta')$
+			\item if for all $i$ and all $x' \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x',\theta')$ it holds that $u_i(x(\theta'),\theta'') \geq u_i(x',\theta'')$,
+			\item then $x(\theta'')=x(\theta')$.
 		\end{itemize}
 	\end{exampleblock}
 	In words, if $x(\theta')$ is ``higher up'' in preferences under $\theta''$ than it is under $\theta'$, and it was chosen under $\theta'$, then it must definitely be chosen under $\theta''$.
@@ -237,7 +239,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general}
+\begin{frame}{Monotonicity: general setting}
 	\begin{exampleblock}{Definition (dictatorial s.c.f.)}
 		S.c.f. $f$ is \alert{dictatorial} if there exists $i \in N$ s.t. for all type profiles $\theta$:
 		$$ f(\theta) \in \arg \max_x u_i(x,\theta_i)$$
@@ -253,20 +255,23 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general}
-	\begin{theorem}[Monotonicity implies dictatorship]
-		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
-		\centering
-		if $x$ is monotone then $x$ is dictatorial.
-	\end{theorem}
+\begin{frame}{Monotonicity: general setting}
 	\begin{itemize}
 		\item The missing link is the following:
-		\item \textbf{Note}: all three results for the general setting hold with ordinal preferences ($\succsim_i$) too, do not rely on cardinal utilities $u_i$.
+		\begin{theorem}[Monotonicity implies dictatorship]
+			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+			\centering
+			if $x$ is monotone then $x$ is dictatorial.
+		\end{theorem}
+		\item \textbf{Note}: all three results for the general setting hold with ordinal preferences ($\succsim_i$) too, they do not rely on cardinal utilities $u_i$.
+		\begin{itemize}
+			\item If anything, the domain assumption is easier to state with ordinal preferences.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general}
+\begin{frame}{Monotonicity: general setting}
 	\begin{itemize}
 		\item Note parallels between GS theorem and Arrow theorem.
 		\item GS thm is extendable to infinite $X$.
