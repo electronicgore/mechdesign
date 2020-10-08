@@ -3,7 +3,7 @@
 \documentclass[english,10pt
 ,aspectratio=169
 %,handout
-%%%%,notes
+%%%%%,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
@@ -755,23 +755,35 @@
 		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
 	}
 	\end{align*}
-	\item This is \alert{payoff equivalence} a.k.a. envelope representation of payoffs a.k.a. Mirrlees condition.
+	(Note that the lower limit does not need to be $\underline{\theta}_i$ -- it can be any other type.)
+	\item This is the \alert{envelope representation of payoffs} a.k.a. Mirrlees condition. From it we can immediately get revenue equivalence.
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Payoff Equivalence}
-\begin{theorem}[Payoff Equivalence for DSIC Euclidean mechanisms]
-	In the Euclidean setting, for any two DSIC DRMs with $x = (k,t)$ and $x' = (k',t')$ respectively:
-	\\ 	
-	\structure{if $k(\theta)=k'(\theta)$} for all $\theta$ \alert{then $t_i(\theta) = t'_i(\theta) + c_i (\theta_{-i})$} for all $\theta$ for some $c_i(\theta_{-i})$.
-\end{theorem}
-\pause
+	\begin{theorem}[Payoff Equivalence for DSIC Euclidean mechanisms]
+		In the Euclidean setting, for any two DSIC DRMs with $x = (k,t)$ and $x' = (k',t')$ respectively:
+		\\ 	
+		\structure{if $k(\theta)=k'(\theta)$} for all $\theta$ \alert{then $t_i(\theta) = t'_i(\theta) + c_i (\theta_{-i})$} for all $\theta$ for some $c_i(\theta_{-i})$.
+	\end{theorem}
+	\pause
+	\textbf{Proof}. Given the envelope representation, invoke the definition of $U_i$:
+	\vspace{-0.5em}\begin{align*}
+		v_i(k^*(\theta_i,\theta_{-i}),\theta_i) - t_i(\theta_i,\theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s.
+	\end{align*}
+	The above holds in any DSIC DRM. Take the two mechanisms in the statement, fix some $\theta,i$, express $t_i(\theta)$ and $t_i'(\theta)$ from the above, and you will get that
+	\vspace{-0.5em}$$ t_i(\theta) = t_i'(\theta) - U_i (\underline{\theta}_i,\theta_{-i}) + U_i' (\underline{\theta}_i,\theta_{-i}),$$
+	where $U_i$ and $U_i'$ denote the eqm utilities in the two mechanisms. The last two terms only depend on $i$ and $\theta_{-i}$ (but not $\theta_i$), hence denoting them as $c_i(\theta_{-i})$ concludes the proof. $\square$
+\end{frame}
+
+
+\begin{frame}{Payoff Equivalence: intuition}
 \begin{itemize} 
 	\item Given allocation $k$ (doesn't have to be efficient), utility of one type (usually ``lowest'' type) pins down utils of all types of player $i$ given fixed $\theta_{-i}$.
 	\pause
 	\item Equivalently, have only one degree of freedom for $i$'s transfers given $\theta_{-i}$.
-	\item Remind anything?
+	\item Reminds you of anything?
 \end{itemize}
 \end{frame}
 
