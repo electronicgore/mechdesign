@@ -1,0 +1,399 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[english,10pt
+,aspectratio=169
+%,handout
+%%%%%%,notes
+]{beamer}
+\input{MD_preamble.tex}
+
+
+\title{Mechanism Design}
+
+\subtitle{3: Optimal (revenue-maximizing) mechanisms}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Fall 2020}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+
+
+\begin{frame}{Done so far}
+\begin{itemize}
+	\item Introduced basic notions and criteria:
+	\begin{itemize}
+		\item s.c.f., mechanism, implementation and implementability (DSIC, BIC),
+		\item efficiency, individual rationality, budget balance.
+	\end{itemize}
+	\pause
+	\item Covered some fundamental results in Mechanism Design:
+	\begin{itemize}
+		\item revelation principle (pretty universal),
+		\item payoff/revenue equivalence (Euclidean model, slightly generalizable),
+		\item necessary conditions for implementability (weak preference reversal, monotonicity)
+	\end{itemize}
+	\pause
+	\item Learned to implement the efficient s.c.f.:
+	\begin{itemize}
+		\item DSIC: VCG;
+		\item BIC: AGV, gVCG.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Today}
+\begin{itemize}
+	\item Finished with implementing efficient s.c.f.s
+	\item Take a break from implementing arbitrary s.c.f.s
+	\item Today will look at revenue maximization.
+	\begin{itemize}
+		\item Revenue-maximizing mechanisms called ``optimal'' in the literature (meaning optimal for the designer), after Myerson's ``optimal mechanism''.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Two types (Monopolistic Screening)}
+
+\begin{frame}{Setting 1: one buyer, discrete type}
+\begin{itemize}
+	\item Starting simple (\alert{Monopolistic Screening} / Second-Degree Price Discrimination).
+	\item Seller-designer can set quantities $k$ and prices $t$ for product, has production costs $c(k) = k^2 (=-v_0(k))$.
+	\begin{itemize}
+		\item As usual, designer has no private information. ``Informed principal'' is a difficult problem.
+	\end{itemize}
+	\item There is one buyer with \structure{valuation $\theta \in \{ L,H \}$}, private info. Prior probabilities are $\phi(H) = \phi$, $\phi(L)=1-\phi$.
+	\item Buyer's preferences Euclidean: \structure{$u_b(x,\theta) = \theta k - t$}
+	\begin{itemize}
+		\item Is this a Euclidean model? % No, types discrete. Even if it was - can't use known mechs because different objective.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monopolistic Screening}
+\begin{itemize}
+	\item As usual, look at DRM $\Gamma = (\Theta, (k,t))$. Notation-wise, let $k_\theta \equiv k(\theta)$ and $t_\theta \equiv t(\theta)$.
+	\item Seller's problem (contrary to before, we can now choose $k$ in addition to $t$.)
+	% Problem is now more difficult because now choose k, not just t
+\end{itemize}
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		\begin{align*}
+			\max_{(k,t)} & \left\{ \phi (t_H - k_H^2) + (1-\phi) (t_L - k_L^2) \right\}
+			\\ \text{s.t. } & (IC_H):\quad \theta_H k_H - t_H \geq \theta_H k_L - t_L
+			\\ & (IC_L):\quad \theta_L k_H - t_H \leq \theta_L k_L - t_L
+			\\ & (IR_H):\quad \theta_H k_H - t_H \geq 0
+			\\ & (IR_L):\quad \theta_L k_L - t_L \geq 0
+		\end{align*}
+	\end{column}
+	\begin{column}{0.5\linewidth}
+		\begin{enumerate}[<+->]
+			\item show $IC_H$ and $IR_L$ imply $IR_H$;
+			\item show $IC_H$ and $IC_L$ imply $k_H \geq k_L$;
+			\item show $k_H \geq k_L$ and binding $IC_H$ imply $IC_L$;
+			\item show $IC_H$ and $IR_L$ bind;
+			\item solve for optimal $(k,t)$.
+		\end{enumerate}
+	\end{column}
+\end{columns}
+
+
+
+% 410-3 2019 ps7 q2
+\end{frame}
+
+
+\begin{frame}{Monopolistic Screening: lessons}
+Lessons:
+	\begin{enumerate}[<+->]
+		\item offering a menu may be optimal to extract value from buyers;
+		\item explains weird non-linear prices you can often encounter; %add photo?
+		\item quantity is distorted downward for low type
+		\item high type gets information rent (pays below valuation);
+		\item IR must bind for at least some type.
+	\end{enumerate}
+\end{frame}
+
+
+\section{Interval of types (Optimal Mechanism)}
+
+\begin{frame}{Setting 2: one buyer, interval of types}
+\begin{itemize}
+	\item Designer/seller has one indivisible item for sale. Chooses menu including probability of sale $k(\theta) \in [0,1]$ and payment $t(\theta)$ given report $\theta$, no costs for simplicity.
+	\begin{itemize}
+		\item Nothing changes from when $k$ was quantity, since everyone is risk-neutral.
+	\end{itemize}
+	\item Buyer has \structure{valuation $\theta \sim F[0,\bar{\theta}]$}, private info.
+	\item Buyer's preferences Euclidean: \structure{$u_b = \theta k - t$}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism}
+Solution approach
+\begin{itemize}[<+->]
+	\item Show: if $\theta' \leq \theta''$ then $k(\theta') \leq k(\theta'')$. (use the two ICs)
+	\item Get the envelope representation $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$.
+	\item Recall that $U_b(\theta) = \theta k(\theta) - t(\theta)$, so
+	{\footnotesize
+		\begin{align*}
+			\mathbb{E} U_s &= \mathbb{E}_\theta \left[ t(\theta) \right]
+			\\ &= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
+			\\ \visible<+->{ &= \mathbb{E}_\theta \left[ \theta k(\theta) - \int_0^\theta k(s) ds \right] - U_b(0) }
+			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
+			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
+			\\ \visible<+->{ &= \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
+	\end{align*}	}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism: integration by parts}
+Integration by parts under the microscope:
+\begin{align*}
+	\int_0^{\bar{\theta}} \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^{\bar{\theta}} - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
+	\\ &= \int_0^{\bar{\theta}} k(\theta) d\theta - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
+\end{align*}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism}
+\begin{equation*}
+	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
+\end{equation*}
+\begin{itemize}
+	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
+	\pause
+	\item What do with $U_b(0)$?
+	\begin{itemize}
+		\item Want to minimize since decreases revenue.
+		\item Gotta be $U_b(0) \geq 0$ to satisfy IR for $\theta = 0$. Other types?
+		\pause
+		\item Recall $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$ and $k(\theta) \geq 0$, so $U_b(0) = 0$ fine.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism}
+\begin{equation*}
+	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+\end{equation*}
+\begin{itemize}
+	\item What do with $k$?
+	\begin{itemize}[<+->]
+		\item Define \structure{virtual surplus} $VS(\theta) := \theta - \frac{1-F(\theta)}{\phi(\theta)}$.
+		\item Pointwise maximization: 
+		$k(\theta) = \begin{cases}
+			1 & \text{ if } VS(\theta) \geq 0;
+			\\ 0 & \text{ if } VS(\theta) < 0;
+		\end{cases}$
+		\item Remember that $k(\theta)$ must be monotone! Sufficient condition: $VS(\theta)$ increasing in $\theta$.
+		\item Same as assuming \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-F(\theta)}$. The assumption we usually live with; need suitable distribution $F(\theta)$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism: Virtual Surplus}
+\begin{itemize}
+	\item What is virtual surplus?
+	\begin{itemize}
+		\item Information rents we have to pay to high types to incentivize them to reveal type honestly.
+	\end{itemize}
+	\item What do if ``unlucky'' and $F(\theta)$ is such that VS is sometimes decreasing?
+	\begin{itemize}
+		\item ``\structure{Ironing}'': find monotone $k(\theta)$ that is ``closest'' to the unconstrained optimum.
+		\item E.g. if VS is globally decreasing then some constant $k$ is optimal.
+		\item No general approach.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism: Lessons}
+\begin{itemize}
+	\item Incentives are costly.
+	\begin{itemize}
+		\item If $\theta$ is an attractive type to imitate, have to distort $\theta$'s allocation $k(\theta)$ compared to first-best (full-info benchmark).
+		\item (That's why $k(\bar{\theta})$ is not distorted.)
+	\end{itemize}
+	\item Even though gains from trade always present, optimal to commit to not sell to low types to charge high types more.
+	\item Distribution $\phi$ matters: if more high types then focus on them and sell with lower probability to the low types.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism: Example}
+\begin{itemize}[<+->]
+	\item Derive the optimal mechanism when $\theta \sim U[0,1]$.
+	\item $VS(\theta) = \theta - \frac{1-F(\theta)}{\phi(\theta)} = 2 \theta - 1$,
+	\item hence optimal $k(\theta) = \mathbb{I} \{\theta \geq 0.5 \}$. Payments?
+	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \theta - 0.5$,
+	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
+	\item Actually cannot do much better than fixed price in this simple trade model.
+	\begin{itemize}
+		\item Maximizing $\int k(\theta) VS(\theta) d\theta$, linear in $k(\theta)$, so will typically have either a cutoff rule, or constant rule -- unless $VS(\theta)$ non-monotone.
+		\item Consequence of Euclidean payoffs. More interesting results with non-linear payoffs.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%NOTE: slides before here were written with the intent of being used in class. Slides from here onwards were only meant as a reference for students, hence they don't have pauses and the text is more dense.
+%TODO: this could be a nice midterm/final problem if not covered in the slides.
+%\subsection{Principal-agent problem}
+%
+%\begin{frame}{Detour (setting 2b): principal-agent problem}
+%\begin{itemize}
+%	\item Principal (employer) and agent (employee).
+%	\item Agent chooses effort $e \in [0,1]$, has private type $\theta \in [0,1]$ about cost of effort \structure{$c(e,\theta) = \theta \cdot e$}.
+%	\item Principal offers a menu of contracts that specify effort $e$ and wage $w$, maximizes profit \structure{$\pi = e-w$}.
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Principal-agent}
+%\begin{itemize}
+%	\item Difference between optimal selling mechanism and optimal labor contract?
+%	\item None, they are the same model (effort=allocation, wage=transfer).
+%	%TODO: the pic
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Principal-agent}
+%\begin{itemize}
+%	\item Proceed as in the optimal mechanism.
+%\end{itemize}
+%\end{frame}
+
+
+\section{Many buyers (Optimal Auction)}
+
+\begin{frame}{Setting 3: many buyers, interval of types}
+\begin{itemize}
+	\item Designer/seller has one indivisible item for sale. Chooses allocation $k(\theta) \in \varDelta(N)$ and payment profile $t(\theta) \in \mathbb{R}^N$ given report profile $\theta$.
+	\item Buyers $i \in \{1,...,N\}$ have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}_i]$}, private info.
+	\item Buyer's preferences Euclidean: \structure{$u_b = \theta_i k_i - t_i$}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Auction}
+\begin{itemize}
+	\item We are effectively designing the optimal auction.
+	\begin{itemize}
+		\item Selling the good to the highest bidder is efficient (assuming higher-value buyers bid more),
+		\item so all standard auction formats -- first-/second-price, Dutch, English -- are revenue-equivalent! (buyer with value zero gets zero)
+	\end{itemize}
+	\item To get more profit often have to depart from efficiency, e.g. by
+	\begin{itemize}
+		\item setting reservation price,
+		\item discriminating buyers (even if they are ex ante identical!).
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Auction}
+\begin{itemize}
+	\item From the perspective of the individual bidder, things are not much different from single-player model, just take expectations over $\theta_{-i}$:
+	\begin{align*}
+		\bar{t}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} t_i(\theta_i,\theta_{-i})
+		\\
+		\bar{k}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} k_i(\theta_i,\theta_{-i})
+		\\
+		\bar{U}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} u_i(x(\theta_i,\theta_{-i}),\theta_i)
+	\end{align*}
+	\item Monotonicity: if $\theta_i' < \theta_i''$ then 
+	$\bar{k}_i(\theta_i') \leq \bar{k}_i(\theta_i'').$
+	\item Envelope representation: 
+	$$\bar{U}_i(\theta_i) = \bar{U}_i(0) + \int_0^{\theta_i} \bar{k}_i(s) ds.$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Auction: Seller}
+\begin{align*}
+	\mathbb{E} U_s &= \mathbb{E}_\theta \left[ \sum_i t_i(\theta) \right]
+	\\ &= \sum_i \mathbb{E}_{\theta} \left[ \theta_i k_i(\theta) - U_i(\theta) \right]
+	\\ &= \sum_i \mathbb{E}_{\theta_i} \left[ \theta_i \bar{k}_i(\theta_i) - \bar{U}_i(\theta_i) \right]
+	\\  &= ...
+	\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \left[ \bar{k}_i(\theta_i) \left( \theta_i - \frac{1-F_i(\theta_i)}{\phi_i(\theta_i)} \right) \right] - \bar{U}_i(0)\right]
+	\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \bar{k}_i(\theta_i) \alert{VS_i(\theta_i)} - \bar{U}_i(0) \right]
+\end{align*}
+\end{frame}
+
+
+\begin{frame}{Optimal Auction}
+\begin{itemize}
+	\item As before, set $\bar{U}_i(0) = 0$.
+	{\footnotesize
+		\begin{align*}
+			\mathbb{E} U_s &= \sum_i \mathbb{E}_{\theta_i} \bar{k}_i(\theta_i) VS_i(\theta_i)
+			\\
+			&= \mathbb{E}_{\theta} \sum_i k_i(\theta) VS_i(\theta)
+		\end{align*}
+	}
+	\item Pointwise maximization: for any $\theta$, give the item to $i$ with the highest $VS_i(\theta)$:
+	\begin{align*}
+		k_i(\theta) = 
+		\begin{cases}
+			1 & \text{ if } i = \arg \max_j VS_j(\theta)
+			\\
+			0 & \text { otherwise}
+		\end{cases}
+	\end{align*}
+	(break ties as you wish)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Optimal Auction: Conclusions}
+\begin{itemize}
+	\item Naive (pointwise) solution works only if the resulting allocations satisfy monotonicity.
+	\begin{itemize}
+		\item If they don't: ???
+		\item Ironing is even more difficult because of joint constraint on allocations: $\sum_i k_i (\theta) \leq 1$.
+	\end{itemize}
+	\item Allocations are inefficient:
+	\begin{itemize}
+		\item Inefficient withholding: $\theta_i > 0$ but $VS_i < 0$ (and $i \in \arg \max_j VS_j$).
+		\item $VS_i$ depend on respective distr-ns of $\theta_i$'s -- asymmetric players are treated asymmetrically.
+		\item In symmetric case, the optimal auction can be implemented as one of standard formats (FPA, SPA, APA, Dutch, English) with reserve price.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%TODO2020: mention Manelli & Vincent (2007) for multi-object optimal mechanisms: mechanism fundamentally depends on the prior; in addition to posted price can have random sales, and sometimes k may even be a non-simple function (i.e., strictly monotone on intervals?)
+
+
+\begin{frame}{Optimal Contests}
+\begin{itemize}
+	\item Related topic: optimal contests.
+	\begin{itemize}
+		\item $N$ contestants exert effort, have private abilities.
+		\item Designer's goal: maximize total effort (e.g. maximize the amount of science that competing reserach teams produce).
+		\item How should designer choose size and number of prizes; winning rules etc? 
+	\end{itemize}
+	\item Will not cover in this class.
+\end{itemize}
+\end{frame}
+
+
+\end{document}
