@@ -144,20 +144,21 @@ Lessons:
 
 \begin{frame}{Optimal Mechanism}
 Solution approach
-\begin{itemize}[<+->]
+\begin{enumerate}[<+->]
 	\item Show: if $\theta' \leq \theta''$ then $k(\theta') \leq k(\theta'')$. (use the two ICs)
-	\item Get the envelope representation $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$.
+	\item Get the envelope representation $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$ 
+	\\ (BIC and DSIC ERPs yield the same expression, since there is only one player).
 	\item Recall that $U_b(\theta) = \theta k(\theta) - t(\theta)$, so
 	{\footnotesize
 		\begin{align*}
-			\mathbb{E} U_s &= \mathbb{E}_\theta \left[ t(\theta) \right]
-			\\ &= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
+			\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] &
+			= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
 			\\ \visible<+->{ &= \mathbb{E}_\theta \left[ \theta k(\theta) - \int_0^\theta k(s) ds \right] - U_b(0) }
 			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
 			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
 			\\ \visible<+->{ &= \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
 	\end{align*}	}
-\end{itemize}
+\end{enumerate}
 \end{frame}
 
 
@@ -166,13 +167,14 @@ Integration by parts under the microscope:
 \begin{align*}
 	\int_0^{\bar{\theta}} \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^{\bar{\theta}} - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
 	\\ &= \int_0^{\bar{\theta}} k(\theta) d\theta - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
+	\\ &= \int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta
 \end{align*}
 \end{frame}
 
 
-\begin{frame}{Optimal Mechanism}
+\begin{frame}{Optimal Mechanism: pinning $U_b(0)$}
 \begin{equation*}
-	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
+	\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
 \end{equation*}
 \begin{itemize}
 	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
@@ -182,13 +184,14 @@ Integration by parts under the microscope:
 		\item Want to minimize since decreases revenue.
 		\item Gotta be $U_b(0) \geq 0$ to satisfy IR for $\theta = 0$. Other types?
 		\pause
-		\item Recall $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$ and $k(\theta) \geq 0$, so $U_b(0) = 0$ fine.
+		\item Recall $U_b(\theta) = U_b(0) + \int_0^\theta k(s) ds$ and $k(\theta) \geq 0$, so $U_b(\theta)\geq U_b(0)$ for all $\theta$, 
+		\item hence $U_b(0) = 0$ is optimal (max revenue, all IR hold, IR binds for $\theta=0$).
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Optimal Mechanism}
+\begin{frame}{Optimal Mechanism: optimal $k$}
 \begin{equation*}
 	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
 \end{equation*}
@@ -201,8 +204,8 @@ Integration by parts under the microscope:
 			1 & \text{ if } VS(\theta) \geq 0;
 			\\ 0 & \text{ if } VS(\theta) < 0;
 		\end{cases}$
-		\item Remember that $k(\theta)$ must be monotone! Sufficient condition: $VS(\theta)$ increasing in $\theta$.
-		\item Same as assuming \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-F(\theta)}$. The assumption we usually live with; need suitable distribution $F(\theta)$.
+		\item Remember: $k(\theta)$ is only implementable if it is monotone! Sufficient condition: $VS(\theta)$ increasing in $\theta$.
+		\item In the end, if $VS(\theta)$ is increasing in $\theta$, the optimal mechanism is given by $k(\theta)$ as above and $t(\theta)$ that can be computed from ERP.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -212,13 +215,15 @@ Integration by parts under the microscope:
 \begin{itemize}
 	\item What is virtual surplus?
 	\begin{itemize}
-		\item Information rents we have to pay to high types to incentivize them to reveal type honestly.
+		\item Ir reflects \structure{information rents} we have to pay to high types to incentivize them to reveal type honestly.
 	\end{itemize}
+	\item Sufficient for increasing $VS(\theta)$ is \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-F(\theta)}$. \\ 
+	The assumption we usually live with; need suitable distribution $F(\theta)$.
 	\item What do if ``unlucky'' and $F(\theta)$ is such that VS is sometimes decreasing?
 	\begin{itemize}
 		\item ``\structure{Ironing}'': find monotone $k(\theta)$ that is ``closest'' to the unconstrained optimum.
 		\item E.g. if VS is globally decreasing then some constant $k$ is optimal.
-		\item No general approach.
+		\item No general approach AFAIK.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -233,6 +238,10 @@ Integration by parts under the microscope:
 	\end{itemize}
 	\item Even though gains from trade always present, optimal to commit to not sell to low types to charge high types more.
 	\item Distribution $\phi$ matters: if more high types then focus on them and sell with lower probability to the low types.
+	\item It will most of the time be optimal to have some cutoff rule: $k(\theta) = \mathbb{I}\{\theta > \hat{\theta}\}$ for some $\hat{\theta}$.
+	\begin{itemize}
+		\item Things become more interesting in multi-item case, see \href{https://www.sciencedirect.com/science/article/pii/S0022053107000348}{\uline{Manelli \& Vincent (2007)}}
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -242,7 +251,7 @@ Integration by parts under the microscope:
 	\item Derive the optimal mechanism when $\theta \sim U[0,1]$.
 	\item $VS(\theta) = \theta - \frac{1-F(\theta)}{\phi(\theta)} = 2 \theta - 1$,
 	\item hence optimal $k(\theta) = \mathbb{I} \{\theta \geq 0.5 \}$. Payments?
-	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \theta - 0.5$,
+	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \max \{\theta - 0.5,\,0\}$,
 	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
 	\item Actually cannot do much better than fixed price in this simple trade model.
 	\begin{itemize}
@@ -253,7 +262,6 @@ Integration by parts under the microscope:
 \end{frame}
 
 
-%NOTE: slides before here were written with the intent of being used in class. Slides from here onwards were only meant as a reference for students, hence they don't have pauses and the text is more dense.
 %TODO: this could be a nice midterm/final problem if not covered in the slides.
 %\subsection{Principal-agent problem}
 %
@@ -288,7 +296,11 @@ Integration by parts under the microscope:
 \begin{itemize}
 	\item Designer/seller has one indivisible item for sale. Chooses allocation $k(\theta) \in \varDelta(N)$ and payment profile $t(\theta) \in \mathbb{R}^N$ given report profile $\theta$.
 	\item Buyers $i \in \{1,...,N\}$ have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}_i]$}, private info.
+	\begin{itemize}
+		\item Independence of $\theta_i$ is important, since we rely on revenue equivalence / ERP
+	\end{itemize}
 	\item Buyer's preferences Euclidean: \structure{$u_b = \theta_i k_i - t_i$}
+	\item What is the optimal BIC mechanism that maximizes seller's expected profit?
 \end{itemize}
 \end{frame}
 
@@ -374,13 +386,10 @@ Integration by parts under the microscope:
 	\begin{itemize}
 		\item Inefficient withholding: $\theta_i > 0$ but $VS_i < 0$ (and $i \in \arg \max_j VS_j$).
 		\item $VS_i$ depend on respective distr-ns of $\theta_i$'s -- asymmetric players are treated asymmetrically.
-		\item In symmetric case, the optimal auction can be implemented as one of standard formats (FPA, SPA, APA, Dutch, English) with reserve price.
+		\item In \textbf{symmetric} case, the optimal auction can be implemented as one of standard formats (FPA, SPA, APA, Dutch, English) with reserve price.
 	\end{itemize}
 \end{itemize}
 \end{frame}
-
-
-%TODO2020: mention Manelli & Vincent (2007) for multi-object optimal mechanisms: mechanism fundamentally depends on the prior; in addition to posted price can have random sales, and sometimes k may even be a non-simple function (i.e., strictly monotone on intervals?)
 
 
 \begin{frame}{Optimal Contests}
