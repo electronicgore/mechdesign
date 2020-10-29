@@ -112,7 +112,7 @@
 
 \newcommand{\hmwkTitle}{Note on Battaglini (2003)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2019} % TA
+\newcommand{\instructor}{Fall 2020} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
@@ -137,12 +137,6 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\solutionsfalse
-\solutionstrue
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
 
 \begin{center}
@@ -150,9 +144,9 @@
 \end{center}
 \bigskip
 
-This note explains how equilibrium works in the model of Battaglini (2003) and how to find it. For model setup, see Lecture 5 (slide 153).
+This note explains how equilibrium works in the model of Battaglini (2003) and how to find it. For model setup, see M4 slide deck.
 
-The equilibrium is described by a profile of strategies for all players, $(a,m_1,m_2)$, where $a(m_1,m_2)$ is the principal's choice of action given messages, and $m_i(\omega)$ is the agent $i$'s choice of message given the true state. The principal chooses $a$ to maximize his payoff $u_p(a,\omega) = -\left(\left\| a - \omega \right\|_2\right)^2$ in expectation conditional on the two reports $(m_1,m_2)$. Therefore, his equilibrium strategy must be given by $a^*(m_1,m_2)$, where
+The equilibrium is described by a profile of strategies for all players, $(a,m_1,m_2)$, where $a(m_1,m_2)$ is the principal's choice of action given messages, and $m_i(\omega)$ is the agent $i$'s choice of message given the true state. The principal chooses $a$ to maximize his expected payoff $\mathbb{E}_\omega [u_p(a,\omega)|m_1,m_2]$ conditional on the two reports $(m_1,m_2)$, where $u_p(a,\omega) = -\left(\left\| a - \omega \right\|_2\right)^2$. Therefore, his equilibrium strategy must be given by
 \begin{align}
 	a^*(m_1,m_2) \equiv \mathbb{E} \left[ \omega | m_1, m_2 \right]
 	\label{eq:optact}
@@ -167,19 +161,19 @@ In other words, by changing their reports $m_i$, the agents can directly affect 
 \begin{figure}[b!]
 	\centering
 	\parbox{7cm}{
-		\includegraphics[scale=0.25]{pics/battaglini03.png}
+		\includegraphics[scale=0.25]{pics/M4/battaglini03.png}
 		\caption{Figure 1}
 		\label{fig:1}
 	}
 	\qquad
 	\parbox{7cm}{
-		\includegraphics[scale=0.25]{pics/battaglini04.png}
+		\includegraphics[scale=0.25]{pics/M4/battaglini04.png}
 		\caption{Figure 2}
 		\label{fig:2}
 	}
 \end{figure}
 
-Look at Figure \ref{fig:1}. What is the set of actions available to player 1 conditional on player 2 reporting truthfully? In other words, what actions $a$ can player 1 induce through various reports $\hat{m}_1$, given that player 2 follows the prescribed strategy $m_2(\omega)$ (we do not know how it looks yet). For agent 1 to be willing to report truthfully, leading to action $a=\omega$, he must weakly prefer that over all other actions $a$ he can induce -- meaning that the set of such actions must lie outside of the outer blue circle in Figure \ref{fig:1}. In particular, it would be fine if the set of such actions was given by the purple line $l_1$, which is orthogonal to $b_1$. Similarly, the set of actions available to player 2 in equilibrium conditional on P1 following $m_1(\omega)$ can be given by $l_2$, among others.
+Look at Figure \ref{fig:1}. What is the set of actions that should be available to player 1 conditional on player 2 reporting truthfully? In other words, what actions $a$ can player 1 induce through various reports $\hat{m}_1$, given that player 2 follows the prescribed strategy $m_2(\omega)$ (we do not know how it looks yet). For agent 1 to be willing to report truthfully, leading to action $a=\omega$, he must weakly prefer that over all other actions $a$ he can induce -- meaning that the set of such actions must lie outside of the outer blue circle in Figure \ref{fig:1}. In particular, it would be fine if the set of such actions was given by the purple line $l_1$, which is orthogonal to $b_1$. Similarly, the set of actions available to player 2 in equilibrium conditional on P1 following $m_1(\omega)$ can be given by $l_2$, among others.
 
 The question is how we determine the \emph{locations} of these respective lines/action sets. One might think of a kind of two-stage communication mechanism: in stage 1, P1 reports where $l_2$ should be and vice versa, and in stage 2, both players $i$ report where the state is on their respective lines $l_i$. Note, however, that the second stage is redundant: once we know where $l_1$ and $l_2$ are, we already know the state $\omega$ (hint: it is the unique point at which the two lines intersect). But will it actually be an equilibrium for player $i$ to correctly report the location of $l_j$? In fact, yes, since by misreporting player $i$ will only be able to induce actions on $l_i$, which contains no better options for $i$ than the truth. Let us now construct the equilibrium formally.
 
