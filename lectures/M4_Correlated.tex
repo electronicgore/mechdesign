@@ -3,7 +3,7 @@
 \documentclass[english,10pt
 ,aspectratio=169
 %,handout
-%,notes
+%%,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
@@ -423,16 +423,14 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 		\item If players' preferences conflict -- set them against each other (divide et impera);
 		\item If players' preferences same -- force them to verify each other's reports.
 	\end{itemize}
-	\item Of course there are always issues that can arise:
+	\item Of course there are always issues that can invalidate our analysis:
 	\begin{itemize}
-		\item If players can communicate outside of the mechanism, collusion is a real threat.
-		\item Cross-vefication may require making incredible or infeasible threats.
+		\item Risk aversion, collusion, competition, limited liability, budget constraints...
+		\item Designer may not know the exact beliefs that every type has. See \href{https://doi.org/10.1016/j.jet.2020.105088}{\uline{Lopomo, Rigotti, and Shannon (2020)}} for analysis of this case and references to papers dealing with the above cases.
+		\item B{\"o}rgers ch.10 takes a more general approach to uncertainty about beliefs (``Robust Mechanism Design'')
 	\end{itemize}
 \end{itemize}
 \end{frame}
-
-
-%TODO: mention a paper about robust corrinfo exploits
 
 
 \end{document}
