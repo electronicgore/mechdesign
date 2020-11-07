@@ -1,0 +1,623 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[english,10pt
+,aspectratio=169
+%,handout
+%%%,notes
+]{beamer}
+\input{MD_preamble.tex}
+
+
+\title{Mechanism Design}
+
+\subtitle{5: Dynamic Mechanisms}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Fall 2020}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\AtBeginSubsection[]{
+		\frame{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+
+
+\begin{frame}{Dynamic Problems}
+\begin{itemize}
+	\item Models considered so far were static: one report, one outcome.
+	\begin{itemize}
+		\item Although we hinted towards dynamic incentives when discussing interim vs ex post IC/IR constraints.
+	\end{itemize}
+	\item There are many \structure{dynamic} problems in the real world:
+	\begin{itemize}
+		\item Dynamic pricing when buyers' tastes evolve (e.g. experience goods) or buyers come and go over time;
+		\item Procurement from firms with changing costs;
+		\item Design of tax and social security systems;
+		\item Dynamic labor contracts
+	\end{itemize}
+	\item How to develop dynamic mechanisms? Will see today.
+	\item This lecture mostly follows \href{https://www.aeaweb.org/articles?id=10.1257/jel.20180892}{\uline{Bergemann and V{\"a}lim{\"a}ki (2019)}}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What defines a dynamic problem? (1)}
+\begin{itemize}
+	\item Why can a dynamic problem not be seen as a sequence of independent static problems? 
+	
+	\item Because there can be \structure{linkages} across periods: (which ruin the independence)
+	\begin{enumerate}
+		\item \alert{Information} -- future info evolves from (so depends on) past info and possibly past allocations.
+		\item \alert{Preferences} -- usually evolve gradually. For our purposes, can see this as persistence in nformation.
+		\item \alert{Allocations} -- set of feasible allocations today may depend on past outcomes (example: sale of fixed number of items over many periods).
+	\end{enumerate}
+
+	\item The same linkages mean that if we try to see the problem as a huge static problem (with same player in different periods seen as different players), the correlations in players' info and the set of feasible allocations will look weird and complicated.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamic Model}
+\begin{itemize}
+	\item \structure{Periods} $t \in \{0,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
+	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i$, \alert{indep}. across $i$.
+	\begin{itemize}
+		\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_{i,t}(\theta_{i,t+1} | \theta_{i,t},k_t).$$
+	\end{itemize}
+	\item Every period: \structure{allocation} $k_t \in K_t$ and \structure{payments} $p_t \in \mathbb{R}^N$.
+	\\ Set of \structure{feasible allocations} evolves as $K_{t+1} = g(K_t,k_t)$.
+	\item Players' \structure{utilities}: $u_i((k_t,p_t),\theta_t) = v_i(k_t,\theta_{i,t}) - p_{i,t}$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Evolving Types}
+Possible interpretations of \structure{evolving types}:
+\begin{itemize}
+	\item \alert{Exogenous evolution} ($\theta_{t+1} \perp k$);
+	\begin{itemize}
+		\item Example: procuring goods over time from a firm with stochastically evolving costs $\theta_{i,t+1} = \gamma \theta_{i,t} + \varepsilon_{i,t+1}$.
+	\end{itemize}
+	\item \alert{Endogenous evolution} (depending on $k_t$);
+	\begin{itemize}
+		\item Example: worker assigned to training by $k_t$ will improve their future productivity $\theta_{i,t+1}$.
+	\end{itemize}
+	\item \alert{Random arrival};
+	\begin{itemize}
+		\item Players can arrive at the mechanism at random times.
+		\item Can model that by setting $\theta_{i,t} = \varnothing$ whenever $i$ is not in the market/mechanism.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamic Model: Assumptions}
+To fix ideas, assume the following for this class:
+\begin{itemize}
+	\item The designer can \structure{commit} to the whole future mechanism at $t=0$.
+	\item Contracts are binding -- we ignore per-period IR constraints (except maybe IR at $t=0$).
+	\begin{itemize}
+		\item Justification: in quasilinear model, can ask players to put collateral at $t=0$, to be repaid at a later date -- this would eliminate incentives to quit mechanism after $t=0$.
+	\end{itemize}
+	\item All past reports and allocations are publicly observed.
+	\item Player $i$ at time $t$ observes their type $\theta_{i,t}$ but not future types.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Direct Mechanisms}
+\begin{itemize}
+	\item As usual, we have the \structure{revelation principle} (Sugaya and Wolitzky, 2017).
+	\item So can focus on mechanisms which ask players to report their types every period.
+	\item \structure{Reporting strategies} given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of \structure{public histories} $h_t = \{k_s,r_{i,s}\}_{s < t}$.
+	\item A \structure{dynamic direct mechanism} is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamic Implementation}
+\begin{itemize}
+	\item Looking for a truthful equilibrium in a direct mechanism.
+	\item ``Equilibrium'' is a sketchy term in dynamic incomplete-info games.
+	\begin{itemize}
+		\item There is at least a dozen different equilibrium concepts and refinements in use.
+		\item Main concern in general: off-equilibrium-path beliefs. What should a player believe after observing an event they considered impossible? Different answers can strongly affect the predicted outcome.
+		\item Not a big problem in mechdesign.
+	\end{itemize}
+	\item Look for \structure{Perfect Bayesian Equilibria}.
+	\begin{itemize}
+		\item Each player chooses report to maximize expected util, expecting others to report truthfully.
+		\item Beliefs are updated using Bayes' rule whenever possible (i.e., on equilibrium path).
+		\item In general in PBE: We can assume anything we want about off-path beliefs to sustain eqm. In our problem: won't need to.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Efficient Dynamic Implementation}
+
+\begin{frame}{Efficient Allocation}
+\begin{itemize}
+	\item Suppose we want to implement the \structure{efficient allocation} $\kappa^*$.
+	\item But what is $\kappa^*$ in a dynamic problem?
+	$$ \kappa^* \in \arg \max_{\{k_t\}_{t=0}^T} \mathbb{E} \left\{ \sum_{t=0}^T \delta^t \sum_{i=0}^N v_i(k_t,\theta_{i,t}) \right\}$$
+	\item Must optimize over the whole path $\{k_t\}_{t=0}^T$ rather than period-by-period.
+	\begin{itemize}
+		\item Today's allocation $k_t$ may affect tomorrow's types $\theta_{t+1}$ and set of alternatives $K_{t+1}$.
+	\end{itemize}
+	\item Also remember that $k_t : \Theta \times H_t \to K_t$ is a highly-dimensional object in itself.
+	\item So simply finding $\kappa^*$ is in general a difficult optimal control problem.
+	\item REMARK: \alert{ex post efficiency} is \alert{unattainable} in dynamics -- $k_t$ must be chosen before $\theta_{t+s}$ learned. \structure{Interim efficiency} is the best we can hope for.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Efficient Implementation}
+\begin{itemize}
+	\item Ok, suppose we found $\kappa^*$, what next?
+	\item In static setting we used VCG aka the pivot mechanism: each player had to pay the externality they imposed on everyone else:
+	$$ p_i(\theta) = -\sum_{j \neq i} v_j \left( k^*(\theta),\theta_j \right) + \sum_{j \neq i} v_j \left( k^*_{-i}(\theta_{-i}),\theta_j \right) $$
+	\item The idea translates almost verbatim to the dynamics.
+	\begin{itemize}
+		\item Problem: the externality that $i$ imposes on others via report $\theta_{i,t}$ may manifest in other periods -- not necessarily at $t$.
+	\end{itemize}
+	\item Enter \structure{dynamic pivot mechanism}! (Bergemann and V{\"a}lim{\"a}ki, 2010)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamic Pivot Mechanism}
+\vspace{-2em}\begin{align*}
+	&\text{Flow social surplus}	& w(k_t,\theta_t)	&\equiv \sum_{i=1}^N v_i(k_t,\theta_{i,t}).
+	\\
+	&\text{Welfare}	& W(\theta_t,K_t)	&\equiv \max_{k_t \in K_t} \left\{ w(k_t,\theta_t) + \delta \mathbb{E} W(\theta_{t+1},K_{t+1}) \right\}.
+	\\
+	&\text{\footnotesize $i$'s marginal contribution}	& M_i(\theta_t,K_t)	&\equiv W(\theta_t,K_t) - W_{-i}(\theta_t,K_t)
+	\\
+	&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= \structure{m_i(\theta_t,K_t)} + \delta \mathbb{E} M_i(\theta_t,K_t).
+	\\
+	&\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_i(\theta_t,K_t).
+\end{align*}\vspace{-1em}
+
+\begin{itemize}
+	\item The dynamic pivot mechanism is given by \structure{$\kappa = \kappa^*$} and \structure{$\rho = \{ p_{i,t}^* \}_{t=0}^T$}.
+	\item Note that $i$ must pay his \structure{flow marginal contribution} rather than simply $w(k^*)-w(k^*_{-i})$.
+	\item This is because $i$ by influencing today's allocation $k_t$, $i$ will also affect future types of other players and the set of available allocations -- have to account for that.
+\end{itemize}
+\end{frame}
+
+
+
+\section{Dynamic Revenue Maximization}
+
+\begin{frame}{Dynamic Revenue Maximization}
+\begin{itemize}
+	\item Second canonical question: what is the optimal mechanism?
+	\begin{itemize}
+		\item Main example: dynamic pricing (there's huge literature, more or less related to DMD).
+		\item With binding contracts: mobile service, loans, insurance
+	\end{itemize}
+	\item Will focus on one-buyer case, $\Theta \subset \mathbb{R}$.
+	\item Again, insights from static models carry over after reasonable modifications.
+	\begin{itemize}
+		\item Now we want to distinguish between info that the buyer has \structure{before} signing up for a mechanism
+		\item and which they acquire \alert{after} signing the contract.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Flashback: Static Model}
+\begin{itemize}
+	\item In the static optimal mechanism, seller's expected revenue was
+	$$ \mathbb{E}R = \mathbb{E}_\theta \left[ v(k(\theta),\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial v(k(\theta),\theta)}{\partial \theta} \right] $$
+	(we derived this for special case $v(k,\theta) = k\theta$ and $\frac{\partial v(k,\theta)}{\partial \theta}=k$)
+	\item Had to trade off max social surplus $v(k,\theta)$ (i.e., efficiency) against information rents.
+	\begin{itemize}
+		\item Had to leave some money to the buyer to incentivize truthful reporting.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Static Model -- Posterior Information}
+\begin{example}
+	\begin{itemize}
+		\item Suppose that buyer only learns $\theta$ \structure{after} signing up for the mechanism, i.e., timing is:
+		\begin{enumerate}
+			\item designer offers $(k,p)$;
+			\item buyer accepts or not;
+			\item buyer learns $\theta$ and sends report $\hat{\theta}$;
+			\item $(k(\hat{\theta}),p(\hat{\theta}))$ is implemented.
+		\end{enumerate}
+		\item What is the optimal contract?
+		\begin{itemize}
+			\item Designer's problem is
+			\begin{align*}
+				\max_{(k,p)} &\;\left\{ \mathbb{E}_\theta p \right\}
+				\\
+				\text{s.t. } (IC): &\; v(k(\theta),\theta) - p(\theta) \geq v(k(\theta),\hat{\theta}) - p(\hat{\theta}) \quad \forall\hat{\theta}
+				\\
+				(IR): &\; \mathbb{E}_\theta \left[v(k,\theta) - p\right]
+			\end{align*}
+			\item Solution: choose efficient $k^*$ and charge $p(\theta) \equiv p = \mathbb{E}_\theta \left[v(k^*(\theta),\theta)\right]$
+			\item Perfect information extraction; no information rents to the buyer; full efficiency.
+			\item Remark: this solution would not work with $N>1$ buyers (why?)
+		\end{itemize}
+	\end{itemize}
+\end{example}
+\end{frame}
+
+
+\begin{frame}{Dynamics and Information}
+\begin{itemize}
+	\item So we can argue that the designer can extract all buyer's \structure{future} info at no cost.
+	\begin{itemize}
+		\item Same idea: ``sell'' the item (subscription) to the buyer at ex ante expected value.
+		\item Then only buyer's \alert{initial} info $\theta_0$ matters for IC.
+	\end{itemize}
+	\item The literature is currently at the stage ``let's hope that this is the case''. More formally, the protocol is:
+	\begin{enumerate}
+		\item Solve the dynamic problem \alert{as if} all future info is \alert{public}.
+		\item Get some allocation and transfers.
+		\item Check whether the resulting mechanism satisfies dynamic IC (at $t>0$).
+		\item Pray that it does.
+	\end{enumerate}
+	\item Pavan, Segal, Toikka (2014) provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
+	\item We today take the ``pray that it does'' approach and only worry about extracting the buyer's initial type $\theta_0$ -- we are \structure{back} to the \structure{static problem}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Caveat}
+\begin{itemize}
+	\item We say we can ignore future information (work as if it's public), only need to extract the information agent already has at the time of contracting.
+	\item This is \textbf{not} same as: ``ignore future types, focus on extracting $\theta_0$'',
+	\begin{itemize}
+		\item because $\theta_0$ is (in general) correlated with future $\theta_t$,
+		\item so $\theta_0$ contains some information about $\theta_t$,
+		\item so we \textbf{cannot} work as if know $\theta_t$ for $t \geq 1$.
+	\end{itemize}
+	\item Solution: separate \alert{types} from \alert{information} through \structure{orthogonalization}.
+	\begin{itemize}
+		\item Suppose $\theta_{t+1} \sim F_{t+1} (\theta_{t+1} | \theta_t, k_t)$.
+		\item Let $\varepsilon_{t+1} \equiv F_{t+1} (\theta_{t+1} | \theta_t, k_t)$. Then $\varepsilon_{t+1} \sim U[0,1]$ and independent of $\theta_t$.
+		\item In a direct mechanism, ask player to report $\theta_0$ in period $0$ and $\varepsilon_{t}$ in period $t$, then recover $\theta_{t+1}$ from these reports.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Virtual Surplus}
+\begin{itemize}
+	\item Optimal allocation $\kappa$ maximizes \alert{virtual surplus} = \structure{social surplus} -- information rents.
+	\begin{itemize}
+		\item This pins down optimal mechanism $(\kappa,\pi+C)$ up to the constant $C$.
+		\item $C$ is determined from IR at $t=0$ -- skip the step of finding it.
+	\end{itemize}
+	\item In \alert{static} model, \alert{virtual surplus} is
+	$$ VS(\theta) = \structure{v(k(\theta),\theta)} - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial \structure{v(k(\theta),\theta)}}{\partial \theta} $$
+	\item Now in \structure{dynamics}, \structure{social surplus} is $$S(\kappa,\theta) \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
+	%$$ VS(\theta_0) = S(\kappa,\theta) - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0} $$
+	Calculating $VS(\theta_0) = S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0}$ requires understanding how $S$ depends on $\theta_0$ (the only source of inforents).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Virtual Surplus}
+\begin{align*}
+	\frac{\partial S(\kappa,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+\end{align*}
+\begin{itemize}
+	\item Let $I_t(\theta_t | \theta^{t-1}, k_{t-1}) \equiv \frac{\partial \theta_t}{\partial \theta_0}$ be \structure{impulse response function}, where $\theta^t \equiv (\theta_0, \theta_1,...,\theta_t)$.
+	\item $I_t$ shows the effect of $\theta_0$ on $\theta_t$ given fixed realization of uncertainty $\{\varepsilon_s\}_{s\leq t}$.
+	\item Can compute that $$I_t(\theta_t | \theta^{t-1}, k_{t-1}) = -\prod_{s=1}^t \frac{\frac{\partial F_s(\theta_s | \theta^{s-1}, k_{s-1})}{\partial \theta_{s-1}}}{\phi_s(\theta_s | \theta^{s-1}, k_{s-1})}.$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Virtual Surplus}
+Then
+\begin{align*}
+	\frac{\partial S(\kappa,\theta)}{\partial \theta_0} &= \sum_{t\geq 0} \delta^t \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t} \frac{\partial \theta_t}{\partial \theta_0}
+	\\
+	&= \sum_{t\geq 0} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1}) \frac{\partial v(k_t(\theta_t),\theta_t)}{\partial \theta_t}
+\end{align*}
+so the whole virtual surplus is
+\begin{align*}
+	VS(\theta_0) &= S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \frac{\partial S(\kappa,\theta)}{\partial \theta_0}
+	\\
+	&= S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
+\end{align*}
+\end{frame}
+
+
+\begin{frame}{Optimal Mechanism}
+\begin{itemize}
+	\item To find optimal \structure{allocation}, take expectation of $VS(\theta_0)$ over $\{\varepsilon_t\}$ and maximize over $\kappa$.
+	\vspace{-0.5em}\begin{align*}
+		\max_\kappa \mathbb{E}_\varepsilon \left[ S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+	\end{align*}\vspace{-1em}
+
+	\item Still a difficult problem, for the same reasons as for efficient $\kappa^*$.
+	\item Then find expected (as of $t=0$) \structure{payments} from the envelope representation of the buyer's expected utility:
+	\vspace{-0.5em}\begin{align*}
+		\frac{d U_{b,0} (\theta_0)}{d \theta_0} = \mathbb{E} \left[ \sum_{t=0}^{T} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1})\frac{\partial v(k_t,\theta_t)}{\partial \theta_t} \mid \theta_0 \right].
+	\end{align*}\vspace{-1em}
+
+	\item Note that these payments can be redistributed across periods and histories since both seller and buyer are risk-neutral.
+	\begin{itemize}
+		\item Will usually have to do it to ensure IC at $t > 0$. No good recipe here.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Dynamic Revenue Maximization: Conclusions}
+\begin{align*}
+	\max_\kappa \mathbb{E}_\varepsilon \left[ S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t} \right]
+\end{align*}
+\begin{itemize}
+	\item \structure{Insight}: if $|I_t|$ decreasing with $t$, i.e., $\theta_0$ contains little information about $\theta_t$ for large $t$ then optimal $k_t$ converges to the efficient $k^*_t$.
+	\item \structure{\textbf{Distortions vanish over time.}}
+	\item See Bergemann and Välimäki (2019, ch.5) for applications.
+\end{itemize}
+\end{frame}
+
+
+
+
+\section{Three dynamic polarization results}
+
+\begin{frame}{What now?}
+\begin{itemize}
+	\item Will look at dynamic mechanisms within some special settings.
+	\item \structure{Beyond} the models we looked at, not \alert{within}.
+	\item Will go very quickly: no solving models, just setup and results.
+	\item Will see a common theme emerging.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Thomas and Worrall (1990)}
+
+\begin{frame}{Dynamic Insurance [Thomas and Worrall (1990)]}
+\begin{itemize}
+	\item One risk-neutral lender (designer), one \alert{risk-averse} borrower (agent), common discount factor $\beta$.
+	\item Time $t=0,1,...$.
+	\item Agent receives random exogenous income $\theta_t \sim i.i.d. F[\underline{\theta},\bar{\theta}]$.
+	\begin{itemize}
+		\item \structure{Concave} utility $u(c)$, so would like to insure.
+		%\item DARA: [weakly] decreasing absolute risk-aversion $-\frac{u''(c)}{u'(c)}$.
+		\item Special assumption: $u(\underline{c}) = -\infty$, where $\underline{c}>0$ is subsistence level.
+	\end{itemize}
+	\item Principal designs insurance contract.
+	\begin{itemize}
+		\item Goal: minimize cost of providing (ex ante expected) util $V_0$ to agent.
+		\item Agent reports $\theta_t$ in every period, mechanism pays him $b_t(\theta_t, \theta_{t-1}, ...)$
+		\item Perfect commitment on both sides -- no IR.
+		\item But must incentivize truthful reporting of income $\theta_t$ -- IC.
+	\end{itemize}
+	%\item Departure from baseline: no allocations $k$, risk-aversion (no quasilinearity in money).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Agent's incentives}
+\begin{itemize}
+	\item At all $t$, agent maximizes lifetime utility 
+	$$V_t \equiv \sum_{s=t}^\infty \beta^s u(\theta_s + b_s).$$
+	\item Let $g^t = (\hat{\theta}_0, ..., \hat{\theta}_t)$ be history of past reports.
+	\item Then agent's IC at $g^{t-1}$ is:
+	\begin{align*}
+		u(\theta_t + b_t(g^{t-1},{\theta}_t)) +\beta V_{t+1}(g^{t-1},{\theta}_t) \geq 
+		\\
+		\geq u(\theta_t + b_t(g^{t-1},\hat{\theta}_t)) +\beta V_{t+1}(g^{t-1},\hat{\theta}_t).
+	\end{align*}
+	for all $\theta_t,\hat{\theta}_t$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Relation to standard model}
+\begin{itemize}
+	\item Note that there are no allocations, only money across periods.
+	\item One way to relate to our standard quasilinear model:
+	\medskip
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\emph{usual model} 	& \emph{this model} \\ \hline
+			allocation $k$ 	& today's transfer $b_t$\\ \hline
+			transfer $t$ 	& continuation util $V_{t+1}$\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	\item The main intertemporal linkage comes from the need to deliver on promised $V_{t+1}$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Efficient contract}
+\begin{itemize}
+	\item Moving on to the results.
+	\item In the optimal contract, at every $g^{t-1}$:
+	\begin{itemize}
+		\item $b_t$ is decreasing in $\hat{\theta}_t$ (insurance);
+		\item $V_{t+1}$ is increasing in $\hat{\theta}_t$ (IC).
+		\item In particular, $b_t(\underline{\theta}) > 0 > b_t(\overline{\theta})$; $V_{t+1}(\underline{\theta}) < V_t < V_{t+1}(\overline{\theta})$.
+	\end{itemize}
+	\item First-best (cheapest way to deliver util $V_t$) would be to provide full insurance, but have to trade efficiency against info rents, so incomplete insurance in the optimum. (Standard opt.mech logic)
+	%\item (NEW) Can trade off levels: raise all $b_t$ while lowering all $V_{t+1}$ or vice versa. 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Immiseration}
+\begin{theorem}[Immiseration]
+	$$\lim_{t\to \infty} V_t \overset{a.s.}{=} -\infty$$
+\end{theorem}
+\begin{itemize}
+	\item In the limit, consumption and utility converge to $\bar{c}$ and $-\infty$ resp.
+	\item Neat mathematical result, but I haven't found any good intuitive explanations of where it comes from and after some thorough thinking cannot offer any correct intuition of my own.
+	\item Popular paper, has quite some citations and influential follow-up papers.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Guo and H{\"o}rner (2018)}
+
+\begin{frame}{Dynamic Allocation without Money [Guo and H{\"o}rner (2018)]}
+\begin{itemize}
+	\item One principal, one agent.
+	\item Time $t=0,1,...$
+	\item In each period: agent's type $v \in \{L,H\}$, principal chooses $a \in \{0,1\}$. Utilities (P,A):
+	\medskip
+	\begin{center}
+		\begin{tabular}{c | c | c |}
+			& $v = H$ 	& $v=L$ \\ \hline
+			$a=0$	& $(0,0)$ 	& $(0,0)$	\\ \hline
+			$a=1$	& $(H-c,H)$ 	& $(L-c,L)$	\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	with $H > c > L$.
+	\item Idea: principal can provide funding for agent's project, it is costly for the principal, but agent always wants more funding.
+	\item Persistence: $\mathbb{P}(v_{t+1} = v_t) = \rho \geq 1/2$.
+	\item Principal's goal: max own discounted util subject to IC.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Connection}
+\begin{itemize}
+	\item Like Thomas and Worrall, but there had only transfers, no allocations. Here only allocations, no transfers.
+	\item Same idea behind IC: induce truthtelling today by varying future utility promises.
+	\medskip
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\emph{usual model} 	& \emph{this model} \\ \hline
+			allocation $k$ 	& today's \structure{allocation $a_t$}\\ \hline
+			transfer $t$ 	& continuation util $V_{t+1}$\\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	\item Opt. mech: if agent does not require funding today, allow to claim more funding in the future. For $v=H$ agent, funding today is more valuable than in the future (since $\mathbb{E} v_{t+s} < H$), for $v=L$ future funding is more valuable than today $\Rightarrow$ IC.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Polatization}
+\begin{itemize}
+	\item Let $U_t \equiv (1-\delta) \mathbb{E} \left[\sum_{s \geq t} \delta^{s-t} a_t v_t\right]$ denote agent's util. 
+	
+	Note $U_t \in \left[0,\bar{U}\right]$ for some $\bar{U}$.
+	
+	\begin{theorem}[Polarisation]
+		Under the optimal mechanism, $U_t \to \{0, \bar{U}\}$ as $t \to \infty$.
+	\end{theorem}
+	
+	\item $U_t$ is a martingale bounded on both sides -- both boundaries are absorbing, and $U_t$ hits one of them sooner or later.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Li, Matouschek, Powell (2017)}
+
+\begin{frame}{Power Dynamics in Organizations [Li, Matouschek, Powell (2017)]}
+\begin{itemize}
+	\item One principal, one agent.
+	\item Time $t=0,1,...$
+	\item In each period: principal chooses $a \in \{0,1,2,3\}$. Utilities (P,A):
+	\medskip
+	\begin{center}
+		\begin{tabular}{c c | c | c |}
+			& & principal 	& agent \\ \hline
+			$a=0$ & (default)	& $0$ 	& $0$	\\ \hline
+			$a=1$ & (agent-preferred)	& $b$ 	& $B$	\\ \hline
+			$a=2$ & (principal-preferred)	& $B$ 	& $b$	\\ \hline
+			$a=3$ & (nuke humanity)	& $-\infty$	& $-\infty$ \\ \hline
+		\end{tabular}
+	\end{center}
+	\medskip
+	with $B > b > 0$.
+	\item Principal-preferred project \structure{only available} at any $t$ \structure{with probability $p$}. Only the agent knows whether $a=2$ is available at a given $t$. Agent suggests a project to principal at every $t$.
+	\item Principal's goal: maximize expected util subject to agent's IC.
+	\item Principal \alert{cannot commit} to future contracts (so this is just a repeated game).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Possible Modes}
+\begin{itemize}
+	\item Centralization
+	\begin{itemize}
+		\item Principal always chooses the default $a=0$.
+	\end{itemize}
+	\item Cooperative Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements principal-preferred $a=2$ when available, agent-preferred $a=1$ otherwise.
+		\item The ``best'' outcome.
+	\end{itemize}
+	\item Restricted Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements principal-preferred $a=2$ when available, default $a=0$ otherwise.
+	\end{itemize}
+	\item Unrestricted Empowerment
+	\begin{itemize}
+		\item Agent suggests and principal implements agent-preferred $a=1$ always.
+	\end{itemize}
+	\item Total Annihilation
+	\begin{itemize}
+		\item Principal implements $a=3$; only used as off-path threat.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Polatization}
+\begin{theorem}
+	In the optimal relational contract, the principal chooses cooperative empowerment for the first $\tau$ periods, where $\tau$ is random and finite with probability one.
+	
+	For $t > \tau$, the relationship results in unrestricted empowerment, restricted empowerment, or centralization forever
+\end{theorem}
+\begin{itemize}
+	\item The relationship inevitably slips out of the cooperative mode into one of the uncooperative ones:
+	\begin{itemize}
+		\item either the agent gets \alert{unlimited power},
+		\item or the principal \structure{loses trust} in him.
+		\item Although convergence to restricted empowerment (semi-cooperative outcome) is possible...
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+	\item Lessons from the three papers:
+	\begin{itemize}
+		\item relying on promises of future utility for incentive provision leads to huge asymptotic inefficiencies.
+	\end{itemize}
+	\item Drastically different from the quasilinear setting we considered,
+	\begin{itemize}
+		\item where inefficiencies vanished over time...
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
