@@ -32,6 +32,7 @@
 	\frame[plain]{\titlepage}
 
 
+\section{Dynamic Mechanisms: Introduction}
 
 \begin{frame}{Dynamic Problems}
 \begin{itemize}
@@ -70,7 +71,7 @@
 
 \begin{frame}{Dynamic Model}
 \begin{itemize}
-	\item \structure{Periods} $t \in \{0,2,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
+	\item \structure{Periods} $t \in \{0,1,...,T\}$; terminal time $T \leq \infty$; all players (incl. designer) have common \structure{discount} factor $\delta$.
 	\item \structure{Players} $i \in \{1,2,...,N\}$ have evolving \structure{types} $\theta_{i,t} \in \Theta_i$, \alert{indep}. across $i$.
 	\begin{itemize}
 		\item Common \structure{prior} $\theta_{i,0} \sim F_{i,0}$; \structure{types} are Markov processes: $$\theta_{i,t+1} \sim F_{i,t}(\theta_{i,t+1} | \theta_{i,t},k_t).$$
@@ -120,7 +121,7 @@ To fix ideas, assume the following for this class:
 \begin{itemize}
 	\item As usual, we have the \structure{revelation principle} (Sugaya and Wolitzky, 2017).
 	\item So can focus on mechanisms which ask players to report their types every period.
-	\item \structure{Reporting strategies} given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of \structure{public histories} $h_t = \{k_s,r_{i,s}\}_{s < t}$.
+	\item \structure{Reporting strategies} given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of \structure{public histories} $h_t = \{k_s,(r_{1,s},...,r_{N,s})\}_{s < t}$.
 	\item A \structure{dynamic direct mechanism} is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
 \end{itemize}
 \end{frame}
@@ -185,7 +186,7 @@ To fix ideas, assume the following for this class:
 	\\
 	&\text{\footnotesize $i$'s marginal contribution}	& M_i(\theta_t,K_t)	&\equiv W(\theta_t,K_t) - W_{-i}(\theta_t,K_t)
 	\\
-	&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= \structure{m_i(\theta_t,K_t)} + \delta \mathbb{E} M_i(\theta_t,K_t).
+	&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= \structure{m_i(\theta_t,K_t)} + \delta \mathbb{E} M_i(\theta_{t+1},K_{t+1}).
 	\\
 	&\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_i(\theta_t,K_t).
 \end{align*}\vspace{-1em}
@@ -242,6 +243,7 @@ To fix ideas, assume the following for this class:
 			\item $(k(\hat{\theta}),p(\hat{\theta}))$ is implemented.
 		\end{enumerate}
 		\item What is the optimal contract?
+		\pause
 		\begin{itemize}
 			\item Designer's problem is
 			\begin{align*}
@@ -253,7 +255,7 @@ To fix ideas, assume the following for this class:
 			\end{align*}
 			\item Solution: choose efficient $k^*$ and charge $p(\theta) \equiv p = \mathbb{E}_\theta \left[v(k^*(\theta),\theta)\right]$
 			\item Perfect information extraction; no information rents to the buyer; full efficiency.
-			\item Remark: this solution would not work with $N>1$ buyers (why?)
+			\item Remark: this solution would not work with $N>1$ bidders competing for 1 item (why?)
 		\end{itemize}
 	\end{itemize}
 \end{example}
@@ -340,6 +342,7 @@ so the whole virtual surplus is
 	\\
 	&= S(\kappa,\theta) - \frac{1-F_0(\theta_0)}{\phi_0(\theta_0)} \sum_{t\geq 0} \delta^t I_t \frac{\partial v_t}{\partial \theta_t}
 \end{align*}
+(definition slightly different than in static opt.mech.; this one is more general)
 \end{frame}
 
 

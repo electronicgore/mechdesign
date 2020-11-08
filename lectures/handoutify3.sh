@@ -8,6 +8,7 @@
 
 cp $1.tex $1.tex.bak
 
+sed -i 's/%,notes/,notes/' $1.tex
 
 sed -i 's/,notes/%,notes/' $1.tex
 sed -i 's/%,handout/,handout/' $1.tex
