@@ -32,7 +32,683 @@
 	\frame[plain]{\titlepage}
 
 
+\begin{frame}{Matching}
+\begin{itemize}
+	\item We are now completely leaving the realm of ``mechanism design'' as it is usually defined.
+	\begin{itemize}
+		\item (Please keep your arms, hands, legs, feet and head inside the ride vehicle at all times.)
+	\end{itemize}
+	\item Matching: huge field, old field, broad field, still somewhat active field. We are merely dipping toes into this vast sea.
+	\item These notes follow Roth and Sotomayor, ch.2 and 4.
+\end{itemize}
+\end{frame}
 
+
+\section{Classic matching model}
+
+\begin{frame}{Classic Model: Two-Sided Matching (``Marriage'')}
+\begin{itemize}
+	\item Set $M = \{m_1, m_2, ..., m_n\}$ of men, set $W = \{w_1, w_2, ..., w_p\}$ of women.
+	\item Every man $m_i$ has strict [ordinal] preferences $\succ_{m_i}$ over $W \cup \{m_i\}$; every woman $w_j$ has preferences $\succ_{w_j}$ over $M \cup \{w_j\}$.
+	\begin{itemize}
+		\item the latter options in either case mean ``staying single''.
+		\item All preferences are \alert{commonly known}.
+	\end{itemize}
+	\begin{definition}
+		A \structure{matching} is a one-to-one mapping $\structure{\mu}: M \cup W \to M \cup W$ such that:
+		\begin{itemize}
+			\item $\mu(m) \in W \cup \{m\}$ for any $m \in M$ -- men are matched to women or stay single;
+			\item $\mu(w) \in M \cup \{w\}$ for any $w \in W$ -- women are matched to men or stay single;
+			\item $\mu(\mu(x)) = x$ for any $x \in M \cup W$ -- every person is matched to the person who is matched to them.
+		\end{itemize}
+	\end{definition}
+	\item A matching $\mu$ prescribes who should be married to whom.
+	\item \structure{Goal}: finding a ``good'' matching given players' preferences.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Stories}
+\begin{itemize}
+	\item One of the original motivations for the model was U.S. medical internships market (was a horrible mess in the 1940s-50s). 
+	\item Current academic job markets in Econ and related fields also fit the model quite nicely (and are a less horrible mess).
+	\item Another application: allocating heterogeneous workers across projects (think consulting firm) or resources across branches (think large production company).
+	\begin{itemize}
+		\item Different projects require for (``prefer'') different skills / resources;
+		\item workers have preferences over projects (e.g., like/dislike certain topics);
+		\item resources' ``preferences'' can take form of, e.g., transportation costs to various production plants.
+	\end{itemize}
+	\item Special case: when only one side has meaningful preferences, while other side's preferences are either absent, or perfectly aligned. Examples:
+	\begin{itemize}
+		\item school admissions;
+		\item kidney exchange;
+		\item allocation of items without transfers/payments.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Properties of Matchings}
+What constitutes a good matching mechanism?
+\begin{definition}
+	Matching \alert{$\mu$} is \alert{individually rational} if any player $x \in M \cup W$ prefers their match $\mu(x)$ to staying single, i.e., $\mu(x) \succ_x x$.
+\end{definition}
+\begin{definition}
+	Fix matching $\mu$. A \alert{blocking pair} is \alert{$(m,w)$} such that both $m \in M$ and $w \in W$ prefer each other to their prescribed matches, i.e., $m \succ_w \mu(w)$ and $w \succ_m \mu(m)$.
+\end{definition}
+\begin{definition}
+	Matching \structure{$\mu$} is \structure{stable} if it is individually rational and has no blocking pairs.
+\end{definition}
+Stability and IR will be our main requirements.
+\end{frame}
+
+
+\begin{frame}{Stability: example}
+\begin{example}
+	\begin{itemize}
+		\item Consider the following example.
+		\item Three men $M = (m_1,m_2,m_3)$; three women $W = (w_1,w_2,w_3)$.
+		\item Preferences (types):
+		\begin{align*}
+			m_1:& \ w_2 \succ_{m_1} w_1 \succ_{m_1} w_3 	& w_1:& \ m_1 \succ_{w_1} m_3 \succ_{w_1} m_2
+			\\
+			m_2:& \ w_1 \succ_{m_2} w_3 \succ_{m_2} w_2 	& w_2:& \ m_3 \succ_{w_2} m_1 \succ_{w_2} m_2
+			\\
+			m_3:& \ w_1 \succ_{m_3} w_2 \succ_{m_3} w_3 	& w_3:& \ m_1 \succ_{w_3} m_3 \succ_{w_3} m_2
+		\end{align*}
+		(no one wants to stay single)
+		\item Matching $\mu = \left( (w_1,m_1), (w_2,m_2), (w_3,m_3) \right)$ is \alert{not stable} -- $(m_1,w_2)$ is a blocking pair ($(m_3,w_2)$ is another).
+		\item Matching $\mu' = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}.
+	\end{itemize}
+\end{example}
+\end{frame}
+
+
+\begin{frame}{Stability}
+\begin{itemize}
+	\item \structure{Stability} is effectively an equilibrium concept for matching problems.
+	\begin{itemize}
+		\item No one wants to ``deviate'' from the ``equilibrium outcome''.
+		\item Although this is not a game -- we have not introduced actions/strategies, so ``deviations'' are not in game-theoretic sense.
+	\end{itemize}
+	\item Note that we are not dealing with any \alert{private information}.
+	\begin{itemize}
+		\item The idea is same as in \structure{Social Choice}: suppose types $\theta$ (preferences) of all players are known -- what is the ``best'' outcome (stable/``equilibrium'' matching) for this collection of $\theta$s?
+		\item But we'll get to incomplete information eventually.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Stability and existence}
+\begin{theorem}[Gale and Shapley]
+	A stable matching exists for every marriage market.
+\end{theorem}
+\begin{itemize}
+	\item Nice, but specific to the exact model. Breaks down in most extensions, e.g.:
+	\begin{itemize}
+		\item roommate problem/one-sided matching -- group of people need to split in twos to be roommates, have preferences over whom to live with;
+		\item three-sided matching -- tanks, damage-dealers, and healers need to split in triples for quest dungeons, have preferences over party-members;
+		\item many-to-one matching -- firms and workers; firms have preferences over sets of workers rather than individual employees; need strong conditions on firms' preferences for theorem to hold.
+		\item peer effects -- as above, but now workers also have preferences over potential colleagues, rather than the firm itself.
+		\item See RS ch.2.3 for particular examples of nonexistence.
+	\end{itemize}
+	\item Also, we would want to know how this stable matching looks and how to implement it...
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{How to Find Your Stable Matching}
+\begin{block}{[Men-Proposing] Deferred Acceptance Algorithm}
+	\begin{itemize}
+		\item Consider a dynamic environment with stages $t=0,1,...$.
+		\item At stage $0$ all men propose to their favorite women.
+		\item If a woman has received one offer, she holds onto it.
+		\item If a woman has receiver more than one offer, she chooses her favorite, holds onto this proposal, and rejects all other men. (Can reject all if staying single is better than all offers.)
+		\item At stage $1$ all rejected men propose to their next-favorite women. Men who were not rejected do nothing.
+		\item Women compare all new offers to what they have from the previous stage; pick best, reject the rest.
+		\item The algorithm iterates until no new offers are made. At that stage marriages are finalized. The resulting matching is stable.
+	\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Deferred Acceptance: Example}
+\begin{example}
+	\begin{itemize}
+		\item Preferences:
+		{\footnotesize
+			\begin{align*}
+				m_1:& \ w_2 \succ_{m_1} w_1 \succ_{m_1} w_3 	& w_1:& \ m_1 \succ_{w_1} m_3 \succ_{w_1} m_2
+				\\
+				m_2:& \ w_1 \succ_{m_2} w_3 \succ_{m_2} w_2 	& w_2:& \ m_3 \succ_{w_2} m_1 \succ_{w_2} m_2
+				\\
+				m_3:& \ w_1 \succ_{m_3} w_2 \succ_{m_3} w_3 	& w_3:& \ m_1 \succ_{w_3} m_3 \succ_{w_3} m_2
+			\end{align*}
+		}
+		\item At stage $0$ 
+		\begin{itemize}
+			\item $m_1$ proposes to $w_2$; $m_2$ and $m_3$ propose to $w_1$.
+			\item $w_2$ has one offer -- keeps it.
+			\item $w_1$ has two offers -- keeps $m_3$, rejects $m_2$.
+		\end{itemize}
+		\item At stage $1$: 
+		\begin{itemize}
+			\item $m_1$ and $m_3$ have outstanding offers, so do nothing.
+			\item $m_2$ proposes to $w_3$.
+			\item all women have one offer each -- keep all.
+		\end{itemize}
+		\item At stage $2$:
+		\begin{itemize}
+			\item All men have outstanding offers, so no new offers made.
+			\item Matching is finalized.
+		\end{itemize}
+		\item Resulting matching $\mu = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}.
+	\end{itemize}
+\end{example}
+\end{frame}
+
+
+\begin{frame}{Deferred Acceptance and Stability}
+\begin{block}{Claim}
+	Mathing $\mu$ produced by DA algorithm is \structure{stable}.
+\end{block}
+\begin{proof}
+	\begin{itemize}
+		\item Note that in DA, a man would never propose to a woman he doesn't like, and a woman would always reject a man she doesn't like.
+		\begin{itemize}
+			\item So matching produced by DA is \structure{individually rational}.
+		\end{itemize}
+		\item Now suppose there is a \alert{blocking pair} $(m,w)$ in the resulting matching $\mu$.
+		\begin{itemize}
+			\item Man $m$ likes $w$ more than his match $\mu(m)$. According to the algorithm, he must have proposed to $w$ and got rejected.
+			\item Woman $w$ rejected man $m$, so she must have had a better offer in hand. Her resulting matching must be better than what she had at that stage, so $\mu(w) \succ m$, a \alert{contradiction}. \qedhere
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+\end{frame}
+
+
+\begin{frame}{So Many Stable Matchings}
+\begin{itemize}
+	\item In the algorithm above men were proposing to women.
+	\item But we can run the algorithm in reverse, with women proposing to men.
+	\pause 
+	\item ...and possibly get another stable matching.
+	\item Can we say anything about the whole set of stable matchings?
+	\item Yes, quite a lot.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Best Matchings Worst Matchings}
+\begin{definition}
+	\begin{itemize}
+		\item A stable matching \alert{$\mu$} is \alert{M\structure{(W)}-optimal} if every man \structure{(woman)} likes [their match in] it at least as well as [in] any other stable matching.
+		
+		\item A stable matching \alert{$\mu$} is \alert{M\structure{(W)}-worst} if every man \structure{(woman)} likes it less than any other stable matching.
+	\end{itemize}
+\end{definition}
+\begin{theorem}
+	\begin{itemize}
+		\item Matching $\mu_{MDA}$ produced by men-proposing DA algorithm is M-optimal and W-worst.
+		
+		\item Matching $\mu_{WDA}$ produced by women-proposing DA algorithm is W-optimal and M-worst.
+	\end{itemize}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}{Best Matchings Worst Matchings}
+\begin{itemize}
+	\item The theorem above contains some insights that generalize nicely:
+	\begin{enumerate}
+		\item all men agree on which stable matchings are best and worst, same for all women;
+		\item men's and women's preferences over stable mathings are opposed.
+	\end{enumerate}
+	\item There exist other stable matchings, which cannot be obtained through DA algorithm.
+	\item Very surprisingly, they organize in a very nice \structure{lattice} structure w.r.t. players' preferences...
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Lattice Structure of the Set of Stable Matchings}
+\begin{itemize}
+	\item If there exist stable matchings $\mu'$ and $\mu''$ then there also exist stable matchings $\bar{\mu}$ and $\underline{\mu}$ such that for all $m \in M$ and $w \in W$:
+	\begin{align*}
+		\bar{\mu}(m) &= \max_{\succ_m} \{\mu'(m), \mu''(m)\}	&
+		\bar{\mu}(w) &= \min_{\succ_w} \{\mu'(w), \mu''(w)\}
+		\\
+		\underline{\mu}(m) &= \min_{\succ_m} \{\mu'(m), \mu''(m)\}	&
+		\underline{\mu}(w) &= \max_{\succ_w} \{\mu'(w), \mu''(w)\}
+	\end{align*}
+	(i.e., in $\bar{\mu}$ every $m$ gets the best match among those he can have in $\mu'$ and $\mu''$, and every $w$ gets the worst of the two; vice versa for $\underline{\mu}$).
+	\item See RS ch.2.3 and ch.3 for more details.
+	\item Some corollaries of this lattice structure:
+	\begin{itemize}
+		\item All stable matchings are contained ``between'' $\mu_{MDA}$ and $\mu_{WDA}$ in terms of players' preferences.
+		\item If $\mu_{MDA} = \mu_{WDA}$ then this is the unique stable matching.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Structure of the Set of Stable Matchings}
+\begin{itemize}
+	\item Plenty of other fun results regarding structure of this set, e.g.:
+	\begin{itemize}
+		\item Set of singles is the same in all stable matchings.
+		\item Adding a new man to the market harms all men and helps all women.
+		\item Iteratively satisfying blocking pairs leads to a stable matching.
+		\item And many more, see RS.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\section{Matching with private information about preferences}
+
+\begin{frame}{Strategic Aspects}
+\begin{itemize}
+	\item Let us finally return to mechanism design angle.
+	\item Suppose players' preferences $\succ$ are not known to the designer.
+	%\begin{itemize}
+	%	\item Commonly known across players for now (will see why this matters later); 
+	%	\item but let's say we cannot use cross-verification mechanisms.
+	%\end{itemize}
+	\item We have a nice algorithm (DA) which obtains stable matchings and is decentralized by design. A reasonable question then is:
+	\begin{block}{Question 1}
+		In a game induced by DA algorithm, is it optimal for players to play according to their true preferences?
+	\end{block}
+	\item Stability implies that no one wants to rematch after the outcome is announced. But misrepresenting own preferences may affect which stable matching is selected.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Good News and Bad News}
+\begin{exampleblock}{Good News}
+	In a game induced by the Deferred Acceptance algorithm, it is a dominant strategy for players on the proposing side to play truthfully.
+\end{exampleblock}
+
+\begin{alertblock}{Bad News}
+	It is generally not optimal for players on the receiving side to play truthfully.
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}{DA is not DSIC: Example}
+\begin{example}
+	\begin{itemize}
+		\item Two men, two women
+		\item Preferences (including the options to stay single):
+		{\footnotesize 
+			\begin{align*}
+				m_1:& \ w_1 \succ_{m_1} w_2 \succ_{m_1} m_1 	& w_1:& \ m_2 \succ_{w_1} m_1 \succ_{w_1} w_1
+				\\
+				m_2:& \ w_2 \succ_{m_2} w_1 \succ_{m_2} m_2 	& w_2:& \ m_1 \succ_{w_2} m_2 \succ_{w_2} w_2
+			\end{align*}
+		}
+		\item Two stable matchings: 
+		\begin{itemize}
+			\item $\alert{\mu} = \left( (m_1,w_1), (m_2,w_2)  \right)$;
+			\item $\alert{\nu} = \left( (m_1,w_2), (m_2,w_1)  \right)$;
+		\end{itemize}
+		\item M-DA leads to matching $\mu$.
+		\item However, $w_2$ can play \structure{as if} her preferences are $m_1 \succ'_{w_2} w_2 \succ'_{w_2} m_2$,
+		i.e., she always rejects $m_2$'s offer.
+		\item Easy to see that then the algorithm will produce matching $\nu$, preferred by $w_2$ to $\mu$, so this is a profitable deviation.
+	\end{itemize}
+\end{example}
+\end{frame}
+
+
+\begin{frame}{Private types: Beyond DA}
+\begin{itemize}
+	\item So, DA does not work as a mechanism that extracts players' private information.
+	\item We have to go beyond it and ask:
+	\begin{block}{Question 2}
+		Does there exist a DSIC mechanism that leads to a stable matching in a marriage model?
+	\end{block}
+	\item Answer: \alert{NO}.
+	\item The previous example is a \structure{universal counterexample}:
+	\begin{itemize}
+		\item If in that problem your mechanism chooses matching $\mu$, then $w_2$ will always have that same deviation that switches outcome to $\nu$ instead.
+		\item If your mechanism chooses $\nu$, then $m_2$ will have a similar deviation that switches the outcome to $\mu$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Private types: going formal}
+\begin{theorem}[Roth]
+	No stable matching mechanism exists for which stating the true preferences is a dominant strategy for every agent.
+\end{theorem}
+\begin{theorem}
+	No stable matching mechanism exists for which stating the true preferences is a best response for every agent if all other agents are reporting truthfully.
+\end{theorem}
+{\small 
+	The above statements mean that for every mechanism there is \structure{some collection} of players and their preferences where a deviation exists (that was our example). The below is a stronger statement, that applies to \alert{any} such \alert{collection}.
+}
+\begin{theorem}
+	Under any mechanism, if more than one stable matching exists in a given marriage problem, then at least one player can profitably misrepresent their preferences.
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}{``Private'' Types...?}
+\begin{itemize}
+	\item Let's look closer at the logic used in our reasoning.
+	\item Each player \alert{knew} the consequences of misreporting their preferences! 
+	\begin{itemize}
+		\item It's as if \structure{all} players knew \structure{everyone's} preferences! And only the designer is ignorant...
+		\item But we know that this kind of environment is not a problem for the designer! (Remember cross-verification mechanisms? The only subtlety is that we need a suitable threat for mismatching reports.)
+	\end{itemize}
+	\item While DSIC amounts to exactly the above ($i$'s report must be optimal \structure{regardless} of everyone else's reports), BIC allows for more:
+	\begin{itemize}
+		\item In BIC mechanism, truthtelling must be optimal for $i$ \structure{on average}, across all possible preferences of other players (given that they report the truth).
+		\item A Bayesian player chooses their report \structure{before} learning others' preferences.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Private Types! (Version 2)}
+\begin{itemize}
+	\item Let us consider the following, more familiar environment.
+	\begin{itemize}
+		\item Each player $i$ has \structure{private} type $\theta_i \in \Theta_i$;
+		\item all players report their types to a direct mechanism $\Gamma$;
+		\item $\Gamma$ prescribes a matching $\mu(\theta)$;
+		\item we want $\mu(\theta)$ to be stable.
+		\item (Previously we implicitly had that $\theta_i$ was known by all players, but not by designer.)
+	\end{itemize}
+	\item Now when player chooses what type $\hat{\omega}_i$ to report, they no longer know for sure the consequences of their deviation.
+	\item To justify stability as a requirement, assume that all types are revealed after the mechanism is run. Then everyone learns everyone's realized preferences (types), and blocking pairs can be formed. We want no blocking pairs to exist.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Impossibility (version 2)}
+\begin{theorem}[Roth]
+	There is no mechanism such that [at least one of] its equilibrium outcome is stable for all realizations of players' types.
+\end{theorem}
+\begin{itemize}
+	\item Require at least two players on each side of the market.
+	\item Proof uses an example similar to what we used to show DA is not DSIC.
+	\item Stability implied as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run, only announcing matching or reports can break this result.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Stability and Private Types (version 3)}
+\begin{itemize}
+	\item The last remark in prev.slide makes you wonder: is stability an appropriate concept under incomplete information?
+	\item It doesn't make sense to assume that true types are revealed. Reports maybe, but that is not the same.
+	\item Sometimes nothing stops a player from \structure{trying} to form a blocking pair even if they do not know whether the potential ``partner in crime'' would want this (i.e., even if types not announced).
+	\begin{itemize}
+		\item If this is a threat, we do actually need stability w.r.t. true preferences.
+		\item But why do we even need a mechanism in this case? Just let the agents match on their own.
+	\end{itemize}
+	\item But if there are costs to such proposals and nothing is announced ex post except for the matching $\mu$, then some weaker form of stability may suffice.
+	\begin{itemize}
+		\item Idea: even if $m$ and $w$ prefer each other to their prescribed matches $\mu(m)$ and $\mu(w)$, they \structure{do not know} that they prefer each other -- and so do not form a blocking pair.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Stability and Private Types (version 3)}
+\begin{itemize}
+	\item There exists a notion of stability that incorporates players' incomplete knowledge of each other's preferences when trying to form blocking pairs...
+	\begin{itemize}
+		\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{Liu, Mailath, Postlewaite, Samuelson (2014)},
+		\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{Pomatto (2019 WP)}.
+	\end{itemize}
+	\item ...but it is not very pleasant to work with,
+	\item and there are no results as to whether these ``stable'' matchings can be obtained in a mechanism.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Private Types: Summary}
+\begin{itemize}
+	\item If all players know all preferences but the designer knows none:
+	\begin{itemize}
+		\item in DA some players on the receiving side want to misreport, so DA is not DSIC;
+		\item more generally, there cannot exist any DSIC stable mechanisms.
+	\end{itemize}
+	\item If players only know own preferences ex interim, but learn others' preferences ex post:
+	\begin{itemize}
+		\item result for DSIC stable mechanisms carries over from the previous case;
+		\item there is no BIC stable mechanism either.
+	\end{itemize}
+	\item If players only know own preferences ex interim and only learn the matching $\mu$ ex post:
+	\begin{itemize}
+		\item if the cost of trying to make a [blocking] pair is small then the results from the previous case apply;
+		\item otherwise the standard notion of stability may be too strong and relaxing it \structure{may} allow us to come up with an IC slightly-less-stable mechanism, but we don't really know.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Item allocation as a matching problem}
+
+\begin{frame}{Item Allocation}
+\begin{itemize}
+	\item Consider now a special case of the marriage problem.
+	\item There are a set $I$ of players and set $X$ of objects.
+	\begin{itemize}
+		\item Player $i$ has preferences $\succ_i$ over $X$;
+		\item Objects have \structure{common} preferences $\succ_X$ over players $I$.
+	\end{itemize}
+	\item The designer knows $\succ_X$, does not know $\succ_i$.
+	\item The designer wants to allocate objects to players (at most one item per player) so as to create a stable matching.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Common preferences}
+\begin{itemize}
+	\item Here $\succ_X$ can be seen as the \structure{designer's} preference over players.
+	\begin{itemize}
+		\item Players with higher priority get to choose first.
+	\end{itemize}
+	\item Alternative interpretation:
+	\begin{itemize}
+		\item $I$ are slots available in schools/universities. Universities usually have common preferences over school graduates, given by exam scores.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Deferred Acceptance}
+\begin{itemize}
+	\item We already know an algorithm that solves this problem: Deferred Acceptance (I-DA).
+	\begin{itemize}
+		\item Let players pick objects in the order of their (players') priority $\succ_X$. First the $\succ_X$-best player $i$ picks his most preferred $x \in X$, then the second player chooses among the remaining $x \in X$ etc.
+		\item Can omit the ``holding on to an offer'' part -- later offers are never preferred by $\succ_X$ to early offers.
+		\item We know it is a dominant strategy for players to pick truthfully.
+	\end{itemize}
+	\item But we also know that the resulting matching is $X$-worst among stable. If $\succ_X$ is the designer's preference then it is also the worst for the designer. Can do better?
+	\begin{itemize}
+		\item According to the general results from before, X-DA would be better, but it is not IC for players $I$.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Uniqueness}
+\begin{theorem}
+	If one side of the marriage market has common preferences then the stable matching is \alert{unique}.
+\end{theorem}
+\begin{itemize}
+	\item X-DA yields the same outcome as I-DA: first all objects send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining objects send offers to $\succ_X$-second player etc
+	\item So the lattice structure of the set of stable matchings implies that the stable matching produced by X-DA / I-DA is the unique stable matching.
+	\item So nothing can beat I-DA in this problem.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Fair Allocations}
+\begin{itemize}
+	\item What if we \structure{do not have} any priority list \structure{$\succ_X$} and instead want to treat all players $i \in I$ equally?
+	\begin{itemize}
+		\item Note: this takes us beyond the standard marriage model, where many results required that all preferences on both sides are strict.
+	\end{itemize}
+	\item Substitute stability with Pareto-Optimality:
+	\begin{itemize}
+		\item Mathing $\mu$ is \structure{Pareto-Optimal} if no set of players can trade among themselves to [weakly] improve all of their utilities.
+		\item Related to stability; is a weaker form of efficiency (as we defined it in mechanism design).
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Fair Allocations: Shapley-Scarf model}
+\begin{itemize}
+	\item There are a set $I$ of players and set $X$ of objects.
+	\begin{itemize}
+		\item Player $i$ has preferences $\succ_i$ over $X$;
+		\item Objects have no preferences over whom to be allocated to.
+	\end{itemize}
+	\item The designer does not know $\succ_i$.
+	\item The designer wants to allocate objects to players (at most one object per player) so as to create a Pareto-optimal matching.
+	\item There is some initial matching $\mu_0$.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{TTC Algorithm}
+\begin{itemize}
+	\item The algorithm we can use here: \structure{Top Trading Cycles}.
+	\begin{itemize}
+		\item In marriage model, we were looking for a stable matching -- one with no blocking pairs. One way to get it was to start from a random matching and iteratively resolve blocking pairs.
+		\item Same idea: start from the initial allocation and let players trade.
+	\end{itemize}
+	\item Begin with matching $\mu_0$ (if there's no initial matching - pick $\mu_0$ at random).
+	\begin{itemize}
+		\item Pick any player $i_0$. Ask them to point to person $i_1$ who currently holds $i_0$'s favorite object. Analogously, ask $i_1$ to point to $i_2$ etc. When some $i_N$ points to $i_k$ ($0\leq k < N$), the cycle closes. Conduct the trades: $i_k$ gives their object to $i_N$, who gives their object to $i_{N-1}$ etc.
+		\item Remove players $\{i_k,...,i_N\}$ and their objects from the game. Start the next cycle with the remaining players and objects.
+		\item Any player is allowed to point to themselves if they already have the most desired object. This would be a one-player cycle.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{TTC Algorithm}
+\begin{theorem}[Roth '82]
+	It is a dominant strategy for all players to follow their true preferences in TTC.
+\end{theorem}
+\begin{theorem}
+	TTC algorithm is the only mechanism in Shapley-Scarf model which is:
+	\begin{enumerate}
+		\item incentive compatible;
+		\item Pareto-optimal;
+		\item individually rational relative to $\mu_0$.
+	\end{enumerate}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}{Item Allocation in Matching: Conclusion}
+\begin{itemize}
+	\item TTC algorithm is widely used in the real world.
+	\begin{itemize}
+		\item Has been applied to school choice and kidney exchange.
+	\end{itemize}
+	\item Rule of thumb:
+	\begin{itemize}
+		\item if you have a marriage market and both sides have preferences, use DA (not ideal but as good as it gets);
+		\item if only one side of the market has meaningful preferences, use TTC.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\section{Matching and money}
+
+\begin{frame}{Matching and Money}
+\begin{itemize}
+	\item The models we had so far (marriage, object allocation) were framed without transfers/money.
+	\item Many people think that this non-monetary nature is one of the characteristic properties of matching models.
+	\item Few know that you can actually do matching with money.
+	\item One example follows (using RS ch.6.2).
+	\item See RS ch.7-9 for more.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kelso and Crawford (1982)}
+\begin{itemize}
+	\item Set of firms $F = \{f_1, ..., f_n\}$; set of workers $W = \{w_1, ..., w_m\}$.
+	\item \structure{Many-to-one}: each firm can hire any number of workers; each worker can only work for one firm.
+	\begin{itemize}
+		\item This is for simplicity; firms can have limited number of spots in principle.
+	\end{itemize}
+	\item \structure{Worker} $i$ has disutility $\sigma_{ij}$ from working for firm $j$ -- i.e., accepts this job only if offered wage of at least $\sigma_{ij}$.
+	\begin{itemize}
+		\item Worker $i$'s utility from working for $j$ is quasilinear: \alert{$u_i(j,s_{ij}) = s_{ij} - \sigma_{ij}$}, where $s_{ij}$ is the wage paid by firm $j$ to the worker.
+	\end{itemize}
+	\item \structure{Firm} $j$ receives profit $y_{ij}$ from hiring worker $i$.
+	\begin{itemize}
+		\item Firm's profit function is additively separable: profit from hiring set $C \subseteq W$ of workers at respective wages $\{s_{ij}\}_{i \in C}$ is \alert{$\pi(C,s) = \sum_{i \in C} (y_{ij} - s_{ij})$}.
+		\item This is \alert{restrictive}. We can look at slightly more general profit functions, but for stable matchings to exist we need profit functions to satisfy certain (restrictive) assumptions.
+	\end{itemize}
+	\item Assume further that money/wages are integer (rather than real) -- i.e., there is no unit smaller than 1DKK.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{KC '82: Modified DA algorithm}
+\begin{itemize}
+	\item A stable matching can be obtained using a modified DA algorithm which proceeds as follows.
+	\begin{itemize}
+		\item Let $s_{ij}(0) = \sigma_{ij}$ be the initial wage offers.
+		\item At every stage $t$ every firm $j$ makes offer $s_{ij}(t)$ to every worker $i$ such that $y_{ij} > s_{ij}(t)$
+		\item Every $i$ holds on to the best offer, rejects the rest.
+		\item If $j$'s offer to $i$ was rejected, set $s_{ij}(t+1) = s_{ij}(t) + 1$.
+		\item (Otherwise, set $s_{ij}(t+1) = s_{ij}(t)$.)
+		\item Iterate the algorithm until no new offers are made.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{KC '82}
+\begin{itemize}
+	\item This modified DA algorithm yields a \structure{stable} matching.
+	\begin{itemize}
+		\item Offers from $j$ to $i$ dry out when firm $j$ can no longer afford worker $i$ -- i.e., after $i$ has a better offer from someone else -- i.e., when hiring $i$ is no longer IR for $j$.
+		\item No blocking pairs by the usual Gale-Shapley argument.
+		\item Note also that in the end, every $i$ is matched to $j^*(i) = \arg \max_j (y_{ij}-\sigma_{ij})$ -- i.e., matching is \structure{efficient} (surplus-maximizing).
+	\end{itemize}
+	\item Apply this model to \structure{item allocation} (where now any player can get any number of items): 
+	\begin{itemize}
+		\item let $y_{ij}$ be each player $j$'s valuation of item $i$;
+		\item let $\sigma_{ij} = 0$ for all $i,j$.
+		\item Then the algorithm above is an English (ascending-price) auction
+		\item which, in turn, is equivalent to the second-price auction (\structure{VCG} mechanism).
+	\end{itemize}
+	\item See RS 6.2 for a more general treatment of this model and RS 7-9 for models with money as a continuous variable (use very different tools to obtain similar results).
+\end{itemize}
+\end{frame}
+
+
+\section{Dynamic matching}
+
+\begin{frame}{Dynamic matching}
+	\begin{itemize}
+		\item Modern literature has shifted a bit towards dynamic matching settings.
+		\begin{itemize}
+			\item E.g., buyers and sellers arrive at the market over time and need to be matched with each other.
+		\end{itemize}
+		\item Main trade-off is between making \structure{good} matches and making \structure{fast} matches.
+		\item See, e.g., \href{https://econtheory.org/ojs/index.php/te/article/view/3740}{\uline{Baccara, Lee, \& Yariv (2020)}} as one model of dynamic matching.
+	\end{itemize}
+\end{frame}
 
 
 \end{document}

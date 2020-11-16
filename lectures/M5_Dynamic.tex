@@ -401,9 +401,9 @@ so the whole virtual surplus as a function of the whole $\theta=(\theta_1,\theta
 		\frac{d U_{b,0} (\theta_0)}{d \theta_0} = \mathbb{E} \left[ \sum_{t=0}^{T} \delta^t I_t(\theta_t | \theta^{t-1}, k_{t-1})\frac{\partial v(k_t,\theta_t)}{\partial \theta_t} \mid \theta_0 \right].
 	\end{align*}\vspace{-1em}
 
-	\item Note that this will pin down the ``expected-at-time-0'' payments $\mathbb{E}_\varepsilon [p_t(\theta^t)|\theta_0]$. These payments can be redistributed across periods and histories since both seller and buyer are risk-neutral.
+	\item Note that this will pin down the ``expected-at-time-0'' payments $\mathbb{E}_\varepsilon [\sum_t \delta^t p_t(\theta^t)|\theta_0]$. These payments can be redistributed across periods and histories since both seller and buyer are risk-neutral.
 	\begin{itemize}
-		\item Will usually have to do it to ensure IC at $t > 0$. No good recipe here.
+		\item Will usually have to do this redistribution to ensure IC at $t > 0$. No good recipe here.
 	\end{itemize}
 \end{itemize}
 \end{frame}
