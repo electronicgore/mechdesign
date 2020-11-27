@@ -91,7 +91,7 @@
 \begin{frame}{Properties of Matchings}
 What constitutes a good matching mechanism?
 \begin{definition}
-	Matching \alert{$\mu$} is \alert{individually rational} if any player $x \in M \cup W$ prefers their match $\mu(x)$ to staying single, i.e., $\mu(x) \succ_x x$.
+	Matching \alert{$\mu$} is \alert{individually rational} if any player $x \in M \cup W$ prefers their match $\mu(x)$ to staying single, i.e., $\mu(x) \succsim_x x$.
 \end{definition}
 \begin{definition}
 	Fix matching $\mu$. A \alert{blocking pair} is \alert{$(m,w)$} such that both $m \in M$ and $w \in W$ prefer each other to their prescribed matches, i.e., $m \succ_w \mu(w)$ and $w \succ_m \mu(m)$.
@@ -309,6 +309,8 @@ Stability and IR will be our main requirements.
 
 \section{Matching with private information about preferences}
 
+\subsection{v1}
+
 \begin{frame}{Strategic Aspects}
 \begin{itemize}
 	\item Let us finally return to mechanism design angle.
@@ -413,6 +415,8 @@ Stability and IR will be our main requirements.
 \end{frame}
 
 
+\subsection{v2}
+
 \begin{frame}{Private Types! (Version 2)}
 \begin{itemize}
 	\item Let us consider the following, more familiar environment.
@@ -430,27 +434,61 @@ Stability and IR will be our main requirements.
 
 
 \begin{frame}{Impossibility (version 2)}
-\begin{theorem}[Roth]
+\begin{theorem}[Roth, RS Th.4.23]
 	There is no mechanism such that [at least one of] its equilibrium outcome is stable for all realizations of players' types.
 \end{theorem}
 \begin{itemize}
 	\item Require at least two players on each side of the market.
-	\item Proof uses an example similar to what we used to show DA is not DSIC.
-	\item Stability implied as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run, only announcing matching or reports can break this result.
+	\item \structure{Proof} uses an example similar to what we used to show DA is not DSIC.
 \end{itemize}
 \end{frame}
 
 
+\begin{frame}
+\begin{example}[exact same example as before]
+	\begin{itemize}
+		\item Two men, two women, \structure{any preferences considered possible by the designer}
+		\item The most likely (modal) preference profile:
+		{\footnotesize 
+			\begin{align*}
+				m_1:& \ w_1 \succ_{m_1} w_2 \succ_{m_1} m_1 	& w_1:& \ m_2 \succ_{w_1} m_1 \succ_{w_1} w_1
+				\\
+				m_2:& \ w_2 \succ_{m_2} w_1 \succ_{m_2} m_2 	& w_2:& \ m_1 \succ_{w_2} m_2 \succ_{w_2} w_2
+			\end{align*}
+		}
+		\item $w_1$ can also have type with $\ m_2 \succ_{w_1} w_1 \succ_{w_1} m_1$, similar for $m_1$; $m_2$ and $w_2$ have no other types.
+		\item Two stable matchings under modal preferences: 
+		\begin{itemize}
+			\item $\alert{\mu} = \left( (m_1,w_1), (m_2,w_2)  \right)$;
+			\item $\alert{\nu} = \left( (m_1,w_2), (m_2,w_1)  \right)$;
+		\end{itemize}
+		\item Suppose your mechanism leads to matching $\mu$ under modal preferences.
+		\item Consider $w_2$'s deviation to report her alternative type ($m_1 \succ'_{w_2} w_2 \succ'_{w_2} m_2$).
+		\item This deviation will \structure{likely} (for $w_2$) produce matching $\nu$, preferred by $w_2$ to $\mu$, so this is a profitable deviation.
+	\end{itemize}
+\end{example}
+\end{frame}
+
+
+\begin{frame}{Impossibility (version 2)}
+\begin{itemize}
+	\item \alert{Issue}: stability implied as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run, only announcing matching or reports can break this result.
+\end{itemize}
+\end{frame}
+
+
+\subsection{v3}
+
 \begin{frame}{Stability and Private Types (version 3)}
 \begin{itemize}
-	\item The last remark in prev.slide makes you wonder: is stability an appropriate concept under incomplete information?
+	\item The last remark in prev.slide makes you wonder: is \alert{stability} an appropriate concept under incomplete information?
 	\item It doesn't make sense to assume that true types are revealed. Reports maybe, but that is not the same.
-	\item Sometimes nothing stops a player from \structure{trying} to form a blocking pair even if they do not know whether the potential ``partner in crime'' would want this (i.e., even if types not announced).
+	\item \emph{Sometimes} nothing stops a player from \structure{trying} to form a blocking pair even if they do not know whether the potential ``partner in crime'' would want this (i.e., even if types not announced).
 	\begin{itemize}
 		\item If this is a threat, we do actually need stability w.r.t. true preferences.
 		\item But why do we even need a mechanism in this case? Just let the agents match on their own.
 	\end{itemize}
-	\item But if there are costs to such proposals and nothing is announced ex post except for the matching $\mu$, then some weaker form of stability may suffice.
+	\item \textbf{But} if there are costs to such proposals and nothing is announced ex post except for the resulting matching $\mu$, then some weaker form of stability may suffice.
 	\begin{itemize}
 		\item Idea: even if $m$ and $w$ prefer each other to their prescribed matches $\mu(m)$ and $\mu(w)$, they \structure{do not know} that they prefer each other -- and so do not form a blocking pair.
 	\end{itemize}
@@ -462,8 +500,8 @@ Stability and IR will be our main requirements.
 \begin{itemize}
 	\item There exists a notion of stability that incorporates players' incomplete knowledge of each other's preferences when trying to form blocking pairs...
 	\begin{itemize}
-		\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{Liu, Mailath, Postlewaite, Samuelson (2014)},
-		\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{Pomatto (2019 WP)}.
+		\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{\uline{Liu, Mailath, Postlewaite, Samuelson (2014)}},
+		\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{\uline{Pomatto (2019 WP)}}.
 	\end{itemize}
 	\item ...but it is not very pleasant to work with,
 	\item and there are no results as to whether these ``stable'' matchings can be obtained in a mechanism.
@@ -494,13 +532,15 @@ Stability and IR will be our main requirements.
 
 \section{Item allocation as a matching problem}
 
+\subsection{Common preferences on one side}
+
 \begin{frame}{Item Allocation}
 \begin{itemize}
 	\item Consider now a special case of the marriage problem.
-	\item There are a set $I$ of players and set $X$ of objects.
+	\item There are a set $N$ of players and set $X$ of objects.
 	\begin{itemize}
-		\item Player $i$ has preferences $\succ_i$ over $X$;
-		\item Objects have \structure{common} preferences $\succ_X$ over players $I$.
+		\item Player $i\in N$ has preferences $\succ_i$ over $X$;
+		\item Objects have \structure{common} preferences $\succ_X$ over players $N$.
 	\end{itemize}
 	\item The designer knows $\succ_X$, does not know $\succ_i$.
 	\item The designer wants to allocate objects to players (at most one item per player) so as to create a stable matching.
@@ -516,7 +556,7 @@ Stability and IR will be our main requirements.
 	\end{itemize}
 	\item Alternative interpretation:
 	\begin{itemize}
-		\item $I$ are slots available in schools/universities. Universities usually have common preferences over school graduates, given by exam scores.
+		\item $N$ are slots available in schools/universities. Universities usually have common preferences over school graduates, given by exam scores.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -524,7 +564,7 @@ Stability and IR will be our main requirements.
 
 \begin{frame}{Deferred Acceptance}
 \begin{itemize}
-	\item We already know an algorithm that solves this problem: Deferred Acceptance (I-DA).
+	\item We already know an algorithm that solves this problem: Deferred Acceptance (N-DA).
 	\begin{itemize}
 		\item Let players pick objects in the order of their (players') priority $\succ_X$. First the $\succ_X$-best player $i$ picks his most preferred $x \in X$, then the second player chooses among the remaining $x \in X$ etc.
 		\item Can omit the ``holding on to an offer'' part -- later offers are never preferred by $\succ_X$ to early offers.
@@ -532,7 +572,7 @@ Stability and IR will be our main requirements.
 	\end{itemize}
 	\item But we also know that the resulting matching is $X$-worst among stable. If $\succ_X$ is the designer's preference then it is also the worst for the designer. Can do better?
 	\begin{itemize}
-		\item According to the general results from before, X-DA would be better, but it is not IC for players $I$.
+		\item According to the general results from before, X-DA would be better, but it is not IC for players $N$.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -543,16 +583,18 @@ Stability and IR will be our main requirements.
 	If one side of the marriage market has common preferences then the stable matching is \alert{unique}.
 \end{theorem}
 \begin{itemize}
-	\item X-DA yields the same outcome as I-DA: first all objects send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining objects send offers to $\succ_X$-second player etc
-	\item So the lattice structure of the set of stable matchings implies that the stable matching produced by X-DA / I-DA is the unique stable matching.
-	\item So nothing can beat I-DA in this problem.
+	\item X-DA yields the same outcome as N-DA: first all objects send their offers to $\succ_X$-best player, who chooses his favorite, then all remaining objects send offers to $\succ_X$-second player etc
+	\item So the lattice structure of the set of stable matchings implies that the stable matching produced by X-DA / N-DA is the unique stable matching.
+	\item So nothing can beat N-DA in this problem.
 \end{itemize}
 \end{frame}
 
 
+\subsection{No preferences on one side}
+
 \begin{frame}{Fair Allocations}
 \begin{itemize}
-	\item What if we \structure{do not have} any priority list \structure{$\succ_X$} and instead want to treat all players $i \in I$ equally?
+	\item What if we \structure{do not have} any priority list \structure{$\succ_X$} and instead want to treat all players $i \in N$ equally?
 	\begin{itemize}
 		\item Note: this takes us beyond the standard marriage model, where many results required that all preferences on both sides are strict.
 	\end{itemize}
@@ -567,7 +609,7 @@ Stability and IR will be our main requirements.
 
 \begin{frame}{Fair Allocations: Shapley-Scarf model}
 \begin{itemize}
-	\item There are a set $I$ of players and set $X$ of objects.
+	\item There are a set $N$ of players and set $X$ of objects.
 	\begin{itemize}
 		\item Player $i$ has preferences $\succ_i$ over $X$;
 		\item Objects have no preferences over whom to be allocated to.
@@ -581,19 +623,23 @@ Stability and IR will be our main requirements.
 
 
 \begin{frame}{TTC Algorithm}
-\begin{itemize}
-	\item The algorithm we can use here: \structure{Top Trading Cycles}.
+	The algorithm we can use here: \structure{Top Trading Cycles}.
 	\begin{itemize}
 		\item In marriage model, we were looking for a stable matching -- one with no blocking pairs. One way to get it was to start from a random matching and iteratively resolve blocking pairs.
 		\item Same idea: start from the initial allocation and let players trade.
 	\end{itemize}
-	\item Begin with matching $\mu_0$ (if there's no initial matching - pick $\mu_0$ at random).
-	\begin{itemize}
+\end{frame}
+
+
+\begin{frame}{TTC Algorithm}
+\begin{alertblock}{Top Trading Cycles algorithm}
+	\begin{enumerate}
+		\item Begin with matching $\mu_0$ (if there's no initial matching - pick $\mu_0$ at random).
 		\item Pick any player $i_0$. Ask them to point to person $i_1$ who currently holds $i_0$'s favorite object. Analogously, ask $i_1$ to point to $i_2$ etc. When some $i_N$ points to $i_k$ ($0\leq k < N$), the cycle closes. Conduct the trades: $i_k$ gives their object to $i_N$, who gives their object to $i_{N-1}$ etc.
 		\item Remove players $\{i_k,...,i_N\}$ and their objects from the game. Start the next cycle with the remaining players and objects.
 		\item Any player is allowed to point to themselves if they already have the most desired object. This would be a one-player cycle.
-	\end{itemize}
-\end{itemize}
+	\end{enumerate}
+\end{alertblock}
 \end{frame}
 
 
@@ -621,7 +667,7 @@ Stability and IR will be our main requirements.
 	\item Rule of thumb:
 	\begin{itemize}
 		\item if you have a marriage market and both sides have preferences, use DA (not ideal but as good as it gets);
-		\item if only one side of the market has meaningful preferences, use TTC.
+		\item if only one side of the market has meaningful preferences (and you are actively unwilling to assume some preferences on the other side), use TTC.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -663,17 +709,15 @@ Stability and IR will be our main requirements.
 
 
 \begin{frame}{KC '82: Modified DA algorithm}
-\begin{itemize}
-	\item A stable matching can be obtained using a modified DA algorithm which proceeds as follows.
-	\begin{itemize}
+A stable matching can be obtained using a modified DA algorithm which proceeds as follows.
+	\begin{enumerate}
 		\item Let $s_{ij}(0) = \sigma_{ij}$ be the initial wage offers.
 		\item At every stage $t$ every firm $j$ makes offer $s_{ij}(t)$ to every worker $i$ such that $y_{ij} > s_{ij}(t)$
 		\item Every $i$ holds on to the best offer, rejects the rest.
 		\item If $j$'s offer to $i$ was rejected, set $s_{ij}(t+1) = s_{ij}(t) + 1$.
 		\item (Otherwise, set $s_{ij}(t+1) = s_{ij}(t)$.)
 		\item Iterate the algorithm until no new offers are made.
-	\end{itemize}
-\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 
@@ -685,6 +729,7 @@ Stability and IR will be our main requirements.
 		\item No blocking pairs by the usual Gale-Shapley argument.
 		\item Note also that in the end, every $i$ is matched to $j^*(i) = \arg \max_j (y_{ij}-\sigma_{ij})$ -- i.e., matching is \structure{efficient} (surplus-maximizing).
 	\end{itemize}
+	\pause
 	\item Apply this model to \structure{item allocation} (where now any player can get any number of items): 
 	\begin{itemize}
 		\item let $y_{ij}$ be each player $j$'s valuation of item $i$;
