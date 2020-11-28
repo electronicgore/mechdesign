@@ -203,7 +203,8 @@ Stability and IR will be our main requirements.
 			\item All men have outstanding offers, so no new offers made.
 			\item Matching is finalized.
 		\end{itemize}
-		\item Resulting matching $\mu = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}.
+		\item The resulting matching $\mu = \left( (w_1,m_3), (w_2,m_1), (w_3,m_2) \right)$ is \structure{stable}.
+		%\item Resulting matching $\mu = \left( (w_1,m_1), (w_2,m_3), (w_3,m_2) \right)$ is \structure{stable}. %This is W-DA
 	\end{itemize}
 \end{example}
 \end{frame}
@@ -358,7 +359,7 @@ Stability and IR will be our main requirements.
 		\end{itemize}
 		\item M-DA leads to matching $\mu$.
 		\item However, $w_2$ can play \structure{as if} her preferences are $m_1 \succ'_{w_2} w_2 \succ'_{w_2} m_2$,
-		i.e., she always rejects $m_2$'s offer.
+		i.e., she could rejects $m_2$'s offer.
 		\item Easy to see that then the algorithm will produce matching $\nu$, preferred by $w_2$ to $\mu$, so this is a profitable deviation.
 	\end{itemize}
 \end{example}
@@ -447,7 +448,7 @@ Stability and IR will be our main requirements.
 \begin{frame}
 \begin{example}[exact same example as before]
 	\begin{itemize}
-		\item Two men, two women, \structure{any preferences considered possible by the designer}
+		\item Two men, two women
 		\item The most likely (modal) preference profile:
 		{\footnotesize 
 			\begin{align*}
@@ -456,7 +457,8 @@ Stability and IR will be our main requirements.
 				m_2:& \ w_2 \succ_{m_2} w_1 \succ_{m_2} m_2 	& w_2:& \ m_1 \succ_{w_2} m_2 \succ_{w_2} w_2
 			\end{align*}
 		}
-		\item $w_1$ can also have type with $\ m_2 \succ_{w_1} w_1 \succ_{w_1} m_1$, similar for $m_1$; $m_2$ and $w_2$ have no other types.
+		\item With small probability, $w_2$ can also have type with $\ m_1 \succ_{w_2} w_2 \succ_{w_2} m_2$; similar for $m_2$; \\
+		$m_1$ and $w_1$ have no other types.
 		\item Two stable matchings under modal preferences: 
 		\begin{itemize}
 			\item $\alert{\mu} = \left( (m_1,w_1), (m_2,w_2)  \right)$;
