@@ -2,15 +2,3 @@ All solution files have if-conditions to generate files with and without solutio
 \solutionsfalse
 \solutionstrue
 and comment out the unneeded one.
-
-
-Headers are currently only present in the versions with solutions.
-
-
-Problem sets are numbered by topics (numbers of "lectures") in slides, which retrospectively was a bad idea. 
-
-
-Every problem set has "review questions" which count as "problem 1" in the within-doc numbering and I stuck to this convention. This was a bad idea too.
-
-
-Many solutions are written by students and are imperfect, but good enough. I edited some but not all parts. Questions themselves are also flawed quite often.
