@@ -220,10 +220,11 @@ Some questions are open ended in that they may not have a unique correct answer.
 		\end{itemize}
 	\end{framed}
 	
-	\textbf{NOTE}: the original solution of this problem made a number of mistakes that made it easier. The actual solution of this problem is much more involved. Both the intended and the actual solutions are presented below, to both give the idea of the intended difficulty of the problem, and give an actual solution.
+	\textbf{NOTE}: the original solution of this problem made a number of mistakes that made it easier. The actual solution of this problem (presented below) is much more involved than was initially anticipated.
 	
+	Further, the problem is written in such a way that the entrepreneurs' outside option must be covered even if the project is not funded.\footnote{While possibly counterintuitive, think of this as mutually exclusive alternatives: the entrepreneurs can either try to convince this investor to fund their project, or they can secure an alternative contract netting them $\theta/2$, but the latter must be done immediately, and this option is lost if they waste time trying to convice the investor in the problem.}
+	This is only possible if $k(\theta)t(\theta) \geq \theta/2$ even for such $\theta$ that $k(\theta)=l(\theta)=0$. Therefore, for such types we either need to allow payments $p(\theta) \equiv k(\theta)t(\theta)$ that are not conditional on funding (which would mean altering the problem conditions), or consider $\varepsilon$-optimal mechanisms, where $k(\theta) = \varepsilon$, and $t(\theta)$ is of the order $\frac{1}{\varepsilon}$ (but no exactly optimal mechanisms would exist, since they would require $\varepsilon \to 0$). This solution takes the former approach and instead of deriving $t(\theta)$, we shall restrict attention to unconditional/expected payments $k(\theta)t(\theta)$.
 	
-	\subsubsection*{Incorrect solution}
 	\begin{enumerate}
 		\item \emph{Monotonicity and ERP.} Consider two types $\theta > \hat{\theta}$. Using $U_e(\theta)$ to denote the expected utility that type $\theta$ of the entrepreneur team receives from truthtelling in the mechanism, the IC constraint for type $\theta$ to not be willing to report $\hat{\theta}$ instead can be written as:
 		\begin{align*}
@@ -242,82 +243,12 @@ Some questions are open ended in that they may not have a unique correct answer.
 		\end{align}
 		I.e., $k(\theta)(1-l(\theta))$ must be weakly increasing in $\theta$ to be implementable. We will refer to this as the monotonicity of the allocation rule.
 		
-		By taking limit of \eqref{eq:ERP_kl} as $\hat{\theta}\to \theta$, we also get that $U'(\theta) = k(\theta) (1-l(\theta))$ for almost all $\theta$. Invoking the fundamental theorem of calculus, we can then conclude that for any $\theta$,
+		By taking limit of \eqref{eq:ERP_kl} as $\hat{\theta}\to \theta$, we also get that $U'(\theta) = k(\theta) (1-l(\theta))$ for almost all $\theta$. Invoking the fundamental theorem of calculus, we can then conclude that for any $\theta$ and $\bar{\theta}$,
 		\begin{align}
-			U_e(\theta) = U_e(0) + \int_0^\theta k(s) (1-l(s)) ds.
-			\label{eq:ERP_kl2}
-		\end{align}
-		(We use $\theta=0$ as the anchor type because, as we shall see later, it is the type, for which IR is the most binding.)
-		
-		\item \emph{Allocation rule.} Using \eqref{eq:ERP_kl2} and the definition of $U_e(\theta)$, we get
-		\begin{align*}
-			U_e(\theta) &= k(\theta) \cdot \left( (1-l(\theta)) \theta - t(\theta) \right) = U_e(0) + \int_0^\theta k(s) (1-l(s)) ds
-			\\
-			\Leftrightarrow
-			k(\theta) t(\theta) &= k(\theta) (1-l(\theta)) \theta - U_e(0) - \int_0^\theta k(s) (1-l(s)) ds
-			\\
-			\Rightarrow
-			\mathbb{E}_\theta [k(\theta) t(\theta)] &= \int_0^1 k(\theta) (1-l(\theta)) \theta d\theta - \int_0^1 \int_0^\theta k(s) (1-l(s)) ds d\theta - U_e(0)
-			\\
-			&= \int_0^1 \left[ k(\theta) (1-l(\theta)) \theta - k(\theta) (1-l(\theta)) + k(\theta) (1-l(\theta)) \theta \right] d\theta - U_e(0)
-			\\
-			&= \int_0^1 \left[ (2\theta -1) k(\theta) (1-l(\theta)) \right] d\theta - U_e(0)
-		\end{align*}
-		(where we have already plugged in $\phi(\theta)=1\Leftrightarrow F(\theta)=1$ in the third line, and integration by parts was used to get from the third to the fourth line).
-		
-		Therefore, the investor's expected profit in any IC mechanism will be given by the following function of the allocation rule:
-		\begin{align*}
-			\mathbb{E}_\theta[U_i(\theta)] &= \mathbb{E}_\theta \left[ k(\theta) \cdot (l(\theta) \theta + t(\theta) - c) \right] 
-			\\
-			&= \mathbb{E}_\theta \left[ k(\theta) \cdot (l(\theta) \theta + (1-l(\theta))(2\theta-1) - c) \right] -U_e(0)
-			\\
-			&= \mathbb{E}_\theta \left[ k(\theta) \cdot (l(\theta) (1-\theta) + 2\theta-1 - c) \right] -U_e(0)
-		\end{align*}
-		
-		One can see from the final expression that since $(1-\theta) \geq 0$, it is optimal to set
-		% After long contemplations, I realize this solution is wrong, but I do not know what the correct one is and how to arrive to it.
-		\begin{align*}
-			(k(\theta),l(\theta)) =
-			\begin{cases}
-				(1,1) & \text{ if } 2\theta -1 -c \geq 0;
-				\\
-				(0,\cdot) & \text{ if } 2\theta -1 -c < 0.
-			\end{cases}
-		\end{align*}
-		In particular, the following allocation rule is optimal: $l(\theta) = k(\theta) = \mathbb{I}\{ \theta \geq \frac{1+c}{2} \}$ for all $\theta$. Note that it does satisfy the monotonicity requirement from above, hence we can indeed find a transfer rule that would support it.
-		
-		\item \emph{Transfer rule.} Now we shall verify that the IR constraint is more binding for lower types. The IR constraint for type $\theta$ is
-		\begin{align*}
-			k(\theta) \cdot \left( (1-l(\theta)) \theta - t(\theta) \right) \geq \frac{\theta}{2},
-		\end{align*}
-		Plugging in the optimal allocation rule found above, we get $\mathbb{I}\{ \theta \geq \frac{1+c}{2} \} \cdot (-t(\theta)) \geq \frac{\theta}{2}$. First, note that $k=0$ for $\theta < \frac{1+c}{2}$, hence the project is not funded in that case, and regardless of $t(\theta)$ we have $U_e(\theta)=0$ for all $\theta$. Second, for $\theta \geq \frac{1+c}{2}$, the IR constraint reduces to $t(\theta) \leq -\frac{\theta}{2}$. From the IC conditions, we know that $t(\theta)$ must be the same for all $\theta \geq \frac{1+c}{2}$ (since allocations $(k,l)$ are the same on that interval). Hence to satisfy IR while extracting maximal surplus, the transfer rule must prescribe $t(\theta) = \frac{1+c}{4}$ for all $\theta \geq \frac{1+c}{2}$. (You could obtain the same result from the ERP.)
-		
-		\item \emph{The resulting mechanism and interpretation.} In the end, the resulting mechanism is as follows:
-		\begin{align*}
-			(k,l,t) = 
-			\begin{cases}
-				(0,0,0) & \text{ if } \theta < \frac{1+c}{2};
-				\\
-				\left(1,1,\frac{1+c}{4}\right) & \text{ if } \theta \geq \frac{1+c}{2}.
-			\end{cases}
-		\end{align*}
-		Note that in the former case the optimal $l$ and $t$ are indeterminate -- we are not funding the project, so the terms of repayment are irrelevant. If the project is funded -- which happens if it is reported to be good enough -- then the funding is organized as a loan, where the entrepreneurs get to keep all profits ($l=1$), but have to repay a fixed amount $t=\frac{1+c}{4}$. This kind of contract is optimal because it does not distort the entrepreneurs' incentives to report $\theta$ truthfully. 
-		
-		The whole enterprise is only profitable for the investor if $\frac{1+c}{4} \geq c \Leftrightarrow c \leq \frac{1}{3}$ -- otherwise there is no point in organizing the mechanism in the first place.
-	\end{enumerate}
-
-
-	\subsubsection*{Correct (hopefully) solution}
-	
-	The mechanism designed above is not IR for types $\theta < \frac{1+c}{2}$, since the problem is written in such a way that the entrepreneurs' outside option must be covered even if the project is not funded.\footnote{While possibly counterintuitive, think of this as mutually exclusive alternatives: the entrepreneurs can either try to convince this investor to fund their project, or they can secure an alternative contract netting them $\theta/2$, but the latter must be done immediately, and this option is lost if they waste time trying to convice the investor in the problem.}
-	This is only possible if $k(\theta)t(\theta) \geq \theta/2$ even for such $\theta$ that $k(\theta)=l(\theta)=0$. Therefore, for such types we either need to allow payments $p(\theta) \equiv k(\theta)t(\theta)$ that are not conditional on funding (which would mean altering the problem conditions), or consider $\varepsilon$-optimal mechanisms, where $k(\theta) = \varepsilon$, and $t(\theta)$ is of the order $\frac{1}{\varepsilon}$ (but no exactly optimal mechanisms would exist, since they would require $\varepsilon \to 0$). This solution takes the former approach and instead of deriving $t(\theta)$, we shall restrict attention to unconditional/expected payments $k(\theta)t(\theta)$.
-	
-	\begin{enumerate}
-		\item Part 1 of the original solution works for the most part. The crux is in selecting the right anchor type when deriving the ERP \eqref{eq:ERP_kl2}. The idea is to select the anchor type $\bar{\theta}$ in such a way as to know what the utility level $U_e(\bar{\theta})$ is. The usual way to do so is to select (by guessing) some type for which IR binds, since then $U_e(\bar{\theta}) = \bar{U}_e(\bar{\theta})$. At least one such type should exist in the optimal mechanism, since otherwise all IR constraints are slack, in which case we can increase all $k(\theta)t(\theta)$ by $\epsilon$ and increase profit. Guessing this type is, however, difficult, in this problem, hence let us leave the anchor type $\bar{\theta}$ undefined for now. Then we have the following ERP:
-		\begin{align}
-			U_e(\theta) = U_e(0) + \int_0^\theta k(s) (1-l(s)) ds.
+			U_e(\theta) = U_e(\bar{\theta}) + \int_{\bar{\theta}}^\theta k(s) (1-l(s)) ds.
 			\label{eq:ERP_kl3}
 		\end{align}
+		The crux is in selecting the right anchor type $\bar{\theta}$. The idea is to select it in such a way as to know what the utility level $U_e(\bar{\theta})$ is. The usual way to do so is to select (by guessing) some type for which IR binds, since then $U_e(\bar{\theta}) = \bar{U}_e(\bar{\theta})$. At least one such type should exist in the optimal mechanism, since otherwise all IR constraints are slack, in which case we can increase all $k(\theta)t(\theta)$ by $\epsilon$ and increase profit. Guessing this type is, however, difficult, in this problem, hence let us leave the anchor type $\bar{\theta}$ undefined for now (but we are assuming that this is the type for which the IR constraint binds).
 		
 		\item \emph{Expected revenue.} Using \eqref{eq:ERP_kl3} and the definition of $U_e(\theta)$, we get
 		\begin{align}
