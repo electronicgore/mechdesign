@@ -1,1 +1,453 @@
-%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----------------------------------------------------------------------------------------%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS%----------------------------------------------------------------------------------------\documentclass[a4paper]{article}\usepackage{amssymb}%\usepackage{enumerate}\usepackage[usenames,dvipsnames]{color}\usepackage{fancyhdr} % Required for custom headers\usepackage{lastpage} % Required to determine the last page for the footer\usepackage{extramarks} % Required for headers and footers\usepackage[usenames,dvipsnames]{color} % Required for custom colors\usepackage{graphicx} % Required to insert images\usepackage{listings} % Required for insertion of code\usepackage{courier} % Required for the courier font\usepackage[table]{xcolor}\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}\usepackage[section]{placeins}\usepackage[a4paper]{geometry}\usepackage[USenglish]{babel}\usepackage[utf8]{inputenc}\usepackage{tikz}\usepackage{hyperref}\usepackage[hyphenbreaks]{breakurl}\usepackage[]{url}\usepackage[shortlabels]{enumitem}\usepackage{framed}\usepackage{pdfpages}% Margins\topmargin=-0.45in\evensidemargin=0in\oddsidemargin=0in\textwidth=6.5in\textheight=9.0in\headsep=0.6in\linespread{1.1} % Line spacing%----------------------------------------------------------------------------------------%   FORMATTING%----------------------------------------------------------------------------------------% Set up the header and footer\pagestyle{fancy}\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head\rhead{\instructor \\ \theprofessor} % Top right header\lfoot{\lastxmark} % Bottom left footer\cfoot{} % Bottom center footer\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer\renewcommand\headrulewidth{0.4pt} % Size of the header rule\renewcommand\footrulewidth{0.4pt} % Size of the footer rule% Other formatting stuff%\setlength\parindent{12pt}\setlength{\parskip}{5 pt}%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}\usepackage{titlesec}\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}%----------------------------------------------------------------------------------------%	NAME AND CLASS SECTION%----------------------------------------------------------------------------------------\newcommand{\hmwkTitle}{Exam} % Assignment title\newcommand{\Class}{Mechanism Design} % Course/class\newcommand{\instructor}{Fall 2020} % TA\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor%----------------------------------------------------------------------------------------%   SOLUTIONS%----------------------------------------------------------------------------------------\newif\ifsolutions\solutionstrue\begin{document}{\ifsolutions \else		\includepdf{MDexam_frontpage20.pdf}\fi}\begin{center}		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}\end{center}Write up your responses to questions below and submit them to Digital Exam. Be concise, but show your work and explain your answers. The deadline to submit the responses is Jan 14, 10:00 AM. No cooperation with other students is permitted.Some questions are open ended in that they may not have a unique correct answer. It is recommended that you look through all problems before beginning to solve them. You are allowed to refer to textbooks, lecture notes, slides, problem sets etc for results and proofs contained therein.The exam revolves around one issue, as presented below, and asks you to approach it from different angles.\section*{Background}		A debate has been ongoing (at least in the US) for the past few years on whether the gig economy workers (Uber drivers, Wolt couriers, etc) can be classified as independent contractors, as they currently are, or must be enlisted as proper employees. The latter would mean that the company would have to provide such workers with minimal wage, health insurance, paid vacations and other social benefits.\footnote{You can find some broad overview of the issue here: \url{https://arstechnica.com/tech-policy/2019/09/uber-and-lyft-vow-continued-fight-against-california-worker-rights-bill/}.}		Voters in California have, in November 2020, ``overwhelmingly approved'' the so-called Proposition 22, which would allow the gig economy firms to continue classifying its workers as contractors (P22 is an amendment to an earlier legislation that would have required a reclassification of workers). Companies' opponents are disappointed with the outcome, blaming it partially on the fact that the companies managed to spend 10 times more money on advertising and promoting their viewpoint.\footnote{\url{https://arstechnica.com/tech-policy/2020/11/uber-and-lyft-in-driving-seat-to-remake-us-labor-laws/}} 		For this exam, we will take Uber as a firm that is representative of this gig economy, and frame the policy debate as ``Uber vs drivers''. If you are not familiar with Uber and its business model, look it up online.			\section{Optimal algorithm}	% opt.mech (not matching)		Let us ignore for a moment all the policy debate and look first at how Uber exploits its drivers in regular times. Suppose you are the head economist of Uber and you are designing the economic side of the matching algorithm. Your goal is to pay the drivers as little as possible, while also ensuring their participation. In particular, consider the following situation: some consumer has placed a fare (a ride order) in the app, and there is a driver available in the vicinity. You (the app) are then effectively bargaining with the driver for how little money they are willing to accept in order to complete this fare.		Suppose the app charges the consumer some amount $w$ for the ride. This $w$ is fixed and commonly known by all players, including the driver and the designer. The driver values their time at $\theta \sim U[0,1]$, which is their private information. You are designing a direct revelation mechanism $\{k(\theta),p(\theta)\}_{\theta\in[0,1]}$, which works as follows:	\begin{enumerate}[label=(\roman{enumi})]		\item the driver reports $\theta$ to the app;		\item the app offers the fare to the driver with probability $k(\theta) \in [0,1]$;\footnote{Think that if the fare is not offered to the driver, then the consumer sees an empty screen, as if there were no available drivers in their area.}		\item the driver can accept or reject the fare;		\item if the driver accepted and completed the fare, they receive payment $p(\theta)$;		\item if the driver declined or was not offered the fare, they receive utility $\theta$.	\end{enumerate}		Therefore, the driver's expected utility from receiving with probability $k$ a fare that pays $p$ is	$$u(k,t,\theta) = k \cdot p + (1-k) \cdot \theta,$$	and their outside option (from rejecting the fare or the whole mechanism) is $\underline{U}(\theta) = \theta$.		Your task is to devise an optimal mechanism $(k,p)$ that maximizes the firm's expected revenue $\mathbb{E}_\theta [k(\theta) \cdot (w-p(\theta))]$ subject to the driver's standard IC constraint and interim IR constraint $u(k,t,\theta) \geq \underline{U}(\theta)$. To derive this mechanism, follow the steps below.		\emph{NOTE: you can attempt to answer each of parts 2-5 even if you did not solve the earlier parts (you can use the statements made in the problem text).}		\begin{enumerate}		\item Show that in any IC mechanism, $k(\theta)$ must be weakly decreasing.		\item Show that in any IC mechanism, the following holds for all $\theta$ (where $U(\theta) \equiv k(\theta) p(\theta) + (1-k(\theta)) \theta$):		\begin{align}			\label{opt:ERP2}			U(\theta) = U(1) - \int_{\theta}^{1} (1-k(s)) ds.		\end{align}		\item Show that in any IC mechanism, the firms' expected profit (from this driver) can be expressed in the following way as a function of the allocation rule $k$ and $U(1)$:		\begin{align}			\label{opt:ERP3}			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] = \int_0^1 \left[ 2\theta + k(\theta) \cdot (w - 2\theta ) \right] d\theta - U(1).		\end{align}		\item Find the allocation rule $k$ that maximizes the expected profit \eqref{opt:ERP3}. Does it satisfy the monotonicity requirement from part 1? If not, what is the optimal monotone allocation rule?		\item Argue (formally if you can) why type $\theta=1$ is the one for whom the IR constraint will be the most binding. I.e., show that if IR holds for $\theta=1$ then it also holds for all other $\theta \in [0,1)$.		\item Suppose $w=1$. Derive the payment rule $p(\theta)$ that supports the optimal [monotone] allocation rule.		\item Suppose $w=2$. Derive the payment rule $p(\theta)$ that supports the optimal [monotone] allocation rule.		\item Are the mechanisms you obtained in the two previous questions ex post IR for the drivers? I.e., will the driver always accept any fare that is offered to them?		%NOTE: the last question is a full dupe of part 5, since interim and ex post IR are equivalent in single-player problems.		%\item Discuss the intuition behind the mechanisms you obtained in the three previous parts in any words you deem fitting. Would you agree or disagree with the claim that Uber exploits its drivers (assuming it uses the mechanism you derived)? 		%Every unit of time, a continuum of mass $c>0$ of consumers places a ride request and a continuum of mass $d>c$ of drivers is available (you know $c$ and $d$ perfectly from the data). This means that the average probability with which a random driver gets a fare in a given period is $\bar{k}=c/d$.	\end{enumerate}			\ifsolutions\subsection*{Solution}	This problem tests the following learning outcomes:	\begin{framed}		\underline{Knowledge}:		\begin{itemize}[$\circ$]			\item {Account for the fundamental ideas behind and approaches to mechanism design.}			\item {Define main trade-offs arising in information extraction problems.}			\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}		\end{itemize}		\underline{Skills}:		\begin{itemize}[$\circ$]			\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}			\item {Propose mechanisms that induce the desired outcomes in various environments.}			\item \textcolor{gray}{Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}		\end{itemize}		\underline{Competencies}:		\begin{itemize}[$\circ$]			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}			\item \textcolor{gray}{Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}		\end{itemize}	\end{framed}	The solution is presented below.	\begin{enumerate}		\item The argument fully mirrors the argument from class and homeworks. Consider two types $\theta > \theta'$. The IC condition for $\theta$ to not be willing to report $\theta'$ is:		\begin{align*}			U(\theta) \equiv k(\theta) p(\theta) + (1-k(\theta)) \theta &\geq k(\theta') p(\theta') + (1-k(\theta')) \theta			\\			&= U(\theta') + (1-k(\theta')) (\theta-\theta').		\end{align*}		Rearranging and dividing both sides by $(\theta-\theta')$ yields		\begin{align*}			\frac{U(\theta)-U(\theta')}{\theta-\theta'} \geq 1-k(\theta').		\end{align*}		By doing the same manipulations for the IC condition for type $\theta'$ to not be willing to report type $\theta$, we obtain		\begin{align}			\label{opt:mon}			1-k(\theta) \geq \frac{U(\theta)-U(\theta')}{\theta-\theta'} \geq 1-k(\theta'),		\end{align}		hence $k(\theta) \leq k(\theta')$.				\item Taking the limit as $\theta' \to \theta$, \eqref{opt:mon} becomes $\frac{dU(\theta)}{d\theta} = 1-k(\theta)$ (for almost all $\theta$). Invoking the fundamental theorem of calculus, we can say that for any $\theta$ then,		\begin{align}			\label{opt:ERP}			U(1) - U(\theta) = \int_{\theta}^{1} \frac{dU(s)}{ds} ds = \int_{\theta}^{1} (1-k(s)) ds.		\end{align}		Rearranging this expression yields the result.				\item Using \eqref{opt:ERP} and the definition of $U(\theta)$, we can express the average payment to type $\theta$ as		\begin{align}			\label{opt:ERP1}			k(\theta)p(\theta) &= -(1-k(\theta)) \theta - \int_{\theta}^{1} (1-k(s)) ds + U(1),		\end{align}		hence the firm's expected profit from type $\theta$ is		\begin{align*}			k(\theta)\cdot (w-p(\theta)) &= wk(\theta) + (1-k(\theta)) \theta + \int_{\theta}^{1} (1-k(s)) ds - U(1).		\end{align*}		Taking the expectation over types $\theta$, we get the expression for the expected profit:		\begin{align*}			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] &= \int_0^1 \left[ wk(\theta) + (1-k(\theta)) \theta + \int_{\theta}^{1} (1-k(s)) ds \right] dF(\theta) - U(1).		\end{align*}		Since $\theta \sim U[0,1]$, we have that $F(\theta) = \theta$ for $\theta \in [0,1]$. Using integration by parts to eliminate the inner integral and then simplifying the resulting expression, we get		\begin{align*}			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] &= \int_0^1 \left[ wk(\theta) + (1-k(\theta)) \theta + \theta (1-k(\theta)) \right] d\theta - U(1)			\\			&= \int_0^1 \left[ 2\theta + k(\theta) \cdot (w - 2\theta ) \right] d\theta - U(1).		\end{align*}				\item Maximizing the expression under the integral for any $\theta$, we get that $k(\theta) = \mathbb{I}\left\{ \theta \leq \frac{w}{2} \right\}$. This allocation rule is indeed weakly decreasing.				\item Recall $\underline{U}(\theta)=\theta$. From \eqref{opt:ERP} (equivalently, \eqref{opt:ERP3}) and the fact that $k(\theta) \geq 0$, we can infer that for all $\theta$,		\begin{align*}			&U(1) - U(\theta) \leq 1-\theta			\\			\Leftrightarrow &U(1) - 1 \leq U(\theta) - \theta.		\end{align*}		Hence if $U(1)\geq 1 \iff U(1)-1 \geq 0$, then $U(\theta)-\theta \geq 0 \iff U(\theta) \geq \theta$.				\item %The ``proper'' way to answer this problem is as follows.		Transfers are pinned down by $k$ and $U(1)$ by the envelope representation of payoffs \eqref{opt:ERP3}. We have $k$ from part 4. From part 5 we know that $U(1)=1$ is both necessary and sufficient for all IR constraints to hold and for at least one of them to bind. Plugging the both of these into \eqref{opt:ERP1}, we get that for $\theta \leq \frac{w}{2}$,		\begin{align*}			k(\theta)p(\theta) &= -(1-k(\theta)) \theta - \int_{\theta}^{1} (1-k(s)) ds + U(1)			\\			\Rightarrow \text{ if $k(\theta)=1$, } p(\theta) &= - \int_{\theta}^{1} (1-k(s)) ds + 1			\\			&= - \int_{\theta}^{w/2} 0 ds - \int_{w/2}^1 1 ds + 1			\\			&= 1 - \left(1-\frac{w}{2}\right) = \frac{w}{2}.		\end{align*}		Hence if $w=1$, any driver that receives the fare ($\theta < \frac{w}{2}$) is paid $p(\theta) = 1/2$. Drivers who report $\theta > w/2$ are not offered a fare and are paid nothing.\footnote{The exact value of $p(\theta)$ is indeterminate in this case, since $p$ is defined as payment \emph{conditional} on completing the fare.}				%A simpler way to obtain this result is to look at the IC condition for type $\theta = \frac{w}{2}$...				\item Using the results from the previous parts, if $w=2$ then the optimal mechanism is $k(\theta) = 1$ for all $\theta$ and $p(\theta)=1$, i.e., the driver receives this offer and is compensated handsomely regardless of their report.				\item Yes. If $\theta < w/2$, the driver is offered a fare and a reward $p(\theta) = w/2$, so accepting the fare for $p(\theta)$ is better than rejecting and receiving $\underline{U}(\theta)=\theta$.				%\item This is a question for debate, so many answers are possible. On the one hand, the goal of the mechanism is to yield maximal profit for the firm, with no regard for drivers' well-being. As a result, the price that the consumer pays for the driver's services and the price that the driver receives are significantly different. So if you were Karl Marx, you would call this worker exploitation. On the other hand, we must recognize that the firm does create non-trivial value through its matching technology and is thus entitled to a share of the surplus ...%TODO	\end{enumerate}\fi	%\section{Social choice}%%	How to aggregate individuals' and the firms' preferences?%	%	\begin{enumerate}%		\item Whose welfare should the California government worry about? Given that Uber HQ is in California, what would be the preferred policy?%	\end{enumerate}\section{Regulating Uber}	%eff mech; open-ended question		\hypersetup{urlbordercolor=1 1 1}	Suppose now instead that you are \href{https://youtu.be/4P9TOsmk6LY?t=21}{the President of the great United States of America}, and your goal is to implement an outcome that is optimal and fair for all of the country's stakeholders, including riders, drivers, and company shareholders. To fix ideas, consider a setting consisting of a representative consumer who is demanding a ride, a representative driver who is able to provide it, and a firm that possesses the matching technology (which is strictly better than the next-best technology from any other competing firm). 	\hypersetup{urlbordercolor=0 1 1}		Basing on the material covered in the course, answer the following questions. You are free to make any other assumptions on the setting and add any other details that you deem necessary. You are welcome to introduce a formal model for your analysis, but you can attempt to answer the questions without one.		\begin{enumerate}		\item Suppose Uber uses the optimal mechanism to extract maximal surplus from its drivers when they are contractors. Consider a regulation that would require Uber to reclassify its drivers from contractors to employees (the converse of Proposition 22).\footnote{You can explore one or more consequences of such regulation as described in the ``Background'' section of the exam, or you can think of other possible consequences.} How would the environment that Uber faces and the mechanism it uses change as a result of this regulation?				\item Would you consider such a regulation an improvement to social welfare? 				\item What other kinds of regulation could improve social welfare in this setting?	\end{enumerate}\ifsolutions\subsection*{Solutions}	This problem tests the following learning outcomes:	\begin{framed}		\underline{Knowledge}:		\begin{itemize}[$\circ$]			\item {Account for the fundamental ideas behind and approaches to mechanism design.}			\item {Define main trade-offs arising in information extraction problems.}			\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}		\end{itemize}		\underline{Skills}:		\begin{itemize}[$\circ$]			\item {Set up policy, trade, and management issues as mechanism design problems.}			\item {Propose mechanisms that induce the desired outcomes in various environments.}			\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}		\end{itemize}		\underline{Competencies}:		\begin{itemize}[$\circ$]			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}			\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}		\end{itemize}	\end{framed}	The problem is extremely open-ended. So long as the answer is internally consistent and is aligned with the approaches and insights covered in class, it would be deemed acceptable. The following presents one possible solution.		\begin{enumerate}		\item The best way to interpret the problem is to think that regulation imposes some constraints on the \emph{set of mechanisms} that the firm can use. The alternative is thinking that the government designs some mechanism that both the firm and its counteragents participate in -- this, however, removes any agency the firm has in shaping its interactions with its workers, which may make this approach look too restrictive to be realistic.				Further, while the firm also faces the problem of extracting the most profit from its \emph{riders} (as opposed to only exploiting drivers), it seems unlikely that any regulation on the firm's interaction with drivers will directly affect its interaction with consumers. While the general equilibrium effects are inevitably present, it is not immediately obvious that they would reverse the effects discussed further (although they would almost surely either mitigate, or amplify the direct effects, which by itself can warrant a discussion). Thus in the following discussion, we adopt the setting of Problem 1, where the firm only has a non-trivial interaction with the driver, while the consumer is a passive player.				One way to incorporate the considered regulation into the model of Problem 1 is to say that the firm must always provide some minimal wage to the driver: $p(\theta) \geq \bar{p}$ for all $\theta$.\footnote{The constraint $p(\theta) \geq \bar{p}$ means the driver receives some minimal payment \emph{per fare} -- which is different from receiving some minimal wage \emph{per hour} if riders' demand fluctuates over time. This solution ignores this discrepancy.}		If $w/2 \geq \bar{p}$, then this constraint is not binding, and the optimal mechanism is the same as in Problem 1. The regulation then has no effect. Otherwise -- if $w/2 < \bar{p}$ -- the drivers' wages will increase, and the firm will offer more fares to the drivers. (Recall that the only reason for the firm to set $k<1$ in the optimal mechanism is to disincentivize drivers from reporting high $\theta$, so the firm can pay them less. If paying less is not an option, the firm has fewer incentives to distort $k$ away from the efficient one.)				\item From the above, it would appear as if the regulation is strictly beneficial, because it brings $k$, the allocation rule for fares used by the firm, closer to the efficient one, generating more social surplus. However, there are at least two aspects that may reverse this conclusion. Firstly, regulation decreases the firm's profits. Given that Uber currently burns about \$1 billion per quarter\footnote{\url{https://arstechnica.com/cars/2020/08/coronavirus-clobbers-uber-leading-to-1-8-billion-quarterly-loss/}}, decreasing revenue can have two consequences: either Uber quits the market, taking its technology with it (which would destroy a lot of social surplus), or it passes the higher prices on to consumers (in which case the society still wins as a whole, but it raises the question of whether redistributing surplus from riders to drivers is a part of the desirable outcome).				The second aspect we need to consider is that Uber will now decide to not serve some rides. In particular, if we see $w$ as the value of the ride to the consumer, rides with $w < \bar{p}$ will now be unprofitable for Uber to serve -- meaning some social surplus is also lost as a result of the regulation. In the end, it is not immediately clear whether the considered regulation would be welfare-improving.				\item Fixing a problem requires identifying what the problem is in the first place. The implied problem is that drivers are paid less (not directly, but via less social benefits) than comparable workers who are formally employed. However, the part of the argument that is omitted is that Uber drivers enjoy more freedom and flexibility in their choice of working hours than any full-time or part-time employee could ever dream of. It is natural to think that for at least some drivers this benefit outweighs the smaller pay. At the same time, there surely are drivers who use Uber as a full-time job, and would like to enjoy the social benefits.				Given the above, a possible solution could be to oblige Uber to give all of its drivers a choice of whether they would prefer to be classified as contractors or employees. Employees would enjoy the standard protections and social benefits, but also face a more rigid contract in terms of their responsibilities. Given the size of the company, it is unlikely that it would face any diseconomies of scale from maintaining two parallel modes of interaction with its drivers. 				That said, a simple requirement to offer both options to every driver may not be sufficient, since the firm may make the ``employment'' option so unappealing (by, e.g., requiring inconvenient working hours at minimal wage) that no driver would select it. This would leave us at the status quo, except for the wasteful effort that the firm would have to exert to comply with the requirements. Therefore, to be effective, the regulation would have to restrict the set of mechanisms available to the firm even further, by not only requiring that the firm offers both ``employment'' and ``contractor'' options, but also requiring some kind of parity between the two.			\end{enumerate}\fi			\section{Dynamic advertising}		Now let us move to the vote on Proposition 22 and explore it from the information design perspective.		Consider a setting with three players: a representative voter, a firm, and a worker union. Suppose a vote on Proposition 22 is coming. The true state $\omega \in \{0,1\}$ represents whether adopting this regulation is socially beneficial. The voter does not know $\omega$ but wants to choose the right thing: $a \in \{0,1\}$, $v_v(a,\omega) = \mathbb{I}\{a=\omega\}$. The two other parties want to tilt this decision in their favor: the firm's utility function is $v_f(a,\omega) = \mathbb{I}\{a=1\}$, while the workers union's utility function is $v_u(a,\omega) = \mathbb{I}\{a=0\}$. (As usual, $\mathbb{I}(\cdot)$ is the indicator function.)		To affect the voter's decision, the firm and the union engage in Bayesian Persuasion, i.e., they can each select any distribution of messages $\mu(m|\omega)$.\footnote{You can interpret Bayesian Persuasion in many ways in this setting. One way is generating media attention: the firm and the union can make the voter pay attention to the issue think about it, and can steer the voter's belief about the state to some extent, but they cannot directly control what conclusions the voter arrives to. Another interpretation is that the firm and the union commission research (academic or journalistic), but have no direct control over its conclusions.}	The firm's budgetary advantage means it moves after the union and can say the final word. There are thus three stages in the problem:	\begin{enumerate}[label=(\roman{enumi})]		\item the union selects a state-contingent distribution of messages $\mu_u(m_u|\omega)$; then a message $m_u$ is drawn from this distribution and is observed by all parties;		\item the firm selects a state-contingent distribution of messages $\mu_f(m_f|\omega)$; then a message $m_f$ is drawn from this distribution and is observed by all parties;		\item the voter selects an action $a$.	\end{enumerate}	We will solve this problem by backwards induction. Answer the following questions.	\emph{Hint: drawing graphs of every object you calculate can be helpful in this problem.}		\begin{enumerate}		\item Let $\phi_2 \equiv \mathbb{P}(\omega=1 | s_u,s_f)$ denote the probability that the voter's posterior belief assigns to state $\omega=1$ after observing both messages $m_u,m_f$. Derive the optimal action rule $\hat{a}(\phi_2) \equiv \arg \max_a \mathbb{E}_\omega[v_v(a,\omega)|\phi_2]$ which maximizes the voter's expected utility, as a function of $\phi_2$.				\item Calculate the expected utility $V_f(\phi_2) \equiv \mathbb{E}_\omega [v_f(\hat{a}(\phi_2),\omega)] | \phi_2]$ that the firm receives from the voter's optimal choice conditional on voter's posterior belief $\phi_2$.				\item Let $\phi_1 \equiv \mathbb{P}(\omega=1 | s_u)$ denote the probability that the voter's belief assigns to state $\omega=1$ after observing mesasge $m_u$. The firm's problem of selecting an optimal communication strategy $\mu_f(m_f|\omega)$ is equivalent to choosing a distribution of posteriors $Q_f(\phi_2|\phi_1)$. Derive $Q_f$ that maximizes the firm's expected profit.				\item Calculate the expected utility $V_u(\phi_1) \equiv \mathbb{E}_\omega [v_u(\hat{a}(\phi_2),\omega)] | \phi_1]$ that the union receives from the voter's optimal choice conditional on voter's belief $\phi_1$.				\item Let $\phi_0 \equiv \mathbb{P}(\omega=1)$ denote the probability that the voter's prior belief assigns to state $\omega=1$.The union's problem of selecting an optimal communication strategy $\mu_u(m_u|\omega)$ is equivalent to choosing a distribution of posteriors $Q_u(\phi_1|\phi_0)$. Derive $Q_u$ that maximizes the union's expected profit.				\item What can you say about the informational outcome for the voter? (I.e., what information does the voter have in the end?) Would it be different if the two senders moved in the opposite order or simultaneously? (Make a convincing intuitive argument.)				\item We are interested in evaluating the union's complaint, which goes as follows:		\begin{quote}			``\texttt{These corporations spent over \$200 million on a corporate misinformation, deceptive campaign to \textbf{rig our democratic process} and to continue their exploitation of working people. It is a blasphemy and a sin.}''		\end{quote}		Would you say that in the information design problem that you have solved, the firm's communication interfered with the voter's decision process? Would you say that this problem captures accurately the essence of the complaint (i.e., the effect of larger campaign expenditure)? If not, how would you set up a model that captures it better?	\end{enumerate}\ifsolutions\subsection*{Solutions}	This problem tests the following learning outcomes:	\begin{framed}		\underline{Knowledge}:		\begin{itemize}[$\circ$]			\item {Account for the fundamental ideas behind and approaches to mechanism design.}			\item {Define main trade-offs arising in information extraction problems.}			\item {Identify the limitations of existing approaches to mechanism design.}			\item {Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}		\end{itemize}		\underline{Skills}:		\begin{itemize}[$\circ$]			\item {Set up policy, trade, and management issues as mechanism design problems.}			\item {Propose mechanisms that induce the desired outcomes in various environments.}			\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}		\end{itemize}		\underline{Competencies}:		\begin{itemize}[$\circ$]			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}			\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}		\end{itemize}	\end{framed}	\begin{enumerate}		\item $\mathbb{E}_\omega[v_v(a,\omega)|\phi_2] = \mathbb{P}( \omega = a )$, hence choosing $a=1$ yields expected utility $\phi_2$, and choosing $a=0$ yields $1-\phi_2$. The optimal action is then $\hat{a}(\phi_2) = \mathbb{I}(\phi_2 \geq 0.5)$.				\item The firm's utility function is $v_f(a,\omega) = \mathbb{I}\{a=1\}$, hence the expected utility from the voter's decision is $V_f(\phi_2) = \mathbb{I}\{\phi_2 \geq 0.5\}$.				\item The concave closure of $V_f(\phi_2)$ is $V^*_f(\phi_2) = \min \{2\phi_2, 1 \}$ (draw a graph to see this). Therefore, $V_f$ and $V^*_f$ coincide on $\phi_2 \in \{0\} \cup [0.5,1]$ -- if $\phi_1$ belongs to this set, an uninformative experiment is optimal. If instead $\phi_1 \in (0,0.5)$ then it is split into posteriors $\phi_2 \in \{0,0.5\}$. We can use the law of total probability to find the optimal experiment for that case, eventually yielding the following distributions $Q_f(\phi_2|\phi_1)$:		\begin{align*}			\phi_2 = 			\begin{cases}				\phi_1 \text{ w.p. } 1, & \text{ if } \phi_1 \in \{0\} \cup [0.5,1];				\\				\begin{cases}					0.5 & \text{ w.p. } 2 \phi_1,					\\					0 & \text{ w.p. } 1-2 \phi_1				\end{cases}				& \text{ if } \phi_1 \in (0.5,1).			\end{cases}		\end{align*}			\item Given the firm's strategy above, the union expects that the voter will choose $a=1$ w.p. $\min\{2\phi_1, 1\}$ and $a=0$ otherwise. Therefore, $V_u(\phi_1) = 1 - \min\{2\phi_1, 1\} = \max \{ 1-2\phi, 0 \}$.				\item Applying the same process as above: the concave closure of $V_u$ is $V^*_u(\phi_1) = 1-\phi_1$. So $V_u$ and $V^*_u$ only coincide on $\phi_1 \in \{0,1\}$, hence the union's optimal experiment $Q_u(\phi_1|\phi_0)$ will be perfectly informative:		\begin{align*}			\phi_1 = 			\begin{cases}				1 & \text{ w.p. } \phi_0,				\\				0 & \text{ w.p. } 1-\phi_0.			\end{cases}		\end{align*}				\item The voter perfectly learns the state from the union's message. Note that the only reason the union provides perfect information to the voter is the implicit threat of the firm then providing any missing information if the union tries to conceal any information unfavorable to the union's cause. This outcome stems from the firm's and the union's incentives being the complete opposites, and would persist so long as both of them are able to design their experiments, regardless of whether one signal is sent after the other or both are selecting their experiments simultaneously.\footnote{A general treatment of the problem with multiple senders and simultaneous moves is available in \href{https://doi.org/10.1093/restud/rdw052}{Gentzkow and Kamenica (REStud, 2016)}.}				\item The argument above implies that it does not matter which of the two parties have the last-mover advantage, hence in our model the funding advantage is irrelevant for the outcome. However, one may easily argue that our model does not fully capture the funding advantage, and it affects other aspects as well. For example, it could be the case instead (and would be more plausible) that the funding affects the set of experiments available to the sender. I.e., the firm having spent more on advertising would mean that the firm can select more informative signals than the union -- in which case it could indeed be the case that the voter in equilibrium observes more information favorable for the firm than for the union.	\end{enumerate}\fi%%-----------------------------------------------------------------------------------------------------\end{document}
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2020} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{MDexam_frontpage20.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+Write up your responses to questions below and submit them to Digital Exam. Be concise, but show your work and explain your answers. The deadline to submit the responses is Jan 14, 10:00 AM. No cooperation with other students is permitted.
+
+Some questions are open ended in that they may not have a unique correct answer. It is recommended that you look through all problems before beginning to solve them. You are allowed to refer to textbooks, lecture notes, slides, problem sets etc for results and proofs contained therein.
+
+The exam revolves around one issue, as presented below, and asks you to approach it from different angles.
+
+\section*{Background}
+	
+	A debate has been ongoing (at least in the US) for the past few years on whether the gig economy workers (Uber drivers, Wolt couriers, etc) can be classified as independent contractors, as they currently are, or must be enlisted as proper employees. The latter would mean that the company would have to provide such workers with minimal wage, health insurance, paid vacations and other social benefits.\footnote{You can find some broad overview of the issue here: \url{https://arstechnica.com/tech-policy/2019/09/uber-and-lyft-vow-continued-fight-against-california-worker-rights-bill/}.}
+	
+	Voters in California have, in November 2020, ``overwhelmingly approved'' the so-called Proposition 22, which would allow the gig economy firms to continue classifying its workers as contractors (P22 is an amendment to an earlier legislation that would have required a reclassification of workers). Companies' opponents are disappointed with the outcome, blaming it partially on the fact that the companies managed to spend 10 times more money on advertising and promoting their viewpoint.\footnote{\url{https://arstechnica.com/tech-policy/2020/11/uber-and-lyft-in-driving-seat-to-remake-us-labor-laws/}} 
+	
+	For this exam, we will take Uber as a firm that is representative of this gig economy, and frame the policy debate as ``Uber vs drivers''. If you are not familiar with Uber and its business model, look it up online.
+	
+	
+	
+\section{Optimal algorithm}
+	% opt.mech (not matching)
+	
+	Let us ignore for a moment all the policy debate and look first at how Uber exploits its drivers in regular times. Suppose you are the head economist of Uber and you are designing the economic side of the matching algorithm. Your goal is to pay the drivers as little as possible, while also ensuring their participation. In particular, consider the following situation: some consumer has placed a fare (a ride order) in the app, and there is a driver available in the vicinity. You (the app) are then effectively bargaining with the driver for how little money they are willing to accept in order to complete this fare.
+	
+	Suppose the app charges the consumer some amount $w$ for the ride. This $w$ is fixed and commonly known by all players, including the driver and the designer. The driver values their time at $\theta \sim U[0,1]$, which is their private information. You are designing a direct revelation mechanism $\{k(\theta),p(\theta)\}_{\theta\in[0,1]}$, which works as follows:
+	\begin{enumerate}[label=(\roman{enumi})]
+		\item the driver reports $\theta$ to the app;
+		\item the app offers the fare to the driver with probability $k(\theta) \in [0,1]$;\footnote{Think that if the fare is not offered to the driver, then the consumer sees an empty screen, as if there were no available drivers in their area.}
+		\item the driver can accept or reject the fare;
+		\item if the driver accepted and completed the fare, they receive payment $p(\theta)$;
+		\item if the driver declined or was not offered the fare, they receive utility $\theta$.
+	\end{enumerate}
+	
+	Therefore, the driver's expected utility from receiving with probability $k$ a fare that pays $p$ is
+	$$u(k,t,\theta) = k \cdot p + (1-k) \cdot \theta,$$
+	and their outside option (from rejecting the fare or the whole mechanism) is $\underline{U}(\theta) = \theta$.
+	
+	Your task is to devise an optimal mechanism $(k,p)$ that maximizes the firm's expected revenue $\mathbb{E}_\theta [k(\theta) \cdot (w-p(\theta))]$ subject to the driver's standard IC constraint and interim IR constraint $u(k,t,\theta) \geq \underline{U}(\theta)$. To derive this mechanism, follow the steps below.
+	
+	\emph{NOTE: you can attempt to answer each of parts 2-5 even if you did not solve the earlier parts (you can use the statements made in the problem text).}
+	
+	\begin{enumerate}
+		\item Show that in any IC mechanism, $k(\theta)$ must be weakly decreasing.
+		\item Show that in any IC mechanism, the following holds for all $\theta$ (where $U(\theta) \equiv k(\theta) p(\theta) + (1-k(\theta)) \theta$):
+		\begin{align}
+			\label{opt:ERP2}
+			U(\theta) = U(1) - \int_{\theta}^{1} (1-k(s)) ds.
+		\end{align}
+		\item Show that in any IC mechanism, the firms' expected profit (from this driver) can be expressed in the following way as a function of the allocation rule $k$ and $U(1)$:
+		\begin{align}
+			\label{opt:ERP3}
+			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] = \int_0^1 \left[ 2\theta + k(\theta) \cdot (w - 2\theta ) \right] d\theta - U(1).
+		\end{align}
+		\item Find the allocation rule $k$ that maximizes the expected profit \eqref{opt:ERP3}. Does it satisfy the monotonicity requirement from part 1? If not, what is the optimal monotone allocation rule?
+		\item Argue (formally if you can) why type $\theta=1$ is the one for whom the IR constraint will be the most binding. I.e., show that if IR holds for $\theta=1$ then it also holds for all other $\theta \in [0,1)$.
+		\item Suppose $w=1$. Derive the payment rule $p(\theta)$ that supports the optimal [monotone] allocation rule.
+		\item Suppose $w=2$. Derive the payment rule $p(\theta)$ that supports the optimal [monotone] allocation rule.
+		\item Are the mechanisms you obtained in the two previous questions ex post IR for the drivers? I.e., will the driver always accept any fare that is offered to them?
+		%NOTE: the last question is a full dupe of part 5, since interim and ex post IR are equivalent in single-player problems.
+		%\item Discuss the intuition behind the mechanisms you obtained in the three previous parts in any words you deem fitting. Would you agree or disagree with the claim that Uber exploits its drivers (assuming it uses the mechanism you derived)? 
+		%Every unit of time, a continuum of mass $c>0$ of consumers places a ride request and a continuum of mass $d>c$ of drivers is available (you know $c$ and $d$ perfectly from the data). This means that the average probability with which a random driver gets a fare in a given period is $\bar{k}=c/d$.
+	\end{enumerate}
+	
+	
+	
+\ifsolutions
+\subsection*{Solution}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}
+			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item \textcolor{gray}{Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item \textcolor{gray}{Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+
+	The solution is presented below.
+
+	\begin{enumerate}
+		\item The argument fully mirrors the argument from class and homeworks. Consider two types $\theta > \theta'$. The IC condition for $\theta$ to not be willing to report $\theta'$ is:
+		\begin{align*}
+			U(\theta) \equiv k(\theta) p(\theta) + (1-k(\theta)) \theta &\geq k(\theta') p(\theta') + (1-k(\theta')) \theta
+			\\
+			&= U(\theta') + (1-k(\theta')) (\theta-\theta').
+		\end{align*}
+		Rearranging and dividing both sides by $(\theta-\theta')$ yields
+		\begin{align*}
+			\frac{U(\theta)-U(\theta')}{\theta-\theta'} \geq 1-k(\theta').
+		\end{align*}
+		By doing the same manipulations for the IC condition for type $\theta'$ to not be willing to report type $\theta$, we obtain
+		\begin{align}
+			\label{opt:mon}
+			1-k(\theta) \geq \frac{U(\theta)-U(\theta')}{\theta-\theta'} \geq 1-k(\theta'),
+		\end{align}
+		hence $k(\theta) \leq k(\theta')$.
+		
+		\item Taking the limit as $\theta' \to \theta$, \eqref{opt:mon} becomes $\frac{dU(\theta)}{d\theta} = 1-k(\theta)$ (for almost all $\theta$). Invoking the fundamental theorem of calculus, we can say that for any $\theta$ then,
+		\begin{align}
+			\label{opt:ERP}
+			U(1) - U(\theta) = \int_{\theta}^{1} \frac{dU(s)}{ds} ds = \int_{\theta}^{1} (1-k(s)) ds.
+		\end{align}
+		Rearranging this expression yields the result.
+		
+		\item Using \eqref{opt:ERP} and the definition of $U(\theta)$, we can express the average payment to type $\theta$ as
+		\begin{align}
+			\label{opt:ERP1}
+			k(\theta)p(\theta) &= -(1-k(\theta)) \theta - \int_{\theta}^{1} (1-k(s)) ds + U(1),
+		\end{align}
+		hence the firm's expected profit from type $\theta$ is
+		\begin{align*}
+			k(\theta)\cdot (w-p(\theta)) &= wk(\theta) + (1-k(\theta)) \theta + \int_{\theta}^{1} (1-k(s)) ds - U(1).
+		\end{align*}
+		Taking the expectation over types $\theta$, we get the expression for the expected profit:
+		\begin{align*}
+			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] &= \int_0^1 \left[ wk(\theta) + (1-k(\theta)) \theta + \int_{\theta}^{1} (1-k(s)) ds \right] dF(\theta) - U(1).
+		\end{align*}
+		Since $\theta \sim U[0,1]$, we have that $F(\theta) = \theta$ for $\theta \in [0,1]$. Using integration by parts to eliminate the inner integral and then simplifying the resulting expression, we get
+		\begin{align*}
+			\mathbb{E}_\theta [k(\theta)\cdot (w-p(\theta))] &= \int_0^1 \left[ wk(\theta) + (1-k(\theta)) \theta + \theta (1-k(\theta)) \right] d\theta - U(1)
+			\\
+			&= \int_0^1 \left[ 2\theta + k(\theta) \cdot (w - 2\theta ) \right] d\theta - U(1).
+		\end{align*}
+		
+		\item Maximizing the expression under the integral for any $\theta$, we get that $k(\theta) = \mathbb{I}\left\{ \theta \leq \frac{w}{2} \right\}$. This allocation rule is indeed weakly decreasing.
+		
+		\item Recall $\underline{U}(\theta)=\theta$. From \eqref{opt:ERP} (equivalently, \eqref{opt:ERP3}) and the fact that $k(\theta) \geq 0$, we can infer that for all $\theta$,
+		\begin{align*}
+			&U(1) - U(\theta) \leq 1-\theta
+			\\
+			\Leftrightarrow &U(1) - 1 \leq U(\theta) - \theta.
+		\end{align*}
+		Hence if $U(1)\geq 1 \iff U(1)-1 \geq 0$, then $U(\theta)-\theta \geq 0 \iff U(\theta) \geq \theta$.
+		
+		\item %The ``proper'' way to answer this problem is as follows.
+		Transfers are pinned down by $k$ and $U(1)$ by the envelope representation of payoffs \eqref{opt:ERP3}. We have $k$ from part 4. From part 5 we know that $U(1)=1$ is both necessary and sufficient for all IR constraints to hold and for at least one of them to bind. Plugging the both of these into \eqref{opt:ERP1}, we get that for $\theta \leq \frac{w}{2}$,
+		\begin{align*}
+			k(\theta)p(\theta) &= -(1-k(\theta)) \theta - \int_{\theta}^{1} (1-k(s)) ds + U(1)
+			\\
+			\Rightarrow \text{ if $k(\theta)=1$, } p(\theta) &= - \int_{\theta}^{1} (1-k(s)) ds + 1
+			\\
+			&= - \int_{\theta}^{w/2} 0 ds - \int_{w/2}^1 1 ds + 1
+			\\
+			&= 1 - \left(1-\frac{w}{2}\right) = \frac{w}{2}.
+		\end{align*}
+		Hence if $w=1$, any driver that receives the fare ($\theta < \frac{w}{2}$) is paid $p(\theta) = 1/2$. Drivers who report $\theta > w/2$ are not offered a fare and are paid nothing.\footnote{The exact value of $p(\theta)$ is indeterminate in this case, since $p$ is defined as payment \emph{conditional} on completing the fare.}
+		
+		%A simpler way to obtain this result is to look at the IC condition for type $\theta = \frac{w}{2}$...
+		
+		\item Using the results from the previous parts, if $w=2$ then the optimal mechanism is $k(\theta) = 1$ for all $\theta$ and $p(\theta)=1$, i.e., the driver receives this offer and is compensated handsomely regardless of their report.
+		
+		\item Yes. If $\theta < w/2$, the driver is offered a fare and a reward $p(\theta) = w/2$, so accepting the fare for $p(\theta)$ is better than rejecting and receiving $\underline{U}(\theta)=\theta$.
+		
+		%\item This is a question for debate, so many answers are possible. On the one hand, the goal of the mechanism is to yield maximal profit for the firm, with no regard for drivers' well-being. As a result, the price that the consumer pays for the driver's services and the price that the driver receives are significantly different. So if you were Karl Marx, you would call this worker exploitation. On the other hand, we must recognize that the firm does create non-trivial value through its matching technology and is thus entitled to a share of the surplus ...%TODO
+	\end{enumerate}
+\fi
+
+
+	
+%\section{Social choice}
+%
+%	How to aggregate individuals' and the firms' preferences?
+%	
+%	\begin{enumerate}
+%		\item Whose welfare should the California government worry about? Given that Uber HQ is in California, what would be the preferred policy?
+%	\end{enumerate}
+
+
+\section{Regulating Uber}
+	%eff mech; open-ended question
+	
+	\hypersetup{urlbordercolor=1 1 1}
+	Suppose now instead that you are \href{https://youtu.be/4P9TOsmk6LY?t=21}{the President of the great United States of America}, and your goal is to implement an outcome that is optimal and fair for all of the country's stakeholders, including riders, drivers, and company shareholders. To fix ideas, consider a setting consisting of a representative consumer who is demanding a ride, a representative driver who is able to provide it, and a firm that possesses the matching technology (which is strictly better than the next-best technology from any other competing firm). 
+	\hypersetup{urlbordercolor=0 1 1}
+	
+	Basing on the material covered in the course, answer the following questions. You are free to make any other assumptions on the setting and add any other details that you deem necessary. You are welcome to introduce a formal model for your analysis, but you can attempt to answer the questions without one.
+	
+	\begin{enumerate}
+		\item Suppose Uber uses the optimal mechanism to extract maximal surplus from its drivers when they are contractors. Consider a regulation that would require Uber to reclassify its drivers from contractors to employees (the converse of Proposition 22).\footnote{You can explore one or more consequences of such regulation as described in the ``Background'' section of the exam, or you can think of other possible consequences.} How would the environment that Uber faces and the mechanism it uses change as a result of this regulation?
+		
+		\item Would you consider such a regulation an improvement to social welfare? 
+		
+		\item What other kinds of regulation could improve social welfare in this setting?
+	\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solutions}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}
+			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item {Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+
+	The problem is extremely open-ended. So long as the answer is internally consistent and is aligned with the approaches and insights covered in class, it would be deemed acceptable. The following presents one possible solution.
+	
+	\begin{enumerate}
+		\item The best way to interpret the problem is to think that regulation imposes some constraints on the \emph{set of mechanisms} that the firm can use. The alternative is thinking that the government designs some mechanism that both the firm and its counteragents participate in -- this, however, removes any agency the firm has in shaping its interactions with its workers, which may make this approach look too restrictive to be realistic.
+		
+		Further, while the firm also faces the problem of extracting the most profit from its \emph{riders} (as opposed to only exploiting drivers), it seems unlikely that any regulation on the firm's interaction with drivers will directly affect its interaction with consumers. While the general equilibrium effects are inevitably present, it is not immediately obvious that they would reverse the effects discussed further (although they would almost surely either mitigate, or amplify the direct effects, which by itself can warrant a discussion). Thus in the following discussion, we adopt the setting of Problem 1, where the firm only has a non-trivial interaction with the driver, while the consumer is a passive player.
+		
+		One way to incorporate the considered regulation into the model of Problem 1 is to say that the firm must always provide some minimal wage to the driver: $p(\theta) \geq \bar{p}$ for all $\theta$.\footnote{The constraint $p(\theta) \geq \bar{p}$ means the driver receives some minimal payment \emph{per fare} -- which is different from receiving some minimal wage \emph{per hour} if riders' demand fluctuates over time. This solution ignores this discrepancy.}
+		If $w/2 \geq \bar{p}$, then this constraint is not binding, and the optimal mechanism is the same as in Problem 1. The regulation then has no effect. Otherwise -- if $w/2 < \bar{p}$ -- the drivers' wages will increase, and the firm will offer more fares to the drivers. (Recall that the only reason for the firm to set $k<1$ in the optimal mechanism is to disincentivize drivers from reporting high $\theta$, so the firm can pay them less. If paying less is not an option, the firm has fewer incentives to distort $k$ away from the efficient one.)
+		
+		\item From the above, it would appear as if the regulation is strictly beneficial, because it brings $k$, the allocation rule for fares used by the firm, closer to the efficient one, generating more social surplus. However, there are at least two aspects that may reverse this conclusion. Firstly, regulation decreases the firm's profits. Given that Uber currently burns about \$1 billion per quarter\footnote{\url{https://arstechnica.com/cars/2020/08/coronavirus-clobbers-uber-leading-to-1-8-billion-quarterly-loss/}}, decreasing revenue can have two consequences: either Uber quits the market, taking its technology with it (which would destroy a lot of social surplus), or it passes the higher prices on to consumers (in which case the society still wins as a whole, but it raises the question of whether redistributing surplus from riders to drivers is a part of the desirable outcome).
+		
+		The second aspect we need to consider is that Uber will now decide to not serve some rides. In particular, if we see $w$ as the value of the ride to the consumer, rides with $w < \bar{p}$ will now be unprofitable for Uber to serve -- meaning some social surplus is also lost as a result of the regulation. In the end, it is not immediately clear whether the considered regulation would be welfare-improving.
+		
+		\item Fixing a problem requires identifying what the problem is in the first place. The implied problem is that drivers are paid less (not directly, but via less social benefits) than comparable workers who are formally employed. However, the part of the argument that is omitted is that Uber drivers enjoy more freedom and flexibility in their choice of working hours than any full-time or part-time employee could ever dream of. It is natural to think that for at least some drivers this benefit outweighs the smaller pay. At the same time, there surely are drivers who use Uber as a full-time job, and would like to enjoy the social benefits.
+		
+		Given the above, a possible solution could be to oblige Uber to give all of its drivers a choice of whether they would prefer to be classified as contractors or employees. Employees would enjoy the standard protections and social benefits, but also face a more rigid contract in terms of their responsibilities. Given the size of the company, it is unlikely that it would face any diseconomies of scale from maintaining two parallel modes of interaction with its drivers. 
+		
+		That said, a simple requirement to offer both options to every driver may not be sufficient, since the firm may make the ``employment'' option so unappealing (by, e.g., requiring inconvenient working hours at minimal wage) that no driver would select it. This would leave us at the status quo, except for the wasteful effort that the firm would have to exert to comply with the requirements. Therefore, to be effective, the regulation would have to restrict the set of mechanisms available to the firm even further, by not only requiring that the firm offers both ``employment'' and ``contractor'' options, but also requiring some kind of parity between the two.
+		
+	\end{enumerate}
+\fi
+	
+	
+	
+\section{Dynamic advertising}
+	
+	Now let us move to the vote on Proposition 22 and explore it from the information design perspective.
+	
+	Consider a setting with three players: a representative voter, a firm, and a worker union. Suppose a vote on Proposition 22 is coming. The true state $\omega \in \{0,1\}$ represents whether adopting this regulation is socially beneficial. The voter does not know $\omega$ but wants to choose the right thing: $a \in \{0,1\}$, $v_v(a,\omega) = \mathbb{I}\{a=\omega\}$. The two other parties want to tilt this decision in their favor: the firm's utility function is $v_f(a,\omega) = \mathbb{I}\{a=1\}$, while the workers union's utility function is $v_u(a,\omega) = \mathbb{I}\{a=0\}$. (As usual, $\mathbb{I}(\cdot)$ is the indicator function.)
+	
+	To affect the voter's decision, the firm and the union engage in Bayesian Persuasion, i.e., they can each select any distribution of messages $\mu(m|\omega)$.\footnote{You can interpret Bayesian Persuasion in many ways in this setting. One way is generating media attention: the firm and the union can make the voter pay attention to the issue think about it, and can steer the voter's belief about the state to some extent, but they cannot directly control what conclusions the voter arrives to. Another interpretation is that the firm and the union commission research (academic or journalistic), but have no direct control over its conclusions.}
+	The firm's budgetary advantage means it moves after the union and can say the final word. There are thus three stages in the problem:
+	\begin{enumerate}[label=(\roman{enumi})]
+		\item the union selects a state-contingent distribution of messages $\mu_u(m_u|\omega)$; then a message $m_u$ is drawn from this distribution and is observed by all parties;
+		\item the firm selects a state-contingent distribution of messages $\mu_f(m_f|\omega)$; then a message $m_f$ is drawn from this distribution and is observed by all parties;
+		\item the voter selects an action $a$.
+	\end{enumerate}
+	We will solve this problem by backwards induction. Answer the following questions.
+	\emph{Hint: drawing graphs of every object you calculate can be helpful in this problem.}
+	
+	\begin{enumerate}
+		\item Let $\phi_2 \equiv \mathbb{P}(\omega=1 | s_u,s_f)$ denote the probability that the voter's posterior belief assigns to state $\omega=1$ after observing both messages $m_u,m_f$. Derive the optimal action rule $\hat{a}(\phi_2) \equiv \arg \max_a \mathbb{E}_\omega[v_v(a,\omega)|\phi_2]$ which maximizes the voter's expected utility, as a function of $\phi_2$.
+		
+		\item Calculate the expected utility $V_f(\phi_2) \equiv \mathbb{E}_\omega [v_f(\hat{a}(\phi_2),\omega)] | \phi_2]$ that the firm receives from the voter's optimal choice conditional on voter's posterior belief $\phi_2$.
+		
+		\item Let $\phi_1 \equiv \mathbb{P}(\omega=1 | s_u)$ denote the probability that the voter's belief assigns to state $\omega=1$ after observing mesasge $m_u$. The firm's problem of selecting an optimal communication strategy $\mu_f(m_f|\omega)$ is equivalent to choosing a distribution of posteriors $Q_f(\phi_2|\phi_1)$. Derive $Q_f$ that maximizes the firm's expected profit.
+		
+		\item Calculate the expected utility $V_u(\phi_1) \equiv \mathbb{E}_\omega [v_u(\hat{a}(\phi_2),\omega)] | \phi_1]$ that the union receives from the voter's optimal choice conditional on voter's belief $\phi_1$.
+		
+		\item Let $\phi_0 \equiv \mathbb{P}(\omega=1)$ denote the probability that the voter's prior belief assigns to state $\omega=1$.The union's problem of selecting an optimal communication strategy $\mu_u(m_u|\omega)$ is equivalent to choosing a distribution of posteriors $Q_u(\phi_1|\phi_0)$. Derive $Q_u$ that maximizes the union's expected profit.
+		
+		\item What can you say about the informational outcome for the voter? (I.e., what information does the voter have in the end?) Would it be different if the two senders moved in the opposite order or simultaneously? (Make a convincing intuitive argument.)
+		
+		\item We are interested in evaluating the union's complaint, which goes as follows:
+		\begin{quote}
+			``\texttt{These corporations spent over \$200 million on a corporate misinformation, deceptive campaign to \textbf{rig our democratic process} and to continue their exploitation of working people. It is a blasphemy and a sin.}''
+		\end{quote}
+		Would you say that in the information design problem that you have solved, the firm's communication interfered with the voter's decision process? Would you say that this problem captures accurately the essence of the complaint (i.e., the effect of larger campaign expenditure)? If not, how would you set up a model that captures it better?
+	\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solutions}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item {Identify the limitations of existing approaches to mechanism design.}
+			\item {Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item {Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+
+	\begin{enumerate}
+		\item $\mathbb{E}_\omega[v_v(a,\omega)|\phi_2] = \mathbb{P}( \omega = a )$, hence choosing $a=1$ yields expected utility $\phi_2$, and choosing $a=0$ yields $1-\phi_2$. The optimal action is then $\hat{a}(\phi_2) = \mathbb{I}(\phi_2 \geq 0.5)$.
+		
+		\item The firm's utility function is $v_f(a,\omega) = \mathbb{I}\{a=1\}$, hence the expected utility from the voter's decision is $V_f(\phi_2) = \mathbb{I}\{\phi_2 \geq 0.5\}$.
+		
+		\item The concave closure of $V_f(\phi_2)$ is $V^*_f(\phi_2) = \min \{2\phi_2, 1 \}$ (draw a graph to see this). Therefore, $V_f$ and $V^*_f$ coincide on $\phi_2 \in \{0\} \cup [0.5,1]$ -- if $\phi_1$ belongs to this set, an uninformative experiment is optimal. If instead $\phi_1 \in (0,0.5)$ then it is split into posteriors $\phi_2 \in \{0,0.5\}$. We can use the law of total probability to find the optimal experiment for that case, eventually yielding the following distributions $Q_f(\phi_2|\phi_1)$:
+		\begin{align*}
+			\phi_2 = 
+			\begin{cases}
+				\phi_1 \text{ w.p. } 1, & \text{ if } \phi_1 \in \{0\} \cup [0.5,1];
+				\\
+				\begin{cases}
+					0.5 & \text{ w.p. } 2 \phi_1,
+					\\
+					0 & \text{ w.p. } 1-2 \phi_1
+				\end{cases}
+				& \text{ if } \phi_1 \in (0.5,1).
+			\end{cases}
+		\end{align*}
+	
+		\item Given the firm's strategy above, the union expects that the voter will choose $a=1$ w.p. $\min\{2\phi_1, 1\}$ and $a=0$ otherwise. Therefore, $V_u(\phi_1) = 1 - \min\{2\phi_1, 1\} = \max \{ 1-2\phi, 0 \}$.
+		
+		\item Applying the same process as above: the concave closure of $V_u$ is $V^*_u(\phi_1) = 1-\phi_1$. So $V_u$ and $V^*_u$ only coincide on $\phi_1 \in \{0,1\}$, hence the union's optimal experiment $Q_u(\phi_1|\phi_0)$ will be perfectly informative:
+		\begin{align*}
+			\phi_1 = 
+			\begin{cases}
+				1 & \text{ w.p. } \phi_0,
+				\\
+				0 & \text{ w.p. } 1-\phi_0.
+			\end{cases}
+		\end{align*}
+		
+		\item The voter perfectly learns the state from the union's message. Note that the only reason the union provides perfect information to the voter is the implicit threat of the firm then providing any missing information if the union tries to conceal any information unfavorable to the union's cause. This outcome stems from the firm's and the union's incentives being the complete opposites, and would persist so long as both of them are able to design their experiments, regardless of whether one signal is sent after the other or both are selecting their experiments simultaneously.\footnote{A general treatment of the problem with multiple senders and simultaneous moves is available in \href{https://doi.org/10.1093/restud/rdw052}{Gentzkow and Kamenica (REStud, 2016)}.}
+		
+		\item The argument above implies that it does not matter which of the two parties have the last-mover advantage, hence in our model the funding advantage is irrelevant for the outcome. However, one may easily argue that our model does not fully capture the funding advantage, and it affects other aspects as well. For example, it could be the case instead (and would be more plausible) that the funding affects the set of experiments available to the sender. I.e., the firm having spent more on advertising would mean that the firm can select more informative signals than the union -- in which case it could indeed be the case that the voter in equilibrium observes more information favorable for the firm than for the union.
+	\end{enumerate}
+\fi
+
+
+
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}
