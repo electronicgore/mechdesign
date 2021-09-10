@@ -14,7 +14,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -55,48 +55,83 @@
 \end{frame}
 
 
-\begin{frame}{MD Problem: Private Information}
-\begin{itemize}
-	\item MD problem is that of extracting private information from agents.
-	
-	\item MD does not really deal with inducing particular actions from agents -- because it designs the actions...
-\end{itemize}
+\begin{frame}{Example 1}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}\\
+				You want to sell an apartment. What is the best way to do so?
+				\begin{itemize}
+					\item Market conditions change; potential buyers come and go. How long should you wait?
+					\item Run an auction or bargain with each buyer?
+					\item Reveal all house issues truthfully or let buyers find them?
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/8tallet}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
-\begin{frame}{MD Problem: Information Example}
-\begin{exampleblock}{Not MD question\only<3>{ (?)}:}
-	\begin{itemize}
-		\item How should the employer \alert<1>{make people work}?
-		\item Desired outcome: everyone works.
-		\item Solution: \structure<1>{fire} anyone who doesn't work. Trivial!
-	\end{itemize}
-\end{exampleblock}
-\pause
-\begin{exampleblock}{MD question\only<3>{ (?)}:}
-	\begin{itemize}
-		\item How should the employer \alert<2>{select the most skilled candidate for the job}?
-		\item All candidates can pretend to be high-skill.
-		\item Solution: ...? make interview difficult? job difficult?
-	\end{itemize}
-\end{exampleblock}
-\pause
-\begin{itemize}
-	\item The line is subtle and depends on who you ask.
-	\item But we will mostly be thinking about \structure{information extraction} problems
-\end{itemize}
+\begin{frame}{Example 2}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		{\setstretch{1.3}\\
+			A country needs to elect a new president. How to organize the election?
+			\begin{itemize}
+				\item How many candidates, how many rounds, etc?
+				\item Turnout to physical voting is typically low. Should you allow online voting?
+				\item Should you allow buying votes (voting with money)?
+			\end{itemize}
+		}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[width=\linewidth]{pics/M0/debate}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{MD Problem: Summary}
-\begin{itemize}
-	\item Mechanism design problem is one of shaping the environment that agents operate in in order to achieve some desirable outcome
-	\item Outcome often depends on agents' private information 
-	
-	$\Rightarrow$ MD problem is that of extracting information.
-	
-	and determining which exactly outcome must be implemented in a given instance
-\end{itemize}
+\begin{frame}{Example 3}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		{\setstretch{1.3}\\
+			Is it possible to design an effective decentralized currency? (Think cryptocurrency)
+			\begin{itemize}
+				\item Where does money come from and how to avoid counterfeits?
+				\item If money is digital, how to avoid double spending?
+				\item If someone needs to process transactions, how to design their rewards?
+			\end{itemize}
+		}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[width=\linewidth]{pics/M0/coins}
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Who plays the players?}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\pause
+					\item Can see the ``designer'' as yet another player
+					\item Moves first and determines what others can do
+					\item But has a \emph{very large} action set
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/housewins}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -113,19 +148,20 @@
 \end{frame}
 
 
-%\begin{frame}{This course}
-%What is expected from you?
-%\begin{itemize}
-%	\item revise your math/game theory if necessary
-%	\begin{itemize}
-%		\item See a note on absalon for important topics.
-%	\end{itemize}
-%	\item a little bit of participation in the lecture
-%	\item exercises (not handed in) between lectures
-%	\item one week take home midterm assignment (groups allowed and recommended)
-%	\item 24 hours take home exam (individual)
-%\end{itemize}
-%\end{frame}
+\begin{frame}{Related courses at KU}
+\begin{itemize}
+	\item Contract theory, Auctions
+	\item Economics of organization, Corporate Finance, Industrial organization
+	\item Other courses in which applications of mechanism design appear:
+	\begin{itemize}
+		\item Public finance/Taxation
+		\item Political economy
+		\item Monetary
+		\item Labor
+		\item \ldots{}
+	\end{itemize}
+\end{itemize}
+\end{frame}
 
 
 
@@ -139,64 +175,69 @@
 	\item \texttt{egor.starkov@econ.ku.dk} or absalon inbox
 	\item Research interests: information economics, dynamic games, communication
 	\item Office: 26.1.13
-	\item Office hours: Tuesdays 14:00-15:00.
+	\item Questions: email/absalon, before/after class
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Logistics}
 \begin{itemize}
-	\item Weekly lectures (except Fall break -- week \#42, Oct 16)
+	\item Weekly lectures (except Fall break -- week \#42)
 	\begin{itemize}
-		\item Fri, 12:00-15:00, CSS 2.0.63 (week \#41: 22.0.19)
+		\item Fri, 12:15-15:00, CSS 2.1.12
 	\end{itemize}
 	
 	\pause
-	\item Mandatory midterm:
+	\item Mandatory assignment:
 	\begin{itemize}
-		\item one week take home (work in your assigned groups)
-		\item soon after fall break
-		\item passing required to participate in the final exam
+		\item ``Make your own problem'' -- find an interesting real-world setting and analyze it using the machinery from the class
+		\item groups of up to 4 are allowed
+		\item deadline: some time in November?
 	\end{itemize}
 	
+	\pause
 	\item Final exam:
 	\begin{itemize}
 		\item 24hrs take home (individual, no groups)
-		\item graded on usual scale
+		\item Convert problems from text to math; solve them and explain intuition
 	\end{itemize}
+
+	\pause
+	\item Research module: contact me if you would like to do it
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Covid-specific stuff}
 	\begin{itemize}
-		\item (SAMF slides)
-		\item Will try our best at physical-online blended learning; details as announced (and updated) on absalon.
-		\item Exploit your groups!
-		\begin{itemize}
-			\item To discuss anything unclear during lectures; to go through exercises; to talk about hardships of student life.
-		\end{itemize}
+		\item Idea is to have as much physical teaching as possible
+		\item But will have Zoom broadcasts until further notice
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Materials}
 	\begin{itemize}
-		\item Intended workflow: lectures $\to$ self catch-up $\to$ problems $\to$ questions
+		\item Intended workflow: 
+		\begin{enumerate}
+			\item We start a topic in class
+			\item \uline{You watch video-lectures at home} during the week (+read textbook, slides, whatever's necessary)
+			\item We discuss any questions in class and solve some problems
+			\item You will have more problems to practice at home
+		\end{enumerate}
 		\pause
-		\item This course is a compilation of many books, papers, courses; does not follow any single one too closely
-		\item I expect lectures (sitting, listening, taking notes, reading slides afterwards) to be sufficient, material-wise, as long as you can fill in some (many?) gaps
-		\item I will be using the whiteboard, but also uploading slides to absalon. These serve as coarse lecture notes
+		\item Suggestion: organize into groups. Watch lectures in groups. Discuss problems in groups.
+		\pause
+		\item In class I use whiteboard+slides. Slides on absalon include some of the whiteboard parts.
 		\begin{itemize}
-			\item Slides will be on absalon by Friday mornings; updated versions with fixed typos (if required) after lectures
+			\item I'll try to upload slides in advance, but they might be edited and updated afterwards
 		\end{itemize}
-		\item If you would like some external materials as well...
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{References}
-	The following four references cover about 90\% of the class.
+	This course is a compilation of many books, papers, courses; does not follow any single one too closely. But the following four references cover about 90\% of the class.
 	\begin{itemize}
 		\item textbooks:
 		\begin{description}
@@ -222,7 +263,7 @@
 
 
 \begin{frame}{References}
-	\includegraphics[width=\textwidth]{pics/L1/sources}
+	\includegraphics[width=\textwidth]{pics/M0/sources}
 	\\
 	see reading list on absalon for details
 \end{frame}
@@ -233,269 +274,122 @@
 	\begin{itemize}
 		\item I suggest getting B{\"o}rgers' textbook. It is not necessary, but might be useful.
 		\item Diamantaras or MWG are okay alternatives.
-		\item I do \textbf{not} recommend getting Roth \& Sotomayor textbook unless you are really interested in the topic. Promise the slides will be sufficient for that part of the class.
+		\item I do \textbf{not} recommend getting Roth \& Sotomayor textbook unless you are really interested in the topic of matching. Promise the slides will be sufficient for that part of the class.
 	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Related courses at KU}
-\begin{itemize}
-	\item Contract theory, Auctions
-	\item Economics of organization, Corporate Finance, Industrial organization
-	\item Other courses in which applications of mechanism design appear:
-	\begin{itemize}
-		\item Public finance/Taxation
-		\item Political economy
-		\item Monetary
-		\item Labor
-		\item \ldots{}
-	\end{itemize}
-\end{itemize}
 \end{frame}
 
 
 \section{First taste}
 
-\begin{frame}{First taste of what's to come}
-	Let us now look at some of the ideas we will see in the rest of the course
-	\begin{itemize}
-		\item While using none of the methods!
-		\item (To be clear: this following introduction is very informal and not representative of how you should solve exam problems)
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{The Trade Example}
-	\begin{columns}
-		\begin{column}{0.45\linewidth}
-			In particular, consider the following situation:
-			\begin{itemize}
-				\item There is a \structure{seller} $i=0$ with one indivisible item, values it at zero
-				\item There are \structure{two} potential \structure{buyers} $i=1,2$, who value the item at $\theta_i \in [0,1]$
-				\item \alert{Valuations} $\theta_i$ are buyers' \alert{private} valuations, independent across $i$
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.55\linewidth}
-			\includegraphics<handout:0>[scale=0.85]{pics/L1/negotiation}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Efficient Trade}
-	\begin{block}{Question 1}
-		How can we implement the \structure{efficient} outcome? (Buyer with the highest valuation gets the item)
-	\end{block}
-	\bigskip
-	\begin{columns}[T]
-		\begin{column}{0.4\linewidth}
-			Objective relevant in, e.g., state auctions
-			\begin{itemize}
-				\item spectrum auctions
-				\item land sale
-				\item privatization 
-				\item ...
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.55\linewidth}
-			Possible formats:
-			\pause
-			\begin{itemize}
-				\item Open bargaining (English/Dutch auction)
-				\item Sealed-bid auction (first-price, second-price, all-pay)
-				\item Contest (like APA, but winning probability smoothly depends on bid)
-				\item all of the above can be static or dynamic
-			\end{itemize}
-			\pause
-			Which are efficient?
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Efficient Trade}
-	\begin{itemize}
-		\item ``implement an outcome'' = ``there exists an equilibrium which generates this outcome''
-		\item Pretty much all mentioned formats have symmetric equilibria in monotone strategies
-		\begin{itemize}
-			\item (if bidders are symmetric)
-			\pause
-			\item Higher buyer's valuation $\Rightarrow$ higher bid $\Rightarrow$ highest valuation gets the item
-		\end{itemize}
-		\item So most symmetric auctions are efficient with symmetric bidders
-		\item I want to focus on one particular format though...
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Second-Price Auction}
-	\textbf{Sealed-bid Second-price Auction}
-	\begin{itemize}
-		\item All players simultaneously submit bids $b_i$
-		\item Highest bidder wins; pays second-highest bid.
-	\end{itemize}
+\begin{frame}{Example: Environment}
+	Let's go back to the apartment sale example and try to tackle the simplest version of it: one buyer, one seller, one item on sale.
 	\pause
-	This auction is not only efficient in our simple story, but also
+	
 	\begin{itemize}
-		\item has equilibrium in dominant strategies (rather than simple Bayes-Nash Eqm);
-		\item remains efficient when other formats are not (e.g., asymmetric bidders);
-		%\item yields the same expected revenue as any other efficient format.
-	\end{itemize}
-	Why does it all Just Work\texttrademark?
-\end{frame}
-
-
-\begin{frame}{Second-Price Auction: Equilibrium}
-	It is easy to show that bidding own valuation is a weakly dominant strategy in SPA:
-	\begin{itemize}
-		\item suppose B1 values the item at $\theta_1$ and bids $b_1 > \theta_1$
-		\begin{enumerate}
-			\item if $b_2 < \theta_1$ then B1 wins and pays $b_2 < \theta_1$ (better than losing, same as bidding any $b_1 > b_2$)
-			\item if $b_2 > b_1$ then B1 loses and pays nothing (better than winning by bidding $b_1 > b_2$)
-			\item if $b_2 \in (\theta_1,b_1)$ then B1 wins and pays $b_2 > \theta_1$ (worse than losing because pays more than item is worth)
-		\end{enumerate}
-		\item The logic above applies to any $b_1 > \theta_1$. Bidding $b_1 \leq \theta_1$ dominates any $b_1 > \theta_1$ because avoids the loss in case 3 and yields same payoff in cases 1-2.
-		\item Mirror logic applies to any $b_1 < \theta_1$:
-		\begin{itemize}
-			\item if $b_1 < b_2 < \theta_1$ then B1 loses, foregoing positive payoff from bidding $b_1 > b_2$ (e.g., $b_1 = \theta_1$).
-			\item So this implies that bidding $b_1 \geq \theta_1$ dominates any $b_1 < \theta_1$.
-		\end{itemize} 
-		\item In the end, $b_1 = \theta_1$ is a weakly dominant strategy.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Second-Price Auction: Incentives}
-	\begin{columns}
-	\begin{column}{0.55\linewidth}
-		What makes it tick?
-		\medskip
-		\begin{itemize}
-			\item<2-> Bid affects in \structure{which states} of the world you get to win and at what price.
-			\item<3-> Bid does not change the price you have to pay \structure{in a given state} (as long as you get the item)
-			%\item<4-> ...%TODO: ...
+		\item \structure<2>{Seller}: likes money, has \textbf{known} valuation $\structure<2>{\bar{\theta}} \in [0,1]$ for the item
+		\begin{itemize}[<4>]
+			\item \structure<4>{utility}: $u_0(k,t) = t - \bar{\theta} k$
 		\end{itemize}
-		\pause[4]
-		\medskip
-		These are powerful drivers of \alert{Incentive Compatibility}: agents not having incentives to pretend to have other valuations.
-		
-		IC is the main property that defines a working mechanism.
-		
-		(There is more to IC than the two features above)
-	\end{column}
-	\begin{column}{0.43\linewidth}
-		\pause[0]
-		\includegraphics<handout:0>[width=\textwidth]{pics/L1/multiverse}
-		\begin{flushright}
-			{\color{gray} \tiny Image credit: NASA, ESA, and G. Bacon (STScI)}
-		\end{flushright}
-	\end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}{Wait a minute, Doc... are you telling me you built a mechanism?}
-	We can use the same basic principles to implement any decision rule in general settings!
-	\pause
-	\begin{itemize}
-		\item Say knowledge of \alert{state} of the world is dispersed among players
-		\item Designer does not know state, wants to implement some state-dependent \alert{decision rule} (like the efficient one) using \alert{payments}
-		\item Can do it via simple mechanism in which every player reports what they know to designer.
-		\item Designer must devise such state-dependent payment schedule that:
-		\begin{itemize}
-			\item no player can lie and change their payment (in a given state) without also changing the decision. This is as before.
-			\item \{payments + alloc rule\} are jointly such that truthtelling is optimal
+		\item \structure<2>{Buyer}: likes money, has \textbf{private} valuation $\structure<2>{\theta} \in [0,1]$ for the item
+		\begin{itemize}[<4>]
+			\item \structure<4>{utility}: $u_1(k,t,\theta) = \theta k - t$
 		\end{itemize}
-		\item With \structure{efficient} decision rule, this is always possible. Otherwise possibility depends on rule and players' preferences.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Revenue Maximization}
-	Back to the trade example.
-	What if there is no specific decision rule to implement?
-	\pause
-	\begin{columns}[T]
-		\begin{column}{0.55\linewidth}
-			\begin{block}{Question 2}
-				Which mechanism would maximize the seller's revenue?
-			\end{block}
-			\pause
-			\begin{itemize}
-				\item Now the seller/designer chooses the decision rule as well as payments.
-				\item Recall all trading formats we mentioned. Which of them is more profitable?
-				\pause
-				\item None! {\footnotesize (If bidders symmetric.)}
-				\\All efficient mechanisms yield same revenue!
-				\pause
-				\item But what if... we violate efficiency?
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\centering
-			\pause[2]
-			\includegraphics<handout:0>[scale=0.6]{pics/L1/profit}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Revenue Maximization: Single Bidder}
-	\begin{itemize}
-		\item<+-> Idea is immediate if we look at the setting with \structure{one bidder} first.
-		\item<+-> There are always gains from trade:
-		\begin{itemize}
-			\item bidder has positive valuation for the item;
-			\item seller values it at zero;
-			\item in any state there is some positive price at which a mutually beneficial trade can happen. (But this price depends on bidder's valuation)
-		\end{itemize}
-		\item<+-> Same insight applies as in Q1: bidder must not control price (conditional on trade).
-		\begin{itemize}
-			\item Given choice between ``buy thing at \$1'' and ``buy same thing at \$2'', who would choose the latter?
-		\end{itemize}
-		\item<+-> So price fixed. Efficient to trade always $\Rightarrow$ price would be zero! Not great for seller.
-		\item<+-> Better to set positive price and exclude bidder with low valuation; to extract more from bidder with high valuation
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Revenue Maximization: Many Bidders}
-	Same applies with more than one bidder:
-	\begin{block}{Key to revenue maximization}
-		Exclude bidders with low valuations to extract more from bidders with high valuations.
-	\end{block}
-	\begin{itemize}
-		\item In auctions: may be optimal to announce a positive reserve price
 		\pause
-		\item Kickstarter: maximize contributions by setting financing threshold and optional thresholds (?)
+		\item let \structure<3>{$k \in \{0,1\}$} denote whether the sale occurs
+		\item let \structure<3>{$t \in \mathbb{R}_+$} denote the price of the sale (or any other transfer between the buyer and the seller)
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{To be continued...}
-	\begin{columns}
-		\begin{column}{0.45\linewidth}
-			This and much more we will look at in the remainder of the course.\\
-			Stay tuned to learn more about designing all kinds of mechanisms!
-		\end{column}
-		\begin{column}{0.5\linewidth}
-			\includegraphics<handout:0>[width=\textwidth]{pics/L1/design}
-		\end{column}
-	\end{columns}
+\begin{frame}{Example: Environment comments}
+	\begin{itemize}
+		\item $k$ and $t$ constitute the \textbf{outcome} (e.g., $(k,t)=(1,0.5)$ = ``apt sold for 0.5 moneys''). Outcome will, almost always, depend on the buyer's valuation $\theta$. So the object we are interested in is the outcome \emph{function} $(k(\theta), t(\theta))$.
+		
+		\item For simplicity, allow payments $t$ to be made even if the item is not sold (otherwise better to define $u_0(k,t) = (t - \bar{\theta}) k$ and $u_1(k,t,\theta) = k (\theta - t)$). Also, $t$ that the buyer pays is the same $t$ that the seller receives -- there are no sales taxes, agent commissions, etc.
+		
+		\item Both players are assumed to be risk-neutral (otherwise utilities are not linear in $t$, which is mildly inconvenient). Obviously, we also ignore everything that does not fit the von Neumann-Morgenstern expected utility model (including ambiguity/disappointment/loss aversion, regret, prospect theory, etc).
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Efficient mechanism}
+	Before we go to seller's revenue maximization, suppose policymaker is the designer, wants to facilitate \textbf{efficient trade}.
+	
+	\begin{itemize}
+		\item What does ``efficient trade'' mean?
+		\pause
+		Efficient = maximizes social surplus: for any $\theta$,
+		\begin{align*}
+			(k^*(\theta),t^*(\theta)) &\in \arg \max_{k(\theta),t(\theta)} \left\{ u_0(k,t) + u_1(k,t,\theta) \right\}
+			\\
+			&= \arg \max_{k(\theta),t(\theta)} \left\{ t(\theta) - \bar{\theta} k(\theta) + \theta k(\theta) - t(\theta) \right\}
+			\\
+			&= \arg \max_{k(\theta),t(\theta)} \left\{ k(\theta) \cdot (\theta - \bar{\theta})  \right\}
+		\end{align*}
+		\pause
+		so $k^*(\theta) = \mathbb{I} \{ \theta > \bar{\theta} \}$ (=trade whenever the buyer values the item more), and $t^*(\theta)$ can be anything.
+		\pause
+		\item This can be implemented by setting a fixed price $t = \bar{\theta}$. Buyer will then obviously buy if and only if $\theta > \bar{\theta}$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Efficient mechanism comments}
+	\begin{itemize}
+		\item The irrelevance of price comes from linearity of utilities in $t$, both agents having the same sensitivity to $t$, and the designer assigning same weight to both agents' utilities.
+		\begin{itemize}
+			\item This will be our approach for most of the course -- everyone is equal, so redistribution does not matter; the only goal of transfers is to provide incentives.
+			\item In principle, you can factor equality into the problem by adjusting the designer's objective function appropriately.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Optimal mechanism}
+	Now back to the original question: what is the sale mechanism that \textbf{maximizes seller's revenue}?
+	\pause
+	
+	\begin{itemize}
+		\item First, what is the realm of all possible mechanisms? What are we choosing from?
+		\pause
+		\begin{itemize}
+			\item Any mechanism produces some outcomes $k,t$
+			\item ...though these depend on $\theta$, so they are actually functions $k(\theta),t(\theta)$.
+			\item Given these functions, we can always propose a ``direct mechanism'': ``buyer reports $\theta$ to the mechanism, and respective outcomes are implemented.
+		\end{itemize}
+		
+		\pause
+		\item But can we choose any pair of functions $k(\theta),t(\theta)$? Or are there any restrictions we should impose?
+		\pause
+		\begin{itemize}
+			\item Well, the idea is for the buyer to report $\theta$ truthfully. So the mechanism should be such that it is optimal for the buyer to report truthfully \alert{$\leftarrow$ ``Incentive compatibility''}
+			\item Also, buyer should be willing to participate in the mechanism, as opposed to walking away -- so should get higher utility than what can get by walking away (zero) \alert{$\leftarrow$ ``Individual rationality''}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Optimal mechanism}
+	Now back to the original question: what is the sale mechanism that \textbf{maximizes seller's revenue}?
+	
+	So in the end we get the following problem:
+	\begin{align*}
+		\max_{k(\cdot),t(\cdot)} & \mathbb{E}_\theta \left[ t(\theta) - \bar{\theta} k(\theta) \right]
+		\\
+		\text{s.t. (IC): } & \theta k(\theta) - t(\theta) \geq \theta k(\hat{\theta}) - t(\hat{\theta}) \text{ for all } \theta,\hat{\theta}
+		\\
+		\text{(IR): } &\theta k(\theta) - t(\theta) \geq 0 \text{ for all } \theta
+	\end{align*}
+	\pause
+	This is almost a standard maximization problem. Except we're maximizing over \uline{functions}, as opposed to one or two numbers... And there is an \uline{infinite} number of constraints...
+	\pause
+	Want to know how to solve this? Tune in next week for more mechanism design!
 \end{frame}
 
 
 \begin{frame}{For next week}
 	\begin{enumerate}
-		\item Read math notes and make sure you are comfortable with them.
-		\item With your group, submit a proposal about a real-world issue that can be solved by a mechanism.
-		\pause
-		\begin{itemize}
-			\item Rationing facemasks in the society during a pandemic?
-			\item Allocating students across student housing?
-			\item Deciding who washes the dishes?
-			\item (bonus points for ridiculous suggestions)
-		\end{itemize}
+		\item Watch lectures 2.1 (`What is a mechanism?') and 2.2 (`Dominant strategy implementation')
 	\end{enumerate}
 \end{frame}
 
