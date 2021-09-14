@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -39,29 +39,27 @@
 
 
 
-\begin{frame}
-	(math exercise from notes)
-\end{frame}
-\note{
-	\begin{itemize}
-		\item asked to read mathreview -- how many did that?
-		\begin{itemize}
-			\item introduce quick survey protocol (1s in chat)
-		\end{itemize}
-		\item $\int_a^b x^2 \log (x) dx$: $u=\log(x)$, $dv = x^2 dx$, so $du = 1/x dx$, $v = \frac{x^3}{3}$ and
-		\begin{align*}
-			\int_a^b x^2 \log (x) dx 
-			&= \left(\frac{x^3}{3}\log(x) \right)|_a^b - \int_a^b \frac{x^2}{3} dx
-			\\
-			&= \left(\frac{x^3}{3}\log(x) - \frac{x^3}{9} \right)|_a^b
-		\end{align*}
-	\end{itemize}
-}
+%\begin{frame}
+%	(math exercise from notes)
+%\end{frame}
+%\note{
+%	\begin{itemize}
+%		\item asked to read mathreview -- how many did that?
+%		\begin{itemize}
+%			\item introduce quick survey protocol (1s in chat)
+%		\end{itemize}
+%		\item $\int_a^b x^2 \log (x) dx$: $u=\log(x)$, $dv = x^2 dx$, so $du = 1/x dx$, $v = \frac{x^3}{3}$ and
+%		\begin{align*}
+%			\int_a^b x^2 \log (x) dx 
+%			&= \left(\frac{x^3}{3}\log(x) \right)|_a^b - \int_a^b \frac{x^2}{3} dx
+%			\\
+%			&= \left(\frac{x^3}{3}\log(x) - \frac{x^3}{9} \right)|_a^b
+%		\end{align*}
+%	\end{itemize}
+%}
 
 
 \section{Defining a Mechanism}
-
-%2020: talk about how MD differs from CT in that it's more social
 
 \begin{frame}{What is a mechanism?}
 	Let's reverse engineer from a simpler question:
@@ -152,9 +150,9 @@
 \end{frame}
 
 
-\begin{frame}
-	(mechanism proposals)
-\end{frame}
+%\begin{frame}
+%	(mechanism proposals)
+%\end{frame}
 
 
 
@@ -162,7 +160,7 @@
 
 \begin{frame}{Revelation Principle}
 	\begin{itemize}
-		\item Main cheat in Mechanism Design! No need to bruteforce through uncountable numbers of different games! It is enough to just... \visible<1>{(\href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{{click to see more}})}
+		\item Main cheat in Mechanism Design! No need to bruteforce through uncountable numbers of different games! It is enough to just... \only<1>{(\href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{{click to see more}})}
 		\pause
 		\item Instead of making players play the game, ask them for their $\theta_i$ and promise to play on their behalf!
 		\item Requires that the designer has commitment power.
@@ -326,23 +324,6 @@
 		\item If not, helps you describe a set of implementable s.c.f. and pick second best.
 		\item \emph{Yours today for \soutred{only \$49.99+shipping} FREE with a qualifying Mechanism Design course!}
 	\end{itemize}
-\end{frame}
-
-
-%TODO2021: bad example, since there are inalienable actions (work amounts)
-\begin{frame}{DSIC: Example}
-\begin{example}[Communism]
-	\begin{itemize}
-		\item society of $N$ people;
-		\item each person's productivity either high $\theta^h$ or low $\theta^l$, equal shares of society;
-		\item a $\theta^{h}$ ($\theta^{l}$) type produces 4 (2) units per full day
-		\item working full day costs 1 unit to the person
-		\item working half day costs 0.5 units
-		\item the government can only observe the income=production but not the type (nor number of hours worked)
-		\item the government can use taxation to redistribute income
-		\item Can the government achieve an equal society in which everyone works full time and has an income of 3?
-	\end{itemize}
-\end{example}
 \end{frame}
 
 
