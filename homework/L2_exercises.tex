@@ -1,1 +1,366 @@
-%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----------------------------------------------------------------------------------------%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS%----------------------------------------------------------------------------------------\documentclass[a4paper]{article}\usepackage{amssymb}\usepackage{enumerate}\usepackage[usenames,dvipsnames]{color}\usepackage{fancyhdr} % Required for custom headers\usepackage{lastpage} % Required to determine the last page for the footer\usepackage{extramarks} % Required for headers and footers\usepackage[usenames,dvipsnames]{color} % Required for custom colors\usepackage{graphicx} % Required to insert images\usepackage{listings} % Required for insertion of code\usepackage{courier} % Required for the courier font\usepackage[table]{xcolor}\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}\usepackage[section]{placeins}\usepackage[a4paper]{geometry}\usepackage[USenglish]{babel}\usepackage[utf8]{inputenc}% Margins\topmargin=-0.45in\evensidemargin=0in\oddsidemargin=0in\textwidth=6.5in\textheight=9.0in\headsep=0.6in\linespread{1.1} % Line spacing%----------------------------------------------------------------------------------------%   FORMATTING%----------------------------------------------------------------------------------------% Set up the header and footer\pagestyle{fancy}\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head\rhead{\instructor \\ \theprofessor} % Top right header\lfoot{\lastxmark} % Bottom left footer\cfoot{} % Bottom center footer\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer\renewcommand\headrulewidth{0.4pt} % Size of the header rule\renewcommand\footrulewidth{0.4pt} % Size of the footer rule% Other formatting stuff%\setlength\parindent{12pt}\setlength{\parskip}{5 pt}%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}\usepackage{titlesec}\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}%----------------------------------------------------------------------------------------%	NAME AND CLASS SECTION%----------------------------------------------------------------------------------------\newcommand{\hmwkTitle}{Exercises for Lecture 2 (M1)} % Assignment title\newcommand{\Class}{Mechanism Design} % Course/class\newcommand{\instructor}{Fall 2021} % TA\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor%----------------------------------------------------------------------------------------%   SOLUTIONS%----------------------------------------------------------------------------------------\newif\ifsolutions%\solutionstrue\begin{document}\begin{center}	\LARGE\textbf{Exercises for Lecture 2 (M1):\\ Revelation Principle, DSIC Mechanisms}\end{center}\section{Screening}The Chicago Transit Authority (the organization in charge of the Chicago subway system) has decided that it needs to do more to maximizeits revenue. As such it has hired you to design its new price and servicescheme. There are two types of customers, High-class and Low-class. Theyhave preferences over the fare P and the degree of bad smell in the traincar they ride in, denoted by B. They have told you that they are able tocharge different fares depending on the car a customer rides in (i.e., tohave different classes of service).The type of a customer is not observable; the fraction of high-classcustomers is $\lambda $. Customers' utility functions are $%u_{i}(P,B)=v-\theta _{i}P-B$, for $i=H,L$, where $\theta_{L}>\theta _{H}>0$. All customers get utility (normalized) of 0 fromwalking (their next best alternative) instead of taking the CTA train.Making train cars smell bad is not costless (workers need to be hiredto rub garbage on the seats): the CTA incurs a cost of $\gamma B>0$\per customer who rides in a car that has smell level B.\begin{enumerate}	\item Write down the problem you would solve for determining the CTA's		profit-maximizing scheme. Assume throughout that the CTA cannot charge		negative prices; i.e., that $P\geq 0$. Assume also that the CTA wants		to serve both high and low class customers.		\item Determine the CTA's profit-maximizing scheme. How does it depend		on the parameters of the problem?\end{enumerate}\ifsolutions\subsection*{Solution}\begin{enumerate}	\item Appealing to the Revelation Principle, the CTA's problem can be	written as:%	\begin{align*}		\max_{(P_{L},B_{L})\geq 0,(P_{H},B_{H})\geq 0}  & \Big\{ \lambda (P_{H}-\gamma		B_{H})+(1-\lambda )(P_{L}-\gamma B_{L}) \Big\} \\		\text{s.t. }(IR_{L}) & \quad v-\theta _{L}P_{L}-B_{L} \geq 0 \\		(IR_{H}) & \quad v-\theta _{H}P_{H}-B_{H} \geq 0 \\		(IC_{L}) & \quad v-\theta _{L}P_{L}-B_{L} \geq v-\theta _{L}P_{H}-B_{H} \\		(IC_{H}) & \quad v-\theta _{H}P_{H}-B_{H} \geq v-\theta _{H}P_{L}-B_{L}.	\end{align*}		\item 	\begin{description}		\item Observe first that $(IR_{H})\,$is redundant since it is implied by $%		(IC_{H})$ plus $(IR_{L})$.				\item Observe next that $(IR_{L})$ will bind: otherwise we could raise both $%		P_{L}$ and $P_{H}\,$by some $\varepsilon >0$ and not violate any		constraints, thereby raising profit.				\item Observe next that $B_{H}=0$. If not, then we can lower $B_{H}$ and		raise $P_{H}\,$so that $\theta _{H}P_{H}+B_{H}$ is unchanged. This violates		no constraints (since it raises $\theta _{L}P_{H}+B_{H}),$ but raises profit.				\item Let's ignore $(IC_{L})$ and check that it holds at the end. In this		case, we must have $(IC_{H})$ binding: otherwise we could lower $B_{L}\,$a		little and raise profit. Hence, we see that (by rewriting the binding $IR_L$ and $IC_H$ respectively)		\begin{align*}			P_{L} &=\frac{v-B_{L}}{\theta _{L}}			\\			P_{H} &=P_{L}+\frac{B_{L}}{\theta _{H}} = \frac{v-B_{L}}{\theta _{L}} + \frac{B_{L}}{\theta _{H}}		\end{align*}		So the CTA\ should choose $B_{L}\in \lbrack 0,v]$ to solve 		\begin{equation*}			\max_{B_{L}}\lambda \left( \frac{v-B_{L}}{\theta _{L}} + \frac{B_{L}}{\theta _{H}} \right)+(1-\lambda ) \left(\frac{v-B_{L}}{\theta _{L}}-\gamma B_{L}\right).		\end{equation*}%		This problem is linear, so the solution is to set $B_{L}=v\,$if 		\begin{equation*}			\left( \frac{\lambda }{1-\lambda }\right) \left( \frac{1}{\theta _{H}}-\frac{%				1}{\theta _{L}}\right) -\left( \frac{1}{\theta _{L}}+\gamma \right) >0,		\end{equation*}%		and set $B_{L}=0$ if this inequality is reversed. Note that in the latter		case, we have $P_{L}=P_{H}=\frac{v}{\theta _{L}}$, while in the former case		we have $P_{H}-P_{L}>0.$ (And don't forget to verify that $IC_L$ holds in		both cases.) Also, observe that we are more likely to set $%		B_{L}=v\,$when the fraction of high class consumers ($\lambda $) is high and		the cost of making train cars smelly ($\gamma $) is low. 	\end{description}\end{enumerate}\fi \section{Judicial design}A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If he is convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has a payoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for a lighter sentence.  In particular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendant a payoff of $-r.$The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privately known probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial and be convicted with probability $1 - \theta$.Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choice function is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ means that type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargain giving him a sentence with payoff $-r$. DA thinks $\theta$ has full support on $[0,1]$.\begin{enumerate}	\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatible	for the defendant.	\item What is the set of all incentive-compatible social choice functions?	You can proceed in the following steps:	\begin{itemize}		\item Show that in any IC $f$ at most one plea bargain $r$ is available.		\item Show that $f$ must be of cutoff type, with the suspect taking the plea if $\theta < \bar{\theta}$ and going to court otherwise.		\item Find the value of $r$ that makes the cutoff s.c.f. $f$ incentive compatible given some cutoff type $\bar{\theta}$.		\item Combine all of the above to characterize the set of implementable $f$.	\end{itemize}\end{enumerate}\ifsolutions\subsection*{Solution}By going to trial a defendant of type $\theta$ receives (expected) utility of $-(1-\theta)$, while from accepting a plea bargain his utility is $-r$. %This implies that the IC constraint is $f(\theta)=r \Rightarrow -r\geq -(1-\theta) ~\&~ \forall \theta' \neq \theta ~ f(\theta') \geq f(\theta)$.Fix some s.c.f. $f(\theta)$. Let $\Theta_p$ be the set of types who are offered a plea bargain $f(\theta) = r(\theta)$, and $\Theta_t$ be the set of types who are meant to go to trial: $f(\theta) = \text{trial}$ ($\Theta_t \cup \Theta_p = [0,1]$). Then the IC constraints are given by:\begin{align*}	\text{ for all } \theta \in \Theta_p: \quad&-r(\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p	\\	& \text{and}  -r(\theta) \geq -(1-\theta);	\\	\text{ for all } \theta \in \Theta_t: \quad& -(1-\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p.\end{align*}We will characterize the set of IC social choice functions by a series of claims. \begin{itemize}	\item[claim 1] $f(\bullet)$ has at most one value on the real line.		Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.		\item[claim 2] $f(\bullet)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}		\\		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\		Proof: assume $\theta'>\theta , f(\theta)=T, f(\theta')=r$. By IC for $\theta$ we know that $-r\leq -(1-\theta)$. However, as $-(1-\theta')>-(1-\theta)$, this implies that $-(1-\theta')>-r$ and we don't have IC for $\theta'$.		\item[claim 3] $r= 1-\bar{\theta}$		Proof: $r\leq 1-\bar{\theta}$ follows directly from IC for type $\bar{\theta}$, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better off by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain, contradicting IC for that type.\end{itemize}These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\		T & \text{if } \theta\geq\bar{\theta} \end{cases} \]is incentive compatible.%As long as the support of types has measure one, the arguments above hold. However, if there is a interval $(a,b)$ with a zero probability, then when we set $\bar{\theta}=a$ any $r\in [a-(b-a),a]$ can be used. This is the case as claim four no longer holds, and we just need to get IC for type $b$. The same argument also holds for closed or half closed intervals.\fi\section{Second-price auction}%MWG 8.B.3 | solutions from Alessandro's questionbankThere is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $v_i$, which the other players believe is distributed according to some c.d.f. $F_i(v_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid; all other bidders pay nothing.\begin{enumerate}	\item Show that bidding truthfully ($b_i=v_i$) is a weakly dominant strategy for every bidder $i$.	\item Conclude that the second-price auction implements the efficient allocation rule in dominant strategies.\end{enumerate}\ifsolutions\subsection{Solution}\textbf{Part 1.}Let's prove that for any $v_{i}$and for any $b_{-i}$ bidding $b_{i}\neq v_{i}$ is weakly dominated.There are two cases:\begin{enumerate}	\item $i$ bids $b_{i}>v_{i}$	\begin{enumerate}		\item If there exists $b_{j}>b_{i}$ then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$		\item If $b_{i}$ is the highest bid, let $b_{j}$ be the second highest.		If $v_{i}<b_{j}<b_{i}$ then $u_{i}(b_{i},b_{-i})=v_{i}-b_{j}<0=u_{i}(v_{i},b_{-i})$.		If $b_{j}<v_{i}<b_{i}$ then again $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$.	\end{enumerate}	\item $i$ bids $b_{i}<v_{i}$	\begin{enumerate}		\item If $b_{i}$ is the highest bid, then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$		\item Some other $b_{j}$ is the highest bid. Then if $b_{i}<b_{j}<v_{i}$,		$u_{i}(b_{i},b_{-i})=0$ while $u_{i}(v_{i},b_{-i})\geq0$; in all		other cases $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$ 	\end{enumerate}\end{enumerate}Thus, indeed bidding the true value $v_{i}$ is a weakly dominantstrategy.\textbf{Part 2.}The efficient allocation rule $k^*(\cdot) = (k^*_1(\cdot),...,k^*_n(\cdot))$ (where $k_i \in [0,1]$ is the probability that $i$ gets the item) is such that for every profile of valuations $v=(v_1,...,v_n)$: $k^*(v) \in \arg \max_{k(v)} \{ \sum_{i=1}^n v_i k_i(v) \}$. It is easy to see that the efficient allocation rule then prescribes giving the item to the bidder with the highest valuation $v_i$: $k^*_i(v) = \mathbb{I} \{ v_i > v_j \, \forall j \}$ (coupled with any tie-breaking rule). From part 1 we know that the second-price auction has an equilibrium in (weakly) dominant strategies, in which all bidders big truthfully. It is immediate that in this equilibrium, the bidder with the highest valuation wins the item -- i.e., the SPA DS-implements the efficient allocation rule.\fi %%-----------------------------------------------------------------------------------------------------\end{document}
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exercises for Lecture 2 (M1)} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2021} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+%\solutionstrue
+
+
+
+
+\begin{document}
+
+\begin{center}
+	\LARGE\textbf{Exercises for Lecture 2 (M1):\\ Revelation Principle, DSIC Mechanisms}
+\end{center}
+
+
+
+\section{S{\o}ndre campus}
+
+There are currently talks at KU about moving the Faculty of Social Sciences from the Kommunehospitalet that we occupy now to S{\o}ndre campus, where some other faculties are currently located.\footnote{News article from Uniavisen (in Danish): \url{https://tinyurl.com/y4uwrefe}.}
+The costs and benefits of such a move are currently being evaluated. Some, however, see this whole discussion as a bargaining maneuver in the upcoming negotiations with the firm that owns the Kommunehospitalet and leases it to the university -- a credible threat of leaving may help the university bargain a better lease rate.
+
+Your mission is to frame this choice of whether SAMF should move as a mechanism design problem. The goal of the mechanism is to extract the information about costs and benefits of the potential move from the relevant parties. In particular, answer the following questions within this setting:
+
+\begin{enumerate}
+	\item Who is the designer?
+	\item What is the outcome in this setting? (Do we have access to transfers? Is the set of allocations $k$ given by simply $K = \{\text{move},\text{no move}\}$ or is it more multifaceted?)
+	\item Who are the players?
+	\item What information do the players have that is relevant to determining the optimal outcome/allocation?
+	\item How would you model the players' utility functions? (Give a concrete example.)
+	\item What criteria or conditions should the mechanism satisfy? 
+	\item What would be the desirable outcome/allocation rule that you would want to implement with such a mechanism? How can you check whether this rule is, in fact, implementable?
+	\item If you allowed for transfers: how would you proceed with designing transfers that support the chosen allocation rule? (You do not need to actually derive the transfers.)
+	\item How would your mechanism work in the real world, in terms of organization and logistics?\footnote{Example: ``all faculty, staff, and students must post a note on the door of their office which would contain their \texttt{report of something}; a dedicated person will walk around and enter responses in an excel sheet, which will then be used to determine the outcome''.}
+\end{enumerate}
+
+NOTE: treat this as a real-life assignment from the university officials. Your goal is to give the best possible answer to the question they ask, NOT to frame the problem in the simplest way possible. That said, you should still be realistic and try to set up the problem in a way that would be tractable and doable given the resources available to a committee responsible for this decision.
+
+\ifsolutions
+\section*{Solution}
+
+This is an open-ended question, so many answers are possible. Below is one example.
+\begin{enumerate}
+	\item The designer is the university leadership (rector), possibly proxied by a ``committee on moving''.
+	
+	\item It feels somewhat strange to include monetary transfers in this problem. While it may be fine to pay small amounts to students and faculty for completing a survey or pay departments to compile a report on a given issue, making these payments contingent on responses to provide incentives is the weird part, which will likely not be well accepted. Therefore, an outcome is simply an allocation.
+	
+	An allocation, however, is much richer than just a binary decision. In case of a move we would also need to decide how to allocate the spaces on S{\o}ndre campus between the departments and faculties, whether to build new lecture halls (or force the students and faculty to commute to CSS or N{\o}rre campus for classes), whether and how to merge the duplicating departments, etc. 
+	
+	\item The set of players should include anyone who possesses information relevant to the outcome, and has preferences regarding the outcome, which could prevent them from communicating this information to us truthfully. In this problem, this includes:
+	\begin{itemize}[noitemsep]
+		\item Students, faculty, and staff, who all have private valuations for the move.
+		\item Future students, for the same reason. We obviously cannot include future students in our mechanism because we do not know who they are, so the next best option is to let the current students speak on their behalf.
+		\item The university's building administration, which knows how much room capacity SAMF requires, how much capacity is available on S{\o}ndre campus, how much the exploitation of these rooms costs on both campuses, and how much it would cost to build more lecture halls on S{\o}ndre campus. It is not immediate that there exists any conflict preventing this information from being openly communicated, but there could be some. E.g., I believe that at the moment, these administrations exist separately on different campuses, so they may be opposed to merging or, conversely, they may actively prefer the merge.
+		\item Some university departments (e.g., IT) can better estimate the cost of the actual process of moving. Potential conficts of interest are as above.
+		\item The firm which owns the Kommunehospitalet and leases it to the university -- it likely has some understanding of what its outside option is in case the university leaves, and the company would have to find new tenants for this property. Note that it makes a lot of sense to allow monetary transfers with this particular player.
+		\item ...
+	\end{itemize}
+	
+	\item See above.
+	
+	\item For concreteness, let us suppose from this point onwards that the costs of the move can be evaluated by internal departments without any conflict and need for a mechanism. Then our set of players is narrowed down to two groups: stakeholders (students, faculty, and staff) and the propertyowner firm. The firm's utility can be modelled as:
+	\begin{align*}
+		u_f(x,\theta) = \begin{cases}
+			-t_f & \text{ if no move};
+			\\
+			\theta_f & \text{ if move},
+		\end{cases}
+	\end{align*}
+	where again the firm's type $\theta_f$ is its outside option relative to continuing the current agreement, and $t_f$ is the negative of the change in lease that KU pays for the Kommunehospitalet. The firm does not care about the details of the move if it happens.
+	
+	With stakeholders it is a little more difficult, since the details of the allocation now matter. What we can do is assume that the allocation can be split into a number of aspects $l \in \{1,...,L\}$ and each $k_l$ can be represented as a number. E.g., one aspect is ``will all classes be held in the same place after the move'', another is ``if yes, will this place be S{\o}ndre campus'', another is ``will there be place for a student bar'', etc. If we take this approach, then stakeholder $i$'s type can be represented as a vector of valuations for every aspect $\theta_i = (\theta_{i,1}, \theta_{i,2}, ..., \theta_{i,L})$, and then the utility can be approximated as $u_i(x,\theta) = \sum_{l=1}^L k_l \theta_{i,l}$.
+	
+	\item We obviously want the mechanism to be incentive compatible, at least in the Bayesian sense.\footnote{Large number of players is one excuse to switch from DSIC to BIC: heuristically, the more possible type profiles $\theta_{-i}$ other players collectively have, the less important every single individual case is for $i$'s expected utility at the point where they are making a decision.}
+	Individual rationality is not an issue, once you realize that ``not responding to a survey'' is just a kind of response. While students and staff and faculty have an outside option of leaving KU and applying to another university, this is likely a costly option. You can, however, make a case for IR being a desirable condition to satisfy for future students (so they choose KU over other universities), as well as the firm that owns Kommunehospitalet (depending on how you model its utility function).
+	Finally, since transfers are not a part of the problem (except when dealing with the firm), budget balance in not a particularly relevant requirement.
+	
+	\item The simplest answer: the desired allocation rule $k^d(\theta)$ should maximize the stakeholders' welfare, i.e., the sum of utilities net of the costs borne by the university. Note that this is not the efficient allocation according to the standard definition, since it ignores the firm's well-being. You can also present various social choice arguments saying that the sum of utilities is not the best measure to use here. E.g., depending on the university's priorities, you may want to assign different weights to students' well-being versus that of the faculty.
+	
+	After calculating this allocation rule, you can realize that this problem fits the general setting (but not the quasilinear or Euclidean, since we do not allow for transfers), so you can use weak monotonicity of the outcome function/allocation rule to test for implementability. (Again, weak monotonicity for the general setting, not the weak monotonicity for the Euclidean setting, even though $k$ is a vector of numbers!)
+	
+	\item I went with a mix, allowing transfers to/from the firm, but not the stakeholders. If the firm's utility entered the objective function, we could use the (g)VCG transfers to align the firm's objective with the derired objective. However, the firm's utility is not a part of the objective function, so the VCG does not work as is. There is no set recipe for this case, but you can employ the first principles to come up with a mechanism that may not necessarily be best, but is good enough. In particular, the firm must be unable to change its transfer without also altering the allocation rule. 
+	
+	The simplest (but not the only!) way to achieve this is to give the firm no power over rent. E.g., the university can determine its willingness to pay for the Kommunehospitalet given stakeholders' reports, and then present the firm with a take-it-or-leave-it offer.
+	
+	\item It is probably easiest to set up an online survey for the stakeholders, and no issues should arise there. Negotiations with the firm are a more subtle matter, since using a direct revelation mechanism may not be appealing for the firm if it does not believe in the university's power to commit to the mechanism, or if it thinks its report may be used against it in future negotiations. A take-it-or-leave-it-offer as suggested above solves this issue. 
+\end{enumerate}
+
+\fi
+
+
+
+\section{Screening}
+
+The Chicago Transit Authority (the organization in charge of the Chicago 
+subway system) has decided that it needs to do more to maximize
+its revenue. As such it has hired you to design its new price and service
+scheme. There are two types of customers, High-class and Low-class. They
+have preferences over the fare P and the degree of bad smell in the train
+car they ride in, denoted by B. They have told you that they are able to
+charge different fares depending on the car a customer rides in (i.e., to
+have different classes of service).
+
+The type of a customer is not observable; the fraction of high-class
+customers is $\lambda $. Customers' utility functions are $%
+u_{i}(P,B)=v-\theta _{i}P-B$, for $i=H,L$, where $\theta
+_{L}>\theta _{H}>0$. All customers get utility (normalized) of 0 from
+walking (their next best alternative) instead of taking the CTA train.
+
+Making train cars smell bad is not costless (workers need to be hired
+to rub garbage on the seats): the CTA incurs a cost of $\gamma B>0$\
+per customer who rides in a car that has smell level B.
+
+\begin{enumerate}
+	\item Write down the problem you would solve for determining the CTA's
+		profit-maximizing scheme. Assume throughout that the CTA cannot charge
+		negative prices; i.e., that $P\geq 0$. Assume also that the CTA wants
+		to serve both high and low class customers.
+	
+	\item Determine the CTA's profit-maximizing scheme. How does it depend
+		on the parameters of the problem?
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item Appealing to the Revelation Principle, the CTA's problem can be
+	written as:%
+	\begin{align*}
+		\max_{(P_{L},B_{L})\geq 0,(P_{H},B_{H})\geq 0}  & \Big\{ \lambda (P_{H}-\gamma
+		B_{H})+(1-\lambda )(P_{L}-\gamma B_{L}) \Big\} \\
+		\text{s.t. }(IR_{L}) & \quad v-\theta _{L}P_{L}-B_{L} \geq 0 \\
+		(IR_{H}) & \quad v-\theta _{H}P_{H}-B_{H} \geq 0 \\
+		(IC_{L}) & \quad v-\theta _{L}P_{L}-B_{L} \geq v-\theta _{L}P_{H}-B_{H} \\
+		(IC_{H}) & \quad v-\theta _{H}P_{H}-B_{H} \geq v-\theta _{H}P_{L}-B_{L}.
+	\end{align*}
+	
+	\item 
+	\begin{description}
+		\item Observe first that $(IR_{H})\,$is redundant since it is implied by $%
+		(IC_{H})$ plus $(IR_{L})$.
+		
+		\item Observe next that $(IR_{L})$ will bind: otherwise we could raise both $%
+		P_{L}$ and $P_{H}\,$by some $\varepsilon >0$ and not violate any
+		constraints, thereby raising profit.
+		
+		\item Observe next that $B_{H}=0$. If not, then we can lower $B_{H}$ and
+		raise $P_{H}\,$so that $\theta _{H}P_{H}+B_{H}$ is unchanged. This violates
+		no constraints (since it raises $\theta _{L}P_{H}+B_{H}),$ but raises profit.
+		
+		\item Let's ignore $(IC_{L})$ and check that it holds at the end. In this
+		case, we must have $(IC_{H})$ binding: otherwise we could lower $B_{L}\,$a
+		little and raise profit. Hence, we see that (by rewriting the binding $IR_L$ and $IC_H$ respectively)
+		\begin{align*}
+			P_{L} &=\frac{v-B_{L}}{\theta _{L}}
+			\\
+			P_{H} &=P_{L}+\frac{B_{L}}{\theta _{H}} = \frac{v-B_{L}}{\theta _{L}} + \frac{B_{L}}{\theta _{H}}
+		\end{align*}
+		So the CTA\ should choose $B_{L}\in \lbrack 0,v]$ to solve 
+		\begin{equation*}
+			\max_{B_{L}}\lambda \left( \frac{v-B_{L}}{\theta _{L}} + \frac{B_{L}}{\theta _{H}} \right)+(1-\lambda ) \left(\frac{v-B_{L}}{\theta _{L}}-\gamma B_{L}\right).
+		\end{equation*}%
+		This problem is linear, so the solution is to set $B_{L}=v\,$if 
+		\begin{equation*}
+			\left( \frac{\lambda }{1-\lambda }\right) \left( \frac{1}{\theta _{H}}-\frac{%
+				1}{\theta _{L}}\right) -\left( \frac{1}{\theta _{L}}+\gamma \right) >0,
+		\end{equation*}%
+		and set $B_{L}=0$ if this inequality is reversed. Note that in the latter
+		case, we have $P_{L}=P_{H}=\frac{v}{\theta _{L}}$, while in the former case
+		we have $P_{H}-P_{L}>0.$ (And don't forget to verify that $IC_L$ holds in
+		both cases.) Also, observe that we are more likely to set $%
+		B_{L}=v\,$when the fraction of high class consumers ($\lambda $) is high and
+		the cost of making train cars smelly ($\gamma $) is low. 
+	\end{description}
+\end{enumerate}
+\fi 
+
+
+
+\section{Judicial design}
+
+A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If he is convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has a payoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for a lighter sentence.  In particular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendant a payoff of $-r.$
+
+The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privately known probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial and be convicted with probability $1 - \theta$.
+
+Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choice function is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ means that type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargain giving him a sentence with payoff $-r$. DA thinks $\theta$ has full support on $[0,1]$.
+
+\begin{enumerate}
+	\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatible	for the defendant.
+	\item What is the set of all incentive-compatible social choice functions?
+	You can proceed in the following steps:
+	\begin{itemize}
+		\item Show that in any IC $f$ at most one plea bargain $r$ is available.
+		\item Show that $f$ must be of cutoff type, with the suspect taking the plea if $\theta < \bar{\theta}$ and going to court otherwise.
+		\item Find the value of $r$ that makes the cutoff s.c.f. $f$ incentive compatible given some cutoff type $\bar{\theta}$.
+		\item Combine all of the above to characterize the set of implementable $f$.
+	\end{itemize}
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+By going to trial a defendant of type $\theta$ receives (expected) utility of $-(1-\theta)$, while from accepting a plea bargain his utility is $-r$. 
+%This implies that the IC constraint is $f(\theta)=r \Rightarrow -r\geq -(1-\theta) ~\&~ \forall \theta' \neq \theta ~ f(\theta') \geq f(\theta)$.
+Fix some s.c.f. $f(\theta)$. Let $\Theta_p$ be the set of types who are offered a plea bargain $f(\theta) = r(\theta)$, and $\Theta_t$ be the set of types who are meant to go to trial: $f(\theta) = \text{trial}$ ($\Theta_t \cup \Theta_p = [0,1]$). Then the IC constraints are given by:
+\begin{align*}
+	\text{ for all } \theta \in \Theta_p: \quad&-r(\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p
+	\\
+	& \text{and}  -r(\theta) \geq -(1-\theta);
+	\\
+	\text{ for all } \theta \in \Theta_t: \quad& -(1-\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p.
+\end{align*}
+
+
+We will characterize the set of IC social choice functions by a series of claims. 
+
+\begin{itemize}
+	\item[claim 1] $f(\bullet)$ has at most one value on the real line.
+	
+	Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
+	
+	\item[claim 2] $f(\bullet)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
+		\\
+		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
+	
+	Proof: assume $\theta'>\theta , f(\theta)=T, f(\theta')=r$. By IC for $\theta$ we know that $-r\leq -(1-\theta)$. However, as $-(1-\theta')>-(1-\theta)$, this implies that $-(1-\theta')>-r$ and we don't have IC for $\theta'$.
+	
+	\item[claim 3] $r= 1-\bar{\theta}$
+	
+	Proof: $r\leq 1-\bar{\theta}$ follows directly from IC for type $\bar{\theta}$, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better off by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain, contradicting IC for that type.
+\end{itemize}
+
+These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function
+
+\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
+	
+	T & \text{if } \theta\geq\bar{\theta} \end{cases} \]
+
+is incentive compatible.
+
+%As long as the support of types has measure one, the arguments above hold. However, if there is a interval $(a,b)$ with a zero probability, then when we set $\bar{\theta}=a$ any $r\in [a-(b-a),a]$ can be used. This is the case as claim four no longer holds, and we just need to get IC for type $b$. The same argument also holds for closed or half closed intervals.
+\fi
+
+
+
+\section{Second-price auction}
+%MWG 8.B.3 | solutions from Alessandro's questionbank
+
+There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $v_i$, which the other players believe is distributed according to some c.d.f. $F_i(v_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid; all other bidders pay nothing.
+\begin{enumerate}
+	\item Show that bidding truthfully ($b_i=v_i$) is a weakly dominant strategy for every bidder $i$.
+	\item Conclude that the second-price auction implements the efficient allocation rule in dominant strategies.
+\end{enumerate}
+
+\ifsolutions
+\subsection{Solution}
+\textbf{Part 1.}
+Let's prove that for any $v_{i}$
+and for any $b_{-i}$ bidding $b_{i}\neq v_{i}$ is weakly dominated.
+There are two cases:
+\begin{enumerate}
+	\item $i$ bids $b_{i}>v_{i}$
+	\begin{enumerate}
+		\item If there exists $b_{j}>b_{i}$ then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$
+		\item If $b_{i}$ is the highest bid, let $b_{j}$ be the second highest.
+		If $v_{i}<b_{j}<b_{i}$ then $u_{i}(b_{i},b_{-i})=v_{i}-b_{j}<0=u_{i}(v_{i},b_{-i})$.
+		If $b_{j}<v_{i}<b_{i}$ then again $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$.
+	\end{enumerate}
+	\item $i$ bids $b_{i}<v_{i}$
+	\begin{enumerate}
+		\item If $b_{i}$ is the highest bid, then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$
+		\item Some other $b_{j}$ is the highest bid. Then if $b_{i}<b_{j}<v_{i}$,
+		$u_{i}(b_{i},b_{-i})=0$ while $u_{i}(v_{i},b_{-i})\geq0$; in all
+		other cases $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$ 
+	\end{enumerate}
+\end{enumerate}
+Thus, indeed bidding the true value $v_{i}$ is a weakly dominant
+strategy.
+
+\textbf{Part 2.}
+The efficient allocation rule $k^*(\cdot) = (k^*_1(\cdot),...,k^*_n(\cdot))$ (where $k_i \in [0,1]$ is the probability that $i$ gets the item) is such that for every profile of valuations $v=(v_1,...,v_n)$: $k^*(v) \in \arg \max_{k(v)} \{ \sum_{i=1}^n v_i k_i(v) \}$. It is easy to see that the efficient allocation rule then prescribes giving the item to the bidder with the highest valuation $v_i$: $k^*_i(v) = \mathbb{I} \{ v_i > v_j \, \forall j \}$ (coupled with any tie-breaking rule). 
+
+From part 1 we know that the second-price auction has an equilibrium in (weakly) dominant strategies, in which all bidders big truthfully. It is immediate that in this equilibrium, the bidder with the highest valuation wins the item -- i.e., the SPA DS-implements the efficient allocation rule.
+\fi 
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}
