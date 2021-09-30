@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -49,7 +49,7 @@
 \begin{frame}{Social choice: Goal}
 \begin{itemize}
 	\item Adopt the \alert{general} setting.
-	\item We do not like cardinal utilities -- can instead work with ordinal preference relations $\succsim_i$.
+	\item If we do not like cardinal utilities -- can instead work with ordinal \structure{preference relations $\succsim_i$}.
 	\begin{exampleblock}{The goal}
 		Given the environment ($N,\{\Theta_i\},X,\{\succsim_i(\theta)\}$), find a s.c.f. $f$ -- or, more generally, a social preference relation $\succsim_S(\theta)$ over $X$ -- that would be worthy of the name ``efficient''
 	\end{exampleblock}
@@ -58,6 +58,9 @@
 		\item Previously, we wanted to maximize sum of utilities. What do we want now?
 	\end{itemize}
 	\item Since we are not talking about incentives at the moment, I will omit $\theta$s in what follows.
+	\begin{itemize}
+		\item But idea same: for \structure{any} fixed preference profile $\{\succsim_i \}$ we want to produce some outcome $f$ or ranking $\succsim_S$. And these $f$ \& $\succsim_S$ \structure{will} depend on $\{\succsim_i \}$ -- i.e., on $\theta=(\theta_1,...,\theta_N)$.
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -140,8 +143,8 @@
 
 \begin{frame}{Testing Implementability}
 	\begin{itemize}
-		\item Forget all about efficiency and social choice.
-		\item Suppose we have some s.c.f. $f(\theta)$ that we want to implement. Question now is:
+		\item Forget all about efficiency and social choice. Or suppose social choice has given us some s.c.f. $f$.
+		\item Suppose we have some s.c.f. $f(\theta)$ that we want to implement. The question now is:
 		\begin{exampleblock}{}
 			How can we check whether a given s.c.f. $f(\theta)$ is implementable?
 		\end{exampleblock} 
@@ -152,19 +155,18 @@
 
 \begin{frame}{DSIC: Weak Preference Reversal Property}
 	\begin{itemize}
-		\item \textbf{Answer 1}: \structure{revelation principle}. Construct a DRM and check all players' \alert{IC conditions}. I.e., that for all $i,\theta_i',\theta_i'',\theta_{-i}$ it holds that
-		$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}').$$
+		\item \textbf{Answer 1}: \structure{revelation principle}. (Applies to any \alert{general} setting.)
+		Construct a DRM and check all players' \alert{IC conditions}; s.c.f. is implementable iff it satisfies them:
+		$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}') \text{ for all } i,\theta_i',\theta_i'',\theta_{-i}.$$
 		
-		\item Note that they imply the following \structure{preference reversal}: for all $i,\theta_i',\theta_i'',\theta_{-i}$,
-		\begin{equation*}
-			\begin{cases}
-				u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'),
-				\\
-				u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') \leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'').
-			\end{cases}
-		\end{equation*}
-		\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$ for $f$ to be DSIC. 
-		\item ``To each their own'': different types should get their most preferred option among the available one.
+		\item Note that they imply the following \structure{preference reversal} condition: for all $i,\theta_i',\theta_i'',\theta_{-i}$,
+		\begin{align*}
+			u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') &\geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'),
+			\\
+			u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') &\leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'').
+		\end{align*}
+		\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$ for $f$ to be DSIC. In other words:
+		\item ``To each their own'': different types should get their most preferred option among the available ones.
 	\end{itemize}
 \end{frame}
 
@@ -172,20 +174,20 @@
 \begin{frame}{Monotonicity: Euclidean setting}
 	\begin{itemize}
 		\item \textbf{Answer 2}: \structure{monotonicity}.
-		\item In a Euclidean setting, $k(\theta)$ is implementable only if it is monotone (weakly increasing).
+		\item In a \alert{Euclidean} setting, $k(\theta)$ is implementable only if it is monotone (weakly increasing).
 		\item Turns out, this is a sharp characterization: \\
 		if $k(\theta)$ is monotone, there exist transfers $t$ such that $\Gamma = (\Theta, (k,t))$ is DSIC.
 		\begin{itemize}
 			\item Monotonicity may require $k(\theta)$ to be either weakly increasing, or weakly decreasing, depending on the problem.
 			\item To prove: use the envelope representation of payoffs to construct transfers; can then show that the resulting mechanism is DSIC.
 		\end{itemize}
-		\item This characterization is extendable to more general settings, although the statements get uglier.
+		\item As we see in what follows, this characterization is extendable to settings beyond Euclidean, although statements get uglier.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Monotonicity: quasilinear setting}
-	One example of this.
+	One example of this in \alert{quasilinear} setting.
 	\begin{exampleblock}{Definition (weak monotonicity)}
 		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
 		\begin{equation*}
@@ -279,7 +281,7 @@
 		\item GS thm is extendable to infinite $X$.
 		\item The source of evil in GS thm is again the domain assumption: we often know \emph{something} about some players' preferences, so ``all possible preferences over $X$'' may be too rich for $\Theta_i$.
 		\begin{itemize}
-			\item We have already seen that once we restrict preferences (e.g. to quasilinear -- assuming ``everyone always likes money'') then there exist non-dictatorial DSIC implementable s.c.f.s (outcome functions) $f(\theta)$.
+			\item We have already seen that once we restrict preferences (e.g. to quasilinear -- assuming ``everyone always likes money'') then there exist non-dictatorial DSIC implementable s.c.f.s $f(\theta)$.
 			\item Single-peaked preferences, in particular, also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
 		\end{itemize}
 		\item For a proof of GS thm, see B{\"o}rgers, ch.8.2, or \href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{\uline{Svensson and Reffgen (2014)}}
