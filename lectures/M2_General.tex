@@ -51,15 +51,12 @@
 	\item Adopt the \alert{general} setting.
 	\item If we do not like cardinal utilities -- can instead work with ordinal \structure{preference relations $\succsim_i$}.
 	\begin{exampleblock}{The goal}
-		Given the environment ($N,\{\Theta_i\},X,\{\succsim_i(\theta)\}$), find a s.c.f. $f$ -- or, more generally, a social preference relation $\succsim_S(\theta)$ over $X$ -- that would be worthy of the name ``efficient''
+		Given the environment ($N,\{\Theta_i\},X,\{\succsim_i(\theta)\}$), find a s.c.f. $f(\theta)$ -- or, more generally, a social preference relation mapping $\succsim_S(\theta)$ over $X$ -- that would be worthy of the name ``efficient''
 	\end{exampleblock}
+	\item To emphasize: for \structure{any} fixed preference profile $\{\succsim_i \}$ we want to produce some outcome $f$ or ranking $\succsim_S$. And these $f$ \& $\succsim_S$ \structure{will} depend on $\{\succsim_i \}$ -- i.e., on $\theta=(\theta_1,...,\theta_N)$.
 	\item But what are the requirements that a good efficient $f$ must satisfy?
 	\begin{itemize}
 		\item Previously, we wanted to maximize sum of utilities. What do we want now?
-	\end{itemize}
-	\item Since we are not talking about incentives at the moment, I will omit $\theta$s in what follows.
-	\begin{itemize}
-		\item But idea same: for \structure{any} fixed preference profile $\{\succsim_i \}$ we want to produce some outcome $f$ or ranking $\succsim_S$. And these $f$ \& $\succsim_S$ \structure{will} depend on $\{\succsim_i \}$ -- i.e., on $\theta=(\theta_1,...,\theta_N)$.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -67,20 +64,20 @@
 
 \begin{frame}{Social choice: Axiomatic approach}
 	\begin{itemize}
-		\item Can impose \alert{axioms} on how a collection of $\{\succsim_i\}$ should map into $\succsim_S$ or $f$.
+		\item Can impose \alert{axioms} on how a collection of $\{\succsim_i\}$ / a type profile $\theta$ should map into $\succsim_S(\theta)$ or $f(\theta)$.
 		\item Possible reasonable axioms:
 	\end{itemize}
 	\begin{description}
-		\item[(A1)] \structure{Domain}: any collection of individual preferences $\left(\succsim_1, ..., \succsim_N \right)$ can be aggregated into $\succsim_S$.
+		\item[(A1)] \structure{Domain}: for any collection of individual preferences $\left(\succsim_1, ..., \succsim_N \right)$, $\succsim_S(\theta)$ is a well-defined social preference relation.
 		\item[(A2)] \structure{Unanimity}: if $a \succsim_i b$ for all $i$ then $a \succsim_S b$.
-		\item[(A3)] \structure{Independence of Irrelevant Alternatives}: if $\succsim_i$ and $\succsim'_i$ rank alternatives $a$ and $b$ the same for all $i$ then so should $\succsim_S$ and $\succsim'_S$.
+		\item[(A3)] \structure{Independence of Irrelevant Alternatives}: if $\succsim_i(\theta)$ and $\succsim_i(\theta')$ rank alternatives $a$ and $b$ the same for all $i$ then so should $\succsim_S(\theta)$ and $\succsim_S(\theta')$.
 	\end{description}
 \end{frame}
 
 
 \begin{frame}{Social choice: Arrow's theorem}
 	\begin{theorem}[Arrow, 1950]
-		With more than three alternatives, if $\succsim_S$ satisfies (A1)-(A3) then it is dictatorial, i.e. $\exists i: a \succsim_S b \Leftrightarrow a \succsim_i b$.
+		With more than three alternatives, if $\succsim_S(\theta)$ satisfies (A1)-(A3) then it is dictatorial, i.e. $\exists i: a \succsim_S b \Leftrightarrow a \succsim_i b$.
 	\end{theorem}
 	\begin{itemize}
 		\item The same is true for s.c.f.s if we rephrase the axioms appropriately. (See MWG Prop 21.E.1.)
@@ -103,15 +100,15 @@
 			Preference relation $\succsim_i$ is \structure{single-peaked} if $\exists x^*$ s.t. for any $x_k < x_l\leq x^*$, $x_l \succsim_i x_k$, and for any $x^* \leq x_k < x_l$, $x_k \succsim_i x_l$.
 		\end{exampleblock}
 	\end{itemize}
-	In this environment  we can construct both a reasonable social preference $\succsim_S$ that satisfies all the axioms, and a mechanism that implements it.
+	In this environment  we can construct both a reasonable social preference mapping $\succsim_S(\theta)$ that satisfies all the axioms, and a mechanism that implements it.
 \end{frame}
 
 
 \begin{frame}{Social choice: Majority voting}
 	\begin{theorem}[MWG 21.D.1-2]
-		In the general setting with single-peaked preferences and odd number of players $N$, \alert{pairwise majority voting} generates a well-defined social preference $\succsim_S$.
+		In the general setting with single-peaked preferences and odd number of players $N$, \alert{pairwise majority voting} generates a well-defined social preference $\succsim_S(\theta)$.
 		\\
-		S.c.f. $f_S$ based on such $\succsim_S$ will always select the peak of the median voter.
+		S.c.f. $f_S(\theta)$ based on such $\succsim_S(\theta)$ will always select the peak of the median voter.
 	\end{theorem}
 	\begin{itemize}
 		\item You can verify that PMV satisfies (A1)-(A3).
@@ -119,7 +116,7 @@
 		\item This gives us a natural notion of \structure{efficiency} which says \\
 		``Social preference is $x_k \succsim_S x_l$ if and only if for the \structure{majority} of $i$,  $x_k \succsim_i x_l$''.
 		
-		\item Note that PMV always generates some $\succsim_S$, but without single-peaked preferences it may be nonsensical. E.g., it can be intransitive: $x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$ (a \structure{Condorcet paradox}).
+		\item Note that PMV generates some binary relation $\succsim_S(\theta)$ for any profile of individual preferences $\theta$, but without single-peaked preferences $\succsim_S(\theta)$ may not be a proper preference relation. E.g., it can be intransitive: $x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$ (a \structure{Condorcet paradox}).
 	\end{itemize}
 \end{frame}
 
@@ -174,7 +171,7 @@
 \begin{frame}{Monotonicity: Euclidean setting}
 	\begin{itemize}
 		\item \textbf{Answer 2}: \structure{monotonicity}.
-		\item In a \alert{Euclidean} setting, $k(\theta)$ is implementable only if it is monotone (weakly increasing).
+		\item In a \alert{Euclidean} setting, $k(\theta)$ is implementable only if it is monotone.
 		\item Turns out, this is a sharp characterization: \\
 		if $k(\theta)$ is monotone, there exist transfers $t$ such that $\Gamma = (\Theta, (k,t))$ is DSIC.
 		\begin{itemize}
