@@ -183,12 +183,6 @@ Assume now that players' valuations are distributed according to $\theta_i \sim 
 
 Derive the gVCG transfers.
 
-%\begin{enumerate}
-%	\item 
-%	\item Derive the AGV transfers. 
-%	\emph{Look the expression up in the slides; we will talk about what it means next week.}
-%\end{enumerate}
-
 \ifsolutions
 \section*{Solution}
 LCT for any $i$ is $\tilde{\theta}_i = -\hat{\theta}$ (you do not actually need to calculate the expectation to find it, since the expression that $\tilde{\theta}_i$ minimizes is weakly monotone in $\theta_i$ -- i.e., one of the edges of the support is the solution). The gVCG transfers are then given by
@@ -203,21 +197,6 @@ LCT for any $i$ is $\tilde{\theta}_i = -\hat{\theta}$ (you do not actually need 
 		-\hat{\theta}	&	\text{ if } \sum_{j\neq i}\theta_j -\hat{\theta} - c > 0.
 	\end{cases}
 \end{align*}
-
-%The uniform distribution does not really help here, since you have to deal with the sums, I should have selected some other distribution.
-%
-%\begin{enumerate}
-%	\item 
-%	
-%	\item The expected externality is 
-%	\begin{align*}
-%		\tilde{t}_i(\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \left(\sum_{j\neq i} \theta_j - c\right) \cdot \mathbb{I} \left\{ \sum_{j=1}^N \theta_j - c \geq 0 \right\} \right].
-%	\end{align*}
-%	Unfortunately, calculating this expectation is, while technically possible, really painful in the general case for uniform distribution, so there is not much more we can do with this expression. The same applies to AGV transfers: the best we can do is just copy the definition,
-%	\begin{equation*}
-%		t_i^{AGV}(\theta) = \frac{1}{N-1} \sum_{j=1,\\ j\neq i}^N \tilde{t}_j (\theta_j) - \tilde{t}_i (\theta_i).
-%	\end{equation*}
-%\end{enumerate}
 \fi
 
 
