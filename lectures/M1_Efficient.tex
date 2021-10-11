@@ -1228,7 +1228,7 @@ Every player is asked for their type; reporting truthfully is a BNE.
 	\item One last mechanism before we go -- in case you care about BB, but not IR.
 	\item Let 
 	\vspace{-0.5em}\begin{align*}
-		\tilde{t}_i (\theta_i) \equiv \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_i) | \theta_i \right]
+		\tilde{t}_i (\theta_i) \equiv \mathbb{E}_{\theta_{-i}} \left[ \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}), \theta_j) | \theta_i \right]
 	\end{align*}
 	
 	be the ``expected externality'' imposed by $i$ on everyone else.
