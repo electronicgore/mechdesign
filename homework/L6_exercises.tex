@@ -80,7 +80,7 @@
 %   SOLUTIONS
 %----------------------------------------------------------------------------------------
 \newif\ifsolutions
-\solutionstrue
+%\solutionstrue
 
 
 
@@ -121,7 +121,7 @@
 	\begin{align*}
 		t_i(\theta_i,\theta_{-i}) = \theta_i k_i(\theta_i,\theta_{-i}) - U_i(\underline{\theta}_{i}, \theta_{-i}) - \int_{\underline{\theta}_{i}}^{\theta_i} k_{i} (s,\theta_{-i}) ds.
 	\end{align*}
-	Now consider a DRM given by the allocation $k$ fixed in the problem and transfers $t$ as defined above. We want to show this mechanism is DSIC. To do this, fix arbitrary $i,\theta_i,\hat{\theta}_i,\theta_{-i}$ and write out an IC constraint for $\theta_i$ to not be willing to misreport himself as $\hat{\theta}_i$:
+	Now consider a DRM given by the allocation $k$ fixed in the problem and transfers $t$ as defined above. We want to show this mechanism is DSIC. To do this, fix arbitrary $i,\theta_i,\hat{\theta}_i,\theta_{-i}$ and write out an IC constraint for $\theta_i$ to not be willing to misreport their type as $\hat{\theta}_i$:
 	\begin{align}
 		\theta_i k_i(\theta_i,\theta_{-i}) - t_i(\theta_i,\theta_{-i}) &\geq \theta_i k_i(\hat{\theta}_i,\theta_{-i}) - t_i(\hat{\theta_i},\theta_{-i})
 		\nonumber
@@ -146,7 +146,7 @@
 
 \section{Implementation in auctions}
 
-	Consider the auction environment with two buyers.  Suppose that each buyer $i$ has willingness to pay $\theta_i$ drawn from the set $[0,1].$
+	Consider the auction environment with two buyers and one item for sale. Suppose that each buyer $i$ has willingness to pay $\theta_i$ drawn from the set $[0,1].$
 	\begin{enumerate}
 		\item Draw a square with $\theta_1$ on the horizontal axis and $\theta_2$ on the vertical axis.  A point in the square
 		represents a profile $(\theta_1, \theta_2)$.
