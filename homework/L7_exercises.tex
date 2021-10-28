@@ -129,7 +129,7 @@
 
 \section{Optimal Procurement Mechanism}
 	% NU 410-3 2019, ps6 q3
-	Consider an inverted setting to the one discussed in the lecture: a seller now has an item of some privately known quality $\theta \sim U[0,1]$. Here $\theta$ also equals the seller's valuation of the item, and the buyer's valuation is given by $v(\theta) > \theta$. The \emph{buyer} designs a direct revelation mechanism $(k,t)$ to purchase this item, where $k(\theta)$ is the probability of trade and $t(\theta)$ is the payment from the buyer to the seller.\footnote{Note that this formulation of the problem explicitly constrains the mechanism to be ex post budget balance requirement.} Players' expected utilities given the seller's true type $\theta$ and the seller's report $\hat{\theta}$ are then given by
+	Consider an inverted setting to the one discussed in the lecture: a seller now has an item of some privately known quality $\theta \in [0,1]$. Here $\theta$ also equals the seller's valuation of the item, and the buyer's valuation is given by $v(\theta) > \theta$. The \emph{buyer} designs a direct revelation mechanism $(k,t)$ to purchase this item, where $k(\theta)$ is the probability of trade and $t(\theta)$ is the payment from the buyer to the seller.\footnote{Note that this formulation of the problem explicitly constrains the mechanism to be ex post budget balance requirement.} Players' expected utilities given the seller's true type $\theta$ and the seller's report $\hat{\theta}$ are then given by
 	\begin{align*}
 		U_S(\hat{\theta}|\theta) &= -\theta k(\hat{\theta}) + t(\hat{\theta}),
 		\\
@@ -137,13 +137,13 @@
 	\end{align*}
 	\begin{enumerate}
 		\item Show that for an allocation rule $k(\theta)$ to be IC, it must be weakly \emph{decreasing} in $\theta$.
-		\item IC ERP can be written for this problem as $U_S(\theta|\theta) = U_S(1|1) + \int_{\theta}^{1} k(s) ds $. Using this expression, show that the buyer's expected utility in any IC DRM $(k,t)$ is given by:
+		\item ERP implies that the payoff of the seller of type $\theta$ can be written as $U_S(\theta|\theta) = U_S(1|1) + \int_{\theta}^{1} k(s) ds $. Using this expression, show that the buyer's expected utility in any IC DRM $(k,t)$ is given by:
 		\begin{align*}
 			\mathbb{E}_\theta [ U_B(\theta | \theta) ] = \int_0^1 k(\theta) VS(\theta) \phi(\theta) d\theta - U_S(1),
 		\end{align*}
 		where $VS(\theta) = v(\theta) - \theta - \frac{F(\theta)}{\phi(\theta)}$.
 		\item Explain each component of $VS(\theta)$.
-		\item Find the optimal allocation rule when $v(\theta) = \frac{3\theta}{2}$ for $\theta \in [0,\frac{1}{3}]$ and $v(\theta) = \frac{5\theta}{2}-\frac{1}{3}$ for $\theta \in [\frac{1}{3},1]$.
+		\item Suppose from now on that $\theta \sim U[0,1]$. Find the optimal allocation rule when $v(\theta) = \frac{3\theta}{2}$ for $\theta \in [0,\frac{1}{3}]$ and $v(\theta) = \frac{5\theta}{2}-\frac{1}{3}$ for $\theta \in [\frac{1}{3},1]$.
 		\item Find the optimal allocation rule when $v(\theta) = \frac{5\theta}{2}$ for $\theta \in [0,\frac{1}{3}]$ and $v(\theta) = \frac{3\theta}{2}+\frac{1}{3}$ for $\theta \in [\frac{1}{3},1]$.
 	\end{enumerate}
 		
@@ -226,7 +226,8 @@
 		\end{cases}
 	\end{align*}
 	Pointwise optimization prescribes setting $k(\theta) = 1$ if $VS(\theta) \geq 0$ and $k(\theta) = 0$ otherwise. In this problem this would result in allocation $k(\theta) = \mathbb{I} \left\{ \theta \geq \frac{2}{3} \right\}$, which is not weakly decreasing as monotonicity requires.
-	Therefore, let us look at constant allocations $k(\theta) = \bar{k}$ instead. By linearity of buyer's payoff in $\bar{k}$ in that case, one of $\bar{k} \in \{0,1\}$ must be optimal.
+	Conversely, it is weakly increasing. The decreasing function that is ``closest'' to some increasing function is a constant function.
+	Therefore, let us look at constant allocations $k(\theta) = \bar{k}$ instead. By linearity of buyer's payoff in $\bar{k}$ in that case, one of $\bar{k} \in \{0,1\}$ must be optimal (and $\bar{k} \in (0,1)$ cannot be optimal).
 	
 	Allocation rule corresponding to $\bar{k} = 0$ prescribes no trade w.p. 1, hence buyer's payoff is zero. Allocation rule $\bar{k} = 1$ prescribes trade w.p. 1 at a constant price, hence this price must be $\bar{t} = \max \theta$ for all seller types to be willing to sell. Buyer's expected payoff is then equal to
 	\begin{align*}
@@ -245,7 +246,7 @@
 			-\frac{\theta}{2} + \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
 		\end{cases}
 	\end{align*}
-	Pointwise maximization yields $k(\theta) = \mathbb{I} \left\{ \theta \leq \frac{2}{3} \right\}$. Monotonicity is not violated (the allocation is weakly decreasing in $\theta$), hence this allocation is implementable.
+	Pointwise maximization yields $k(\theta) = \mathbb{I} \left\{ \theta \leq \frac{2}{3} \right\}$. Monotonicity is not violated (the allocation is weakly decreasing in $\theta$), hence this allocation is implementable and, so, optimal.
 \end{enumerate}
 \fi
 
