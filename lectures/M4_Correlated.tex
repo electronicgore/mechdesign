@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -88,10 +88,10 @@
 \begin{itemize}
 	\item Still a \structure{quasilinear world} with modification.
 	\item $N$ agents with private types $\theta_i \in \Theta_i$ ($\Theta_i$ finite).
-	\item Types have some joint distribution: $(\theta_1,...,\theta_N) \sim \phi(\Theta)$.
+	\item Types have some joint distribution: $(\theta_1,...,\theta_N) \sim \phi(\Theta)$ (p.d.f.).
 	\item Player $i$'s beliefs about $\theta_{-i}$ are derived by Bayes' rule:
 	$$\phi(\theta_{-i}|\theta_i) = \frac{\phi(\theta_{-i},\theta_i)}{\sum_{\theta_{-i}' \in \Theta_{-i}} \phi(\theta_{-i}',\theta_i)} $$
-	\item Designer only knows the distribution $F$, wants to implement some allocation $k(\theta)$.
+	\item Designer only knows the distribution $\phi$, wants to implement some allocation $k(\theta)$.
 \end{itemize}
 \end{frame}
 
@@ -251,7 +251,7 @@ Forget about the allocation \(k\) and think about how to elicit private informat
 		\item \emph{both} know \alert{state} $\omega = (\omega^1,\omega^2) \in \mathbb{R}^2$;
 		\item each sends \alert{report} $m \in \mathbb{R}^2$ to the principal.
 	\end{itemize}
-	\item \structure{Principal} (``designer'') does not know $\omega$, must choose action $a \in \mathbb{R}^2$ after hearing $(m_1,m_2)$.
+	\item \structure{Principal} (``designer'') does not know $\omega$, must choose action $a \in \mathbb{R}^2$ \alert{after} hearing $(m_1,m_2)$.
 	\item Preferences: squared Euclidean distance between $a$ and resp. \alert{bliss points}
 	\begin{itemize}
 		\item Principal: $u_p (a,\omega) = -\left(\left\|a-\omega\right\| \right)^2$;
