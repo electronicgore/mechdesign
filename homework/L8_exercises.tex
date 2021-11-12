@@ -336,12 +336,12 @@
 \section{Battaglini}
 	%from 2019 hw
 	
-	Construct a perfectly revealing equilibrium in the Battaglini(2002) model with agents' biases $b_1 = (1, -3)$ and $b_2 = (-4, 2)$. (Describe agents' reporting strategies as functions of state and the principal's decision strategy as a function of reports.)
+	Construct a perfectly revealing equilibrium in the Battaglini model with agents' biases $b_1 = (1, -3)$ and $b_2 = (-4, 2)$. (Describe agents' reporting strategies as functions of state and the principal's decision strategy as a function of reports.)
 
 \ifsolutions
 \section*{Solution}
 	
-	We consider an example of the Battaglini (2003) model with one principal, two agents and a two-dimensional outcome, where the two agents $i\in\{1,2\}$ have biases $b_1=(1,-3)$ and $b_2=(-4,2)$ respectively. The timing of the interaction is as follows:
+	We consider an example of the Battaglini model with one principal, two agents and a two-dimensional outcome, where the two agents $i\in\{1,2\}$ have biases $b_1=(1,-3)$ and $b_2=(-4,2)$ respectively. The timing of the interaction is as follows:
 	\begin{enumerate}
 		\item Nature determines the state of the world $w=(w_1,w_2)\in\mathbb{R}^2$, which is observed by both agents, but not the principal
 		\item Having observed $w$, agents $1$ and $2$ simultaneously send messages\\ ($m_1(w),m_2(w))\in\mathbb{R}^2$ to the principal about the observed state
@@ -353,7 +353,7 @@
 		\item Agent $i$: $u_i(a,w)=-(||a-(w+b_i)||)^2$
 	\end{itemize}
 	where $||x||=\sqrt{x_1^2+x_2^2}$, for $x=(x_1,x_2)\in\mathbb{R}^2$. The agents biases $b_i$ are commonly known. This implies that the principal chooses the equilibrium action such that $a^*(m_1(w),m_2(w))=E[w|(m_1(w),m_2(w))]$ and with this in mind, agent $i$ sends message $\hat{m}_i(w)$ in order to maximize their utility $u_i(a^*,w)=-(||a^*(\hat{m}_i(w),m_{-i}(w))-(w+b_i)||)^2$\\\\
-	The principal is able to design how the agents communicate to the principal about the observed state. In order to find a fully revealing equilibrium, the goal of the principal is to design communication strategies such that the principal is able to identify the state from the two messages and such that it is optimal for the agents to tell the truth. The Battaglini (2003) model suggests that the principal should restrict the agents' messaging, such that instead of simply reporting $w$, a given agent must report a line which is orthogonal to the other player's bias. The implication is that there is a second stage where the player then reports the true state $w$ on the line reported by the other player. However, in practice, this second stage is not necessary for the fully revealing equilibrium, since the reported lines are sufficient in order to locate $w$.\\\\
+	The principal is able to design how the agents communicate to the principal about the observed state. In order to find a fully revealing equilibrium, the goal of the principal is to design communication strategies such that the principal is able to identify the state from the two messages and such that it is optimal for the agents to tell the truth. The Battaglini model suggests that the principal should restrict the agents' messaging, such that instead of simply reporting $w$, a given agent must report a line which is orthogonal to the other player's bias. The implication is that there is a second stage where the player then reports the true state $w$ on the line reported by the other player. However, in practice, this second stage is not necessary for the fully revealing equilibrium, since the reported lines are sufficient in order to locate $w$.\\\\
 	We can construct this formally by considering the basis $(c_1,c_2)$ where $c_1$ and $c_2$ are vectors which are orthogonal to the biases $b_1$ and $b_2$ respectively. As long as $b_1$ and $b_2$ are linearly independent, then so are $c_1$ and $c_2$, which implies that the true state $w$ can be uniquely represented as a linear combination of $c_1$ and $c_2$:
 	\begin{equation}
 		w=o^1 \cdot c_1 + o^2 \cdot c_2 \nonumber
