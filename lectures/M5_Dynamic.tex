@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -119,7 +119,7 @@ To fix ideas, assume the following for this class:
 
 \begin{frame}{Direct Mechanisms}
 \begin{itemize}
-	\item As usual, we have the \structure{revelation principle} (Sugaya and Wolitzky, 2017).
+	\item As usual, we have the \structure{revelation principle} (\href{https://doi.org/10.3982/TE2270}{\uline{Sugaya and Wolitzky, 2017}}).
 	\item So can focus on mechanisms which ask players to report their types every period.
 	\item \structure{Reporting strategies} given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of \structure{public histories} $h_t = \{k_s,(r_{1,s},...,r_{N,s})\}_{s < t}$.
 	\item A \structure{dynamic direct mechanism} is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
@@ -133,8 +133,8 @@ To fix ideas, assume the following for this class:
 	\item ``Equilibrium'' is a sketchy term in dynamic incomplete-info games.
 	\begin{itemize}
 		\item There is at least a dozen different equilibrium concepts and refinements in use.
-		\item Main concern in general: off-equilibrium-path beliefs. What should a player believe after observing an event they considered impossible? Different answers can strongly affect the predicted outcome.
-		\item Not a big problem in mechdesign.
+		\item Main concern in general: off-equilibrium-path beliefs. \textcolor{gray}{What should a player believe after observing an event they considered impossible? Different answers can strongly affect the predicted outcome.}
+		\item Not a big problem in mechdesign \textcolor{gray}{-- players do not observe any actions until it's too late to act.}
 	\end{itemize}
 	\item Look for \structure{Perfect Bayesian Equilibria}.
 	\begin{itemize}
@@ -159,7 +159,7 @@ To fix ideas, assume the following for this class:
 	\end{itemize}
 	\item Also remember that $k_t : \Theta \times H_t \to K_t$ is a highly-dimensional object in itself.
 	\item So simply finding $\kappa^*$ is in general a difficult optimal control problem.
-	\item REMARK: \alert{ex post efficiency} is \alert{unattainable} in dynamics -- $k_t$ must be chosen before $\theta_{t+s}$ learned. \structure{Interim efficiency} is the best we can hope for.
+	\item \textbf{Remark}: \alert{ex post efficiency} is \alert{unattainable} in dynamics -- $k_t$ must be chosen before $\theta_{t+s}$ learned. \structure{Interim efficiency} is the best we can hope for.
 \end{itemize}
 \end{frame}
 
@@ -298,7 +298,7 @@ To fix ideas, assume the following for this class:
 				\item Check whether the resulting mechanism satisfies dynamic IC (at $t>0$).
 				\item Pray that it does.
 			\end{enumerate}
-			\item Pavan, Segal, Toikka (2014) provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
+			\item \href{https://doi.org/10.3982/ECTA10269}{\uline{Pavan, Segal, Toikka (2014)}} provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
 			\item We today take the ``pray that (FE) holds'' approach and only worry about extracting the buyer's initial type $\theta_0$ -- we are \structure{back} to the \structure{static problem}.
 		\end{itemize}
 	\end{minipage}
@@ -349,7 +349,7 @@ To fix ideas, assume the following for this class:
 		\item This pins down optimal mechanism $(\kappa,\pi+C)$ up to the constant $C$.
 		\item $C$ is determined from IR at $t=0$ -- skip the step of finding it.
 	\end{itemize}
-	\item In \alert{static} model, \alert{virtual surplus} is (\emph{note inconsistency in how VS is defined here vs before!})
+	\item In \alert{static} model, \alert{virtual surplus} is (\emph{note inconsistency in how VS is defined here vs in past lectures!})
 		$$ VS(k,\theta) = \structure{v(k(\theta),\theta)} - \frac{1-F(\theta)}{\phi(\theta)} \frac{\partial \structure{v(k(\theta),\theta)}}{\partial \theta} $$
 	\item Now in \alert{dynamics}, \structure{real surplus} is 
 		$$ \structure{S(\kappa,\theta)} \equiv \sum_{t\geq 0} \delta^t v(k_t(\theta_t),\theta_t).$$ 
