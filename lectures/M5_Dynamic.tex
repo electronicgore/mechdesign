@@ -180,15 +180,15 @@ To fix ideas, assume the following for this class:
 
 \begin{frame}{Dynamic Pivot Mechanism}
 \vspace{-2em}\begin{align*}
-	&\text{Flow social surplus}	& w(k_t,\theta_t)	&\equiv \sum_{i=1}^N v_i(k_t,\theta_{i,t}).
+	&\text{Flow social surplus}	& w_t(k_t,\theta_t)	&\equiv \sum_{i=1}^N v_i(k_t,\theta_{i,t}).
 	\\
-	&\text{Welfare}	& W(\theta_t,K_t)	&\equiv \max_{k_t \in K_t} \left\{ w(k_t,\theta_t) + \delta \mathbb{E} W(\theta_{t+1},K_{t+1}) \right\}.
+	&\text{Welfare}	& W_t(\theta_t,K_t)	&\equiv \max_{k_t \in K_t} \left\{ w_t(k_t,\theta_t) + \delta \mathbb{E} W_{t+1}(\theta_{t+1},K_{t+1}) \right\}.
 	\\
-	&\text{\footnotesize $i$'s marginal contribution}	& M_i(\theta_t,K_t)	&\equiv W(\theta_t,K_t) - W_{-i}(\theta_t,K_t)
+	&\text{\footnotesize $i$'s marginal contribution}	& M_{i,t}(\theta_t,K_t)	&\equiv W_t(\theta_t,K_t) - W_{-i,t}(\theta_t,K_t)
 	\\
-	&\text{\footnotesize can be written recursively as}	& M_i(\theta_t,K_t)	&= \structure{m_i(\theta_t,K_t)} + \delta \mathbb{E} M_i(\theta_{t+1},K_{t+1}).
+	&\text{\footnotesize can be written recursively as}	& M_{i,t}(\theta_t,K_t)	&= \structure{m_{i,t}(\theta_t,K_t)} + \delta \mathbb{E} M_{i,t+1}(\theta_{t+1},K_{t+1}).
 	\\
-	&\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_i(\theta_t,K_t).
+	&\text{Payments}	& p_{i,t}^*	&\equiv v_i(k^*_t,\theta_{i,t}) - m_{i,t}(\theta_t,K_t).
 \end{align*}\vspace{-1em}
 
 \begin{itemize}
