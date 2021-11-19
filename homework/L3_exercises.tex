@@ -151,6 +151,7 @@
 		
 		\item Let $U_i(\theta) \equiv u_i((k^*(\theta),t^{VCG}(\theta)),\theta)$. Bruteforcing over possible combinations of $k^*(\theta)$, $k^*(\theta_{-i})$, and the sign of $\theta_i$, would lead us to the observation that if $\theta_i \leq 0$, $\sum_{j \neq i} \theta_j > 0$, and $\sum_j \theta_j > 0$, then $U_i(\theta) < 0$. Person $i$ does not have to pay anything ($t^{VCG}_i(\theta)=0$) in that case, but the project is implemented and $\theta_i < 0$. If such a type profile occurs, $i$ would wish they did not sign up for the mechanism -- so the mechanism is not ex post IR.
 		
+		%NOTE: this conclusion regarding BB changes if there is some cost C associated with the public good
 		\item If you try to write out the whole surplus and analyze it, you will get a big and difficult-to-analyze expression. A better way to proceed is to analyze $t_i^{VCG}(\theta)$ for each $i$ individually. In particular, $i$'s transfer can be negative only in one of the two following cases:
 		\begin{enumerate}
 			\item $\sum_{j\neq i} \theta_j < 0$, $\mathbb{I}\left\{ \sum_{j \neq i} \theta_j > 0 \right\}=1$, and $\mathbb{I}\left\{ \sum_j \theta_j > 0 \right\}=0$;
