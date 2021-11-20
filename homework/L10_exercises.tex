@@ -80,7 +80,7 @@
 %   SOLUTIONS
 %----------------------------------------------------------------------------------------
 \newif\ifsolutions
-%\solutionstrue
+\solutionstrue
 
 
 
@@ -96,7 +96,7 @@
 \section{Dynamic Efficient Allocation}
 	Consider a dynamic problem of efficient allocation. The designer has one indivisible item that he seeks to allocate across two periods, $t=1,2$. There are four players, $i\in \{a,b,c,d\}$. Players $i=a,b$ are in the market only during period $t=1$; players $i=c,d$ are in the market only during period $t=2$. In a given period, the designer can only interact with players who are in the market at that period. 
 	
-	All players have private valuations $\theta_i \sim \text{i.i.d.}U[0,1]$ for the item and Euclidean preferences $u_i(k,p,\theta) = \theta_i k - p$, where $k$ is the probability $i$ gets the item and $p$ is the payment $i$ makes.
+	All players have private valuations $\theta_i \sim \text{i.i.d.}U[0,1]$ for the item and Euclidean preferences $u_i(k,p,\theta) = \theta_i k_i - p$, where $k_i$ is the probability $i$ gets the item and $p$ is the payment $i$ makes.
 	
 	The designer's goal is to allocate the item efficiently, i.e., to the player with the highest valuation $\theta_i$. The designer discounts future payoffs using discount factor $\delta \leq 1$. In other words, the designer maximizes the expected discounted social surplus resulting from the allocation and does not care about monetary cost or profit (or the players' participation constraints).
 	
@@ -104,7 +104,7 @@
 		\item Suppose the item was not allocated in period $t=1$, i.e., the designer still has the item in his possession at the beginning of $t=2$. Propose a (static) mechanism that the designer can use to allocate the item efficiently among players $i=c,d$ at $t=2$. Describe your mechanism \emph{completely} and argue that it is incentive compatible (DSIC or BIC).
 		\item Moving on to $t=1$. The designer faces a choice between giving the item to one of the players $i=a,b$ or keeping it until $t=2$. 
 		Compute the expected social surplus from the latter decision (keeping the item until $t=2$), assuming that your mechanism from part 1 is used at $t=2$.
-		\item Describe the efficient dynamic allocation rule $\kappa^* = (k^*_1(\theta_1,\theta_2), k^*_2(\theta_3,\theta_4))$.
+		\item Describe the efficient dynamic allocation rule $\kappa^* = (k^*_1(\theta_a,\theta_b), k^*_2(\theta_c,\theta_d))$.
 		\item Propose a full dynamic mechanism that implements the efficient allocation rule $\kappa^*$ in both periods. Describe your mechanism completely. (\emph{Hint: in Part 1 you have already found how the mechanism should look like for $t=2$, now you need to complete it for $t=1$. While you can use the Dynamic Pivot Mechanism, there exists a simpler way.})
 	\end{enumerate}
 	
@@ -166,21 +166,22 @@
 			p^{AGV}_{i,1} (\theta) &= \frac{1}{2} \left[ \left(\max \left\{\theta_i, \frac{2\delta}{3}\right\}\right)^2 - \left(\max \left\{\theta_j, \frac{2\delta}{3}\right\}\right)^2 \right].
 		\end{align*}
 	
-		\textbf{Option 2.} It is also possible to use the dynamic pivot mechanism here and obtain VCG payments from flow marginal contributions. Applying the analysis for $t=2$, we get that flow social surplus and total welfare in period $2$ are $w_2(k_2,\theta_1,\theta_2) = k_{c,2} \theta_c + k_{d,2} \theta_d$ and $W_2(\theta_1,\theta_2,k_1) = (1-k_1) \max \{\theta_c,\theta_d\}$. In period $1$, the flow surplus is $w_1(k_1,\theta_1) = k_{a,1} \theta_a + k_{b,1} \theta_b$. The total welfare is then 
+		\textbf{Option 2.} It is also possible to use the dynamic pivot mechanism here and obtain VCG payments from flow marginal contributions. Applying the analysis for $t=2$, we get that flow social surplus and total welfare in period $2$ are $w_2(k_2,\theta_1,\theta_2) = k_{c,2} \theta_c + k_{d,2} \theta_d$ and $W_2(\theta_1,\theta_2,k_1) = (1-(k_{a,1}+k_{b,1})) \max \{\theta_c,\theta_d\}$. In period $1$, the flow surplus is $w_1(k_1,\theta_1) = k_{a,1} \theta_a + k_{b,1} \theta_b$. The total welfare is then 
 		\begin{align*}
-			W_1(\theta_1) &= \max \left\{ k_{a,1} \theta_a + k_{b,1} \theta_b + \delta \mathbb{E}_{\theta_2} \left[(1-k_{a,1}-k_{b,1}) \max \{\theta_c,\theta_d\} \right] \right\}
+			W_1(\theta_1) &= \max_k \left\{ k_{a,1} \theta_a + k_{b,1} \theta_b + \delta \mathbb{E}_{\theta_2} \left[(1-k_{a,1}-k_{b,1}) \max \{\theta_c,\theta_d\} \right] \right\}
 			\\
 			&= \max \left\{ \theta_a, \theta_b, \delta \mathbb{E} \max \{\theta_c,\theta_d\} \right\}
 			\\
 			&= \max \left\{ \theta_a, \theta_b, \frac{2\delta}{3} \right\}.
 		\end{align*}
-		Since players $i=a,b$ are only active in period $t=1$, welfare-excluding-them is given by $W_{-i,1}(\theta_1,\theta_2) = W_2(\theta_1,\theta_2)$ at $t=2$ and
+		
+		\textbf{Period-one players $(i=a,b)$.}
+		Since players $i=a,b$ are only active in period $t=1$, welfare-excluding-them at $t=2$ is given by $W_{-i,2}(\theta_1,\theta_2) = W_2(\theta_1,\theta_2)$ and at $t=1$ by
 		\begin{align*}
-			W_{-i,1}(\theta_1) &= \max \left\{ k_{-i,1} \theta_{-i} + \delta \mathbb{E}_{\theta_2} \left[(1-k_{-i,1}) \max \{\theta_c,\theta_d\} \right] \right\}
+			W_{-i,1}(\theta_1) &= \max_k \left\{ k_{-i,1} \theta_{-i} + \delta \mathbb{E}_{\theta_2} \left[(1-k_{-i,1}) \max \{\theta_c,\theta_d\} \right] \right\}
 			\\
 			&= \max \left\{ \theta_{-i}, \frac{2\delta}{3} \right\}
 		\end{align*}
-		at $t=1$. 
 		Then if $\theta_a > \theta_b$, the two players' marginal contributions at $t=1$ are $M_{b,1} = 0$ and
 		\begin{equation*}
 			M_{a,1} (\theta_1) = \begin{cases}
@@ -189,15 +190,56 @@
 				0 & \text{ otherwise},
 			\end{cases}
 		\end{equation*}
-		and vice versa if $\theta_a < \theta_b$ (break the tie arbitrarily). Given that both are only active at $t=1$, their marginal contributions at $t=2$ are $M_{a,2}(\theta_1,\theta_2) = M_{b,2}(\theta_1,\theta_2) = 0$, and so are their flow marginal contributions at $t=2$, and the fmc at $t=1$ are $m_{i,1} (\theta_1) = M_{i,1} (\theta_1)$ for $i=a,b$. Making the final step, the payments prescribed by the dynamic pivot mechanism are then
+		and vice versa if $\theta_a < \theta_b$ (break the tie arbitrarily). Given that both are only active at $t=1$, their marginal contributions at $t=2$ are $M_{a,2}(\theta_1,\theta_2) = M_{b,2}(\theta_1,\theta_2) = 0$, and so are their flow marginal contributions at $t=2$: $m_{i,2} (\theta_2, k_1) =0$. The fmc at $t=1$ are $m_{i,1} (\theta_1) = M_{i,1} (\theta_1)$ for $i=a,b$. Making the final step, the payments $p_{i,t}(\theta_t,K_t)=v_i(k_t^*,\theta_{i,t}) - m_{i,t}(\theta_t,K_t)$ prescribed by the dynamic pivot mechanism are then
 		\begin{align*}
-			p_{a,1} = \begin{cases}
+			p^{DPM}_{a,1} (\theta_1) = \begin{cases}
 				\theta_a - \max \left\{ \theta_b, \frac{2\delta}{3} \right\} & \text{ if } \theta_a \geq \max \left\{ \theta_b, \frac{2\delta}{3} \right\}
 				\\
 				0 & \text{ otherwise},
 			\end{cases}
 		\end{align*}
-		$p_{a,2} = 0$, and analogously for player $b$.
+		$p^{DPM}_{a,2} (\theta_1,\theta_2) = 0$, and analogously for player $b$.
+		
+		\textbf{Period-two players $(i=c,d)$.}
+		Welfare-excluding-$i$ at $t=2$ is that from giving the item to the other current player: $W_{-i,2} (\theta_1,\theta_2,k_1) = (1-(k_{a,1}+k_{b,1})) \theta_{-i}$. At $t=1$, things are more complicated, since ignoring player $i \in \{c,d\}$ changes the designer's option value of retaining the good at $t=1$: if $k_1 = (0,0)$ then $W_2 = \theta_{-i}$, so $\delta \mathbb{E} W_2 = \frac{\delta}{2}$ (as opposed to $\frac{2\delta}{3}$ if $i$ is accounted for.) So we get that 
+		\begin{align*}
+			W_{-i,1}(\theta_1) &= \max_k \left\{ k_{a,1} \theta_a + k_{b,1} \theta_b + \delta \mathbb{E}_{\theta_2} \left[(1-k_{-i,1}) \max \{\theta_c,\theta_d\} \right] \right\}
+			\\
+			&= \max \left\{ \theta_a, \theta_b, \frac{\delta}{2} \right\}.
+		\end{align*}
+		Moving on to the marginal contributions for $i=c,d$, we then have at $t=2$ that if $\theta_c \geq \theta_d$: 
+		\begin{align*}
+			M_{c,2}(\theta_1,\theta_2) = m_{c,2}(\theta_1,\theta_2) &= (1-(k_{a,1}+k_{b,1}))(\theta_c - \theta_d)
+			\\
+			M_{d,2}(\theta_1,\theta_2) = m_{d,2}(\theta_1,\theta_2) &= 0,
+		\end{align*}
+		and vice versa. At $t=1$, on the other hand:
+		\begin{align*} 
+			M_{i,1} (\theta_1) &= W_1(\theta_1) - W_{-i,1}(\theta_1) = \max \left\{ \theta_a, \theta_b, \frac{2\delta}{3} \right\} -  \max \left\{ \theta_a, \theta_b, \frac{\delta}{2} \right\}
+			\\
+			\Rightarrow
+			m_{i,1} (\theta_1) &= M_{i,1} (\theta_1) - \delta \mathbb{E} [M_{i,2}(\theta_1,\theta_2) ] 
+			\\
+			&= \max \left\{ \theta_a, \theta_b, \frac{2\delta}{3} \right\} -  \max \left\{ \theta_a, \theta_b, \frac{\delta}{2} \right\} - \delta \mathbb{E} \left[ (\max\{\theta_i,\theta_j\} - \theta_j) \cdot \mathbb{I}\left\{ \frac{2\delta}{3} \geq \max\{ \theta_a,\theta_b\} \right\} \right].
+		\end{align*}
+		Therefore, the payments prescribed by the dynamic pivot mechanism are, for $i,j=c,d$,
+		\begin{align*}
+			p^{DPM}_{i,2} (\theta_1,\theta_2) &= \begin{cases}
+				\theta_j & \text{ if } \frac{2\delta}{3} \geq \max\{ \theta_a,\theta_b\} \text{ and } \theta_i > \theta_j,
+				\\
+				0 & \text{ otherwise};
+			\end{cases}
+		\end{align*}
+		\begin{align*}
+			p^{DPM}_{i,1} (\theta_1) &= -\max \left\{ \theta_a, \theta_b, \frac{2\delta}{3} \right\} + \max \left\{ \theta_a, \theta_b, \frac{\delta}{2} \right\} + \delta \mathbb{E} \left[ (\max\{\theta_i,\theta_j\} - \theta_j) \right] \cdot \mathbb{I}\left\{ \frac{2\delta}{3} \geq \max\{ \theta_a,\theta_b\} \right\}
+			\\
+			&= \begin{cases}
+				\max \{\theta_a, \theta_b\} - \frac{\delta}{2} & \text{ if } \max \{\theta_a, \theta_b\} \in \left(\frac{\delta}{2}, \frac{2\delta}{3} \right),
+				\\
+				0 & \text{ otherwise.}
+			\end{cases}
+		\end{align*}
+		Note that now players $c$ and $d$ may be asked to make a payment at $t=1$, which is the only difference of the DPM payments from the ``double SPA'' guess made in Option 1, but this payment does not depend on $\theta_c$ or $\theta_d$, hence does not affect their reporting incentives.
 		
 		\textbf{Options 1,2.} Regardless of the path taken above, you must fully describe the resulting dynamic mechanism, requirements same as in part 1. Example: ``in period 1, a direct mechanism $(k^*_1,p^{VCG}_1)$ is used, and if the item is not allocated then a VCG mechanism is used in period 2 that implements allocation $k^*_2$ using transfers $p^{VCG}_{2}$. Both periods use static VCG mechanisms for participating players, which (mechanisms) are incentive compatible in dominant strategies, as was shown in lectures''.
 	\end{enumerate}
