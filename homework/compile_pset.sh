@@ -24,6 +24,8 @@ pdflatex -synctex=1 -interaction=nonstopmode $1.tex
 cp $1.pdf ${OUT}_p.pdf
 echo 'Pset compiled.'
 
+sed -i 's/%\\solutionstrue/\\solutionstrue/' $1.tex
+
 echo 'All done.'
 
 
