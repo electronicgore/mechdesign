@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2020}
+	Fall 2021}
 
 
 \begin{document}
@@ -131,7 +131,7 @@ Stability and IR will be our main requirements.
 		\item No one wants to ``deviate'' from the ``equilibrium outcome''.
 		\item Although this is not a game -- we have not introduced actions/strategies, so ``deviations'' are not in game-theoretic sense.
 	\end{itemize}
-	\item Note that we are not dealing with any \alert{private information}.
+	\item Note that we are \alert{not} dealing with any \alert{private information}.
 	\begin{itemize}
 		\item The idea is same as in \structure{Social Choice}: suppose types $\theta$ (preferences) of all players are known -- what is the ``best'' outcome (stable/``equilibrium'' matching) for this collection of $\theta$s?
 		\item But we'll get to incomplete information eventually.
@@ -145,12 +145,12 @@ Stability and IR will be our main requirements.
 	A stable matching exists for every marriage market.
 \end{theorem}
 \begin{itemize}
-	\item Nice, but specific to the exact model. Breaks down in most extensions, e.g.:
+	\item Nice, but specific to the exact model. \alert{Breaks down} in most extensions, e.g.:
 	\begin{itemize}
-		\item roommate problem/one-sided matching -- group of people need to split in twos to be roommates, have preferences over whom to live with;
-		\item three-sided matching -- tanks, damage-dealers, and healers need to split in triples for quest dungeons, have preferences over party-members;
-		\item many-to-one matching -- firms and workers; firms have preferences over sets of workers rather than individual employees; need strong conditions on firms' preferences for theorem to hold.
-		\item peer effects -- as above, but now workers also have preferences over potential colleagues, rather than the firm itself.
+		\item \textbf{roommate problem/one-sided matching} -- group of people need to split in twos to be roommates, have preferences over whom to live with;
+		\item \textbf{three-sided matching} -- tanks, damage-dealers, and healers need to split in triples for quest dungeons, have preferences over party-members;
+		\item \textbf{many-to-one matching} -- firms and workers; firms have preferences over sets of workers rather than individual employees; need strong conditions on firms' preferences for theorem to hold.
+		\item \textbf{peer effects} -- as above, but now workers also have preferences over potential colleagues, rather than the firm itself.
 		\item See RS ch.2.3 for particular examples of nonexistence.
 	\end{itemize}
 	\item Also, we would want to know how this stable matching looks and how to implement it...
@@ -474,7 +474,9 @@ Stability and IR will be our main requirements.
 
 \begin{frame}{Impossibility (version 2)}
 \begin{itemize}
-	\item \alert{Issue}: stability implied as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run, only announcing matching or reports can break this result.
+	\item \alert{Issue}: stability defined as ``stability w.r.t. true preferences'', not w.r.t. reported types -- i.e., need types to be revealed after the mechanism is run. 
+	
+	If we only announce the final matching or the reports, the result can break.
 \end{itemize}
 \end{frame}
 
@@ -502,11 +504,11 @@ Stability and IR will be our main requirements.
 \begin{itemize}
 	\item There exists a notion of stability that incorporates players' incomplete knowledge of each other's preferences when trying to form blocking pairs...
 	\begin{itemize}
-		\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{\uline{Liu, Mailath, Postlewaite, Samuelson (2014)}},
-		\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{\uline{Pomatto (2019 WP)}}.
+		%\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{\uline{Liu, Mailath, Postlewaite, Samuelson (2014)}},
+		%\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{\uline{Pomatto (2019 WP)}}.
+		\item see \href{https://www.aeaweb.org/articles/pdf/doi/10.1257/aer.20181186}{\uline{Liu (2020)}}
 	\end{itemize}
-	\item ...but it is not very pleasant to work with,
-	\item and there are no results as to whether these ``stable'' matchings can be obtained in a mechanism.
+	\item but there are much fewer results as to whether \& how these ``stable'' matchings can be obtained in a mechanism, what their properties are, etc
 \end{itemize}
 \end{frame}
 
