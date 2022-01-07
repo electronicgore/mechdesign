@@ -130,7 +130,9 @@
 			\\
 			&= - \theta_j \cdot \mathbb{I} \{ k^*_{j,2} (\theta) = 1 \} + \theta_j \cdot \mathbb{I} \{ k^{-i}_{j,2} (\theta) = 1 \}
 			\\
-			&= -\theta_j \cdot \mathbb{I} \{ \theta_i \geq \theta_j \},
+			&= - \theta_j \cdot \mathbb{I} \{ \theta_i < \theta_j \} + \theta_j
+			\\
+			&= \theta_j \cdot \mathbb{I} \{ \theta_i \geq \theta_j \},
 		\end{align*}
 		where $i,j \in \{c,d\}$, $j\neq i$, $\mathbb{I} \{\cdot\}$ is the indicator function, and $k^{-i}_2$ is the efficient allocation that ignores player $i$ (i.e., in this problem $k^{-i}_2$ prescribes the item to be given to $j$ for all $\theta=(\theta_c,\theta_d)$). As we know from lectures, VCG is DSIC.
 		
