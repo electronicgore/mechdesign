@@ -20,7 +20,7 @@
 \usepackage{listings} % Required for insertion of code
 \usepackage{courier} % Required for the courier font
 \usepackage[table]{xcolor}
-\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url,hyperref}
 \usepackage[section]{placeins}
 \usepackage[a4paper]{geometry}
 \usepackage[USenglish]{babel}
@@ -593,7 +593,7 @@ We will solve this problem by backwards induction. Answer the following question
 
 
 \ifsolutions
-\subsection*{Solutions}
+\subsection*{Solution}
 \begin{enumerate}
 	\item $\mathbb{E}_\omega[v_v(a,\omega)|\phi_2] = \mathbb{P}( \omega = a )$, hence choosing $a=1$ yields expected utility $\phi_2$, and choosing $a=0$ yields $1-\phi_2$. The optimal action is then $\hat{a}(\phi_2) = \mathbb{I}(\phi_2 \geq 0.5)$.
 	

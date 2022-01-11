@@ -192,9 +192,9 @@ The $\tilde{t}$ are as follows: for $i=1,2$,
 \begin{align*}
 	\tilde{t}_i(\theta_i) &= \mathbb{E}_{\theta_j} \left[ (\theta_j - c) \cdot \mathbb{I} \{ \theta_1+\theta_2 \geq c \} \right]
 	\\
-	&= \int_{c-\theta_i}^{1} (\theta_j -c) \frac{1}{2} d\theta_j 
+	&= \int_{\min\{c-\theta_i, 1\}}^{1} (\theta_j -c) \frac{1}{2} d\theta_j 
 	\\
-	&= \frac{1}{4} \left[ (c-1)^2 - \theta_i^2 \right];
+	&= \frac{1}{4} \left[ (c-1)^2 - \theta_i^2 \right] \cdot \mathbb{I} \{ \theta_i \geq c-1 \};
 \end{align*}
 and the actual transfers are then $t_i^{AGV}(\theta) = \tilde{t}_j(\theta_j) - \tilde{t}_i(\theta_i)$ for $i=1,2$, which evaluates to 
 \begin{align*}
