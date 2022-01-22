@@ -195,7 +195,7 @@
 		and vice versa if $\theta_a < \theta_b$ (break the tie arbitrarily). Given that both are only active at $t=1$, their marginal contributions at $t=2$ are $M_{a,2}(\theta_1,\theta_2) = M_{b,2}(\theta_1,\theta_2) = 0$, and so are their flow marginal contributions at $t=2$: $m_{i,2} (\theta_2, k_1) =0$. The fmc at $t=1$ are $m_{i,1} (\theta_1) = M_{i,1} (\theta_1)$ for $i=a,b$. Making the final step, the payments $p_{i,t}(\theta_t,K_t)=v_i(k_t^*,\theta_{i,t}) - m_{i,t}(\theta_t,K_t)$ prescribed by the dynamic pivot mechanism are then
 		\begin{align*}
 			p^{DPM}_{a,1} (\theta_1) = \begin{cases}
-				\theta_a - \max \left\{ \theta_b, \frac{2\delta}{3} \right\} & \text{ if } \theta_a \geq \max \left\{ \theta_b, \frac{2\delta}{3} \right\}
+				\max \left\{ \theta_b, \frac{2\delta}{3} \right\} & \text{ if } \theta_a \geq \max \left\{ \theta_b, \frac{2\delta}{3} \right\}
 				\\
 				0 & \text{ otherwise},
 			\end{cases}
