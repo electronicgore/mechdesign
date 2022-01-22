@@ -1,4 +1,6 @@
-All solution files have if-conditions to generate files with and without solutions. Look for lines
+All solution files have if-conditions to generate files with and without solutions. Use the included `compile_pset.sh` Bash script to compile both versions. 
+
+For manual choice look for lines
 \solutionsfalse
 \solutionstrue
 and comment out the unneeded one.
