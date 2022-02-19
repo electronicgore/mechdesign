@@ -1,0 +1,309 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2021} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+	
+	{\ifsolutions \else	
+		\includepdf{MDreexam_frontpage21.pdf}
+		\fi}
+	
+	\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+	\end{center}
+	
+	{\ifsolutions \else	
+	Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Feb 13, 10:00 AM. No cooperation with other students is permitted.
+	
+	Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. Some questions are open ended in that they may not have a unique correct answer. It is recommended that you look through all problems before beginning to solve them. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+	\fi}
+	
+	
+	\section{Book giveaway}
+	% matching, open + monotonicity + corr.info
+	Djul has defended his Ph.D. and found a job. He looks back at the small library of books that he has assembled during his studies and decides that he does not need them as much any more. Therefore, he decides to give the books away to fellow Ph.D. students. Suppose there are $b \in \{1,...,B\}$ books and $i \in \{1,...,N\}$ interested students. Since $N > B$, Djul decides that it would be fair to limit the giveaway to one book per person. Let $\theta_{i,b}$ denote the valuation of student $i$ for book $b$ (privately known by student $i$). Assume that all students are economists who act in pure self-interest.
+	
+	\begin{enumerate}
+		\item Given that Ph.D. students are poor,\footnote{The story is taking place in the U.S.} and Djul himself now has a well-paying job, he would prefer to give the books away for free. Propose a mechanism that Djul could use to allocate the books among fellow students for free and in a way that would be Pareto optimal. 
+		
+		\item Suppose now that $N=6$, $B=4$, and the realized valuations are as given in Table \ref{table:books}. Calculate the allocation produced by your mechanism from part 1.
+		\begin{table}[h]
+			\begin{center}
+				\begin{tabular}{| c || c | c | c | c | c | c |}
+					\hline
+					$\theta_{i,b}$ & $i=1$ & $i=2$ & $i=3$ & $i=4$ & $i=5$ & $i=6$
+					\\ \hline\hline
+					$b=1$ & $4$ & $4$ & $1$ & $8$ & $9$ & $9$
+					\\ \hline
+					$b=2$ & $0$ & $2$ & $4$ & $9$ & $5$ & $3$
+					\\ \hline
+					$b=3$ & $9$ & $5$ & $5$ & $2$ & $6$ & $4$
+					\\ \hline
+					$b=4$ & $7$ & $6$ & $0$ & $7$ & $2$ & $6$
+					\\ \hline
+				\end{tabular}
+				\caption{Preferences for the Book Giveaway problem}
+				\label{table:books}
+			\end{center}
+		\end{table}
+		
+		\item Does there exist a mechanism that allocates the books without transfers efficiently (i.e., in a welfare-maximizing way)? If yes: present a mechanism. If not: explain why.
+		
+		\item Djul has run your mechanism from part 1 and messaged people regarding who got which book, but lost his phone with all the notes and messages before actually giving any books away. He thus cannot remember which book was promised to which student. Each student, however, knows which book they were promised. How can Djul recover the promised allocation without running the whole mechanism again? (Propose a mechanism that relies on students' reports of the books they were promised and explain why it works.)
+	\end{enumerate}
+	
+	
+	
+	\ifsolutions
+	\subsection*{Solution}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item {Identify the limitations of existing approaches to mechanism design.}
+			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item {Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item \textcolor{gray}{Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+	
+	The solution is presented below.
+	
+	\begin{enumerate}
+		\item There are a few alternatives. Djul could use the deferred acceptance algorithm with students proposing in a random order (analogous to random serial dictatorship in social choice). This could effectively be implemented via a ``first come-first serve'' rule. Since in this situation every student gets their most preferred book (out of those that were not most preferred by preceding students), there is no scope for Pareto-improving exchanges, hence the resulting book allocation is Pareto-optimal. Note, however, that it need not be welfare maximizing. E.g., let there be two students, two books, $\theta_{1,b} = (10,9)$ and $\theta_{2,b} = (10,1)$, and student $i=1$ gets to choose first. Then student $1$ gets book $1$ and student $2$ gets book $2$, which yields welfare $11$, but they could \emph{trade}, rather than just exchange, books (with student $2$ paying student $1$ any amount in $[1,9]$), to arrive at an allocation that yields welfare $19$.
+		
+		The same issue arises if we try to use the Top Trading Cycles algorithm with any arbitrary initial allocation -- the resulting allocation would be Pareto-efficient for the same reason, but not necessarily welfare-maximizing for the same reason.
+		
+		\item Take the DA algorithm, in which students select books in the order of their indices. Then student $1$ picks book $3$, student $2$ picks book $4$, student $3$ picks book $2$ (since $3$ was taken), and student $4$ picks book $1$.
+		
+		\item The arguments in part 1 suggest that the standard matching algorithms are not efficient. While we would typically resort to VCG to implement an efficient allocation, it is not an option in this case since the goal is to avoid payments. Using non-monetary transfers like time or effort would, strictly speaking, fulfill the goal (hence VCG would be an acceptable answer if a non-monetary implementation of transfers is specified), but it defeats the spirit of the problem, since the intent is to not impose extra burden on the students.
+		
+		At the same time, without transfers the allocation can not be implemented, which is easy to see from the IC conditions. The example given in part 1 with realized types $\theta_{1,b} = (10,9)$ and $\theta_{2,b} = (10,1)$ shows that DRM $(k^*,t=0)$ is not DSIC, since under this realized type profile $k^*$ prescribes that student $1$ gets book $2$, but they would prefer to misreport their valuation vector as, e.g., $\hat{\theta}_{1,b} =(11,1)$ in order to get book $1$, which they prefer more. The fact that DRM $(k^*,t=0)$ is not BIC follows from the same example if we assume that $\theta_{2,b} = (10,1)$ is the only type possible for player $2$.
+		
+		\item Consider the following mechanism: if every book is claimed by exactly one student, implement the reported allocation, otherwise burn all books in a book-burning van. This mechanism has an equilibrium in which all reports are truthful. To see this, note that no student $i$ has an incentive to report the book they like less than the one they were assigned (or report no book), since this cannot result in $i$ getting a better book. On the other hand, if $i$ reports a more preferred book $b$ than the one they were assigned, Pareto-optimality implies that this book is claimed by some other student $j$, who reports truthfully in equilibrium -- hence book $b$ is claimed by both $i$ and $j$, which triggers the burn clause in the mechanism, and neither of them gets any book. This outcome is worse for $i$ than getting the initially allocated book, hence this deviation is not profitable either. So none of the available deviations is profitable for $i$, and $i$ was arbitary, hence truthtelling is an equilibrium of the game induced by this mechanism.
+	\end{enumerate}
+	\fi
+	
+	
+	
+	\section{Employment Contracts}
+	% dyn.opt.mech
+	Going back a few months, when Djul was still searching for a job, he was interviewing with a company called Azamon. One of the interview assignments that Azamon gave him was to design his own employment contract with flexible hours. You decided it was an interesting problem and decided to solve it on your own.
+	
+	Djul's effort costs can vary from day to day, and Azamon is ready to give him short days and days off on bad days in exchange for extra hours on good days. Let $\theta_t$ denote Djul's cost factor on day $t$, which he learns at the beginning of day $t$. 
+	%It is distributed around some mean $\bar{\theta}$: $\theta_t = \bar{\theta} + \epsilon_t$ with $\mathbb{E}[\epsilon_t]=0$.
+	Djul's costs of working $l_t \geq 0$ hours on day $t$ are given by $v_D(l) = -\theta_t l_t^2$. The marginal product of Djul's labor on a working day $t$ is expected to be equal to $l_t$. Both parties' preferences are quasilinear in monetary payments, so the flow utility functions are given by
+	\begin{align*}
+		u_D(l_t,p_t,\theta_t) = -\theta_t l_t^2 + p_t
+		\\
+		u_A(l,p,\theta) = l_t - p_t,
+	\end{align*}
+	where $p_t$ is payment earned by Djul on day $t$.
+	
+	Both parties have infinite planning horizon ($t=\{1,2,...\}$) and a common per-day discount factor $\delta<1$.\footnote{For concreteness, suppose that the contract is being debated and signed at $t=0$, and the first working day is $t=1$.} 
+	Djul's outside option is taking a job at Azamon's competitor Glooble that yields him an expected discounted lifetime utility of $\bar{V}$ (assume this option is only available at $t=0$).
+	
+	\begin{enumerate}
+		\item Suppose $\theta_t$ is commonly learned by both Djul and Azamon on day $t$. Derive the first-best (efficient) working schedule $l_{FB}(\theta)$ that maximizes the social surplus. What should the payment schedule $p(\theta)$ be for Djul to be willing to accept this first-best $l(\theta)$?
+		
+		\item Suppose $\theta_t = {\theta}$ is constant over time but unknown to the firm, which believes that ${\theta} \sim Exp(\lambda)$. Derive a static contract/mechanism $(l(\theta), p(\theta))$ that prescribes constant workload and salary as a function of Djul's initial report of his productivity. Such a contract must be IC and IR for Djul and should maximize the firm's expected discounted profit.
+		
+		\item Finally, suppose $\theta_t = \theta_0 + \epsilon_t$, where Djul knows $\theta_0$, but Azamon believes it is distributed as $Exp(\lambda)$, and all $\epsilon_t$ are commonly observed by both Djul and Azamon at the beginning of day $t$, and the common belief until then is that $\epsilon_t \sim \text{i.i.d.} Exp(\beta)$. Derive the firm-optimal contract $(l_t(\theta_t),p_t(\theta_t))$.
+	\end{enumerate}
+	
+	
+	\ifsolutions
+	\subsection*{Solution}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}
+			\item {Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item \textcolor{gray}{Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+	
+	The solution is presented below.
+	
+	\begin{enumerate}
+		\item The first-best maximizes the social surplus:
+		\begin{align*}
+			l_{FB}(\theta) &= \arg \max_l \{ l - \theta l^2 \}
+			\\
+			&= \frac{1}{2\theta}.
+		\end{align*}
+		Djul accepts this work schedule if his expected discounted utility exceeds his outside option $\bar{V}$. There are many payment schedules that satisfy this requirement (since both Djul and Azamon are risk-neutral and have the same discount factor $\delta$, it does not matter how payments are allocated over time and states). One example is $p_t = \theta_t l_{FB}^2(\theta_t)$ for $t>1$ and $p_1 = \theta_1 l_{FB}^2(\theta_1) + \bar{V}$, i.e., Azamon exactly compensates Djul for labor costs and provides a sign-up bonus $\bar{V}$. Instead of a sign-up bonus, Azamon could award stock options with maturity $T$ and expected redemption value $\delta^{-T} \bar{V}$ (so that their current value is $\bar{V}$). Finally, instead of bonuses we can have $p_t = \theta_t l_{FB}^2(\theta_t) + (1-\delta)\bar{V}$ for all $t$ -- ``honest pay for honest work''. 
+		
+		\item This is a standard static Myerson optimal mechanism question. Following the usual steps, we have first from the reciprocal IC conditions for any two $\theta''>\theta'$ that
+		\begin{align*}
+			l^2(\theta') \geq -\frac{U_D(\theta'')-U_D(\theta')}{\theta''-\theta'} \geq l^2(\theta'').
+		\end{align*}
+		(Here $U$ denotes per-period utility on equilibrium path.)
+		Hence to satisfy the IC conditions, it must necessarily be that $l(\theta)$ is decreasing in $\theta$. Further, we see that $\frac{dU_D(\theta)}{d\theta} = -l^2(\theta)$, which yields the ERP
+		\begin{align*}
+			U_D(\theta) = U_D(\infty) + \int_\theta^\infty l^2(s) ds.
+		\end{align*}
+		Expressing the (per-period) payment $p(\theta)$ from $U_D(\theta) = -\theta l^2(\theta) + p(\theta)$ and plugging it into $U_A(\theta) = l(\theta) - p(\theta)$, we get
+		\begin{align*}
+			\mathbb{E} U_A(\theta) &= \mathbb{E} \left[ l(\theta) - \theta l^2(\theta) - U_D(\infty) - \int_\theta^\infty l^2(s) ds \right]
+			\\
+			&= \int_0^\infty \left[ l(\theta) - \theta l^2(\theta) - \int_\theta^\infty l^2(s) ds \right] \phi(\theta) d\theta - U_D(\infty)
+			\\
+			&= \int_0^\infty \left[ l(\theta) - \theta l^2(\theta) - \frac{\Phi(\theta)}{\phi(\theta)} l^2(\theta) \right] \phi(\theta) d\theta - U_D(\infty),
+		\end{align*}
+		where the last equality makes use of integration by parts.
+		Maximizing this expected profit warrants setting $U_D(\infty)$ as low as possible, hence set $U_D(\infty) = (1-\delta) \bar{V}$, and IR for all other types then holds as well since $\int_{\theta}^{\infty}l^2(s)ds \geq 0$.
+		
+		Trying to maximize the virtual surplus over $l(\theta)$ pointwise, for each $\theta$ individually, yields
+		\begin{align*}
+			l_{S}(\theta) &\in \arg \max_l \left\{ l - \theta l^2 - \frac{l^2}{\lambda} (e^{\lambda\theta}-1) \right\}
+			\\
+			\Rightarrow l_{S}(\theta) &= \frac{1}{2} \left( \theta + \frac{e^{\lambda\theta}-1}{\lambda} \right)^{-1}.
+		\end{align*}
+		The allocation above is decreasing in $\theta$, as required by monotonicity, hence it is indeed the optimal static allocation.
+		To obtain transfers, plug the optimal allocation into the ERP:
+		\begin{align*}
+			p(\theta) &= \theta l_S^2(\theta) + U_D(\infty) + \int_\theta^\infty l_S^2(s) ds
+			\\
+			&= (1-\delta) \bar{V} + \frac{\theta}{4} \left( \theta + \frac{e^{\lambda\theta}-1}{\lambda} \right)^{-2} + \frac{1}{4} \int_{\theta}^{\infty} \left( s + \frac{e^{\lambda s}-1}{\lambda} \right)^{-2} ds.
+		\end{align*}
+		The integral cannot be computed analytically, but can quite easily be calculated numerically.
+		
+		\item Following the steps from the slides, we arrive at the following expression for total discounted virtual surplus at $t=0$ (for a given path of play):
+		\begin{align*}
+			VS_0(\theta_0, \epsilon_1, \epsilon_2, ...) &= \sum_{t=1}^\infty \delta^t \left( l_t(\theta_t)-\theta_t l_t^2(\theta_t) \right) - \frac{\Phi(\theta_0)}{\phi(\theta_0)} \sum_{t=1}^\infty \delta^t l_t^2(\theta_t) \frac{\partial \theta_t}{\partial \theta_0}.
+		\end{align*}
+		Since $\theta_t = \theta_0 + \epsilon_t$, the impulse response function is just identically one: $\frac{\partial \theta_t}{\partial \theta_0} = 1$. Hence for a given period $t$ and path $(\theta_0, \epsilon_1, \epsilon_2, ...)$, the virtual surplus is given by $\delta^t \left[ l_t(\theta_t) - \theta_t l_t^2(\theta_t) - \frac{\Phi(\theta_0)}{\phi(\theta_0)} l_t^2(\theta_t) \right]$, which is maximized by $$l_{D,t}(\theta_0,...,\epsilon_t) = \frac{1}{2} \left( \theta_t + \frac{e^{\lambda\theta_0}-1}{\lambda} \right)^{-1}.$$
+		
+		To get the transfers, invoke the ERP. Djul's expected discounted lifetime payoff can be written as
+		\begin{align*}
+			V_D(\theta_0,\epsilon_1,...) &= V_D(\infty,\epsilon_1,...) - \int_{\theta_0}^{\infty} \sum_{t=1}^\infty \delta^t \frac{\partial v_D (k_t,\theta_t)}{\partial \theta_t} I_t(\theta_t | \theta_0,\epsilon_1,...,\epsilon_{t-1}) d \theta_0 
+			\\
+			&= \bar{V} + \int_{\theta_0}^{\infty} \sum_{t=1}^\infty \delta^t l_{D,t}^2 (\theta_0,...,\epsilon_t) d \theta_0 
+			\\
+			\Rightarrow
+			\sum_{t=1}^\infty \delta^t p_t(\theta_0,...,\epsilon_t) &= \sum_{t=1}^\infty \delta^t \left[ (1-\delta)\bar{V} + \theta_t l_{D,t}^2(\theta_0,...,\epsilon_t) + \int_{\theta_0}^{\infty} \sum_{t=1}^\infty \delta^t l_{D,t}^2 (\theta_0,...,\epsilon_t) d \theta_0 \right],
+		\end{align*}
+		so in principle the following payment schedule provides proper ex ante incentives to report $\theta_0$ truthfully (but not necessarily to report $\epsilon_t$ truthfully, were that to be required):
+		$$p_t(\theta_0,...,\epsilon_t) = (1-\delta)\bar{V} + \theta_t l_{D,t}^2(\theta_0,...,\epsilon_t) + \int_{\theta_0}^{\infty} \delta^t l_{D,t}^2 (\theta_0,...,\epsilon_t) d \theta_0.$$
+	\end{enumerate}
+	\fi
+	
+	
+	
+	%%-----------------------------------------------------------------------------------------------------
+	
+\end{document}

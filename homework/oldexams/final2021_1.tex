@@ -1,0 +1,555 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2021} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{MDexam_frontpage21.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Jan 14, 10:00 AM. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. Some questions are open ended in that they may not have a unique correct answer. It is recommended that you look through all problems before beginning to solve them. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+\fi}
+
+
+\section{We will find something}
+	% social choice, open
+	
+	Alice and Bob are trying to figure out where to go for dinner. Let $X$ denote the set of cafes and restaurants in the neighborhood (and assume there are at least three of them around). Both agents $i=A,B$ have some utility functions $u_i(x,\theta_i)$ over dining options $x$, where $\theta_i$ denotes agent $i$'s private information (relevant to their preferences). You are asked to explore possible algorithms $f$ that accept the two players' $i=A,B$ reports of their preferences $\theta_i$ and output a recommendation $f(\theta) \in X$ of where they should go for dinner. Alice and Bob would prefer to not have money involved in this decision process.
+	
+	Make any additional assumptions on the primitives that you find appropriate given the setting.
+	
+	\begin{enumerate}
+		\item Propose a non-dictatorial social choice function $f(\theta)$.
+		\item Is it implementable? (What is the suitable implementation concept?)
+		\item How does your answer above relate to the Gibbard-Satterthwaite theorem?
+		\item Does $f(\theta)$ need to satisfy any other properties in addition to incentive compatibility? Does your $f(\theta)$ satisfy these properties?
+		%TODO: ^ the question above is too vague, reformulate it if the problem is reused
+	\end{enumerate}
+	
+	
+	
+\ifsolutions
+\subsection*{Solution}
+	This problem tests the following learning outcomes:
+	\begin{framed}
+		\underline{Knowledge}:
+		\begin{itemize}[$\circ$]
+			\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+			\item {Define main trade-offs arising in information extraction problems.}
+			\item {Identify the limitations of existing approaches to mechanism design.}
+			\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+		\end{itemize}
+		\underline{Skills}:
+		\begin{itemize}[$\circ$]
+			\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}
+			\item {Propose mechanisms that induce the desired outcomes in various environments.}
+			\item \textcolor{gray}{Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+		\end{itemize}
+		\underline{Competencies}:
+		\begin{itemize}[$\circ$]
+			\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+			\item \textcolor{gray}{Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+		\end{itemize}
+	\end{framed}
+
+	The solution is presented below.
+
+	\begin{enumerate}
+		\item A few examples:
+		
+		\textbf{Random dictatorship}: a fair coin is flipped; if it comes up heads then Alice's most preferred option (according to her reported preferences) is selected; otherwise Bob's favorite option is chosen: 
+		$f(\theta) = \begin{cases}
+			\arg \max_x u_A(x,\hat{\theta}_A) & \text{ w.p. } 0.5
+			\\
+			\arg \max_x u_B(x,\hat{\theta}_B) & \text{ w.p. } 0.5
+		\end{cases}.$ Neither agent is then a full dictator (i.e., gets their best option always), so this s.c.f. is non-dictatorial.
+	
+		\textbf{Welfare maximization}: alternative that maximizes the sum of agents' utilities is chosen: $f(\theta) = \arg \max_x \{u_A(x,\theta_A) + u_B(x,\theta_B)\}$. Ties are broken randomly.
+		
+		\textbf{Borda count}: alternatives are ranked according to the agents' reported preferences, from worst to best. E.g., if $x$ is Alice's least favorite option and Bob's second least-favorite option, it is assigned ranks $r_A(x)=1$ and $r_B(x)=2$. Then the alternative with the highest total rank is chosen: $f(\theta) = \arg \max_x \{ r_A(x) + r_B(x) \}$. Ties are broken randomly.
+		
+		\textbf{VCG}: while the problem mentions that monetary transfers should not be a part of the mechanism, we know that transfers do not have to be monetary. Therefore, we could in principle set up a VCG (or any other) mechanism $(k^*,t^{VCG})$, where $k^*(\theta) = \arg \max_x \{u_A(x,\theta_A) + u_B(x,\theta_B)\}$ is the efficient allocation rule (welfare-maximizing dining option), and $t^{VCG}(\theta)$ are the standard VCG transfers realized via future favors or ``reputation'' gain/loss, or household chores (if Alice and Bob share a household). This option does, however, go against the spirit of the problem, hence we shall ignore it in the following parts.
+		
+		\item In this setting, implementation in dominant strategy equilibrium appears suitable, since in such an informal setting either player can say ex post: ``Wait, on second thought, my preferences are actually different!'' -- which would constitute a deviation from the original report. However, a case for implementation in Bayes-Nash Equilibrium can be made. 
+		
+		It is immediate that random dictatorship is DSIC: with probability $50\%$ the agent's preferences are followed, otherwise their report does not matter -- hence there are no incentives to misreport one's preferences. Welfare maximization and Borda count are not DSIC (or BIC); a counterexample is as follows. 
+		
+		Let $X = \{a,b,c\}$ and it is common knowledge that Alice's utility function is $u_A(a)=3$, $u_A(b)=2$, $u_A(c)=1$. Let Bob's type space be given by the following table:
+		\begin{center}
+			\begin{tabular}{c | c c c}
+				$u_B(x,\theta_B)$ & $\theta_B'$ & $\theta_B''$
+				\\ \hline
+				$a$ & $1$ & $2$
+				\\
+				$b$ & $3$ & $3$
+				\\
+				$c$ & $2$ & $1$
+			\end{tabular}
+		\end{center}
+		Note that in this example, utilities of all players from any alternative given any type equates its Borda rank.
+		Both procedures then yield s.c.f. $f(\theta_B') = b$, $f(\theta_B'') \in \{a,b\}$. Given random tie breaking, type $\theta_B''$ of Bob is better off reporting type $\theta_B'$, since that results in higher chance of the more preferred alternative $b$ being chosen. Therefore, neither welfare maximization, nor Borda count are implementable in general with random tie-breaking. (A similar example can be constructed for any other fixed tie-breaking rule.)
+		
+		\item The negative conclusion regarding welfare maximization and Borda count goes in line with the GS theorem. Random dictatorship seemingly contradicts the GS theorem. However, the theorem is only stated for deterministic social choice functions, whereas random dictatorship explicitly relies on randomization. (There exists an extension of the GS theorem, which shows that once we allow for random mechanisms in its statement, the conclusion is that any DSIC unanimous s.c.f. is a random dictatorship.)\footnote{Gibbard, A. (1977). Manipulation of Schemes that Mix Voting with Chance. Econometrica, 45(3), 665–681. https://doi.org/10.2307/1911681}
+		
+		\item Individual rationality and budget balance make little sense, since our agents need to eat somewhere, and transfers are ruled out by the problem. However, in addition to the usual IC constraints, we might want to impose an additional requirement of renegotiation-proofness (or Pareto-optimality, which is equivalent in this setting). It would require that $f(\theta)$ never suggests an alternative that is inferior to some other $x$ according to both players' reported preferences -- since then players could just agree to take $x$ instead of $f(\theta)$, invalidating the mechanism.
+	\end{enumerate}
+\fi
+
+
+\section{Piece of cake}
+	% VCG, easyish
+
+	Young siblings Annie and Billy are fighting over a cake of size $1$. Their respective valuations are given by $\theta_A \geq 0$ and $\theta_B \geq 0$ per unit of cake respectively and are their private information. Both kids act in pure self-interest. Their Mom is an expert in mechanism design and decides to employ the VCG mechanism to resolve the fight. However, she also has preference for splitting the cake equally among the two kids: her (real) utility function is given by $v_0(k) = -\alpha(k_A - k_B)^2$, where $k_i$ is the share of the cake allocated to kid $i=A,B$.
+
+	\begin{enumerate}
+		\item Write down the social welfare function that is maximized by the efficient allocation $k^*(\theta)$. Explain the meaning of the parameter $\alpha$. Derive $k^*(\theta)$. 
+		
+		\item Derive the VCG transfers and describe the whole mechanism. (If you cannot derive the mechanism for the general case, assume $\theta_i \in [0,1]$, $\alpha > 1/4$, and derive the mechanism for this special case.)
+		
+		\item Since the kids are unlikely to have any money, what instrument can Mom use as transfers?
+		
+		\item The VCG mechanism maximizes the social welfare, but it may cost a lot in terms of transfers. Is this an issue in this problem? If yes, what would be a better mechanism to use here? (You do not need to fully derive the alternative mechanism, just describe how you would approach the problem.)
+		%TODO: ^ clarify "cost a lot" means cost to the principal
+	\end{enumerate}
+
+
+
+\ifsolutions
+\subsection*{Solution}
+This problem tests the following learning outcomes:
+\begin{framed}
+	\underline{Knowledge}:
+	\begin{itemize}[$\circ$]
+		\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+		\item {Define main trade-offs arising in information extraction problems.}
+		\item {Identify the limitations of existing approaches to mechanism design.}
+		\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+	\end{itemize}
+	\underline{Skills}:
+	\begin{itemize}[$\circ$]
+		\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}
+		\item {Propose mechanisms that induce the desired outcomes in various environments.}
+		\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+	\end{itemize}
+	\underline{Competencies}:
+	\begin{itemize}[$\circ$]
+		\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+		\item \textcolor{gray}{Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+	\end{itemize}
+\end{framed}
+
+The solution is presented below.
+
+\begin{enumerate}
+	\item The kids' real utilities are standard Euclidean, $v_i(k,\theta) = \theta_i k_i$, so the social welfare is given by 
+	\begin{align*}
+		w(k,\theta) = \sum_{i \in \{0,A,B\}} v_i(k,\theta) = -\alpha(k_A - k_B)^2 + \theta_A k_A + \theta_B k_B.
+	\end{align*}
+	Since this is effectively Mom's objective function as a designer (as opposed to $v_0$), $\alpha$ describes the weight she puts on equity relative to the kids' utilities. The efficient allocation that maximizes $w(k,\theta)$ subject to the constraint $k_A+k_B \leq 1$ is given by $k^*(\theta)=(k^*_A(\theta),k^*_B(\theta))$ with $k^*_A(\theta) = \min \left\{ \max \left\{ \frac{1}{2} + \frac{\theta_A - \theta_B}{8 \alpha}, 0 \right\}, 1 \right\}$  and $k^*_B(\theta) = 1 - k^*_A(\theta)$. 
+	
+	\item First we need to calculate the efficient-excluding-$i$ allocations for $i=A,B$:
+	\begin{align*}
+		k^{-i}_i(\theta) &= \arg \max_k \left\{ -\alpha(k_j - k_i)^2 + \theta_j k_j \right\}
+		\\
+		&= \min \left\{ \max \left\{ \frac{1}{2} - \frac{\theta_j}{8 \alpha}, 0 \right\}, 1 \right\},
+	\end{align*}
+	and $k^{-i}_j(\theta) = 1 - k^{-i}_i(\theta)$. Note that in this calculation, we only ignore $i$'s utility, but $k_i$ still enters Mom's utility which favors equity, hence if $\alpha$ is large enough, $k_i$ will be positive.
+	
+	Then applying the standard expression for the VCG transfers:
+	\begin{align*}
+		t_{i}^{VCG}(\theta) &= -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+		\\
+		&= -\left( -\alpha \left( k^*_j(\theta)-k^*_i(\theta) \right)^2 + \theta_j k^*_j(\theta) \right)
+		+ \left( -\alpha \left( k^{-i}_j(\theta)-k^{-i}_i(\theta) \right)^2 + \theta_j k^{-i}_j(\theta) \right)
+		%\\
+		%&= -\left( -\alpha \left( \frac{\theta_j - \theta_i}{4 \alpha} \cap [-1,1] \right)^2 + \theta_j \left( \frac{1}{2} + \frac{\theta_j - \theta_i}{8 \alpha} \cap [0,1] \right) \right)
+		%+ \left( -\alpha \left( \frac{\theta_j}{4 \alpha} \cap [-1,1] \right)^2 + \theta_j  \left( \frac{1}{2} + \frac{\theta_j}{8 \alpha} \cap [0,1] \right) \right)
+		\\
+		&= \begin{cases}
+			- (-\alpha + \theta_j ) + (-\alpha + \theta_j)
+			& \text{ if } \theta_j \geq 4 \alpha + \theta_i;
+			\\
+			- (-\alpha(\frac{\theta_j-\theta_i}{4\alpha})^2 + \theta_j (\frac{1}{2}+\frac{\theta_j-\theta_i}{8\alpha}) ) + (-\alpha + \theta_j)
+			& \text{ if } \theta_j \in [\max \{4 \alpha, -4 \alpha + \theta_i \}, 4 \alpha + \theta_i ];
+			\\
+			- (-\alpha ) + (-\alpha + \theta_j)
+			& \text{ if } \theta_j \in [4 \alpha, -4 \alpha + \theta_i];
+			\\
+			- (-\alpha(\frac{\theta_j-\theta_i}{4\alpha})^2 + \theta_j (\frac{1}{2}+\frac{\theta_j-\theta_i}{8\alpha}) ) + (-\alpha (\frac{\theta_j}{4\alpha})^2 + \theta_j (\frac{1}{2} + \frac{\theta_j}{8\alpha}) )
+			& \text{ if } \theta_j \in [-4 \alpha + \theta_i, 4 \alpha];
+			\\
+			- (-\alpha ) + (-\alpha (\frac{\theta_j}{4\alpha})^2 + \theta_j (\frac{1}{2} + \frac{\theta_j}{8\alpha}) )
+			& \text{ if } \theta_j \leq \min \{4 \alpha, -4 \alpha + \theta_i\};
+		\end{cases}
+		\\
+		&= \begin{cases}
+			0
+			& \text{ if } \theta_j \geq 4 \alpha + \theta_i;
+			\\
+			%\frac{\theta_j}{2} - \frac{\theta_j^2 - \theta_i^2}{16\alpha} - \alpha
+			\alpha \left[ \left(\frac{\theta_i}{4\alpha}\right)^2 - \left(\frac{\theta_j}{4\alpha}-1\right)^2 \right]
+			& \text{ if } \theta_j \in [\max \{4 \alpha, -4 \alpha + \theta_i \}, 4 \alpha + \theta_i ];
+			\\
+			\theta_j
+			& \text{ if } \theta_j \in [4 \alpha, -4 \alpha + \theta_i];
+			\\
+			\alpha \left( \frac{\theta_i}{4\alpha}\right)^2
+			& \text{ if } \theta_j \in [-4 \alpha + \theta_i, 4 \alpha];
+			\\
+			\alpha \left( \frac{\theta_j}{4\alpha} + 1 \right)^2
+			& \text{ if } \theta_j \leq \min \{4 \alpha, -4 \alpha + \theta_i\}.
+		\end{cases}
+	\end{align*}
+	Combining this with the allocation rule $k^*(\theta)$, we can conclude that the VCG mechanism looks as given in Table \ref{table:cake} and Figure \ref{fig:cake}. Depending on the parameters of the problem, some of the regions may be empty. E.g., if $\theta_i\in[0,1]$ then for $\alpha \in [1/8,1/4]$ regions $R2$ and $R5$ disappear, whereas for $\alpha > 1/4$ only region $R6$ remains.
+	
+	\begin{table}[h]
+		\begin{center}
+			\renewcommand{\arraystretch}{1.3}
+		\begin{tabular}[center]{|| c | c c c c ||}
+			\hline
+			& $k^*_A(\theta)$ & $k^*_B(\theta)$ & $t^{VCG}_A(\theta)$ & $t^{VCG}_B(\theta)$
+			\\
+			\hline\hline 
+			$\theta \in R1$ & $0$ & $1$ & $0$ & $\alpha \left(\frac{\theta_A}{4\alpha}+1\right)^2$
+			\\
+			\hline
+			$\theta \in R2$ & $0$ & $1$ & $0$ & $\theta_A$
+			\\
+			\hline
+			$\theta \in R3$ & $\frac{1}{2}+\frac{\theta_A-\theta_B}{8\alpha}$ & $\frac{1}{2}-\frac{\theta_A-\theta_B}{8\alpha}$ & $\alpha \left[ \left(\frac{\theta_A}{4\alpha}\right)^2 - \left(\frac{\theta_B}{4\alpha}-1\right)^2 \right]$ & $\alpha \left(\frac{\theta_B}{4\alpha}\right)^2$
+			\\
+			\hline
+			$\theta \in R4$ & $\frac{1}{2}+\frac{\theta_A-\theta_B}{8\alpha}$ & $\frac{1}{2}-\frac{\theta_A-\theta_B}{8\alpha}$ & $\alpha \left[ \left(\frac{\theta_A}{4\alpha}\right)^2 - \left(\frac{\theta_B}{4\alpha}-1\right)^2 \right]$ & $\alpha \left[ \left(\frac{\theta_B}{4\alpha}\right)^2 - \left(\frac{\theta_A}{4\alpha}-1\right)^2 \right]$
+			\\
+			\hline
+			$\theta \in R5$ & $1$ & $0$ & $\theta_B$ & $0$
+			\\
+			\hline
+			$\theta \in R6$ & $\frac{1}{2}+\frac{\theta_A-\theta_B}{8\alpha}$ & $\frac{1}{2}-\frac{\theta_A-\theta_B}{8\alpha}$ & $\alpha \left(\frac{\theta_A}{4\alpha}\right)^2$ & $\alpha \left(\frac{\theta_B}{4\alpha}\right)^2$
+			\\
+			\hline
+			$\theta \in R7$ & $\frac{1}{2}+\frac{\theta_A-\theta_B}{8\alpha}$ & $\frac{1}{2}-\frac{\theta_A-\theta_B}{8\alpha}$ & $\alpha \left(\frac{\theta_A}{4\alpha}\right)^2$ & $\alpha \left[ \left(\frac{\theta_B}{4\alpha}\right)^2 - \left(\frac{\theta_A}{4\alpha}-1\right)^2 \right]$
+			\\
+			\hline
+			$\theta \in R8$ & $1$ & $0$ & $\alpha \left(\frac{\theta_B}{4\alpha}+1\right)^2$ & $0$
+			\\
+			\hline
+		\end{tabular}
+		\caption{The VCG mechanism for cake sharing, see Figure \ref{fig:cake} for type regions.}
+		\label{table:cake}
+		\end{center}
+	\end{table}
+	\begin{figure}[h]
+		\begin{center} 
+			\begin{tikzpicture}[scale=7]
+				%regions
+				\filldraw[yellow, opacity=0.3] (0,1) -- (0,0.25) -- (0.25,0.5) |- (0,1);
+				\filldraw[red, opacity=0.3] (0.25,0.5) -- (0.75,1) -| (0.25,0.5);
+				\filldraw[blue, opacity=0.3] (0,0.25) -- (0.25,0.5) |- (0,0.25);
+				\filldraw[green, opacity=0.3] (0.25,0.5) |- (0.5,0.25) -- (1,0.75) |- (0.75,1) --(0.25,0.5);
+				\filldraw[red, opacity=0.3] (0.5,0.25) -- (1,0.75) |- (0.5,0.25);
+				\filldraw[green, opacity=0.3] (0,0) -| (0.25,0.25) -| (0,0);
+				\filldraw[blue, opacity=0.3] (0.25,0) -- (0.5,0.25) -| (0.25,0);
+				\filldraw[yellow, opacity=0.3] (1,0) -- (0.25,0) -- (0.5,0.25) -| (1,0);
+				\draw (0.12,0.7) node{$R1$};
+				\draw (0.4,0.85) node{$R2$};
+				\draw (0.16,0.34) node{$R3$};
+				\draw (0.6,0.6) node{$R4$};
+				\draw (0.85,0.4) node{$R5$};
+				\draw (0.12,0.12) node{$R6$};
+				\draw (0.34,0.16) node{$R7$};
+				\draw (0.7,0.12) node{$R8$};
+				
+				% axes 
+				\draw[->] (0,0) -- (1.1,0) node[below]{$\theta_A$};
+				\draw[->] (0,0) -- (0,1.1) node[left]{$\theta_B$};
+				\draw (0,0) node[below left]{$0$};
+				\draw (0,0.25) -- (0.76,1.01) node[above]{$\frac{1}{2} + \frac{\theta_A - \theta_B}{8\alpha}=0$};
+				\draw (0.25,0) -- (1.01,0.76) node[right]{$\frac{1}{2} + \frac{\theta_A - \theta_B}{8\alpha}=1$};
+				\draw (0,0.25) -- (1.01,0.25);
+				\draw (0.25,0) -- (0.25,1.01);
+				\draw (0.25,0) node[below]{$4\alpha$};
+				\draw (0,0.25) node[left]{$4\alpha$};
+			\end{tikzpicture}
+			\caption{regions of types for the cake problem.}
+			\label{fig:cake}
+		\end{center}
+	\end{figure}
+
+	\item Within the monetary realm, Mom can withhold kids' future allowance, which should be similar to requiring a payment. Alternatively, methods of payment can include cutting down on the kids' screen time (on a smartphone, tv, Nintendo Switch\texttrademark, etc), bedtime, curfew time, or similar. Symmetrically, transfers \emph{to} the kids can be implemented by increasing their respective time allowance.
+	
+	\item The welfare-maximizing allocation rule $k^*(\theta)$ relies on the objective function (``social welfare'') not being a function of transfers -- i.e., regardless of the transfers required to implement $k^*(\theta)$, it remains optimal to do so. The question then can be paraphrased as: is the objective function that our mechanism aims to maximize specified correctly or should it also depend on transfers somehow?
+	
+	The answer to this question would depend on your answer to part 3 above and your thoughts on parenting. One argument could be that a simple desire to eat some cake should not cause any repercussions, hence Mom should look among mechanisms without transfers -- somehow characterize the set of allocation rules that are IC without transfers and somehow select the best among them. Another viewpoint could be that the instrument via which transfers are imposed is important to the kids (so it provides incentives) but not to Mom (so it can be excluded from the objective), so VCG is perfectly fine. Finally, one could make the argument that transfers are important to all parties, so they should enter Mom's objective function. In that case the optimal mechanisms machinery could be used to derive a mechanism that maximizes welfare while also maximizing (or minimizing) the sum of kids' transfers to the mechanism.
+\end{enumerate}
+\fi
+
+
+
+\section{Used Car Auction}
+% opt.mech, simple dynamics (no IRFs)
+Monica is running a used car auction. This week she has two cars for sale: a '85 Ford Mustang and an '87 Pontiac Trans Am, hereinafter denoted as $c \in \{F,P\}$. The auction has attracted $N$ interested bidders $i\in \{1,...,N\}$, whose valuations are commonly believed to be $\theta_{i,c} \sim \text{i.i.d.}U[0,1]$. In particular, for every $i$, $\theta_{i,F}$ is independent of $\theta_{i,P}$, since the two cars are quite different and have different age-related issues. However, once a bidder wins one car, they are not interested in bidding for another. Monica's value for retaining either car is $\bar{\theta} \in [0,1]$ and $2\bar{\theta}$ if she retains both. All players' preferences are Euclidean. Your goal is to help Monica design the auction in such a way as to generate the most revenue.
+
+\begin{enumerate}
+	\item Suppose the cars are auctioned sequentially over two periods $t=1,2$, and at $t=2$ there are only one car $c=P$ and $N-1$ bidders left. Derive the optimal auction that maximizes Monica's expected revenue. Make sure to describe both the allocation and the payment rules.
+	%TODO: clarify "derive the optimal auction for t=2"
+	
+	\item Calculate buyer $i$'s ex ante expected utility from participating in the auction you derived.
+	
+	\item Now move on to $t=1$ and the auction for $c=F$. Suppose that at this point the buyers do not yet know their valuations $\theta_{i,P}$ for the second car (since it has not yet been presented and they did not have a chance to inspect it). Derive the optimal auction for $c=F$ in $t=1$, assuming that in $t=2$ the auction for $c=P$ will be run according to the rules you derived in part 1.
+	
+	\item How do you think the expected revenue $R_F$ from selling $c=F$ in $t=1$ compares with the expected revenue from selling $c=P$ in $t=2$? (A convincing intuitive argument suffices.) What implications do your conclusions have for auction design? (I.e., is it optimal to sell the two items sequentially or could a different format yield better results?)
+\end{enumerate}
+
+
+
+\ifsolutions
+\subsection*{Solution}
+This problem tests the following learning outcomes:
+\begin{framed}
+	\underline{Knowledge}:
+	\begin{itemize}[$\circ$]
+		\item {Account for the fundamental ideas behind and approaches to mechanism design.}
+		\item {Define main trade-offs arising in information extraction problems.}
+		\item \textcolor{gray}{Identify the limitations of existing approaches to mechanism design.}
+		\item \textcolor{gray}{Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation.}
+	\end{itemize}
+	\underline{Skills}:
+	\begin{itemize}[$\circ$]
+		\item \textcolor{gray}{Set up policy, trade, and management issues as mechanism design problems.}
+		\item {Propose mechanisms that induce the desired outcomes in various environments.}
+		\item {Analyze the drawbacks of existing institutions and suggest alternatives or identify reasons why none are available.}
+	\end{itemize}
+	\underline{Competencies}:
+	\begin{itemize}[$\circ$]
+		\item {Apply the most relevant theoretical apparatus to analyze case-based problems.}
+		\item {Use the analytical framework of mechanism design in discussions of the real-world institutions, proposed policies, and market strategies.}
+	\end{itemize}
+\end{framed}
+
+The solution is presented below.
+
+\begin{enumerate}
+	\item Following the slides for the optimal auctions, we get that Monica's expected profit is given by
+	\begin{gather}
+		\begin{aligned} 
+			\mathbb{E}U_{M,2} &= \mathbb{E}_\theta \left[ \sum_{i=1}^{N-1} t_{i,2}(\theta) - k_{i,2} \bar{\theta} \right]
+			\\
+			&= \mathbb{E}_\theta \left[ \sum_{i=1}^{N-1} \left(k_{i,2}(\theta) VS_{i,2}(\theta) - U_{i,2}(0,\theta_{-i,P})\right) \right],
+			\label{eq:carauction}
+		\end{aligned}
+		\\
+		\nonumber
+		\begin{aligned} 
+		\text{where } VS_{i,2}(\theta) &= \theta_{i,P} - \bar{\theta} - \frac{1-\Phi_i(\theta_{i,P})}{\phi_i(\theta_{i,P})}
+		\\
+		&= 2\theta_{i,P} - (1+\bar{\theta}).
+		\end{aligned}
+	\end{gather}
+	Note that it is convenient to incorporate $\bar{\theta}$ directly in the objective function as a loss if a trade takes place. If we do this, we can include it in $VS$ as a part of the real surplus generated from trade, $\theta_{i,P} - \bar{\theta}$.
+	
+	At $t=2$, bidders' outside option is zero, hence the minimal $U_{i,2}(0,\theta_{i,P})$ we can set is zero for all $i,\theta_{i,P}$. Further, maximizing $\mathbb{E}U_{M,2}$ over allocation rules $k$ that are feasible ($\sum_{i=1}^{N-1}k_{i,2} \leq 1$), we get
+	\begin{align*}
+		k_{i,2}^*(\theta) = \begin{cases}
+			1 & \text{ if } \theta_{i,P} \geq \hat{\theta}_{i,2},
+			\\
+			0 & \text{ otherwise},
+		\end{cases}
+	\end{align*}
+	where $\hat{\theta}_{i,2} = \max \left\{\frac{1+\bar{\theta}}{2}, \max_{j \neq i} \{ \theta_{j,P} \} \right\}$ is the minimal winning report for $i$ given others' reports.
+	We can see that this allocation rule is monotone (it needs to be increasing in $\theta_{i,P}$ in this problem) for all $\theta_{-i,P}$, hence it is implementable in dominant strategies. To find the transfers that support it, use the ERP for the bidders' utility: 
+	\begin{align*}
+		U_{i,2}(\theta_{i,P},\theta_{-i,P}) = \theta_{i,P} k_{i,2}(\theta) - t_{i,2}(\theta) &= U_{i,2}(0,\theta_{-i,P}) + \int_0^{\theta_{i,P}} k_{i,2}(\theta) d\theta_{i,P}
+		\\
+		&= \max \{ \theta_{i,P} - \hat{\theta}_{i,2}, 0 \}
+		\\
+		\Rightarrow t_{i,2}(\theta) &= \begin{cases}
+			\hat{\theta}_{i,2} & \text{ if } \theta_{i,P} \geq \hat{\theta}_{i,2}
+			\\
+			0 & \text{ otherwise}.
+		\end{cases}
+	\end{align*}
+	It is trivial to verify that the resulting mechanism is IR for all $i,\theta_{i,P},\theta_{-i,P}$.
+	
+	We conclude that the optimal auction at $t=2$ is a second-price auction with reserve price equal to $\frac{1+\bar{\theta}}{2}$. 
+	
+	\item We have calculated that $U_{i,2}(\theta) = \max \{ \theta_{i,P} - \hat{\theta}_{i,2}, 0 \}$, hence
+	\begin{align*}
+		\mathbb{E}_\theta U_{i,2}(\theta_i,\theta_{-i}) &= \int_0^1 \int_0^1 \max \{ \theta_{i,P} - \hat{\theta}_{i,2}, 0 \} d \Phi_i(\theta_{i,P}) d \hat{\Phi}_i (\hat{\theta}_{i,2}) 
+		\\
+		&= \int_0^1 \left[ \int_{\hat{\theta}_{i,2}}^1 (\theta_{i,P} - \hat{\theta}_{i,2}) d\theta_{i,P} \right] d \hat{\Phi}_i (\hat{\theta}_{i,2}) 
+		\\
+		&= \int_0^1 \left[ \frac{(1-\hat{\theta}_{i,2})^2}{2} \right] d \hat{\Phi}_i (\hat{\theta}_{i,2}),
+	\end{align*}
+	where $\hat{\Phi}_i (\cdot)$ is the cdf of $\hat{\theta}_{i,2}$:
+	\begin{align*}
+		\hat{\Phi}_i (\hat{\theta}_{i,2}) &= \mathbb{P} \left\{ \max \left\{\frac{1+\bar{\theta}}{2}, \max_{j \neq i} \{ \theta_{j,P} \} \right\} \leq \hat{\theta}_{i,2} \right\}
+		\\
+		& = \begin{cases}
+			0 & \text{ if } \hat{\theta}_{i,2} < \frac{1+\bar{\theta}}{2}
+			\\
+			\mathbb{P} \left\{ \max_{j \neq i} \{ \theta_{j,P} \} \leq \hat{\theta}_{i,2} \right\} & \text{ if } \hat{\theta}_{i,2} \geq \frac{1+\bar{\theta}}{2}
+		\end{cases}
+		\quad 
+		= \begin{cases}
+			0 & \text{ if } \hat{\theta}_i < \frac{1+\bar{\theta}}{2}
+			\\
+			\hat{\theta}_{i,2}^{N-2} & \text{ if } \hat{\theta}_i \geq \frac{1+\bar{\theta}}{2}
+		\end{cases}
+	\end{align*}
+	(recall that $\max_{j \neq i} \{ \theta_{j,P} \}$ is a max of $N-2$ elements, since it is assumed there is a total of $N-1$ bidders at this stage). So we have (for $\hat{\theta}_{i,2} \geq \frac{1-\bar{\theta}}{2}$) that $d \hat{\Phi}_i (\hat{\theta}_{i,2}) = \hat{\phi}_i(\hat{\theta}_{i,2}) d \hat{\theta}_{i,2} = (N-2) \hat{\theta}_{i,2}^{N-3} d \hat{\theta}_{i,2}$, and at $\hat{\theta}_{i,2}=\frac{1+\bar{\theta}}{2}$, $\hat{\Phi}_i(\hat{\theta}_{i,2})$ jumps up from zero to $\frac{1+\bar{\theta}}{2}$. Plugging this in, we get
+	\begin{align}
+		\mathbb{E}_\theta U_{i,2}(\theta_{i,P},\theta_{-i,P}) &= \left.\left( \frac{(1-\hat{\theta}_{i,2})^2}{2} \right) \right|_{\hat{\theta}_{i,2}=\frac{1+\bar{\theta}}{2}} \cdot \left[ \left(\frac{1+\bar{\theta}}{2}\right)^{N-2} - 0^{N-2} \right]
+		+ \int_{\frac{1+\bar{\theta}}{2}}^1 \frac{(1-\hat{\theta}_{i,2})^2}{2} (N-2) \hat{\theta}_{i,2}^{N-3} d \hat{\theta}_{i,2}
+		\nonumber
+		\\
+		&= \frac{1}{N} \left(\frac{1+\bar{\theta}}{2}\right)^N - \frac{1}{N-1} \left(\frac{1+\bar{\theta}}{2}\right)^{N-1} + \frac{1}{N(N-1)}
+		\label{eq:cars_utilt2}
+	\end{align}
+	It can be verified (analytically or graphically) that this function is decreasing in $N$.
+	
+	\item The difference between the two periods is that at $t=1$, the bidders' outside option from not participating in the auction or not winning the item is not zero, since they have an option to participate at $t=2$, which yields positive expected utility. At the same time, if a bidder wins $F$ at $t=1$, they forego this value (since, as assumed in the problem, they have no value for a second car, and will not participate at $t=2$).
+	Letting $\alpha$ denote the probability that Ford is sold at $t=1$ to one of the other $N-1$ bidders, \eqref{eq:cars_utilt2} implies the outside option is given by
+	\begin{align*}
+		%\bar{U} = \alpha \frac{1}{N} \left( 1 - \left(\frac{1+\bar{\theta}}{2}\right)^N \right) + (1-\alpha) \frac{1}{N+1} \left( 1 - \left(\frac{1+\bar{\theta}}{2}\right)^{N+1} \right).
+		\bar{U} = \frac{1-\alpha}{N+1} \left(\frac{1+\bar{\theta}}{2}\right)^{N+1} + \frac{2\alpha - 1}{N} \left(\frac{1+\bar{\theta}}{2}\right)^N - \frac{\alpha}{N-1} \left(\frac{1+\bar{\theta}}{2}\right)^{N-1} + \frac{1-\alpha}{(N+1)N} + \frac{\alpha}{N(N-1)}.
+		%\bar{U} = \frac{\alpha}{N(N-1)} \left[ (N-1)\left(\frac{1+\bar{\theta}}{2}\right)^N - N \left(\frac{1+\bar{\theta}}{2}\right)^{N-1} + 1 \right] + \frac{1-\alpha}{(N+1)N} \left[ N \left(\frac{1+\bar{\theta}}{2}\right)^{N+1} - (N+1) \left(\frac{1+\bar{\theta}}{2}\right)^Z + 1 \right]
+	\end{align*}
+	Bidder $i$'s utility function at $t=1$ is then given by $u_{i,1}(x,\theta) = \theta_{i,F} k_{i,1} + \bar{U}(1-k_{i,1}) - t_{i,1}$.
+	All derivations leading to expression \eqref{eq:carauction} still apply in this case, with the virtual suprlus now being $$VS_{i,1}(\theta) = (\theta_{i,F}-\bar{U}) - \bar{\theta} - \frac{1-\Phi_i(\theta_{i,F})}{\phi_i(\theta_{i,F})} = 2\theta_{i,F} - (1+\bar{U}+\bar{\theta}).$$ 
+	The optimal allocation rule is hence given by
+	\begin{align*}
+		k_{i,1}^*(\theta) = \begin{cases}
+			1 & \text{ if } \theta_{i,F} \geq \hat{\theta}_{i,1}
+			\\
+			0 & \text{ otherwise}
+		\end{cases},
+	\end{align*}
+	where $\hat{\theta}_{i,1} = \max \left\{\frac{1+\bar{U}+\bar{\theta}}{2}, \max_{j \neq i} \{ \theta_{j,F} \} \right\}$.
+	However, now the lowest we can set $U_{i,1}(0,\theta_{-i,F})$ to is $U_{i,1}(0,\theta_{-i,F}) = \bar{U}$, implying that the transfers are given by
+	\begin{align*}
+		\theta_{i,F} k_{i,1} + \bar{U}(1-k_{i,1}) - t_{i,1} &= \bar{U} + \max \{ \theta_{i,F} - \hat{\theta}_{i,1}, 0 \}
+		\\
+		\Rightarrow t_{i,1}(\theta) &= \begin{cases}
+			\hat{\theta}_{i,1} - \bar{U} & \text{ if } \theta_{i,F} \geq \hat{\theta}_{i,1}
+			\\
+			0 & \text{ otherwise}
+		\end{cases}.
+	\end{align*}
+	Note that this is not the final solution: $k^*_{i,1}$ and $t_{i,1}$ both depend on $\hat{\theta}_{i,1}$, which depends on $\bar{U}$, which depends on $\alpha$, which depends on $k^*_1$, hence we have a closed system. Resolving this system yields the solution.
+	
+	\textbf{Remark:} the above adopts an intuitive assumption that entry to the second auction is unrestricted (which is plausible in this setting). However, this does not fully exploit the power of dynamic mechanisms. In particular, Monica could restrict access to the $t=2$ auction to only those agents who participate at $t=1$. This means the bidders' outside option $\bar{U}_n$ from dropping out of $t=1$ auction is then given by $\bar{U}_n = 0$, whereas continuing and not winning car $F$ yields $\bar{U}_p = \bar{U}$ as defined above (as long as all agents choose to participate in equilibrium). Asking all players to pay $\bar{U}_p - \bar{U}_n = \bar{U}$ in order to be admitted to the second-period auction could then serve as a free source of extra revenue. I.e., the optimal first-period mechanism if exclusion is possible consists of $k^*_{i,1}(\theta)$ defined above and 
+	\begin{align*}
+		t_{i,1}(\theta) &= \begin{cases}
+			\hat{\theta}_{i,1} & \text{ if } \theta_{i,F} \geq \hat{\theta}_{i,1}
+			\\
+			\bar{U}_p & \text{ otherwise}
+		\end{cases}.
+	\end{align*}
+	
+
+	\item We can see that at $t=1$, the item is sold less frequently (since the winner's valuation now must be above $\frac{1+\bar{U}+\bar{\theta}}{2}$, as opposed to the $\frac{1+\bar{\theta}}{2}$ cutoff at $t=2$), and all bidders shade their bids (the winner pays the second-highest valuation minus $\bar{U}$). These two factors suggest that the expected revenue in $t=1$ will be lower. However, there is another factor, which is that the competition is more intense, since we have $N$ bidders for sure at $t=1$ and we may have $N-1$ bidders at $t=2$. This effect may dominate for small $N$, leading to higher revenue at $t=1$. 
+	
+	Either way, the total revenue from both periods would be lower than if the bidders did not about the existence of both cars from the start. So it might be optimal to announce an auction for $c=F$, sell that via an SPA with reserve $\frac{1+\bar{\theta}}{2}$, and then announce that $c=P$ is also for sale in another similar SPA. However, that may attract fewer interested bidders $N$ to start with, reducing the revenue again. In the end, the solution is not clear-cut without further calculations and assumptions about bidder participation.
+\end{enumerate}
+\fi
+
+
+\end{document}
