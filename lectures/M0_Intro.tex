@@ -26,7 +26,175 @@
 	\frame[plain]{\titlepage}
 
 
+
+
+
+
+\section{Logistics}
+
+\begin{frame}{Hi}
+	\begin{itemize}
+		\item Egor Starkov
+		\item Contact: \texttt{egor.starkov@econ.ku.dk} or absalon inbox
+		\item Research interests: information economics, dynamic games, communication
+		\item Office: 26.1.13
+		\item Office hours: Tue, 14-15
+		\item Questions: email/absalon, before/after class
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Logistics}
+	\begin{itemize}
+		\item Weekly lectures (except Fall break -- week \#42)
+		\begin{itemize}
+			\item Tue, 15:15-18:00, CSS 2.0.18 (but check timetable for room changes)
+		\end{itemize}
+		
+		\pause
+		\item Mandatory assignment:
+		\begin{itemize}
+			\item ``Make your own problem'' -- find an interesting real-world setting and analyze it using the machinery from the class
+			\item groups of up to 4 are allowed
+			\item deadline: some time in November?
+		\end{itemize}
+		
+		\pause
+		\item Final exam:
+		\begin{itemize}
+			\item 24hrs take home (individual, no groups)
+			\item Convert problems from text to math; solve them and explain intuition
+		\end{itemize}
+		
+		\pause
+		\item Research module for PhD students: contact me if you would like to do it
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Covid-specific stuff}
+	\begin{itemize}
+		\item No online streams/recordings are currently planned, back to stone age
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Materials}
+	\begin{itemize}
+		\item Intended workflow: 
+		\begin{enumerate}
+			\item We start a topic in class
+			\item \uline{You watch video-lectures at home} during the week (+read textbook, slides, whatever's necessary)
+			\item We go through the material \emph{very quickly} in class and discuss any questions you have
+			\item We solve some problems in class
+			\item You will have more problems to practice at home
+		\end{enumerate}
+		\pause
+		\item Suggestion: organize into groups. Watch lectures in groups. Discuss problems in groups.
+		\pause
+		\item In class I use whiteboard+slides. Slides on absalon include some of the whiteboard parts.
+		\begin{itemize}
+			\item I'll try to upload slides in advance, but they might be edited and updated afterwards
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{References: textbooks}
+	This course is a compilation of many books, papers, courses; does not follow any single one too closely. But here are some books that might help (see the reading list on Absalon for full references)
+	\begin{itemize}%[\noitemsep]
+		\item \textbf{Narahari}: Probably your best bet. Hard to find in print, but you have online access through the library (see Absalon).
+		\item \textbf{Diamantaras}: Another good textbook, but seems very hard to find.
+		\item \textbf{B\"{o}rgers}: I used this as default in previous years, but it's quite hardcore and hard to follow. (Easy to find though.)
+		\item \textbf{MWG}: A microeconomic bible. Very good, very clear, but has the smallest coverage for our course.
+		\item \textbf{RS}: Relevant for two lectures on matching. Some material is contained in Narahari and Diamantaras. Nice reference if you are into matching.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{References: other}
+	\begin{itemize}
+		\item I will sometimes refer to individual papers and surveys for results outside of textbooks.
+		\item Some of these are completely optional 
+		\item Some I expect you to know (but try to explain well enough in the slides).
+		\item See the reading list on Absalon for details (will likely be updated during the course).
+		%\item survey papers:
+		%\begin{description}
+		%	\item[B\&V] Bergemann, Dirk, and Juuso Välimäki. ``Dynamic mechanism design: An introduction.'' Journal of Economic Literature 57.2 (2019): 235-74.
+		%	\item[B\&M] Bergemann, Dirk, and Stephen Morris. ``Information design: A unified perspective.'' Journal of Economic Literature 57.1 (2019): 44-95. 
+		%\end{description}
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{References}
+%	In the end:
+%	\begin{itemize}
+	%		\item I suggest getting B{\"o}rgers' textbook. It is not necessary, but might be useful.
+	%		\item Diamantaras or MWG are okay alternatives.
+	%		\item I do \textbf{not} recommend getting Roth \& Sotomayor textbook unless you are really interested in the topic of matching. Promise the slides will be sufficient for that part of the class.
+	%	\end{itemize}
+%\end{frame}
+
+
+
+
+
 \section{What is mechanism design?}
+
+\begin{frame}{What is Economics?}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item What is \structure<1>{the big question of Economics}?
+					\pause
+					\item My take: it is about the \alert{optimal allocation of resources}.
+					\begin{itemize}
+						\item How to trade things from people who have them to people who value them (in terms of other things they offer in exchange)?
+						\item How to allocate the right people to the right jobs?
+						\item How to allocate education, healthcare, congestion, ...?
+						% Educators' resources are limited and heterogeneous, how to allocate students to schools?
+					\end{itemize}
+					\item (Also about disagreements about what ``optimal'' means.)
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0|1>[width=\linewidth]{pics/M0/alloc}
+			\includegraphics<handout:0|2->[width=\linewidth, trim=245 0 35 0, clip]{pics/M0/market2}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{What is the problem?}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item Isn't this solved?
+					\begin{itemize}
+						\item You've seen in Micro I that \alert<1>{markets} are efficient! (First Welfare Theorem)
+					\end{itemize}
+					\pause
+					\item Well, not really...
+					\begin{itemize}
+						\item Many cases where FWT breaks: externalities, monopoly power, \structure<3>{asymmetric information}...
+						\pause
+						\item Also, efficiency might not be the objective
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/market}
+		\end{column}
+	\end{columns}
+\end{frame}
+
 
 \begin{frame}{What is Game Theory?}
 \begin{center}
@@ -140,13 +308,16 @@
 			{\setstretch{1.3}
 				\begin{itemize}
 					\pause
-					\item Can see the ``designer'' as yet another player
-					\item Moves first and sets the rules for other players
+					\item In principle, we can see the ``designer'' as yet another player in a game
 					\begin{itemize}
 						\item Government/regulator
 						\item Organizer of an interaction
 					\end{itemize}
-					\item Designer has a \emph{very large} action set
+					\item Moves first and sets the rules for other players
+					\item Problem: designer has a \emph{very large} action set
+					\begin{itemize}
+						\item Specific tools are needed to solve the designer's problem
+					\end{itemize}
 				\end{itemize}
 			}
 		\end{column}
@@ -190,218 +361,6 @@
 
 
 
-\section{Logistics}
-
-\begin{frame}{Hi}
-\begin{itemize}
-	\item Egor Starkov
-	\item \texttt{egor.starkov@econ.ku.dk} or absalon inbox
-	\item Research interests: information economics, dynamic games, communication
-	\item Office: 26.1.13
-	\item Questions: email/absalon, before/after class
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Logistics}
-\begin{itemize}
-	\item Weekly lectures (except Fall break -- week \#42)
-	\begin{itemize}
-		\item Tue, 15:15-18:00, CSS 2.0.18 (but check timetable for room changes)
-	\end{itemize}
-	
-	\pause
-	\item Mandatory assignment:
-	\begin{itemize}
-		\item ``Make your own problem'' -- find an interesting real-world setting and analyze it using the machinery from the class
-		\item groups of up to 4 are allowed
-		\item deadline: some time in November?
-	\end{itemize}
-	
-	\pause
-	\item Final exam:
-	\begin{itemize}
-		\item 24hrs take home (individual, no groups)
-		\item Convert problems from text to math; solve them and explain intuition
-	\end{itemize}
-
-	\pause
-	\item Research module for PhD students: contact me if you would like to do it
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Covid-specific stuff}
-	\begin{itemize}
-		\item No online streams/recordings are currently planned
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Materials}
-	\begin{itemize}
-		\item Intended workflow: 
-		\begin{enumerate}
-			\item We start a topic in class
-			\item \uline{You watch video-lectures at home} during the week (+read textbook, slides, whatever's necessary)
-			\item We go through the material \emph{very quickly} in class and discuss any questions you have
-			\item We solve some problems in class
-			\item You will have more problems to practice at home
-		\end{enumerate}
-		\pause
-		\item Suggestion: organize into groups. Watch lectures in groups. Discuss problems in groups.
-		\pause
-		\item In class I use whiteboard+slides. Slides on absalon include some of the whiteboard parts.
-		\begin{itemize}
-			\item I'll try to upload slides in advance, but they might be edited and updated afterwards
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{References: textbooks}
-	This course is a compilation of many books, papers, courses; does not follow any single one too closely. But here are some books that might help (see the reading list on Absalon for full references)
-	\begin{itemize}%[\noitemsep]
-		\item \textbf{Narahari}: Probably your best bet. Hard to find in print, but you have online access through the library (see Absalon).
-		\item \textbf{Diamantaras}: Another good textbook, but seems very hard to find.
-		\item \textbf{B\"{o}rgers}: I used this as default in previous years, but it's quite hardcore and hard to follow. (Easy to find though.)
-		\item \textbf{MWG}: A microeconomic bible. Very good, very clear, but has the smallest coverage for our course.
-		\item \textbf{RS}: Relevant for two lectures on matching. Some material is contained in Narahari and Diamantaras. Nice reference if you are into matching.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{References: other}
-	\begin{itemize}
-		\item I will sometimes refer to individual papers and surveys for results outside of textbooks.
-		\item Some of these are completely optional 
-		\item Some I expect you to know (but try to explain well enough in the slides).
-		\item See the reading list on Absalon for details (will likely be updated during the course).
-		%\item survey papers:
-		%\begin{description}
-		%	\item[B\&V] Bergemann, Dirk, and Juuso Välimäki. ``Dynamic mechanism design: An introduction.'' Journal of Economic Literature 57.2 (2019): 235-74.
-		%	\item[B\&M] Bergemann, Dirk, and Stephen Morris. ``Information design: A unified perspective.'' Journal of Economic Literature 57.1 (2019): 44-95. 
-		%\end{description}
-	\end{itemize}
-\end{frame}
-
-
-%\begin{frame}{References}
-%	In the end:
-%	\begin{itemize}
-%		\item I suggest getting B{\"o}rgers' textbook. It is not necessary, but might be useful.
-%		\item Diamantaras or MWG are okay alternatives.
-%		\item I do \textbf{not} recommend getting Roth \& Sotomayor textbook unless you are really interested in the topic of matching. Promise the slides will be sufficient for that part of the class.
-%	\end{itemize}
-%\end{frame}
-
-
-\section{First taste}
-
-\begin{frame}{Example: Environment}
-	Let's go back to the apartment sale example and try to tackle the simplest version of it: one buyer, one seller, one item on sale.
-	\pause
-	
-	\begin{itemize}
-		\item \structure<2>{Seller}: likes money, has \textbf{known} valuation $\structure<2>{\bar{\theta}} \in [0,1]$ for the item
-		\begin{itemize}[<4>]
-			\item \structure<4>{utility}: $u_0(k,t) = t - \bar{\theta} k$
-		\end{itemize}
-		\item \structure<2>{Buyer}: likes money, has \textbf{private} valuation $\structure<2>{\theta} \in [0,1]$ for the item
-		\begin{itemize}[<4>]
-			\item \structure<4>{utility}: $u_1(k,t,\theta) = \theta k - t$
-		\end{itemize}
-		\pause
-		\item let \structure<3>{$k \in \{0,1\}$} denote whether the sale occurs
-		\item let \structure<3>{$t \in \mathbb{R}_+$} denote the price of the sale (or any other transfer between the buyer and the seller)
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Example: Environment comments}
-	\begin{itemize}
-		\item $k$ and $t$ constitute the \textbf{outcome} (e.g., $(k,t)=(1,0.5)$ = ``apt sold for 0.5 moneys''). Outcome will, almost always, depend on the buyer's valuation $\theta$. So the object we are interested in is the outcome \emph{function} $(k(\theta), t(\theta))$.
-		
-		\item For simplicity, allow payments $t$ to be made even if the item is not sold (otherwise better to define $u_0(k,t) = (t - \bar{\theta}) k$ and $u_1(k,t,\theta) = k (\theta - t)$). Also, $t$ that the buyer pays is the same $t$ that the seller receives -- there are no sales taxes, agent commissions, etc.
-		
-		\item Both players are assumed to be risk-neutral (otherwise utilities are not linear in $t$, which is mildly inconvenient). Obviously, we also ignore everything that does not fit the von Neumann-Morgenstern expected utility model (including ambiguity/disappointment/loss aversion, regret, prospect theory, etc).
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Example: Efficient mechanism}
-	Before we go to seller's revenue maximization, suppose policymaker is the designer, wants to facilitate \textbf{efficient trade}.
-	
-	\begin{itemize}
-		\item What does ``efficient trade'' mean?
-		\pause
-		Efficient = maximizes social surplus: for any $\theta$,
-		\begin{align*}
-			(k^*(\theta),t^*(\theta)) &\in \arg \max_{k(\theta),t(\theta)} \left\{ u_0(k,t) + u_1(k,t,\theta) \right\}
-			\\
-			&= \arg \max_{k(\theta),t(\theta)} \left\{ t(\theta) - \bar{\theta} k(\theta) + \theta k(\theta) - t(\theta) \right\}
-			\\
-			&= \arg \max_{k(\theta),t(\theta)} \left\{ k(\theta) \cdot (\theta - \bar{\theta})  \right\}
-		\end{align*}
-		\pause
-		so $k^*(\theta) = \mathbb{I} \{ \theta > \bar{\theta} \}$ (=trade whenever the buyer values the item more), and $t^*(\theta)$ can be anything.
-		\pause
-		\item This can be implemented by setting a fixed price $t = \bar{\theta}$. Buyer will then obviously buy if and only if $\theta > \bar{\theta}$.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Example: Efficient mechanism comments}
-	\begin{itemize}
-		\item The irrelevance of price comes from linearity of utilities in $t$, both agents having the same sensitivity to $t$, and the designer assigning same weight to both agents' utilities.
-		\begin{itemize}
-			\item This will be our approach for most of the course -- everyone is equal, so redistribution does not matter; the only goal of transfers is to provide incentives.
-			\item In principle, you can factor equality into the problem by adjusting the designer's objective function appropriately.
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Example: Optimal mechanism}
-	Now back to the original question: what is the sale mechanism that \textbf{maximizes seller's revenue}?
-	\pause
-	
-	\begin{itemize}
-		\item First, what is the realm of all possible mechanisms? What are we choosing from?
-		\pause
-		\begin{itemize}
-			\item Any mechanism produces some outcomes $k,t$
-			\item ...though these depend on $\theta$, so they are actually functions $k(\theta),t(\theta)$.
-			\item Given these functions, we can always propose a ``direct mechanism'': ``buyer reports $\theta$ to the mechanism, and respective outcomes are implemented.
-		\end{itemize}
-		
-		\pause
-		\item But can we choose any pair of functions $k(\theta),t(\theta)$? Or are there any restrictions we should impose?
-		\pause
-		\begin{itemize}
-			\item Well, the idea is for the buyer to report $\theta$ truthfully. So the mechanism should be such that it is optimal for the buyer to report truthfully \alert{$\leftarrow$ ``Incentive compatibility''}
-			\item Also, buyer should be willing to participate in the mechanism, as opposed to walking away -- so should get higher utility than what can get by walking away (zero) \alert{$\leftarrow$ ``Individual rationality''}
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Example: Optimal mechanism}
-	Now back to the original question: what is the sale mechanism that \textbf{maximizes seller's revenue}?
-	
-	So in the end we get the following problem:
-	\begin{align*}
-		\max_{k(\cdot),t(\cdot)} & \mathbb{E}_\theta \left[ t(\theta) - \bar{\theta} k(\theta) \right]
-		\\
-		\text{s.t. (IC): } & \theta k(\theta) - t(\theta) \geq \theta k(\hat{\theta}) - t(\hat{\theta}) \text{ for all } \theta,\hat{\theta}
-		\\
-		\text{(IR): } &\theta k(\theta) - t(\theta) \geq 0 \text{ for all } \theta
-	\end{align*}
-	\pause
-	This is almost a standard maximization problem. Except we're maximizing over \uline{functions}, as opposed to one or two numbers... And there is an \uline{infinite} number of constraints...
-	\pause
-	Want to know how to solve this? Tune in next week for more mechanism design!
-\end{frame}
 
 
 \begin{frame}{For next week}
