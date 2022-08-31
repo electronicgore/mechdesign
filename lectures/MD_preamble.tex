@@ -17,21 +17,21 @@
 
 \usepackage{tikz}
 \usepackage{tikzscale}
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-		\node[shape=circle,draw, inner sep=-20pt] (char) {#1};}}
-\usetikzlibrary{automata,positioning}
-\usetikzlibrary{decorations.pathreplacing}
+%\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+%		\node[shape=circle,draw, inner sep=-20pt] (char) {#1};}}
+%\usetikzlibrary{automata,positioning}
+%\usetikzlibrary{decorations.pathreplacing}
 \usepackage{pgfplots}
 \usepgfplotslibrary{fillbetween}
 \usepackage{graphicx}
 
 \usepackage{setspace}
-\thinmuskip=1mu
-\medmuskip=1mu 
-\thickmuskip=1mu 
+%\thinmuskip=1mu
+%\medmuskip=1mu 
+%\thickmuskip=1mu 
 
 
-\usecolortheme{default}
+%\usecolortheme{default}
 \usepackage{verbatim}
 \usepackage[normalem]{ulem}
 
@@ -48,12 +48,12 @@
 
 
 
-% To use LyX frames from old version:
-\def\lyxframeend{} % In case there is a superfluous frame end
-\long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
-\def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
-\def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
-\def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
-\def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
-\long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
-	\frame<#1>[#2][#3]{\frametitle{#4}#5}}
+%% To use LyX frames from old version:
+%\def\lyxframeend{} % In case there is a superfluous frame end
+%\long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+%\def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+%\def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+%\def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+%\def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+%\long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+%	\frame<#1>[#2][#3]{\frametitle{#4}#5}}
