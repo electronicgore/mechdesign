@@ -1,7 +1,9 @@
 Material and information related to the Masters-level Mechanism Design course at Københavns Universitet.
 
-The course covers most of core topics in mechanism design as presented in Tilman Borgers' textbook, plus some extra topics such as matching (using Roth & Sotomayor textbook) and information design. See the reading list for more detailed info and further readings.
+The course covers most of core topics in mechanism design as presented in Yadati Narahari's textbook, including matching and some bonus topics, such as information design. See the reading list for more detailed info and further readings.
 
 This repo contains lecture slides, homework and exam problems with solutions. 
 
-Current version: Fall 2021.
+NOTE: lecture slides contain some copyrighted pictures used under fair use in slides but not redistributed in this repo. This means that an attempt to compile slides will in some cases yield errors. When this happens, find and comment out the relevant "includegraphics" lines.
+
+Current version: Fall 2022.
