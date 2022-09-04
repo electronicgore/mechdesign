@@ -101,6 +101,14 @@
 
 \section{VCG}
 
+\begin{frame}{VCG Mechanism: intro}
+\begin{itemize}
+	\item We now introduce the VCG mechanism that DSIC-implements the efficient allocation. We shall do it in a few steps.
+	\item \textbf{NOTE}: while the big idea of the VCG mechanism is the same everywhere, the \alert{exact definition} of the VCG mechanism \alert{differs} in different sources (textbooks). The version in these slides is, I believe, the most robust, so I ask that you stick to it, unless you have a good reason not to.
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{VCG Mechanism: Groves' Transfers}
 \begin{itemize}
 	\item More formally, the problem of agent $i$ of type $\theta_i$ is:
@@ -175,6 +183,9 @@
 	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
 	\\ &\text{where } k^*(\theta_{-i}) \in \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
 	\end{align*}
+
+	\item \textbf{NOTE}: it is the $k^*(\theta_{-i})$ that each textbook interprets differently (or replaces with other things). Again, I believe the version above to be the easiest to apply in the widest range of settings, so I encourage you to use that.
+	
 	\item Resulting \alert{VCG transfers}:
 	\vspace{-0.5em}\begin{align*}
 	\structure{ t_{i}^{VCG}(\theta) } \equiv -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
