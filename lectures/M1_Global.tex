@@ -101,6 +101,21 @@
 \end{frame}
 
 
+\begin{frame}{Mechanism}
+\begin{itemize}
+	\item a mechanism is a game played by the agents
+	\item each agent has an action set $A_{i}$ in this game
+\end{itemize}
+\begin{definition}[mechanism]
+	A \alert{mechanism} $\Gamma=(A_{1},\dots,A_{N},g(\cdot))$ is a collection of: 
+	\begin{itemize}
+		\item N \structure{strategy sets} $(A_{1},\dots,A_{N})$ and 
+		\item an \structure{outcome function} $g:A_{1}\times\dots\times A_{N}\rightarrow X$.
+	\end{itemize}
+\end{definition}
+\end{frame}
+
+
 \begin{frame}{Social Choice Function}
 	\begin{definition}[Social choice function]
 		A \alert{social choice function} is a function \alert{$f:\Theta_{1}\times \dots\times\Theta_{N}\rightarrow X$} that assigns to each profile of types $(\theta_{1},\dots,\theta_{N})$ a collective choice $f(\theta_{1},\dots,\theta_{N})\in X$.
@@ -108,21 +123,6 @@
 	\begin{itemize}
 		\item gives a desired outcome as a function of the agents' types
 	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Mechanism}
-	\begin{itemize}
-		\item a mechanism is a game played by the agents
-		\item each agent has an action set $A_{i}$ in this game
-	\end{itemize}
-	\begin{definition}[mechanism]
-		A \alert{mechanism} $\Gamma=(A_{1},\dots,A_{N},g(\cdot))$ is a collection of: 
-		\begin{itemize}
-			\item N \structure{strategy sets} $(A_{1},\dots,A_{N})$ and 
-			\item an \structure{outcome function} $g:A_{1}\times\dots\times A_{N}\rightarrow X$.
-		\end{itemize}
-	\end{definition}
 \end{frame}
 
 
@@ -385,7 +385,7 @@ concept that will be used in this implementation concept.
 \begin{frame}{Bayes-Nash Equilibrium}
 \begin{definition}[Bayes-Nash equilibrium]
 	The \structure{strategy profile} $a^* =(a_{1}^*,\dots,a_{N}^*)$ with $a_i^*: \Theta_i \to A_i$ is a \alert{Bayes-Nash equilibrium} of the mechanism $\Gamma=(A_{1},\dots,A_{N},g)$ if, for all $i$ and all $\theta_{i}\in\Theta_{i}$,
-	$$E_{\theta_{-i}}\left[u_{i}(g(a_i^*(\theta_i),a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]\geq E_{\theta_{-i}}\left[u_{i}(g(\hat a_i,a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]$$
+	$$\mathbb{E}_{\theta_{-i}}\left[u_{i}(g(a_i^*(\theta_i),a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]\geq \mathbb{E}_{\theta_{-i}}\left[u_{i}(g(\hat a_i,a_{-i}^*(\theta_{-i})),\theta_{i})|\theta_{i}\right]$$
 	for all $\hat a_{i}\in A_{i}$.
 \end{definition}
 \pause
@@ -393,7 +393,7 @@ concept that will be used in this implementation concept.
 	\item Standard NE reasoning: if everyone else plays eqm strats, $i$ has no incentive to deviate.
 	\item (This definition is for pure strategies, but there is no problem in allowing mixed strategies.)
 	\item Expectations are taken w.r.t. distribution $F(\theta)$
-	\item BTW: we assumed that allocation and transfers are \emph{deterministic} given reports. \href{https://doi.org/10.3982/ECTA14698}{\uline{Chen, He, Li, and Sun (2019)}} show that this is often without loss of generality.
+	%\item BTW: we assumed that allocation and transfers are \emph{deterministic} given reports. \href{https://doi.org/10.3982/ECTA14698}{\uline{Chen, He, Li, and Sun (2019)}} show that this is often without loss of generality.
 \end{itemize}
 \end{frame}
 \note{(video script):
@@ -449,7 +449,7 @@ a given s.c.f..
 	
 	That is, for all $i,\theta_{i}$, and $\hat{\theta}_{i}\in\Theta_{i}$,
 	\vspace{-0.5em}\begin{align*}
-		E_{\theta_{-i}}\left[u_{i}(f(\theta_i,\theta_{-i}),\theta_{i})|\theta_{i}\right]\geq E_{\theta_{-i}}\left[u_{i}(f(\hat \theta_{i},\theta_{-i}),\theta_{i})|\theta_{i}\right].
+		\mathbb{E}_{\theta_{-i}}\left[u_{i}(f(\theta_i,\theta_{-i}),\theta_{i})|\theta_{i}\right]\geq \mathbb{E}_{\theta_{-i}}\left[u_{i}(f(\hat \theta_{i},\theta_{-i}),\theta_{i})|\theta_{i}\right].
 	\end{align*}\vspace{-1em}
 \end{definition}
 Every player is asked for their type; reporting truthfully is a BNE.
