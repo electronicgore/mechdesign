@@ -25,6 +25,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage[USenglish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{enumitem}
 
 
 % Margins
@@ -169,6 +170,114 @@ This is an open-ended question, so many answers are possible. Below is one examp
 
 \section{Screening}
 
+One application of mechanism design is to profit maximization when consumers have private information about their valuations. One example of such a problem is second-degree price discrimination that you have seen in mikro II. The following is a variation of that, known as a ``monopolistic screening'' problem (with two types) that you may have seen in game theory.
+
+Suppose a seller-designer offers a single product for sale that he can produce at zero cost. She offers a menu of pairs of quantities $k \in [0,1]$ and prices $t \in \mathbb{R}_+$. There is one buyer with valuation $\theta \in \{ L,H \}$ for the product, which is his private information. The seller's belief regarding $\theta$ is given by $\phi(H) = \phi$, $\phi(L)=1-\phi$. The buyer's preferences are given by $u_b(k,t,\theta) = \theta k - t$ if he buys the product and zero otherwise.
+
+\begin{enumerate}
+	\item Explain why it is sufficient for the seller to offer a menu consisting of two items: $(k_H,t_H)$ and $(k_L,t_L)$.
+	
+	\item Write down the seller's problem of maximizing her expected profit subject to the buyer's incentive compatibility (IC) and individual rationality (IR) constraints for every $\theta$, in terms of the model primitives.
+	
+	\item Derive the seller's optimal menu $((k_H^*,t_H^*), (k_L^*,t_L^*))$ by following the steps below.
+	\begin{enumerate}
+		\item Show that if $((k_H,t_H),(k_L,t_L))$ satisfy $IC_H$ and $IR_L$, then they also satisfy $IR_H$.
+		\item Show that $((k_H,t_H),(k_L,t_L))$ satisfy $IC_H$ and $IC_L$ only if $k_H \geq k_L$.
+		\item Show that if $((k_H,t_H),(k_L,t_L))$ are such that $k_H \geq k_L$ and $IC_H$ binds (i.e., is satisfied with equality), then they also satisfy $IC_L$.
+		\item Show that given all of the above, it is always optimal to choose  $((k_H,t_H),(k_L,t_L))$ in such a way that $IC_H$ and $IR_L$ bind.
+		\item Given all of the above, solve for the optimal menu $((k_H^*,t_H^*), (k_L^*,t_L^*))$.
+	\end{enumerate}
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item By the revelation principle, the problem can be solved by a direct revelation mechanism that asks the consumer for his type and prescribes an outcome $(k,t)$ in return. Since there are only two types of the consumer, such a DRM will respond with either $(k_H,t_H)$ or $(k_L,t_L)$, depending on the consumer's report of $\theta$. An equivalent (indirect) mechanism would, instead of asking the consumer to report his type, simply offer him a choice between these two outcomes.
+	
+	\item The problem looks as follows:
+	\begin{align*}
+		\max_{((k_H,t_H),(k_L,t_L))} & \left\{ \phi t_H + (1-\phi) t_L \right\}
+		\\ \text{s.t. } (IC_H):&\quad \theta_H k_H - t_H \geq \theta_H k_L - t_L,
+		\\ (IC_L):&\quad \theta_L k_H - t_H \leq \theta_L k_L - t_L,
+		\\ (IR_H):&\quad \theta_H k_H - t_H \geq 0,
+		\\ (IR_L):&\quad \theta_L k_L - t_L \geq 0.
+	\end{align*}
+	
+	\item Proceeding step by step:
+	\begin{enumerate}
+		\item Consider the following chain of inequalities:
+		\begin{align*}
+			\theta_H k_H - t_H \geq \theta_H k_L - t_L
+			\geq 
+			\theta_L k_L - t_L \geq 0.
+		\end{align*}
+		The first inequality above is $IC_H$, the second is satisfied since $\theta_H > \theta_L$, and the last one is $IR_L$. Hence if $IC_H$ and $IR_L$ hold, then $\theta_H k_H \geq 0$, meaning that $IR_H$ holds automatically, and can be ignored.
+		
+		\item Subtracting $IC_L$ from $IC_H$, we get
+		\begin{align*}
+			\theta_H k_H - t_H - \left( \theta_L k_H - t_H \right) &\geq \theta_H k_L - t_L - \left( \theta_L k_L - t_L \right)
+			\\ \iff
+			(\theta_H - \theta_L) k_H &\geq (\theta_H - \theta_L) k_L
+			\\ \iff
+			(\theta_H - \theta_L) (k_H -k_L) &\geq 0.
+		\end{align*}
+		Since $\theta_H > \theta_L$, we get that $IC_H$ and $IC_L$ together imply that $k_H \geq k_L$.
+		
+		\item If $IC_H$ binds, then $t_H - t_L = (k_H - k_L) \theta_H$. Plugging that into $IC_L$ gives:
+		\begin{align*}
+			\theta_L k_H - t_H &\leq \theta_L k_L - t_L
+			\\ \iff 
+			\theta_L (k_H - k_L) &\leq t_H - t_L
+			\\ \iff
+			\theta_L (k_H - k_L) &\leq (k_H - k_L) \theta_H
+			\\ \iff
+			(\theta_H - \theta_L) (k_H -k_L) &\geq 0.
+		\end{align*}
+		(Same expression as above, but a slightly different implication behind it. Previously the idea was that this condition was necessary for $IC_H$ and $IC_L$ to hold. Now the idea is if $IC_H$ holds with equality, then the condition above is equivalent to $IC_L$.) 
+		
+		Since $\theta_H > \theta_L$ and it is assumed that $k_H \geq k_L$, the condition above holds, hence $IC_L$ also holds.
+		
+		\item In part (a) we saw that $IR_H$ can be ignored because it is always satisfied by a menu that satisfies the other constraints. In part (c) we saw that if the optimal menu is such that $IC_H$ binds, then $IC_L$ can also be ignored. Let us consider a problem without $IR_H$ and $IC_L$, and we will show that $IC_H$ does indeed bind in the optimum, hence $IC_L$ is indeed satisfied.
+		\begin{align*}
+			\max_{((k_H,t_H),(k_L,t_L))} & \left\{ \phi t_H + (1-\phi) t_L \right\}
+			\\ \text{s.t. } (IC_H):&\quad \theta_H k_H - t_H \geq \theta_H k_L - t_L,
+			\\ (IR_L):&\quad \theta_L k_L - t_L \geq 0.
+		\end{align*}
+		Proceed by contradiction: suppose $IC_H$ is slack in the optimum (i.e., the optimal menu is such that $IC_H$ holds with strict inequality). Then the seller could offer a different menu with a slightly higher $t_H$ -- this would yield higher expected profit, and both constraints would still be satisfied, hence such a menu is strictly better, which contradicts the original menu being optimal. Therefore, $IC_H$ can not be slack in the optimal menu. Similarly, if $IR_L$ is slack in the optimum, then increasing $t_L$ and $t_H$ is a similar profitable deviation, yielding another contradiction.
+		
+		\item Given all of the above, the problem can be re-stated as 
+		\begin{align*}
+			\max_{((k_H,t_H),(k_L,t_L))} & \left\{ \phi t_H + (1-\phi) t_L \right\}
+			\\ \text{s.t. } (IC_H):&\quad \theta_H k_H - t_H = \theta_H k_L - t_L,
+			\\ (IR_L):&\quad \theta_L k_L - t_L = 0,
+			\\ & k_H \geq k_L.
+		\end{align*}
+		This problem is much simpler than the original one. From $IR_L$, we get $t_L = \theta_L k_L$, and then from $IR_H$, we can express $t_H = \theta_H (k_H-k_L) + \theta_L k_L$. The problem is then equivalent to
+		\begin{align*}
+			\max_{(k_H,k_L)} & \left\{ \phi \theta_H (k_H-k_L) + \theta_L k_L \right\},
+			\\\text{s.t. } & k_H \geq k_L.
+		\end{align*}
+		This is a linear maximization problem with linear constraints (remember also that $k_\theta \in [0,1]$), hence we'll have a corner solution. There are three corners in the constrained set: $(k_H,k_L) \in \left\{ (0,0), (1,0), (1,1) \right\}$. It is easy to see that $(0,0)$ is dominated by $(1,0)$. Either of the other two can be optimal depending on the parameters. Hence the optimal menu is given by:
+		\begin{align*}
+			((k_H^*,t_H^*), (k_L^*,t_L^*)) = \begin{cases}
+				((1,\theta_H),(0,0)) & \text{ if } \phi \theta_H \geq \theta_L,
+				\\
+				((1,\theta_L), (1,\theta_L)) & \text{ if } \phi \theta_H \leq \theta_L.
+			\end{cases}
+		\end{align*}
+	\end{enumerate}
+\end{enumerate}
+
+\fi 
+
+
+
+\section{Screening 2}
+%Jeff's problem bank
+
+This is a marginally more difficult version of the previous problem. Once you understood the solution of the previous problem, try to solve this one by following the same algorithm.
+
 The Chicago Transit Authority (the organization in charge of the Chicago 
 subway system) has decided that it needs to do more to maximize
 its revenue. As such it has hired you to design its new price and service
@@ -293,11 +402,11 @@ Fix some s.c.f. $f(\theta)$. Let $\Theta_p$ be the set of types who are offered 
 We will characterize the set of IC social choice functions by a series of claims. 
 
 \begin{itemize}
-	\item[claim 1] $f(\bullet)$ has at most one value on the real line.
+	\item[claim 1] $f(\cdot)$ has at most one value on the real line.
 	
 	Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
 	
-	\item[claim 2] $f(\bullet)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
+	\item[claim 2] $f(\cdot)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
 		\\
 		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
 	
@@ -324,7 +433,7 @@ is incentive compatible.
 \section{Second-price auction}
 %MWG 8.B.3 | solutions from Alessandro's questionbank
 
-There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $v_i$, which the other players believe is distributed according to some c.d.f. $F_i(v_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid; all other bidders pay nothing.
+There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $v_i$, which the other players believe is distributed according to some c.d.f. $F_i(v_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid $b_{(2)}$, their utility is then given by $u_i = v_i - b_{(2)}$. All other bidders get nothing and pay nothing, so their utility is zero.
 \begin{enumerate}
 	\item Show that bidding truthfully ($b_i=v_i$) is a weakly dominant strategy for every bidder $i$.
 	\item Conclude that the second-price auction implements the efficient allocation rule in dominant strategies.
