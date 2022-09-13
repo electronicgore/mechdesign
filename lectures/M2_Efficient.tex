@@ -2,7 +2,7 @@
 
 \documentclass[english,10pt
 ,aspectratio=169
-%,handout
+,handout
 %%%%%,notes
 ]{beamer}
 \input{MD_preamble.tex}
@@ -41,6 +41,7 @@
 			\end{itemize}
 			\item Instead of arbitrary $u_i(x,\theta)$ focus on \structure{quasilinear preferences}:
 			$$\alert{ u_i(x,\theta_i) = v_i(k,\theta_i) - t_i }$$
+			%NOTE: v_i can only depend on theta_i (as opposed to theta) due to Clarke payments
 			\vspace{-1em}
 			\item S.c.f. is $f(\theta) = \left( k(\theta), t_1(\theta), ..., t_N(\theta) \right)$
 		\end{itemize}
@@ -50,13 +51,14 @@
 
 \begin{frame}{Quasilinear Preferences}
 \begin{itemize}
-	\item Restrictions include:
+	\item Common interpretation: transfers=payments. This comes with a bunch of assumptions:
 	\begin{itemize}
 		\item Monetary transfers always available,
-		\item utility is linear in money,
-		\item marginal utility of money is constant across types and people and independent of allocation.
+		\item individual utility is linear in money (risk-neutrality),
+		\item marginal social utility of money is constant across types and people and independent of allocation.
 	\end{itemize}
-	\item All three are sometimes restrictive, the latter two especially. But let's roll with it.
+	\item All three are sometimes restrictive, the latter two especially. 
+	\item However, monetary payments are not necessary! Anything that $i$ cares about that is not directly included in the allocation $k$ can be used to adjust $i$'s utility as needed!
 \end{itemize}
 \end{frame}
 
@@ -71,7 +73,7 @@
 	\end{align*}
 	\item Transfers just reallocate utility across agents, so focus on \structure{efficient allocation $k^*(\theta)$}:
 	\vspace{-1em}\begin{align*}
-	k^*(\theta) = \arg \max_k \sum_{i=0}^N v_i(k,\theta)
+	k^*(\theta) = \arg \max_k \sum_{i=0}^N v_i(k,\theta_i)
 	\end{align*}
 	\item Note that we can include $i=0$ into welfare calculations. This can capture designer's preferences or any social costs/benefits not captured by individual agents (e.g., cost of implementing a public project)
 \end{itemize}
@@ -182,6 +184,7 @@
 	\vspace{-0.5em}\begin{align*}
 	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
 	\\ &\text{where } k^*(\theta_{-i}) \in \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
+	%TODO: k^* or k^{-i}? I think the latter is in pset3 -- fix whichever is wrong
 	\end{align*}
 
 	\item \textbf{NOTE}: it is the $k^*(\theta_{-i})$ that each textbook interprets differently (or replaces with other things). Again, I believe the version above to be the easiest to apply in the widest range of settings, so I encourage you to use that.
@@ -654,7 +657,7 @@ Can we answer this question now?
 		\item $\Theta_i \subseteq \mathbb{R}^{K_i}$ is a convex set for every $i$ 
 		\item $v_i(k,\theta_i)$ is convex in $\theta_i$ for all $i$.
 	\end{itemize}
-	(I believe you can relax convexity of $\Theta_i$ to connectedness, but I do not have a reference for that.)
+	%(I believe you can relax convexity of $\Theta_i$ to connectedness, but I do not have a reference for that.)
 \end{frame}
 
 
@@ -832,7 +835,7 @@ Not necessarily IR. :(
 	\item These cancel out and exhaust all terms in the sum. Therefore, $\sum_i t_i^{AGV} (\theta) = 0$ for all $\theta$ = ex post exact budget balance.
 	\begin{itemize}
 		\item \textbf{Note:} if the mechanism needs to raise some fixed sum \emph{for any} $\theta$, it can be treated as $\tilde{t}_0$. \\
-		If the mechanism needs to raise some sum that is \emph{dependent on} $\theta$ (e.g. fund a public project iff it is build), AGV \alert{cannot} handle that.
+		If the mechanism needs to raise some sum that is \emph{dependent on} $\theta$ (e.g. fund a public project iff it is built), AGV \alert{cannot} handle that.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -867,9 +870,9 @@ Not necessarily IR. :(
 	\item We have two mechanisms that implement the \structure{efficient} $k^*$ in \alert{quasilinear} model:
 	\begin{itemize}
 		\item AGV: BIC + BB,
-		\item gVCG: BIC + IIR.
+		\item gVCG: DSIC + IIR.
 	\end{itemize}
-	\item In the \alert{Euclidean} model, gVCG is also [ex ante-]revenue-maximizing
+	\item In the \alert{Euclidean} model, gVCG is also [ex ante-]revenue-maximizing among BIC+IIR mechanisms.
 	\item Revenue equivalence is powerful, but needs more structure than just quasilinear model.
 \end{itemize}
 \end{frame}
