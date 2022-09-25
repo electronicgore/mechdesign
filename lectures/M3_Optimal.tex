@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2021}
+	Fall 2022}
 
 
 \begin{document}
@@ -55,11 +55,12 @@
 \begin{frame}{Today}
 \begin{itemize}
 	\item Finished with implementing efficient s.c.f.s
-	\item Take a break from implementing arbitrary s.c.f.s
+	%\item Take a break from implementing arbitrary s.c.f.s
 	\item Today will look at revenue maximization.
 	\begin{itemize}
 		\item Revenue-maximizing mechanisms called ``optimal'' in the literature (meaning optimal for the designer), after Myerson's ``optimal mechanism''.
 	\end{itemize}
+	\item gVCG was optimal in the class of efficient mechanisms. Now we remove the restriction on allocations.
 \end{itemize}
 \end{frame}
 
@@ -174,7 +175,7 @@ Integration by parts under the microscope:
 
 \begin{frame}{Optimal Mechanism: pinning $U_b(0)$}
 \begin{equation*}
-	\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
+	\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1-2>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
 \end{equation*}
 \begin{itemize}
 	\item To choose: $\{k(\theta)\}_\theta$ and $U_b(0)$ (pins transfers).
@@ -229,6 +230,20 @@ Integration by parts under the microscope:
 \end{frame}
 
 
+\begin{frame}{Optimal Mechanism: non-linear preferences}
+	\begin{itemize}
+		\item Note that linear preferences $v(k,\theta) = \theta k$ are not necessary for any of this.
+		\item With general $v$ you will not get a nice decomposition $k \cdot VS$ in the integral.
+		\item But you can still obtain something like
+		\begin{equation*}
+			\int_0^{\bar{\theta}} \left( v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+		\end{equation*}
+		and define $VS(\theta) = v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-F(\theta)}{\phi(\theta)}$ (note it's slightly different from how we defined $VS$ in the linear case)
+		\item And you can still find the optimal $k$ by maximizing this virtual surplus (and it still has to be monotone)
+	\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Optimal Mechanism: Lessons}
 \begin{itemize}
 	\item Incentives are costly.
@@ -255,7 +270,7 @@ Integration by parts under the microscope:
 	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
 	\item Actually cannot do much better than fixed price in this simple trade model.
 	\begin{itemize}
-		\item Maximizing $\int k(\theta) VS(\theta) d\theta$, linear in $k(\theta)$, so will typically have either a cutoff rule, or constant rule -- unless $VS(\theta)$ non-monotone.
+		\item Maximizing $\int k(\theta) VS(\theta) d\theta$, which is linear in $k(\theta)$ for all $\theta$. So we'll typically have either a cutoff rule, or constant rule -- unless $VS(\theta)$ non-monotone.
 		\item Consequence of Euclidean payoffs. More interesting results with non-linear payoffs.
 	\end{itemize}
 \end{itemize}
