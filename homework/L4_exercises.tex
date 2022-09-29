@@ -158,19 +158,179 @@
 
 \section{Payoff equivalence in auctions}
 
-Consider an auction for one item and $N$ bidders with valuations $v_i \sim i.i.d.U[0,1]$ and quasilinear preferences. Consider three different auction formats, in which all bidders submit bids simultaneously:
+Consider an auction for one item and $N$ bidders with valuations $\theta_i \sim i.i.d.U[0,1]$ and quasilinear preferences. Consider three different auction formats, in which all bidders submit bids simultaneously:
 \begin{itemize}
-	\item \emph{First-price sealed bid auction}, in which the highest bidder wins the item and pays their own bid. In such a format with $v_i \sim U[0,1]$, bidder $i$'s equilibrium bidding strategy is $b_i^{FPA} = \frac{N-1}{N} v_i$.
-	\item \emph{Second-price sealed bid auction}, in which the highest bidder wins and pays the second-highest bid. In such a format, it is a weakly dominant strategy for bidder $i$ to bid their valuation: $b_i^{SPA} = v_i$.
-	\item \emph{All-pay auction}, in which all bidders pay their bids, and the highest bidder wins the item. In such a format with $v_i \sim U[0,1]$, bidder $i$'s equilibrium bidding strategy is $b_i^{APA} = \frac{N-1}{N} v_i^N$.
+	\item \emph{First-price sealed bid auction}, in which the highest bidder wins the item and pays their own bid. In such a format with $\theta_i \sim U[0,1]$, bidder $i$'s equilibrium bidding strategy is $b_i^{FPA} = \frac{N-1}{N} \theta_i$.
+	\item \emph{Second-price sealed bid auction}, in which the highest bidder wins and pays the second-highest bid. In such a format, it is a weakly dominant strategy for bidder $i$ to bid their valuation: $b_i^{SPA} = \theta_i$.
+	\item \emph{All-pay auction}, in which all bidders pay their bids, and the highest bidder wins the item. In such a format with $\theta_i \sim U[0,1]$, bidder $i$'s equilibrium bidding strategy is $b_i^{APA} = \frac{N-1}{N} \theta_i^N$.
 \end{itemize}
-Calculate the bidders' expected payoff and the auctioneer's expected revenue and verify that they are the same under the three formats.
+Calculate the bidders' (interim) expected payoffs and the auctioneer's (ex ante) expected revenues under the three formats. Verify that they are the same across the three cases.
 
 \emph{Bonus question:} verify that the bidding functions given for FPA and APA do indeed constitute an equilibrium.
 
 \ifsolutions
 \section*{Solution}
-See notes from class.
+
+We use the following notation conventions, given some player $i$:
+\begin{align*}
+	K_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ k_i(\theta_i,\theta_{-i}) \right],
+	\\
+	T_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ t_i(\theta_i,\theta_{-i}) \right],
+	\\
+	\bar{U}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ \theta_i K_i(\theta_i) - T_i(\theta_i) \right],
+	\\
+	\theta_{(2)} &\equiv \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j .
+\end{align*}
+(The $\theta_{(2)}$ is a somewhat weird notation, since its value depends on both the $i$'s identity and the type profile $\theta$, neither of which is reflected in the notation -- which should be more like $\theta_{(2),i}(\theta)$ or $\theta_{(2)}(\theta_{-i})$. Both of the latter options feel quite heavy though, hence we use simply $\theta_{(2)}$.)
+
+Further, it will prove useful to derive the distribution of $\max_{i \in \{1,...,N\}} \theta_i$. Its cdf is given by $F_N(x)$ such that
+\begin{equation} \label{eq:auc_Fmax}
+\begin{aligned}
+	F_{N}(x) 
+	&= \mathbb{P} \left\{ \max_{i \in \{1,...,N\}} \theta_i \leq x \right\}
+	\\
+	&= \prod_{j \in \{1,...,N\}} \mathbb{P} \left\{ \theta_j \leq x \right\}
+	\\
+	&= x^N,
+\end{aligned}
+\end{equation}
+where the second equality follows from the independence of players' valuations, and the final equality uses $\theta_j \sim U[0,1]$. The respective pdf is then given by $\phi_{N}(x) = Nx^{N-1}$.
+
+\paragraph{FPA.} 
+Given the proposed bidding strategy, the highest-valuation player wins the item. Bidder $i$'s interim expected payoff is
+\begin{align*}
+	\bar{U}_i(\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \left( \theta_i - \frac{N-1}{N} \theta_i \right) \cdot \mathbb{I} \left\{ \theta_i > \theta_j, \forall j \neq i \right\} \right]
+	\\
+	&= \mathbb{E}_{\theta_{-i}} \left[ \frac{\theta_i}{N} \cdot \mathbb{I} \left\{ \theta_i > \theta_j, \forall j \neq i \right\} \right]
+	\\
+	&= \frac{\theta_i}{N} \cdot \mathbb{E}_{\theta_{-i}} \left[ \mathbb{I} \left\{ \theta_i > \theta_{(2)} \right\} \right]
+\end{align*}
+where the third inequality follows from the definition of $\theta_{(2)}$ and from $\frac{\theta_i}{N}$ being independent of $\theta_{-i}$. Then since $\theta_i$ is fixed, and the expectation of an indicator of an event is simply the probability of this event, we get
+\begin{align*}
+	\bar{U}_i(\theta_i) 
+	&= \frac{\theta_i}{N} \cdot \mathbb{P} \left\{ \theta_{(2)} < \theta_i \right\}
+	= \frac{\theta_i}{N} \cdot F_{N-1} (\theta_i)
+	= \frac{\theta_i}{N} \cdot \theta_i^{N-1}
+	= \frac{\theta_i^N}{N}.
+\end{align*}
+To show that the suggested strategy indeed constitutes an equilibrium, take some bidder $i$, suppose all other players bid according to $b_j(\theta_j) = \frac{N-1}{N} \theta_j$, and maximize $i$'s interim expected utility w.r.t. their bid $b_i$:
+\begin{align*}
+	\bar{U}_i(b_i,\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \left( \theta_i - b_i \right) \cdot \mathbb{I} \left\{ b_i > \frac{N-1}{N} \theta_j, \forall j \neq i \right\} \right]
+	\\
+	&= (\theta_i - b_i) \cdot F_{N-1} \left(\frac{N b_i}{N-1} \right) = (\theta_i - b_i) \cdot \left(\frac{N b_i}{N-1} \right)^{N-1}.
+\end{align*}
+Taking the FOC of the maximization problem and solving it for $b_i$, we get
+\begin{align*}
+	\frac{d \bar{U}_i(b_i,\theta_i)}{db_i} 
+	&= \left(\frac{N}{N-1} \right)^{N-1} \left[(N-1) \theta_i b_i^{N-2} - N b_i^{N-1} \right] = 0
+	\\ \Rightarrow
+	b_i^* &= \frac{N-1}{N} \theta_i,
+\end{align*}
+as conjectured.
+
+Moving on to the designer's profit, 
+\begin{align*}
+	\mathbb{E}_\theta [R] = - \mathbb{E}_\theta[t_0(\theta)]
+	&= \mathbb{E}_\theta \left[ \sum_{i=1}^N t_i(\theta) \right]
+	\\
+	&= \mathbb{E}_\theta \left[ \max_{i \in \{1,...,N\}} b_i(\theta_i) \right]
+	\\
+	&= \mathbb{E}_\theta \left[ \max_{i \in \{1,...,N\}} \frac{N-1}{N} \theta_i \right]
+	\\
+	&= \frac{N-1}{N} \mathbb{E}_\theta \left[ \max_{i \in \{1,...,N\}} \theta_i \right]
+	\\
+	&= \frac{N-1}{N} \int_0^1 x \phi_{N} (x) dx
+	\\
+	&= \frac{N-1}{N} \int_0^1 N x^N dx
+	\\
+	&= \frac{N-1}{N+1}.
+\end{align*}
+In the end, in FPA, $\bar{U}_i(\theta_i) = \frac{\theta_i^N}{N}$ and $\mathbb{E}_\theta [R] = 
+\frac{N-1}{N+1}$.
+
+
+\paragraph*{APA}
+Following the same logic,
+\begin{align*}
+	\bar{U}_i(\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \theta_i \cdot \mathbb{I} \left\{ \theta_i > \theta_j, \forall j \neq i \right\} - \frac{N-1}{N} \theta_i^N \right]
+	\\
+	&= \theta_i \cdot \theta_i^{N-1} - \frac{N-1}{N} \theta_i^N
+	= \frac{\theta_i^N}{N}.
+\end{align*}
+In the second equality above, the first term is obtained using the exact same calculations as for FPA, and the second term lacks the expectation because it does not depend on $\theta_{-i}$.
+
+To verify that the proposed strategy is optimal, proceed as in FPA:
+\begin{align*}
+	\bar{U}_i(b_i,\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \theta_i \cdot \mathbb{I} \left\{ b_i > \frac{N-1}{N} \theta_j^N, \forall j \neq i \right\} - b_i \right]
+	\\
+	&= \theta_i F_{N-1} \left( \left( \frac{ N b_i}{N-1} \right)^\frac{1}{N} \right) - b_i
+	\\
+	&= \theta_i \left( \frac{ N b_i}{N-1} \right)^\frac{N-1}{N} - b_i
+	\\ \Rightarrow
+	\frac{d \bar{U}_i(b_i,\theta_i)}{db_i} 
+	&= \theta_i \left( \frac{ N }{N-1} \right)^\frac{-1}{N} b_i^\frac{-1}{N} - 1 = 0
+	\\ \Rightarrow
+	b_i^* &= \frac{N-1}{N} \theta_i^N,
+\end{align*}
+as conjectured.
+%TODO
+
+For the designer's expected revenue,
+\begin{align*}
+	\mathbb{E}_\theta [R]
+	&= \mathbb{E}_\theta \left[ \sum_{i=1}^N t_i(\theta) \right]
+	\\
+	&= \mathbb{E}_\theta \left[ \sum_{i=1}^N \frac{N-1}{N} \theta_i^N \right]
+	\\
+	&= \sum_{i=1}^N \frac{N-1}{N} \mathbb{E}_{\theta_i} \left[ \theta_i^N \right]
+	\\
+	&= (N-1) \int_0^1 x^N dx
+	\\
+	&= \frac{N-1}{N+1}.
+\end{align*}
+The third inequality above splits the expectation of the sum into the sum of expectations (using the linearity of the expectation operator) and notices that the expectation of $\theta_i^N$ only depends on the realization of $\theta_i$, but not on any of the other $\theta_j$. The fourth equality collapses the sum (since all the expectations are equal, due to symmetric distribution of valuations) and rewrites the expectation explicitly (with the pdf of $\theta_i$ being $\phi(x)=1$ for $x \in [0,1]$).
+
+
+\paragraph*{SPA}
+Interim expected utility for the bidder:
+\begin{align*}
+	\bar{U}_i(\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \left( \theta_i - \theta_{(2)} \right) \cdot \mathbb{I} \left\{ \theta_i > \theta_j, \forall j \neq i \right\} \right]
+	\\
+	&= \theta_i \cdot \theta_i^{N-1} - \mathbb{E}_{\theta_{-i}} \left[ \theta_{(2)} \cdot \mathbb{I} \left\{ \theta_i > \theta_j, \forall j \neq i \right\} \right]
+	\\
+	&= \theta_i^N - \mathbb{E}_{\theta_{(2)}} \left[ \theta_{(2)} \cdot \mathbb{I} \left\{ \theta_{(2)} < \theta_i \right\} \right]
+	\\
+	&= \theta_i^N - \int_0^1 \left[ x \cdot \mathbb{I} \left\{ x < \theta_i \right\} \right] (N-1)x^{N-2} dx
+	\\
+	&=\theta_i^N - (N-1) \int_0^{\theta_i} x^{N-1} dx
+	\\
+	&=\theta_i^N - \frac{N-1}{N} \theta_i^N = \frac{\theta_i^N}{N}.
+\end{align*}
+In the above, the second equality uses the same calculation as FPA for the first term. All other manipulations concern the second term. The third equality notices that out of all information about all $\theta_{-i}$, only $\theta_{(2)}$ is relevant. The fourth equality writes the expectation down explicitly, using the distribution obtained in \eqref{eq:auc_Fmax}. The remainder is just algebra.
+
+The expected revenue of the designer is given by:
+\begin{align*}
+	\mathbb{E}_\theta [R]
+	&= \mathbb{E}_\theta \left[ \sum_{i=1}^N t_i(\theta) \right]
+	\\
+	&= \mathbb{E}_\theta \left[ \theta_{(2)} \right].
+\end{align*}
+However, the meaning of $\theta_{(2)}$ is different here, which should ideally be reflected in the notation but isn't. In the previous cases, when we took $\theta_i$ as fixed and took expectation over $\theta_{-i}$, it was the case that simply $\theta_{(2)} = \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j$, i.e., it was the highest valuation among $N-1$ bidders. Now, though, we need to genuinely calculate the \emph{second-highest bid among $N$ bidders}. We can derive its pdf $\phi_{(2)}(x)$ as the probability, for any $x$, that exactly $N-2$ valuations are below $x$, one valuation is at $x$, and one valuation is above $x$. Since the latter two can belong to any bidder, there are a total of $N(N-1)$ permutations. In the end:
+\begin{align*}
+	\phi_{(2)}(x) &= N (N-1) \cdot x^{N-2} \cdot 1 \cdot (1-x)
+	\\ \Rightarrow 
+	\mathbb{E}_\theta [R] = \mathbb{E}_\theta \left[ \theta_{(2)} \right]
+	&= \int_0^1 x N(N-1) x^{N-2} (1-x) dx
+	\\
+	&= N(N-1) \left[ \int_0^1 x^{N-1} dx - \int_0^1 x^N dx \right]
+	\\
+	&= N(N-1) \left[\frac{1}{N} - \frac{1}{N+1}\right]
+	\\
+	&= N(N-1) \frac{1}{N(N+1)} = \frac{N-1}{N+2}.
+\end{align*}
+
+Hence we see that bidders' interim expected utilities and the designer's expected revenue are indeed the same across all three formats.
+%\mathbb{E}_{\theta_{-i}} \left[  \right]
 \fi 
 
 
