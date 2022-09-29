@@ -177,7 +177,7 @@
 
 \section{Efficient public good provision (continued)}
 
-Consider problem 1 from the previous problem set.
+Consider problem 2 from L3 problem set.
 
 Assume now that players' valuations are distributed according to $\theta_i \sim U[-\hat{\theta},\hat{\theta}]$ for all $i$, and that the public project has some known social cost $c > 0$.
 
@@ -198,6 +198,92 @@ LCT for any $i$ is $\tilde{\theta}_i = -\hat{\theta}$ (you do not actually need 
 	\end{cases}
 \end{align*}
 \fi
+
+
+
+\section{AGV and public goods}
+
+Consider the public good provision problem (again). Suppose now that there are only two individuals: $i=1,2$, their valuations for the public project are $\theta_i \sim i.i.d. U[-1,1]$, and the cost is $c \in [0,1]$ (known to all agents).
+
+\begin{enumerate}
+	\item Calculate the AGV transfers for this problem.
+	\item Do the players' payments to the mechanism cover the project cost $c$ if and only if the project is implemented? (I.e., is the mechanism exactly budget balanced once we account for the project costs?)
+\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+Note: the lectures are somewhat vague, so you can get somewhat different expressions in part 1 depending on how exactly you approach the problem. The answer to part 2 should, however, be qualitatively the same in all of those cases.
+
+The $\tilde{t}$ are as follows: for $i=1,2$,
+\begin{align*}
+	\tilde{t}_i(\theta_i) &= \mathbb{E}_{\theta_j} \left[ (\theta_j - c) \cdot \mathbb{I} \{ \theta_1+\theta_2 \geq c \} \right]
+	\\
+	&= \int_{\min\{c-\theta_i, 1\}}^{1} (\theta_j -c) \frac{1}{2} d\theta_j 
+	\\
+	&= \frac{1}{4} \left[ (c-1)^2 - \theta_i^2 \right] \cdot \mathbb{I} \{ \theta_i \geq c-1 \};
+\end{align*}
+and the actual transfers are then $t_i^{AGV}(\theta) = \tilde{t}_j(\theta_j) - \tilde{t}_i(\theta_i)$ for $i=1,2$, which evaluates to 
+\begin{align*}
+	t_i^{AGV}(\theta) = \begin{cases}
+		\frac{\theta_i^2 - \theta_j^2}{4} & \text{ if } \theta_i,\theta_j \geq c-1 \text{ (region I)},
+		\\
+		\frac{(c-1)^2 - \theta_j^2}{4} & \text{ if } \theta_j \geq c-1 > \theta_i \text{ (region II)},
+		\\
+		\frac{\theta_i^2 - (c-1)^2}{4} & \text{ if } \theta_i \geq c-1 > \theta_j \text{ (region III)},
+		\\
+		0 & \text{ if } c-1 > \theta_i,\theta_j \text{ (region IV)}.
+	\end{cases}
+\end{align*}
+\begin{figure}
+	\begin{center} 
+		\begin{tikzpicture}[scale=3.5]
+			%regions
+			\filldraw[yellow, opacity=0.3] (-0.3,-0.3) -| (-1,1) -| (-0.3,-0.3);
+			\filldraw[yellow, opacity=0.3] (-0.3,-0.3) -| (1,-1) -| (-0.3,-0.3);
+			\filldraw[red, opacity=0.3] (-0.3,1) -| (1,1) -| (1,-0.3);
+			\filldraw[red, opacity=0.2] (-0.3,1) -| (-0.3,-0.3) -| (1,-0.3);
+			\filldraw[blue, opacity=0.3] (-0.3,-0.3) -| (-1,-1) -| (-0.3,-0.3);
+			\draw (0.6,0.6) node{Ia};
+			\draw (0.15,0.15) node{Ib};
+			\draw (-0.6,0.35) node{II};
+			\draw (0.35,-0.6) node{III};
+			\draw (-0.6,-0.6) node{IV};
+			
+			% axes 
+			\draw[->] (-1.1,0) -- (1.2,0) node[below]{$\theta_i$};
+			\draw[->] (0,-1.1) -- (0,1.2) node[left]{$\theta_j$};
+			\draw (0,0) node[below left]{$0$};
+			\draw (0,1) node[below left]{$1$};
+			\draw (0,-1) node[below left]{$-1$};
+			\draw (1,0) node[below right]{$1$};
+			\draw (-1,0) node[below left]{$-1$};
+			
+			\draw (-0.3,0) node[above ]{$c-1$};
+			\draw (0,-0.3) node[right ]{$c-1$};
+			\draw (0.7,0) node[below left]{$c$};
+			\draw (0,0.7) node[below left]{$c$};
+			
+			% bounding box
+			\draw[dotted] (1,-1) |- (-1,1) |- (1,-1);
+			
+			% lines
+			\draw[dashed] (-0.3,1) -- (1,-0.3);
+		\end{tikzpicture}
+		\caption{regions for AGV transfers}
+		\label{fig:AGV}
+	\end{center}
+\end{figure}
+
+The regions are plotted in Figure \ref{fig:AGV}. Note that the public project is implemented only in region Ia, but the two agents' transfers sum up to zero there, same as in all other regions. Therefore, the AGV mechanism does not cover the project cost.
+At this point you might think that this is because you need to compute $\tilde{t}_0$ and somehow include it in the players' payments. However, regardless of how you split this $\tilde{t}_0$ across agents, payments in regions Ia and Ib will always be continuous at the border (since $\tilde{t}_0$ would just add some constant to agents' payments), whereas to cover the cost of the project exactly, the sum of payments must be larger by $c$ in Ia than in Ib.
+%\begin{align*}
+%\tilde{t}_0 &= \mathbb{E}_{\theta_1,\theta_2} \left[ (\theta_1+\theta_2) \mathbb{I} \{ \theta_1+\theta_2 \geq c \} \right]
+%\\
+%&= \int_{c-1}^1 \left[ \int_{c-\theta_i}^1 (\theta_1+\theta_2) d\theta_2 \right] d\theta_1 
+%\\
+%&= \frac{4+c^3}{3}.
+%\end{align*}
+\fi 
 
 
 
@@ -363,92 +449,6 @@ This solution uses the following notation: $a \vee b \equiv \max\{a,b\}$; $a \we
 \end{enumerate}
 \fi
 
-
-
-
-\section{AGV and Public Goods}
-
-Consider the public good provision problem from the two previous problem sets. Suppose now that there are only two individuals: $i=1,2$, their valuations for the public project are $\theta_i \sim i.i.d. U[-1,1]$, and the cost is $c \in [0,1]$ (known to all agents).
-
-\begin{enumerate}
-	\item Calculate the AGV transfers for this problem.
-	\item Do the players' payments to the mechanism cover the project cost $c$ if and only if the project is implemented? (I.e., is the mechanism budget balanced once we account for the project costs?)
-\end{enumerate}
-
-\ifsolutions
-\section*{Solution}
-Note: the lectures are somewhat vague, so you can get somewhat different expressions in part 1 depending on how exactly you approach the problem. The answer to part 2 should, however, be qualitatively the same in all of those cases.
-
-The $\tilde{t}$ are as follows: for $i=1,2$,
-\begin{align*}
-	\tilde{t}_i(\theta_i) &= \mathbb{E}_{\theta_j} \left[ (\theta_j - c) \cdot \mathbb{I} \{ \theta_1+\theta_2 \geq c \} \right]
-	\\
-	&= \int_{\min\{c-\theta_i, 1\}}^{1} (\theta_j -c) \frac{1}{2} d\theta_j 
-	\\
-	&= \frac{1}{4} \left[ (c-1)^2 - \theta_i^2 \right] \cdot \mathbb{I} \{ \theta_i \geq c-1 \};
-\end{align*}
-and the actual transfers are then $t_i^{AGV}(\theta) = \tilde{t}_j(\theta_j) - \tilde{t}_i(\theta_i)$ for $i=1,2$, which evaluates to 
-\begin{align*}
-	t_i^{AGV}(\theta) = \begin{cases}
-		\frac{\theta_i^2 - \theta_j^2}{4} & \text{ if } \theta_i,\theta_j \geq c-1 \text{ (region I)},
-		\\
-		\frac{(c-1)^2 - \theta_j^2}{4} & \text{ if } \theta_j \geq c-1 > \theta_i \text{ (region II)},
-		\\
-		\frac{\theta_i^2 - (c-1)^2}{4} & \text{ if } \theta_i \geq c-1 > \theta_j \text{ (region III)},
-		\\
-		0 & \text{ if } c-1 > \theta_i,\theta_j \text{ (region IV)}.
-	\end{cases}
-\end{align*}
-\begin{figure}
-	\begin{center} 
-		\begin{tikzpicture}[scale=3.5]
-			%regions
-			\filldraw[yellow, opacity=0.3] (-0.3,-0.3) -| (-1,1) -| (-0.3,-0.3);
-			\filldraw[yellow, opacity=0.3] (-0.3,-0.3) -| (1,-1) -| (-0.3,-0.3);
-			\filldraw[red, opacity=0.3] (-0.3,1) -| (1,1) -| (1,-0.3);
-			\filldraw[red, opacity=0.2] (-0.3,1) -| (-0.3,-0.3) -| (1,-0.3);
-			\filldraw[blue, opacity=0.3] (-0.3,-0.3) -| (-1,-1) -| (-0.3,-0.3);
-			\draw (0.6,0.6) node{Ia};
-			\draw (0.15,0.15) node{Ib};
-			\draw (-0.6,0.35) node{II};
-			\draw (0.35,-0.6) node{III};
-			\draw (-0.6,-0.6) node{IV};
-			
-			% axes 
-			\draw[->] (-1.1,0) -- (1.2,0) node[below]{$\theta_i$};
-			\draw[->] (0,-1.1) -- (0,1.2) node[left]{$\theta_j$};
-			\draw (0,0) node[below left]{$0$};
-			\draw (0,1) node[below left]{$1$};
-			\draw (0,-1) node[below left]{$-1$};
-			\draw (1,0) node[below right]{$1$};
-			\draw (-1,0) node[below left]{$-1$};
-			
-			\draw (-0.3,0) node[above ]{$c-1$};
-			\draw (0,-0.3) node[right ]{$c-1$};
-			\draw (0.7,0) node[below left]{$c$};
-			\draw (0,0.7) node[below left]{$c$};
-			
-			% bounding box
-			\draw[dotted] (1,-1) |- (-1,1) |- (1,-1);
-			
-			% lines
-			\draw[dashed] (-0.3,1) -- (1,-0.3);
-		\end{tikzpicture}
-		\caption{regions for AGV transfers}
-		\label{fig:AGV}
-	\end{center}
-\end{figure}
-
-The regions are plotted in Figure \ref{fig:AGV}. Note that the public project is implemented only in region Ia, but the two agents' transfers sum up to zero there, same as in all other regions. Therefore, the AGV mechanism does not cover the project cost.
-At this point you might think that this is because you need to compute $\tilde{t}_0$ and somehow include it in the players' payments. However, regardless of how you split this $\tilde{t}_0$ across agents, payments in regions Ia and Ib will always be continuous at the border (since $\tilde{t}]_0$ would just add some constant to agents' payments), whereas to cover the cost of the project exactly, the sum of payments must be larger by $c$ in Ia than in Ib.
-%\begin{align*}
-%\tilde{t}_0 &= \mathbb{E}_{\theta_1,\theta_2} \left[ (\theta_1+\theta_2) \mathbb{I} \{ \theta_1+\theta_2 \geq c \} \right]
-%\\
-%&= \int_{c-1}^1 \left[ \int_{c-\theta_i}^1 (\theta_1+\theta_2) d\theta_2 \right] d\theta_1 
-%\\
-%&= \frac{4+c^3}{3}.
-%\end{align*}
-\fi 
 
 
 %%-----------------------------------------------------------------------------------------------------
