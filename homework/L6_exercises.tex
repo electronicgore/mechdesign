@@ -68,9 +68,9 @@
 %----------------------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
-\newcommand{\hmwkTitle}{Exercises for Lecture 7 (M3)} % Assignment title
+\newcommand{\hmwkTitle}{Exercises for Lecture 6} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2021} % TA
+\newcommand{\instructor}{Fall 2022} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -80,7 +80,7 @@
 %   SOLUTIONS
 %----------------------------------------------------------------------------------------
 \newif\ifsolutions
-%\solutionstrue
+\solutionstrue
 
 
 
@@ -88,14 +88,14 @@
 \begin{document}
 
 \begin{center}
-		\LARGE\textbf{Exercises for Lecture 7 (M3):\\ Optimal mechanisms.}
+		\LARGE\textbf{Exercises for Lecture 6:\\ Optimal mechanisms.}
 \end{center}
 
 
 
 \section{Malevolent Judicial Design}
 	% 410-3 problem bank ps7 q15
-	Revisit the Judicial Design exercise (L2 problem 3). Suppose that the defendant's type is $\theta \sim U[0,1]$, which stands for the probability of being acquitted if the defendant goes to the trial. Suppose that the DA wants to maximize the expected length of the defendant's sentence, i.e. to minimize the defendant's expected payoff. (So the DA gets a payoff of $1$ for a life sentence and a payoff of $r$ for a reduced sentence which would give the defendant a payoff of $-r$.)  
+	Revisit the Judicial Design exercise (L2 problem 4). Suppose that the defendant's type is $\theta \sim U[0,1]$, which stands for the probability of being acquitted if the defendant goes to the trial. Suppose that the DA wants to maximize the expected length of the defendant's sentence, i.e. to minimize the defendant's expected payoff. (So the DA gets a payoff of $1$ for a life sentence and a payoff of $r$ for a reduced sentence which would give the defendant a payoff of $-r$.)  
 	\begin{enumerate}
 		\item Among the incentive-compatible mechanisms you identified, what is the optimal mechanism for the DA?
 		\item How does your answer change if going to trial imposes additional cost $c \in (0,1)$ on the DA (but not on the defendant) relative to agreeing on a plea bargain?
@@ -136,7 +136,7 @@
 		U_B(\hat{\theta}|\theta) &= v(\theta) k(\hat{\theta}) - t(\hat{\theta}).
 	\end{align*}
 	\begin{enumerate}
-		\item Show that for an allocation rule $k(\theta)$ to be IC, it must be weakly \emph{decreasing} in $\theta$.
+		\item Show that for an allocation rule $k(\theta)$ to be IC for the seller, it must be weakly \emph{decreasing} in $\theta$.
 		\item ERP implies that the payoff of the seller of type $\theta$ can be written as $U_S(\theta|\theta) = U_S(1|1) + \int_{\theta}^{1} k(s) ds $. Using this expression, show that the buyer's expected utility in any IC DRM $(k,t)$ is given by:
 		\begin{align*}
 			\mathbb{E}_\theta [ U_B(\theta | \theta) ] = \int_0^1 k(\theta) VS(\theta) \phi(\theta) d\theta - U_S(1),
@@ -524,7 +524,7 @@ Suppose now instead that the gods are not benevolent, but try to minimize the am
 			\theta_i^2 - \theta_i - \frac{1}{4} + \bar{U}_i(0)	& \text{ if } \theta_i > 0.5.
 		\end{cases}
 	\end{align*}
-	It is minimized at $\theta_i=0.5$, meaning that if the IR constraint holds for type $\theta_i=0.5$ then it will also hold for all other types.\footnote{While this coincides with the least charitable type in this problem, this is purely by coincidence.}
+	It is minimized at $\theta_i=0.5$, meaning that if the IR constraint holds for type $\theta_i=0.5$ then it will also hold for all other types.%\footnote{While this coincides with the least charitable type in this problem, this is purely by coincidence.} %NOTE: is it though? Isn't it the point of the LCT?
 	Setting the IR constraint to bind for that type ($\bar{U}_i(0.5)=0$), we obtain $\bar{U}_i(0) = 0.5$, so in the end, the transfers that support the favor-minimizing allocation $k$ in BNE are given by
 	$$t_i(\theta_i) = 
 	\begin{cases}
