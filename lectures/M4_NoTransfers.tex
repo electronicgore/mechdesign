@@ -1,0 +1,185 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[english,10pt
+,aspectratio=169
+%,handout
+%%%%%%,notes
+]{beamer}
+\input{MD_preamble.tex}
+
+
+\title{Mechanism Design}
+
+\subtitle{2: Implementability of arbitrary s.c.f.s}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Fall 2022}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame{
+			\frametitle{This slide deck:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+
+
+\section{Testing Implementability}
+
+\begin{frame}{Testing Implementability}
+	\begin{exampleblock}{}
+		How can we check whether a given $f(\theta)$ is implementable?
+	\end{exampleblock} 
+	\begin{itemize}
+		\item We have seen an answer for the Euclidean setting. What about more general settings?
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{DSIC: Weak Preference Reversal Property}
+%	\begin{itemize}
+%		\item \textbf{Answer 1}: \structure{revelation principle}. (Applies to any \alert{general} setting.)
+%		Construct a DRM and check all players' \alert{IC conditions}; s.c.f. is implementable iff it satisfies them:
+%		$$ u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') \geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}') \text{ for all } i,\theta_i',\theta_i'',\theta_{-i}.$$
+%		
+%		\item Note that they imply the following \structure{preference reversal} condition: for all $i,\theta_i',\theta_i'',\theta_{-i}$,
+%		\begin{align*}
+%			u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}') &\geq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'),
+%			\\
+%			u_{i}(f(\theta_{i}', \theta_{-i}), \theta_{i}'') &\leq u_{i}(f(\theta_{i}'', \theta_{-i}), \theta_{i}'').
+%		\end{align*}
+%		\item $i$'s preference between $f(\theta_{i}', \theta_{-i})$ and $f(\theta_{i}'', \theta_{-i})$ should flip when his type changes from $\theta_i'$ to $\theta_i''$ for $f$ to be DSIC. In other words:
+%		\item ``To each their own'': different types should get their most preferred option among the available ones.
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Monotonicity: Euclidean setting}
+	\begin{itemize}
+		\item \textbf{Reminder}: \structure{monotonicity} for Euclidean problems.
+		\begin{itemize}
+			\item Note: only the players' preferences are required to be linear for this to hold; the principal can have non-linear prefs. 
+		\end{itemize}
+		\item In a \alert{Euclidean} setting, $k(\theta)$ is implementable only if it is monotone.
+		\item Turns out, this is a sharp characterization: \\
+		if $k(\theta)$ is monotone, there exist transfers $t$ such that $\Gamma = (\Theta, (k,t))$ is DSIC.
+		\begin{itemize}
+			\item Monotonicity may require $k(\theta)$ to be either weakly increasing, or weakly decreasing, depending on the problem.
+			\item To prove: use the relevant ERP to construct all transfers; can then show that the resulting mechanism is DSIC/BIC as needed.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: quasilinear setting}
+	Extension to \alert{quasilinear} setting:
+	\begin{exampleblock}{Definition (weak monotonicity)}
+		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
+		\begin{equation*}
+			v_{i}(k(\structure{\theta_{i}'}, \theta_{-i}), \structure{\theta_{i}'}) - 
+			v_{i}(k(\alert{\theta_{i}''}, \theta_{-i}), \structure{\theta_{i}'}) 
+			\geq 
+			v_{i}(k(\structure{\theta_{i}'}, \theta_{-i}), \alert{\theta_{i}''}) - 
+			v_{i}(k(\alert{\theta_{i}''}, \theta_{-i}), \alert{\theta_{i}''}) 
+		\end{equation*}
+	\end{exampleblock}
+	\begin{theorem}[Necessity of weak monotonicity in qlin setting]
+		In the quasilinear setting: if $k$ is DSIC then $k$ is weakly monotone.
+	\end{theorem}
+	So $k$ must be weakly monotone to be implementable.\\ 
+	But weak monotonicity does not guarantee implementability. \\
+	But we can strengthen this...
+\end{frame}
+
+
+\begin{frame}{Monotonicity: quasilinear setting}
+	\begin{exampleblock}{Definition (cyclical monotonicity)}
+		Allocation $k$ is \alert{cyclically monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
+		\begin{equation*}
+			\sum_{m=1}^{M-1}
+			\left[
+			v_{i}(k(\alert{\theta_{i}^m}, \theta_{-i}), \alert{\theta_{i}^{m+1}}) - 
+			v_{i}(k(\alert{\theta_{i}^{m}}, \theta_{-i}), \alert{\theta_{i}^m}) 
+			\right] 
+			\leq 0
+		\end{equation*}
+	\end{exampleblock}
+	\begin{theorem}[Rochet, 1987]
+		In a quasilinear setting: $k$ is DSIC if and only if $k$ is cyclically monotone.
+	\end{theorem}
+	\textbf{Note}: ``Weak monotonicity'' = ``cyclical monotonicity for $M=3$''.
+	See B{\"o}rgers, ch.5.3-5.4 for proofs or references to proofs (for $N=1$). See rest of ch.5 for other kinds of monotonicity for quasilinear setting.
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general setting (1)}
+	\textbf{Without transfers}, interesting results come up... \\
+	\textbf{Assume} $X$ is finite and $\Theta_i$ are rich enough to contain all possible preferences over $X$ for all $i$.
+	\begin{exampleblock}{Definition (outcome monotonicity)}
+		In a general setting, outcome $x$ is \alert{monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
+		\begin{itemize}
+			\item if for all $i$ and all $x' \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x',\theta')$ it holds that $u_i(x(\theta'),\theta'') \geq u_i(x',\theta'')$,
+			\item then $x(\theta'')=x(\theta')$.
+		\end{itemize}
+	\end{exampleblock}
+	In words, if under $\theta''$ everyone likes $x(\theta')$ more than under $\theta'$, then we give $x(\theta')$ under $\theta''$.
+	\begin{theorem}[Necessity of monotonicity in general setting]
+		In the general setting: if $x$ is DSIC and $x(\Theta)=X$ then $x$ is monotone.
+	\end{theorem}
+	(This is not THE interesting part yet. The next result is.)
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general setting (2)}
+	\begin{exampleblock}{Definition (dictatorial s.c.f.)}
+		S.c.f. $f$ is \alert{dictatorial} if there exists $i \in N$ s.t. for all type profiles $\theta$:
+		$$ f(\theta) \in \arg \max_x u_i(x,\theta_i)$$
+	\end{exampleblock}
+	\begin{theorem}[Gibbard-Satterthwaite, 1973,'75]
+		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+		\centering
+		$x$ is \alert{DSIC} if and only if $x$ is \alert{dictatorial}.
+	\end{theorem}
+	\begin{itemize}
+		\item To clarify: $x(\Theta) \equiv \left\{ x \in X \mid \exists \theta: x(\theta) = x \right\}$.
+		\item Note: if $x(\Theta) \subset X$, then only preferences over alternatives in $x(\Theta)$ are relevant, and we will still have a dictatorship on $x(\Theta)$. This is something we'll come back to later.
+		\item GS theorem is the mechanism design version of Arrow's theorem from social choice.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general setting (3)}
+	\begin{itemize}
+		\item The missing link between the two results above is this:
+		\begin{theorem}[Monotonicity implies dictatorship]
+			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+			\centering
+			if $x$ is monotone then $x$ is dictatorial.
+		\end{theorem}
+		\item For a full proof of GS thm, see B{\"o}rgers, ch.8.2, or \href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{\uline{Svensson and Reffgen (2014)}}
+		\item All three results for the general setting hold with ordinal preferences ($\succsim_i$) too, they do not rely on cardinal utilities $u_i$.
+		%\begin{itemize}
+		%	\item If anything, the domain assumption ($x(\Theta)=X$) is easier to state with ordinal preferences.
+		%\end{itemize}
+		\item The GS thm is also extendable to infinite $X$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general setting (4)}
+	\begin{itemize}
+		\item It seems like GS thm is a strong negative result saying ``we can't implement anything unless it's dictatorial!''. But we obviously can: we've seen examples (like VCG). Where is the contradiction?
+		\item The source of evil in GS thm is the domain assumption: we often know \emph{something} about some players' preferences, so ``all possible preferences over $X$'' may be too rich for $\Theta_i$.
+		\begin{itemize}
+			\item We have already seen that once we restrict preferences (e.g. to quasilinear -- assuming ``everyone always likes money'') then there exist non-dictatorial DSIC implementable s.c.f.s $f(\theta)$.
+			\item Another common example is the single-peaked preferences. They also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\end{document}

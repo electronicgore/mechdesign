@@ -139,7 +139,7 @@
 		\item Show that for an allocation rule $k(\theta)$ to be IC for the seller, it must be weakly \emph{decreasing} in $\theta$.
 		\item ERP implies that the payoff of the seller of type $\theta$ can be written as $U_S(\theta|\theta) = U_S(1|1) + \int_{\theta}^{1} k(s) ds $. Using this expression, show that the buyer's expected utility in any IC DRM $(k,t)$ is given by:
 		\begin{align*}
-			\mathbb{E}_\theta [ U_B(\theta | \theta) ] = \int_0^1 k(\theta) VS(\theta) \phi(\theta) d\theta - U_S(1),
+			\mathbb{E}_\theta [ U_B(\theta | \theta) ] = \int_0^1 k(\theta) VS(\theta) \phi(\theta) d\theta - U_S(1|1),
 		\end{align*}
 		where $VS(\theta) = v(\theta) - \theta - \frac{\Phi(\theta)}{\phi(\theta)}$.
 		\item Explain each component of $VS(\theta)$.
@@ -150,7 +150,7 @@
 \ifsolutions
 \section*{Solution}
 \begin{enumerate}
-	\item Take two arbitrary types $\theta$ and $\hat{\theta}>\theta$. The IC condition for $\theta$ to not be willing to falsely report $\hat{\theta}$ is
+	\item Take two arbitrary seller types $\theta$ and $\hat{\theta}>\theta$. The IC condition for $\theta$ to not be willing to falsely report $\hat{\theta}$ is
 	\begin{align*}
 		U_S(\theta|\theta) &\geq U_S (\hat{\theta}|\theta)
 		\\
@@ -171,29 +171,29 @@
 	
 	\item The expected utility of the buyer can be written as:
 	
-	$$ \mathbb{E}U_B(\hat{\theta}|\theta)=\mathbb{E}_\theta[v(\theta)k(\hat{\theta})-t(\hat{\theta})]$$
+	$$ \mathbb{E}U_B(\theta) \equiv \mathbb{E}U_B(\theta|\theta) = \mathbb{E}_\theta[v(\theta)k(\theta)-t(\theta)]$$
 	
-	Rearranging $U_S$ to $t(\theta)=U_S(\hat{\theta}|\theta)+\theta k(\theta)$ and plugging it into the expected utility of the buyer:
+	Rearranging $U_S$ to $t(\theta)=U_S(\theta|\theta)+\theta k(\theta)$ and plugging it into the expected utility of the buyer:
 	
-	$$ \mathbb{E}U_B(\theta)=\mathbb{E}_\theta[v(\theta)k(\theta)-U_S(\theta)-\theta k(\theta)]$$
+	$$ \mathbb{E}U_B(\theta)=\mathbb{E}_\theta[v(\theta)k(\theta)-U_S(\theta|\theta)-\theta k(\theta)]$$
 	
 	Now, using the envelope theorem and integration by parts yields:
 	\begin{align*}
-		\mathbb{E}U_B(\theta) &=\mathbb{E}_\theta[(v(\theta)-\theta)k(\theta)-U_S(1)-\int_\theta^1k(s)ds]
+		\mathbb{E}U_B(\theta) &=\mathbb{E}_\theta[(v(\theta)-\theta)k(\theta)-U_S(1|1)-\int_\theta^1k(s)ds]
 		\\
-		&=\mathbb{E}_\theta[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds]-U_S(1)
+		&=\mathbb{E}_\theta \left[ (v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds \right]-U_S(1|1)
 		\\
-		&=\int_0^1 \left[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds \right] \phi(\theta)d\theta-U_S(1)
+		&=\int_0^1 \left[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds \right] \phi(\theta)d\theta-U_S(1|1)
 		\\
-		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_\theta^1k(s) \phi(\theta) ds d\theta-U_S(1)
+		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_\theta^1k(s) \phi(\theta) ds d\theta-U_S(1|1)
 		\\
 		%&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_0^s k(\theta) \phi(\theta) d\theta ds-U_S(1)
 		%\\
 		%&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1 k(s) \left[\int_0^\theta \phi(\theta) d\theta \right] ds-U_S(1)
 		%\\
-		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta-\int_0^1 k(\theta) \Phi(\theta) d\theta -U_S(1)
+		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta-\int_0^1 k(\theta) \Phi(\theta) d\theta -U_S(1|1)
 		\\
-		&=\int_0^1 \left(v(\theta)-\theta-\frac{\Phi(\theta)}{\phi(\theta)} \right) k(\theta)\phi(\theta)d\theta -U_S(1)
+		&=\int_0^1 \left(v(\theta)-\theta-\frac{\Phi(\theta)}{\phi(\theta)} \right) k(\theta)\phi(\theta)d\theta -U_S(1|1)
 	\end{align*}
 	
 	
@@ -214,7 +214,7 @@
 		\begin{cases}
 			\frac{3\theta}{2} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
 			\\
-			\frac{5\theta}{2} - \frac{1}{3} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [0, \frac{1}{3}]
+			\frac{5\theta}{2} - \frac{1}{3} - \theta - \frac{\theta}{1} &\text{ if } \theta \in [\frac{1}{3}, 1]
 		\end{cases}
 		\\
 		\Leftrightarrow
@@ -222,7 +222,7 @@
 		\begin{cases}
 			-\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
 			\\
-			\frac{\theta}{2} - \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
+			\frac{\theta}{2} - \frac{1}{3} &\text{ if } \theta \in [\frac{1}{3}, 1]
 		\end{cases}
 	\end{align*}
 	Pointwise optimization prescribes setting $k(\theta) = 1$ if $VS(\theta) \geq 0$ and $k(\theta) = 0$ otherwise. In this problem this would result in allocation $k(\theta) = \mathbb{I} \left\{ \theta \geq \frac{2}{3} \right\}$, which is not weakly decreasing as monotonicity requires.
@@ -243,11 +243,13 @@
 		\begin{cases}
 			\frac{\theta}{2} &\text{ if } \theta \in [0, \frac{1}{3}]
 			\\
-			-\frac{\theta}{2} + \frac{1}{3} &\text{ if } \theta \in [0, \frac{1}{3}]
+			-\frac{\theta}{2} + \frac{1}{3} &\text{ if } \theta \in [\frac{1}{3}, 1]
 		\end{cases}
 	\end{align*}
 	Pointwise maximization yields $k(\theta) = \mathbb{I} \left\{ \theta \leq \frac{2}{3} \right\}$. Monotonicity is not violated (the allocation is weakly decreasing in $\theta$), hence this allocation is implementable and, so, optimal.
 \end{enumerate}
+
+\textbf{NOTE}: the answers to parts 4 and 5 above do not constitute a full derivation of the optimal mechanism, since they do not handle the buyer's choice of $U_S(1|1)$ and the corresponding discussion of the seller's IR constraints. The problem does not ask for this (and only inquires about the \emph{optimal allocation rule}), but if you were asked instead to derive the full \emph{optimal mechanism}, these extra steps would be expected.
 \fi
 
 
