@@ -289,18 +289,20 @@ At this point you might think that this is because you need to compute $\tilde{t
 
 \section{Myerson-Satterthwaite theorem}
 
-Derive the gVCG transfers for the bilateral trade problem (assuming $\theta_b,\theta_s \sim U[0,1]$ and are mutually independent). Show that the resulting mechanism is not ex ante budget balanced (not even weakly).
-
-\ifsolutions
-\section*{Solution}
-
-The seller's valuation for the item is given by his private type $\theta_S \sim U[0,1]$, and the buyer's valuation is given by his private type $\theta_B \sim U[0,1]$. The outside options are given by $\underline{U}_S({\theta}_S)={\theta}_S$ and $\underline{U}_B({\theta}_B)=0$ respectively. The utilities of the two players are Euclidean and are given by:
+Consider the \textbf{bilateral trade} problem discussed in class: one buyer, one seller, one item. The seller's valuation for the item is given by his private type $\theta_S \sim U[0,1]$, and the buyer's valuation is given by his private type $\theta_B \sim U[0,1]$, independent of $\theta_S$. The outside options are given by $\underline{U}_S({\theta}_S)={\theta}_S$ and $\underline{U}_B({\theta}_B)=0$ respectively. The utilities of the two players are Euclidean and are given by:
 \begin{align*}
 	u_S &= v(k,\theta_S)-t_S(\theta)=\theta_S (1-k)-t_S(\theta)
 	\\
 	u_B &= v(k,\theta_B)-t_B(\theta)=\theta_B k-t_B(\theta)
 \end{align*}
-where $k(\theta) \in [0,1]$ is the probability of trade given type profile $\theta$. It is straight-forward to see that the efficient allocation, $k^*$, is given by:
+where $k(\theta) \in [0,1]$ is the probability of trade given type profile $\theta$. The designer would like to create an efficient market for these players (i.e., implement the efficient allocation rule)
+
+Derive the gVCG transfers for this problem. Show that the resulting mechanism is not ex ante budget balanced (not even weakly).
+
+
+\ifsolutions
+\section*{Solution}
+It is straightforward to see that the efficient allocation, $k^*$, is given by:
 \begin{align*}
 	k^*= \begin{cases}
 		1 & \text{ if } \theta_S \leq \theta_B \\ 
