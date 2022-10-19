@@ -77,7 +77,7 @@
 
 \begin{frame}{Monotonicity: quasilinear setting}
 	Extension to \alert{quasilinear} setting:
-	\begin{exampleblock}{Definition (weak monotonicity)}
+	\begin{exampleblock}{Definition (\textbf{weak monotonicity})}
 		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
 		\begin{equation*}
 			v_{i}(k(\structure{\theta_{i}'}, \theta_{-i}), \structure{\theta_{i}'}) - 
@@ -97,7 +97,7 @@
 
 
 \begin{frame}{Monotonicity: quasilinear setting}
-	\begin{exampleblock}{Definition (cyclical monotonicity)}
+	\begin{exampleblock}{Definition (\textbf{cyclical monotonicity})}
 		Allocation $k$ is \alert{cyclically monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
 		\begin{equation*}
 			\sum_{m=1}^{M-1}
@@ -108,7 +108,7 @@
 			\leq 0
 		\end{equation*}
 	\end{exampleblock}
-	\begin{theorem}[Rochet, 1987]
+	\begin{theorem}[\textbf{Rochet, 1987}]
 		In a quasilinear setting: $k$ is DSIC if and only if $k$ is cyclically monotone.
 	\end{theorem}
 	\textbf{Note}: ``Weak monotonicity'' = ``cyclical monotonicity for $M=3$''.
@@ -117,9 +117,8 @@
 
 
 \begin{frame}{Monotonicity: general setting (1)}
-	\textbf{Without transfers}, interesting results come up... \\
-	\textbf{Assume} $X$ is finite and $\Theta_i$ are rich enough to contain all possible preferences over $X$ for all $i$.
-	\begin{exampleblock}{Definition (outcome monotonicity)}
+	\textbf{Without transfers}, interesting results come up... 
+	\begin{exampleblock}{Definition (\textbf{outcome monotonicity})}
 		In a general setting, outcome $x$ is \alert{monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
 		\begin{itemize}
 			\item if for all $i$ and all $x' \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x',\theta')$ it holds that $u_i(x(\theta'),\theta'') \geq u_i(x',\theta'')$,
@@ -135,28 +134,37 @@
 
 
 \begin{frame}{Monotonicity: general setting (2)}
-	\begin{exampleblock}{Definition (dictatorial s.c.f.)}
-		S.c.f. $f$ is \alert{dictatorial} if there exists $i \in N$ s.t. for all type profiles $\theta$:
-		$$ f(\theta) \in \arg \max_x u_i(x,\theta_i)$$
+	%\textbf{Assume} $X$ is finite and 
+	\begin{exampleblock}{Assumption (\textbf{Domain})}
+		Assume type sets $\Theta_i$ are rich enough to contain all possible (ordinal) preferences over $X$ for all $i$.
 	\end{exampleblock}
-	\begin{theorem}[Gibbard-Satterthwaite, 1973,'75]
+	\begin{exampleblock}{Definition (dictatorial s.c.f.)}
+		S.c.f. $f$ is called \alert{dictatorial} if there exists $i \in N$ s.t. for all type profiles $\theta$:
+	$ f(\theta) \in \arg \max_x u_i(x,\theta_i).$
+	\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}{Monotonicity: general setting (3)}
+	\begin{theorem}[\textbf{Gibbard-Satterthwaite, 1973,'75}]
 		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
 		\centering
 		$x$ is \alert{DSIC} if and only if $x$ is \alert{dictatorial}.
 	\end{theorem}
 	\begin{itemize}
-		\item To clarify: $x(\Theta) \equiv \left\{ x \in X \mid \exists \theta: x(\theta) = x \right\}$.
-		\item Note: if $x(\Theta) \subset X$, then only preferences over alternatives in $x(\Theta)$ are relevant, and we will still have a dictatorship on $x(\Theta)$. This is something we'll come back to later.
+		\item To clarify, $x(\Theta) \equiv \left\{ x \in X \mid \exists \theta: x(\theta) = x \right\}$ is the set of ``outcomes that could be prescribed for some $\theta \in \Theta$''.
+		\item Note: restriction $x(\Theta) = X$ is irrelevant.\\
+		If $x(\Theta) \subset X$, then only preferences over alternatives in $x(\Theta)$ are relevant, and we will still have a dictatorship on $x(\Theta)$. This is something we'll come back to later.
 		\item GS theorem is the mechanism design version of Arrow's theorem from social choice.
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (3)}
+\begin{frame}{Monotonicity: general setting (4)}
 	\begin{itemize}
 		\item The missing link between the two results above is this:
 		\begin{theorem}[Monotonicity implies dictatorship]
-			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$ and the domain assumption hold, then\\
 			\centering
 			if $x$ is monotone then $x$ is dictatorial.
 		\end{theorem}
@@ -170,15 +178,84 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (4)}
+\begin{frame}{Monotonicity: general setting (5)}
 	\begin{itemize}
-		\item It seems like GS thm is a strong negative result saying ``we can't implement anything unless it's dictatorial!''. But we obviously can: we've seen examples (like VCG). Where is the contradiction?
-		\item The source of evil in GS thm is the domain assumption: we often know \emph{something} about some players' preferences, so ``all possible preferences over $X$'' may be too rich for $\Theta_i$.
+		\item It \emph{seems} like GS thm is a strong negative result saying ``we can't implement anything unless it's dictatorial!''. But we obviously can: we've seen examples (like VCG). Where is the contradiction?
+		\item The source of evil in GS thm is the \alert{domain} assumption (``any preference is possible''). \\
+		We often know \structure{something} about some players' preferences, so can restrict the set of possible preferences.
 		\begin{itemize}
-			\item We have already seen that once we restrict preferences (e.g. to quasilinear -- assuming ``everyone always likes money'') then there exist non-dictatorial DSIC implementable s.c.f.s $f(\theta)$.
+			\item E.g., quasilinear prefs: ``everyone always likes money''. Then at least the efficient allocation rule $k^*(\theta)$ is implementable (and typically not dictatorial!)
 			\item Another common example is the single-peaked preferences. They also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
 		\end{itemize}
+		\item \textbf{Takeaway:} you can't make an \sout{omelet} mechanism without \sout{breaking some eggs} making some assumptions about the players' preferences! (...or can you?)
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Next steps}
+	\begin{itemize}
+		\item We will now look at a few examples of mechanisms without transfers. 
+		\item These will show what kind of mechanisms we can have if we relax the domain assumption (similar to assuming we have access to transfers) and what kinds of instruments we can use.
+		\item Some will show that even dictatorial mechanisms can be useful!
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Example 1: Voting with single-peaked preferences}
+
+\begin{frame}{Example 1: Voting with single-peaked preferences}
+	\textbf{Setup:}
+	\begin{itemize}
+		\item There are $M$ alternatives that are ordered in some sense: \\
+		$X = (x_1, x_2, ..., x_M)$ with $x_1 < x_2 < ... < x_M$.
+		\item There are $N$ players with private single-peaked ordinal preferences $\succsim_i(\theta_i)$ over these alternatives
+		\begin{itemize}
+			\item An ordinal preference relation $\succsim_i(\theta_i)$ is called \structure{single-peaked} if $\exists x^*(\theta_i)$ s.t. for any $x_k < x_l\leq x^*(\theta_i)$, $x_l \succsim_i x_k$, and for any $x^*(\theta_i) \leq x_k < x_l$, $x_k \succsim_i x_l$.
+			\item Think ``utility function $u_i(x,\theta_i)$ that is increasing between $x_1$ and $x^*(\theta_i)$ and decreasing between $x^*(\theta_i)$ and $x_M$''.
+		\end{itemize}
+		\item \alert{Example}: policy debate on a one-dimensional issue -- corporate tax rate, level of the unemployment benefits, openness of the immigration policy, level of governmental oversight over media/internet.
+	\end{itemize}
+	\textbf{Question:}
+	\begin{itemize}
+		\item Can we implement any non-dictatorial s.c.f. $f(\theta)$?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 1. Pairwise majority voting}
+	If we allowed arbitrary preferences over $X$, then GS thm says ``no, only dictatorship is incentive compatible''. But we assumed single-peakedness, so GS thm does not hold.
+	\begin{theorem}
+		In the setting defined above, if the number of players $N$ is odd, then \alert{pairwise majority voting} selects \structure{the peak of the median voter}.
+	\end{theorem}
+	\begin{itemize}
+		\item \textbf{Pairwise Majority Voting:} for any pair $x_k, x_l$, if the majority of voters prefers $x_k$ to $x_l$ (according to their reported types $(\theta_1,...,\theta_N)$), then say that $x_k$ is \emph{socially preferred} to $x_l$. After comparing all pairs, select the one that is socially preferred to all others.
+		\item Without single-peakedness, Condorcet cycles ($x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$) may arise in the social preference. But if individual prefs are single-peaked, soc pref is well defined, its most preferred alternative exists, and coincides with the median voter's most preferred alternative. (See MWG, theorems 21.D.1-2.)
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Example 2: Delegation}
+
+\begin{frame}{title}
+content...
+\end{frame}
+
+
+
+\section{Example 3: Communication}
+
+\begin{frame}{title}
+	content...
+\end{frame}
+
+
+
+\section{Example 4: Dynamic }
+
+\begin{frame}{title}
+content...
 \end{frame}
 
 
