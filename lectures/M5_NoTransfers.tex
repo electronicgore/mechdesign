@@ -251,8 +251,184 @@ content...
 \end{frame}
 
 
+\section{Example 4: Cheap talk with correlated senders}
 
-\section{Example 4: Dynamic }
+\begin{frame}{Setup}
+	\begin{itemize}
+		\item Example based on \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00336}{\uline{Battaglini (2002)}}.
+		\item Two \structure{agents}, $i \in \{1,2\}$:
+		\begin{itemize}
+			\item \emph{both} know \alert{state} $\omega = (\omega^1,\omega^2) \in \mathbb{R}^2$;
+			\item each sends \alert{report} $m \in \mathbb{R}^2$ to the principal.
+		\end{itemize}
+		\item \structure{Principal} (``designer'') does not know $\omega$, must choose action $a \in \mathbb{R}^2$ \alert{after} hearing $(m_1,m_2)$.
+		\item Preferences: squared Euclidean distance between $a$ and resp. \alert{bliss points}
+		\begin{itemize}
+			\item Principal: $u_p (a,\omega) = -\left(\left\|a-\omega\right\| \right)^2$;
+			\item Agent $i$: $u_i (a,\omega) = -\left(\left\|a-(\omega+b_i)\right\| \right)^2$;
+			\item where $\left\|x\right\| \equiv \sqrt{(x^1)^2 + (x^2)^2}$ for $x = (x^1,x^2) \in \mathbb{R}^2$.
+			\item \alert{Biases} $b_i$ commonly known.
+		\end{itemize}
+		\item (Subscripts index $i$, superscripts stand for coordinates [in default basis] and exponents.)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item You can see this as a ``level-1'' mechanism design problem in our classification:
+		{\footnotesize 
+			\begin{description}
+				\item[Level 1:] \structure{check whether some given s.c.f $x(\theta)$ is implementable.}
+				\item[Level 2:] design transfers $t(\theta)$ to implement some $k(\theta)$.
+				\item[Level 3:] design $(k(\theta),t(\theta))$ or $x(\theta)$ to maximize some objective function.
+			\end{description}
+		}
+		%\item Not a ``mechanism design problem''...
+		%\begin{itemize}
+		%	\item \alert{no commitment} for principal -- cannot really ``design'' any \structure{incentive structure} for agents.
+		%\end{itemize}
+		%\item ...but can ask a related question: how to design \structure{communication}?
+		%\begin{itemize}
+		%	\item Choose what information should be contained in agents' reports.
+		%\end{itemize}
+		\item ...where the objective is $a(\omega) = \omega$ (\structure{perfect revelation} of information).
+		\item However, this is not quite a MD problem because the principal \alert{cannot commit} to a mechanism,
+		\begin{itemize}
+			\item since action $a(m_1,m_2)$ must maximize $u_p$, principal cannot commit to other actions (e.g. threaten with $a=(\infty,\infty)$ if agents' reports disagree),
+			\item so we cannot use the revelation principle. So the question is:
+			\begin{block}{}
+				\alert{What} should agents be asked to report, for truthtelling to be an equilibrium?
+			\end{block}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Remark: a view from a different angle}
+	\begin{itemize}
+		%\item Why is this a meaningful question given lack of commitment?
+		\item Games of \structure{communication} via ``cheap talk'' have \alert{\textbf{many} equilibria}. 
+		\begin{itemize}
+			\item Main reason: it takes two to talk, so a single player cannot deviate to more informative communication.
+			\item Even if both sender and receiver could benefit from informative communication, they can be trapped in uninformative equilibrium.
+			\item If I say gibberish and you ignore everything I say, this is \emph{always} an equilibrium, regardless of the underlying game. (See next slide for an illustration from the animal kingdom.)
+			%\item (You can't hear anything valuable if you try; I can't convey anything meaningful because you won't listen.)
+			\item The same applies to ``slightly informative equilibrium''... and ``moderately informative equilibrium''...
+			\item And there can be many ``slightly informative equilibria'' that have different kinds of noise in messages... You see now where the multiplicity comes from?
+		\end{itemize}
+		\item Our ``\structure{Communication Design}'' problem is effectively an \structure{equilibrium selection} issue: does there exist a communication norm (language, possibly established by principal), under which all information is revealed in our model?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\includegraphics[scale=1.05]{pics/M4/cheaptalkmonke.png}
+	\medskip
+	
+	\url{https://en.wikipedia.org/wiki/Origin_of_language\#Problems_of_reliability_and_deception}
+\end{frame}
+
+
+\begin{frame}{Idea}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[scale=0.65]{pics/M4/battaglini01.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			{\small
+				\begin{itemize}
+					\item Relative positions of bliss points and indifference curves are fixed; just the absolute location unknown.
+					\item The circles on the graph represent the indifference curves of the two players.
+				\end{itemize}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Idea}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[scale=0.65]{pics/M4/battaglini02.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			{\small
+				\begin{itemize}
+					\item Ask player $i$ to project the state on some axis orthogonal to $b_i$ and report the result.
+					\item Will report honestly (i.e., report, which is a projection of $\omega +b_1$, coincides with the projection of the actual $\omega$).
+					\item So we learn one coordinate of the true state.
+				\end{itemize}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Idea}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[scale=0.65]{pics/M4/battaglini03.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			{\small
+				\begin{itemize}
+					\item Then with two players, we can learn state perfectly this way.
+					\item (As long as $b_i$ \structure{linearly independent}.)
+					\item More generally, two players are enough to learn the state of any dimensionality $n$, since asking either player allows to learn $n-1$ dimensions of state.
+					\item See Battaglini (2002) for $n$ dimensions and more general preferences.
+				\end{itemize}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Equilibrium strategies}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[scale=0.65]{pics/M4/battaglini04.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			{\small
+				\begin{itemize}
+					\item Consider basis $(c_1,c_2)$ where $b_i \perp c_i \in \mathbb{R}^2$ -- i.e., $b_i \cdot c_i = 0$ ($\iff b_i^1 c_i^1 + b_i^2 c_i^2 = 0$). 
+					\item State $\omega$ has unique coordinates $(o_1,o_2)$ in this basis, i.e. $\omega = o_1 \cdot c_1 + o_2 \cdot c_2$.
+					\item Ask A1 to report $o_1$. If A2 reports $o_2$ truthfully, A1 effectively chooses an action on the green line (see graph). 
+					\item So truthful reporting is optimal for A1 (green line is orthog to $b_1$ $\Rightarrow$ it is tangent to A1's circular indifference curve at $\omega$ $\Rightarrow$ any lies $\tilde{o}_1$ puts the implemented action $\tilde{\omega}$ on a lower indiff curve).
+				\end{itemize}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Clarifications}
+	\begin{itemize}
+		\item There are many vectors $c_i$ that are orthogonal to a given $b_i$ -- select any.
+		\begin{itemize}
+			\item E.g., letting $c_i = \frac{1}{\left\| b_i \right\|_2 } \left[ \begin{array}{c c} 0 & 1 \\ -1 & 0 \end{array} \right] \left( \begin{array}{c}
+				b_i^1 \\ b_i^2
+			\end{array} \right)$ would yield a vector $c_i$ of unit length that is rotated $90\deg$ clockwise w.r.t. $b_i$.
+		\end{itemize}
+		\item Formally, the problem setup says that messages are two-dimensional: $m_i \in \mathbb{R}^2$. So to be 100\% formal you can say that, e.g., $m_i = (o^i, 0)$, and that the principal ignores the second coordinate of each message.
+		\begin{itemize}
+			\item Alternatively: agents are expected to report $\omega$, but then the principal calculated respective $o_i$ and decides based on them (even (especially!) if reports do not coincide).
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Example 5: Dynamic }
 
 \begin{frame}{title}
 content...
