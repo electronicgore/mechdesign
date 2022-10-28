@@ -10,7 +10,7 @@
 
 \title{Mechanism Design}
 
-\subtitle{2: Implementability of arbitrary s.c.f.s}
+\subtitle{5: Beyond the Euclidean setting}
 
 \author{Egor Starkov}
 
@@ -35,7 +35,7 @@
 		How can we check whether a given $f(\theta)$ is implementable?
 	\end{exampleblock} 
 	\begin{itemize}
-		\item We have seen an answer for the Euclidean setting. What about more general settings?
+		\item We have seen an answer for the Euclidean setting (monotonicity). What about more general settings?
 	\end{itemize}
 \end{frame}
 
@@ -75,10 +75,13 @@
 \end{frame}
 
 
+%TODO: add also a convex v result
+
+
 \begin{frame}{Monotonicity: quasilinear setting}
 	Extension to \alert{quasilinear} setting:
-	\begin{exampleblock}{Definition (\textbf{weak monotonicity})}
-		Allocation $k$ is \alert{weakly monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
+	\begin{exampleblock}{Definition (\textbf{weak q-monotonicity})}
+		Allocation $k$ is \alert{weakly q-monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
 		\begin{equation*}
 			v_{i}(k(\structure{\theta_{i}'}, \theta_{-i}), \structure{\theta_{i}'}) - 
 			v_{i}(k(\alert{\theta_{i}''}, \theta_{-i}), \structure{\theta_{i}'}) 
@@ -88,17 +91,17 @@
 		\end{equation*}
 	\end{exampleblock}
 	\begin{theorem}[Necessity of weak monotonicity in qlin setting]
-		In the quasilinear setting: if $k$ is DSIC then $k$ is weakly monotone.
+		In the quasilinear setting: if $k$ is DSIC then $k$ is weakly q-monotone.
 	\end{theorem}
-	So $k$ must be weakly monotone to be implementable.\\ 
-	But weak monotonicity does not guarantee implementability. \\
+	So $k$ must be weakly q-monotone to be implementable.\\ 
+	But weak q-monotonicity does not guarantee implementability. \\
 	But we can strengthen this...
 \end{frame}
 
 
 \begin{frame}{Monotonicity: quasilinear setting}
-	\begin{exampleblock}{Definition (\textbf{cyclical monotonicity})}
-		Allocation $k$ is \alert{cyclically monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
+	\begin{exampleblock}{Definition (\textbf{cyclical q-monotonicity})}
+		Allocation $k$ is \alert{cyclically q-monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
 		\begin{equation*}
 			\sum_{m=1}^{M-1}
 			\left[
@@ -108,18 +111,18 @@
 			\leq 0
 		\end{equation*}
 	\end{exampleblock}
-	\begin{theorem}[\textbf{Rochet, 1987}]
-		In a quasilinear setting: $k$ is DSIC if and only if $k$ is cyclically monotone.
+	\begin{theorem}[\textbf{\citet{rochet_necessary_1987}}]
+		In a quasilinear setting: $k$ is DSIC if and only if $k$ is cyclically q-monotone.
 	\end{theorem}
-	\textbf{Note}: ``Weak monotonicity'' = ``cyclical monotonicity for $M=3$''.
+	\textbf{Note}: ``Weak q-monotonicity'' = ``cyclical q-monotonicity for $M=3$''.
 	See B{\"o}rgers, ch.5.3-5.4 for proofs or references to proofs (for $N=1$). See rest of ch.5 for other kinds of monotonicity for quasilinear setting.
 \end{frame}
 
 
 \begin{frame}{Monotonicity: general setting (1)}
 	\textbf{Without transfers}, interesting results come up... 
-	\begin{exampleblock}{Definition (\textbf{outcome monotonicity})}
-		In a general setting, outcome $x$ is \alert{monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
+	\begin{exampleblock}{Definition (\textbf{outcome g-monotonicity})}
+		In a general setting, outcome $x$ is \alert{g-monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
 		\begin{itemize}
 			\item if for all $i$ and all $x' \in X$ s.t. $u_i(x(\theta'),\theta') \geq u_i(x',\theta')$ it holds that $u_i(x(\theta'),\theta'') \geq u_i(x',\theta'')$,
 			\item then $x(\theta'')=x(\theta')$.
@@ -127,7 +130,7 @@
 	\end{exampleblock}
 	In words, if under $\theta''$ everyone likes $x(\theta')$ more than under $\theta'$, then we give $x(\theta')$ under $\theta''$.
 	\begin{theorem}[Necessity of monotonicity in general setting]
-		In the general setting: if $x$ is DSIC and $x(\Theta)=X$ then $x$ is monotone.
+		In the general setting: if $x$ is DSIC and $x(\Theta)=X$ then $x$ is g-monotone.
 	\end{theorem}
 	(This is not THE interesting part yet. The next result is.)
 \end{frame}
@@ -146,7 +149,7 @@
 
 
 \begin{frame}{Monotonicity: general setting (3)}
-	\begin{theorem}[\textbf{Gibbard-Satterthwaite, 1973,'75}]
+	\begin{theorem}[\textbf{\cite{gibbard_manipulation_1973,satterthwaite_strategy-proofness_1975}}]
 		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
 		\centering
 		$x$ is \alert{DSIC} if and only if $x$ is \alert{dictatorial}.
@@ -166,9 +169,9 @@
 		\begin{theorem}[Monotonicity implies dictatorship]
 			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$ and the domain assumption hold, then\\
 			\centering
-			if $x$ is monotone then $x$ is dictatorial.
+			if $x$ is g-monotone then $x$ is dictatorial.
 		\end{theorem}
-		\item For a full proof of GS thm, see B{\"o}rgers, ch.8.2, or \href{http://dx.doi.org/10.1016/j.jmateco.2014.09.007}{\uline{Svensson and Reffgen (2014)}}
+		\item For a full proof of GS thm, see B{\"o}rgers, ch.8.2, or \cite{svensson_proof_2014}
 		\item All three results for the general setting hold with ordinal preferences ($\succsim_i$) too, they do not rely on cardinal utilities $u_i$.
 		%\begin{itemize}
 		%	\item If anything, the domain assumption ($x(\Theta)=X$) is easier to state with ordinal preferences.
@@ -188,6 +191,9 @@
 			\item Another common example is the single-peaked preferences. They also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
 		\end{itemize}
 		\item \textbf{Takeaway:} you can't make an \sout{omelet} mechanism without \sout{breaking some eggs} making some assumptions about the players' preferences! (...or can you?)
+		\begin{itemize}
+			\item With $N=1$, all mechanisms are by definition dictatorial -- yet they can still be useful!
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -223,8 +229,8 @@
 \end{frame}
 
 
-\begin{frame}{Example 1. Pairwise majority voting}
-	If we allowed arbitrary preferences over $X$, then GS thm says ``no, only dictatorship is incentive compatible''. But we assumed single-peakedness, so GS thm does not hold.
+\begin{frame}{Single-peaked: Pairwise majority voting}
+	If we allowed arbitrary preferences over $X$, then GS thm says ``no, only dictatorship is incentive compatible''. But we assumed single-peakedness, so GS thm does not hold:
 	\begin{theorem}
 		In the setting defined above, if the number of players $N$ is odd, then \alert{pairwise majority voting} selects \structure{the peak of the median voter}.
 	\end{theorem}
@@ -235,19 +241,204 @@
 \end{frame}
 
 
+\begin{frame}{Single-peaked: Takeaways}
+	\begin{itemize}
+		\item We can often make some assumptions on players' prefs, which make some non-dictatorial s.c.f.s implementable.
+		\item In the problem of social choice on a one-dimensional issue, the median voter's ideal option is preferred by the majority.
+	\end{itemize}
+\end{frame}
+
+
 
 \section{Example 2: Delegation}
 
-\begin{frame}{title}
-content...
+%TODO: replace X with some X*? Since it's a choice object, not a primitive.
+\begin{frame}{Example 2: Delegation}
+	\textbf{Setup:} (following \cite{holmstrom_theory_1980})
+	\begin{itemize}
+		\item Consider a principal-agent model with one principal/designer and one agent, with the respective payoffs given by quadratic loss functions:
+		\begin{align*}
+			u_P(x,\theta) &= - \alpha (x-\theta)^2
+			\\
+			u_A(x,\theta) &= - \alpha (x-\theta-b)^2,
+		\end{align*}
+		where $\theta \sim U[0,1]$ is the state of the world only known by the agent; $\alpha$ and $b$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
+		\item The principal can choose $x$ directly or let the agent choose $x \in X$ while restricting the set of options $X \subseteq \mathbb{R}$ available to the agent.
+	\end{itemize}
+	\textbf{Question:} how should the principal act?
+\end{frame}
+
+
+\begin{frame}{Delegation: Solution 1}
+	\begin{itemize}
+		\item Note that this can be seen as a mechanism design problem, in which the agent reports $\theta$, and the principal commits to some decision rule $x(\theta)$. \\
+		The agent then effectively chooses $x$ from the set $x(\Theta)$.
+	\end{itemize}
+	\textbf{Solution:}
+	\begin{itemize}
+		\item The agent's FOC for $x$ given $\theta$ is 
+		\begin{align*}
+			(-2\alpha) (x-\theta-b) = 0
+		\end{align*}
+		So the agent selects $x^*(\theta) = \theta+b$ if it is available; $x \in X$ closest to $x^*(\theta)$ otherwise.
+		\item The principal would ideally prefer $x_P(\theta) = \theta$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Delegation: Solution 2}
+	\begin{lemma}
+		The optimal delegation set $X$ is convex (i.e., an interval).
+	\end{lemma}
+	\textbf{Proof:} suppose not, and the principal's chosen $X$ has $x_1,x_2 \in X$ and $(x_1,x_2) \notin X$. (Formally, there are more cases to consider, but we ignore those.)
+	Consider an alternative delegation set $X' \equiv X \cup (x_1, x_2)$.
+	
+	$X$ and $X'$ yield the same payoff to the principal when $\theta \notin (x_1-b, x_2-b)$, since then all $x \in (x_1, x_2)$ are dominated for the agent by either $x_1$, or $x_2$. I.e., the agent's choice is the same from $X$ and $X'$ for such $\theta$.
+	
+	Suppose $\theta \in (x_1-b, x_2-b)$. Under $X'$, the agent plays $x^*(\theta)$ for all such $\theta$, hence $x(\theta)-\theta = b$ for all such $\theta$.
+	Under $X$, the agent plays $x_1$ or $x_2$; can show that $\mathbb{E} \left[ x(\theta)-\theta \mid \theta \in (x_1-b, x_2-b) \right] = b$ in that case as well.
+	
+	The principal's payoff is a concave function of $x-\theta$, hence (by Jensen's inequality) the principal prefers constant $x-\theta$ to a lottery with the same mean -- hence $X'$ is better than $X$!
+\end{frame}
+
+
+\begin{frame}{Delegation: Solution 3}
+	So the optimal delegation set is $X = [\underline{x}, \bar{x}]$. Agent wants to take higher actions than the principal $\Rightarrow$ no sense restricting them from the bottom $\Rightarrow$ $\underline{x}=0$ (or $\underline{x}=-\infty$). Actions $x \geq 1$ never optimal for the principal, hence the upper limit must be $\bar{x} \leq 1$. Principal's expected payoff is
+	\begin{align*}
+		\mathbb{E}\left[-\alpha \left( x(\theta) - \theta \right)^2 \right]
+		= -\alpha \left[ \int_0^{\bar{x}-b} \left(x^*(\theta)-\theta \right)^2 d\theta + \int_{\bar{x}-b}^{1} (\bar{x}-\theta)^2 d\theta \right].
+	\end{align*}
+	Maximizing over $\bar{x}$ yields the optimal upper limit $\bar{x} = 1-b$.
+	
+	\textbf{Final answer:} the optimal delegation set is $X = [0, 1-b]$. \\
+	Or, in mechanism design terms, the optimal direct mechanism is $x(\theta) = \min \left\{ \theta+b, 1-b \right\}$.
+\end{frame}
+
+
+\begin{frame}{Delegation: Takeaways}
+	Takeaways regarding the problem:
+	\begin{itemize}
+		\item Delegation is a prominent problem in organizational econ.
+		\item Makes sense to restrict the agent where there's conflict (high $x$), not where there's none (low $x$).
+	\end{itemize}
+
+	Broader takeaways:
+	\begin{itemize}
+		\item Even dictatorial mechanisms can be useful (again, have $N=1$ in this problem, so the mechanism is by definition dictatorial).
+		\item An example of the applicability of mechanism design (not immediate from the start how this is a mechdesign problem).
+		\item An example on the usefulness of indirect mechanisms IRL (note that the actual delegation does not require the principal to commit to a decision rule).
+	\end{itemize}
 \end{frame}
 
 
 
 \section{Example 3: Communication}
 
-\begin{frame}{title}
-	content...
+\begin{frame}{Example 3: Communication}
+	\begin{itemize}
+		\item Another prominent question in org.econ is \textbf{``delegation vs communication''}: is it better to ask the agent to \structure{report the state} to the principal, or should we just let the agent \alert{make the decision}?
+		
+		\item While it's not necessarily in the mechanism design realm, this relates to our broad question of ``how to best extract private information from the players?''
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cheap talk: setup}
+	\textbf{Setup:} (following \cite{crawford_strategic_1982})
+	\begin{itemize}
+		\item Same as before: one principal/designer, one agent, with payoffs given by quadratic loss functions:
+		\begin{align*}
+			u_P(x,\theta) &= - \alpha (x-\theta)^2
+			\\
+			u_A(x,\theta) &= - \alpha (x-\theta-b)^2,
+		\end{align*}
+		where $\theta \sim U[0,1]$ is the state of the world privately known by the agent; $\alpha$ and $b$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
+		\item \textbf{NEW:} The principal asks the agent to report $\theta$, then (principal) chooses $x$ given the report to maximize their payoff, \alert{cannot commit} to a decision rule.
+	\end{itemize}
+	\textbf{Question:} how much can the principal learn about the state? (In MD lingo: which s.c.f. $x(\theta)$ are implementable?)
+\end{frame}
+
+
+\begin{frame}{Cheap talk: comments}
+	\begin{itemize}
+		\item Due to no-commitment assumption, the principal will always choose $x(m) = \mathbb{E}[\theta|m]$ after message $m$.
+		\item Can see this as a MD problem with two players: the agent and the future principal -- but it's a stretch. %(due to info assumptions mostly, since future principal has no pvt info, apart from what is communicated by the agent)
+		\item More reasonable interpretation -- MD problem (with 1 agent) with an additional constraint (principal's ex post compliance).
+		\item This model is known as a game of \emph{cheap talk} communication, since the agent can message about $\theta$ but has no evidence to back up their claim -- in contrast to models of \emph{verifiable disclosure}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cheap talk: solution 1}
+	\begin{itemize}
+		\item Again, de facto dictatorship: principal offers a \alert{set of options $X$} to the agent.
+		
+		\item Again, need to figure what the agent's IC conditions (together with the principal's ex post IC) imply for how $x(\theta)$ can and cannot look like. \\
+		The principal's IC implies that for all $\theta$, \structure{$x(\theta)=\mathbb{E}[\theta' \mid x(\theta')=x(\theta) ]$}.
+		
+		\pause 
+		
+		\item \textbf{Statement:} all implementable $X$ are finite: $X = \{x_1,...,x_K\}$, with options at least $b$ apart.\\
+		\textbf{Proof:} suppose $x',x'' \in X$ with $x''-x' \in (0,b)$. Then for all $\theta \geq x'$, the agent prefers $x''$ to $x'$, so $x(\theta) \neq x'$ for such $\theta$. But then $\mathbb{E}[\theta \mid x(\theta) = x'] < x'$, a contradiction.
+		\pause 
+		\begin{itemize}
+			\item The exact opposite of delegation!
+			\item This is fully due to the principal's IC. What constraints does the agent's IC add?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cheap talk: solution 2}
+	\begin{itemize}
+		\item It is immediate that $x(\theta)$ must be increasing (by the standard monotonicity argument -- just look at the pair of the agent's mutual IC conditions for some $\theta',\theta''$).
+		
+		\item So any option $x \in X$ is chosen on an interval of states (or nowhere): $\{ \theta \mid x(\theta)=x_k \} = [\theta_{k-1}, \theta_k]$, where. 
+
+		\item Can we figure out the interval boundaries? Yes, easy: when $\theta=\theta_k$, the agent must be indifferent between $x_k$ and $x_{k+1}$ (so $\theta_k+b \in [x_k, x_{k+1}]$):
+		\begin{align*}
+			- \alpha (x_k-\theta_k-b)^2 &= - \alpha (x_{k+1}-\theta_k-b)^2
+			& \iff & &
+			\theta_k+b - x_k = x_{k+1} - \theta_k - b.
+		\end{align*}
+		
+		\item Further, from the principal's IC and the uniform distribution:
+		\begin{align*}
+			x_k=\mathbb{E}[\theta \mid x(\theta)=x_k ]= \frac{\theta_{k-1} + \theta_k}{2}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cheap talk: solution 3}
+	\begin{itemize}
+		\item Combining the two conditions yields a recurrent equation on $\{\theta_k\}$: $$\theta_{k-1}-2\theta_k + \theta_{k+1} = 4b.$$
+		
+		\item \textbf{Final answer:} any sequence $\{\theta_k\}_{k=0}^K$ that satisfies the equation above and the boundary conditions $\theta_0 = 0$, $\theta_K = 1$ characterizes an implementable s.c.f.
+		
+		\item Can show: there is an upper bound $\bar{K}(b)$ such that for any $K \in [1, \bar{K}(b)]$ there exists an implementable s.c.f. with $K$ options in the choice set. 
+		\begin{itemize}
+			\item Alternative (original) interpretation: for every $K \in [1, \bar{K}(b)]$, there exists a corresponding equilibrium of the communication game. 
+			\item Reminder: in MD, we assume the designer has the power of equilibrium selection!
+		\end{itemize}
+		
+		\item Both the principal and the agent prefer the more informative/responsive s.c.f. (higher $K$)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cheap talk: results and discussion}
+	\begin{enumerate}
+		\item Can calculate the principal's payoffs and show that \structure{delegation is better than communication} for the principal
+		\begin{itemize}
+			\item \textcolor{violet}{Not immediate} from the setup of the two respective games.
+			\item \alert{Counterintuitive} that the manager suffers from having fewer decision rights under delegation!
+			\item \structure{Obvious} when framed as mechanism design problems: ``communication'' is ``delegation + extra constraint''. \\
+			\textbf{Lesson:} framing problems in MD context can provide clarity!
+		\end{itemize}
+		
+		\item We can deal with extra constraints (like the principal's ex post IC), no problem! The whole ``MD problem'' is exactly about figuring out what the constraints are and what they imply!
+	\end{enumerate}
 \end{frame}
 
 
@@ -255,7 +446,7 @@ content...
 
 \begin{frame}{Setup}
 	\begin{itemize}
-		\item Example based on \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00336}{\uline{Battaglini (2002)}}.
+		\item Example based on \cite{battaglini_multiple_2002}.
 		\item Two \structure{agents}, $i \in \{1,2\}$:
 		\begin{itemize}
 			\item \emph{both} know \alert{state} $\omega = (\omega^1,\omega^2) \in \mathbb{R}^2$;
@@ -432,6 +623,13 @@ content...
 
 \begin{frame}{title}
 content...
+\end{frame}
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{teaching}
+\bibliographystyle{abbrvnat}
 \end{frame}
 
 
