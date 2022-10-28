@@ -68,7 +68,7 @@
 %----------------------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
-\newcommand{\hmwkTitle}{Exercises for Lecture 8 (M4)} % Assignment title
+\newcommand{\hmwkTitle}{Exercises for Lecture 7 (M4)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
 \newcommand{\instructor}{Fall 2022} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
@@ -80,7 +80,7 @@
 %   SOLUTIONS
 %----------------------------------------------------------------------------------------
 \newif\ifsolutions
-%\solutionstrue
+\solutionstrue
 
 
 
@@ -128,7 +128,7 @@
 		\item The payment itself can be non-monetary in principle -- e.g., by means of time and effort required to secure an appointment. However, the mechanism does not only require payment to meet the investor, but also requires that this payment is contingent upon the outcome of the meeting, which means that the aforementioned tools can not be easily used. 
 		
 		One way to interpret transfers is to say that they represent the reputation that these entrepreneurs will acquire in the venture capital circles after the meeting. If they are caught lying ($|\theta_1 - \theta_2|>1$), the investor will make sure to spread the news about it, and the entrepreneurs will have a harder time securing investment for this or other projects from other sources. 
-		(It is not immediate whether the investor can commit to such behavior ex ante to incentivize agents -- which is crucial for the mechanism to be credible, -- but you can argue that the designer takes personal offense in having to waste her time listening to a bad pitch, and thus finds it individuall optimal to punish bad proposers.)
+		(It is not immediate whether the investor can commit to such behavior ex ante to incentivize agents -- which is crucial for the mechanism to be credible, -- but you can argue that the designer takes personal offense in having to waste her time listening to a bad pitch, and thus finds it individually optimal to punish bad proposers.)
 	\end{enumerate}
 \fi 
 
@@ -211,7 +211,7 @@
 	\subsubsection*{2. Compute the truth-revealing transfers $\hat{t}_{i}(\theta)=-ln(\phi(\theta_{-i}|\theta_{i}))$}
 	Inserting the values for $\phi(\theta_{-i}|\theta_{i})$, we find that:
 	\begin{align}
-		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=H)&=-ln(\phi(\theta_{-i=H}|\theta_{i=H})) \nonumber \\ 
+		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=H)&=-ln(\phi(\theta_{-i}=H|\theta_{i}=H)) \nonumber \\ 
 		&= -ln(1/3) = ln(3)\\
 		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=L)&=-ln(2/3)=ln(3)-ln(2)\\
 		\hat{t}_{i}(\theta_{i}=L,\theta_{-i}=H)&=-ln(2/3)=ln(3)-ln(2)\\
