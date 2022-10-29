@@ -28,18 +28,22 @@
 
 
 
-\section{Testing Implementability}
+\section{Implementability: beyond the Euclidean setting}
 
 \begin{frame}{Testing Implementability}
+	The running question for now:
 	\begin{exampleblock}{}
 		How can we check whether a given $f(\theta)$ is implementable?
 	\end{exampleblock} 
 	\begin{itemize}
-		\item We have seen an answer for the Euclidean setting (monotonicity). What about more general settings?
+		\item We have seen an answer for the Euclidean setting ($k$ should be monotone). 
+		\item As nice as it is, Euclidean setting is very restrictive, mainly due to the $u(x,\theta)=\theta k - t_i$ payoff function.
+		\item What about more general settings?
 	\end{itemize}
 \end{frame}
 
 
+%TODO: this could be moved to some early lecs, when talking about IC
 %\begin{frame}{DSIC: Weak Preference Reversal Property}
 %	\begin{itemize}
 %		\item \textbf{Answer 1}: \structure{revelation principle}. (Applies to any \alert{general} setting.)
@@ -58,7 +62,7 @@
 %\end{frame}
 
 
-\begin{frame}{Monotonicity: Euclidean setting}
+\begin{frame}{Euclidean setting: refresher}
 	\begin{itemize}
 		\item \textbf{Reminder}: \structure{monotonicity} for Euclidean problems.
 		\begin{itemize}
@@ -78,8 +82,28 @@
 %TODO: add also a convex v result
 
 
-\begin{frame}{Monotonicity: quasilinear setting}
+\begin{frame}{Quasilinear setting: result 1}
 	Extension to \alert{quasilinear} setting:
+	\begin{itemize}
+		\item Suppose we are fine with one-dimensional $k_i$ and $\theta_i$, but want to consider more general payoff functions $v_i(k_i,\theta_i)$.
+	\end{itemize}
+	\begin{theorem}[Monotonicity in qlin setting]
+		In the quasilinear setting: if $K_i,\Theta_i \subset \mathbb{R}$, $\Theta_i$ is bounded, and \alert{$\frac{\partial^2 v_i(k_i,\theta_i)}{\partial k_i \partial \theta_i} > 0$}, then: \\
+		\centering
+		if \structure{$k_i(\theta)$ is weakly increasing} in $\theta_i$ for all $i$ then $k$ is \structure{DSIC}.
+	\end{theorem}
+	\begin{itemize}
+		\item In words: if $\theta_i$ and $k_i$ are complements from $i$'s standpoint, then it is sufficient for $k$ to be monotone to be implementable.
+		\begin{itemize}
+			\item (Necessity probably also holds in this formulation, but I haven't checked)
+		\end{itemize}
+		\item See B{\"o}rgers ch.5.6 for details (including what boundedness of $\Theta_i$ means).
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Quasilinear setting: result 2}
+	What follows is a couple more results for the quasilinear setting with no restrictions on $K$ or $\Theta$.
 	\begin{exampleblock}{Definition (\textbf{weak q-monotonicity})}
 		Allocation $k$ is \alert{weakly q-monotone} if for all $i,\theta_i',\theta_i'',\theta_{-i}$:
 		\begin{equation*}
@@ -99,7 +123,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: quasilinear setting}
+\begin{frame}{Quasilinear setting: result 3}
 	\begin{exampleblock}{Definition (\textbf{cyclical q-monotonicity})}
 		Allocation $k$ is \alert{cyclically q-monotone} if for all $i,\theta_{-i}$, and all sequences $(\theta_i^1,\theta_i^2,...,\theta_i^M)\in \Theta_i^M$ of arbitrary length $M$ s.t. $\theta_i^M=\theta_i^1$, the following holds:
 		\begin{equation*}
@@ -119,7 +143,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (1)}
+\begin{frame}{General setting: monotonicity}
 	\textbf{Without transfers}, interesting results come up... 
 	\begin{exampleblock}{Definition (\textbf{outcome g-monotonicity})}
 		In a general setting, outcome $x$ is \alert{g-monotone} if for all $\theta',\theta'' \in \Theta$ the following holds:
@@ -136,7 +160,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (2)}
+\begin{frame}{General setting: dictatorship 1}
 	%\textbf{Assume} $X$ is finite and 
 	\begin{exampleblock}{Assumption (\textbf{Domain})}
 		Assume type sets $\Theta_i$ are rich enough to contain all possible (ordinal) preferences over $X$ for all $i$.
@@ -148,7 +172,7 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (3)}
+\begin{frame}{General setting: dictatorship 2}
 	\begin{theorem}[\textbf{\cite{gibbard_manipulation_1973,satterthwaite_strategy-proofness_1975}}]
 		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
 		\centering
@@ -156,14 +180,14 @@
 	\end{theorem}
 	\begin{itemize}
 		\item To clarify, $x(\Theta) \equiv \left\{ x \in X \mid \exists \theta: x(\theta) = x \right\}$ is the set of ``outcomes that could be prescribed for some $\theta \in \Theta$''.
-		\item Note: restriction $x(\Theta) = X$ is irrelevant.\\
+		\item Note: restriction $x(\Theta) = X$ is irrelevant for this result.\\
 		If $x(\Theta) \subset X$, then only preferences over alternatives in $x(\Theta)$ are relevant, and we will still have a dictatorship on $x(\Theta)$. This is something we'll come back to later.
 		\item GS theorem is the mechanism design version of Arrow's theorem from social choice.
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (4)}
+\begin{frame}{General setting: dictatorship 3}
 	\begin{itemize}
 		\item The missing link between the two results above is this:
 		\begin{theorem}[Monotonicity implies dictatorship]
@@ -171,7 +195,7 @@
 			\centering
 			if $x$ is g-monotone then $x$ is dictatorial.
 		\end{theorem}
-		\item For a full proof of GS thm, see B{\"o}rgers, ch.8.2, or \cite{svensson_proof_2014}
+		\item For a proof of GS thm, see Narahari ch.17
 		\item All three results for the general setting hold with ordinal preferences ($\succsim_i$) too, they do not rely on cardinal utilities $u_i$.
 		%\begin{itemize}
 		%	\item If anything, the domain assumption ($x(\Theta)=X$) is easier to state with ordinal preferences.
@@ -181,16 +205,18 @@
 \end{frame}
 
 
-\begin{frame}{Monotonicity: general setting (5)}
+\begin{frame}{General setting: Takeaways}
 	\begin{itemize}
 		\item It \emph{seems} like GS thm is a strong negative result saying ``we can't implement anything unless it's dictatorial!''. But we obviously can: we've seen examples (like VCG). Where is the contradiction?
+		\pause 
 		\item The source of evil in GS thm is the \alert{domain} assumption (``any preference is possible''). \\
 		We often know \structure{something} about some players' preferences, so can restrict the set of possible preferences.
 		\begin{itemize}
-			\item E.g., quasilinear prefs: ``everyone always likes money''. Then at least the efficient allocation rule $k^*(\theta)$ is implementable (and typically not dictatorial!)
-			\item Another common example is the single-peaked preferences. They also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
+			\item E.g., quasilinear prefs: ``everyone always likes money/transfers''. Then at least the efficient allocation rule $k^*(\theta)$ is implementable (and typically not dictatorial!)
+			\item Another common example is the single-peaked preferences, explored below. %They also allow for non-dictatorial DSIC mechanisms. (B{\"o}rgers, Prop 8.6)
 		\end{itemize}
-		\item \textbf{Takeaway:} you can't make an \sout{omelet} mechanism without \sout{breaking some eggs} making some assumptions about the players' preferences! (...or can you?)
+		\pause
+		\item Further, dictatorship is not a sentence!
 		\begin{itemize}
 			\item With $N=1$, all mechanisms are by definition dictatorial -- yet they can still be useful!
 		\end{itemize}
@@ -200,9 +226,8 @@
 
 \begin{frame}{Next steps}
 	\begin{itemize}
-		\item We will now look at a few examples of mechanisms without transfers. 
+		\item We will now look at a few examples of mechanisms without transfers, dictatorial and not. 
 		\item These will show what kind of mechanisms we can have if we relax the domain assumption (similar to assuming we have access to transfers) and what kinds of instruments we can use.
-		\item Some will show that even dictatorial mechanisms can be useful!
 	\end{itemize}
 \end{frame}
 
@@ -298,7 +323,7 @@
 	Suppose $\theta \in (x_1-b, x_2-b)$. Under $X'$, the agent plays $x^*(\theta)$ for all such $\theta$, hence $x(\theta)-\theta = b$ for all such $\theta$.
 	Under $X$, the agent plays $x_1$ or $x_2$; can show that $\mathbb{E} \left[ x(\theta)-\theta \mid \theta \in (x_1-b, x_2-b) \right] = b$ in that case as well.
 	
-	The principal's payoff is a concave function of $x-\theta$, hence (by Jensen's inequality) the principal prefers constant $x-\theta$ to a lottery with the same mean -- hence $X'$ is better than $X$!
+	The principal's payoff is a concave function of $x-\theta$, hence (by Jensen's inequality) the principal prefers constant $x-\theta$ to a lottery with the same mean -- hence $X'$ is better than $X$! \qed 
 \end{frame}
 
 
@@ -324,7 +349,7 @@
 
 	Broader takeaways:
 	\begin{itemize}
-		\item Even dictatorial mechanisms can be useful (again, have $N=1$ in this problem, so the mechanism is by definition dictatorial).
+		\item Even dictatorial mechanisms can be useful for the principal (again, have $N=1$ in this problem, so the mechanism is by definition dictatorial).
 		\item An example of the applicability of mechanism design (not immediate from the start how this is a mechdesign problem).
 		\item An example on the usefulness of indirect mechanisms IRL (note that the actual delegation does not require the principal to commit to a decision rule).
 	\end{itemize}
