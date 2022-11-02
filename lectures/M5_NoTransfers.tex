@@ -287,7 +287,7 @@
 			\\
 			u_A(x,\theta) &= - \alpha (x-\theta-b)^2,
 		\end{align*}
-		where $\theta \sim U[0,1]$ is the state of the world only known by the agent; $\alpha$ and $b$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
+		where $\theta \sim U[0,1]$ is the state of the world only known by the agent; $\alpha \geq 0$ and $b \in [0,1/2]$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
 		\item The principal can choose $x$ directly or let the agent choose $x \in X$ while restricting the set of options $X \subseteq \mathbb{R}$ available to the agent.
 	\end{itemize}
 	\textbf{Question:} how should the principal act?
@@ -377,7 +377,7 @@
 			\\
 			u_A(x,\theta) &= - \alpha (x-\theta-b)^2,
 		\end{align*}
-		where $\theta \sim U[0,1]$ is the state of the world privately known by the agent; $\alpha$ and $b$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
+		where $\theta \sim U[0,1]$ is the state of the world privately known by the agent; $\alpha \geq 0$ and $b \in [0,1/4]$ are commonly known parameters; and $x \in \mathbb{R}$ is the decision to be made.
 		\item \textbf{NEW:} The principal asks the agent to report $\theta$, then (principal) chooses $x$ given the report to maximize their payoff, \alert{cannot commit} to a decision rule.
 	\end{itemize}
 	\textbf{Question:} how much can the principal learn about the state? (In MD lingo: which s.c.f. $x(\theta)$ are implementable?)
@@ -457,7 +457,7 @@
 		\item Can calculate the principal's payoffs and show that \structure{delegation is better than communication} for the principal
 		\begin{itemize}
 			\item \textcolor{violet}{Not immediate} from the setup of the two respective games.
-			\item \alert{Counterintuitive} that the manager suffers from having fewer decision rights under delegation!
+			\item \alert{Counterintuitive} that the manager gains from having fewer decision rights under delegation!
 			\item \structure{Obvious} when framed as mechanism design problems: ``communication'' is ``delegation + extra constraint''. \\
 			\textbf{Lesson:} framing problems in MD context can provide clarity!
 		\end{itemize}
