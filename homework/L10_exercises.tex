@@ -265,54 +265,56 @@
 
 
 
-\section{Matching on height}
-	%Final2020, p3
-	Consider the classic marriage (two sided-matching) model, with finite sets of men and women, $M$ and $W$.  Each man $m \in M$ has height $h_m$; each woman $w \in W$ has height $h_w$.  Preferences are as follows:
+\subsection{Book giveaway}
+% final2021_2. matching, open + monotonicity + corr.info
+Djul has defended his Ph.D. and found a job. He looks back at the small library of books that he has assembled during his studies and decides that he does not need them as much any more. Therefore, he decides to give the books away to fellow Ph.D. students. Suppose there are $b \in \{1,...,B\}$ books and $i \in \{1,...,N\}$ interested students. Since $N > B$, Djul decides that it would be fair to limit the giveaway to one book per person. Let $\theta_{i,b}$ denote the valuation of student $i$ for book $b$ (privately known by student $i$). Assume that all students are economists who act in pure self-interest.
+
+\begin{enumerate}
+	\item Given that Ph.D. students are poor,\footnote{The story is taking place in the U.S.} and Djul himself now has a well-paying job, he would prefer to give the books away for free. Propose a mechanism that Djul could use to allocate the books among fellow students for free and in a way that would be Pareto optimal. 
 	
-	\begin{itemize}
-		\item agents prefer mates to have height closer to their own;
-		\item agents strictly prefer being matched to remaining single.
-	\end{itemize}
+	\item Suppose now that $N=6$, $B=4$, and the realized valuations are as given in Table \ref{table:books}. Calculate the allocation produced by your mechanism from part 1.
+	\begin{table}[h]
+		\begin{center}
+			\begin{tabular}{| c || c | c | c | c | c | c |}
+				\hline
+				$\theta_{i,b}$ & $i=1$ & $i=2$ & $i=3$ & $i=4$ & $i=5$ & $i=6$
+				\\ \hline\hline
+				$b=1$ & $4$ & $4$ & $1$ & $8$ & $9$ & $9$
+				\\ \hline
+				$b=2$ & $0$ & $2$ & $4$ & $9$ & $5$ & $3$
+				\\ \hline
+				$b=3$ & $9$ & $5$ & $5$ & $2$ & $6$ & $4$
+				\\ \hline
+				$b=4$ & $7$ & $6$ & $0$ & $7$ & $2$ & $6$
+				\\ \hline
+			\end{tabular}
+			\caption{Preferences for the Book Giveaway problem}
+			\label{table:books}
+		\end{center}
+	\end{table}
 	
-	Formally, the utility that man $m$ and woman $w$ get from being matched to each other is given by $u_m(w) = u_w(m) = -|h_m - h_w|$, and the utility of being single is arbitrarily low.
+	\item Does there exist a mechanism that allocates the books without transfers efficiently (i.e., in a welfare-maximizing way)? If yes: present a mechanism. If not: explain why.
 	
-	In particular, consider a market with three men $M = \{m_1,m_2,m_3\}$ with heights $\{h_{m_1}, h_{m_2}, h_{m_3}\} = \{174,177,184\}$ and two women $W = \{w_1,w_2\}$ with heights $\{h_{w_1}, h_{w_2}\} = \{175,180\}$.
-	
-	\begin{enumerate}
-		\item %(5pts) 
-		Find the outcome of men-proposing deferred acceptance (M-DA) algorithm in this market.
-		\item %(5pts) 
-		Find the outcome of women-proposing deferred acceptance (W-DA) algorithm in this market.
-		\item %(5pts) 
-		Are there any other stable matchings? Find them or argue why none exist.
-	\end{enumerate}
-	Consider now an incomplete-information setting, where the players' heights are not observable to the designer (but all players know everyone's height). 
-	\begin{enumerate}[resume]
-		\item %(5pts) 
-		Consider a game in which all player must report their heights before the W-DA algorithm is run. Show that the strategy profile where all players truthfully report their heights is not a Bayes-Nash Equilibrium of this game.
-		\item %(5pts) 
-		Given that all players know everyone's height, is there a mechanism that the designer can use to elicit players' true heights? (No transfers are allowed.) If yes, describe the mechanism fully and verify that it implements the truthful outcome. If not, argue why not.
-	\end{enumerate}
+	\item Djul has run your mechanism from part 1 and messaged people regarding who got which book, but lost his phone with all the notes and messages before actually giving any books away. He thus cannot remember which book was promised to which student. Each student, however, knows which book they were promised. How can Djul recover the promised allocation without running the whole mechanism again? (Propose a mechanism that relies on students' reports of the books they were promised and explain why it works.)
+\end{enumerate}
+
 
 
 \ifsolutions
-\section*{Solution}
-	\begin{enumerate}
-		\item[1-2.] The answers to parts 1 and 2 are the same: under either algorithm the matches are $(m_1, w_1)$ and $(m_2, w_2)$, while $m_3$ remains single. It is not necessary to provide the derivation via DA algorithms explicitly.
-		
-		%\emph{Grading note} for 1 and 2: partial credit possible if student ran some steps of the algorithm correctly but arrived to a wrong answer.
-		
-		\setcounter{enumi}{2}
-		\item Together with the lattice structure of the set of stable matchings and the fact that the outcomes of M-DA and W-DA are always the maximal and minimal elements of this lattice, the fact that the two coincide implies that the set of stable matchings is a singleton (i.e., the outcome identified in (1)-(2) is unique). Alternatively, this particular problem is simple enough to bruteforce through all possible matchings to verify that no other matchings are stable.
-		
-		\item If $m_3$ reports his height truthfully then he remains single, while reporting $h_{m_3} = 180$ would lead to him being matched with $w_2$ under W-DA. Alternatively, man $m_2$ also has a profitable deviation by reporting $h_{m_2} = 175$.
-		
-		%\emph{Grading note}: full credit for identifying one valid profitable deviation.
-		
-		\item Ask each player to report \emph{all} players' height. If all reports coincide, use this height profile to run M-DA/W-DA algorithm. Otherwise leave everyone unmatched (note that your mechanism \emph{must} prescribe some outcome in case of mismatching reports, otherwise players' incentives are not well defined). Truthtelling is an equilibrium of this mechanism: neither of the players matched under truthtelling want to deviate and become unmatched, and $m_3$ is indifferent between reporting truthfully and lying.
-		
-		Another possible correct answer is as follows. Ask each player to report all players' height. If at least $4$ out of $5$ reports coincide, use the modal heights profile to run M-DA/W-DA algorithm. Otherwise \emph{match randomly}. Note that random matching is better for $m_3$ than remaining single for sure, so $m_3$ must not be able to invoke this possibility on his own -- hence the 4/5 rule.
-	\end{enumerate}
+\subsection*{Solution}
+\begin{enumerate}
+	\item There are a few alternatives. Djul could use the deferred acceptance algorithm with students proposing in a random order (analogous to random serial dictatorship in social choice). This could effectively be implemented via a ``first come-first serve'' rule. Since in this situation every student gets their most preferred book (out of those that were not most preferred by preceding students), there is no scope for Pareto-improving exchanges, hence the resulting book allocation is Pareto-optimal. Note, however, that it need not be welfare maximizing. E.g., let there be two students, two books, $\theta_{1,b} = (10,9)$ and $\theta_{2,b} = (10,1)$, and student $i=1$ gets to choose first. Then student $1$ gets book $1$ and student $2$ gets book $2$, which yields welfare $11$, but they could \emph{trade}, rather than just exchange, books (with student $2$ paying student $1$ any amount in $[1,9]$), to arrive at an allocation that yields welfare $19$.
+	
+	The same issue arises if we try to use the Top Trading Cycles algorithm with any arbitrary initial allocation -- the resulting allocation would be Pareto-efficient for the same reason, but not necessarily welfare-maximizing for the same reason.
+	
+	\item Take the DA algorithm, in which students select books in the order of their indices. Then student $1$ picks book $3$, student $2$ picks book $4$, student $3$ picks book $2$ (since $3$ was taken), and student $4$ picks book $1$.
+	
+	\item The arguments in part 1 suggest that the standard matching algorithms are not efficient. While we would typically resort to VCG to implement an efficient allocation, it is not an option in this case since the goal is to avoid payments. Using non-monetary transfers like time or effort would, strictly speaking, fulfill the goal (hence VCG would be an acceptable answer if a non-monetary implementation of transfers is specified), but it defeats the spirit of the problem, since the intent is to not impose extra burden on the students.
+	
+	At the same time, without transfers the allocation can not be implemented, which is easy to see from the IC conditions. The example given in part 1 with realized types $\theta_{1,b} = (10,9)$ and $\theta_{2,b} = (10,1)$ shows that DRM $(k^*,t=0)$ is not DSIC, since under this realized type profile $k^*$ prescribes that student $1$ gets book $2$, but they would prefer to misreport their valuation vector as, e.g., $\hat{\theta}_{1,b} =(11,1)$ in order to get book $1$, which they prefer more. The fact that DRM $(k^*,t=0)$ is not BIC follows from the same example if we assume that $\theta_{2,b} = (10,1)$ is the only type possible for player $2$.
+	
+	\item Consider the following mechanism: if every book is claimed by exactly one student, implement the reported allocation, otherwise burn all books in a book-burning van. This mechanism has an equilibrium in which all reports are truthful. To see this, note that no student $i$ has an incentive to report the book they like less than the one they were assigned (or report no book), since this cannot result in $i$ getting a better book. On the other hand, if $i$ reports a more preferred book $b$ than the one they were assigned, Pareto-optimality implies that this book is claimed by some other student $j$, who reports truthfully in equilibrium -- hence book $b$ is claimed by both $i$ and $j$, which triggers the burn clause in the mechanism, and neither of them gets any book. This outcome is worse for $i$ than getting the initially allocated book, hence this deviation is not profitable either. So none of the available deviations is profitable for $i$, and $i$ was arbitary, hence truthtelling is an equilibrium of the game induced by this mechanism.
+\end{enumerate}
 \fi
 
 
