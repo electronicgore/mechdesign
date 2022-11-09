@@ -10,12 +10,12 @@
 
 \title{Mechanism Design}
 
-\subtitle{5: Dynamic Mechanisms}
+\subtitle{6: Dynamic Mechanisms}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2021}
+	Fall 2022}
 
 
 \begin{document}
@@ -48,7 +48,7 @@
 		\item Dynamic labor contracts
 	\end{itemize}
 	\item How to develop dynamic mechanisms? Will see today.
-	\item This lecture mostly follows \href{https://www.aeaweb.org/articles?id=10.1257/jel.20180892}{\uline{Bergemann and V{\"a}lim{\"a}ki (2019)}}.
+	\item This lecture mostly follows \cite{bergemann_dynamic_2019}.
 \end{itemize}
 \end{frame}
 
@@ -119,7 +119,7 @@ To fix ideas, assume the following for this class:
 
 \begin{frame}{Direct Mechanisms}
 \begin{itemize}
-	\item As usual, we have the \structure{revelation principle} (\href{https://doi.org/10.3982/TE2270}{\uline{Sugaya and Wolitzky, 2017}}).
+	\item As usual, we have the \structure{revelation principle}, though there are caveats \citep{sugaya_revelation_2021}.
 	\item So can focus on mechanisms which ask players to report their types every period.
 	\item \structure{Reporting strategies} given by $\rho_i = \{r_{i,t}\}_{t=0}^T$, where $r_{i,t}: \Theta_i \times H_t \to \Theta_i$ and $H_t$ is the set of \structure{public histories} $h_t = \{k_s,(r_{1,s},...,r_{N,s})\}_{s < t}$.
 	\item A \structure{dynamic direct mechanism} is $(\kappa,\pi) = \{k_t,p_t\}_{t=0}^T$, where $k_t: \Theta \times H_t \to K_t$ and $p_t: \Theta \times H_t \to \mathbb{R}^N$.
@@ -173,7 +173,7 @@ To fix ideas, assume the following for this class:
 	\begin{itemize}
 		\item Problem: the externality that $i$ imposes on others via report $\theta_{i,t}$ may manifest in other periods -- not necessarily at $t$.
 	\end{itemize}
-	\item Enter \structure{dynamic pivot mechanism}! (Bergemann and V{\"a}lim{\"a}ki, 2010)
+	\item Enter \structure{dynamic pivot mechanism}! \citep{bergemann_dynamic_2010}
 \end{itemize}
 \end{frame}
 
@@ -298,7 +298,7 @@ To fix ideas, assume the following for this class:
 				\item Check whether the resulting mechanism satisfies dynamic IC (at $t>0$).
 				\item Pray that it does.
 			\end{enumerate}
-			\item \href{https://doi.org/10.3982/ECTA10269}{\uline{Pavan, Segal, Toikka (2014)}} provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
+			\item \cite*{pavan_dynamic_2014} provide some sufficient conditions for this to work, but these are considered by some as too restrictive.
 			\item We today take the ``pray that (FE) holds'' approach and only worry about extracting the buyer's initial type $\theta_0$ -- we are \structure{back} to the \structure{static problem}.
 		\end{itemize}
 	\end{minipage}
@@ -438,7 +438,7 @@ so the whole virtual surplus as a function of the whole $\theta=(\theta_1,\theta
 
 \subsection{Thomas and Worrall (1990)}
 
-\begin{frame}{Dynamic Insurance [Thomas and Worrall (1990)]}
+\begin{frame}{Dynamic Insurance \citep{thomas_income_1990}}
 \begin{itemize}
 	\item One risk-neutral lender (designer), one \alert{risk-averse} borrower (agent), common discount factor $\beta$.
 	\item Time $t=0,1,...$.
@@ -524,7 +524,7 @@ so the whole virtual surplus as a function of the whole $\theta=(\theta_1,\theta
 
 \subsection{Guo and H{\"o}rner (2018)}
 
-\begin{frame}{Dynamic Allocation without Money [Guo and H{\"o}rner (2018)]}
+\begin{frame}{Dynamic Allocation without Money \citep{guo_dynamic_2018}}
 \begin{itemize}
 	\item One principal, one agent.
 	\item Time $t=0,1,...$
@@ -582,7 +582,7 @@ so the whole virtual surplus as a function of the whole $\theta=(\theta_1,\theta
 
 \subsection{Li, Matouschek, Powell (2017)}
 
-\begin{frame}{Power Dynamics in Organizations [Li, Matouschek, Powell (2017)]}
+\begin{frame}{Power Dynamics in Organizations \citep{li_power_2017}}
 \begin{itemize}
 	\item One principal, one agent.
 	\item Time $t=0,1,...$
@@ -663,6 +663,12 @@ so the whole virtual surplus as a function of the whole $\theta=(\theta_1,\theta
 \end{itemize}
 \end{frame}
 
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{teaching}
+\bibliographystyle{abbrvnat}
+\end{frame}
 
 
 \end{document}
