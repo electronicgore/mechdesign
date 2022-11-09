@@ -10,12 +10,12 @@
 
 \title{Mechanism Design}
 
-\subtitle{6: Matching Mechanisms}
+\subtitle{7: Matching Mechanisms}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2021}
+	Fall 2022}
 
 
 \begin{document}
@@ -504,9 +504,7 @@ Stability and IR will be our main requirements.
 \begin{itemize}
 	\item There exists a notion of stability that incorporates players' incomplete knowledge of each other's preferences when trying to form blocking pairs...
 	\begin{itemize}
-		%\item see \href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA11183}{\uline{Liu, Mailath, Postlewaite, Samuelson (2014)}},
-		%\item \href{http://www.its.caltech.edu/~lpomatto/stable_matching.pdf}{\uline{Pomatto (2019 WP)}}.
-		\item see \href{https://www.aeaweb.org/articles/pdf/doi/10.1257/aer.20181186}{\uline{Liu (2020)}}
+		\item see \cite{liu_stability_2020}
 	\end{itemize}
 	\item but there are much fewer results as to whether \& how these ``stable'' matchings can be obtained in a mechanism, what their properties are, etc
 \end{itemize}
@@ -648,7 +646,7 @@ Stability and IR will be our main requirements.
 
 
 \begin{frame}{TTC Algorithm}
-\begin{theorem}[Roth '82]
+\begin{theorem}[\cite{roth_incentive_1982}]
 	It is a dominant strategy for all players to follow their true preferences in TTC.
 \end{theorem}
 \begin{theorem}
@@ -691,7 +689,7 @@ Stability and IR will be our main requirements.
 \end{frame}
 
 
-\begin{frame}{Kelso and Crawford (1982)}
+\begin{frame}{\cite{kelso_job_1982}}
 \begin{itemize}
 	\item Set of firms $F = \{f_1, ..., f_n\}$; set of workers $W = \{w_1, ..., w_m\}$.
 	\item \structure{Many-to-one}: each firm can hire any number of workers; each worker can only work for one firm.
@@ -755,9 +753,14 @@ A stable matching can be obtained using a modified DA algorithm which proceeds a
 			\item E.g., buyers and sellers arrive at the market over time and need to be matched with each other.
 		\end{itemize}
 		\item Main trade-off is between making \structure{good} matches and making \structure{fast} matches.
-		\item See, e.g., \href{https://econtheory.org/ojs/index.php/te/article/view/3740}{\uline{Baccara, Lee, \& Yariv (2020)}} as one model of dynamic matching.
+		\item See, e.g., \citet*{baccara_optimal_2020} as one model of dynamic matching.
 	\end{itemize}
 \end{frame}
 
+\appendix
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{teaching}
+	\bibliographystyle{abbrvnat}
+\end{frame}
 
 \end{document}
