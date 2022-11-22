@@ -93,7 +93,7 @@
 
 \begin{frame}{Unraveling}
 	\begin{theorem}[Unraveling]
-		In equilibrium, all firm types $\theta$ present evidence, so there is full learning.
+		In equilibrium, all firm types $\theta$ (except for maybe the lowest one) present evidence, so there is full learning.
 	\end{theorem}
 	\begin{itemize}[<+->]
 		\item Argument for finite $\Theta$:
@@ -134,7 +134,8 @@
 				\item Then for the low enough types, the profit from showing evidence is not worth the cost.
 				
 				\pause 
-				\item \textbf{Graph:} $\theta \sim U[0,1]$. Start with no one revealing. Then $\theta=1$ wants to reveal, payoff increases from $\mathbb{E}[\theta]=0.5$ to $1-c$. Same (iteratively) for all high-ish $\theta$s up to $\theta = 2c$, who is exactly indifferent: $\mathbb{E}[\theta | \theta < 2c] = c = \theta-c$. So all types $\theta \in [0,2c]$ pool together in silence.
+				\item \textbf{Example:} $\theta \sim U[0,1]$. Suppose types $\Theta_S$ silent. Payoff from silence is $\mathbb{E}[\theta \mid \theta \in \Theta_S]$, indep of $\theta$; from disclosure is $\theta-c$, incr in $\theta$ $\Rightarrow$ high $\theta$ disclose, low $\theta$ silent. Cutoff type $z$ must be indifferent: $z-c = \mathbb{E}[\theta\mid \theta < z] = \frac{z}{2}$ $\Rightarrow z = 2c$.
+				\\ Eqm: $\theta \in [0,2c)$ silent, $\theta \in [2c, 1]$ disclose.
 			\end{itemize}
 		}
 	\end{column}
@@ -186,7 +187,7 @@
 	\item With probability $1-\lambda$ the firm has no evidence and is forced to stay silent.
 	\item Then, if types $\Theta_S$ stay silent:
 	\begin{align*}
-		\mathbb{E}[\theta \mid \text{silence}] = \frac{\lambda \mathbb{P}(\Theta_S) \mathbb{E}[\theta \mid \Theta_S] + (1-\lambda) \mathbb{E}[\theta]}{\lambda \mathbb{P}(\Theta_S) + (1-\lambda)} > \mathbb{E}[\theta \mid \theta \in \Theta_S].
+		\mathbb{E}[\theta \mid \text{silence}] = \frac{\lambda \mathbb{P}(\Theta_S) \mathbb{E}[\theta \mid \Theta_S] + (1-\lambda) \mathbb{E}[\theta]}{\lambda \mathbb{P}(\Theta_S) + (1-\lambda)} > \mathbb{E}[\theta \mid \Theta_S].
 	\end{align*}
 	The consumer is not as pessimistic after no disclosure (as when $\lambda=1$), because they understand the firm may not have any evidence. So profit from disclosure is smaller.
 	\item This may again lead to some low types staying silent (pretending to have no evidence).
@@ -200,7 +201,7 @@
 		{\setstretch{1.3}
 			\begin{itemize}
 				\item Suppose again $\theta \sim U[0,1]$ and let $\lambda = 3/4$.
-				\item \textbf{Conjecture:} in eqm, types $\theta \in [z,1]$ disclose their type if they can; types $\theta \in [0, z)$ always silent. Then 
+				\item In eqm, types $\theta \in [z,1]$ disclose their type if they can; types $\theta \in [0, z)$ always silent (same argument as in costly disclosure). Then using LIE and Bayes' rule,
 				\pause
 				\begin{align*}
 					\mathbb{E}[\theta \mid \text{silence}] 
@@ -209,7 +210,7 @@
 					= \frac{3z^2 + 1}{2(3z + 1)}
 				\end{align*}
 				\item Type $\theta$ discloses if $\theta \geq \mathbb{E}[\theta \mid \text{silence}]$ and silent otherwise. Hence $z = \mathbb{E}[\theta \mid \text{silence}] \iff z =1/3$.
-				\item So there is an eqm, where types $\theta \in [1/3,1]$ disclose their type if they can; types $\theta \in [0, 1/3)$ always stay silent. (Can verify that it is unique.)
+				\item Eqm: types $\theta \in [1/3,1]$ disclose if they can; types $\theta \in [0, 1/3)$ always stay silent.
 			\end{itemize}
 		}
 	\end{column}
@@ -259,7 +260,7 @@
 	\item A cursed receiver makes no inference from silence: $\mathbb{E}[\theta \mid \text{silence} ] = \mathbb{E}[\theta]$; is otherwise same as a rational receiver.
 	
 	\pause \bigskip 
-	\item Then if $\theta \sim [0,1]$ and the firm reveals $\theta$ iff $\theta \geq x$:
+	\item Then if $\theta \sim [0,1]$ and the firm reveals $\theta$ iff $\theta \geq z$, eqm cutoff $z$ must be such that:
 	\begin{align*}
 		z = \pi \mathbb{E}[\theta] + (1-\pi) \mathbb{E}[\theta \mid \Theta_S] = \frac{\pi}{2} + (1-\pi)\frac{z}{2}
 		&& \Rightarrow &&
@@ -290,7 +291,7 @@
 		\item that the desire to have good news to disclose leads to \alert{excessive risk-taking} \citep*{ben-porath_disclosure_2018} %\alert{excessive information acquisition} and 
 		
 		\bigskip 
-		\item There are also a few reasons why sender might want to hide good news, see an overview in \cite{smirnov_bad_2022}
+		\item There are also a few reasons why sender might want to voluntarily reveal bad news, see an overview in \cite{smirnov_bad_2022}
 	\end{itemize}
 \end{frame}
 
@@ -306,16 +307,16 @@
 
 \begin{frame}{Evidence and Mechanism design}
 \begin{itemize}
-	\item We have looked at disclosure games so far, where receiver had to be sequentially rational (maximize $\mathbb{E}u_R$ given $m$ $\Rightarrow$ choose $x=\mathbb{E}[\theta|m]$).
+	\item We have looked at disclosure games so far, where receiver/designer had to be sequentially rational (maximize $\mathbb{E}u_R$ given $m$ $\Rightarrow$ choose $x=\mathbb{E}[\theta|m]$).
 	\item What if we take a mechanism design perspective? I.e., suppose the receiver can \alert{commit} to a decision rule $x(m)$. Can this help produce a \structure{better outcome?}
 	\begin{itemize}
-		\item E.g., in the Dye setting (uncertain evidence).
-		\item Note: choosing a strategy $x(m)$ in a game can be seen as a mechanism design problem subject to the sequential rationality constraint. Extra constraint = worse outcome. Or is it?
+		\item E.g., in the \textbf{Dye setting} (uncertain evidence).
+		\item Note: choosing a strategy $x(m)$ in the no-commitment game can be seen as ``a mechanism design problem with a sequential rationality constraint''. Extra constraint = worse outcome. Or is it?
 	\end{itemize}
 
 	\pause \bigskip 
 	\item \citet*{hart_evidence_2017} show this is not the case.
-	\item Their result: under some conditions on the sender's evidence and the receiver's preferences (that our result satisfies): 
+	\item Their result: under some conditions on the sender's evidence and the receiver's preferences (that our setting satisfies): 
 	\begin{itemize}
 		\item disclosure game has a unique equilibrium,
 		\item the optimal disclosure mechanism exists and is unique,
@@ -327,7 +328,7 @@
 
 \begin{frame}{Evidence and Mechanism design 2}
 \begin{itemize}
-	\item This result (no value from commitment) relies on concavity of the receiver's preferences + assumptions on evidence structure. 
+	\item Their result (no value from commitment) relies on concavity of the receiver's preferences + assumptions on evidence structure. 
 	\item \textbf{Counterexample} with preferences not concave in $x$ given $\theta$:
 	\item Let $\theta \in \{1,2,...,999\}$ with $\phi_0(999) = 0.002$ and $\phi_0(\theta) = 0.001$ for $\theta < 999$.
 	\item Suppose types $\theta<999$ are verifiable: $m \in \{\varnothing, \theta\}$; type $\theta=999$ has no evidence: $m = \varnothing$.
