@@ -1,0 +1,312 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2022} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{MDexam_frontpage22.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+\section{Optimal Twitter downsizing}
+%all comms (CT+disc+BP+deleg) + optmech?
+
+Elon Musk has acquired Twitter and (as of writing this) has since laid off about half of its 7500 employees. This decision has been criticized by the insiders. You are to advise Elon on a better managerial strategy (under the unrealistic assumption that he listens to advisors).
+
+Elon chooses how many engineers to retain, $k \in [0,1]$. Suppose the share of engineers that are \emph{actually} crucial for Twitter's operations is given by $\theta \in [0,1]$, which is not known to Elon, but he believes it is distributed uniformly on $[0,1]$. His utility function is given by $v_0(k,\theta) = -(k-(\theta-b))^2$, i.e., in his search for optimizations, he wants to retain only $k(\theta) = \max\{\theta-b, 0\}$ for some publicly known $b<1$.
+Twitter's (now former) CEO Parag Agrawal knows the true $\theta$ and wants to do the right thing for the company: his preferences are given by $v_1(k,\theta) = - (k - \theta)^2$, so he would prefer $k(\theta) = \theta$.
+
+Elon wants to fire the CEO, but learn $\theta$ first. He considers some of the mechanisms described below. Your goal is to evaluate and compare the results they will produce. For each of the mechanisms below, discuss the following, as best you can:
+\begin{enumerate}
+	\item How would the equilibrium of a given game/optimum of a given mechanism look like, in terms of strategies and outcomes?
+	\item How would the payoffs of Elon and Parag respectively compare across games/mechanisms?
+\end{enumerate}
+
+The mechanisms are as follows:
+\begin{enumerate}[label={(\alph{enumi})}]
+	\item Elon asks Parag to make a report $\hat{\theta} \in [0,1]$, and Elon then chooses the $k$ that he finds optimal.
+	
+	\item Same as above, but Parag has \emph{credible evidence} about $\theta$ that he can choose to disclose. I.e., when the true state is $\theta$, he has a choice $m \in \{\theta,\varnothing\}$ of whether to report the true state $m=\theta$ or report nothing $m=\varnothing$.\footnote{Suppose for simplicity that Parag cannot report a false state (without presenting any evidence.)}
+	
+	\item Same as (a), but suppose Parag can \emph{commit} to some messaging strategy $m(\theta): \Theta \to \varDelta(M)$ (for arbitrary $M$).
+	\begin{itemize}
+		\item Extra question: how can we justify such a commitment assumption?
+	\end{itemize}
+	
+	\item Elon lets Parag choose $k$ from within some subset $K \subseteq [0,1]$ that Elon chooses.
+	
+	\item Same as (d), but Elon can use exit compensation as an incentive; i.e., he can commit to paying $t(k)$ to Parag (assume this payment enters both utility functions linearly).
+\end{enumerate}
+You do not need to fully derive each equilibrium/optimum mathematically; a good intuitive explanation suffices. That said, you are encouraged to be as formal as you can. Show your reasoning even if you cannot provide a conclusive answer.
+
+Conclude: which mechanism should Elon use and which mechanism would Parag prefer?
+
+
+
+\ifsolutions
+\subsection*{Solution}
+
+For each mechanism, two solution levels are given: a basic level of intuition that most students are expected to have, and the maximal solution that is only expected from the very top students, if at all.
+
+\begin{enumerate}[label={(\alph{enumi})}]
+	\item \textbf{Cheap talk.}
+	\textbf{Basic:} If $b$ is not too large, an interval equilibrium arises, in which Parag sends same $m_j$ for some interval of states $[\theta_{j-1},\theta_{j}]$. A completely uninformative equilibrium always exists. Focusing on the most informative equilibria, the number of intervals (and so the informativeness of the equilibrium) is decreasing in $b$. The same applies to both players' payoffs.
+	
+	\textbf{Advanced:} From Elon's optimality, in such an interval equilibrium, $k(m_j) = \max \left\{ \frac{\theta_{j-1} + \theta_{j}}{2}-b, 0\right\}$, and then from Parag's indifference at $\theta_{j}$, the cutoffs (assuming $k(m_j)>0$) must be such that 
+	\begin{align*}
+		\left(\theta_{j} - \left( \frac{\theta_{j-1} + \theta_{j}}{2} - b \right) \right)^2 = \left(\theta_{j} - \left( \frac{\theta_{j} + \theta_{j+1}}{2} - b \right) \right)^2
+		\\
+		\Rightarrow (\theta_{j+1} - \theta_j) = (\theta_j - \theta_{j-1}) + 4b
+	\end{align*}
+	for all $j$.
+	
+	Payoffs of both players could be evaluated as a technical exercise, but they are difficult to analyze since they depend non-trivially on $b$ via the maximal number of intervals $M(b)$ in the most informative equilibrium.
+	
+	%It is helpful to observe that since $k(m_0) \geq 0$ and $\theta_0 = 0$, it must be that $\theta_1 ...$
+	
+	
+	\item \textbf{Disclosure.}
+	\textbf{Basic:} in class, we have shown that evidence leads to unraveling, i.e., a full-information outcome. This is the best possible outcome for Elon, since he gets full information and has full decision power -- but may be better or worse than the mechanism in (a) for Parag, who gains in some states and loses in other states.
+	
+	\textbf{Advanced:} in class, we showed unraveling in a setting when the sender has state-independent monotone preference over the receiver's action. While this problem does not fit that setting, the overall argument still holds.
+	In particular, suppose that in equilibrium, Parag sends message $m$ and \emph{shows no evidence} when $\theta \in \Theta_m$ for some $\Theta_m \subseteq [0,1]$, and discloses true $\theta$ with evidence otherwise. Then if
+	\begin{align*}
+		\left( (\mathbb{E}[\theta \mid \Theta_m]-b) - \theta \right)^2 > \left( (\theta-b) - \theta \right)^2
+		\\
+		\iff
+		\left( \mathbb{E}[\theta \mid \Theta_m] - \theta \right) \cdot \left( \mathbb{E}[\theta \mid \Theta_m] - 2b - \theta \right) > 0,
+	\end{align*}
+	then Parag would have an incentive to disclose $\theta$. In particular, disclosure is optimal when $\theta > \mathbb{E}[\theta \mid \Theta_m]$ (note that this is the same condition that we had in the regular unraveling argument). Then \emph{full disclosure} is the only equilibrium. Indeed, for any candidate equilibrium with non-trivial $\Theta_m$, all types $\theta > \mathbb{E}[\theta \mid \Theta_m]$ would like to deviate from the prescribed strategy of reporting $m$ without evidence to reporting $m=\theta$  with evidence, so such a candidate [strategy and belief profile] cannot constitute an equilibrium.\footnote{This analysis is quite informal from the game theory point of view -- e.g., it does not track the principal's beliefs after different messages too carefully. This is because all beliefs on and off path should hopefully be self-explanatory enough that the students would not need to dive deep into this particular rabbit hole.}
+	
+	This outcome is ideal for Elon, since he always learns $\theta$ and gets to choose his preferred action $k(\theta)=\max\{\theta-b, 0\}$. Parag, meanwhile, gets a payoff of $\mathbb{E}\left[ -\left( \max\{ \theta-b, 0 \} - \theta \right)^2 \right] = -b^2 \left( 1 -\frac{2b}{3} \right)$ in such an equilibrium. Note that full disclosure is an equilibrium for any $b < 1$ -- i.e., even when the cheap talk game (a) has only uninformative babbling equilibria (which occurs whenever $b > 1/4$).
+	
+	It is then immediate from Jensen's inequality that the disclosure game (b) equilibrium then yields a higher payoff to Parag than the cheap talk game (a) whenever $b > 1/4$. A similar, albeit a more involved, argument can be used to show the same for $b < 1/4$, or this can also be verified visually by plotting both expected payoffs as a function of $b$.
+	
+	
+	\item \textbf{Bayesian Persuasion.}
+	\textbf{Basic:} at the very least, Parag can perform no worse than in (a) or (b), since both of those mechanisms are available if he can commit to a messaging strategy. It is not obvious what his optimal messaging strategy would be and how good it would be from Elon's perspective -- though it can obviously not beat mechanism (b), which yields Elon the highest payoff he can conceivably get.
+	
+	\textbf{Advanced:} first observe that it is never optimal for Parag to pool together two or more states $\theta',\theta'' > b$ (i.e., have the same message $m$ sent with positive probability in all of these states) without pooling them with some state(s) $\theta''' < b$. As in (b), this follows from the concavity of Parag's utility function and Jensen's inequality: inducing actions $k(\theta')=\theta'-b$ and $k(\theta'')=\theta''-b$ yields a higher expected payoff than an average action $k(\theta')=k(\theta'')=\mathbb{E}[\theta|m]-b$. A similar argument then implies that it is not profitable for Parag to pool any pair of states $\theta' < b < \theta''$ either (the only difference is that revealing truthfully in this case yields $k(\theta')=0>\theta'-b$, which is better for Parag than $k(\theta')=\theta'-b$). Hence a perfectly truthful mechanism is optimal, and persuasion mechanism is equivalent to the disclosure mechanism (b), except instead of requiring the existence of verifiable evidence in this setting it requires that Parag is able to commit to a communication strategy.
+	
+	\begin{itemize}
+		\item \textbf{Bonus question:} Parag does not necessarily know $\theta$ off the top of his head. He might need to go through some documents and talk to people in order to figure out what $\theta$ is exactly. He can then only acquire the information that will be revealed to Elon (and which information is accessed can be verified afterwards) and/or solemnly promise Elon to report a particular subset of information that he learns (assuming that the true state is publicly learned at some later date). The sanctions in case of noncompliance could come in terms of Parag's reputation as a high-profile CEO.
+	\end{itemize}
+
+
+	\item \textbf{Delegation.}
+	\textbf{Basic:} following the argument from class, Elon would select an interval $K = [0,1-2b]$ (this is different from $[0,1-b]$ obtained in class due to a different payoff specification). This mechanism can be no better for Elon than disclosure (b) due to the arguments presented above, and is always better than cheap talk (a) due to the arguments presented in class.
+
+	\textbf{Advanced:} Parag's expected loss is $b^2\left( 1-\frac{2b}{3} \right)$ under disclosure (b). Under delegation, it is equal to $\frac{8}{3}b^3$. Therefore, delegation is better than disclosure for him if and only if $b < 0.3$ (and better than cheap talk for a wider range of $b$).
+	
+	
+	\item \textbf{Contracting.}
+	\textbf{Basic:}	first, an additional constraint needs to be imposed in order to bound transfers from below, since none is specified in the problem. This was usually fulfilled by the IR constraints in the course, but it is a bit unintuitive in this problem, since it is not clear what the outside option is. The limited liability constraint (LL) might be a better fit: $t(\theta) \geq 0$.
+	
+	It is then obvious that contracting would be at least as good for Elon as delegation (d), since it strictly expands the set of mechanisms he can use. It is not clear how Parag's payoff would compare.
+	
+	\textbf{Advanced:} the problem can be approached using the Myerson's optimal mechanism. Denote the players' equilibrium payoffs given state $\theta$ as $U_0(\theta) \equiv -(k(\theta)-(\theta-b))^2 - t(\theta)$ and $U_1(\theta) \equiv -(k(\theta)-\theta)^2 + t(\theta)$ respectively. From ERP: 
+	\begin{equation}
+		U_1(\theta) = U_1(0) - 2\int_0^\theta (s-k(s))ds
+	\end{equation}
+	I have chosen anchor type/state $0$ because Parag's utility is surely $U_1(0)=0$ in that case, since both he and Elon prefer $k(0)=0$, so there is no reason to have anything but $k(0)=0,\, t(0)=0$ in the optimal contract.\footnote{Note that in this problem, $0$ is the highest utility Parag can ever get, in contrast to other problems seen in class, where $U=0$ is usually the lowest possible utility. The end goal is to find a benchmark type with a known utility value. In other problems, this utility typically comes from the IR constraint. This problem presents a different argument.}
+	From the above and the definitions, obtain
+	\begin{align*}
+		t(\theta) &= (k(\theta)-\theta)^2 - 2\int_0^\theta (s-k(s))ds
+		\\ \Rightarrow
+		\mathbb{E}[U_0(\theta)] &= \mathbb{E} \left[ -(k(\theta)-(\theta-b))^2 - (k(\theta)-\theta)^2 + 2\int_0^\theta (s-k(s))ds \right]
+		\\
+		&= \int_0^1 \Big[ -(k(\theta)-(\theta-b))^2 - (k(\theta)-\theta)^2 + 2(1-\theta)(\theta-k(\theta)) \Big] d\theta,
+	\end{align*}
+	where the last line uses integration by parts. Maximizing the integrand over $k(\theta) \in [0,1]$ for a given $\theta$, we get the candidate allocation rule
+	\begin{align*}
+		k^*(\theta) = \max \left\{ \frac{3\theta - (1+b)}{2}, \, 0 \right\}
+	\end{align*}
+	(which is weakly increasing in $\theta$, as required by the IC conditions). Plugging this allocation rule into the expression for transfers, however, yields a transfer rule that does not satisfy LL:
+	\begin{align*}
+		t^*(\theta) = \begin{cases}
+			0 \quad \text{if } \theta \leq \frac{1+b}{3}; &
+			\\
+			\frac{3}{4}(\theta - (1+b))^2 - \frac{1}{3}(1+b)^2 \leq 0 \quad \text{ otherwise.}&
+		\end{cases}
+	\end{align*}
+	If LL is not an issue in the problem and negative transfers are permitted (think of a story where Parag receives a high exit bonus according to his existing contract, but Elon can offer him to forego a part of the bonus in order to implement a higher $k$), then $(k^*,t^*)$ described above constitute the optimal contract.
+	If, however, the contract must satisfy LL, then further analysis is required.
+\end{enumerate}
+\fi
+
+
+
+\section{Advertiser-friendly free speech}
+%screening, basic
+
+Elon wants to build a platform with free-ish speech, which is also appealing to advertisers. The issue is that the two objectives seem to be at odds with each other -- free speech means tolerating even the very inappropriate and offensive tweets, whereas advertisers do not want their products to be advertised next to such tweets. However, as the example of youtube shows, this tension can be resolved through a partner program.
+
+Suppose we can broadly split the audience of Twitter, $i \in \{1, ..., N\}$, into two groups: the polite ($\theta=\theta_p$) and the nasty ($\theta=\theta_n$). The respective proportions of the two groups are $\phi(\theta_p),\phi(\theta_n)$ (with $\phi(\theta_p)+\phi(\theta_n)=1$). Every person $i$ can behave in an advertiser-friendly way ($k_i=1$) or not ($k_i=0$), but the private cost of doing so depends on their type $\theta$, which is their private information. 
+Twitter could ask users whether they would like to enroll in an ad-revenue-sharing program and only show ads next to tweets of those users that do enroll. If person $i$ enrolls in revenue-sharing, they are expected to tweet politely ($k_i=1$) and receive some payment $t_i$.
+
+The individual preferences (relative to quitting Twitter altogether) are then characterized by $u_i(x,\theta) = -\theta_i k_i + t_i$, and Twitter's profit is given by $u_0(x,\theta) = \sum_{i=1}^N \left( k_i - t_i \right)$.\footnote{The notation is standard: an outcome $x=(k,t)$ is composed of a vector of allocations $k=(k_1,...,k_N)$ and a vector of transfers $t=(t_1,...,t_N)$.} 
+Suppose that $\theta_p < 1 < \theta_n$.
+
+\begin{enumerate}
+	\item Write down Twitter's profit-maximization problem. What does it maximize over? What are the relevant constraints that should be taken into account? 
+	
+	\item Derive the optimal revenue-sharing contract that Twitter will select. What will Twitter's profit be?
+	
+	\item Can you think of any implicit assumptions that are made in your analysis that are unlikely to hold in reality?
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item By the revelation principle, the problem is that of choosing a menu $(k_i(\theta_p), t_i(\theta_p)), (k_i(\theta_n), t_i(\theta_n))$ that solves
+	\begin{align*}
+		\max_{(k_i(\theta_p), t_i(\theta_p)), (k_i(\theta_n), t_i(\theta_n))} & \mathbb{E}_\theta \left[ \sum_{i=1}^N \left( k_i(\theta_i) - t_i(\theta_i) \right) \right] 
+		\\
+		\text{s.t. } (IC_p): & -\theta_p k_i(\theta_p) + t_i(\theta_p) \geq -\theta_p k_i(\theta_n) + t_i(\theta_n)
+		\\
+		(IC_n): & -\theta_n k_i(\theta_n) + t_i(\theta_n) \geq -\theta_n k_i(\theta_p) + t_i(\theta_p)
+		\\
+		(IR_p): & -\theta_p k_i(\theta_p) + t_i(\theta_p) \geq 0
+		\\
+		(IR_n): & -\theta_n k_i(\theta_n) + t_i(\theta_n) \geq 0
+	\end{align*}
+	The IC conditions are standard: for type $\theta$ to choose an option intended for them. The IR conditions are stated in the standard form, which requires that all types $\theta$ should prefer to join Twitter under the option intended for them to not joining. These conditions can be relaxed to $k_i(\theta_i) \cdot \left( -\theta_i k_i(\theta_i) + t_i(\theta_i) \right) \geq 0$, since nothing in the problem requires the players to actually join the platform if they are not willing to behave (i.e., if $k_i(\theta)=0$).
+	
+	\item One can proceed via the usual solution algorithm for screening problems (show that out of the four inequality constraints two will bind in the optimum and the other two can be ignored). What follows is a slightly simpler route that works in this particular problem.
+	
+	Start with the IR constraints. They imply that $t_i(\theta_i) \geq \theta_i k_i(\theta_i)$, meaning that if $k_i(\theta_i)=1$ then $t_i(\theta_i) \geq \theta_i$. So asking type $\theta$ to be polite costs at least $\theta$ to Twitter in payments demanded by the player. Since $\theta_n > 1$, it never makes sense to ask type $\theta_n$ to be polite (since Twitter yields one unit of revenue per ad-friendly user) $\Rightarrow k_i(\theta_n)=0$. Then setting $t_i(\theta_n)=0$ satisfies $IR_n$, makes $IC_p$ as weak as possible, and, as we will verify later, $IC_n$ would still hold in the optimum.
+	
+	The $IC_p$ then collapses to the same requirement as $IR_p$, which is $t_i(\theta_p) \geq \theta_p k_i(\theta_p)$. In words, Twitter can pay $\theta_p$ to a polite user to make them ad-friendly. Since $\theta_p < 1$, it is profitable to do so. 
+	
+	Therefore, the optimal menu of contracts that Twitter would offer is $(k_i,t_i) = (0,0)$ for $\theta_n$ and $(k_i,t_i) = (1,\theta_p)$ for $\theta_p$. In words, every user would have an option of either tweeting whatever they want for free, or self-censoring and receiving payment $\theta_p$. Twitter's profit in such a case is $N \phi(\theta_p) (1-\theta_p)$, where $\phi(\theta_p)$ is the share of polite types in the population.
+	
+	\item Some possible answers are:
+	\begin{itemize}
+		\item It is assumed that $k_i$ is enforceable: if a user enrolls in revenue-sharing, they cannot post advertiser-unfriendly things. In reality this is not true, and Twitter would have to somehow monitor this.
+		
+		\item The analysis ignores the amount of tweeting: would someone who tweets one ad-friendly tweet a year get the same ad revenue share as someone who tweets a dozen times a day? If the rewards are instead proportional to activity, how does it affect tweeting intensity? Should tweet popularity matter?
+		
+		\item The two-type structure is a rough approximation, the heterogeneity in the real world is richer, which would have to be reflected in the optimal contract.
+	\end{itemize}
+\end{enumerate}
+\fi
+
+
+
+
+%\section{prbname}
+%...
+%
+%
+%
+%\ifsolutions
+%\subsection*{Solution}
+%...
+%\fi
+
+
+\end{document}

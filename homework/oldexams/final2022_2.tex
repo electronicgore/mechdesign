@@ -1,0 +1,277 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Re-exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2022} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{MDreexam_frontpage22.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+
+\section{Commitment and the revelation principle}
+The revelation principle relies on the designer being able to commit to a mechanism. Give an example of a setting, a social choice function, and an indirect mechanism that implements it, such that the s.c.f. cannot be replicated by a direct mechanism if the designer is unable to commit to a decision rule.
+
+To clarify: the designer selects a mechanism $\Gamma = (A,g)$ consisting of a collection of action sets $A= A_1 \times ... \times A_N$ for all players and an outcome function $g: A \to X$ that maps profiles of actions chosen by the players into outcomes. Under commitment, the designer selects $g$ before observing the players' choices $a \in A$. Without commitment, the designer can override the choice of outcome $x \in X$ after observing $a \in A$ -- in other words, the outcome function $g$ must be ex post optimal for the principal. You are to look at the equilibrium in both cases -- i.e., in case of no commitment, the players anticipate that the designer cannot commit and act accordingly.
+
+
+\ifsolutions
+\subsection*{Solution}
+Various examples can be presented. 
+A simple option is the delegation game we have seen in class: an agent privately knows the state $\theta \sim U[0,1]$ and has preferences $u_A(x,\theta) = -(x-(\theta+b))^2$; the designer chooses a DRM $x(\theta)$ to maximize $u_D(x,\theta) = -(x-\theta)^2$. In an (indirect) delegation game, the designer allows the agent to choose any $x$ in some delegation set $X$. We saw in class that the optimal delegation set is $X=[0,1-b]$, and the implemented s.c.f. is then $x_D(\theta) = \min \{\theta+b, 1-b\}$. In a direct mechanism, the agent would instead be asked to report $\theta$ to the designer, who then selects an outcome $x(\theta)$. If the designer lacks commitment, then $x_D(\theta)$ is not implementable in such a mechanism, since instead of $x_D(\theta)$ they would find it optimal to deviate to $x_N(\theta) \equiv \arg \max_x \left\{ -(x-\theta)^2 \right\} = \theta$. In fact, we have shown in class (when looking at a cheap talk game -- which is exactly this game without commitment) that only some step choice functions are implementable in this case.
+
+Another, trickier, example is the buyer-seller problem that we used to study Myerson's optimal mechanism: a seller with one indivisible item designs a mechanism for one buyer with private valuation $\theta \in [0,1]$. We found in class that the profit-maximizing mechanism in such a problem is the posted-price mechanism with price $p=0.5$. 
+One can easily see that in a direct mechanism, the seller would want to deviate: once the buyer reports $\theta$, the seller would want to change the price from $p=0.5$ (which may now be too high or too low) to $p=\theta$. The posted-price mechanism, in turn, is not a direct mechanism -- instead, the seller names the price ($p=0.5$) ex ante and lets the buyer choose whether to buy the item at this price. 
+The subtlety is that after the buyer has rejected $p=0.5$, the seller would prefer to make another offer ($p=0.25$) in this setting (see also: Coase conjecture). If we take the problem literally, however, this is not an issue, since after observing the buyer's choice $a \in \{\text{buy, pass}\}$, the seller is not permitted to ask further questions and is obliged to select an outcome $(k,p)$. Assuming that the outcome must be ex post individually rational for the buyer (they cannot be forced to buy an item they do not want), after $a=\text{pass}$ the seller would have to choose $k=p=0$.
+\fi
+
+
+
+\section{Selling to asymmetric buyers}
+There is a single object for sale and there are two potential buyers. The value assigned by buyer $1$ to the object is $\theta_1\sim U[0,1+\alpha]$, while the value of the object for buyer $2$ is $\theta_2\sim U[0,1-\alpha]$, independently distributed, for some $\alpha\in(0,1)$. The seller has no value for the item.
+
+Calculate the profit-maximizing Bayesian IC mechanism for the seller:
+\begin{enumerate}
+	\item Derive the optimal allocation rule. (\emph{Hint: it should maximize the seller's virtual surplus.})
+	\item Derive the optimal payment rule. (\emph{Hint: you can make a guess and verify that it satisfies the Envelope Representation of Payoffs for BIC mechanisms that you likely obtained in part 1. Alternatively, you can use the ERP for DSIC mechanisms to calculate the payments explicitly.})
+	\item Is the optimal mechanism efficient? Explain intuitively why the seller might not want to allocate the good to lower types. Explain intuitively why the seller might want to treat the two buyers asymmetrically.
+\end{enumerate}
+%Now assume there is a third buyer with valuation $\theta_3\sim exp(1)$ (independent from $\theta_1,\theta_2$).
+%\begin{enumerate}[resume]
+%	\item Derive the optimal allocation rule in this case. What is the smallest realization of $\theta_3$ such that the third buyer gets the object for sure (that is, independently of the values of the first two buyers)?
+%	\item Derive the optimal payment rule for the third buyer. Is it bounded? 
+%\end{enumerate}
+
+
+
+\ifsolutions
+\subsection*{Solution}
+%TODO: redo the notation in the below
+\begin{enumerate}
+	\item Proceed according to the standard derivation of the Myerson's optimal mechanism. The buyers' utility functions are $u_i(k,t,\theta) = \theta_i k_i(\theta) - t_i(\theta)$. Let $\bar{U}_i(\theta_i)$ denote buyer $i$'s expected utility in the equilibrium of the optimal mechanism as a function of $i$'s own type $\theta_i$. It can be rewritten using the envelope representation of payoffs as $\bar{U}_i(\theta_i) = \bar{U}_i(0) + \int_0^{\theta_i} \bar{k}_i(\theta_i) ds$, where $\bar{k}_i(\theta_i) \equiv \mathbb{E}_{\theta_{-i}}[ k_i(\theta_i,\theta_{-i}) ]$ is $i$'s expected allocation. (It is suggested that the students show how this representation is obtained and show along the way that any BIC allocation rule must be monotone in expectation.)
+	Then $\bar{t}_i(\theta_i) = \theta_i \bar{k}_i(\theta_i) - \int_0^{\theta_i} \bar{k}_i(\theta_i) ds - \bar{U}_i(0)$, where $\bar{t}_i(\theta_i) \equiv \mathbb{E}_{\theta_{-i}}[ t_i(\theta_i,\theta_{-i}) ]$ is the expected payment of type $\theta_i$.
+	
+	The seller's expected payment from bidder $1$ is then given by
+	\begin{align*}
+		\mathbb{E}_\theta \left[ t_1(\theta) \right] &= \mathbb{E}_{\theta_1} \left[ \bar{t}_1(\theta_1) \right]
+		= \mathbb{E}_{\theta_1} \left[ \theta_1 \bar{k}_1(\theta_1) - \int_0^{\theta_1} \bar{k}_1(\theta_1) ds - \bar{U}_1(0) \right]
+		\\ &= \int_0^{1+\alpha} \left[ \theta_1 \bar{k}_1(\theta_1) - \int_0^{\theta_1} \bar{k}_1(\theta_1) ds \right] \phi_1(\theta_1) d\theta_1 - \bar{U}_1(0)
+		\\ &= \int_0^{1+\alpha} \left[ \bar{k}_1(\theta_1) \left( \theta_1 - \frac{1-F_1(\theta_1)}{\phi_1(\theta_1)} \right) \right] \phi_1(\theta_1) d\theta_1 - \bar{U}_1(0)
+		\\ &= \int_0^{1+\alpha} \left[ \bar{k}_1(\theta_1) \left( 2\theta_1 - (1+\alpha) \right) \right] \frac{1}{1+\alpha} d\theta_1 - \bar{U}_1(0)
+		\\ &= \left[ \mathbb{E}_{\theta_1} \bar{k}_1(\theta_1) VS_1(\theta_1) - \bar{U}_1(0) \right],
+	\end{align*}
+	where $VS_1(\theta_1) \equiv \left( 2\theta_1 - (1+\alpha) \right)$. Following the same steps for buyer 2, we get 
+	$$\mathbb{E}_\theta \left[ t_2(\theta) \right] = \left[ \mathbb{E}_{\theta_2} \bar{k}_2(\theta_2) VS_2(\theta_2) - \bar{U}_2(0) \right],$$ where $VS_2(\theta_2) \equiv \left( 2\theta_2 - (1-\alpha) \right)$.
+	
+	Intuitively, buyers with $\theta_i = 0$ should get zero payoff (never get the item, never pay anything), so set $\bar{U}_i(0) = 0$.
+	The seller's expected payoff then is
+	\begin{align*}
+		\mathbb{E}_\theta U_s(\theta) &= \sum_i \mathbb{E}_{\theta_i} \left[\bar{k}_i(\theta_i) VS_i(\theta_i)\right]
+		\\
+		&= \mathbb{E}_{\theta} \left[\sum_i k_i(\theta) VS_i(\theta_i)\right]
+	\end{align*}
+	This is maximized by the allocation rule $k(\theta)$ that gives the good to buyer $1$ if $VS_1>0$ and $VS_1>VS_2$ (that is, $k_1(\theta) = \mathbb{I} \left\{ \theta_1 > \max \left\{ \frac{1+\alpha}{2}, \theta_2+\alpha \right\} \right\}$), and allocate the good to buyer $2$ if $\theta_2>\frac{1-\alpha}{2}$ and $\theta_2>\theta_1-\alpha$, i.e., $k_2(\theta) = \mathbb{I} \left\{ \theta_2 > \max \left\{ \frac{1-\alpha}{2}, \theta_1-\alpha \right\} \right\}$. (Note that this allocation rule is indeed monotone and, hence, implementable, both in dominant strategies and in Bayes-Nash.)
+	
+	\item Using either approach suggested in the question yields
+	\begin{align*}
+		t_1(\theta)&=\begin{cases} 
+			\theta_i-\int_0^{\theta_i}k_i(s,\theta_2)ds=\max\{\theta_2+\alpha,\frac{1+\alpha}{2}\} & \text{ if } \theta_1 > \max \left\{ \frac{1+\alpha}{2}, \theta_2+\alpha \right\}
+			\\
+			0 &\text{ otherwise};
+		\end{cases}
+		\\
+		t_2(\theta)&=\begin{cases} 
+			\max\{\theta_1-\alpha,\frac{1-\alpha}{2}\} & \text{ if } \theta_2 > \max \left\{ \frac{1-\alpha}{2}, \theta_1-\alpha \right\}
+			\\
+			0 &\text{ otherwise.}
+		\end{cases}
+	\end{align*}
+
+	\item An efficient mechanism would always allocate the item to the buyer with the highest $\theta_i$. The optimal mechanism is not efficient: it leaves the item with the seller if both $\theta_1 < \frac{1+\alpha}{2}$ and $\theta_2 < \frac{1-\alpha}{2}$. While selling to lower types means the seller gets paid in more states of the world, the actual payment would be lower because by allowing lower types to win the item, the seller lowers the payment they can extract from the higher types. Hence it is optimal to commit to not selling to low types in order to extract higher payments from the higher types. 
+	
+	Similarly, the players are treated asymmetrically: buyer 2 is treated more favorably and may sometimes get the item even when $\theta_2 < \theta_1$. This is done in order to extract higher payment from buyer 1, who is more likely to have a high willingness to pay.
+\end{enumerate}
+
+%	\item { $V_3(x_3)=x_3-\frac{1-1+e^{-x_3}}{e^{-x_3}}=x_3-1$. Again, the optimal allocation requires to sell the good to the buyer with the highest virtual valuation. Buyer 3 gets the object for sure iff $V_3>\sup_{x_1,x_2}\{V_1,V_2\} $ that is iff $x_3>2+k$.
+%	}
+%	
+%	\item{
+%		\[t_i(x)=\begin{cases} 0 &\text{ if not getting the object} \\ \inf\{x_i': V_i(x_i')>\max_{-i}\{V_{-i}(x_{-i}),0\}\} & \text{ if getting the object}.\end{cases}\]
+%		It is bounded, buyer $3$ will never pay more than $2+k$.
+%	}
+\fi
+
+
+
+\section{Team coding}
+Aksel and Bente are not happy with the stock software on their robot vacuum, and are jointly developing a custom firmware for it. They each contribute respective $k_A, k_B$ lines of code to the program and which results in an overall quality of the software $k_T = k_A + k_B$. Both Aksel and Bente like higher quality software but dislike producing code. Their utility thus depends positively on overall software quality but negatively on their own coding contributions, and the cost of effort $\theta_i \sim U[1,2]$ is the respective person's private information. Further, they have a swear jar that stands empty (because neither of them use profanities), so they would like to reclassify it into a ``slacker jar'' and introduce a rule such that whoever does not produce enough code has to pay $t_i$ to the slacker jar.
+In the end, the utility functions are given by 
+$$u_i(k,t,\theta) = k_T - \theta_i k_i^2 - t_i.$$ 
+
+\begin{enumerate}
+	\item Aksel and Bente both want to maximize the total welfare in their household: $$\max_k \left\{ \left( k_T - \theta_A k_A^2 \right) + \left( k_T - \theta_B k_B^2 \right) \right\}.$$ 
+	How should they design the rules regarding the ``slacker jar''? I.e., how much should each of them pay and when? How would they end up behaving under the rules you suggest?
+	
+	\item Can your mechanism lead to someone taking money from the jar? If so, can a situation arise when they are supposed to take more money than the jar has?
+	
+	\item Aksel suggests that they use the funds from the slacker jar to have a nice dinner together. Bente suggests instead to donate this money to charity. How do these proposals differ in terms of the incentives they give the players to tip the jar and exert coding effort? %Which proposal should they select?
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item We will be designing a direct revelation mechanism $(k(\theta),t(\theta))$, in which both players report their respective types and receive a prescription of the effort and the slacker jar penalty they should put in. As we will see, the mapping from $k$ to $t$ is well defined, meaning that in an indirect mechanism, slacker jar contributions can be made contingent on effort only.
+	
+	The efficient allocation rule is given by
+	\begin{align*}
+		&k^*(\theta) \in \arg \max_k \left\{ 2k_A + 2k_B - \theta_A k_A^2 - \theta_B k_B^2 \right\}
+		\\
+		\Rightarrow
+		&k_i^*(\theta) = \frac{1}{\theta_i}.
+	\end{align*}
+	It can be implemented using the VCG mechanism. The subtle point is that the $k^{-i}(\theta)$ allocation rule that was suggested in class does not work well here: maximizing the utility of player $j$ ignoring player $i$ yields $k^{-i}_i(\theta) = +\infty$. This can be addressed in multiple ways. One is imposing an upper bound on $k_i$ (like 24 hours a day). This is somewhat difficult since the problem does not state clearly which units are used -- though a student could make an assumption about this, as long as they are clear about what assumption they are making. Another option is taking a whole different baseline allocation rule instead of the ``efficient-ignoring-$i$'' rule from class. This solution adopts the latter approach. Since $\theta_i \in [1,2]$, a player can never be asked to exert more than $k_i = 1$ unit of effort. So let $\bar{k}_i^{-i}(\theta) \equiv 1$ together with $\bar{k}_j^{-i}(\theta) \equiv \frac{1}{2\theta_j}$ (which is myopically optimal for $j \neq i$) be the baseline allocation rule for the VCG mechanism.
+	
+	The VCG transfer rule is then given by (where $v_i(k,\theta_i)$ is the transfer-independent part of utility)
+	\begin{align*}
+		t_i^{VCG}(\theta) &= - v_j(k^*(\theta),\theta_j) + v_j(\bar{k}(\theta), \theta_j)
+		\\
+		&= - \left( \frac{1}{\theta_i} + \frac{1}{\theta_j} - \frac{\theta_j}{(\theta_j)^2} \right) + \left( \frac{1}{1} + \frac{1}{2 \theta_j} - \frac{\theta_j}{2\theta_j^2} \right)
+		\\
+		&= 1-\frac{1}{\theta_i} = 1-k^*_i(\theta).
+	\end{align*}
+	So each person is supposed to exert $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$ effort and pay $t_i^{VCG}(\theta) = 1-k^*_i(\theta)$ to the slacker jar. Note that the payment only depends on own type and effort and not on the other player's type. 
+	
+	It is trivial to check that it is then optimal for both players to behave according to their type (the students can simply state that this is a property of the VCG mechanism):
+	\begin{align*}
+		&\max_{\hat{\theta}_i \in [1,2]} \left\{ k^*_T(\hat{\theta}_i,\theta_j) - \theta_i (k^*_i(\hat{\theta}_i,\theta_j))^2 - t_i^{VCG}(\hat{\theta}_i,\theta_j) \right\}
+		\\ \iff
+		&\max_{\hat{\theta}_i \in [1,2]} \left\{ \frac{1}{\hat{\theta}_i} + \frac{1}{\theta_j} - \frac{\theta_i}{\left(\hat{\theta}_i \right)^2} - \left( 1 - \frac{1}{\hat{\theta}_i} \right) \right\}
+		\\ \Rightarrow
+		&\text{FOC:} -\frac{2}{\left( \hat{\theta}_i \right)^2} + \frac{2\theta_i}{\left( \hat{\theta}_i \right)^3} = 0
+		\Rightarrow \hat{\theta}_i = \theta_i.
+	\end{align*}
+
+	\item The first question asks whether players' payments are always non-negative in the mechanism; the second question asks whether the mechanism is ex post budget balanced. Since $t_i^{VCG}(\theta) = 1-k^*_i(\theta)$ and $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$, it follows that $t_i^{VCG}(\theta) \geq 0$ for all $\theta$, meaning that payments from players to the jar are always positive and the players would never be expected to take from the jar.
+	
+	\item The VCG transfer rule is carefully crafted to provide the required incentives to the players. If they anticipate receiving some benefit from tipping the jar -- like being able to afford a better dinner -- this distorts the incentives to exert effort/report type. In particular, the players would be more willing to tip the jar and exert less effort compared to what the VCG mechanism expects. Donating the jar money to charity would not be subject to such concerns (assuming the players are selfish enough to not care about charity donations on the same scale as personal well-being).
+\end{enumerate}
+\fi
+
+
+
+%\section{prbname}
+%...
+%
+%
+%
+%\ifsolutions
+%\subsection*{Solution}
+%...
+%\fi
+
+
+\end{document}
