@@ -14,7 +14,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2022}
+	Fall 2023}
 
 
 \begin{document}
@@ -25,6 +25,223 @@
 	}}
 	\frame[plain]{\titlepage}
 
+
+
+
+
+
+\section{What is mechanism design?}
+
+
+\begin{frame}{What is Game Theory?}
+	\begin{center}
+		Economic agents interact with each other.
+		\pause
+		
+		$\Downarrow$
+		
+		What is the outcome? 
+		\\
+		How is it shaped by environment?
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{What is Mechanism Design?}
+	\begin{center}
+		\pause[2] 
+		How to shape the environment to achieve it?
+		\\
+		(in a strategic setting or a decision problem)
+		
+		$\Uparrow$
+		
+		\pause[1]
+		There is some desirable outcome.
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Example 1}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}\\
+				You want to sell an apartment. What is the best \alert{mechanism} to do so?
+				\begin{itemize}
+					\item Even setting a \structure{take-it-or-leave-it price} defines some decision problem for a buyer (which price to set then?)
+					\pause 
+					\item Can \structure{bargaining} perform better than a fixed price?
+					\item Should you try to attract more buyers? (How?)
+					\item How much info about the apartment do you reveal?
+				\end{itemize}
+				
+				\bigskip 
+				Optimal pricing and related questions is a large share of mechanism design.
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/8tallet}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Example 2}
+	\begin{columns}
+		\begin{column}{0.45\linewidth}
+			{\setstretch{1.3}\\
+				Suppose EU wants to connect its high-speed rail networks. How should the costs be split across countries? 
+				\begin{itemize}
+					\item Proportional to distance of lines built?
+					\item Proportional to costs of lines built?
+					\item Proportional to benefits accrued?
+					\item ...how to elicit whichever is chosen?
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.55\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/rail}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Example 3}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			{\setstretch{1.3}\\
+				How to \structure{allocate students to schools}?
+				\begin{itemize}
+					\item Parents/kids have some preferences over schools,
+					\item Schools might have priorities over students,
+					\item Impossible to respect all preferences.
+					\item How to organize the application/allocation process to get the best outcome?
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.5\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/M0/school}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{What is mechanism design?}
+	\begin{itemize}
+		\item To an extent, this is a course about \alert{formulating problems}:
+		\begin{itemize}
+			\item formulating an objective;
+			\item \alert{identifying the constraints} that the solution should satisfy.
+		\end{itemize}
+		
+		\pause\bigskip 
+		\item Identifying \structure{what constitutes a solution} is an important part of any problem
+		\begin{itemize}
+			\item What's the solution to $x^2 = 4$? To $a x^2 + bx + c = 0$?
+			\pause 
+			\item What's the solution to \href{https://www.smbc-comics.com/comic/dilemma-2}{the prisoner's dilemma}? To the lemons market game?
+			\pause 
+			\item What's the solution to social polarization? To unemployment? To war?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is mechanism design? Problems}
+	We'll be talking a lot about \structure{asymmetric information}. Why?
+	\begin{itemize}
+		\item First Welfare Theorem: competitive markets are efficient and cool and the best.
+		\item So for interesting settings, have to look beyond Walrasian markets
+		\item (asymmetric information, monopoly power, externalities, etc... a bit of everything.)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is mechanism design? Methods}
+	\begin{itemize}
+		\item Most MD problems can be reduced to some \structure{maximization problem}, but a simple Largangian is rarely enough...
+		\item (due to high dimensionality of the problems and/or high number of specific constraints)
+		\item So we'll also be looking at some \alert{tools and methods} that help solve mechanism design problems.
+		\item Can't hope to cover the whole universe of problems, so we'll only look at selected few.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is mechanism design? This course}
+	What can \emph{you} expect?
+	\begin{itemize}
+		\item a crash course on \alert{formalizing problems}
+		\item overview of classic results (\structure{problems and solutions}) over past 40 years
+		\item a bit from the frontier but not much
+		\item and...
+		%\item plenty of math! (brace yourselves) (also see math review on absalon)
+		%\item intuition and economics behind the models
+		%\item models are abstract but are applicable to a \textbf{lot of} areas (industrial organization, political economy, taxation, auctions\ldots{})
+		%\item Finally, I hope to give you some practice in economic \textbf{modelling}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			{\setstretch{1.3}
+				...and we need to talk about math
+			}
+		\end{column}
+		\begin{column}{0.48\linewidth}
+			\pause[1]
+			\href{https://www.smbc-comics.com/comic/what-its-like}{\includegraphics<handout:0>[width=\linewidth]{pics/M0/math2}}
+			\vspace{-5ex}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Math}
+	\begin{columns}
+		\begin{column}{0.8\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item There's a lot of math in this class
+					\item I know most of you suck at math (no offense)
+					\item Remember: \emph{it's fine}, everyone does, no one's born a math whiz
+					\item But it's a language you've got to learn
+					\item And the only way into it is \alert{practice}
+				\end{itemize}
+				% Possibility:
+				% - No one starts good at math: own story 
+				% - I self-selected, but I still believe that everyone can do it if they choose to.
+				% Why choose to:
+				% - Maybe not for own internal logic, but for communication and coordination with other people
+				% - Managers have their own "success=leadership*synergy^organization", and it make sense, but economists have to be more precise (in analytics, in policy, in litigation)
+			}
+		\end{column}
+		\begin{column}{0.15\linewidth}
+			\pause[1]
+			\href{https://www.smbc-comics.com/comic/real-life-3}{\includegraphics<handout:0>[width=\linewidth]{pics/M0/mathskills}}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Related courses at KU}
+	\begin{itemize}
+		\item Contract theory, Auctions
+		\item Economics of organization, Corporate Finance, Industrial organization
+		\item Other courses in which applications of mechanism design appear:
+		\begin{itemize}
+			\item Public finance/Taxation
+			\item Political economy
+			\item Monetary
+			\item Labor
+			\item \ldots{}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
 
 
@@ -48,24 +265,27 @@
 	\begin{itemize}
 		\item Weekly lectures (except Fall break -- week \#42)
 		\begin{itemize}
-			\item Tue, 15:15-18:00, CSS 2.0.18 (but check timetable for room changes)
+			\item Tue, 15:15-18:00, CSS 35.0.12 (but check timetable for room changes)
 			\item talk later about what happens in those
 		\end{itemize}
 		
-		\pause
-		\item Mandatory assignment:
-		\begin{itemize}
-			\item ``Make your own problem'' -- find an interesting real-world setting and analyze it using the machinery from the class
-			\item groups of up to 4 are allowed
-			\item deadline: some time in November?
-		\end{itemize}
+		%\pause
+		%\item Mandatory assignment:
+		%\begin{itemize}
+		%	\item ``Make your own problem'' -- find an interesting real-world setting and analyze it using the machinery from the class
+		%	\item groups of up to 4 are allowed
+		%	\item deadline: some time in November?
+		%\end{itemize}
 		
 		\pause
 		\item Final exam:
 		\begin{itemize}
-			\item 24hrs take home (individual, no groups)
-			\item Convert problems from text to math; solve them and explain intuition
+			\item 12hrs take home (individual, no groups)
+			\item Formalize problems; solve them and explain intuition
 		\end{itemize}
+		
+		\pause
+		\item Weekly problem sets (ungraded, for practice)
 		
 		\pause
 		\item Research module for PhD students: contact me if you would like to do it
@@ -80,7 +300,7 @@
 \end{frame}
 
 
-\begin{frame}{Materials}
+\begin{frame}{Workflow}
 	\begin{itemize}
 		\item Intended workflow: 
 		\begin{enumerate}
@@ -88,16 +308,16 @@
 			\item \uline{You watch video-lectures at home} during the week (and/or read textbook, slides, papers)
 			\item We go through the same material \emph{very quickly} in class and discuss any questions you have
 			\item We solve some problems in class
-			\item You will have more problems to practice at home
+			\item You have more problems to practice at home
 		\end{enumerate}
 		\pause
-		\item Suggestion: organize into groups. Watch lectures in groups. Discuss problems in groups.
+		\item Suggestion: organize into study groups. Watch videos in groups. Discuss problems in groups. Let me know before next lecture if you want to join a group.
 		\pause
 		\item In class I use whiteboard+slides for ``lecture'' stuff. Slides on absalon include some of the whiteboard parts.
 		\begin{itemize}
 			\item I'll try to upload slides in advance, but they might be edited and updated afterwards
 		\end{itemize}
-		The problems will be whiteboard-only; with solutions (mostly) uploaded afterwards.
+		The problems are whiteboard-only; with solutions (mostly) uploaded afterwards.
 	\end{itemize}
 \end{frame}
 
@@ -105,7 +325,7 @@
 \begin{frame}{References: textbooks}
 	This course is a compilation of many books, papers, courses; does not follow any single one too closely. Below are some books that might help (see the reading list on Absalon for full references). Note that notation will be different across books and the class!
 	\begin{itemize}%[\noitemsep]
-		\item \textbf{Narahari}: Probably your best bet. Hard to find in print, but you have online access through the library (see Absalon).
+		\item \alert{\textbf{Narahari}}: Probably your best bet. Hard to find in print, but you have online access through the library (see Absalon).
 		\item \textbf{Diamantaras}: Another good textbook, but seems very hard to find.
 		\item \textbf{B\"{o}rgers}: I used this as default in previous years, but it's quite hardcore and hard to follow. (Easy to find though.)
 		\item \textbf{MWG}: A microeconomic bible. Very good, very clear, but has the smallest coverage for our course.
@@ -139,227 +359,6 @@
 	%	\end{itemize}
 %\end{frame}
 
-
-
-
-
-\section{What is mechanism design?}
-
-\begin{frame}{What is Economics?}
-	\begin{columns}
-		\begin{column}{0.6\linewidth}
-			{\setstretch{1.3}
-				\begin{itemize}
-					\item What is \structure<1>{the big question of Economics}?
-					\pause
-					\item My take: it is about the \alert{optimal allocation of resources}.
-					\begin{itemize}
-						\item How to trade things from people who have them to people who value them (in terms of other things they offer in exchange)?
-						\item How to allocate the right people to the right jobs?
-						\item How to allocate education, healthcare, congestion, ...?
-						% Educators' resources are limited and heterogeneous, how to allocate students to schools?
-					\end{itemize}
-					\item (Also about disagreements about what ``optimal'' means.)
-				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\pause[1]
-			\includegraphics<handout:0|1>[width=\linewidth]{pics/M0/alloc}
-			\includegraphics<handout:0|2->[width=\linewidth, trim=245 0 35 0, clip]{pics/M0/market2}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{What is the problem?}
-	\begin{columns}
-		\begin{column}{0.6\linewidth}
-			{\setstretch{1.3}
-				\begin{itemize}
-					\item Isn't this solved?
-					\begin{itemize}
-						\item You've seen in Micro I that \alert<1>{markets} are efficient! (First Welfare Theorem)
-					\end{itemize}
-					\pause
-					\item Well, not really...
-					\begin{itemize}
-						\item Many cases where FWT breaks: externalities, monopoly power, \structure<3>{asymmetric information}...
-					\end{itemize}
-					\pause
-					\item Also, efficiency might not be the designer's objective
-				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[width=\linewidth]{pics/M0/market}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{What is Game Theory?}
-\begin{center}
-	Economic agents interact with each other.
-	\pause
-	
-	$\Downarrow$
-	
-	What is the outcome? 
-	
-	How is it shaped by environment?
-\end{center}
-\end{frame}
-
-
-\begin{frame}{What is Mechanism Design?}
-\begin{center}
-	\pause[2] 
-	How to shape the environment to achieve it?
-	
-	$\Uparrow$
-	
-	\pause[1]
-	There is some desirable outcome.
-\end{center}
-\end{frame}
-
-
-%\begin{frame}{Example 1}
-%\begin{columns}
-%	\begin{column}{0.6\linewidth}
-%		{\setstretch{1.3}\\
-%			A country needs to elect a new president. How to organize the election?
-%			\begin{itemize}
-%				\item How many candidates, how many rounds, etc?
-%				\item Turnout to physical voting is typically low. Should you allow online voting?
-%				\item Should you allow buying votes (voting with money)?
-%			\end{itemize}
-%		}
-%	\end{column}
-%	\begin{column}{0.4\linewidth}
-%		\pause[1]
-%		\includegraphics<handout:0>[width=\linewidth]{pics/M0/debate}
-%	\end{column}
-%\end{columns}
-%\end{frame}
-
-
-\begin{frame}{Example 1}
-\begin{columns}
-	\begin{column}{0.45\linewidth}
-		{\setstretch{1.3}\\
-			Suppose EU wants to connect its high-speed rail networks. Who should pay for the connections? 
-			\begin{itemize}
-				\item Countries that own the land might not be willing to spend the money.
-				\item Those with a lot of HSR feel they have already invested enough while others are free-riding.
-			\end{itemize}
-		}
-	\end{column}
-	\begin{column}{0.55\linewidth}
-		\pause[1]
-		\includegraphics<handout:0>[width=\linewidth]{pics/M0/rail}
-	\end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}{Example 2}
-	\begin{columns}
-		\begin{column}{0.6\linewidth}
-			{\setstretch{1.3}\\
-				You want to sell an apartment. What is the best way to do so?
-				\begin{itemize}
-					\item Market conditions change; potential buyers come and go. How long should you wait?
-					\item Run an auction or bargain with each buyer?
-					\item Reveal all house issues truthfully or let buyers find them?
-				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[width=\linewidth]{pics/M0/8tallet}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Example 3}
-\begin{columns}
-	\begin{column}{0.6\linewidth}
-		{\setstretch{1.3}\\
-			Is it possible to design an effective decentralized currency? (Think cryptocurrency)
-			\begin{itemize}
-				\item Where does money come from and how to avoid counterfeits?
-				\item If money is digital, how to avoid double spending?
-				\item If someone needs to process transactions, how to design their rewards?
-			\end{itemize}
-		}
-	\end{column}
-	\begin{column}{0.4\linewidth}
-		\pause[1]
-		\includegraphics<handout:0>[width=\linewidth]{pics/M0/coins}
-	\end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}{Who plays the players?}
-	\begin{columns}
-		\begin{column}{0.6\linewidth}
-			{\setstretch{1.3}
-				\begin{itemize}
-					\pause
-					\item In principle, we can see the ``designer'' as yet another player in a game
-					\begin{itemize}
-						\item Government/regulator
-						\item Organizer of an interaction
-					\end{itemize}
-					\item Moves first and sets the rules for other players
-					\item Problem: designer has a \emph{very large} action set
-					\begin{itemize}
-						\item Specific tools are needed to solve the designer's problem
-					\end{itemize}
-				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[width=\linewidth]{pics/M0/housewins}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{This course}
-	What can you expect?
-	\begin{itemize}
-		\item overview of main results over past 40 years
-		\item not that much from the frontier
-		\item plenty of math! (brace yourselves) (also see math review on absalon)
-		\item intuition and economics behind the models
-		\item models are abstract but are applicable to a \textbf{lot of} areas (industrial organization, political economy, taxation, auctions\ldots{})
-		\item Finally, I hope to give you some practice in economic \textbf{modelling}.
-		%\item see course description for more details on what exactly you learn
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Related courses at KU}
-\begin{itemize}
-	\item Contract theory, Auctions
-	\item Economics of organization, Corporate Finance, Industrial organization
-	\item Other courses in which applications of mechanism design appear:
-	\begin{itemize}
-		\item Public finance/Taxation
-		\item Political economy
-		\item Monetary
-		\item Labor
-		\item \ldots{}
-	\end{itemize}
-\end{itemize}
-\end{frame}
 
 
 
