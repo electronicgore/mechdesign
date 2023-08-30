@@ -114,7 +114,7 @@
 
 \newcommand{\hmwkTitle}{Math Review} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2022} % TA
+\newcommand{\instructor}{Fall 2023} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 %\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
@@ -259,19 +259,19 @@ The Leibniz rule tells you how to take the derivative of a function that is an i
 
 What we wat to look at are functions like
 \begin{align*}
-	f(x) = \int_0^x g(y) dy.
+	f(x) \equiv \int_0^x g(z) dz.
 \end{align*}
 
-What is the derivative of $f$? The Leibniz rule says that
+What is the derivative of $f$ (w.r.t. $x$)? The Leibniz rule says that
 \begin{align*}
 	f'(x)=g(x)
 \end{align*}
 
-The way you should think about this is that the integral of a function is the area below the graph of this function. So, draw some function $g$ now. Seriously, do it! The integral $\int_0^x g(y) dy$ is the area between the axis and the function $g$ from $0$ to some $x$ (take some $x > 0$ and shade this area in the graph you just drew). The derivative of $f$ with respect to $x$ answers to the following question: How does the size of the shaded area change if you make $x$ a bit bigger? From the graph, it should be clear that the area gets approximately $g(x) \cdot dx$ bigger if you increase $x$ by $dx$. This means that $f'(x) = g(x)$ (one marginal unit increase in $x$ increases $f$ by $g(x)$).
+The way you should think about this is that the integral of a function is the area below the graph of this function. So, draw some function $g$ now. Seriously, do it! The integral $\int_0^x g(z) dz$ is the area between the axis and the function $g(z)$ from $z=0$ to some $z=x$ (take some $x > 0$ and shade this area in the graph you just drew). The derivative of $f(x)$ with respect to $x$ answers to the following question: ``\emph{How does the size of the shaded area change if you make $x$ a bit bigger?}'' From the graph, it should be clear that if you increase $x$ by $dx$, the area gets approximately $g(x) \cdot dx$ bigger. This means that $f'(x) = g(x)$ (increasing $x$ by one unit increases $f$ by $g(x)$).
 
 Similar intuition implies that the derivative of
 \begin{align*}
-	h(x) &= \int_x^1 g(y) dy
+	h(x) &\equiv \int_x^1 g(z) dz
 	\\
 	\text{is }
 	h'(x) &= -g(x).
@@ -279,9 +279,9 @@ Similar intuition implies that the derivative of
 
 The full Leibniz rule (that we will not really use) says that the derivative of
 \begin{align*}
-	f(x) &= \int_{a(x)}^{b(x)} g(x,y) dy
+	f(x) &\equiv \int_{a(x)}^{b(x)} g(x,z) dz
 	\\
-	\text{is } f'(x) &= -a'(x)g(x,a(x)) + b'(x) g(x,b(x)) + \int_{a(x)}^{b(x)} g'_x(x,y) dy.
+	\text{is } f'(x) &= -a'(x)g(x,a(x)) + b'(x) g(x,b(x)) + \int_{a(x)}^{b(x)} g'_x(x,z) dz.
 \end{align*}
 
 
@@ -308,7 +308,7 @@ This theorem states what you almost surely know, at least informally: ``integrat
 
 \section{Integration by parts}
 
-Integration is difficult, okay?\footnote{\url{https://xkcd.com/2117/}} Integration by parts is one trick that sometimes helps make it a little easier. For example, if you are asked to compute 
+Integration is difficult, mkay?\footnote{\url{https://xkcd.com/2117/}} Integration by parts is one trick that sometimes helps make it a little easier. For example, if you are asked to compute 
 $$\int_4^5 xe^x dx,$$ finding the ``antiderivative'' of $xe^x$ is not a trivial task. But you can use integration by parts to go around it. The rule itself looks as
 \begin{align} \label{eq:IBP}
 	\int_a^b u(x) v'(x) dx = [u(x)v(x)]|_a^b - \int_a^b u'(x) v(x) dx,
