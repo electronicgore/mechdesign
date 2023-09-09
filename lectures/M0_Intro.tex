@@ -114,7 +114,7 @@
 			{\setstretch{1.3}\\
 				How to \structure{allocate students to schools}?
 				\begin{itemize}
-					\item Parents/kids have some preferences over schools,
+					\item Parents/students have some preferences over schools,
 					\item Schools might have priorities over students,
 					\item Impossible to respect all preferences.
 					\item How to organize the application/allocation process to get the best outcome?
@@ -179,7 +179,7 @@
 
 
 \begin{frame}{What is mechanism design? This course}
-	What can \emph{you} expect?
+	What can you expect?
 	\begin{itemize}
 		\item a crash course on \alert{formalizing problems}
 		\item overview of classic results (\structure{problems and solutions}) over past 40 years
@@ -313,13 +313,13 @@
 		\item Intended workflow: 
 		\begin{enumerate}
 			\item We start a topic in class
-			\item \uline{You watch video-lectures at home} during the week (and/or read textbook, slides, papers)
+			\item \href{https://www.youtube.com/playlist?list=PL4pUs4P_j1WasI0kO99OgNNd_hJwpct4D}{\uline{You watch video-lectures at home}} during the week (and/or read textbook, slides, papers)
 			\item We go through the same material \emph{very quickly} in class and discuss any questions you have
 			\item We solve some problems in class
 			\item You have more problems to practice at home
 		\end{enumerate}
 		\pause
-		\item Suggestion: organize into study groups. Watch videos in groups. Discuss problems in groups. Let me know before next lecture if you want to join a group.
+		\item Suggestion: organize into study groups. Watch videos in groups. Discuss problems in groups. Let me know by Friday if you want to join a group (assignment on absalon).
 		\pause
 		\item In class I use whiteboard+slides for ``lecture'' stuff. Slides on absalon include some of the whiteboard parts.
 		\begin{itemize}
@@ -413,7 +413,7 @@
 		\pause \bigskip 
 		\item Let's consider a very sophisticated \alert<2>{mechanism} called ``just ask for direction''.
 		\pause
-		\item The agent would truthfully reveal $\theta$.
+		\item The agent would truthfully reveal $\theta$, no reason to lie.
 	\end{itemize}
 \end{frame}
 
@@ -427,7 +427,7 @@
 				\\ \hline 
 				$a=N$ 		& $1,2$			& $0,2$
 				\\ \hline
-				$a=G$		& $0,0$			& $1,0$
+				$a=C$		& $0,0$			& $1,0$
 				\\ \hline 
 			\end{tabular}
 		\end{center}
@@ -438,7 +438,7 @@
 		\item $a \in \{C,N\}$ is the judge's \structure<1>{action} (verdict: convict or not)
 		\item the agent knows $\theta$, wants $a=N$
 		\pause \bigskip 
-		\item Just asking would not work: if $\theta=G$, \alert<2>{the agent would lie} and say the state is $\theta=N$.
+		\item Just asking would not work: if $\theta=g$, \alert<2>{the agent would lie} and say the state is $\theta=n$.
 		\item It is \alert<2>{not possible} to elicit the agent's information
 		\item (unless other tools are available)
 	\end{itemize}
@@ -451,7 +451,7 @@
 	\end{exampleblock}
 	
 	\begin{itemize}
-		\item $\theta\in [0,1]$ is the \structure<1>{type of the agent} (optimal reduction)
+		\item $\theta\in [0,1]$ is the \structure<1>{state of the world} (optimal reduction)
 		\item $a \in [0,1]$ is the principal's \structure<1>{action}, wants $a=\theta-b$ for some bias $b<0$
 		\item the agent knows $\theta$, wants $a=\theta$
 		\pause \bigskip 
@@ -464,12 +464,12 @@
 
 
 \begin{frame}{Takeaways}
-	\begin{enumerate}
+	\begin{itemize}
 		\item Agent is willing to reveal their private info if and only if it is in their interest to do so.
 		\bigskip 
 		\item Can we do \structure<1>{better than ``just asking''}? \pause Turns out, \alert<2>{NO}.
 		\item ...But if action is multi-dimensional, can often find partial alignment and \structure<2>{elicit at least some information}.
-	\end{enumerate}
+	\end{itemize}
 \end{frame}
 
 
@@ -489,10 +489,19 @@
 \end{frame}
 
 
+\begin{frame}{Takeaways}
+	\begin{itemize}
+		\item Agent is willing to reveal their private info if and only if it is in their interest to do so.
+		\bigskip 
+		\item Can we do better than ``just asking''? Turns out, NO.
+		\item ...But if action is multi-dimensional, can often find partial alignment and elicit at least some information.
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}{For next week}
 	\begin{enumerate}
-		\item Split into study groups (let me know if you are looking for a group)
+		\item Split into study groups (if you are looking for a group: respond to an assignment on absalon by Friday or email me)
 		\item Have a look at math review notes on absalon
 		\item Watch lectures 2.1 (`What is a mechanism?') and 2.2 (`Dominant strategy implementation') \href{https://www.youtube.com/playlist?list=PL4pUs4P_j1WasI0kO99OgNNd_hJwpct4D}{\uline{on youtube}}.
 		\item Or read Narahari ch.14-16
