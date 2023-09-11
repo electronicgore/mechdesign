@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2022}
+	Fall 2023}
 
 
 \begin{document}
@@ -59,6 +59,9 @@
 	\end{itemize}
 	\item All three are sometimes restrictive, the latter two especially. 
 	\item However, monetary payments are not necessary! Anything that $i$ cares about that is not directly included in the allocation $k$ can be used to adjust $i$'s utility as needed!
+	\begin{itemize}
+		\item $i$'s time, $i$'s effort, promises to $i$, etc
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -106,7 +109,7 @@
 \begin{frame}{VCG Mechanism: intro}
 \begin{itemize}
 	\item We now introduce the VCG mechanism that DSIC-implements the efficient allocation. We shall do it in a few steps.
-	\item \textbf{NOTE}: while the big idea of the VCG mechanism is the same everywhere, the \alert{exact definition} of the VCG mechanism \alert{differs} in different sources (textbooks). The version in these slides is, I believe, the most robust, so I ask that you stick to it, unless you have a good reason not to.
+	\item \textbf{NOTE}: while the broad idea behind the VCG mechanism is the same everywhere, the \alert{exact definition} of the VCG mechanism \alert{differs} in different sources (textbooks).
 \end{itemize}
 \end{frame}
 
@@ -187,7 +190,7 @@
 	%TODO: k^* or k^{-i}? I think the latter is in pset3 -- fix whichever is wrong
 	\end{align*}
 
-	\item \textbf{NOTE}: it is the $k^*(\theta_{-i})$ that each textbook interprets differently (or replaces with other things). Again, I believe the version above to be the easiest to apply in the widest range of settings, so I encourage you to use that.
+	\item \textbf{NOTE}: it is the \structure{default allocation rules} $k^*(\theta_{-i})$ that each textbook defines differently (or replaces with other things). My version is quite robust, but you can use other default rules if they make more sense in a given setting (so long as the rule for $i$ is independent of $\theta_i$)
 	
 	\item Resulting \alert{VCG transfers}:
 	\vspace{-0.5em}\begin{align*}
@@ -313,6 +316,9 @@
 		\item (in bilateral trade: $\underline{U}_s(\theta_s) = \theta_s$)
 	\end{itemize}
 	\item expectation means that distribution of $\theta$s now matters!
+	\begin{itemize}
+		\item (whether a mechanism is DSIC does not depend on the distr-n; but whether it is IR does)
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -650,7 +656,8 @@ Can we answer this question now?
 
 
 \begin{frame}{Payoff Equivalence in BIC. Generalization}
-	The proof is nice and illustrative in Euclidean setting.\\ \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/1468-0262.00233}{\uline{Krishna and Maenner (2001)}} present a more general result for the following setting:
+	The proof is nice and illustrative in Euclidean setting.\\
+	\cite{krishna_convex_2001} present a more general result for the following setting:
 	\begin{itemize}
 		\item quasilinear setting;
 		\item independent types;
@@ -681,7 +688,7 @@ Can we answer this question now?
 \begin{frame}{Generalized VCG}
 	\begin{itemize}
 		\item As it turns out, VCG can be (interim) IR with a slight modification... And it will be (ex ante) revenue-maximizing among all such mechanisms in that case.
-		\item Enter \alert{generalized VCG} (\href{https://sites.google.com/site/vjkrishna/research}{\uline{Krishna and Perry, 2000}}).
+		\item Enter \alert{generalized VCG} \citep{krishna_efficient_2000}.
 		\pause\medskip
 		\item Define \structure{least charitable type} $\tilde{\theta}_i$ as
 		\begin{align*}
@@ -875,6 +882,13 @@ Not necessarily IR. :(
 	\item In the \alert{Euclidean} model, gVCG is also [ex ante-]revenue-maximizing among BIC+IIR mechanisms.
 	\item Revenue equivalence is powerful, but needs more structure than just quasilinear model.
 \end{itemize}
+\end{frame}
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{teaching}
+\bibliographystyle{abbrvnat}
 \end{frame}
 
 

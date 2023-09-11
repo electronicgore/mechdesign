@@ -433,39 +433,39 @@ is incentive compatible.
 \section{Second-price auction}
 %MWG 8.B.3 | solutions from Alessandro's questionbank
 
-There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $v_i$, which the other players believe is distributed according to some c.d.f. $F_i(v_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid $b_{(2)}$, their utility is then given by $u_i = v_i - b_{(2)}$. All other bidders get nothing and pay nothing, so their utility is zero.
+There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $\theta_i$, which the other players believe is distributed according to some c.d.f. $F_i(\theta_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid $b_{(2)}$, their utility is then given by $u_i = \theta_i - b_{(2)}$. All other bidders get nothing and pay nothing, so their utility is zero.
 \begin{enumerate}
-	\item Show that bidding truthfully ($b_i=v_i$) is a weakly dominant strategy for every bidder $i$.
+	\item Show that bidding truthfully ($b_i=\theta_i$) is a weakly dominant strategy for every bidder $i$.
 	\item Conclude that the second-price auction implements the efficient allocation rule in dominant strategies.
 \end{enumerate}
 
 \ifsolutions
 \subsection{Solution}
 \textbf{Part 1.}
-Let's prove that for any $v_{i}$
-and for any $b_{-i}$ bidding $b_{i}\neq v_{i}$ is weakly dominated.
+Let's prove that for any $\theta_{i}$
+and for any $b_{-i}$ bidding $b_{i}\neq \theta_{i}$ is weakly dominated.
 There are two cases:
 \begin{enumerate}
-	\item $i$ bids $b_{i}>v_{i}$
+	\item $i$ bids $b_{i}>\theta_{i}$
 	\begin{enumerate}
-		\item If there exists $b_{j}>b_{i}$ then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$
+		\item If there exists $b_{j}>b_{i}$ then $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$
 		\item If $b_{i}$ is the highest bid, let $b_{j}$ be the second highest.
-		If $v_{i}<b_{j}<b_{i}$ then $u_{i}(b_{i},b_{-i})=v_{i}-b_{j}<0=u_{i}(v_{i},b_{-i})$.
-		If $b_{j}<v_{i}<b_{i}$ then again $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$.
+		If $\theta_{i}<b_{j}<b_{i}$ then $u_{i}(b_{i},b_{-i})=\theta_{i}-b_{j}<0=u_{i}(\theta_{i},b_{-i})$.
+		If $b_{j}<\theta_{i}<b_{i}$ then again $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$.
 	\end{enumerate}
-	\item $i$ bids $b_{i}<v_{i}$
+	\item $i$ bids $b_{i}<\theta_{i}$
 	\begin{enumerate}
-		\item If $b_{i}$ is the highest bid, then $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$
-		\item Some other $b_{j}$ is the highest bid. Then if $b_{i}<b_{j}<v_{i}$,
-		$u_{i}(b_{i},b_{-i})=0$ while $u_{i}(v_{i},b_{-i})\geq0$; in all
-		other cases $u_{i}(b_{i},b_{-i})=u_{i}(v_{i},b_{-i})$ 
+		\item If $b_{i}$ is the highest bid, then $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$
+		\item Some other $b_{j}$ is the highest bid. Then if $b_{i}<b_{j}<\theta_{i}$,
+		$u_{i}(b_{i},b_{-i})=0$ while $u_{i}(\theta_{i},b_{-i})\geq0$; in all
+		other cases $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$ 
 	\end{enumerate}
 \end{enumerate}
-Thus, indeed bidding the true value $v_{i}$ is a weakly dominant
+Thus, indeed bidding the true value $\theta_{i}$ is a weakly dominant
 strategy.
 
 \textbf{Part 2.}
-The efficient allocation rule $k^*(\cdot) = (k^*_1(\cdot),...,k^*_n(\cdot))$ (where $k_i \in [0,1]$ is the probability that $i$ gets the item) is such that for every profile of valuations $v=(v_1,...,v_n)$: $k^*(v) \in \arg \max_{k(v)} \{ \sum_{i=1}^n v_i k_i(v) \}$. It is easy to see that the efficient allocation rule then prescribes giving the item to the bidder with the highest valuation $v_i$: $k^*_i(v) = \mathbb{I} \{ v_i > v_j \, \forall j \}$ (coupled with any tie-breaking rule). 
+The efficient allocation rule $k^*(\cdot) = (k^*_1(\cdot),...,k^*_n(\cdot))$ (where $k_i \in [0,1]$ is the probability that $i$ gets the item) is such that for every profile of valuations $v=(\theta_1,...,\theta_n)$: $k^*(v) \in \arg \max_{k(v)} \{ \sum_{i=1}^n \theta_i k_i(v) \}$. It is easy to see that the efficient allocation rule then prescribes giving the item to the bidder with the highest valuation $\theta_i$: $k^*_i(v) = \mathbb{I} \{ \theta_i > \theta_j \, \forall j \}$ (coupled with any tie-breaking rule). 
 
 From part 1 we know that the second-price auction has an equilibrium in (weakly) dominant strategies, in which all bidders big truthfully. It is immediate that in this equilibrium, the bidder with the highest valuation wins the item -- i.e., the SPA DS-implements the efficient allocation rule.
 \fi 
