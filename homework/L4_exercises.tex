@@ -69,7 +69,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 4} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2022} % TA
+\newcommand{\instructor}{Fall 2023} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -154,6 +154,76 @@
 	where on the RHS we have the equilibrium (truthtelling) utilities of some fixed type $\hat{\theta}_i$ in the two mechanisms. Denoting this difference by $h_i$ proves the statement of revenue equivalence.\footnote{To clarify why exactly we can denote $h_i \equiv -\bar{U}_i(\hat{\theta}_i) + \bar{U}'_i(\hat{\theta}_i)$: note that once we fix some respective ``comparison types'' $\hat{\theta}_i$ for every player $i$, this expression only depends on the identity of player $i$, but not on their actual type $\theta_i$, and not on other players' reports $\theta_{-i}$.}
 \fi
 
+
+\section{Efficient public good provision 2}
+
+	Consider the public good provision problem from the previous problem set, described as follows.
+	
+	There is a society of $N$ people. They must collectively decide whether to implement a public project. Let $k \in \{0,1\}$ denote the outcome of this decision: $k=1$ if project is implemented, $k=0$ otherwise. Every person $i$ has some private valuation $\theta_i \in \mathbb{R}$ for the project, positive or negative. Preferences are linear, so $i$'s utility can be written as
+	$$
+		u_i(x,\theta) = \theta_i k(\theta) - t_i(\theta).
+	$$
+	Here $x=(k,t)$ stands for some direct mechanism which prescribes outcome $k(\theta) \in \{0,1\}$ and payment profile $t(\theta)$ given profile of reports $\theta$.
+	
+	\begin{enumerate}
+		\item Fix an arbitrary $\theta_{-i}$ and suppose that we want to implement an allocation rule that satisfies $k_i(\theta_i, \theta_{-i}) = \mathbb{I}\{\theta_i \geq \tilde{\theta}_i \}$ for some $\tilde{\theta}_i$ (where $\mathbb{I}\{\cdot\}$ is an indicator function).
+		
+		Use the envelope representation of payoffs to derive the (class of) transfer rule(s) for $i$ that implements $k_i$ given $\theta_{-i}$.
+		
+		\item Suppose the public prject has cost $c > 0$. Find the efficient allocation rule $k^*(\theta)$. Use your findings from the previous question to derive the (class of) transfer rule(s) for all players that implements $k^*$ in dominant strategies.
+		
+		\item Conclude that \emph{only} Groves' transfers can DS-implement $k^*$ in this problem.
+	\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+
+\begin{enumerate}
+	\item ERP (for DSIC mechanisms, since we are conditioning on $\theta_{-i}$ in this problem) tells us that the following \emph{must} hold in an IC mechanism:
+	\begin{align*}
+		U_i(\theta_i,\theta_{-i}) 
+		&= U_i(\tilde{\theta}_i, \theta_{-i}) + \int\limits_{\tilde{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) ds
+		\\
+		&= U_i(\tilde{\theta}_i, \theta_{-i}) + \mathbb{I}\{\theta_i \geq \tilde{\theta}_i \} \cdot (\theta_i - \tilde{\theta}_i)
+		\\
+		&= U_i(\tilde{\theta}_i, \theta_{-i}) + (\theta_i - \tilde{\theta}_i)_+
+	\end{align*}
+	where we have chosen $\tilde{\theta}_i$ as our ``anchor'' type, and the second line used the allocation rule given in the problem. The third line above uses the simplifying notation $(x)_+ \equiv x \cdot \mathbb{I}\{x > 0\}$. Plugging $U_i(\theta_i,\theta_{-i}) = \theta_i k(\theta) - t_i(\theta)$, we get the expression for the transfers:
+	\begin{align*}
+		t_i(\theta_i, \theta_{-i}) 
+		&= \theta_i k(\theta) - U_i(\tilde{\theta}_i, \theta_{-i}) - (\theta_i - \tilde{\theta}_i)_+
+		\\
+		&= \begin{cases}
+			- U_i(\tilde{\theta}_i, \theta_{-i}) & \text{ if } \theta_i < \tilde{\theta}_i,
+			\\
+			\tilde{\theta}_i - U_i(\tilde{\theta}_i, \theta_{-i}) & \text{ if } \theta_i \geq \tilde{\theta}_i.
+		\end{cases}
+	\end{align*}
+	Importantly, ERP implies that the transfer rule \emph{must} satisfy the form above to support the desired $k_i$ rule -- no other transfer rules would work.
+	
+	\item We can account for the cost by including it in the preferences of the principal: $u_0(x,\theta) = -c k + \sum_{i=1}^N t_i$. Then the efficient allocation rule is
+	\begin{align*}
+		k^*(\theta) 
+		&\in \arg \max_{k \in \{0,1\}} \sum_{i=0}^N u_i((k,t),\theta)
+		\\
+		&\in \arg \max_{k \in \{0,1\}} \left\{\left(\sum_{i=1}^N \theta_i - c \right) k \right\}
+		\\
+		&= \mathbb{I} \left\{ \sum_{i=1}^N \theta_i > c \right\}.
+	\end{align*}
+	Note that it fits the representation given in the previous question, with $\tilde{\theta}_i \equiv c - \sum_{j\neq i} \theta_j$. Hence a transfer rule $t(\theta)$ DS-implements $k^*(\theta)$ if and only if it satisfies
+	\begin{align} \label{eq:pubgood_groves}
+		t_i(\theta_i, \theta_{-i}) 
+		&= \begin{cases}
+			h_i(\theta_{-i}) & \text{ if } \theta_i < \tilde{\theta}_i,
+			\\
+			c - \sum_{j\neq i} \theta_j + h_i(\theta_{-i}) & \text{ if } \theta_i \geq \tilde{\theta}_i,
+		\end{cases}
+	\end{align}
+	where $h_i(\theta_{-i}) \equiv - U_i(\tilde{\theta}_i, \theta_{-i})$.
+	
+	\item It is easy to see that \eqref{eq:pubgood_groves} is exactly the expression for Groves' transfers in this problem, and ERP implies that in any DSIC mechanism with allocation rule $k^*$, the transfer rule \emph{must} satisfy \eqref{eq:pubgood_groves}. The statement in the question then follows.
+\end{enumerate}
+\fi 
 
 
 \section{Payoff equivalence in auctions}
