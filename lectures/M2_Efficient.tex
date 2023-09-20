@@ -31,7 +31,7 @@
 \section{Problem setup}
 
 \begin{frame}{Quasilinear Preferences}
-	\begin{alertblock}{Assumption: Quasilinear setting}
+	\begin{alertblock}{Assumption: Quasilinear setting/Transferable utility}
 		\begin{itemize}
 			\item Instead of allowing all possible preferences, adopt a special structure.
 			\item Instead of $x \in X$ describing everything related to outcome, split it into:
@@ -185,16 +185,16 @@
 \begin{itemize}
 	\item A suggestion for $h_i(\theta_{-i})$ made by Clarke (``pivot mechanism''):
 	\vspace{-0.5em}\begin{align*}
-	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^*(\theta_{-i}),\theta_{j}),
-	\\ &\text{where } k^*(\theta_{-i}) \in \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
+	&h_{i}(\theta_{-i})=\sum_{j\neq i} v_{j}(k^{-i}(\theta_{-i}),\theta_{j}),
+	\\ &\text{where } k^{-i}(\theta_{-i}) \in \arg\max_{k} \sum_{j\neq i}v_{j}(k,\theta_{j}).
 	%TODO: k^* or k^{-i}? I think the latter is in pset3 -- fix whichever is wrong
 	\end{align*}
 
-	\item \textbf{NOTE}: it is the \structure{default allocation rules} $k^*(\theta_{-i})$ that each textbook defines differently (or replaces with other things). My version is quite robust, but you can use other default rules if they make more sense in a given setting (so long as the rule for $i$ is independent of $\theta_i$)
+	\item \textbf{NOTE}: it is the \structure{default allocation rules} $k^{-i}(\theta_{-i})$ that each textbook defines differently (or replaces with other things). My version is quite robust, but you can use other default rules if they make more sense in a given setting (so long as the rule for $i$ is independent of $\theta_i$)
 	
 	\item Resulting \alert{VCG transfers}:
 	\vspace{-0.5em}\begin{align*}
-	\structure{ t_{i}^{VCG}(\theta) } \equiv -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+	\structure{ t_{i}^{VCG}(\theta) } \equiv -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^{-i}(\theta_{-i}), \theta_{j})
 	\end{align*}
 \end{itemize}
 \end{frame}
@@ -210,7 +210,7 @@
 
 \begin{frame}{VCG Mechanism: Final Transfers}
 \begin{align*}
-\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^*(\theta_{-i}), \theta_{j})
+\structure{ t_{i}^{VCG}(\theta) } = -\left(\sum_{j\neq i} v_{j}(k^*(\theta_i, \theta_{-i}), \theta_{j}) \right) + \sum_{j\neq i} v_{j}(k^{-i}(\theta_{-i}), \theta_{j})
 \end{align*}
 \begin{itemize}
 	\item What's the big idea?
@@ -709,7 +709,7 @@ Can we answer this question now?
 	\pause
 	Has the usual Groves' term (the third one); the other three guarantee IR.
 	\begin{itemize}
-		\item The first term is similar to Clarke's term, but with $k^*(\tilde{\theta}_i,\theta_{-i})$ instead of $k^*(\theta_{-i})$
+		\item The first term is similar to Clarke's term, but with $k^*(\tilde{\theta}_i,\theta_{-i})$ instead of $k^{-i}(\theta_{-i})$
 		\item $2^{nd}$ and $4^{th}$ is the net utility that LCT $\tilde{\theta}_i$ gets from participating in the mechanism -- need to also pay it to all other types
 	\end{itemize}
 \end{frame}
