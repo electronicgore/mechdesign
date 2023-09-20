@@ -95,7 +95,7 @@
 \section{Combinatorial Auction}
 % Bichler, example 7.3.1
 
-There are two items, $l=A,B$ (e.g., two adjacent plots of land), being auctioned off among two bidders, $i=1,2$. Each bidder's valuations for the two items and the bundle consisting of both items are $(v_{i,A}, v_{i,B}, v_{i,AB}) \sim F_i$, distributed independently across bidders. Their value of not getting either item is zero, and their utility functions are quasilinear in payments. 
+There are two items, $l=A,B$ (e.g., two adjacent plots of land), being auctioned off among two bidders, $i=1,2$. Each bidder's valuations for the two items and the bundle consisting of both items are $(v_{i,A}, v_{i,B}, v_{i,AB}) \sim F_i$, distributed independently across bidders; the auctioneer's value for the items is zero. Their value of not getting either item is zero, and their utility functions are quasilinear in payments. 
 
 The auctioneer runs a VCG auction to allocate the items. In this auction, each bidder reports a bid for every combination of items. The resulting allocation is determined so as to maximize the bidders' welfare according to their reported valuations, and the payments are determined using the VCG payment rule.
 
@@ -120,11 +120,11 @@ Calculate the resulting allocation and payments.
 	
 	Given that all valuations for all items are positive (including marginal valuations within the bundle), the efficient allocation must be non-wasteful, i.e., both items will be allocated to one of the bidders. If we let $(k_1,k_2)$ denote the bundles of items that the bidders obtain, then we can write all four of such non-wasteful allocations as: $(\{A\},\{B\})$, $(\{B\},\{A\})$, $(\{A,B\},\{\varnothing\})$, and $(\{\varnothing\},\{A,B\})$. The social welfare associated with each of the four is, respectively, $34$, $25$, $33$, and $29$. Welfare is maximized by awarding item $A$ to bidder 1 and item $B$ to bidder 2, hence this is the allocation selected by the VCG mechanism given bidders' reported types are as in Table \ref{tab:combac}.
 	
-	To calculate the VCG payments, we need to calculate $k^*(\theta_{-i})$ for both $i$, which is the efficient allocation ignoring bidder $i$ -- in our problem it would just maximize the other bidder's utility (since the designer has no utility function). It is straightforward that given the valuations in Table \ref{tab:combac}, utility of either bidder is maximized by awarding them both items. Hence the VCG payments given the realized valuations are given by
+	To calculate the VCG payments, we need to calculate $k^{-i}(\theta_{-i})$ for both $i$, which is the efficient allocation ignoring bidder $i$ -- in our problem it would just maximize the other bidder's utility (since the designer has no utility function). It is straightforward that given the valuations in Table \ref{tab:combac}, utility of either bidder is maximized by awarding them both items. Hence the VCG payments given the realized valuations are given by
 	\begin{align*}
-		t_1^{VCG}(\theta) = -v_2(k^*(\theta),\theta_2) + v_2(k^*(\theta_2),\theta_2) = -14+29 = 15 \text{ from bidder 1,}
+		t_1^{VCG}(\theta) = -v_2(k^*(\theta),\theta_2) + v_2(k^{-1}(\theta_2),\theta_2) = -14+29 = 15 \text{ from bidder 1,}
 		\\
-		t_2^{VCG}(\theta) = -v_1(k^*(\theta),\theta_1) + v_1(k^*(\theta_1),\theta_1) = -20+33 = 13 \text{ from bidder 2.}
+		t_2^{VCG}(\theta) = -v_1(k^*(\theta),\theta_1) + v_1(k^{-2}(\theta_1),\theta_1) = -20+33 = 13 \text{ from bidder 2.}
 	\end{align*}
 	%These can be considered as e.g. B1 paying their bid 20, but getting a Vickrey rebate =34-29=5 bc B1's participation increases the total surplus by 5. Same for B2: pay 14, get a rebate =34-33=1, pay 13 in the end.
 \fi 
