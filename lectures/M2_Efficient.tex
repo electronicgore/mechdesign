@@ -623,7 +623,7 @@ Can we answer this question now?
 	\begin{itemize}
 		\item Let 
 		\vspace{-0.5em}\begin{align*}
-		\bar{U}_i (\hat{\theta}_i,\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
+		\tilde{U}_i (\hat{\theta}_i,\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ u_i \left( x(\hat{\theta}_i, \theta_{-i}), \theta_i \right) | \theta_i \right]
 		\\
 		&\,\,= \mathbb{E}_{\theta_{-i}} \left[ \theta_i k_i(\hat{\theta}_i, \theta_{-i}) - t_i \left( \hat{\theta}_i, \theta_{-i} \right) | \theta_i \right].
 		\end{align*}\vspace{-1em}
@@ -632,18 +632,18 @@ Can we answer this question now?
 		\pause
 		\item Take full derivative w.r.t $\theta_i$ at $\hat{\theta}_i=\theta_i$:
 		\vspace{-0.5em}\begin{align*}
-		\frac{d}{d \theta_i} \bar{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \bar{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
+		\frac{d}{d \theta_i} \tilde{U}_i (\theta_i,\theta_i) &= \left. \frac{\partial}{\partial \hat{\theta}_i} \tilde{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i} + \left. \frac{\partial}{\partial \theta_i} \tilde{U}_i (\hat{\theta}_i,\theta_i) \right|_{\hat{\theta}_i=\theta_i}
 		\\ &= \hspace{1.4cm} 0 \hspace{1.4cm} + \mathbb{E}_{\theta_{-i}} \left[k_i (\theta_i, \theta_{-i}) | \theta_i \right]
 		\end{align*}\vspace{-1em}
 		
-		The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\bar{U}_i (\hat{\theta}_i,\theta_i)$.
+		The first term is zero because truthful report $\hat{\theta}_i = \theta_i$ maximizes $\tilde{U}_i (\hat{\theta}_i,\theta_i)$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Payoff Equivalence in BIC. Proof}
 	\begin{itemize}
-		\item Then by the Fundamental Theorem of Calculus
+		\item Then by the Fundamental Theorem of Calculus (with $\bar{U}_i (\theta_i) \equiv \tilde{U}_i (\theta_i,\theta_i)$)
 		\begin{align*}
 		\bar{U}_i (\theta_i) &= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \frac{d \bar{U}_i}{d \theta_i}(s,s) d s
 		\\&= \bar{U}_i (\underline{\theta}_i) + \int_{\underline{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}} \left[k_i(s,\theta_{-i}) | \theta_i \right] d s,

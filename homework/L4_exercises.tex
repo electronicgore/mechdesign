@@ -91,7 +91,6 @@
 		\LARGE\textbf{Exercises for Lecture 4:\\ Revenue equivalence}
 \end{center}
 
-%TODO: add a problem on ERP/monotonicity (maybe instead of current prb2)
 
 \section{Payoff equivalence in BIC mechanisms}
 
@@ -120,21 +119,21 @@
 		\mathbb{E}_{\theta_{-i}}\left[ k(\theta_i,\theta_{-i}) \right] \geq \frac{\bar{U}_i(\theta_i) - \bar{U}_i(\hat{\theta}_i)}{\theta_i - \hat{\theta}_i} \geq \mathbb{E}_{\theta_{-i}}\left[ k(\hat{\theta}_i,\theta_{-i}) \right] .
 		\label{eq:ICsandwich}
 	\end{align}
-	The expected allocation $K_i(\theta_i) \equiv \mathbb{E}_{\theta_{-i}}\left[ k(\theta_i,\theta_{-i}) \right]$ is thus monotone in $\theta_i$. Monotonicity implies continuity almost everywhere, hence the following is true for almost all $\theta_i$:
+	The expected allocation $\bar{k}_i(\theta_i) \equiv \mathbb{E}_{\theta_{-i}}\left[ k(\theta_i,\theta_{-i}) \right]$ is thus monotone in $\theta_i$. Monotonicity implies continuity almost everywhere, hence the following is true for almost all $\theta_i$:
 	\begin{align}
-		\lim_{\hat{\theta}_i \to \theta_i} K_i(\theta_i) = K_i(\hat{\theta}_i).
+		\lim_{\hat{\theta}_i \to \theta_i} \bar{k}_i(\hat{\theta}_i) = \bar{k}_i(\theta_i).
 		\label{eq:Klimit}
 	\end{align}
 	Now take limits of \eqref{eq:ICsandwich} as $\hat{\theta}_i \to \theta_i$. By the theorem about two policemen\footnote{\url{https://en.wikipedia.org/wiki/Squeeze_theorem}} together with \eqref{eq:Klimit}, we have that
 	\begin{align}
-		\lim_{\hat{\theta}_i \to \theta_i} \frac{\bar{U}_i(\theta_i) - \bar{U}_i(\hat{\theta}_i)}{\theta_i - \hat{\theta}_i} = K_i(\theta_i)
+		\lim_{\hat{\theta}_i \to \theta_i} \frac{\bar{U}_i(\theta_i) - \bar{U}_i(\hat{\theta}_i)}{\theta_i - \hat{\theta}_i} = \bar{k}_i(\theta_i)
 		\label{eq:derivlimit}
 	\end{align}
 	for almost all $\theta_i$.
-	The left-hand side of \eqref{eq:derivlimit} is the definition of the derivative of $\bar{U}_i$, hence $\frac{d\bar{U}_i(\theta_i)}{d \theta_i}$ exists and $\frac{d\bar{U}_i(\theta_i)}{d \theta_i} = K_i(\theta_i)$ almost everywhere.\footnote{At points of discontinuity of $K_i(\theta_i)$, function $\bar{U}_i(\theta_i)$ will have a kink, and all values between the two limits $\lim_{\hat{\theta}_i \nearrow \theta_i} K_i(\hat{\theta}_i)$ and $\lim_{\hat{\theta}_i \searrow \theta_i} K_i(\hat{\theta}_i)$ will be subderivatives of $\bar{U}_i$ at that point. For purposes of applying the Fundamental theorem of calculus, we can safely take $K_i(\theta_i)$ to mean the derivative of $\bar{U}_i$ at such points.}
+	The left-hand side of \eqref{eq:derivlimit} is the definition of the derivative of $\bar{U}_i$, hence $\frac{d\bar{U}_i(\theta_i)}{d \theta_i}$ exists and $\frac{d\bar{U}_i(\theta_i)}{d \theta_i} = \bar{k}_i(\theta_i)$ almost everywhere.\footnote{At points of discontinuity of $\bar{k}_i(\theta_i)$, function $\bar{U}_i(\theta_i)$ will have a kink, and all values between the two limits $\lim_{\hat{\theta}_i \nearrow \theta_i} \bar{k}_i(\hat{\theta}_i)$ and $\lim_{\hat{\theta}_i \searrow \theta_i} \bar{k}_i(\hat{\theta}_i)$ will be subderivatives of $\bar{U}_i$ at that point. For purposes of applying the Fundamental theorem of calculus, we can safely take $\bar{k}_i(\theta_i)$ to mean the derivative of $\bar{U}_i$ at such points.}
 	Applying the Fundamental theorem of calculus, we get that for any $\hat{\theta}_i$, the following holds:
 	\begin{align}
-		\bar{U}_i(\theta_i) &= \bar{U}_i(\hat{\theta}_i) + \int_{\hat{\theta}_i}^{\theta_i} K_i(s) ds
+		\bar{U}_i(\theta_i) &= \bar{U}_i(\hat{\theta}_i) + \int_{\hat{\theta}_i}^{\theta_i} \bar{k}_i(s) ds
 		\\
 		&= \bar{U}_i(\hat{\theta}_i) + \int_{\hat{\theta}_i}^{\theta_i} \mathbb{E}_{\theta_{-i}}\left[ k(s,\theta_{-i}) \right] ds.
 	\end{align}
@@ -411,11 +410,11 @@ Calculate the bidders' (interim) expected payoffs and the auctioneer's (ex ante)
 
 We use the following notation conventions, given some player $i$:
 \begin{align*}
-	K_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ k_i(\theta_i,\theta_{-i}) \right],
-	\\
-	T_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ t_i(\theta_i,\theta_{-i}) \right],
-	\\
-	\bar{U}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ \theta_i K_i(\theta_i) - T_i(\theta_i) \right],
+	%\bar{k}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ k_i(\theta_i,\theta_{-i}) \right],
+	%\\
+	%\bar{t}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ t_i(\theta_i,\theta_{-i}) \right],
+	%\\
+	\bar{U}_i(\theta_i) &\equiv \mathbb{E}_{\theta_{-i}} \left[ \theta_i \bar{k}_i(\theta_i) - \bar{t}_i(\theta_i) \right],
 	\\
 	\theta_{(2)} &\equiv \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j .
 \end{align*}
