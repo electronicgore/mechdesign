@@ -70,7 +70,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 7 (M4)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2022} % TA
+\newcommand{\instructor}{Fall 2023} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -176,7 +176,7 @@
 	First explore the problem of information elicitation (without the need to support any underlying allocation). 
 	\begin{enumerate}
 		\item Compute the players' interim beliefs $\phi(\theta_{-i} | \theta_i)$.
-		\item Compute the truth-revealing transfers $\hat{t}_i(\theta) = -\ln(\phi(\theta_{-i} | \theta_i))$.
+		\item Compute the truth-revealing transfers $\hat{t}_i(\theta) = -\\ln(\phi(\theta_{-i} | \theta_i))$.
 		\item Verify that a direct mechanism in which each player reports their type $\theta_i$ and pays $\hat{t}_i(\theta)$ is BIC (when coupled with some constant allocation rule $k$).
 	\end{enumerate}
 	
@@ -208,14 +208,14 @@
 	\end{align}
 	
 	
-	\subsubsection*{2. Compute the truth-revealing transfers $\hat{t}_{i}(\theta)=-ln(\phi(\theta_{-i}|\theta_{i}))$}
+	\subsubsection*{2. Compute the truth-revealing transfers $\hat{t}_{i}(\theta)=-\ln(\phi(\theta_{-i}|\theta_{i}))$}
 	Inserting the values for $\phi(\theta_{-i}|\theta_{i})$, we find that:
 	\begin{align}
-		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=H)&=-ln(\phi(\theta_{-i}=H|\theta_{i}=H)) \nonumber \\ 
-		&= -ln(1/3) = ln(3)\\
-		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=L)&=-ln(2/3)=ln(3)-ln(2)\\
-		\hat{t}_{i}(\theta_{i}=L,\theta_{-i}=H)&=-ln(2/3)=ln(3)-ln(2)\\
-		\hat{t}_{i}(\theta_{i}=L,\theta_{-i}=L)&=-ln(1/3)=ln(3)
+		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=H)&=-\ln(\phi(\theta_{-i}=H|\theta_{i}=H)) \nonumber \\ 
+		&= -\ln(1/3) = \ln(3)\\
+		\hat{t}_{i}(\theta_{i}=H,\theta_{-i}=L)&=-\ln(2/3)=\ln(3)-\ln(2)\\
+		\hat{t}_{i}(\theta_{i}=L,\theta_{-i}=H)&=-\ln(2/3)=\ln(3)-\ln(2)\\
+		\hat{t}_{i}(\theta_{i}=L,\theta_{-i}=L)&=-\ln(1/3)=\ln(3)
 	\end{align}
 	
 	
@@ -234,15 +234,15 @@
 	\begin{align}
 		\phi(\theta_{-i}=H|\theta_{i}=H)(V_{i}(k,\theta_{i}=H)-\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=H) + \nonumber \\\phi(\theta_{-i}=L|\theta_{i}=H)(V_{i}(k,\theta_{i}=H)-\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L) \geq \nonumber\\
 		\phi(\theta_{-i}=H|\theta_{i}=H)(V_{i}(k,\theta_{i}=H)-\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=H) + \nonumber \\\phi(\theta_{-i}=L|\theta_{i}=H)(V_{i}(k,\theta_{i}=H)-\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=L)\\
-		\rightarrow \frac{1}{3}(V_{i}(k,\theta_{i}=H)-ln(3))+\frac{2}{3}(V_{i}(k,\theta_{i}=H)-ln(3)+ln(2)) \geq \nonumber\\ \frac{2}{3}(V_{i}(k,\theta_{i}=H)-ln(3))+\frac{1}{3}(V_{i}(k,\theta_{i}=H)-ln(3)+ln(2))\\
-		\rightarrow \frac{2}{3}ln(2) \geq \frac{1}{3}ln(2)
+		\rightarrow \frac{1}{3}(V_{i}(k,\theta_{i}=H)-\ln(3))+\frac{2}{3}(V_{i}(k,\theta_{i}=H)-\ln(3)+\ln(2)) \geq \nonumber\\ \frac{2}{3}(V_{i}(k,\theta_{i}=H)-\ln(3))+\frac{1}{3}(V_{i}(k,\theta_{i}=H)-\ln(3)+\ln(2))\\
+		\rightarrow \frac{2}{3}\ln(2) \geq \frac{1}{3}\ln(2)
 	\end{align}
 	The requirement for $\theta_{i}=H$ is therefore fulfilled. Likewise, for player type $\theta_{i}=L$, BIC requires that
 	\begin{align}
 		\phi(\theta_{-i}=H|\theta_{i}=L)(V_{i}(k,\theta_{i}=L)-\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=H) + \nonumber \\\phi(\theta_{-i}=L|\theta_{i}=L)(V_{i}(k,\theta_{i}=L)-\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=L) \geq \nonumber\\
 		\phi(\theta_{-i}=H|\theta_{i}=L)(V_{i}(k,\theta_{i}=L)-\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=H) + \nonumber \\\phi(\theta_{-i}=L|\theta_{i}=L)(V_{i}(k,\theta_{i}=L)-\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L)\\
-		\rightarrow \frac{2}{3}(V_{i}(k,\theta_{i}=H)-ln(3)+ln(2))+\frac{1}{3}(V_{i}(k,\theta_{i}=H)-ln(3)) \geq \nonumber\\ \frac{1}{3}(V_{i}(k,\theta_{i}=L)-ln(3)+ln(2))+\frac{2}{3}(V_{i}(k,\theta_{i}=L)-ln(3))\\
-		\rightarrow \frac{2}{3}ln(2) \geq \frac{1}{3}ln(2)
+		\rightarrow \frac{2}{3}(V_{i}(k,\theta_{i}=H)-\ln(3)+\ln(2))+\frac{1}{3}(V_{i}(k,\theta_{i}=H)-\ln(3)) \geq \nonumber\\ \frac{1}{3}(V_{i}(k,\theta_{i}=L)-\ln(3)+\ln(2))+\frac{2}{3}(V_{i}(k,\theta_{i}=L)-\ln(3))\\
+		\rightarrow \frac{2}{3}\ln(2) \geq \frac{1}{3}\ln(2)
 	\end{align}
 	Since this also holds, we have verified that a direct mechanism in which each player reports their type $\theta_{i}$ and pays $\hat{t}_{i}(\theta)$ is BIC (when
 	coupled with some constant allocation rule $k$).
@@ -278,14 +278,14 @@
 		\phi(\theta_{-i}=L|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L)) \geq \nonumber\\ \phi(\theta_{-i}=H|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=H)) + \nonumber\\ \phi(\theta_{-i}=L|\theta_{i}=H)(1-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=L,\theta_{-i}=L))
 		\\
 		\rightarrow 
-		\frac{1}{3}(1-C_{1}-C_{2}ln(3))+\frac{2}{3}(0-C_{1}-C_{2}ln(3)+C_{2}ln(2)) \geq \nonumber\\ 
-		\frac{2}{3}(1-C_{1}-C_{2}ln(3)) + \frac{1}{3}(0-C_{1}-C_{2}ln(3)+C_{2}ln(2))
+		\frac{1}{3}(1-C_{1}-C_{2}\ln(3))+\frac{2}{3}(0-C_{1}-C_{2}\ln(3)+C_{2}\ln(2)) \geq \nonumber\\ 
+		\frac{2}{3}(1-C_{1}-C_{2}\ln(3)) + \frac{1}{3}(0-C_{1}-C_{2}\ln(3)+C_{2}\ln(2))
 		\\
 		\rightarrow
-		\frac{1}{3}-C_{1}-C_{2}\left(ln(3)+\frac{2}{3}ln(2)\right) \geq  \frac{2}{3}-C_{1}-C_{2}\left(ln(3)+\frac{1}{3}ln(2)\right)
+		\frac{1}{3}-C_{1}-C_{2}\left(\ln(3)+\frac{2}{3}\ln(2)\right) \geq  \frac{2}{3}-C_{1}-C_{2}\left(\ln(3)+\frac{1}{3}\ln(2)\right)
 		\\
-		\frac{1}{3}C_{2}ln(2) \geq \frac{1}{3}\\
-		C_{2}\geq \frac{1}{ln(2)}, C_{1}\in\mathbb{R}
+		\frac{1}{3}C_{2}\ln(2) \geq \frac{1}{3}\\
+		C_{2}\geq \frac{1}{\ln(2)}, C_{1}\in\mathbb{R}
 	\end{align}
 	Given symmetry, the same condition is required for the mechanism to tbe BIC for player type $\theta_{i}=L$.
 	
@@ -296,9 +296,9 @@
 		\phi(\theta_{-i}=H|\theta_{i}=H)(1-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=H))+\nonumber\\
 		\phi(\theta_{-i}=L|\theta_{i}=H)(0-C_{1}-C_{2}\hat{t}_{i}(\hat{\theta}_{i}=H,\theta_{-i}=L)) \geq 0\\
 		\rightarrow
-		\frac{1}{3}(1-C_{1}-C_{2}ln(3))+\frac{2}{3}(0-C_{1}-C_{2}ln(3)+C_{2}ln(2)) \geq 0\\
+		\frac{1}{3}(1-C_{1}-C_{2}\ln(3))+\frac{2}{3}(0-C_{1}-C_{2}\ln(3)+C_{2}\ln(2)) \geq 0\\
 		\rightarrow
-		C_1\leq\frac{1}{3}-C_2(ln(3)-\frac{2}{3}ln(2))
+		C_1\leq\frac{1}{3}-C_2(\ln(3)-\frac{2}{3}\ln(2))
 	\end{align}
 	Once again, the same condition holds true for player type $\theta_{i}=L$.\\\\
 	For the mechanism to be ex ante Budget Balanced, the expected sum of payments must be non-negative, which implies that:
@@ -308,26 +308,26 @@
 		\phi(\theta_{-i}=H|\theta_{i}=L)t_i(\theta_{i}=L,\theta_{-i}=H)+\nonumber\\
 		\phi(\theta_{-i}=L|\theta_{i}=L)t_i(\theta_{i}=L,\theta_{-i}=L)\geq 0\\
 		\rightarrow
-		\frac{1}{6}(C_1+C_2ln(3))+\frac{1}{3}(C_1+C_2ln(3)-C_2ln(2))+\nonumber\\
-		\frac{1}{3}(C_1+C_2ln(3)-C_2ln(2))+\frac{1}{6}(C_1+C_2ln(3))\geq 0\\
+		\frac{1}{6}(C_1+C_2\ln(3))+\frac{1}{3}(C_1+C_2\ln(3)-C_2\ln(2))+\nonumber\\
+		\frac{1}{3}(C_1+C_2\ln(3)-C_2\ln(2))+\frac{1}{6}(C_1+C_2\ln(3))\geq 0\\
 		\rightarrow
-		C_1+C_2ln(3)-\frac{2}{3}C_2ln(2)\geq 0\\
+		C_1+C_2\ln(3)-\frac{2}{3}C_2\ln(2)\geq 0\\
 		\rightarrow
-		C_1\geq -C_2(ln(3)-\frac{2}{3}ln(2))
+		C_1\geq -C_2(\ln(3)-\frac{2}{3}\ln(2))
 	\end{align}
 	For the mechanism to be interim IR and ex ante BB, $C_1$ and $C_2$ must satisfy the condition:
 	\begin{equation}
-		1/3-C_2(ln(3)-\frac{2}{3}ln(2))\geq C_1 \geq -C_2(ln(3)-\frac{2}{3}ln(2))
+		1/3-C_2(\ln(3)-\frac{2}{3}\ln(2))\geq C_1 \geq -C_2(\ln(3)-\frac{2}{3}\ln(2))
 	\end{equation}
 	
 	
 	\subsubsection*{8. Give an example of a BIC, interim IR and ex ante BB mechanism that implements $\Tilde{k}$}
-	We choose an arbitrary value $C_2=3$, which satisfies the BIC-condition $C_2\geq \frac{1}{ln(2)}$. We then choose $C_1$, such that the mechanism is exactly ex ante BB. This implies that 
+	We choose an arbitrary value $C_2=3$, which satisfies the BIC-condition $C_2\geq \frac{1}{\ln(2)}$. We then choose $C_1$, such that the mechanism is exactly ex ante BB. This implies that 
 	\begin{align}
-		C_1=-3(ln(3)-\frac{2}{3}ln(2))\nonumber\\
-		=ln(\frac{4}{27})
+		C_1=-3(\ln(3)-\frac{2}{3}\ln(2))\nonumber\\
+		=\ln(\frac{4}{27})
 	\end{align}
-	The direct revelation mechanism $(\tilde{k},t)$, where transfer-scheme $t$ is given by $t_i(\theta_i,\theta_{-i})=ln(\frac{4}{27})-3ln(\phi(\theta_{-i}|\theta_{i}))$ is therefore BIC, interim IR and ex ante BB and it implements the desired allocation $\Tilde{k}$.
+	The direct revelation mechanism $(\tilde{k},t)$, where transfer-scheme $t$ is given by $t_i(\theta_i,\theta_{-i})=\ln(\frac{4}{27})-3\ln(\phi(\theta_{-i}|\theta_{i}))$ is therefore BIC, interim IR and ex ante BB and it implements the desired allocation $\Tilde{k}$.
 
 \fi
 
