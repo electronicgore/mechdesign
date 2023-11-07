@@ -3,7 +3,7 @@
 \documentclass[english,10pt
 ,aspectratio=169
 %,handout
-%%%%%%,notes
+%,notes
 ]{beamer}
 \input{MD_preamble.tex}
 
@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2022}
+	Fall 2023}
 
 
 \begin{document}
@@ -28,12 +28,12 @@
 
 
 
-\section{Implementability: beyond the Euclidean setting}
+\section{Implementability: linear and quasilinear setting}
 
 \begin{frame}{Testing Implementability}
 	The running question for now:
 	\begin{exampleblock}{}
-		How can we check whether a given $f(\theta)$ is implementable?
+		How can we check whether a given s.c.f. $f(\theta)$ is implementable?
 	\end{exampleblock} 
 	\begin{itemize}
 		\item We have seen an answer for the Euclidean setting ($k$ should be monotone). 
@@ -143,6 +143,8 @@
 \end{frame}
 
 
+\section{Implementability: general setting}
+
 \begin{frame}{General setting: monotonicity}
 	\textbf{Without transfers}, interesting results come up... 
 	\begin{exampleblock}{Definition (\textbf{outcome g-monotonicity})}
@@ -240,7 +242,7 @@
 	\begin{itemize}
 		\item There are $M$ alternatives that are ordered in some sense: \\
 		$X = (x_1, x_2, ..., x_M)$ with $x_1 < x_2 < ... < x_M$.
-		\item There are $N$ players with private single-peaked ordinal preferences $\succsim_i(\theta_i)$ over these alternatives
+		\item There are $N$ players with private single-peaked ordinal preferences $\succsim_i(\theta_i)$ over $x \in X$
 		\begin{itemize}
 			\item An ordinal preference relation $\succsim_i(\theta_i)$ is called \structure{single-peaked} if $\exists x^*(\theta_i)$ s.t. for any $x_k < x_l\leq x^*(\theta_i)$, $x_l \succsim_i x_k$, and for any $x^*(\theta_i) \leq x_k < x_l$, $x_k \succsim_i x_l$.
 			\item Think ``utility function $u_i(x,\theta_i)$ that is increasing between $x_1$ and $x^*(\theta_i)$ and decreasing between $x^*(\theta_i)$ and $x_M$''.
@@ -261,7 +263,7 @@
 	\end{theorem}
 	\begin{itemize}
 		\item \textbf{Pairwise Majority Voting:} for any pair $x_k, x_l$, if the majority of voters prefers $x_k$ to $x_l$ (according to their reported types $(\theta_1,...,\theta_N)$), then say that $x_k$ is \emph{socially preferred} to $x_l$. After comparing all pairs, select the one that is socially preferred to all others.
-		\item Without single-peakedness, Condorcet cycles ($x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$) may arise in the social preference. But if individual prefs are single-peaked, soc pref is well defined, its most preferred alternative exists, and coincides with the median voter's most preferred alternative. (See MWG, theorems 21.D.1-2.)
+		\item Without single-peakedness, Condorcet cycles ($x_1 \succ_S x_2 \succ_S x_3 \succ_S x_1$) may arise in the social preference from PMV. But if individual prefs are single-peaked, soc pref is well defined, its most preferred alternative exists, and coincides with the median voter's most preferred alternative. (See MWG, theorems 21.D.1-2.)
 	\end{itemize}
 \end{frame}
 

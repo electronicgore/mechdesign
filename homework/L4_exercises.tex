@@ -243,7 +243,7 @@ Consider the auction environment with two buyers and one item for sale. Suppose 
 	between regions pick the allocation from one of the neighboring regions. )  Find a transfer rule which, when
 	coupled with your allocation rule, forms a DSIC mechanism.
 	
-	\emph{Hint: you will probably need to use the envelope representation of payoffs that we obtained when deriving payoff-equivalence:}
+	\emph{Hint: you will probably need to use the envelope representation of payoffs:}
 	\begin{equation*}
 		U_i(\theta_i, \theta_{-i}) = U_i (\underline{\theta}_i,\theta_{-i}) + \int_{\underline{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) d s
 	\end{equation*}
@@ -309,7 +309,7 @@ Based on the figure, we construct the following allocation:
 
 We know that the allocation must be monotone for it to be implementable. However, it is very easy to check (just observe the drawing) that fixing the type of the other player, the probability of getting the good weakly increases with the player's type. Now we have to construct the transfers to implement this in dominant strategies. We will make use of the envelope representation of utility, mainly of the result that:
 \begin{align} \label{transfer}
-	t_i(\theta_i,\theta_{-i}) = \theta_i k_i(\theta_i,\theta_{-i}) - U_i(\underline{\theta}_{i}) - \int_{\underline{\theta}_{i}}^{\theta_i} k_{i} (u,\theta_{-i}) du
+	t_i(\theta_i,\theta_{-i}) = \theta_i k_i(\theta_i,\theta_{-i}) - U_i(\underline{\theta}_{i}, \theta_{-i}) - \int_{\underline{\theta}_{i}}^{\theta_i} k_{i} (u,\theta_{-i}) du
 \end{align}
 are the transfers that work.
 
