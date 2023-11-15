@@ -301,12 +301,10 @@
 		C_1\leq\frac{1}{3}-C_2(\ln(3)-\frac{2}{3}\ln(2))
 	\end{align}
 	Once again, the same condition holds true for player type $\theta_{i}=L$.\\\\
-	For the mechanism to be ex ante Budget Balanced, the expected sum of payments must be non-negative, which implies that:
+	For the mechanism to be ex ante Budget Balanced, the expected sum of payments must be non-negative: (we can just look at $\mathbb{E}[t_1]$, since $\mathbb{E}[t_1] = \mathbb{E}[t_2]$)
 	\begin{align}
-		\phi(\theta_{-i}=H|\theta_{i}=H)t_i(\theta_{i}=H,\theta_{-i}=H)+\nonumber\\
-		\phi(\theta_{-i}=L|\theta_{i}=H)t_i(\theta_{i}=H,\theta_{-i}=L)+\nonumber\\
-		\phi(\theta_{-i}=H|\theta_{i}=L)t_i(\theta_{i}=L,\theta_{-i}=H)+\nonumber\\
-		\phi(\theta_{-i}=L|\theta_{i}=L)t_i(\theta_{i}=L,\theta_{-i}=L)\geq 0\\
+		\phi(H,H)t_1(H,H)+\phi(H,L)t_1(H,L)+\nonumber\\
+		\phi(L,H)t_1(L,H)+\phi(L,L)t_1(L,L)\geq 0\\
 		\rightarrow
 		\frac{1}{6}(C_1+C_2\ln(3))+\frac{1}{3}(C_1+C_2\ln(3)-C_2\ln(2))+\nonumber\\
 		\frac{1}{3}(C_1+C_2\ln(3)-C_2\ln(2))+\frac{1}{6}(C_1+C_2\ln(3))\geq 0\\
