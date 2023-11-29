@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2022}
+	Fall 2023}
 
 
 \begin{document}
@@ -27,6 +27,7 @@
 	\frame[plain]{\titlepage}
 
 
+%TODO: add pictures for intro (guardian review, see pics; smiley-face food safety certs, ...)
 
 \begin{frame}{Introduction}
 \begin{itemize}
@@ -99,7 +100,7 @@
 		\item Argument for finite $\Theta$:
 		\item Suppose statement is not true: there is a set of types $\Theta_S$ that stay silent (do not disclose).
 		\item Then the firm's payoff when hiding evidence is $\mathbb{E}[\theta | \phi_0, \Theta_S]$, where $\phi_0$ is the consumer's prior belief.
-		\item Consider type $z \equiv \max \Theta_S$. Revealing the type (with evidence) yields payoff $x$, which is higher than the payoff from silence (which is a weighted average of $x$ and lower types).
+		\item Consider type $z \equiv \max \Theta_S$. Revealing the type (with evidence) yields payoff $z$, which is higher than the payoff from silence (which is a weighted average of $z$ and lower types).
 		\item So regardless of which types stay silent, the highest of such types would like to separate. Then the highest of the remaining types would like to do the same, etc -- this process is called \alert{unraveling}.
 	\end{itemize}
 \end{frame}
@@ -185,11 +186,12 @@
 \begin{itemize}
 	\item Now return to the case $c=0$, but the firm only has \structure{evidence with probability $\lambda < 1$}.
 	\item With probability $1-\lambda$ the firm has no evidence and is forced to stay silent.
-	\item Then, if types $\Theta_S$ stay silent:
+	\item Then, if types $\Theta_S$ stay silent (even with evidence):
 	\begin{align*}
-		\mathbb{E}[\theta \mid \text{silence}] = \frac{\lambda \mathbb{P}(\Theta_S) \mathbb{E}[\theta \mid \Theta_S] + (1-\lambda) \mathbb{E}[\theta]}{\lambda \mathbb{P}(\Theta_S) + (1-\lambda)} > \mathbb{E}[\theta \mid \Theta_S].
+		\mathbb{E}[\theta \mid \text{silence}] = \frac{\lambda \mathbb{P}(\Theta_S) \mathbb{E}[\theta \mid \Theta_S] + (1-\lambda) \mathbb{E}[\theta]}{\lambda \mathbb{P}(\Theta_S) + (1-\lambda)}.
+		% > \mathbb{E}[\theta \mid \Theta_S].
 	\end{align*}
-	The consumer is not as pessimistic after no disclosure (as when $\lambda=1$), because they understand the firm may not have any evidence. So profit from disclosure is smaller.
+	This is higher than in the baseline ($\lambda=1$), because the consumer understands the firm may not have any evidence. So profit from disclosure is smaller.
 	\item This may again lead to some low types staying silent (pretending to have no evidence).
 \end{itemize}
 \end{frame}
@@ -260,7 +262,7 @@
 	\item A cursed receiver makes no inference from silence: $\mathbb{E}[\theta \mid \text{silence} ] = \mathbb{E}[\theta]$; is otherwise same as a rational receiver.
 	
 	\pause \bigskip 
-	\item Then if $\theta \sim [0,1]$ and the firm reveals $\theta$ iff $\theta \geq z$, eqm cutoff $z$ must be such that:
+	\item Then if $\theta \sim U[0,1]$ and the firm reveals $\theta$ iff $\theta \geq z$, eqm cutoff $z$ must be such that:
 	\begin{align*}
 		z = \pi \mathbb{E}[\theta] + (1-\pi) \mathbb{E}[\theta \mid \Theta_S] = \frac{\pi}{2} + (1-\pi)\frac{z}{2}
 		&& \Rightarrow &&
@@ -330,14 +332,14 @@
 \begin{itemize}
 	\item Their result (no value from commitment) relies on concavity of the receiver's preferences + assumptions on evidence structure. 
 	\item \textbf{Counterexample} with preferences not concave in $x$ given $\theta$:
-	\item Let $\theta \in \{1,2,...,999\}$ with $\phi_0(999) = 0.002$ and $\phi_0(\theta) = 0.001$ for $\theta < 999$.
-	\item Suppose types $\theta<999$ are verifiable: $m \in \{\varnothing, \theta\}$; type $\theta=999$ has no evidence: $m = \varnothing$.
+	\item Let $\theta \in \{1,2,...,9\}$ with $\phi_0(9) = 0.2$ and $\phi_0(\theta) = 0.1$ for $\theta < 9$.
+	\item Suppose types $\theta<9$ are verifiable: $m \in \{\varnothing, \theta\}$; type $\theta=9$ has no evidence: $m = \varnothing$.
 	\item Receiver's payoff is $u_R(x,\theta) = \mathbb{I}\{x=\theta\}$; sender's payoff is still $u_S(x,\theta)=x$.
 	\pause \bigskip 
 	\item Then commitment outcome is better than no commitment:
 	\begin{itemize}
-		\item In eqm w/o commitment, after silence the receiver chooses $x(\varnothing)=999$, so sender never reveals $\theta$. $\Rightarrow \, \mathbb{E}u_R = 0.002$.
-		\item With commitment, receiver can commit to $x(\varnothing)=1$ $\Rightarrow$ sender reveals $\theta$ if possible $\Rightarrow$ $\mathbb{E}u_R = 0.998$.
+		\item In eqm \textbf{w/o commitment}, after silence the receiver chooses $x(\varnothing)=9$, so sender never reveals $\theta$. $\Rightarrow \, \mathbb{E}u_R = 0.2$.
+		\item \textbf{With commitment}, receiver can commit to $x(\varnothing)=1$ $\Rightarrow$ sender reveals $\theta$ if possible $\Rightarrow$ $\mathbb{E}u_R = 0.8$.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -375,9 +377,9 @@
 	\item E.g., consider an \textbf{item allocation problem:} 
 	\begin{itemize}
 		\item $N$ bidders with private, \alert{verifiable} types $\theta_i$; designer chooses allocation $x \in \varDelta(N)$;
-		\item $u_i(x,\theta) = x_i \theta_i$;
+		\item bidder $i$'s utility: $u_i(x,\theta) = x_i \theta_i$;
 		%\mathbb{I}\{x_i=1\}$ ($i$ benefits from getting the item, but $\theta_i$ is not $i$'s valuation)
-		\item $u_0(x,\theta) = \sum_{i=1}^N x_i \theta_i$ (designer wants to allocate to highest $\theta_i$).
+		\item designer's utility: $u_0(x,\theta) = \sum_{i=1}^N x_i \theta_i$ (designer wants to allocate to highest $\theta_i$).
 	\end{itemize}
 \end{itemize}
 \end{frame}
