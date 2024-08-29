@@ -165,23 +165,36 @@ One way to interpret pdf $f(y)$ (``pdf'' will always refer to density, not distr
 \subsection{Mathematical expectations}
 
 How can we find the mathematical expectation -- average value -- of a random variable? For discrete random variables, we weigh each value with the probability of that value occurring:
-\begin{align*}
+\begin{align}
 	\mathbb{E}[x] &= \sum_{x \in \{1,2,3\}} x \cdot p(x)
+	\label{eq:E1}
 	\\
 	&= 1 \cdot \frac{1}{6} + 2 \cdot \frac{2}{6} + 3 \cdot \frac{3}{6}
+	\nonumber
 	\\
 	&= \frac{14}{6} \approx 2.33
-\end{align*}
+	\nonumber
+\end{align}
 %Note the slight abuse of notation: when writing $\mathbb{E}[x]$ we use $x$ to denote the random variable itself (a distribution that has not yet realized any given value), while in $\sum_{x} x \cdot p(x)$ we use $x$ to refer to various values that this random variable may take.
 
 To find an expectation of a continuous random variable, we do the exact same thing, except we use integral instead of the sum (since an integral is pretty much a sum of a continuum of infinitesimally small terms):
-\begin{align*}
+\begin{align}
 	\mathbb{E}[y] &= \int_0^1 \left[y \cdot f(y)\right] dy
+	\label{eq:E2}
 	\\
 	&= \int_0^1 \left[2y^2 \right] dy
+	\nonumber
 	\\
 	&= \left. \frac{2}{3} y^3 \right|_{y=0}^{1} = \frac{2}{3} - 0 = \frac{2}{3}
-\end{align*}
+	\nonumber
+\end{align}
+
+Note that $x$, as a \emph{discrete} random variable, can be described by the distribution function $p(x)$, but not density $f(x)$ (density is not defined for discrete random variables). Conversely, $y$ is a \emph{continuous} random variable, and hence has a density $f(y)$, but no distribution function $p(x)$. What if we have some random variable $z$ and we do not know whether it is discrete or continuous? How can we describe it? Well, we can always describe it in terms of its \emph{cumulative distribution function} ("cdf") $F(z)$: for any number $\bar{z}$, $F(\bar{z}) \in [0,1]$ denotes the probability that the realization of random variable $z$ turns out to be weakly smaller than $\bar{z}$. We can then define the mathematical expectation of $z$ as
+\begin{align}
+	\mathbb{E}[z] &= \int_{\mathbb{R}} z dF(z).
+	\label{eq:E3}
+\end{align}
+Note that while \eqref{eq:E3} is a useful piece of general notation, for practical purposes of actually calculating an expectation of some random variable we will want to actually use either \eqref{eq:E1} (which is equivalent to \eqref{eq:E3} for discrete random variables), or \eqref{eq:E2} (which is equivalent for continuous random variables).
 
 
 \subsection{Events}
