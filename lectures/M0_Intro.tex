@@ -14,7 +14,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2023}
+	Fall 2024}
 
 
 \begin{document}
@@ -33,33 +33,72 @@
 \section{What is mechanism design?}
 
 
-\begin{frame}{What is Game Theory?}
-	\begin{center}
-		Economic agents interact with each other.
+\begin{frame}{History of (Micro)Economic Thought (abridged)}
+	\centering
+	\begin{tabular}{c|c|c}
+		\textbf{Question} & \textbf{Answer} & \textbf{Tool}
+		\\ \hline
 		\pause
-		
-		$\Downarrow$
-		
-		What is the outcome? 
-		\\
-		How is it shaped by environment?
-	\end{center}
+		How well do markets work? & \pause Very well! 
+			& \begin{tabular}{@{}c@{}}
+				Walrasian markets, \\
+				First/Second Welfare Theorems
+			\end{tabular}
+		\\ \hline 
+		\pause 
+		Why may markets not work? & \pause 
+			\begin{tabular}{@{}c@{}}
+				Asymmetric information, \\ market power, externalities
+			\end{tabular}
+			& Game theory
+		\\ \hline 
+		\pause 
+		How to fix the inefficiencies? & \pause We'll see! & Mechanism design!
+	\end{tabular}
 \end{frame}
 
 
-\begin{frame}{What is Mechanism Design?}
-	\begin{center}
-		\pause[2] 
-		How to shape the environment to achieve it?
-		\\
-		(in a strategic setting or a decision problem)
-		
-		$\Uparrow$
-		
-		\pause[1]
-		There is some desirable outcome.
-	\end{center}
+\begin{frame}{Not just markets}
+	Economics has long sprawled beyond just markets. We, too, will talk about ``markets'' in a very general sense, including, e.g.:
+	\pause 
+	\begin{itemize}[<+->]
+		\item markets for decisions (in groups and societies) and decision rights (in organizations)
+		\item markets created by individual interactions (one-on-one, as opposed to many buyers vs many sellers)
+		\item markets for partners, roommates, school seats and students
+		\item markets without money
+		\item markets for information
+		\item ...
+	\end{itemize}
 \end{frame}
+
+
+%\begin{frame}{What is Game Theory?}
+%	\begin{center}
+%		Economic agents interact with each other.
+%		\pause
+%		
+%		$\Downarrow$
+%		
+%		What is the outcome? 
+%		\\
+%		How is it shaped by environment?
+%	\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}{What is Mechanism Design?}
+%	\begin{center}
+%		\pause[2] 
+%		How to shape the environment to achieve it?
+%		\\
+%		(in a strategic setting or a decision problem)
+%		
+%		$\Uparrow$
+%		
+%		\pause[1]
+%		There is some desirable outcome.
+%	\end{center}
+%\end{frame}
 
 
 \begin{frame}{Example 1}
@@ -76,7 +115,7 @@
 				\end{itemize}
 				
 				\bigskip 
-				Optimal pricing and related questions is a large share of mechanism design.
+				Auctions, optimal pricing, and related questions are a large part of mechanism design.
 			}
 		\end{column}
 		\begin{column}{0.4\linewidth}
@@ -117,6 +156,7 @@
 					\item Parents/students have some preferences over schools,
 					\item Schools might have priorities over students,
 					\item Impossible to respect all preferences.
+					\item And we can't use money.
 					\item How to organize the application/allocation process to get the best outcome?
 				\end{itemize}
 			}
@@ -129,46 +169,75 @@
 \end{frame}
 
 
-\begin{frame}{What is mechanism design?}
+%\begin{frame}{What is this course? Problems}
+%	We'll be talking a lot about \structure{asymmetric information}. Why?
+%	\begin{itemize}
+%		\item First Welfare Theorem: competitive markets are efficient and cool and the best.
+%		\item So for interesting settings, have to look beyond Walrasian markets
+%		\item (asymmetric information, monopoly power, externalities, etc...)
+%		\pause\bigskip
+%		\item Many \alert{economic problems} deal with asymmetric information:
+%		\begin{itemize}
+%			\item eliciting a potential buyer's willingness to pay,
+%			\item eliciting students' preferences over schools,
+%			\item eliciting voters' preferences over candidates,
+%			\item etc...
+%		\end{itemize}
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{What is this course? Problems}
 	\begin{itemize}
-		\item To an extent, this is a course about \alert{formulating problems}:
+		\pause 
+		\item \structure{Eliciting hidden information}
 		\begin{itemize}
-			\item formulating an objective;
-			\item \alert{identifying the constraints} that the solution should satisfy.
+			\item Recall: \alert<1-3>{information asymmetry} is a big source of inefficiencies in markets! Often feeds market power and externalities
+			\item Will also look at the complementary question: what's the optimal way to supply information?
 		\end{itemize}
 		
-		\pause\bigskip 
-		\item Identifying \structure{what constitutes a solution} is an important part of any problem
+		\only<1-3>{\visible<3>{\centering\includegraphics[width=0.82\linewidth]{pics/M0/communicating}}}
+		
+		\only<4->{
+		\item \alert{Hidden action problems} (inducing, monitoring, enforcement)
 		\begin{itemize}
-			\item What's the solution to $x^2 = 4$? To $a x^2 + bx + c = 0$?
-			\pause 
-			\item What's the solution to \href{https://www.smbc-comics.com/comic/dilemma-2}{the prisoner's dilemma}? To the lemons market game?
-			\pause 
-			\item What's the solution to social polarization? To unemployment? To war?
+			\item We won't look at those, see \textbf{contract theory} course
 		\end{itemize}
+		
+		\item \alert{Aggregating social preferences} / sharing the surplus
+		\begin{itemize}
+			\item We'll mostly follow the utilitarian approach. See \emph{social choice theory} for more approaches.
+			\item Cooperative game theory offers alternative approach to surplus sharing problems.
+			\item See also the \textbf{distributive justice} course.
+		\end{itemize}
+		}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{What is mechanism design? Problems}
-	We'll be talking a lot about \structure{asymmetric information}. Why?
+\begin{frame}{What is this course? Problem-solving skills}
+\begin{itemize}
+	\pause 
+	\item To an extent, this is a course about \alert{formulating problems}:
 	\begin{itemize}
-		\item First Welfare Theorem: competitive markets are efficient and cool and the best.
-		\item So for interesting settings, have to look beyond Walrasian markets
-		\item (asymmetric information, monopoly power, externalities, etc...)
-		\pause\bigskip
-		\item Many \alert{economic problems} deal with asymmetric information:
-		\begin{itemize}
-			\item eliciting a potential buyer's willingness to pay,
-			\item eliciting students' preferences over schools,
-			\item eliciting voters' preferences over candidates,
-			\item etc...
-		\end{itemize}
+		\item \structure<2>{formulating an objective};
+		\item \structure<2>{identifying the constraints} that the solution should satisfy.
 	\end{itemize}
+	
+	\pause\bigskip 
+	\item Identifying \alert{what constitutes a solution} is an important part of any problem
+	\begin{itemize}
+		\item What's the solution to $x^2 = 4$? To $a x^2 + bx + c = 0$?
+		\pause 
+		\item What's the solution to \href{https://www.smbc-comics.com/comic/dilemma-2}{the prisoner's dilemma}? To the lemons market game?
+		\pause 
+		\item What's the solution to social polarization? To unemployment? To war?
+	\end{itemize}
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}{What is mechanism design? Methods}
+\begin{frame}{What is this course? Methods}
 	\begin{itemize}
 		\item Most MD problems can be reduced to some \structure{maximization problem}, but a simple Largangian is rarely enough...
 		\item (due to high dimensionality of the problems and/or high number of specific constraints)
@@ -178,7 +247,7 @@
 \end{frame}
 
 
-\begin{frame}{What is mechanism design? This course}
+\begin{frame}{What is this course?}
 	What can you expect?
 	\begin{itemize}
 		\item a crash course on \alert{formalizing problems}
@@ -215,10 +284,19 @@
 			{\setstretch{1.3}
 				\begin{itemize}
 					\item There's a lot of math in this class
-					\item I know most of you suck at math (no offense)
-					\item Remember: \emph{it's fine}, everyone does, no one's born a math whiz
-					\item But it's a language you've got to learn
+					\item Remember: \textbf{you \alert{don't} suck at math!}
+					\begin{itemize}
+						\item No one is inherently good or bad at math!
+					\end{itemize}
+					\item Math is just a language you've got to learn
+					\item It's difficult, so it's easy to get discouraged
+					\begin{itemize}
+						\item And the defeatist moods are self-reinforcing
+					\end{itemize}
 					\item And the only way into it is \alert{practice}
+					\begin{itemize}
+						\item Believe in yourself and never give up!
+					\end{itemize}
 				\end{itemize}
 				% Possibility:
 				% - No one starts good at math: own story 
@@ -236,20 +314,36 @@
 \end{frame}
 
 
-\begin{frame}{Related courses at KU}
-	\begin{itemize}
-		\item Contract theory, Auctions
-		\item Economics of organization, Corporate Finance, Industrial organization
-		\item Other courses in which applications of mechanism design appear:
-		\begin{itemize}
-			\item Public finance/Taxation
-			\item Political economy
-			\item Monetary
-			\item Labor
-			\item \ldots{}
-		\end{itemize}
-	\end{itemize}
+\begin{frame}
+	\centering
+	\includegraphics<handout:0>[width=0.55\linewidth]{pics/M0/howtolearn}
 \end{frame}
+
+
+\begin{frame}
+	So you just need to believe in yourself and
+	
+	\centering
+	\href{https://www.youtube.com/watch?v=KxGRhd_iWuE}{\includegraphics<handout:0>[width=0.7\linewidth]{pics/M0/nevergiveup}}
+	
+	(click this pic every time you feel like you can't do it any more)
+\end{frame}
+
+
+%\begin{frame}{Related courses at KU}
+%	\begin{itemize}
+%		\item Contract theory, Auctions
+%		\item Economics of organization, Corporate Finance, Industrial organization
+%		\item Other courses in which applications of mechanism design appear:
+%		\begin{itemize}
+%			\item Public finance/Taxation
+%			\item Political economy
+%			\item Monetary
+%			\item Labor
+%			\item \ldots{}
+%		\end{itemize}
+%	\end{itemize}
+%\end{frame}
 
 
 
@@ -266,6 +360,10 @@
 		\item Office hours: Tue, 14-15
 		\item Questions: email/absalon, before/after class
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What about you?}
 \end{frame}
 
 
@@ -301,29 +399,30 @@
 \end{frame}
 
 
-\begin{frame}{Covid-specific stuff}
-	\begin{itemize}
-		\item No online streams/recordings are currently planned, back to stone age
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Covid-specific stuff}
+%	\begin{itemize}
+%		\item No online streams/recordings are currently planned, back to stone age
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Workflow}
 	\begin{itemize}
 		\item Intended workflow: 
 		\begin{enumerate}
-			\item We start a topic in class
+			\item We start a topic in class (very briefly)
 			\item \href{https://www.youtube.com/playlist?list=PL4pUs4P_j1WasI0kO99OgNNd_hJwpct4D}{\uline{You watch video-lectures at home}} during the week (and/or read textbook, slides, papers)
-			\item We go through the same material \emph{very quickly} in class and discuss any questions you have
+			\item We go through the same material \textbf{very quickly} in class and discuss any questions you have
 			\item We solve some problems in class
 			\item You have more problems to practice at home
 		\end{enumerate}
+		\only<1>{Have you noticed the emphasis above? If you don't prepare for lectures, life will be difficult!}
 		\pause
 		\item Suggestion: organize into study groups. Watch videos in groups. Discuss problems in groups. Let me know by Friday if you want to join a group (assignment on absalon).
 		\pause
 		\item In class I use whiteboard+slides for ``lecture'' stuff. Slides on absalon include some of the whiteboard parts.
 		\begin{itemize}
-			\item I'll try to upload slides in advance, but they might be edited and updated afterwards
+			\item I'll upload slides in advance, but they might be edited and updated afterwards
 		\end{itemize}
 		The problems are whiteboard-only; with solutions (mostly) uploaded afterwards.
 	\end{itemize}
@@ -504,7 +603,9 @@
 		\item Split into study groups (if you are looking for a group: respond to an assignment on absalon by Friday or email me)
 		\item Have a look at math review notes on absalon
 		\item Watch lectures 2.1 (`What is a mechanism?') and 2.2 (`Dominant strategy implementation') \href{https://www.youtube.com/playlist?list=PL4pUs4P_j1WasI0kO99OgNNd_hJwpct4D}{\uline{on youtube}}.
-		\item Or read Narahari ch.14-16
+		\begin{itemize}
+			\item Or read Narahari ch.14-16
+		\end{itemize}
 	\end{enumerate}
 \end{frame}
 
