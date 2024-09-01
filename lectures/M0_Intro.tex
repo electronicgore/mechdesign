@@ -5,6 +5,7 @@
 ,aspectratio=169
 ]{beamer}
 \input{MD_preamble.tex}
+\usepackage{multirow}
 
 
 \title{Mechanism Design}
@@ -472,18 +473,43 @@
 \section{First Taste}
 
 \begin{frame}{First taste: Communication problem}
+	To get an idea of the kind of problem we'll be looking at, consider an interaction between two players, described as follows:
+	\begin{center}
+		\begin{tabular}{r|c|c}
+			& Principal & Agent
+			\\ \hline 
+			Role & \begin{tabular}{@{}c@{}}Has \structure{decision rights}\end{tabular} 
+			& \begin{tabular}{@{}c@{}}Has decision-relevant \structure{information}\end{tabular}
+			\\ \hline \pause 
+			\multirow{3}{*}{Examples} 
+			& Politician & Advisor
+			\\ \pause
+			& Manager & Analyst
+			\\ \pause
+			& Seller & Buyer
+		\end{tabular}
+		\pause
+		
+		\begin{itemize}
+			\item let $\theta \in \Theta$ denote the state of the world, known to the agent
+			\item let $a \in A$ denote the principal's final action
+			\item suppose the principal asks the agent to send message $m$ about the state
+			\item principal cannot verify whether the message/report is truthful or not
+		\end{itemize}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{First taste: Communication problem}
 	\begin{block}{Communication problem}
-		Can \emph{the designer} elicit \emph{the agent}'s \alert{private information}? How?
+		Can the principal \emph{elicit} the agent's \alert{private information}?
 	\end{block}
 	\begin{itemize}
-		\item (``designer'' and ``agent'' are just labels for different players for now)
-		\pause 
-		\item As usual, \structure{getting to an answer} first requires \alert{understanding the problem}
-		\pause
+		\item In other words, will the agent report truthfully?
 		\item The answer depends on the \structure{nature of the relationship}
 		\begin{itemize}
-			\item What will the designer do with this knowledge?
-			\item How does the agent feel about that?
+			\item What will the principal \structure{do} with this knowledge?
+			\item How does the agent \structure{feel} about that?
 			\item Let's look at a few examples...
 		\end{itemize}
 	\end{itemize}
@@ -497,9 +523,9 @@
 			\begin{tabular}{r | c | c |}
 				$(u_P,u_A)$	& $\theta=l$	& $\theta=r$
 				\\ \hline 
-				$a=L$ 		& $2,1$			& $0,0$
+				$a=l$ 		& $2,1$			& $0,0$
 				\\ \hline
-				$a=R$		& $0,0$			& $2,1$
+				$a=r$		& $0,0$			& $2,1$
 				\\ \hline 
 			\end{tabular}
 		\end{center}
@@ -507,12 +533,12 @@
 	 
 	\begin{itemize}
 		\item where $\theta\in \{r,l\}$ is the \structure<1>{state of the world} (the correct direction)
-		\item $a \in \{L,R\}$ is the \structure<1>{action} the tourist will take (where they will go)
-		\item the agent wants to help, knows $\theta$
+		\item $a \in \{l,r\}$ is the \structure<1>{action} the principal will take (where they will go)
+		\item the agent knows $\theta$, wants to help
 		\pause \bigskip 
-		\item Let's consider a very sophisticated \alert<2>{mechanism} called ``just ask for direction''.
+		\item Suppose the principal believes and follows the report: $a(m) = m$
 		\pause
-		\item The agent would truthfully reveal $\theta$, no reason to lie.
+		\item The agent would then truthfully report the state: $m(\theta) = \theta$, no reason to lie.
 	\end{itemize}
 \end{frame}
 
@@ -524,41 +550,54 @@
 			\begin{tabular}{r | c | c |}
 				$(u_P,u_A)$	& $\theta=n$	& $\theta=g$
 				\\ \hline 
-				$a=N$ 		& $1,2$			& $0,2$
+				$a=n$ 		& $1,2$			& $0,2$
 				\\ \hline
-				$a=C$		& $0,0$			& $1,0$
+				$a=c$		& $0,0$			& $1,0$
 				\\ \hline 
 			\end{tabular}
 		\end{center}
 	\end{exampleblock}
 	
 	\begin{itemize}
-		\item where $\theta\in \{g,n\}$ is the \structure<1>{type of the agent} (guilty or not)
-		\item $a \in \{C,N\}$ is the judge's \structure<1>{action} (verdict: convict or not)
-		\item the agent knows $\theta$, wants $a=N$
+		\item where $\theta\in \{g,n\}$ is the \structure<1>{type of the agent} (guilty or not);
+		$a \in \{c,n\}$ is the judge's \structure<1>{action} (verdict: convict or not);
+		the agent knows $\theta$, wants $a=n$
 		\pause \bigskip 
-		\item Just asking would not work: if $\theta=g$, \alert<2>{the agent would lie} and say the state is $\theta=n$.
-		\item It is \alert<2>{not possible} to elicit the agent's information
-		\item (unless other tools are available)
+		\item If the principal believes the report ($a(m)=m$), the agent would lie and report $m(\theta) = n$ regardless of $\theta$.
+		\pause 
+		\item Otherwise, whatever the principal's strategy $a(m)$ is, if there is some report $m$ that leads to $a(m)=n$, the agent would always use it, regardless of $\theta$!
+		\item There is no way for the principal to get different reports in $\theta=n$ and $\theta=g$!
+		%\item (unless other tools are available)
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Partially aligned interests}
 	\begin{exampleblock}{Example 3: Partially aligned interests}
-		A president (principal) is asking an economic advisor (agent) by how much the spending should be cut.
+		A president (principal) is asking an economic advisor (agent) whether to enact a tax reform
+		\begin{center}
+			\begin{tabular}{r | c | c | c |}
+				$(u_P,u_A)$	& $\theta=l$	& $\theta=n$ 	& $\theta=h$
+				\\ \hline 
+				$a=n$ 		& $4,1$			& $2,2$			& $0,1$
+				\\ \hline
+				$a=r$		& $2,0$			& $4,1$			& $2,2$
+				\\ \hline 
+			\end{tabular}
+		\end{center}
 	\end{exampleblock}
 	
 	\begin{itemize}
-		\item $\theta\in [0,1]$ is the \structure<1>{state of the world} (optimal reduction)
-		\item $a \in [0,1]$ is the principal's \structure<1>{action}, wants $a=\theta-b$ for some bias $b<0$
-		\item the agent knows $\theta$, wants $a=\theta$
+		\item $\theta\in \{l,n,h\}$ is the state of the economy (need for a reform), equal probabilities
+		\item $a \in \{n,r\}$ is the principal's action (whether to reform), wants $a=r$ if $\theta \in \{n,h\}$
+		\item the agent knows $\theta$, wants $a=r$ only if $\theta = h$
 		\pause \bigskip 
-		\item \cite{crawford_strategic_1982} show that if $b$ small, there exists a \alert<2>{partially informative} equilibrium($[0,1]$ is partitioned into intervals; agent reveals which interval $\theta$ belongs to)
-		\item agent \alert{reveals part} of their private information, but not all of it
+		\item if the principal believes $m=\theta$, then best response is $a(l)=n$, $a(n)=a(h)=r$
+		\pause 
+		\item the agent is then partially honest: $m(l)=m(n)=l$, $m(h)=h$! 
+		\item $a(l)=n$ is still a best response for the principal, even if they understand the deception
 	\end{itemize}
 \end{frame}
-
 
 
 
@@ -568,24 +607,53 @@
 		\bigskip 
 		\item Can we do \structure<1>{better than ``just asking''}? \pause Turns out, \alert<2>{NO}.
 		\item ...But if action is multi-dimensional, can often find partial alignment and \structure<2>{elicit at least some information}.
+		\begin{itemize}
+			\item E.g., another dimension could be a \alert{payment}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Partial alignment in multidimensional settings}
-	\begin{exampleblock}{Example 4: Multidimensional setting}
-		A seller (principal) is asking a potential buyer (agent) about their valuation for the item.
+	\begin{exampleblock}{Example 3b: Partially aligned interests + payments}
+		\begin{center}
+			\begin{tabular}{r | c | c | c |}
+				$(v_P,v_A)$	& $\theta=l$	& $\theta=n$ 	& $\theta=h$
+				\\ \hline 
+				$a=n$ 		& $4,1$			& $2,2$			& $0,1$
+				\\ \hline
+				$a=r$		& $2,0$			& $4,1$			& $2,2$
+				\\ \hline 
+			\end{tabular}
+		\end{center}
 	\end{exampleblock}
-	
 	\begin{itemize}
-		\item $\theta \in [0,1]$ is the \structure<1>{type of the agent} (valuation)
-		\item the principal's \structure<1>{action} consists of a price \alert<1>{$p \geq 0$} and a decision \alert<1>{$k \in \{s,r\}$} of whether sell or retain item
-		\item the agent knows $\theta$, wants $k=s$ if $p$ low and $k=r$ otherwise
-		\item the principal wants the opposite
-		\pause \bigskip 
-		\item Despite opposing interests, trade \structure{can} occur (e.g., via the seller announcing some price at which they're willing to sell, and the buyer choosing whether to accept it or not).
+		\item Suppose now P chooses $a(m)$ together with payment $t(m)$ from A; payments are linearly added to/subtracted from utilities: $u_P = v_P + t$, $u_A = v_A - t$
+		\pause
+		\item Suppose P ``fines'' the agent for advising against the reform: $t(l) = 1$, $t(n) = t(h) = 0$
+		\begin{itemize}
+			\item (or, equivalently, think of rewarding the agent for advising the reform: $t(l) = 0$, $t(n)=t(h) = -1$)
+		\end{itemize}
+		\pause
+		\item Then (check!) there exists an equilibrium with truthful communication!
 	\end{itemize}
 \end{frame}
+
+
+%\begin{frame}{Partial alignment in multidimensional settings}
+%	\begin{exampleblock}{Example 4: Multidimensional setting}
+%		A seller (principal) is asking a potential buyer (agent) about their valuation for the item.
+%	\end{exampleblock}
+%	
+%	\begin{itemize}
+%		\item $\theta \in [0,1]$ is the \structure<1>{type of the agent} (valuation)
+%		\item the principal's \structure<1>{action} consists of a price \alert<1>{$p \geq 0$} and a decision \alert<1>{$k \in \{s,r\}$} of whether sell or retain item
+%		\item the agent knows $\theta$, wants $k=s$ if $p$ low and $k=r$ otherwise
+%		\item the principal wants the opposite
+%		\pause \bigskip 
+%		\item Despite opposing interests, trade \structure{can} occur (e.g., via the seller announcing some price at which they're willing to sell, and the buyer choosing whether to accept it or not).
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Takeaways}
@@ -610,11 +678,11 @@
 \end{frame}
 
 
-\appendix
-\begin{frame}[allowframebreaks]{References}
-	\bibliography{teaching}
-	\bibliographystyle{abbrvnat}
-\end{frame}
+%\appendix
+%\begin{frame}[allowframebreaks]{References}
+%	\bibliography{teaching}
+%	\bibliographystyle{abbrvnat}
+%\end{frame}
 
 
 \end{document}
