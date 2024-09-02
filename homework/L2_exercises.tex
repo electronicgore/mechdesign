@@ -364,69 +364,67 @@ per customer who rides in a car that has smell level B.
 
 
 
-\section{Judicial design}
-
-A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If he is convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has a payoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for a lighter sentence.  In particular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendant a payoff of $-r.$
-
-The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privately known probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial and be convicted with probability $1 - \theta$.
-
-Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choice function is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ means that type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargain giving him a sentence with payoff $-r$. DA thinks $\theta$ has full support on $[0,1]$.
-
-\begin{enumerate}
-	\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatible	for the defendant.
-	\item What is the set of all incentive-compatible social choice functions?
-	You can proceed in the following steps:
-	\begin{itemize}
-		\item Show that in any IC $f$ at most one plea bargain $r$ is available.
-		\item Show that $f$ must be of cutoff type, with the suspect taking the plea if $\theta < \bar{\theta}$ and going to court otherwise.
-		\item Find the value of $r$ that makes the cutoff s.c.f. $f$ incentive compatible given some cutoff type $\bar{\theta}$.
-		\item Combine all of the above to characterize the set of implementable $f$.
-	\end{itemize}
-\end{enumerate}
-
-
-\ifsolutions
-\subsection*{Solution}
-By going to trial a defendant of type $\theta$ receives (expected) utility of $-(1-\theta)$, while from accepting a plea bargain his utility is $-r$. 
-%This implies that the IC constraint is $f(\theta)=r \Rightarrow -r\geq -(1-\theta) ~\&~ \forall \theta' \neq \theta ~ f(\theta') \geq f(\theta)$.
-Fix some s.c.f. $f(\theta)$. Let $\Theta_p$ be the set of types who are offered a plea bargain $f(\theta) = r(\theta)$, and $\Theta_t$ be the set of types who are meant to go to trial: $f(\theta) = \text{trial}$ ($\Theta_t \cup \Theta_p = [0,1]$). Then the IC constraints are given by:
-\begin{align*}
-	\text{ for all } \theta \in \Theta_p: \quad&-r(\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p
-	\\
-	& \text{and}  -r(\theta) \geq -(1-\theta);
-	\\
-	\text{ for all } \theta \in \Theta_t: \quad& -(1-\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p.
-\end{align*}
-
-
-We will characterize the set of IC social choice functions by a series of claims. 
-
-\begin{itemize}
-	\item[claim 1] $f(\cdot)$ has at most one value on the real line.
-	
-	Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
-	
-	\item[claim 2] $f(\cdot)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
-		\\
-		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
-	
-	Proof: assume $\theta'>\theta , f(\theta)=T, f(\theta')=r$. By IC for $\theta$ we know that $-r\leq -(1-\theta)$. However, as $-(1-\theta')>-(1-\theta)$, this implies that $-(1-\theta')>-r$ and we don't have IC for $\theta'$.
-	
-	\item[claim 3] $r= 1-\bar{\theta}$
-	
-	Proof: $r\leq 1-\bar{\theta}$ follows directly from IC for type $\bar{\theta}$, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better off by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain, contradicting IC for that type.
-\end{itemize}
-
-These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function
-
-\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
-	
-	T & \text{if } \theta\geq\bar{\theta} \end{cases} \]
-
-is incentive compatible.
-
-%As long as the support of types has measure one, the arguments above hold. However, if there is a interval $(a,b)$ with a zero probability, then when we set $\bar{\theta}=a$ any $r\in [a-(b-a),a]$ can be used. This is the case as claim four no longer holds, and we just need to get IC for type $b$. The same argument also holds for closed or half closed intervals.
-\fi
+%\section{Judicial design}
+%
+%A suspect is in custody, accused of murder.  If he goes to trial he will either be convicted or acquitted. If he is convicted he will be sent to prison for life giving him a payoff of $-1$.  If he is acquitted he goes free and has a payoff of $0$.  The district attorney can offer plea bargains: allowing the defendant to plead guilty in return for a lighter sentence.  In particular, for any $r\in (0,1)$, the DA can offer a reduced sentence which, if accepted, would give the defendant a payoff of $-r.$
+%
+%The defendant is privately informed about his chances for acquittal at trial:  $\theta\in [0,1]$ is the defendant's privately known probability of acquittal.  If the defendant does not enter into a plea bargain with the DA he will go to trial and be convicted with probability $1 - \theta$.
+%
+%Consider the mechanism design problem where the DA is the principal and the defendant is the agent.  A social choice function is a mapping $f:[0,1] \rightarrow \left\{ \text{trial} \right\} \cup (0,1)$ where $f(\theta) = \text{trial}$ means that type $\theta$ will go to trial and $f(\theta) = r \in (0,1)$ means that type $\theta$ accepts a plea bargain giving him a sentence with payoff $-r$. DA thinks $\theta$ has full support on $[0,1]$.
+%
+%\begin{enumerate}
+%	\item Write down the inequalities that characterize whether some given social choice function $f$ is incentive-compatible	for the defendant.
+%	\item What is the set of all incentive-compatible social choice functions?
+%	You can proceed in the following steps:
+%	\begin{itemize}
+%		\item Show that in any IC $f$ at most one plea bargain $r$ is available.
+%		\item Show that $f$ must be of cutoff type, with the suspect taking the plea if $\theta < \bar{\theta}$ and going to court otherwise.
+%		\item Find the value of $r$ that makes the cutoff s.c.f. $f$ incentive compatible given some cutoff type $\bar{\theta}$.
+%		\item Combine all of the above to characterize the set of implementable $f$.
+%	\end{itemize}
+%\end{enumerate}
+%
+%
+%\ifsolutions
+%\subsection*{Solution}
+%By going to trial a defendant of type $\theta$ receives (expected) utility of $-(1-\theta)$, while from accepting a plea bargain his utility is $-r$. 
+%%This implies that the IC constraint is $f(\theta)=r \Rightarrow -r\geq -(1-\theta) ~\&~ \forall \theta' \neq \theta ~ f(\theta') \geq f(\theta)$.
+%Fix some s.c.f. $f(\theta)$. Let $\Theta_p$ be the set of types who are offered a plea bargain $f(\theta) = r(\theta)$, and $\Theta_t$ be the set of types who are meant to go to trial: $f(\theta) = \text{trial}$ ($\Theta_t \cup \Theta_p = [0,1]$). Then the IC constraints are given by:
+%\begin{align*}
+%	\text{ for all } \theta \in \Theta_p: \quad&-r(\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p
+%	\\
+%	& \text{and}  -r(\theta) \geq -(1-\theta);
+%	\\
+%	\text{ for all } \theta \in \Theta_t: \quad& -(1-\theta) \geq -r(\theta') \text{ for all } \theta' \in \Theta_p.
+%\end{align*}
+%
+%
+%We will characterize the set of IC social choice functions by a series of claims. 
+%
+%\begin{itemize}
+%	\item[claim 1] $f(\cdot)$ has at most one value on the real line.
+%	
+%	Proof: if $f(\theta_1)<f(\theta_2) ~\theta_1,\theta_2 \in [0,1]$ then a defendant of type $\theta_2$ gains higher utility by declaring $\theta_1$ (as $-f(\theta_1)>-f(\theta_2)$. This implies the mechanism is not IC for $\theta_2$.
+%	
+%	\item[claim 2] $f(\cdot)$ has a cutoff at some $\bar{\theta}$. i.e. $f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta}
+%		\\
+%		T & \text{if } \theta\geq\bar{\theta} \end{cases}$ (value at $\bar{\theta}$ is not unique)\\
+%	
+%	Proof: assume $\theta'>\theta , f(\theta)=T, f(\theta')=r$. By IC for $\theta$ we know that $-r\leq -(1-\theta)$. However, as $-(1-\theta')>-(1-\theta)$, this implies that $-(1-\theta')>-r$ and we don't have IC for $\theta'$.
+%	
+%	\item[claim 3] $r= 1-\bar{\theta}$
+%	
+%	Proof: $r\leq 1-\bar{\theta}$ follows directly from IC for type $\bar{\theta}$, while $r\geq 1-\bar{\theta}$ follows from IC of type $\bar{\theta}+\epsilon$. If type $\bar{\theta}$ were strictly better off by accepting the plea bargain, by continuity and monotonicity of benefit of trial, type $\bar{\theta}+\epsilon$ would also strictly prefer the plea bargain, contradicting IC for that type.
+%\end{itemize}
+%
+%These four claims  imply that for any $(r,\bar{\theta})$ s.t. $r= 1-\bar{\theta}$ the social choice function
+%
+%\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
+%	
+%	T & \text{if } \theta\geq\bar{\theta} \end{cases} \]
+%
+%is incentive compatible.
+%\fi
 
 
 
