@@ -26,6 +26,7 @@
 \usepackage[USenglish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
+\usepackage{multirow}
 
 
 % Margins
@@ -70,7 +71,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 2 (M1)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\instructor}{Fall 2024} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -168,9 +169,91 @@ This is an open-ended question, so many answers are possible. Below is one examp
 
 
 
+\section{Supplier Selection}
+% Narahari example 14.3, 15.1
+
+A buyer wishes to procure a certain volume of an item produced by two potential suppliers, $i \in \{1,2\}$.\footnote{For example, think of the municipality searching for concrete to build a new school, or the military selecting a producer of a new fighter jet, or a tech startup choosing a cloud compute provider.} 
+Supplier $i=1$ is known to use technology $\theta_1 = a_1$, while supplier $i=2$ uses one of two possible technologies: either (1) a superior, high-end technology $a_2$, or (2) a low-end technology $b_2$ that does not scale well. So the second supplier's type is $\theta_2 \in \{a_2, b_2\}$.
+
+The buyer can choose one of three outcomes: $x \in \{x_1, x_{12}, x_2\}$, where outcome $x_1$ means the whole volume is sourced from $i=1$, $x_2$ means the whole volume is sourced from $i=2$, and outcome $x_{12}$ means that the volume is split, so half is purchased from $i=1$, and half from $i=2$.
+The suppliers' payoffs (given their types $\theta_i$ and chosen outcome $x$) are described by the following table.
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c c|c|c|c}
+		\multicolumn{2}{c|}{$u_i(x,\theta_i)$} & $x_1$ & $x_{12}$ & $x_2$
+		\\ \hline 
+		$i=1$ & $\theta_1 = a_1$ & $100$ & $50$ & $0$
+		\\ \hline 
+		\multirow{2}{*}{$i=2$} & $\theta_2 = a_2$ & $0$ & $50$ & $100$
+		\\ 
+		& $\theta_2 = b_2$ & $0$ & $50$ & $25$
+	\end{tabular}
+\end{table}
+
+\begin{enumerate}
+	\item Describe the set of all social choice functions in this problem.
+	\item Is the following s.c.f. DSIC (dominant-strategy incentive compatible): $f(a_1,a_2) = x_{12}, f(a_1,b_2) = x_1$?
+	\item Which of the s.c.f.s that you identified in part 1 are DSIC? 
+	\item Do you think the set of BIC (Bayesian incentive compatible) social choice functions is larger than the set of DSIC s.c.f.s, or is it be the same?
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solutions}
+\begin{enumerate}
+	\item Supplier $i=1$ has known type: $\Theta_1 = \{a_1\}$. Supplier $i=2$ has two possible types: $\Theta_2 = \{a_2, b_2\}$. So type space $\Theta = \Theta_1 \times \Theta_2$ has two elements: $\Theta = \left\{ (a_1,a_2), (a_1,b_2) \right\}$.
+	A s.c.f. is a function that maps every type profile $\theta \in \Theta$ to an outcome $x \in \{x_1, x_{12}, x_2\}$. This means there is a total of $2 \cdot 3 = 6$ type profiles. They are listed in Table \ref{tab:supplier_scfs} below.
+	
+	\item Supplier $1$ has known type, and so has no freedom to report a different type. We thus need to check that for every $\theta_2 \in \{a_2, b_2\}$, supplier $2$ has no incentive to deviate to reporting a different type $\hat{\theta}_2$:
+	\begin{align*}
+		u_2\left( f(a_1, a_2), a_2 \right) &\geq u_2\left( f(a_1, b_2), a_2 \right)
+		& \iff u_2\left( x_{12}, a_2 \right) &\geq u_2\left( x_1, a_2 \right)
+		& \iff 50 & \geq 0,
+		& 
+		\\
+		u_2\left( f(a_1, b_2), b_2 \right) &\geq u_2\left( f(a_1, a_2), b_2 \right)
+		& \iff u_2\left( x_1, b_2 \right) &\geq u_2\left( x_{12}, b_2 \right)
+		& \iff 0 & \geq 50.& 
+	\end{align*}
+	The second condition is violated: when the true type is $\theta_2 = b_2$, supplier $2$ actually prefers to report $\hat{\theta}_2 = a_2$ instead of their true type. We conclude that this s.c.f. is not DSIC.
+	
+	\item Applying the test from the previous part to all possible s.c.f.s, we get the following table.
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{c|c|c}
+			\multicolumn{2}{c|}{s.c.f.} & \multirow{2}{*}{DSIC}
+			\\ \cline{1-2}
+			$f(a_1, a_2)$ & $f(a_1, b_2)$ &
+			\\ \hline 
+			$x_{1}$ & $x_{1}$ & $\checkmark$
+			\\
+			$x_{1}$ & $x_{12}$ & $\times$
+			\\
+			$x_{1}$ & $x_{2}$ & $\times$
+			\\
+			$x_{12}$ & $x_{1}$ & $\times$
+			\\
+			$x_{12}$ & $x_{12}$ & $\checkmark$
+			\\
+			$x_{12}$ & $x_{2}$ & $\times$
+			\\
+			$x_{2}$ & $x_{1}$ & $\times$
+			\\
+			$x_{2}$ & $x_{12}$ & $\checkmark$
+			\\
+			$x_{2}$ & $x_{2}$ & $\checkmark$
+		\end{tabular}
+		\caption{Different social choice functions and their implementability \label{tab:supplier_scfs}}
+	\end{table}
+	
+	\item Set of BIC s.c.f.s coincides with the set of DSIC s.c.f.s in this problem. Supplier $1$ has no choice of report, and the IC conditions for supplier $2$ are the same under DSIC and BIC implementation concepts, amounting to the first inequality in the two series of inequalities presented in the solution to part 2.
+\end{enumerate}
+\fi 
+
+
+
 \section{Screening}
 
-One application of mechanism design is to profit maximization when consumers have private information about their valuations. One example of such a problem is second-degree price discrimination that you have seen in mikro II. The following is a variation of that, known as a ``monopolistic screening'' problem (with two types) that you may have seen in game theory.
+One application of mechanism design is to profit maximization when consumers have private information about their valuations. One example of such a problem is second-degree price discrimination that you have seen in Microeconomics II. The following is a variation of that, known as a ``monopolistic screening'' problem (with two types) that you may have seen in game theory.
 
 Suppose a seller-designer offers a single product for sale that he can produce at zero cost. She offers a menu of pairs of quantities $k \in [0,1]$ and payments $t \in \mathbb{R}_+$ (for the whole amount $k$, not per unit). There is one buyer with valuation $\theta \in \{ L,H \}$ for the product, which is his private information. The seller's belief regarding $\theta$ is given by $\phi(H) = \phi$, $\phi(L)=1-\phi$. The buyer's preferences are given by $u_b(k,t,\theta) = \theta k - t$ if he buys the product and zero otherwise.
 
