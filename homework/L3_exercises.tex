@@ -69,7 +69,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 3 (M2)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\instructor}{Fall 2024} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -181,22 +181,17 @@ Calculate the resulting allocation and payments.
 			\\
 			&= \left(\sum_{j\neq i} \theta_j \right) \left[ \mathbb{I}\left\{ \sum_{j \neq i} \theta_j > 0 \right\} - \mathbb{I}\left\{ \sum_j \theta_j > 0 \right\} \right],
 		\end{align*}
-		where $\mathbb{I}\{\cdot\}$ is an indicator function (takes value $1$ if its argument is \texttt{True} and $0$ if it is \texttt{False}). In words, citizen $i$ only has a non-trivial transfer if they are pivotal in social decision:
+		where $\mathbb{I}\{\cdot\}$ is an indicator function (takes value $1$ if its argument is \texttt{True} and $0$ if it is \texttt{False}). In words, citizen $i$ only has a non-trivial transfer if they are pivotal in the social decision:
 		\begin{itemize}
-			\item $i$ must pay $\left(\sum_{j\neq i} \theta_j \right)$ to the mechanism if the project is not implemented ($k^*(\theta)=0$), but it would have been implemented without $i$ ($k^*(\theta_{-i})=1$). This can happen if $\theta_i < 0$.
+			\item $t_{i}^{VCG}(\theta) = \sum_{j\neq i} \theta_j \geq 0$ if the project is not implemented in the end ($k^*(\theta)=0$), but it would have been implemented without $i$ ($k^*(\theta_{-i})=1$). This can happen only if $\theta_i < 0$.
 			
-			\item $i$ receives a payment of $\left(\sum_{j\neq i} \theta_j \right)$ from the mechanism if the project is implemented ($k^*(\theta)=1$), but it would not have been implemented without $i$ ($k^*(\theta_{-i})=0$).
+			\item $t_{i}^{VCG}(\theta) = -\sum_{j\neq i} \theta_j \geq 0$ if the project is implemented in the end ($k^*(\theta)=1$), but it would not have been implemented without $i$ ($k^*(\theta_{-i})=0$).
 		\end{itemize}
 		
-		\item Let $U_i(\theta) \equiv u_i((k^*(\theta),t^{VCG}(\theta)),\theta)$. Bruteforcing over possible combinations of $k^*(\theta)$, $k^{-i}(\theta_{-i})$, and the sign of $\theta_i$, would lead us to the observation that if $\theta_i \leq 0$, $\sum_{j \neq i} \theta_j > 0$, and $\sum_j \theta_j > 0$, then $U_i(\theta) < 0$. Person $i$ does not have to pay anything ($t^{VCG}_i(\theta)=0$) in that case, but the project is implemented and $\theta_i < 0$. If such a type profile occurs, $i$ would wish they did not sign up for the mechanism -- so the mechanism is not ex post IR.
+		\item As mentioned in part 3 above, if $\theta_i \leq 0$, $k^*(\theta)=0$ ($\sum_j \theta_j < 0$), and $k^*(\theta_{-i})=1$ ($\sum_{j \neq i} \theta_j > 0$), then $i$ blocks the public project but has to pay for this, so $u_i\left( (k^*(\theta), t^{VCG}(\theta) ), \theta_i \right) = -t^{VCG}_i(\theta) < 0$. If such a type profile occurs, $i$ would wish they did not sign up for the mechanism -- so the mechanism is not ex post IR.
 		
 		%NOTE: this conclusion regarding BB changes if there is some cost C associated with the public good
-		\item If you try to write out the whole surplus and analyze it, you will get a big and difficult-to-analyze expression. A better way to proceed is to analyze $t_i^{VCG}(\theta)$ for each $i$ individually. In particular, $i$'s transfer can be negative only in one of the two following cases:
-		\begin{enumerate}
-			\item $\sum_{j\neq i} \theta_j < 0$, $\mathbb{I}\left\{ \sum_{j \neq i} \theta_j > 0 \right\}=1$, and $\mathbb{I}\left\{ \sum_j \theta_j > 0 \right\}=0$;
-			\item $\sum_{j\neq i} \theta_j > 0$, $\mathbb{I}\left\{ \sum_{j \neq i} \theta_j > 0 \right\}=0$, and $\mathbb{I}\left\{ \sum_j \theta_j > 0 \right\}=1$.
-		\end{enumerate}
-		You can see that the first two requirements in either case contradict one another. Therefore, $t_i^{VCG}(\theta) \geq 0$ for all $i$ and $\theta$, and thus the VCG mechanism is ex post budget balanced in this problem (but not ``exactly budget balanced'').
+		\item As also mentioned in part 3 above, if $i$ is not pivotal, then $t^{VCG}_i(\theta) = 0$. If $i$ is pivotal, then $t^{VCG}_i(\theta) \geq 0$. So the transfer to the mechanism is weakly positive for all $i$ and $\theta$, meaning $\sum_i t^{VCG}_i(\theta) \geq 0$ for all $\theta$ -- the VCG mechanism is ex post budget balanced in this problem (but not ``exactly budget balanced'', since the sum is strictly positive for some $\theta$).
 	\end{enumerate}
 \fi
 
@@ -304,6 +299,60 @@ Imagine that the two firms are able to collude by committing to a collusive “m
 	In the end, mechanism participation is only optimal for $i$ if its costs are high but the opponent's costs are even higher.
 \end{enumerate}
 \fi
+
+
+\section{Spiteful exchange}
+% VCG/gVCG simple, final 2023-2
+Carl stole a coral from Clara; Clara stole Carl's clarinet. 
+Once everything's been said and done, they are debating whether to exchange the stolen items back, $k \in \{0,1\}$. Carl's own valuation for getting back the clarinet and returning the coral is given by $\theta_1$, which is his private information. Clara's analogous valuation for returning the clarinet and recovering the coral is $\theta_2$. Both players, however, are spiteful, so they want to maximize own value and minimize the other person's value. In the end, Carl's utility function $u_1$ and Clara's $u_2$ are given by
+\begin{align*}
+	u_1(k,t,\theta) &= \theta_1 k(\theta) - \alpha \theta_2 k(\theta) - t_1(\theta),
+	\\
+	u_2(k,t,\theta) &= \theta_2 k(\theta) - \alpha \theta_1 k(\theta) - t_2(\theta),
+\end{align*}
+where $\alpha$ is the common animosity parameter, and $t_i$ represent transfers to the mechanism.
+
+Propose a welfare-maximizing mechanism (describe it fully and explain how you derived it) for each of the following cases:
+\begin{enumerate}
+	\item $\alpha=1$;
+	\item $\alpha \in (0,1)$;
+	\item $\alpha>1$.
+\end{enumerate}
+Would the resulting mechanisms be individually rational and/or budget balanced?
+
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item Welfare is given by 
+	\begin{align*}
+		v_1(k,\theta) + v_2(k,\theta) &= \theta_1 k(\theta) - \alpha \theta_2 k(\theta) + \theta_2 k(\theta) - \alpha \theta_1 k(\theta)
+		\\
+		&=(1-\alpha)(\theta_1+\theta_2) k(\theta)
+		\\
+		&=0.
+	\end{align*}
+	If $\alpha=1$, welfare does not depend on the allocation or the transfers, hence no mechanism can improve on the status quo $k=0, t_i=0$ for $i\in\{1,2\}$. This ``trivial mechanism'' is both IR and BB.
+	
+	\item If $\alpha \in (0,1)$, then welfare equals $(1-\alpha)(\theta_1+\theta_2) k(\theta)$, hence the efficient allocation rule is $k^*(\theta) = \mathbb{I} \left\{ \theta_1+\theta_2 > 0 \right\}$ (if $\theta_1+\theta_2=0$, either $k\in \{0,1\}$ can be selected). We can then use the VCG transfers to support it:
+	\begin{align*}
+		t^{VCG}_1(\theta) &= (\theta_2 - \alpha \theta_1) \cdot \left( \mathbb{I}\left\{\theta_2 - \alpha\theta_1 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 > 0\right\} \right),
+		\\
+		t^{VCG}_2(\theta) &= (\theta_1 - \alpha \theta_2) \cdot \left( \mathbb{I}\left\{\theta_1 - \alpha\theta_2 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 > 0\right\} \right).
+	\end{align*}
+	The resulting mechanism $(k^*,t^{VCG})$ would be budget balanced, but not individually rational. 
+	Another option would be to use the gVCG mechanism (that we will encounter in the weeks to come), which would be IR, but not necessarily BB.
+	
+	\item If $\alpha > 1$, then welfare equals $-(\alpha-1)(\theta_1+\theta_2) k(\theta)$, hence the efficient allocation rule is $k^*(\theta) = \mathbb{I} \left\{ \theta_1+\theta_2 < 0 \right\}$. We can again use the VCG transfers to support it:
+	\begin{align*}
+		t^{VCG}_1(\theta) &= (\theta_2 - \alpha \theta_1) \cdot \left( \mathbb{I}\left\{\theta_2 - \alpha\theta_1 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 < 0\right\} \right),
+		\\
+		t^{VCG}_2(\theta) &= (\theta_1 - \alpha \theta_2) \cdot \left( \mathbb{I}\left\{\theta_1 - \alpha\theta_2 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 < 0\right\} \right).
+	\end{align*}
+	The resulting mechanism $(k^*,t^{VCG})$ would again be budget balanced, but not individually rational. 
+\end{enumerate}
+\fi
+
 
 %%-----------------------------------------------------------------------------------------------------
 

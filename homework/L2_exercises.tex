@@ -109,7 +109,7 @@ Your mission is to frame this choice of whether SAMF should move as a mechanism 
 	\item How would you model the players' utility functions? (Give a concrete example.)
 	\item What criteria or conditions should the mechanism satisfy? 
 	\item What would be the desirable outcome/allocation rule that you would want to implement with such a mechanism? How can you check whether this rule is, in fact, implementable?
-	\item If you allowed for transfers: how would you proceed with designing transfers that support the chosen allocation rule? (You do not need to actually derive the transfers.)
+	\item If you allowed for transfers: how would you proceed with designing transfers that support the chosen allocation rule? (You do not need to actually derive the transfers. You may also want to return to this question in a few weeks, when you know more.)
 	\item How would your mechanism work in the real world, in terms of organization and logistics?\footnote{Example: ``all faculty, staff, and students must post a note on the door of their office which would contain their \texttt{report of something}; a dedicated person will walk around and enter responses in an excel sheet, which will then be used to determine the outcome''.}
 \end{enumerate}
 
@@ -151,14 +151,14 @@ This is an open-ended question, so many answers are possible. Below is one examp
 	With stakeholders it is a little more difficult, since the details of the allocation now matter. What we can do is assume that the allocation can be split into a number of aspects $l \in \{1,...,L\}$ and each $k_l$ can be represented as a number. E.g., one aspect is ``will all classes be held in the same place after the move'', another is ``if yes, will this place be S{\o}ndre campus'', another is ``will there be place for a student bar'', etc. If we take this approach, then stakeholder $i$'s type can be represented as a vector of valuations for every aspect $\theta_i = (\theta_{i,1}, \theta_{i,2}, ..., \theta_{i,L})$, and then the utility can be approximated as $u_i(x,\theta) = \sum_{l=1}^L k_l \theta_{i,l}$.
 	
 	\item We obviously want the mechanism to be incentive compatible, at least in the Bayesian sense.\footnote{Large number of players is one excuse to switch from DSIC to BIC: heuristically, the more possible type profiles $\theta_{-i}$ other players collectively have, the less important every single individual case is for $i$'s expected utility at the point where they are making a decision.}
-	Individual rationality is not an issue, once you realize that ``not responding to a survey'' is just a kind of response. While students and staff and faculty have an outside option of leaving KU and applying to another university, this is likely a costly option. You can, however, make a case for IR being a desirable condition to satisfy for future students (so they choose KU over other universities), as well as the firm that owns Kommunehospitalet (depending on how you model its utility function).
+	Individual rationality (IR) is not an issue, once you realize that ``not responding to a survey'' is just another kind of response. While students and staff and faculty have an outside option of leaving KU and applying to another university, this is likely a very costly option. You can, however, make a case for IR being a desirable condition to satisfy for future students (so they choose KU over other universities), as well as the firm that owns Kommunehospitalet (depending on how you model its utility function).
 	Finally, since transfers are not a part of the problem (except when dealing with the firm), budget balance in not a particularly relevant requirement.
 	
 	\item The simplest answer: the desired allocation rule $k^d(\theta)$ should maximize the stakeholders' welfare, i.e., the sum of utilities net of the costs borne by the university. Note that this is not the efficient allocation according to the standard definition, since it ignores the firm's well-being. You can also present various social choice arguments saying that the sum of utilities is not the best measure to use here. E.g., depending on the university's priorities, you may want to assign different weights to students' well-being versus that of the faculty.
 	
 	After calculating this allocation rule, you can realize that this problem fits the general setting (but not the quasilinear or Euclidean, since we do not allow for transfers), so you can use weak monotonicity of the outcome function/allocation rule to test for implementability. (Again, weak monotonicity for the general setting, not the weak monotonicity for the Euclidean setting, even though $k$ is a vector of numbers!)
 	
-	\item I went with a mix, allowing transfers to/from the firm, but not the stakeholders. If the firm's utility entered the objective function, we could use the (g)VCG transfers to align the firm's objective with the derired objective. However, the firm's utility is not a part of the objective function, so the VCG does not work as is. There is no set recipe for this case, but you can employ the first principles to come up with a mechanism that may not necessarily be best, but is good enough. In particular, the firm must be unable to change its transfer without also altering the allocation rule. 
+	\item I went with a mix, allowing transfers to/from the firm, but not the stakeholders. If the firm's utility entered the objective function, we could use the (g)VCG transfers (that we have not talked about yet) to align the firm's objective with the derired objective. However, the firm's utility is not a part of the objective function, so the VCG does not work as is. There is no set recipe for this case, but you can employ the first principles to come up with a mechanism that may not necessarily be best, but is good enough. In particular, the firm must be unable to change its transfer without also altering the allocation rule. 
 	
 	The simplest (but not the only!) way to achieve this is to give the firm no power over rent. E.g., the university can determine its willingness to pay for the Kommunehospitalet given stakeholders' reports, and then present the firm with a take-it-or-leave-it offer.
 	
@@ -170,9 +170,9 @@ This is an open-ended question, so many answers are possible. Below is one examp
 
 
 \section{Supplier Selection}
-% Narahari example 14.3, 15.1
+% Narahari examples 14.3, 15.1
 
-A buyer wishes to procure a certain volume of an item produced by two potential suppliers, $i \in \{1,2\}$.\footnote{For example, think of the municipality searching for concrete to build a new school, or the military selecting a producer of a new fighter jet, or a tech startup choosing a cloud compute provider.} 
+A buyer (designer) wishes to procure a certain volume of an item produced by two potential suppliers, $i \in \{1,2\}$.\footnote{For example, think of the municipality searching for concrete to build a new school, or the military selecting a producer of a new fighter jet, or a tech startup choosing a cloud compute provider.} 
 Supplier $i=1$ is known to use technology $\theta_1 = a_1$, while supplier $i=2$ uses one of two possible technologies: either (1) a superior, high-end technology $a_2$, or (2) a low-end technology $b_2$ that does not scale well. So the second supplier's type is $\theta_2 \in \{a_2, b_2\}$.
 
 The buyer can choose one of three outcomes: $x \in \{x_1, x_{12}, x_2\}$, where outcome $x_1$ means the whole volume is sourced from $i=1$, $x_2$ means the whole volume is sourced from $i=2$, and outcome $x_{12}$ means that the volume is split, so half is purchased from $i=1$, and half from $i=2$.
@@ -203,7 +203,7 @@ The suppliers' payoffs (given their types $\theta_i$ and chosen outcome $x$) are
 	\item Supplier $i=1$ has known type: $\Theta_1 = \{a_1\}$. Supplier $i=2$ has two possible types: $\Theta_2 = \{a_2, b_2\}$. So type space $\Theta = \Theta_1 \times \Theta_2$ has two elements: $\Theta = \left\{ (a_1,a_2), (a_1,b_2) \right\}$.
 	A s.c.f. is a function that maps every type profile $\theta \in \Theta$ to an outcome $x \in \{x_1, x_{12}, x_2\}$. This means there is a total of $2 \cdot 3 = 6$ type profiles. They are listed in Table \ref{tab:supplier_scfs} below.
 	
-	\item Supplier $1$ has known type, and so has no freedom to report a different type. We thus need to check that for every $\theta_2 \in \{a_2, b_2\}$, supplier $2$ has no incentive to deviate to reporting a different type $\hat{\theta}_2$:
+	\item Supplier $1$ has known type, and so has no freedom to report a different type. We thus only need to check that for every $\theta_2 \in \{a_2, b_2\}$, supplier $2$ has no incentive to deviate to reporting a different type $\hat{\theta}_2$:
 	\begin{align*}
 		u_2\left( f(a_1, a_2), a_2 \right) &\geq u_2\left( f(a_1, b_2), a_2 \right)
 		& \iff u_2\left( x_{12}, a_2 \right) &\geq u_2\left( x_1, a_2 \right)
@@ -245,7 +245,13 @@ The suppliers' payoffs (given their types $\theta_i$ and chosen outcome $x$) are
 		\caption{Different social choice functions and their implementability \label{tab:supplier_scfs}}
 	\end{table}
 	
-	\item Set of BIC s.c.f.s coincides with the set of DSIC s.c.f.s in this problem. Supplier $1$ has no choice of report, and the IC conditions for supplier $2$ are the same under DSIC and BIC implementation concepts, amounting to the first inequality in the two series of inequalities presented in the solution to part 2.
+	\item Set of BIC s.c.f.s coincides with the set of DSIC s.c.f.s in this problem. Supplier $1$ has no choice of report, and the IC conditions for supplier $2$ are the same under DSIC and BIC implementation concepts, amounting to 
+	\begin{align*}
+		u_2\left( f(a_1, a_2), a_2 \right) &\geq u_2\left( f(a_1, b_2), a_2 \right)
+		\\
+		u_2\left( f(a_1, b_2), b_2 \right) &\geq u_2\left( f(a_1, a_2), b_2 \right).
+	\end{align*}
+	And since the constraints that $f$ should satisfy to be DSIC and BIC, respectively, are the same, the set of $f$ that satisfy these constraints are also the same.
 \end{enumerate}
 \fi 
 
@@ -260,7 +266,7 @@ Suppose a seller-designer offers a single product for sale that he can produce a
 \begin{enumerate}
 	\item Explain why it is sufficient for the seller to offer a menu consisting of two items: $(k_H,t_H)$ and $(k_L,t_L)$.
 	
-	\item Write down the seller's problem of maximizing her expected profit subject to the buyer's incentive compatibility (IC) and individual rationality (IR) constraints for every $\theta$, in terms of the model primitives.
+	\item Write down the seller's problem of maximizing her expected profit subject to the buyer's incentive compatibility (IC) and individual rationality\footnote{IR constraint is a condition that ensures the buyer is willing to participate in the mechanism, as opposed to walking away. In this problem, a buyer is willing to participate in the mechanism if their expected utility from doing so is greater than the utility they get from walking away (in which case they don't get the item and don't have to pay anything).} (IR) constraints for every $\theta$, in terms of the model primitives.
 	
 	\item Derive the seller's optimal menu $((k_H^*,t_H^*), (k_L^*,t_L^*))$ by following the steps below.
 	\begin{enumerate}
@@ -513,43 +519,51 @@ per customer who rides in a car that has smell level B.
 
 
 \section{Second-price auction}
-%MWG 8.B.3 | solutions from Alessandro's questionbank
+%MWG 8.B.3 | solutions from Alessandro's questionbank | heavily rewritten
 
-There is a single item being sold via a second-price sealed bid auction. There are $i={1,...,n}$ bidders. Every bidder $i$ has a private valuation $\theta_i$, which the other players believe is distributed according to some c.d.f. $F_i(\theta_i)$. All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid $b_{(2)}$, their utility is then given by $u_i = \theta_i - b_{(2)}$. All other bidders get nothing and pay nothing, so their utility is zero.
+A seller (designer) has a single item for sale. There are $i={1,...,N}$ bidders. Every bidder $i$ has a private valuation $\theta_i$, which the other players believe is distributed according to some c.d.f. $\Phi_i(\theta_i)$. 
+Suppose for simplicity that beliefs $\Phi_i$ are such that all valuations are positive, $\theta_i > 0$, and two players can never have the same valuation: $\theta_i \neq \theta_j$.
+An allocation rule in this setting is\footnote{Here, $\varDelta(\{0,...,N\})$ denotes the set of distributions on $\{0,...,N\}$, meaning $k(\theta) = \left( k_0(\theta), ..., k_N(\theta) \right)$ with $k_i(\theta) \in [0,1]$ for all $i$ and $\theta$, and $\sum_{i=0}^N k_i(\theta) = 1$ for all $\theta$. Further, $k_0(\theta)$ denotes the probability that the seller keeps (does not sell) the item.} 
+$k: \Theta \to \varDelta(\{0,...,N\})$, where $k_i(\theta)$ denotes the probability that bidder $i$ gets the item when the reported type profile is $\theta$. A transfer rule is $t: \Theta \to \mathbb{R}^N$, where $t_i(\theta)$ denotes how much bidder $i$ must pay to the seller.
+Bidders have quasilinear utilities: $u_i(k,t,\theta) = \theta_i k_i(\theta) - t_i(\theta)$.
+
+Define the \emph{efficient} allocation rule $k^*$ as the one that maximizes the sum of bidders' utilities ignoring transfers:
+\begin{align*}
+	k^*(\theta) \in \arg \max_{k \in \varDelta(\{0,...,N\})} \left\{ \sum_{i=1}^N \theta_i k_i \right\}
+\end{align*}
 \begin{enumerate}
+	\item Calculate the efficient allocation rule.
+\end{enumerate}
+
+Now consider a specific (indirect) mechanism: a second-price sealed bid auction.
+All bidders simultaneously submit bids $b_i$ to the seller (without seeing what the others bid). The highest bidder then wins the object and pays the second-highest bid $b_{(2)}$, so their utility is given by $u_i = \theta_i - b_{(2)}$. All other bidders get nothing and pay nothing, so their utility is zero. Ties are broken randomly.
+\begin{enumerate}[resume]
 	\item Show that bidding truthfully ($b_i=\theta_i$) is a weakly dominant strategy for every bidder $i$.
 	\item Conclude that the second-price auction implements the efficient allocation rule in dominant strategies.
 \end{enumerate}
 
 \ifsolutions
 \subsection{Solution}
-\textbf{Part 1.}
-Let's prove that for any $\theta_{i}$
-and for any $b_{-i}$ bidding $b_{i}\neq \theta_{i}$ is weakly dominated.
-There are two cases:
 \begin{enumerate}
-	\item $i$ bids $b_{i}>\theta_{i}$
+	\item It is immediate from the maximization problem that the efficient allocation rule $k^*$ is such that $k^*_i(\theta) = 1$ if $\theta_i > \max_{j \neq i} \theta_j$ -- i.e., bidder $i$ has the highest valuation for the item, -- and $k^*_i(\theta) = 0$ if $\theta_i < \max_{j \neq i} \theta_j$.
+	
+	\item For any $i$, let $b_{-i}$ denote the vector of bids of bidders other than $i$ and $b^{max}_{-i}$ the highest of these bids. Let $u_i(b_i,b_{-i},\theta_i)$ denote the utility player $i$ gets from bidding $b_i$ given others' bids and own type. We want to show that
+	\begin{align} \label{eq:spa_dominance}
+		u_i(\theta_i, b_{-i}, \theta_i) \geq u_i(b_i, b_{-i}, \theta_i)
+	\end{align}
+	for all $i, b_i, b_{-i}, \theta_i$.
+	Consider the following three cases.
 	\begin{enumerate}
-		\item If there exists $b_{j}>b_{i}$ then $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$
-		\item If $b_{i}$ is the highest bid, let $b_{j}$ be the second highest.
-		If $\theta_{i}<b_{j}<b_{i}$ then $u_{i}(b_{i},b_{-i})=\theta_{i}-b_{j}<0=u_{i}(\theta_{i},b_{-i})$.
-		If $b_{j}<\theta_{i}<b_{i}$ then again $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$.
+		\item If $b^{max}_{-i} > \theta_i$, then by bidding their own valuation, bidder $i$ will lose, so $u_i(\theta_i, b_{-i}, \theta_i) = 0$. The same is true for any $b_i < b^{max}_{-i}$, so \eqref{eq:spa_dominance} holds for these bids. If instead $i$ bids $b_i > b^{max}_{-i}$, they win the item and must pay $b^{max}_{-i}$, so in this case $u_i(b_i, b_{-i}, \theta_i) = \theta_i - b^{max}_{-i} < 0$, and \eqref{eq:spa_dominance} holds again. Bidding exactly $b_i = b^{max}_{-i}$ yields the same negative utility with probability smaller than one, and utility zero otherwise, so the expected utility is negative in this case too.
+		
+		\item If $b^{max}_{-i} < \theta_i$, then by bidding their own valuation, bidder $i$ will win the item and have to pay $b^{max}_{-i}$, so $u_i(\theta_i, b_{-i}, \theta_i) = \theta_i - b^{max}_{-i} > 0$. The same is true for any $b_i > b^{max}_{-i}$, so \eqref{eq:spa_dominance} holds for these bids. If instead $i$ bids $b_i < b^{max}_{-i}$, they lose the auction, so in this case $u_i(b_i, b_{-i}, \theta_i) = 0$, and \eqref{eq:spa_dominance} holds again. Bidding exactly $b_i = b^{max}_{-i}$ yields utility $\theta_i - b^{max}_{-i}$ with probability smaller than one, and utility zero otherwise, which means \eqref{eq:spa_dominance} is satisfied.
+		
+		\item If $b^{max}_{-i} = \theta_i$, then both winning and losing yield utility zero for $i$ (since winning involves paying $b^{max}_{-i}$), hence \eqref{eq:spa_dominance} is satisfied for all $b_i$.
 	\end{enumerate}
-	\item $i$ bids $b_{i}<\theta_{i}$
-	\begin{enumerate}
-		\item If $b_{i}$ is the highest bid, then $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$
-		\item Some other $b_{j}$ is the highest bid. Then if $b_{i}<b_{j}<\theta_{i}$,
-		$u_{i}(b_{i},b_{-i})=0$ while $u_{i}(\theta_{i},b_{-i})\geq0$; in all
-		other cases $u_{i}(b_{i},b_{-i})=u_{i}(\theta_{i},b_{-i})$ 
-	\end{enumerate}
+	
+	\item From part 1, the efficient allocation rule gives the item to the bidder with the highest valuation.
+	From part 2 we know that the second-price auction has an equilibrium in (weakly) dominant strategies, in which all bidders big truthfully. It is immediate that in this equilibrium, the bidder with the highest valuation wins the item -- i.e., the SPA DS-implements the efficient allocation rule.
 \end{enumerate}
-Thus, indeed bidding the true value $\theta_{i}$ is a weakly dominant
-strategy.
-
-\textbf{Part 2.}
-The efficient allocation rule $k^*(\cdot) = (k^*_1(\cdot),...,k^*_n(\cdot))$ (where $k_i \in [0,1]$ is the probability that $i$ gets the item) is such that for every profile of valuations $v=(\theta_1,...,\theta_n)$: $k^*(v) \in \arg \max_{k(v)} \{ \sum_{i=1}^n \theta_i k_i(v) \}$. It is easy to see that the efficient allocation rule then prescribes giving the item to the bidder with the highest valuation $\theta_i$: $k^*_i(v) = \mathbb{I} \{ \theta_i > \theta_j \, \forall j \}$ (coupled with any tie-breaking rule). 
-
-From part 1 we know that the second-price auction has an equilibrium in (weakly) dominant strategies, in which all bidders big truthfully. It is immediate that in this equilibrium, the bidder with the highest valuation wins the item -- i.e., the SPA DS-implements the efficient allocation rule.
 \fi 
 
 %%-----------------------------------------------------------------------------------------------------
