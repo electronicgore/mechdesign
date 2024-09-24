@@ -26,6 +26,8 @@
 \usepackage[USenglish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
+\usepackage{subcaption}
+\captionsetup[subfigure]{subrefformat=parens,labelformat=empty}
 
 
 % Margins
@@ -70,7 +72,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 4} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\instructor}{Fall 2024} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -170,7 +172,7 @@
 		
 		Use the envelope representation of payoffs to derive the (class of) transfer rule(s) for $i$ that DS-implements $k_i$ given $\theta_{-i}$.
 		
-		\item Suppose the public prject has cost $c > 0$. Find the efficient allocation rule $k^*(\theta)$. Use your findings from the previous question to derive the (class of) transfer rule(s) for all players that implements $k^*$ in dominant strategies.
+		\item Suppose the public project has cost $c > 0$. Find the efficient allocation rule $k^*(\theta)$. Use your findings from the previous question to derive the (class of) transfer rule(s) for all players that implements $k^*$ in dominant strategies.
 		
 		\item Conclude that \emph{only} Groves' transfers can DS-implement $k^*$ in this problem.
 	\end{enumerate}
@@ -179,7 +181,7 @@
 \section*{Solution}
 
 \begin{enumerate}
-	\item ERP (for DSIC mechanisms, since we are conditioning on $\theta_{-i}$ in this problem) tells us that the following \emph{must} hold in an IC mechanism:
+	\item ERP for DSIC mechanisms tells us that the following \emph{must} hold in an IC mechanism:
 	\begin{align*}
 		U_i(\theta_i,\theta_{-i}) 
 		&= U_i(\tilde{\theta}_i, \theta_{-i}) + \int\limits_{\tilde{\theta}_i}^{\theta_i} k_i(s,\theta_{-i}) ds
@@ -188,7 +190,7 @@
 		\\
 		&= U_i(\tilde{\theta}_i, \theta_{-i}) + (\theta_i - \tilde{\theta}_i)_+
 	\end{align*}
-	where we have chosen $\tilde{\theta}_i$ as our ``anchor'' type, and the second line used the allocation rule given in the problem. The third line above uses the simplifying notation $(x)_+ \equiv x \cdot \mathbb{I}\{x > 0\}$. Plugging $U_i(\theta_i,\theta_{-i}) = \theta_i k(\theta) - t_i(\theta)$, we get the expression for the transfers:
+	where we have chosen $\tilde{\theta}_i$ as our ``anchor'' type, and the second line used the allocation rule given in the problem. The third line above uses the simplifying notation $(x)_+ \equiv x \cdot \mathbb{I}\{x > 0\} = \max \{0, x\}$. Plugging $U_i(\theta_i,\theta_{-i}) = \theta_i k(\theta) - t_i(\theta)$, we get the expression for the transfers:
 	\begin{align*}
 		t_i(\theta_i, \theta_{-i}) 
 		&= \theta_i k(\theta) - U_i(\tilde{\theta}_i, \theta_{-i}) - (\theta_i - \tilde{\theta}_i)_+
@@ -227,7 +229,7 @@
 
 
 
-\section{Implementation in auctions}
+\section{Implementation in auctions} \label{prb:implement_arb_k}
 
 Consider the auction environment with two buyers and one item for sale. Suppose that each buyer $i$ has willingness to pay $\theta_i \in [0,1].$
 \begin{enumerate}
@@ -259,34 +261,56 @@ Consider the auction environment with two buyers and one item for sale. Suppose 
 
 \begin{figure}
 	\begin{center} 
-		\begin{tikzpicture}[scale=7.5]
-			%regions
-			\filldraw[yellow, opacity=0.3] (0,0) -| (1,1) -| (0,0);
-			\filldraw[red, opacity=0.3] (0,0.88) -- (0.4,0.445) -- (1,0.79) |- (0,1) -- (0,0.88);
-			\filldraw[blue, opacity=0.3] (0.81,0) -- (0.4,0.445) -- (1,0.79) |- (0.81,0);
-			
-			% axes 
-			\draw[->] (0,0) -- (1.2,0) node[below left]{$\theta_1$};
-			\draw[->] (0,0) -- (0,1.1) node[below left]{$\theta_2$};
-			\draw (0,0) node[below left]{$0$};
-			\draw (0,1) node[left]{$1$};
-			\draw (1,0) node[below]{$1$};
-			
-			% bounding box
-			\draw[dotted] (1,0) |- (0,1);
-			
-			% two lines
-			\draw (-0.2,0.1) -- (1.2,0.9);
-			\draw (-0.2, 1.1) -- (0.9,-0.1);
-			\draw (1.2,0.8) node {$\theta_2 = a_1 \theta_1 + b_1$};
-			\draw (0.75,0.25) node {$\theta_2 = b_2 - a_2 \theta_1$};
-			
-			% special notation
-			\draw[dashdotted] (1,0.79) -- +(-1,0) node[left]{$\tilde{\theta}_2$};
-			\draw[dashdotted] (0,0.445) node[left]{$\hat{\theta}_2$} -| +(0.4,-0.445) node[below]{$\hat{\theta}_1$};
-		\end{tikzpicture}
-		\caption{an arbitrary allocation}
-		\label{fig:2}
+		\subfloat[][Panel (a): $k(\theta)$ fitting the problem]{
+			\begin{tikzpicture}[scale=5.5]
+				%regions
+				\filldraw[yellow, opacity=0.3] (0,0) -| (1,1) -| (0,0);
+				\filldraw[red, opacity=0.3] (0,0.88) -- (0.4,0.445) -- (1,0.79) |- (0,1) -- (0,0.88);
+				\filldraw[blue, opacity=0.3] (0.81,0) -- (0.4,0.445) -- (1,0.79) |- (0.81,0);
+				
+				% axes 
+				\draw[->] (0,0) -- (1.2,0) node[below left]{$\theta_1$};
+				\draw[->] (0,0) -- (0,1.1) node[below left]{$\theta_2$};
+				\draw (0,0) node[below left]{$0$};
+				\draw (0,1) node[left]{$1$};
+				\draw (1,0) node[below]{$1$};
+				
+				% bounding box
+				\draw[dotted] (1,0) |- (0,1);
+				
+				% two lines
+				\draw (-0.2,0.1) -- (1.2,0.9);
+				\draw (-0.2, 1.1) -- (0.9,-0.1);
+				\draw (1.2,0.8) node {$\theta_2 = a_1 \theta_1 + b_1$};
+				\draw (0.75,0.25) node {$\theta_2 = b_2 - a_2 \theta_1$};
+				
+				% special notation
+				\draw[dashdotted] (1,0.79) -- +(-1,0) node[left]{$\tilde{\theta}_2$};
+				\draw[dashdotted] (0,0.445) node[left]{$\hat{\theta}_2$} -| +(0.4,-0.445) node[below]{$\hat{\theta}_1$};
+			\end{tikzpicture}
+			\label{fig:2}
+		}
+		\hfill
+		\subfloat[][Panel (b): $k(\theta)$ not fitting the problem]{
+			\begin{tikzpicture}[scale=5.5]
+				\filldraw[yellow, opacity=0.3] (0,0) -| (1,1) -| (0,0);
+				\filldraw[red, opacity=0.3] (0,0.7) -- (0.25,0.45) -- (0.8,1) -| (0,0.7);
+				\filldraw[blue, opacity=0.3] (0.7,0) -- (0.45,0.25) -- (1,0.8) |- (0.7,0);
+				
+				\draw(0.2,0.2) node{$k=0$};
+				\draw(0.2,0.8) node{$k=2$};
+				\draw(0.8,0.2) node{$k=1$};
+				
+				% axes 
+				\draw[->] (0,0) -- (1.1,0) node[below left]{$\theta_1$};
+				\draw[->] (0,0) -- (0,1.1) node[below left]{$\theta_2$};
+				
+				% bounding box
+				\draw[dotted] (1,0) |- (0,1);
+			\end{tikzpicture}
+			\label{fig:3}
+		}
+		\caption{Allocation rules for Problem \ref{prb:implement_arb_k}.}
 	\end{center}
 \end{figure}
 
@@ -334,7 +358,7 @@ Finally, consider $\theta_2\leq\hat{\theta}_2$. In that case, $k_1(\cdot,\theta_
 \right.
 \]
 
-Notice that, apart from Problem 3 saying it is the case, it is clear why the mechanism is DSIC: whether the player pays or not depends on his announcement, but not how much he pays. In this sense, it is like a SPA.
+Notice that, apart from Problem 3 saying it is the case, it is clear why the mechanism is DSIC: whether the player pays or not depends on his announcement, but not how much he pays. In this sense, it is like an SPA.
 
 We can calculate the transfers for player 2 in a similar manner. Consider $\theta_1<\hat{\theta}_1$. Then, $k_2(\theta_1,\theta_2)=0$ if $\theta_2\leq b_2-a_2 \theta_1$. Then,
 
@@ -368,26 +392,6 @@ Consider the allocation depicted in Figure \ref{fig:3}, which is given by (the e
 
 This allocation is again monotone for each player ($k_i$ weakly increasing in $\theta_i$ given fixed $\theta_j$). We can construct the transfers that DSIC-implement it in the same way as we did in the main problem above (using \eqref{transfer}).
 
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[scale=7.5]
-		\filldraw[yellow, opacity=0.3] (0,0) -| (1,1) -| (0,0);
-		\filldraw[red, opacity=0.3] (0,0.7) -- (0.25,0.45) -- (0.8,1) -| (0,0.7);
-		\filldraw[blue, opacity=0.3] (0.7,0) -- (0.45,0.25) -- (1,0.8) |- (0.7,0);
-		
-		\draw(0.2,0.2) node{$k=0$};
-		\draw(0.2,0.8) node{$k=2$};
-		\draw(0.8,0.2) node{$k=1$};
-		
-		% axes 
-		\draw[->] (0,0) -- (1.1,0) node[below left]{$\theta_1$};
-		\draw[->] (0,0) -- (0,1.1) node[below left]{$\theta_2$};
-		
-		% bounding box
-		\draw[dotted] (1,0) |- (0,1);
-	\end{tikzpicture}
-	\caption{an even more arbitrary DSIC allocation} \label{fig:3}
-\end{figure}
 
 \fi
 
@@ -395,7 +399,7 @@ This allocation is again monotone for each player ($k_i$ weakly increasing in $\
 
 \section{Payoff equivalence in auctions}
 
-Consider an auction for one item and $N$ bidders with valuations $\theta_i \sim i.i.d.U[0,1]$ and quasilinear preferences. Consider three different auction formats, in which all bidders submit bids simultaneously:
+Consider an auction for one item and $N$ bidders with valuations $\theta_i \sim i.i.d.U[0,1]$ and linear preferences. Consider three different auction formats, in which all bidders submit bids simultaneously:
 \begin{itemize}
 	\item \emph{First-price sealed bid auction}, in which the highest bidder wins the item and pays their own bid. In such a format with $\theta_i \sim U[0,1]$, bidder $i$'s equilibrium bidding strategy is $b_i^{FPA} = \frac{N-1}{N} \theta_i$.
 	\item \emph{Second-price sealed bid auction}, in which the highest bidder wins and pays the second-highest bid. In such a format, it is a weakly dominant strategy for bidder $i$ to bid their valuation: $b_i^{SPA} = \theta_i$.
@@ -418,20 +422,20 @@ We use the following notation conventions, given some player $i$:
 	\\
 	\theta_{(2)} &\equiv \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j .
 \end{align*}
-(The $\theta_{(2)}$ is a somewhat weird notation, since its value depends on both the $i$'s identity and the type profile $\theta$, neither of which is reflected in the notation -- which should be more like $\theta_{(2),i}(\theta)$ or $\theta_{(2)}(\theta_{-i})$. Both of the latter options feel quite heavy though, hence we use simply $\theta_{(2)}$.)
+(The $\theta_{(2)}$ is a slightly weird piece of notation, since its value depends on both the $i$'s identity and the type profile $\theta$, neither of which is reflected in the notation -- which should be more like $\theta_{(2),i}(\theta)$ or $\theta_{(2)}(\theta_{-i})$. Both of the latter options feel quite heavy though, hence we use simply $\theta_{(2)}$.)
 
-Further, it will prove useful to derive the distribution of $\max_{i \in \{1,...,N\}} \theta_i$. Its cdf is given by $F_N(x)$ such that
+Further, it will prove useful to derive the distribution of $\max_{i \in \{1,...,N\}} \theta_i$. Its cdf is given by $\Phi_N(x)$ such that
 \begin{equation} \label{eq:auc_Fmax}
 \begin{aligned}
-	F_{N}(x) 
+	\Phi_N(x) 
 	&= \mathbb{P} \left\{ \max_{i \in \{1,...,N\}} \theta_i \leq x \right\}
+	= \prod_{j \in \{1,...,N\}} \mathbb{P} \left\{ \theta_j \leq x \right\} 
 	\\
-	&= \prod_{j \in \{1,...,N\}} \mathbb{P} \left\{ \theta_j \leq x \right\}
-	\\
-	&= x^N,
+	&= \prod_{j \in \{1,...,N\}} \Phi_j (x)
+	= x^N,
 \end{aligned}
 \end{equation}
-where the second equality follows from the independence of players' valuations, and the final equality uses $\theta_j \sim U[0,1]$. The respective pdf is then given by $\phi_{N}(x) = Nx^{N-1}$.
+for $x \in [0,1]$, where the second equality follows from the independence of players' valuations, and the final equality uses $\theta_j \sim U[0,1] \Rightarrow \Phi_j(x) = x$ for $x \in [0,1]$. The respective pdf is then given by $\phi_{N}(x) = Nx^{N-1}$.
 
 \paragraph{FPA.} 
 Given the proposed bidding strategy, the highest-valuation player wins the item. Bidder $i$'s interim expected payoff is
@@ -446,7 +450,7 @@ where the third inequality follows from the definition of $\theta_{(2)}$ and fro
 \begin{align*}
 	\bar{U}_i(\theta_i) 
 	&= \frac{\theta_i}{N} \cdot \mathbb{P} \left\{ \theta_{(2)} < \theta_i \right\}
-	= \frac{\theta_i}{N} \cdot F_{N-1} (\theta_i)
+	= \frac{\theta_i}{N} \cdot \Phi_{N-1} (\theta_i)
 	= \frac{\theta_i}{N} \cdot \theta_i^{N-1}
 	= \frac{\theta_i^N}{N}.
 \end{align*}
@@ -454,7 +458,7 @@ To show that the suggested strategy indeed constitutes an equilibrium, take some
 \begin{align*}
 	\bar{U}_i(b_i,\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \left( \theta_i - b_i \right) \cdot \mathbb{I} \left\{ b_i > \frac{N-1}{N} \theta_j, \forall j \neq i \right\} \right]
 	\\
-	&= (\theta_i - b_i) \cdot F_{N-1} \left(\frac{N b_i}{N-1} \right) = (\theta_i - b_i) \cdot \left(\frac{N b_i}{N-1} \right)^{N-1}.
+	&= (\theta_i - b_i) \cdot \Phi_{N-1} \left(\frac{N b_i}{N-1} \right) = (\theta_i - b_i) \cdot \left(\frac{N b_i}{N-1} \right)^{N-1}.
 \end{align*}
 Taking the FOC of the maximization problem and solving it for $b_i$, we get
 \begin{align*}
@@ -465,9 +469,9 @@ Taking the FOC of the maximization problem and solving it for $b_i$, we get
 \end{align*}
 as conjectured.
 
-Moving on to the designer's profit, 
+Moving on to the designer's profit: 
 \begin{align*}
-	\mathbb{E}_\theta [R] = - \mathbb{E}_\theta[t_0(\theta)]
+	\mathbb{E}_\theta [R] = \mathbb{E}_\theta[-t_0(\theta)]
 	&= \mathbb{E}_\theta \left[ \sum_{i=1}^N t_i(\theta) \right]
 	\\
 	&= \mathbb{E}_\theta \left[ \max_{i \in \{1,...,N\}} b_i(\theta_i) \right]
@@ -482,7 +486,7 @@ Moving on to the designer's profit,
 	\\
 	&= \frac{N-1}{N+1}.
 \end{align*}
-In the end, in FPA, $\bar{U}_i(\theta_i) = \frac{\theta_i^N}{N}$ and $\mathbb{E}_\theta [R] = 
+In the end, in the FPA, $\bar{U}_i(\theta_i) = \frac{\theta_i^N}{N}$ and $\mathbb{E}_\theta [R] = 
 \frac{N-1}{N+1}$.
 
 
@@ -500,7 +504,7 @@ To verify that the proposed strategy is optimal, proceed as in FPA:
 \begin{align*}
 	\bar{U}_i(b_i,\theta_i) &= \mathbb{E}_{\theta_{-i}} \left[ \theta_i \cdot \mathbb{I} \left\{ b_i > \frac{N-1}{N} \theta_j^N, \forall j \neq i \right\} - b_i \right]
 	\\
-	&= \theta_i F_{N-1} \left( \left( \frac{ N b_i}{N-1} \right)^\frac{1}{N} \right) - b_i
+	&= \theta_i \Phi_{N-1} \left( \left( \frac{ N b_i}{N-1} \right)^\frac{1}{N} \right) - b_i
 	\\
 	&= \theta_i \left( \frac{ N b_i}{N-1} \right)^\frac{N-1}{N} - b_i
 	\\ \Rightarrow
@@ -551,7 +555,7 @@ The expected revenue of the designer is given by:
 	\\
 	&= \mathbb{E}_\theta \left[ \theta_{(2)} \right].
 \end{align*}
-However, the meaning of $\theta_{(2)}$ is different here, which should ideally be reflected in the notation but isn't. In the previous cases, when we took $\theta_i$ as fixed and took expectation over $\theta_{-i}$, it was the case that simply $\theta_{(2)} = \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j$, i.e., it was the highest valuation among $N-1$ bidders. Now, though, we need to genuinely calculate the \emph{second-highest bid among $N$ bidders}. We can derive its pdf $\phi_{(2)}(x)$ as the probability, for any $x$, that exactly $N-2$ valuations are below $x$, one valuation is at $x$, and one valuation is above $x$. Since the latter two can belong to any bidder, there are a total of $N(N-1)$ permutations. In the end:
+However, the meaning of $\theta_{(2)}$ is different here, which should ideally be reflected in the notation but isn't. In the previous cases, when we took $\theta_i$ as fixed and took expectation over $\theta_{-i}$, it was the case that simply $\theta_{(2)} = \max_{j \in \{1,...,N\} \backslash \{i\}} \theta_j$, i.e., it was the highest valuation among $N-1$ bidders. Now, though, we need to genuinely calculate the \emph{second-highest bid among $N$ bidders}. We can derive its pdf $\phi_{(2)}(x)$ as the probability/density, for any $x$, that exactly $N-2$ valuations are below $x$, one valuation is at $x$, and one valuation is above $x$. Since the latter two can belong to any bidder, there are a total of $N(N-1)$ permutations. In the end:
 \begin{align*}
 	\phi_{(2)}(x) &= N (N-1) \cdot x^{N-2} \cdot 1 \cdot (1-x)
 	\\ \Rightarrow 
