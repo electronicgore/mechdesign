@@ -70,7 +70,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 5} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\instructor}{Fall 2024} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -92,94 +92,17 @@
 \end{center}
 
 
-%
-%\section{Transfers and Social choice}
-%% MWG 21.B.3
-%% social choice
-%Consider a public good provision problem, with $k \in \{0,1\}$. The society consists of $N$ agents (for simplicity suppose $N$ is odd) with Euclidean preferences and valuations $(\theta_1, ..., \theta_N)$ for the public good (where $\theta_i$ can be positive or negative). The social cost of the public good is zero.
-%
-%\begin{enumerate}
-%\item Show that a decision made via the majority voting is Pareto-optimal in the absence of transfers, but generically not Pareto-optimal if transfers are allowed.
-%\item Compare and contrast the decision yielded by the majority rule (a ``median'') with the Pareto-optimal decision rule when transfers are allowed (a ``mean'').
-%\end{enumerate}
-%
-%
-%\ifsolutions
-%\section*{Solution}
-%Let $f_M(\theta)$ denote the social choice function corresponding to the majority voting procedure, and $f_T(\theta)$ denote the Pareto-optimal alternative in the presence of transfers. Then
-%\begin{align*}
-%f_M(\theta) &= \mathbb{I} \left\{ |Y(\theta)| > |N(\theta)| \right\},
-%\\
-%\text{where } Y(\theta) &\equiv \{ i \in N | \theta_i \geq 0 \},
-%\\
-%Z(\theta) &\equiv \{ i \in N | \theta_i < 0 \}.
-%\end{align*}
-%In words, $f_M(\theta)$ selects $k=1$ if and only if there are more agents preferring alternative $k=1$ (i.e., with $\theta_i \geq 0$) than agents preferring alternative $k=0$ (i.e., with $\theta_i < 0$). To show that this is Pareto-optimal in the absence of transfers, note that the only other option is to select (for some $\theta$) the opposite alternative $k=1-f(\theta)$. This would harm all agents $i \in Y(\theta)$, hence would not be a Pareto-improvement, hence $f(\theta)$ is Pareto-optimal.\footnote{Note that by this logic, any social choice rule is Pareto-optimal in this setting as long as it satisfies unanimity.}
-%
-%On the other hand, $f_T(\theta)$ is defined to be Pareto-optimal given transfers are alloweed. It is natural to restrict $\sum_{i=1}^{N} t_i = 0$ (or $\leq 0$), since otherwise distributing more transfers is always an improvement. Given this, it is immediate that $f_T(\theta) = \mathbb{I} \{\sum_{i=1}^N \theta_i \geq 0 \}$. This is because if the other $k$ is chosen for some $\theta$, then flipping a decision and redistributing transfers is an improvement.\footnote{If $\sum_{i=1}^N \theta_i \geq 0$ and $f(\theta)=0$ then flipping the decision and increasing every $i$'s transfer by $\theta_i - \varepsilon$ (which can be a negative amount for some $i$) strictly improves all agents' utility and balances the budget for some $\varepsilon > 0$. Conversely, if $\sum_{i=1}^N \theta_i < 0$ and $f(\theta)=1$ then flipping the decision and decreasing transfers by $\theta_i + \varepsilon$ is an improvement by similar logic.}
-%
-%In other words, treating $(\theta_1,...,\theta_N)$ as a statistical sample, $f_M(\theta)$ selects $k=1$ iff the \emph{median} $\theta_i$ is positive, whereas $f_T(\theta)$ selects $k=1$ whenever the \emph{mean} of all valuations is positive. While for some distributions the two can coincide (e.g., if $\theta_i \in \{-1,1\}$), in general they do not.
-%
-%Intuitively, the majority rule $f_M$ only counts the number of people in favor of either alternative, but it does not account for the intensity of preferences. Transfers can be used to account for this intensity, reallocating utility from agents with strong preferences to agents who are close to being indifferent between the two options.
-%\fi 
-%
-%
-%
-%\section{Social choice with two alternatives}
-%	Consider a social choice problem between two alternatives in $X = \{l, r\}$ (could be a ``left-leaning policy'' and a ``right-leaning policy'').
-%	\begin{enumerate}
-%		\item What \emph{ordinal} preferences (rankings $\succsim_i$) can an individual have over $X$?
-%		\item Consider a society of two citizens, $i=1,2$ that can have any of the preferences you identified above.
-%		\begin{enumerate}
-%			\item Give an example of a social preference $\succsim$ that satisfies the three axioms from class (Full Domain, Unanimity, IIA).
-%			\item Is it dictatorial? (Note that Arrow's theorem does not apply.)
-%			\item Do there exist any other social preferences that satisfy the same requirements? Are any/all of them dictatorial?
-%		\end{enumerate}
-%		\item Now consider a society of three citizens, $i=1,2,3$. Give an example of a social preference that satisfies the three axioms (A1)-(A3) and is not dictatorial.
-%	\end{enumerate}
-%
-%\ifsolutions
-%\section*{Solution}
-%	\begin{enumerate}
-%		\item $l \succsim_i r$, $r \succsim_i l$, and $l \sim_i r$. If you restrict attention to strict rankings (as is sometimes done), then only $l \succ_i r$ and $r \succ_i l$ remain.
-%		%For simplicity, we suppose from this point onwards either that preferences are strict (so $l \sim_i r$ never occurs), or that in case $l \sim_i r$ player $i$ randomly reports one of the two weak preferences. This is not necessary, and you can do the exercise with indifferences as well.
-%		
-%		\item For convenience, encode preferences using types $\theta_i \in \{l,r\}$ so that if $\theta_i=l$ then $l \succsim_i r$ and if $\theta_i=r$ then $r \succsim_i l$. For simplicity, suppose that if $l \sim_i r$ then $i$ randomly reports one of the two weak preferences.
-%		Then all possible social preferences (ignoring indifferences) are given by the columns of the following table, where each cell indicates the socially preferred option:
-%		\begin{center}
-%		\begin{tabular}{c|c c c c c c c c c c c c c c c c|}
-%			& \multicolumn{16}{c}{$\succsim_S$ (preferred option)}
-%			\\
-%			$(\theta_1,\theta_2)$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16
-%			\\ \hline 
-%			$(l,l)$ & $l$ & $l$ & $l$ & $l$ & $r$ & $l$ & $l$ & $r$ & $l$ & $r$ & $r$ & $l$ & $r$ & $r$ & $r$ & $r$
-%			\\
-%			$(l,r)$ & $l$ & $l$ & $l$ & $r$ & $l$ & $l$ & $r$ & $l$ & $r$ & $l$ & $r$ & $r$ & $l$ & $r$ & $r$ & $r$
-%			\\
-%			$(r,l)$ & $l$ & $l$ & $r$ & $l$ & $l$ & $r$ & $l$ & $l$ & $r$ & $r$ & $l$ & $r$ & $r$ & $l$ & $r$ & $r$
-%			\\
-%			$(r,r)$ & $l$ & $r$ & $l$ & $l$ & $l$ & $r$ & $r$ & $r$ & $l$ & $l$ & $l$ & $r$ & $r$ & $r$ & $l$ & $r$
-%			\\ \hline
-%		\end{tabular}
-%		\end{center}
-%		Domain axiom (A1) can be satisfied by completing these social preferences in a non-contradictory way to cases when one of the agents reports indifference. E.g., if $l \sim_1 r$ and $l \geq_2 r$, then the resulting social preference $\succsim_S$ can be copied from either case $\theta=(l,l)$, or case $\theta=(r,l)$. 
-%		
-%		The IIA axiom (A3) has no bite in case of two alternatives, since if two profiles of individual preferences $\theta$ and $\theta'$ prescribe same rankings over alternatives for both players, then $\theta=\theta'$, so the requirement $\succsim_S(\theta)=\succsim_S(\theta')$ is satisfied trivially.
-%		 
-%		Out of the social preference rules presented in the table, only \#2,6,7 and 12 satisfy the unanimity axiom (A2), which requires that if $\theta=(l,l)$ then $l \succsim_S r$, and if $\theta=(r,r)$ then $r \succsim_S l$. You can see that \#6 and 7 are dictatorial, with player 1 and player 2 as dictators respectively. However, we also have non-dictatorial rules \#2 and 12. You can interpret them as unanimous voting with a default option: e.g., under \#2 alternative $r$ is only adopted if both players support it, and otherwise the society defaults to $l$.
-%		
-%		\item Majority voting (no need to call it pairwise, since there is only one pair of alternatives to rank) fits all the requirements. You could have come up with it on your own or you could have used the result from class -- note that with two alternatives, all individual preferences are necessarily single-peaked, with a peak at either $l$, or $r$.
-%		
-%	\end{enumerate}
-%\fi
-
-
 
 \section{Efficient public good provision 3}
 
-Consider problem 2 from L3 problem set.
+Consider the usual public project problem setup:
+There is a society of $N$ people. They must collectively decide whether to implement a public project. Let $k \in \{0,1\}$ denote the outcome of this decision: $k=1$ if project is implemented, $k=0$ otherwise. Every person $i$ has some private valuation $\theta_i \in \mathbb{R}$ for the project, positive or negative. Preferences are linear, so $i$'s utility can be written as
+$$
+u_i(x,\theta) = \theta_i k(\theta) - t_i(\theta).
+$$
+Here $x=(k,t)$ stands for some direct mechanism which prescribes outcome $k(\theta) \in \{0,1\}$ and payment profile $t(\theta)$ given profile of reports $\theta$.
 
-Assume now that players' valuations are distributed according to $\theta_i \sim U[-\hat{\theta},\hat{\theta}]$ for all $i$, and that the public project has some known social cost $c > 0$. 
+Assume now that players' valuations are independently distributed according to $\theta_i \sim U[-\hat{\theta},\hat{\theta}]$ for all $i$, and that the public project has some known social cost $c > 0$. 
 All players' outside options are zero: $\underline{U}_i(\theta_i)=0$.
 
 Derive the gVCG transfers.
@@ -359,99 +282,65 @@ Hence, we have now shown that the gVCG mechanism is not budget balanced (ex ante
 
 
 
-\section{Auction with non-trivial seller valuation}
-%Note: zero o.o. for seller confuses students. This is on purpose.
-%Note: there is a clash of notation, with vj denoting valuations and not real utilities as in lectures.
-A seller, $i=1$, possesses a single indivisible object for which there are two potential buyers. Each buyer $i \in \{2,3\}$ has value $v_i$ for the good and the seller has an opportunity cost $c$ from selling the good.  Utility is quasi-linear in money, so if buyer $i$ purchases the good at price $p$, his final utility is $v_i-p$, and the seller's utility is $p-c$. Each agent has zero utility if he does not trade and zero is therefore also the reservation utility of each agent.
+\section{Divine intervention}
+%midterm 2020 p2
+%BIC mech, gVCG, optimal mechanism
 
-Each $v_i$ is drawn independently from the same distribution $F$ which has full support on $[0,\bar v]$, and $c$ is drawn independently from a distribution $G$ which has support $[0,\bar c]$.  Assume that $F$ and $G$ satisfy all of the conditions necessary for the revenue
-equivalence theorem and our characterization results in class.
+The year is 854 AD. The place is Denmark. The reigning king Horik is challenged by his nephew Guttorm for the claim to the kingdom. Both know that a grand battle between them in inevitable, and both are praying to Odin and the rest of {\AE}sir to tilt the outcome of this battle in their favor. You are to assume the role of Odin and to decide the outcome of the battle.
 
-\medskip
-A mechanism consists of two collections of functions, $q(c, v_2, v_3)$ and $t(c, v_2, v_3)$, where $q(c, v_2, v_3)$ is a probability distribution that prescribes the probabilities that the good will be allocated to each of the three agents, and $t(c, v_2, v_3)$ gives the list of transfers paid by each of the three agents.
-Say that a mechanism is \emph{feasible} if it is Bayesian incentive compatible, interim individually rational, and ex ante exactly budget-balanced.
-%TODO: using Borgers' prop 3.6, can strengthen this back to ex post BB. This also makes more sense in the context of the problem formulation which implies the same prices for buyer and seller.
+In particular, you are a mechanism designer dealing with two players $i=H,G$. Every player $i$ has a private type $\theta_i \sim U[0,1]$ ($\theta_H$ and $\theta_G$ are indepedent). An outcome is given by $x=(k,t)$, where $k=(k_H,k_G)$ is an allocation such that $k_i \in [-1,1]$ and $k_H + k_G \leq 0$, and $t$ is a vector of transfers. Players' payoffs are given by $u_i(x,\theta) = k_i \theta_i - t_i$. The outside options are normalized to zero.
+
+In our story, allocations represent who wins the battle: e.g., $(k_H,k_G)=(1,-1)$ means Horik wins while Guttorm loses and is killed in battle. Restriction $k_H + k_G \leq 0$ means that they cannot both win, but can both lose. Transfer $t_i$ need not mean money, but rather (the negative of) favor that the gods will show to $i$ outside of battle, in life or afterlife.
+Horik's and Guttorm's types represent their paltriness. Higher $\theta_i$ means that $i$ would very much prefer to become a king and is very afraid of death. Low $\theta_i$ means that $i$ values honorable death in combat almost as highly as reign over the realm. Finally, the ``outside option'' represents fleeing from the battle, retaining life but losing the kingdom. The level of ``favor'' $t_i$ in this case is normalized to zero (i.e., favor is measured relative to this scenario).
+
+Suppose that Odin \& the co-gods love a good battle (so do not want players to flee), but are otherwise benevolent and do not care about favor. They thus decide to use a generalized VCG mechanism to determine the outcome.
 
 \begin{enumerate}
-	\item What is the efficient allocation rule?
-	
-	\item Assume $\bar c = \bar v$.  Show that there does not exist a feasible mechanism that implements the efficient allocation rule. \emph{Hint: use gVCG and its properties.}
-	
-	\item Now assume $\bar v > \bar c$.  Show that the following is a sufficient condition for the existence of a feasible mechanism that implements the efficient allocation rule:
-	$$ \mathbb{E}(\min\{v_2, v_3\}) \geq \bar c. $$
-	\item Again assume $\bar{v} > \bar{c}$, but now suppose that there are $N$ potential buyers with values drawn independently from $F$.  Prove that for any $F$ and $G$ there is a $\bar N$ such that whenever $N > \bar{N}$  there exists a feasible mechanism that
-	implements the efficient allocation rule.
+	\item Find the efficient allocation rule $k^*(\theta) = \arg \max_k \{u_H(k,\theta) + u_G(k,\theta)\}$.
+	\item Find the least charitable types $\tilde{\theta}_i$.
+	\item Calculate the gVCG transfer rule $t^{gVCG}(\theta)$ that supports the efficient allocation rule.
 \end{enumerate}
 
 
 \ifsolutions
 \section*{Solution}
-Note: this problem has not been brought in conformance with the notation we use in class (allocations are $q$ instead of $k$, valuations are $v_i$ instead of $\theta_i$, conflicting with our notation for real utilities $v_i(k,\theta_i)$, it mentions both prices $p$ and transfers $t$...) This adds an extra layer of complexity that tests your skills in parsing text and context, rather than notation.
-
-This solution uses the following notation: $a \vee b \equiv \max\{a,b\}$; $a \wedge b \equiv \min \{a,b\}$.
-\begin{enumerate}%[\label=(\alph{enumi})]
-	\item The efficient allocations must satisfy
+\begin{enumerate}
+	\item The efficient allocation is obviously (you may have a different tie-breaking
+	rule)
 	\begin{align*}
-		q(c, v_2, v_3) = 
-		\begin{cases}
-			(1,0,0) &\text{ if } c > v_2, v_3, \\
-			(0,1,0) &\text{ if } v_2 > c,v_3, \\
-			(0,0,1) &\text{ if } v_3 > c,v_2.
-		\end{cases}
-	\end{align*}
-	Ties can be broken arbitrarily.
-	
-	\item Let's use the Krishna--Perry theorem. The least charitable types are $0$ for the buyers and $\bar{c}$ for the seller (see problem 3).\footnote{This problem is more complex due to two buyers instead of one, but the idea is the same. Further, while you cannot compute the expectation $\mathbb{E}_{\theta_{-i}} [\sum v_i(k^*(\theta),\theta_i)]$ in this problem -- since distributions $F$ and $G$ are not specified, -- you can still see that, e.g., when you try to compute B2's LCT $\tilde{v}_2 \in \arg \min_{v_2} \left\{ \mathbb{E}_{c,v_3} \left[ \max\{c,v_2,v_3\} \right] \right\}$ the expression inside the expectation is weakly decreasing in $v_2$ for all $c,v_3$, hence the whole expectation is also weakly decreasing, so it is minimized by $v_2 = 0$.} 
-	The gVCG mechanism has the following transfers:
-	%
-	\begin{itemize}
-		
-		\item when no trade occurs, there are no transfers
-		
-		\item when trade occurs between the seller and buyer $i$, $i$ pays $v_{-i} \vee c$, the seller receives $v_i \wedge \bar{c}$, and $-i$ has transfer zero.
-		%\footnote{This solution uses the following notation: $a \vee b \equiv \max \{a,b\}$ and $a \wedge b \equiv \min \{a,b\}$.}
-		
-	\end{itemize}
-	
-	%When $c=0$ and $v_i > v_{-i}$, trade occurs, with the buyer paying $v_{-i} < \bar{v} =\bar{c}$ and the seller receiving $\bar{c}$. So there is a budget deficit.
-	If $\bar{v}=\bar{c}$ then $v_i \wedge \bar{c} = v_i$, so this mechanism yields weakly negative revenue: %assuming wlog that $v_i > v_{-i}$, we get
-	\begin{align*}
-		\sum_i t_i (\theta) = \begin{cases}
-			0 &\text{ if } c > v_2, v_3 \\
-			v_3 \vee c - v_2 < 0 &\text{ if } v_2 > c,v_3 \\
-			v_2 \vee c - v_3 < 0 &\text{ if } v_3 > c,v_2.
+		k^{*}(\theta) & =\begin{cases}
+			(1,-1) & \text{ if }\theta_{H}>\theta_{G};\\
+			(0, 0) & \text{ if }\theta_{H}=\theta_{G};\\
+			(-1,1) & \text{ if }\theta_{H}<\theta_{G}.
 		\end{cases}
 	\end{align*}
 	
-	Since gVCG mechanism has maximal revenue among efficient, BIC and IIR mechanisms, this implies that any other mechanism that is efficient, BIC, and interim IR will run an expected deficit. If there is no ex ante BB mechanism then there is no ex post BB mechanism either (deficit in expectation means that there must be deficit for at least some type realizations). Therefore, no feasible mechanism exists in this case.
+	\item The least charitable type is 
+	\begin{align*}
+		\tilde{\theta}_{i} & \equiv \arg\min_{\theta_{i}} \mathbb{E}_{\theta_{-i}} \left\{ \theta_{H} k^*_{H}(\theta) + \theta_{G} k^*_{G}(\theta) - 0 \right\} 
+		\\
+		& =\arg\min_{\theta_{i}}\mathbb{E}_{\theta_{j}} \left\{  \left(\theta_{i}-\theta_{j}\right) k_{i}^{*} (\theta) \right\} 
+		\\
+		& =0.5
+	\end{align*}
 	
-	
-	\item Let's use the same mechanism. The budget surplus is zero conditional on no trade, and
-	%
-	\begin{equation*}
-		[ v_2 \wedge v_3 ] \vee c - [ v_2 \vee v_3 ] \wedge \bar{c}
-		\geq [ v_2 \wedge v_3 ] - \bar{c} 
-	\end{equation*}
-	%
-	conditional on trade. So the expected budget surplus is bounded below by
-	%
-	\begin{equation*}
-		\mathbb{E}( [ v_2 \wedge v_3 ] - \bar{c} | v_2 \vee v_3 \geq c )
-		\geq \mathbb{E}( [ v_2 \wedge v_3 ] - \bar{c} )
-		\geq 0 .
-	\end{equation*}
-	
-	So the gVCG mechanism runs an expected budget surplus, and we can make the mechanism exactly ex ante budget balanced by distributing the expected revenue among players.
-	
-	
-	\item By analogous reasoning, the expected budget surplus is bounded below by
-	\begin{equation*}
-		\mathbb{E}\left( v^{(2)} - \bar{c} \right),
-	\end{equation*}
-	where $v^{(2)}$ is the second order statistic (the second-highest value). Since $v \in (\bar{c},\bar{v})$ with positive probability under $F$, the expected value $\mathbb{E} v^{(2)}$ can be made arbitrarily close to $\bar{v}$ by taking $N$ large enough; in particular, $N$ can be chosen large enough to make it higher than $\bar{c}$.
+	\item The gVCG transfer rule for $i$ is
+	\begin{align*}
+		t^{gVCG}_i(\theta_i,\theta_{-i}) &= \theta_j k_j^*(\tilde{\theta}_i,\theta_{j}) + \tilde{\theta}_i k_i^*(\tilde{\theta}_i,\theta_{j}) - \theta_j k_j^*({\theta}_i,\theta_{j}) - \underline{U}_i (\tilde{\theta}_i)
+		\\
+		&= |0.5-\theta_j| - \theta_j \cdot \text{sgn}(\theta_j - \theta_i)
+		\\
+		&= \begin{cases}
+			|0.5-\theta_j| - \theta_j & \text{ if } \theta_i < \theta_j,
+			\\
+			|0.5-\theta_j| 			& \text{ if } \theta_j = \theta_i,
+			\\
+			|0.5-\theta_j| + \theta_j & \text{ if } \theta_i > \theta_j.
+		\end{cases}
+	\end{align*}
+	I.e., if $\theta_j < 0.5$ then $i$ pays $0.5$ if he wins and $0.5-2\theta_j \gtrless 0$ if he loses; while if $\theta_j > 0.5$ then $i$ pays $2\theta_j - 0.5 > 0$ if he wins and receives $0.5$ if he loses.
 \end{enumerate}
-\fi
-
+\fi 
 
 
 %%-----------------------------------------------------------------------------------------------------
