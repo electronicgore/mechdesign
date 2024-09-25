@@ -111,7 +111,7 @@
 		\mathbb{E}_{\theta_{-i}}\left[ \hat{\theta}_{i} k(\hat{\theta}_i,\theta_{-i}) - t(\hat{\theta}_i,\theta_{-i}) \right].
 		\label{eq:IC2}
 	\end{align}
-	Add and subtract $\hat{\theta}_{i} k(\hat{\theta}_i,\theta_{-i})$ from the right-hand side of \eqref{eq:IC1} to obtain
+	Add and subtract $\mathbb{E}_{\theta_{-i}}\left[ \hat{\theta}_{i} k(\hat{\theta}_i,\theta_{-i}) \right]$ from the right-hand side of \eqref{eq:IC1} to obtain
 	\begin{align}
 		\bar{U}_i(\theta_i) \geq \bar{U}_i(\hat{\theta}_i) + (\theta_i - \hat{\theta}_i) \mathbb{E}_{\theta_{-i}}\left[ k(\hat{\theta}_i,\theta_{-i}) \right], \label{eq:IC1b}
 	\end{align}
@@ -168,7 +168,7 @@
 	Here $x=(k,t)$ stands for some direct mechanism which prescribes outcome $k(\theta) \in \{0,1\}$ and payment profile $t(\theta)$ given profile of reports $\theta$.
 	
 	\begin{enumerate}
-		\item Fix an arbitrary $\theta_{-i}$ and suppose that we want to implement (in dominant strategies) an allocation rule that satisfies $k_i(\theta_i, \theta_{-i}) = \mathbb{I}\{\theta_i \geq \tilde{\theta}_i \}$ for some $\tilde{\theta}_i$ (where $\mathbb{I}\{\cdot\}$ is an indicator function).
+		\item Fix an arbitrary $i$ and $\theta_{-i}$ and suppose that we want to implement (in dominant strategies) an allocation rule that satisfies $k_i(\theta_i, \theta_{-i}) = \mathbb{I}\{\theta_i \geq \tilde{\theta}_i \}$ for some $\tilde{\theta}_i$ (where $\mathbb{I}\{\cdot\}$ is an indicator function).
 		
 		Use the envelope representation of payoffs to derive the (class of) transfer rule(s) for $i$ that DS-implements $k_i$ given $\theta_{-i}$.
 		
