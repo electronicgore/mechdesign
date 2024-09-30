@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Fall 2023}
+	Fall 2024}
 
 
 \begin{document}
@@ -137,7 +137,7 @@ Lessons:
 	\begin{itemize}
 		\item Nothing changes from when $k$ was quantity, since everyone is risk-neutral.
 	\end{itemize}
-	\item Buyer has \structure{valuation $\theta \sim F[0,\bar{\theta}]$}, private info.
+	\item Buyer has \structure{valuation $\theta \sim \Phi[0,\bar{\theta}]$}, private info.
 	\item Buyer's preferences Euclidean: \structure{$u_b = \theta k - t$}.
 	\item Buyer's outside option yields utility zero: $\underline{U}_b(\theta)=0$.
 \end{itemize}
@@ -157,8 +157,8 @@ Solution approach
 			= \mathbb{E}_\theta \left[ \theta k(\theta) - U_b(\theta) \right]
 			\\ \visible<+->{ &= \mathbb{E}_\theta \left[ \theta k(\theta) - \int_0^\theta k(s) ds \right] - U_b(0) }
 			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} \int_0^\theta k(s) \phi(\theta) ds d\theta} - U_b(0) }
-			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta} - U_b(0) }
-			\\ \visible<+->{ &= \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
+			\\ \visible<+->{ &= \int_0^{\bar{\theta}} \theta k(\theta) \phi(\theta) d\theta - \structure{\int_0^{\bar{\theta}} (1-\Phi(\theta)) k(\theta) d\theta} - U_b(0) }
+			\\ \visible<+->{ &= \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-\Phi(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta - U_b(0) }
 	\end{align*}	}
 \end{enumerate}
 \end{frame}
@@ -167,16 +167,16 @@ Solution approach
 \begin{frame}{Optimal Mechanism: integration by parts}
 Integration by parts under the microscope:
 \begin{align*}
-	\int_0^{\bar{\theta}} \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[F(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^{\bar{\theta}} - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
-	\\ &= \int_0^{\bar{\theta}} k(\theta) d\theta - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
-	\\ &= \int_0^{\bar{\theta}} (1-F(\theta)) k(\theta) d\theta
+	\int_0^{\bar{\theta}} \left( \int_0^\theta k(s) ds \right) \phi(\theta) d\theta &= \left. \left[\Phi(\theta) \int_0^\theta k(s) ds \right] \right|_{\theta=0}^{\bar{\theta}} - \int_0^{\bar{\theta}} F(\theta) k(\theta) d\theta
+	\\ &= \int_0^{\bar{\theta}} k(\theta) d\theta - \int_0^{\bar{\theta}} \Phi(\theta) k(\theta) d\theta
+	\\ &= \int_0^{\bar{\theta}} (1-\Phi(\theta)) k(\theta) d\theta
 \end{align*}
 \end{frame}
 
 
 \begin{frame}{Optimal Mechanism: pinning $U_b(0)$}
 \begin{equation*}
-	\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1-2>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
+	\mathbb{E} U_s = \mathbb{E}_\theta [ t(\theta) ] = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-\Phi(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta \only<1-2>{- U_b(0)} %\only<2->{\soutred{- U_b(0)}} 
 \end{equation*}
 \begin{itemize}
 	\item To choose: allocation rule $k(\theta)$ and $U_b(0)$ (pins transfers).
@@ -195,12 +195,12 @@ Integration by parts under the microscope:
 
 \begin{frame}{Optimal Mechanism: optimal $k$}
 \begin{equation*}
-	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+	\mathbb{E} U_s = \int_0^{\bar{\theta}} k(\theta) \left( \theta - \frac{1-\Phi(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
 \end{equation*}
 \begin{itemize}
 	\item What do with $k$?
 	\begin{itemize}[<+->]
-		\item Define \structure{virtual surplus} $VS(\theta) := \theta - \frac{1-F(\theta)}{\phi(\theta)}$.
+		\item Define \structure{virtual surplus} $VS(\theta) := \theta - \frac{1-\Phi(\theta)}{\phi(\theta)}$.
 		\item Pointwise maximization: 
 		$k(\theta) = \begin{cases}
 			1 & \text{ if } VS(\theta) \geq 0;
@@ -219,9 +219,9 @@ Integration by parts under the microscope:
 	\begin{itemize}
 		\item It reflects \structure{information rents} we have to pay to high types to incentivize them to reveal type honestly.
 	\end{itemize}
-	\item Sufficient for increasing $VS(\theta)$ is \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-F(\theta)}$. \\ 
-	The assumption we usually live with; need suitable distribution $F(\theta)$.
-	\item What do if ``unlucky'' and $F(\theta)$ is such that VS is sometimes decreasing?
+	\item Sufficient for increasing $VS(\theta)$ is \structure{increasing hazard rate} $\frac{\phi(\theta)}{1-\Phi(\theta)}$. \\ 
+	The assumption we usually live with; need suitable distribution $\Phi(\theta)$.
+	\item What do if ``unlucky'' and $\Phi(\theta)$ is such that VS is sometimes decreasing?
 	\begin{itemize}
 		\item ``\structure{Ironing}'': find monotone $k(\theta)$ that is ``closest'' to the unconstrained optimum.
 		\item E.g. if VS is globally decreasing then some constant $k$ is optimal.
@@ -237,9 +237,9 @@ Integration by parts under the microscope:
 		\item With general $v$ you will not get a nice decomposition $k \cdot VS$ in the integral.
 		\item But you can still obtain something like
 		\begin{equation*}
-			\int_0^{\bar{\theta}} \left( v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-F(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
+			\int_0^{\bar{\theta}} \left( v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-\Phi(\theta)}{\phi(\theta)} \right) \phi(\theta) d\theta
 		\end{equation*}
-		and define $VS(\theta) = v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-F(\theta)}{\phi(\theta)}$ (note it's slightly different from how we defined $VS$ in the linear case)
+		and define $VS(\theta) = v(k(\theta),\theta) - \frac{\partial v(k(\theta),\theta)}{\partial \theta} \cdot \frac{1-\Phi(\theta)}{\phi(\theta)}$ (note it's slightly different from how we defined $VS$ in the linear case)
 		\item And you can still find the optimal $k$ by maximizing this virtual surplus (and it still has to be monotone)
 	\end{itemize}
 \end{frame}
@@ -265,7 +265,7 @@ Integration by parts under the microscope:
 \begin{frame}{Optimal Mechanism: Example}
 \begin{itemize}[<+->]
 	\item Derive the optimal mechanism when $\theta \sim U[0,1]$.
-	\item $VS(\theta) = \theta - \frac{1-F(\theta)}{\phi(\theta)} = 2 \theta - 1$,
+	\item $VS(\theta) = \theta - \frac{1-\Phi(\theta)}{\phi(\theta)} = 2 \theta - 1$,
 	\item hence optimal $k(\theta) = \mathbb{I} \{\theta \geq 0.5 \}$. Payments?
 	\item $U_b (\theta) = U_b(0) + \int_0^\theta k(\theta) d\theta = \max \{\theta - 0.5,\,0\}$,
 	\item so $t(\theta) = 0.5 \cdot \mathbb{I} \{\theta \geq 0.5 \}$. Fixed price is optimal!
@@ -311,7 +311,7 @@ Integration by parts under the microscope:
 \begin{frame}{Setting 3: many buyers, interval of types}
 \begin{itemize}
 	\item Designer/seller has one indivisible item for sale. Chooses allocation $k(\theta) \in \varDelta(N)$ and payment profile $t(\theta) \in \mathbb{R}^N$ given report profile $\theta$.
-	\item Buyers $i \in \{1,...,N\}$ have \structure{valuations $\theta_i \sim \text{i.i.d.} F[0,\bar{\theta}_i]$}, private info.
+	\item Buyers $i \in \{1,...,N\}$ have \structure{valuations $\theta_i \sim \text{i.i.d.} \Phi[0,\bar{\theta}_i]$}, private info.
 	\begin{itemize}
 		\item Independence of $\theta_i$ is important, since we rely on revenue equivalence / ERP
 	\end{itemize}
@@ -361,7 +361,7 @@ Integration by parts under the microscope:
 	\\ &= \sum_i \mathbb{E}_{\theta} \left[ \theta_i k_i(\theta) - U_i(\theta) \right]
 	\\ &= \sum_i \mathbb{E}_{\theta_i} \left[ \theta_i \bar{k}_i(\theta_i) - \bar{U}_i(\theta_i) \right]
 	\\  &= ...
-	\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \left[ \bar{k}_i(\theta_i) \left( \theta_i - \frac{1-F_i(\theta_i)}{\phi_i(\theta_i)} \right) \right] - \bar{U}_i(0)\right]
+	\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \left[ \bar{k}_i(\theta_i) \left( \theta_i - \frac{1-\Phi_i(\theta_i)}{\phi_i(\theta_i)} \right) \right] - \bar{U}_i(0)\right]
 	\\ &= \sum_i \left[ \mathbb{E}_{\theta_i} \bar{k}_i(\theta_i) \alert{VS_i(\theta_i)} - \bar{U}_i(0) \right]
 \end{align*}
 \end{frame}
