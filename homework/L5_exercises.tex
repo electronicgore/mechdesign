@@ -213,42 +213,28 @@ At this point you might think that this is because you need to compute $\tilde{t
 
 \section{Myerson-Satterthwaite theorem}
 
-Consider the \textbf{bilateral trade} problem discussed in class: one buyer, one seller, one item. The seller's valuation for the item is given by his private type $\theta_S \sim U[0,1]$, and the buyer's valuation is given by his private type $\theta_B \sim U[0,1]$, independent of $\theta_S$. The outside options are given by $\underline{U}_S({\theta}_S)={\theta}_S$ and $\underline{U}_B({\theta}_B)=0$ respectively. The utilities of the two players are Euclidean and are given by:
+Consider the \textbf{bilateral trade} problem discussed in class: the designer would like to implement the efficient allocation rule in a market consisting of one buyer and one seller, who are trading one item. The seller's valuation for the item is given by his private type $\theta_S \sim U[0,1]$, and the buyer's valuation is given by his private type $\theta_B \sim U[0,1]$, independent of $\theta_S$. The outside options are given by $\underline{U}_S({\theta}_S)={\theta}_S$ and $\underline{U}_B({\theta}_B)=0$ respectively. The utilities of the two players are Euclidean and are given by:
 \begin{align*}
-	u_S &= v(k,\theta_S)-t_S(\theta)=\theta_S (1-k)-t_S(\theta)
+	u_S(x,\theta) &= \theta_S (1-k(\theta)) - t_S(\theta)
 	\\
-	u_B &= v(k,\theta_B)-t_B(\theta)=\theta_B k-t_B(\theta)
+	u_B(x,\theta) &= \theta_B k(\theta) - t_B(\theta)
 \end{align*}
-where $k(\theta) \in [0,1]$ is the probability of trade given type profile $\theta$. The designer would like to create an efficient market for these players (i.e., implement the efficient allocation rule)
+where $k(\theta) \in [0,1]$ is the probability of trade given type profile $\theta$.
 
 Derive the gVCG transfers for this problem. Show that the resulting mechanism is not ex ante budget balanced (not even weakly).
 
 
 \ifsolutions
 \section*{Solution}
-It is straightforward to see that the efficient allocation rule $k^*$ is given by:
+It is straightforward to see that the efficient allocation rule $k^*(\theta)$ is given by:
 \begin{align*}
-	k^*= \begin{cases}
+	k^*(\theta)= \begin{cases}
 		1 & \text{ if } \theta_S \leq \theta_B \\ 
 		0 & \text{ if } \theta_S > \theta_B
 	\end{cases}
 \end{align*}
-Our next step is to construct the gVCG transfers that implement the efficient allocation. They are given by:
-\begin{align*}
-	t_S^{gVCG} = v_B(k^*(\tilde{\theta}_S,\theta_B),\theta_B) + v_S(k^*(\tilde{\theta}_S,\theta_B),\tilde{\theta}_S) - \\
-	-v_B(k^*(\theta_S,\theta_B),\theta_B) - \underline{U}_S(\tilde{\theta}_S)
-	\\
-	t_B^{gVCG} = v_S(k^*(\tilde{\theta}_B,\theta_S),\theta_S) + v_B(k^*(\tilde{\theta}_B,\theta_S),\tilde{\theta}_B) - \\
-	-v_S(k^*(\theta_B,\theta_S),\theta_S) - \underline{U}_B(\tilde{\theta}_B)
-\end{align*}
-Noticing that $v_B(k^*(\theta))+v_S(k^*(\theta)) = \max \{\theta_B,\theta_S\}$ and plugging in the efficient allocation $k^*$ and the outside options $\underline{U}_i$, we get
-\begin{align*}
-	t_S^{gVCG} &= \max\{\tilde{\theta}_S,\theta_B\} - \theta_B k^*(\theta_S,\theta_B) - \tilde{\theta}_S
-	\\
-	t_B^{gVCG} &= \max\{\tilde{\theta}_B,\theta_S\} - \theta_S \left(1 - k^*(\theta_S,\theta_B)\right)
-\end{align*}
 
-The least charitable types $\tilde{\theta}_i$ of each player are defined as:
+The least charitable types $\tilde{\theta}_i$ of each player are given by:
 \begin{align*}
 	\tilde{\theta}_i &\in \arg \min_{\theta_i \in \Theta_i} \left\{ \mathbb{E}_{\theta_{-i}} \left[ v_B (k^*(\theta_i,\theta_{-i}),\theta_j) + v_S (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right] \right\}
 	\\
@@ -262,21 +248,37 @@ The least charitable types $\tilde{\theta}_i$ of each player are defined as:
 	\\
 	\tilde{\theta}_S &\in \arg \min_{\theta_S \in [0,1]} \left\{ \mathbb{E}_{\theta_B} \left[ \max\{\theta_B,\theta_S\} - \theta_S \right] \right\} = \arg \min_{\theta_S \in [0,1]} \left\{ \frac{1}{2} + \frac{\theta_S^2}{2} - \theta_S \right\} = \{1\}.
 \end{align*}
-So in the end we have $\tilde{\theta}_B = 0$, $\tilde{\theta}_S = 1$. Plugging these into the respective expressions for transfers, we get the following (because $\max\{\tilde{\theta}_S,\theta_B\} = \max\{1,\theta_B\} = 1$, and $\max\{\tilde{\theta}_B,\theta_S\} = \max\{0,\theta_S\} = \theta_S$):
+So in the end we have $\tilde{\theta}_B = 0$, $\tilde{\theta}_S = 1$. 
+
+Our next step is to construct the gVCG transfers that implement the efficient allocation. They are given by:
 \begin{align*}
-	t_S^{gVCG} &= - \theta_B k^*(\theta_S,\theta_B)
+	t_S^{gVCG}(\theta) = v_B(k^*(\tilde{\theta}_S,\theta_B),\theta_B) + v_S(k^*(\tilde{\theta}_S,\theta_B),\tilde{\theta}_S) - \\
+	-v_B(k^*(\theta_S,\theta_B),\theta_B) - \underline{U}_S(\tilde{\theta}_S)
 	\\
-	t_B^{gVCG} &= \theta_S k^*(\theta_S,\theta_B)
+	t_B^{gVCG}(\theta) = v_S(k^*(\tilde{\theta}_B,\theta_S),\theta_S) + v_B(k^*(\tilde{\theta}_B,\theta_S),\tilde{\theta}_B) - \\
+	-v_S(k^*(\theta_B,\theta_S),\theta_S) - \underline{U}_B(\tilde{\theta}_B)
 \end{align*}
-Recall that BB (budget balance) is defined as $t_S+t_B\geq0$. The sum of gVCG transfers is:
+Noticing that $v_B(k^*(\theta))+v_S(k^*(\theta)) = \max \{\theta_B,\theta_S\}$ and plugging in the efficient allocation $k^*$ and the outside options $\underline{U}_i$, we get
 \begin{align*}
-	t_S+t_B= \begin{cases}
+	t_S^{gVCG}(\theta) &= \max\{\tilde{\theta}_S,\theta_B\} - \theta_B k^*(\theta_S,\theta_B) - \tilde{\theta}_S
+	\\
+	t_B^{gVCG}(\theta) &= \max\{\tilde{\theta}_B,\theta_S\} - \theta_S \left(1 - k^*(\theta_S,\theta_B)\right)
+\end{align*}
+Since $\tilde{\theta}_B = 0$, $\tilde{\theta}_S = 1$, we have $\max\{\tilde{\theta}_S,\theta_B\} = \max\{1,\theta_B\} = 1$, and $\max\{\tilde{\theta}_B,\theta_S\} = \max\{0,\theta_S\} = \theta_S$. Therefore, the transfer rules become:
+\begin{align*}
+	t_S^{gVCG}(\theta) &= - \theta_B k^*(\theta_S,\theta_B)
+	\\
+	t_B^{gVCG}(\theta) &= \theta_S k^*(\theta_S,\theta_B)
+\end{align*}
+Recall that a mechanism is ex ante weakly BB (budget balanced) if $\mathbb{E}_\theta \left[ t_S(\theta)+t_B(\theta) \right] \geq 0$. In our case:
+\begin{align*}
+	t_S^{gVCG}(\theta)+t_B^{gVCG}(\theta)= \begin{cases}
 		\theta_S - \theta_B <0 & \text{ if } \theta_S \leq \theta_B, 
 		\\ 
 		0 & \text{ if } \theta_S > \theta_B.
 	\end{cases}
 \end{align*}
-Hence, we have now shown that the gVCG mechanism is not budget balanced (ex ante or ex post). However, it is the mechanism that yields the highest expected revenue $\mathbb{E}_\theta \left(t_S(\theta) + t_B(\theta)\right)$ among all mechanisms that are efficient, BIC, and interim IR. Therefore, there does not exist a mechanism for the bilateral trade problem which is efficient, BIC, interim IR, and ex ante BB.
+Hence, the gVCG mechanism is not budget balanced (ex ante or ex post). However, it is the mechanism that yields the highest expected revenue $\mathbb{E}_\theta \left(t_S(\theta) + t_B(\theta)\right)$ among all mechanisms that are efficient, BIC, and interim IR. Therefore, there does not exist a mechanism for the bilateral trade problem which is efficient, BIC, interim IR, and ex ante BB.
 
 \fi
 
@@ -315,7 +317,7 @@ Suppose that Odin \& the co-gods love a good battle (so do not want players to f
 		\end{cases}
 	\end{align*}
 	
-	\item The least charitable type is 
+	\item The least charitable types are, for both $i$, 
 	\begin{align*}
 		\tilde{\theta}_{i} & \equiv \arg\min_{\theta_{i}} \mathbb{E}_{\theta_{-i}} \left\{ \theta_{H} k^*_{H}(\theta) + \theta_{G} k^*_{G}(\theta) - 0 \right\} 
 		\\
