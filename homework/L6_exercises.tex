@@ -93,36 +93,6 @@
 
 
 
-\section{Malevolent Judicial Design}
-	% 410-3 problem bank ps7 q15
-	Revisit the Judicial Design exercise (L2 problem 4). Suppose that the defendant's type is $\theta \sim U[0,1]$, which stands for the probability of being acquitted if the defendant goes to the trial. Suppose that the DA wants to maximize the expected length of the defendant's sentence, i.e. to minimize the defendant's expected payoff. (So the DA gets a payoff of $1$ for a life sentence and a payoff of $r$ for a reduced sentence which would give the defendant a payoff of $-r$.)  
-	\begin{enumerate}
-		\item Among the incentive-compatible mechanisms you identified, what is the optimal mechanism for the DA?
-		\item How does your answer change if going to trial imposes additional cost $c \in (0,1)$ on the DA (but not on the defendant) relative to agreeing on a plea bargain?
-	\end{enumerate}
-	
-\ifsolutions
-\section*{Solution}
-	The implementable social choice functions must look as follows, for some $\bar{\theta} \in [0,1]$ (see the original problem):
-	\[ f(\theta)= \begin{cases} r & \text{if } \theta<\bar{\theta} \\
-		T & \text{if } \theta\geq\bar{\theta} \end{cases}, \]
-	where plea bargain $r= 1-\bar{\theta}$ is offered, and the defendant can choose between that and going to trial. 
-	%Note that even if the distribution does not have full support, this inly allows the DA to offer lower sentences in a plea bargain so we can ignore that case.	
-	The DA gets $r$ from a plea deal and $1-\theta$ if the defendant goes to trial, so the DA's expected payoff from any such $f(\theta)$ is:
-	\begin{equation}
-		\label{eq:MJD}
-		\begin{aligned}
-			\Phi(\bar{\theta}) \cdot (1-\bar{\theta})+\int_{\bar{\theta}}^1 (1-\theta-c) d\Phi(\theta)
-			&= \bar{\theta} (1-\bar{\theta}) + \frac{1-2\bar{\theta}+\bar{\theta}^2}{2} - c(1-\bar{\theta}) 
-			\\&= (1-\bar{\theta}) \left(\frac{1+\bar{\theta}}{2} - c\right)
-		\end{aligned}
-	\end{equation}
-	\begin{enumerate}
-		\item We could maximize \eqref{eq:MJD} over $\bar{\theta}$ directly. However, for $c=0$ there is a more direct solution. Any defendant who takes the the plea bargain gets a lower sentence from the plea bargain than what they would have gotten from trial. Thus, it is clearly optimal for the DA not to offer any plea bargains (except perhaps to $\theta=0$, which will accept a plea bargain of 1), i.e., setting $\bar{\theta}=0$ is optimal.
-		
-		\item When going to trial imposes cost $c>0$ on the DA, maximizing \eqref{eq:MJD} w.r.t. $\bar{\theta}$ yields the optimal threshold $\bar{\theta}=c$. So in the optimal mechanism, a plea deal $r=1-c$ is offered, sufficiently innocent types $\theta \in [0,c]$ take it, and types $\theta \in (c,1]$ prefer to go to trial.
-	\end{enumerate}
-\fi
 
 
 
@@ -268,10 +238,10 @@ Suppose the app charges the consumer some amount $w$ for the ride. This $w$ is f
 \end{enumerate}
 
 Therefore, the driver's expected utility from receiving with probability $k$ a fare that pays $p$ is
-$$u(k,t,\theta) = k \cdot p + (1-k) \cdot \theta,$$
+$$u(k,p,\theta) = k \cdot p + (1-k) \cdot \theta,$$
 and their outside option (from rejecting the fare or the whole mechanism) is $\underline{U}(\theta) = \theta$.
 
-Your task is to devise an optimal mechanism $(k,p)$ that maximizes the firm's expected revenue $\mathbb{E}_\theta [k(\theta) \cdot (w-p(\theta))]$ subject to the driver's standard IC constraint and interim IR constraint $u(k,t,\theta) \geq \underline{U}(\theta)$. To derive this mechanism, follow the steps below.
+Your task is to devise an optimal mechanism $(k,p)$ that maximizes the firm's expected revenue $\mathbb{E}_\theta [k(\theta) \cdot (w-p(\theta))]$ subject to the driver's standard IC constraint and interim IR constraint $u(k,p,\theta) \geq \underline{U}(\theta)$. To derive this mechanism, follow the steps below.
 
 %\emph{NOTE: you can attempt to answer each of parts 2-5 even if you did not solve the earlier parts (you can use the statements made in the problem text).}
 
@@ -374,72 +344,20 @@ Your task is to devise an optimal mechanism $(k,p)$ that maximizes the firm's ex
 
 
 
-\section{Divine intervention}
+\section{Divine intervention 2}
 %midterm 2020 p2
 %BIC mech, gVCG, optimal mechanism
 
-The year is 854 AD. The place is Denmark. The reigning king Horik is challenged by his nephew Guttorm for the claim to the kingdom. Both know that a grand battle between them in inevitable, and both are praying to Odin and the rest of {\AE}sir to tilt the outcome of this battle in their favor. You are to assume the role of Odin and to decide the outcome of the battle.
+Consider the ``Divine intervention'' problem (L5 exercises, problem 4).
 
-In particular, you are a mechanism designer dealing with two players $i=H,G$. Every player $i$ has a private type $\theta_i \sim U[0,1]$ ($\theta_H$ and $\theta_G$ are indepedent). An outcome is given by $x=(k,t)$, where $k=(k_H,k_G)$ is an allocation such that $k_i \in [-1,1]$ and $k_H + k_G \leq 0$, and $t$ is a vector of transfers. Players' payoffs are given by $u_i(x,\theta) = k_i \theta_i - t_i$. The outside options are normalized to zero.
+Suppose now instead that the gods are not benevolent, but try to minimize the amount of favor they owe to mortals -- i.e., they maximize $\mathbb{E}[t_H+t_G]$. That said, they still like to see a good battle, so ensuring that neither player decides to flee takes priority.
 
-In our story, allocations represent who wins the battle: e.g., $(k_H,k_G)=(1,-1)$ means Horik wins while Guttorm loses and is killed in battle. Restriction $k_H + k_G \leq 0$ means that they cannot both win, but can both lose. Transfer $t_i$ need not mean money, but rather (the negative of) favor that the gods will show to $i$ outside of battle, in life or afterlife.
-Horik's and Guttorm's types represent their paltriness. Higher $\theta_i$ means that $i$ would very much prefer to become a king and is very afraid of death. Low $\theta_i$ means that $i$ values honorable death in combat almost as highly as reign over the realm. Finally, the ``outside option'' represents fleeing from the battle, retaining life but losing the kingdom. The level of ``favor'' $t_i$ in this case is normalized to zero (i.e., favor is measured relative to this scenario).
-
-For the first part of this problem, suppose that Odin \& the co-gods love a good battle (so do not want players to flee), but are otherwise benevolent and do not care about favor. They thus decide to use the generalized VCG mechanism to determine the outcome.
-
-\begin{enumerate}
-	\item Find the efficient allocation rule $k^*(\theta) = \arg \max_k \{u_H(k,\theta) + u_G(k,\theta)\}$.
-	\item Find the least charitable types $\tilde{\theta}_i$.
-	\item Calculate the gVCG transfer rule $t^{gVCG}(\theta)$ that supports the efficient allocation rule.
-\end{enumerate}
-
-Suppose now instead that the gods are not benevolent, but try to minimize the amount of favor they owe to mortals -- i.e., to maximize $\mathbb{E}[t_H+t_G]$. That said, they still like to see a good battle, so ensuring that neither player decides to flee takes priority.
-
-\begin{enumerate}[resume]
-	\item Find the optimal BIC mechanism that maximizes the expected ``revenue'' $\mathbb{E}_\theta[t_H(\theta)+t_G(\theta)]$ subject to the players' IR constraints.
-\end{enumerate}
+Find the optimal BIC mechanism that maximizes the expected ``revenue'' $\mathbb{E}_\theta[t_H(\theta)+t_G(\theta)]$ subject to the players' IR constraints.
 
 
 \ifsolutions
 \section*{Solution}
-
-\begin{enumerate}
-	\item The efficient allocation is obviously (you may have a different tie-breaking
-	rule)
-	\begin{align*}
-		k^{*}(\theta) & =\begin{cases}
-			(1,-1) & \text{ if }\theta_{H}>\theta_{G};\\
-			(0, 0) & \text{ if }\theta_{H}=\theta_{G};\\
-			(-1,1) & \text{ if }\theta_{H}<\theta_{G}.
-		\end{cases}
-	\end{align*}
-	
-	\item The least charitable type is 
-	\begin{align*}
-		\tilde{\theta}_{i} & \equiv \arg\min_{\theta_{i}} \mathbb{E}_{\theta_{-i}} \left\{ \theta_{H} k^*_{H}(\theta) + \theta_{G} k^*_{G}(\theta) - 0 \right\} 
-		\\
-		& =\arg\min_{\theta_{i}}\mathbb{E}_{\theta_{j}} \left\{  \left(\theta_{i}-\theta_{j}\right) k_{i}^{*} (\theta) \right\} 
-		\\
-		& =0.5
-	\end{align*}
-	
-	\item The gVCG transfer rule for $i$ is
-	\begin{align*}
-		t^{gVCG}_i(\theta_i,\theta_{-i}) &= \theta_j k_j^*(\tilde{\theta}_i,\theta_{j}) + \tilde{\theta}_i k_i^*(\tilde{\theta}_i,\theta_{j}) - \theta_j k_j^*({\theta}_i,\theta_{j}) - \underline{U}_i (\tilde{\theta}_i)
-		\\
-		&= |0.5-\theta_j| - \theta_j \cdot \text{sgn}(\theta_j - \theta_i)
-		\\
-		&= \begin{cases}
-			|0.5-\theta_j| - \theta_j & \text{ if } \theta_i < \theta_j,
-			\\
-			|0.5-\theta_j| 			& \text{ if } \theta_j = \theta_i,
-			\\
-			|0.5-\theta_j| + \theta_j & \text{ if } \theta_i > \theta_j.
-		\end{cases}
-	\end{align*}
-	I.e., if $\theta_j < 0.5$ then $i$ pays $0.5$ if he wins and $0.5-2\theta_j \gtrless 0$ if he loses; while if $\theta_j > 0.5$ then $i$ pays $2\theta_j - 0.5 > 0$ if he wins and receives $0.5$ if he loses.
-	
-	\item Invoke BIC ERP (we can use it since the problem fits the Euclidean setting):
+	Invoke BIC ERP (we can use it since the problem fits the linear setting):
 	\begin{align}
 		\bar{U}_i(\theta_i) &= \bar{U}_i(0) + \int_0^{\theta_i} \mathbb{E}_{\theta_{-i}} [k_i(s,\theta_{-i})] ds
 	\end{align}
@@ -534,7 +452,6 @@ Suppose now instead that the gods are not benevolent, but try to minimize the am
 		\\
 		\theta_i^2 - \frac{1}{4}	& \text{ if } \theta_i > 0.5.
 	\end{cases}$$
-\end{enumerate}
 \fi
 
 
