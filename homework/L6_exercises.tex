@@ -99,12 +99,13 @@
 
 \section{Optimal Procurement Mechanism}
 	% NU 410-3 2019, ps6 q3
-	Consider an inverted setting to the one discussed in the lecture: a seller now has an item of some privately known quality $\theta \in [0,1]$. Here $\theta$ also equals the seller's valuation of the item, and the buyer's valuation is given by $v(\theta) > \theta$. The \emph{buyer} designs a direct revelation mechanism $(k,t)$ to purchase this item, where $k(\theta)$ is the probability of trade and $t(\theta)$ is the payment from the buyer to the seller.\footnote{Note that this formulation of the problem explicitly constrains the mechanism to be ex post budget balance requirement.} Players' expected utilities given the seller's true type $\theta$ and the seller's report $\hat{\theta}$ are then given by
+	Consider an inverted setting to the one discussed in the lecture: a seller now has an item of some privately known quality $\theta \in [0,1]$. Here $\theta$ also equals the seller's valuation of the item, and the buyer's valuation is given by $v(\theta) > \theta$. The \emph{buyer} designs a direct revelation mechanism $(k,t)$ to purchase this item, where $k(\theta)$ is the probability of trade and $t(\theta)$ is the payment from the buyer to the seller. Players' expected utilities given the seller's true type $\theta$ and the seller's report $\hat{\theta}$ are then given by
 	\begin{align*}
 		U_S(\hat{\theta}|\theta) &= -\theta k(\hat{\theta}) + t(\hat{\theta}),
 		\\
 		U_B(\hat{\theta}|\theta) &= v(\theta) k(\hat{\theta}) - t(\hat{\theta}).
 	\end{align*}
+	%NOTE: to be clear, this is not a budget balance restriction, this is the accounting condition
 	\begin{enumerate}
 		\item Show that for an allocation rule $k(\theta)$ to be IC for the seller, it must be weakly \emph{decreasing} in $\theta$.
 		\item ERP implies that the payoff of the seller of type $\theta$ can be written as $U_S(\theta|\theta) = U_S(1|1) + \int_{\theta}^{1} k(s) ds $. Using this expression, show that the buyer's expected utility in any IC DRM $(k,t)$ is given by:
@@ -155,7 +156,7 @@
 		\\
 		&=\int_0^1 \left[(v(\theta)-\theta)k(\theta)-\int_\theta^1k(s)ds \right] \phi(\theta)d\theta-U_S(1|1)
 		\\
-		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_\theta^1k(s) \phi(\theta) ds d\theta-U_S(1|1)
+		&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_\theta^1k(s) ds \phi(\theta) d\theta-U_S(1|1)
 		\\
 		%&=\int_0^1(v(\theta)-\theta)k(\theta)\phi(\theta)d\theta  -\int_0^1\int_0^s k(\theta) \phi(\theta) d\theta ds-U_S(1)
 		%\\
