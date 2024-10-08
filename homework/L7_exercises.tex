@@ -70,7 +70,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\hmwkTitle}{Exercises for Lecture 7 (M4)} % Assignment title
 \newcommand{\Class}{Mechanism Design} % Course/class
-\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\instructor}{Fall 2024} % TA
 \newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
 
 
@@ -95,48 +95,9 @@
 %TODO: add King Solomon's problem here!
 
 
-\section{Meeting the investor}
-	%final2020-2 q1
-	A team of two entrepreneurs $i=1,2$ approaches a venture investor $i=0$ with a request to fund their newest business idea. Suppose the real value of the idea is $\omega \sim U[-\infty, \infty]$.\footnote{This is called an ``improper prior'' -- the prior belief about $\omega$ is not a proper probability distribution, but the posterior belief resulting from updating it via Bayes' rule after an informative event would be a proper distribution.}
-	Each entrepreneur $i=1,2$ estimates this value at $\theta_i = \omega + \epsilon_i$, where $\epsilon_i \sim i.i.d.U[-0.5,0.5]$. (Take unit of measurement to be millions of dollars.)
-	
-	\begin{enumerate}
-		\item Design a mechanism that would allow the investor to perfectly learn both entrepreneurs' estimates $\theta_i$. In this mechanism, both would independently report their $\theta_i$ to the mechanism, and the mechanism would prescribe report-contingent transfers $t_i(\theta_1,\theta_2)$ from each entrepreneur $i=1,2$ to the investor. Assume that the two entrepreneurs cannot coordinate their reporting strategies. Derive the transfer rules that implement truthful reporting (and show that it is indeed optimal for both entrepreneurs to report truthfully under this transfer rule).
-		
-		\item How could your mechanism be implemented in the real world? I.e., is it reasonable to ask entrepreneurs to pay for a meeting with an investor? If not, how else could you induce the desired transfers?
-	\end{enumerate}
-
-\ifsolutions
-\section*{Solution}
-	\begin{enumerate}
-		\item One way to proceed is to use the truth-revealing transfers we introduced while talking about the Cremer-McLean mechanism. Even though we only introduced this approach for settings with finite type spaces, it would be applicable in this problem -- but one would need to verify that the incentive compatibility constraints still hold.
-		
-		However, there is a simpler solution. Since $\theta_i \in [ \omega-0.5, \omega+0.5]$, it is also true that $\omega|\theta_i \in [\theta_i-0.5, \theta_i+0.5]$ and thus $\theta_j|\theta_i \in [\theta_i-1, \theta_i+1]$. In words, each entrepreneur $i$ knows for sure that their colleague's valuation $\theta_j$ is within $1$ of their own, because estimation errors $\epsilon_i,\epsilon_j$ are at most $0.5$ in absolute value. This means that we can use the following transfers in our mechanism:
-		\begin{align*}
-			t_i(\theta_1,\theta_2) = 
-			\begin{cases}
-				0 & \text{ if } \theta_j \in [\theta_i-1,\theta_i+1];
-				\\
-				\infty & \text{ if } \theta_j \notin [\theta_i-1,\theta_i+1].
-			\end{cases}
-		\end{align*}
-		
-		I.e., both $i$ and $j$ must pay infinity (or any other sufficiently large amount) to the mechanism in case their reports differ by more than $1$ [million dollars]. To see that this transfer rule induces truthtelling, consider $i$'s expected transfer given some own report $\hat{\theta}_i$ and under the assumption that $j$ reports truthfully (which is what happens in the desired equilibrium):
-		\begin{align*}
-			\mathbb{E} [t_i(\hat{\theta}_i,\theta_j) | \theta_i] &= 0 \cdot \mathbb{P} \{ |\theta_j-\hat{\theta}_i| \leq 1 | \theta_i \} + \infty \cdot \mathbb{P} \{ |\theta_j-\hat{\theta}_i| > 1 | \theta_i \}.
-		\end{align*}
-		The latter probability is zero (and so $i$ pays zero rather than infinity) if and only if $\hat{\theta}_i = \theta_i$, hence truthtelling is optimal for $i$ for any $\theta_i$.
-		
-		\item The payment itself can be non-monetary in principle -- e.g., by means of time and effort required to secure an appointment. However, the mechanism does not only require payment to meet the investor, but also requires that this payment is contingent upon the outcome of the meeting, which means that the aforementioned tools can not be easily used. 
-		
-		One way to interpret transfers is to say that they represent the reputation that these entrepreneurs will acquire in the venture capital circles after the meeting. If they are caught lying ($|\theta_1 - \theta_2|>1$), the investor will make sure to spread the news about it, and the entrepreneurs will have a harder time securing investment for this or other projects from other sources. 
-		(It is not immediate whether the investor can commit to such behavior ex ante to incentivize agents -- which is crucial for the mechanism to be credible, -- but you can argue that the designer takes personal offense in having to waste her time listening to a bad pitch, and thus finds it individually optimal to punish bad proposers.)
-	\end{enumerate}
-\fi 
 
 
-
-\section{Optimal Auction with Correlated Values}
+\section{Optimal Common-Value Auction}
 	%410-3ps6 q14 (bank 2015)
 	Consider the optimal auction problem in which there are two bidders whose valuations $v_i \in [0,1]$ are uniformly distributed but 
 	perfectly correlated, i.e. $v_1 = v_2$ with probability 1.  Construct a DSIC mechanism with the following properties:
@@ -332,7 +293,57 @@
 \fi
 
 
+
+
+\section{Meeting the investor}
+%final2020-2 q1
+A team of two entrepreneurs $i=1,2$ approaches a venture investor $i=0$ with a request to fund their newest business idea. Suppose the real value of the idea is $\omega \sim U[-\infty, \infty]$.\footnote{This is called an ``improper prior'' -- the prior belief about $\omega$ is not a proper probability distribution, but the posterior belief resulting from updating it via Bayes' rule after an informative event would be a proper distribution.}
+Each entrepreneur $i=1,2$ estimates this value at $\theta_i = \omega + \epsilon_i$, where $\epsilon_i \sim i.i.d.U[-0.5,0.5]$. (Take unit of measurement to be millions of dollars.)
+
+\begin{enumerate}
+	\item Design a mechanism that would allow the investor to perfectly learn both entrepreneurs' estimates $\theta_i$. In this mechanism, both would independently report their $\theta_i$ to the mechanism, and the mechanism would prescribe report-contingent transfers $t_i(\theta_1,\theta_2)$ from each entrepreneur $i=1,2$ to the investor. Assume that the two entrepreneurs cannot coordinate their reporting strategies. Derive the transfer rules that implement truthful reporting (and show that it is indeed optimal for both entrepreneurs to report truthfully under this transfer rule).
+	
+	\item How could your mechanism be implemented in the real world? I.e., is it reasonable to ask entrepreneurs to pay for a meeting with an investor? If not, how else could you induce the desired transfers?
+\end{enumerate}
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item One way to proceed is to use the truth-revealing transfers we introduced while talking about the Cremer-McLean mechanism. Even though we only introduced this approach for settings with finite type spaces, it would be applicable in this problem -- but one would need to verify that the incentive compatibility constraints still hold.
+	
+	However, there is a simpler solution. Since $\theta_i \in [ \omega-0.5, \omega+0.5]$, it is also true that $\omega|\theta_i \in [\theta_i-0.5, \theta_i+0.5]$ and thus $\theta_j|\theta_i \in [\theta_i-1, \theta_i+1]$. In words, each entrepreneur $i$ knows for sure that their colleague's valuation $\theta_j$ is within $1$ of their own, because estimation errors $\epsilon_i,\epsilon_j$ are at most $0.5$ in absolute value. This means that we can use the following transfers in our mechanism:
+	\begin{align*}
+		t_i(\theta_1,\theta_2) = 
+		\begin{cases}
+			0 & \text{ if } \theta_j \in [\theta_i-1,\theta_i+1];
+			\\
+			\infty & \text{ if } \theta_j \notin [\theta_i-1,\theta_i+1].
+		\end{cases}
+	\end{align*}
+	
+	I.e., both $i$ and $j$ must pay infinity (or any other sufficiently large amount) to the mechanism in case their reports differ by more than $1$ [million dollars]. To see that this transfer rule induces truthtelling, consider $i$'s expected transfer given some own report $\hat{\theta}_i$ and under the assumption that $j$ reports truthfully (which is what happens in the desired equilibrium):
+	\begin{align*}
+		\mathbb{E} [t_i(\hat{\theta}_i,\theta_j) | \theta_i] &= 0 \cdot \mathbb{P} \{ |\theta_j-\hat{\theta}_i| \leq 1 | \theta_i \} + \infty \cdot \mathbb{P} \{ |\theta_j-\hat{\theta}_i| > 1 | \theta_i \}.
+	\end{align*}
+	The latter probability is zero (and so $i$ pays zero rather than infinity) if and only if $\hat{\theta}_i = \theta_i$, hence truthtelling is optimal for $i$ for any $\theta_i$.
+	
+	\item The payment itself can be non-monetary in principle -- e.g., by means of time and effort required to secure an appointment. However, the mechanism does not only require payment to meet the investor, but also requires that this payment is contingent upon the outcome of the meeting, which means that the aforementioned tools can not be easily used. 
+	
+	One way to interpret transfers is to say that they represent the reputation that these entrepreneurs will acquire in the venture capital circles after the meeting. If they are caught lying ($|\theta_1 - \theta_2|>1$), the investor will make sure to spread the news about it, and the entrepreneurs will have a harder time securing investment for this or other projects from other sources. 
+	(It is not immediate whether the investor can commit to such behavior ex ante to incentivize agents -- which is crucial for the mechanism to be credible, -- but you can argue that the designer takes personal offense in having to waste her time listening to a bad pitch, and thus finds it individually optimal to punish bad proposers.)
+\end{enumerate}
+\fi 
+
+
+
+
 \end{document}
+
+
+
+
+
+
 
 
 
@@ -384,3 +395,5 @@
 	Given a realized state $w=(w_1,w_2)$, these values of $o^1$ and $o^2$ are the equilibrium reporting strategies of the two agents in our example, which imply that the principal chooses the true state $a=w$.
 
 \fi
+
+
