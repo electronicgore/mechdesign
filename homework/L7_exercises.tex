@@ -92,8 +92,6 @@
 \end{center}
 
 
-%TODO: add King Solomon's problem here!
-
 
 
 
@@ -119,6 +117,75 @@
 	\[t_2(v_1,v_2)=\left\{\begin{array}{cc} 0 & \text{if}\quad v_2\neq v_1\\
 		v_1 & \quad\text{otherwise}\quad\end{array}\right.\]
 	Note that for bidder 1 it is weakly dominant to say her valuation: she never gets the good so she might as well say $v_1$. For player 2, we have exactly the same situation: given the message sent by agent 1, she is indifferent between saying the truth and not, so telling the truth is weakly dominant. Agent 2 gets the good always and both bidders have 0 utility at every type profile.
+\fi 
+
+
+\section{The Legend of King Solomon}
+
+	The legend of King Solomon goes as follows.\footnote{See, e.g., \url{https://mechon-mamre.org/p/pt/pt09a03.htm#16}.} 
+	Two women come to the king with a baby, each claiming to be the baby’s mother (but both knowing who the true mother is), asking the king to solve their dispute. The king suggests to slice the baby into two equal pieces and give each woman one piece. One of the women immediately pleads with the king not to slice the baby (and give it to the other woman instead); the other accepts the slicing proposal. The king inferred that the former is the true mother and ruled that the child should remain hers.
+	
+	\begin{enumerate}
+		\item Formulate this as a mechanism design problem (describe players, types, outcomes, payoffs, the designer's objective).
+		
+		\item Write down the \emph{announced} mechanism (that involves slicing the baby) formally (describe the reports that all players can make and how they map into outcomes). Is this mechanism IC for the players?
+		
+		\item Write down the \emph{actual} mechanism (that the king ended up using) formally. Is this mechanism IC for the players? Does it implement the king's desired social choice function?
+		
+		\item Can you propose a mechanism that would be IC for the players and implements the king's preferred social choice function?
+	\end{enumerate}
+
+
+\ifsolutions
+\section*{Solution}
+\begin{enumerate}
+	\item The king is the designer, $i=0$; the two women $i=1,2$ are the players. The players commonly know the state $\theta \in \{1,2\}$, which is the identity of the true mother. The outcomes mentioned or implied in the problem are $x \in \{1,2,s\}$: give the baby to one of the women ($x=i$) or slice the baby in half ($x=s$). The king prefers to implement the ``correct allocation'' given by s.c.f. $f(\theta) = \theta$ (to give the baby to the true mother). The women's preferences are such that both prefer to get the child, but otherwise, the true mother prefers the baby to survive, while the other woman prefers that no one gets the baby. This can be captured by the following numbers:
+	\begin{center}
+		\begin{tabular}{l | c | c | c |}
+			$u_i(x,\theta)$ & $x=i$ & $x=3-i$	& $x=s$	\\ \hline
+			$\theta=i$		& $1$ 	& $0$ 		& $-1$	\\ \hline
+			$\theta \neq i$	& $1$	& $-1$		& $0$	\\ \hline
+		\end{tabular}
+	\end{center}
+	
+	\item The announced mechanism is such that the women should simultaneously make reports $a_i$ about the true state $\theta$, and the outcome rule is such that if the women agree about the state, the baby is given to the true mother, otherwise the baby is sliced:
+	\begin{align*}
+		g(a_1,a_2) = \begin{cases}
+			1 & \text{ if } a_1=a_2=1, 
+			\\
+			2 & \text{ if } a_1=a_2=2, 
+			\\
+			s & \text{ if } a_1 \neq a_2. 
+		\end{cases}
+	\end{align*}
+	The announced mechanism is not IC, since the non-mother would prefer to lie about the state (as observed in the legend): if $\theta \neq i$ and the other woman reports truthfully, then $i$ reporting truthfully yields $u_i = -1$, since then $x=3-i$. Instead, reporting $a_i = i$ results in $x=s$, which gives $i$ utility $u_i=0$, which is higher.
+	
+	\item The actual mechanism is that the women should simultaneously make reports $a_i$ about the true state $\theta$, and the outcome rule is such that if the women agree about the state, the baby is given to the woman who does \emph{not} claim ownership (which is what happened in the legend). It is not clear what happens in case of disagreement, but since no new rules were introduced for that case, we can assume that the baby is still sliced:
+	\begin{align*}
+		g(a_1,a_2) = \begin{cases}
+			2 & \text{ if } a_1=a_2=1, 
+			\\
+			1 & \text{ if } a_1=a_2=2, 
+			\\
+			s & \text{ if } a_1 \neq a_2. 
+		\end{cases}
+	\end{align*}
+	As described above, the actual mechanism is actually IC: if $\theta = i$ and the other woman reports truthfully, then $i$ reporting truthfully yields $x=3-i$ and $u_i = 0$, which is better than lying (claiming $a_i \neq i$), which results in $x=s$ and $u_i=-1$. If $\theta = 3-i$ and the other woman reports truthfully, then truthful reporting yields $x=i$ and $u_i=1$, while lying (claiming $a_i = i$) results in $x=s$ and $u_i=0$.
+	
+	However, this mechanism by itself does not implement the king's preferred s.c.f., since it always gives the baby to the non-mother. The legend only works because the king announced one mechanism to elicit reports, and then switched to a different decision rule. In the context of our course, this means the principal did not commit to the announced mechanism. If the players were aware of this lack of commitment, their reports would have likely been different. In other words, this trick will probably not work again should the king ever need to judge on a similar dispute.
+	
+	\item If we may only use the primitives introduced in part 1, there exists no mechanism that satisfies both requirements. However, we know there is a sword at king's disposal (that would've been used to slice the baby), as well as that ancient kings were not particularly accountable to common law and, often, our modern morals. So we can consider another outcome $x = k$, which is to kill everyone (both women and the baby). If both women's utilities from such an outcome are low enough ($u_i(k,\theta) < -1$), the threat to implement this outcome after divergent reports would be effective. I.e., it is easy to verify that a mechanism given by the outcome rule
+	\begin{align*}
+		g(a_1,a_2) = \begin{cases}
+			1 & \text{ if } a_1=a_2=1, 
+			\\
+			2 & \text{ if } a_1=a_2=2, 
+			\\
+			k & \text{ if } a_1 \neq a_2 
+		\end{cases}
+	\end{align*}
+	would be IC for both players (there would exist an equilibrium, in which both players always report truthfully) and implements the king's desired s.c.f.. Note also that $x=k$ would be a purely out-of-equilibrium threat, so no bloodshed would occur.
+\end{enumerate}
 \fi 
 
 
