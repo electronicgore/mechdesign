@@ -176,7 +176,7 @@
 
 \begin{frame}{General setting: dictatorship 2}
 	\begin{theorem}[\textbf{\cite{gibbard_manipulation_1973,satterthwaite_strategy-proofness_1975}}]
-		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$, then\\
+		In a general setting with $|X|\geq 3$: if $x(\Theta)=X$ and the domain assumption holds, then\\
 		\centering
 		$x$ is \alert{DSIC} if and only if $x$ is \alert{dictatorial}.
 	\end{theorem}
@@ -193,7 +193,7 @@
 	\begin{itemize}
 		\item The missing link between the two results above is this:
 		\begin{theorem}[Monotonicity implies dictatorship]
-			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$ and the domain assumption hold, then\\
+			In a general setting with $|X|\geq 3$: if $x(\Theta)=X$ and the domain assumption holds, then\\
 			\centering
 			if $x$ is g-monotone then $x$ is dictatorial.
 		\end{theorem}
@@ -389,8 +389,10 @@
 \begin{frame}{Cheap talk: comments}
 	\begin{itemize}
 		\item Due to no-commitment assumption, the principal will always choose $x(m) = \mathbb{E}[\theta|m]$ after message $m$.
-		\item Can see this as a MD problem with two players: the agent and the future principal -- but it's a stretch. %(due to info assumptions mostly, since future principal has no pvt info, apart from what is communicated by the agent)
-		\item More reasonable interpretation -- MD problem (with 1 agent) with an additional constraint (principal's ex post compliance).
+		\begin{itemize}
+			\item Can see this as a MD problem with two players: the agent and the future principal -- but it's a stretch. %(due to info assumptions mostly, since future principal has no pvt info, apart from what is communicated by the agent)
+			\item More reasonable interpretation -- MD problem (with 1 agent) with an additional constraint (principal's ex post compliance).
+		\end{itemize}
 		\item This model is known as a game of \emph{cheap talk} communication, since the agent can message about $\theta$ but has no evidence to back up their claim -- in contrast to models of \emph{verifiable disclosure}.
 	\end{itemize}
 \end{frame}
@@ -406,7 +408,7 @@
 		\pause 
 		
 		\item \textbf{Statement:} all implementable $X$ are finite: $X = \{x_1,...,x_K\}$, with options at least $b$ apart.\\
-		\textbf{Proof:} suppose $x',x'' \in X$ with $x''-x' \in (0,b)$. Then for all $\theta \geq x'$, the agent prefers $x''$ to $x'$, so $x(\theta) \neq x'$ for such $\theta$. But then $\mathbb{E}[\theta \mid x(\theta) = x'] < x'$, a contradiction.
+		\textbf{Proof:} suppose $x',x'' \in X$ with $x''-x' \in (0,b)$. Then for all $\theta \geq x'$, the agent prefers $x''$ to $x'$, so $x(\theta) \neq x'$ for such $\theta$. But then $\mathbb{E}[\theta \mid x(\theta) = x'] < x'$, a contradiction with the principal's IC.
 		\pause 
 		\begin{itemize}
 			\item The exact opposite of delegation!
@@ -443,9 +445,9 @@
 		
 		\item \textbf{Final answer:} any sequence $\{\theta_k\}_{k=0}^K$ that satisfies the equation above and the boundary conditions $\theta_0 = 0$, $\theta_K = 1$ characterizes an implementable s.c.f.
 		
-		\item Can show: there is an upper bound $\bar{K}(b)$ such that for any $K \in [1, \bar{K}(b)]$ there exists an implementable s.c.f. with $K$ options in the choice set. 
+		\item Can show: there is an upper bound $\bar{K}(b)$ such that for any $K \in \{1, ..., \bar{K}(b) \}$, there exists an implementable s.c.f. with $K$ options in the choice set. 
 		\begin{itemize}
-			\item Alternative (original) interpretation: for every $K \in [1, \bar{K}(b)]$, there exists a corresponding equilibrium of the communication game. 
+			\item Alternative (original) interpretation: for every $K \in \{1, ..., \bar{K}(b) \}$, there exists a corresponding equilibrium of the communication game. 
 			\item Reminder: in MD, we assume the designer has the power of equilibrium selection!
 		\end{itemize}
 		
