@@ -318,4 +318,76 @@ Djul has defended his Ph.D. and found a job. He looks back at the small library 
 \fi
 
 
+
+\section{Teams and sponsors}
+% stable matchings, final 2023-1
+There are four racing teams without sponsors in Formula 0: Abarth,
+Bentley, Caterpillar, and Dacia (referred to respectively as A, B, C,
+and D). There are three sponsors looking to invest in racing teams in
+exchange for exposure and marketing activities: XFT Technologies,
+Yggdrasil Finance, and Zero Energy (X, Y, and Z, respectively).
+The sponsorship contracts in Formula 0 are standard in terms of sums and
+responsibilities, but different teams and sponsors may prefer different
+partners, due to differences in values and vision.
+
+Both teams and sponsors are very secretive about their preferences, but
+it is known that everyone has a very clear ranking over potential
+partners (and each wants exactly one partner). Further, the following 
+information has been revealed through interviews and leaks:
+\begin{itemize}
+	\item all three sponsors and all four teams want to find a partner more
+	than to stay independent/uninvolved;
+	\item sponsor Y is by far the most preferred option for teams B and D;
+	\item sponsor Y itself favors B over the other teams;
+	\item sponsor Z, conversely, said they had no talks with B or D, and
+	among the other two teams, it is generally understood that they favor a
+	deal with C;
+	\item team C ranks Z over X, but it is not clear where Y stands in this
+	ranking;
+	\item sponsor X suffered from an internal leak, suggesting that their
+	marketing team ranked C over D over B over A.
+\end{itemize}
+You are a correspondent for an autosport website, and your editor asked
+you to write an article ``This is how the sponsorships will play out in
+F0''. The information is incomplete, but your editor insists that it
+allows to learn at least something about how the final matching will
+look like.
+
+\begin{enumerate}
+	\item You decided to start by speculating. Complete the players'
+	rankings (in any way that is consistent with the information provided) and find a
+	stable matching in this market.
+	
+	\item Your editor is not happy with speculation and says you should not make
+	any assumptions about preferences except for those given above. What can
+	you answer to the following questions about the stable matching in this
+	market, based only on the information given above:
+	\begin{enumerate}
+		\item Whom will Y sponsor?
+		\item Who will sponsor team C?
+		\item Who will sponsor team A?
+	\end{enumerate}
+	(Explain how you obtained your answers.)
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item For part 1, the student should present a complete strict ranking for every player. The simplest way to then find a stable matching is to run a deferred acceptance algorithm. If so, the student should mention which side of the market proposes and which accepts, but the step-by-step solution of the algorithm is not required, and neither is a proof of why the resulting matching is stable, only the matching itself has to be presented. If the student does not use the DA algorithm, then it should be explained why the matching is stable. 
+	
+	Part 1 can be skipped if the student finds and characterizes the unique stable matching in part 2.
+	
+	\item We cannot run the DA algorithm to find a stable matching since we do not know the players' preferences perfectly, and hence cannot properly simulate the offers and the acceptance decisions. However, we can find a stable matching in a series of claims as follows:
+	\begin{itemize}
+		\item Y must sponsor B, since for any other matching, $(Y,B)$ would be a blocking pair (since both players are each other's top choices).
+		\item Z must sponsor C by the same logic (once we remove Y and B from the market).
+		\item The only remaining sponsor is then X, who will match with team D. This is because C is not available and D is X's second-best choice, while D prefers to match with X over staying unsponsored like all teams do (and Y,Z are unavailable by the arguments above).
+		\item Finally, A is the only team left in the market with no sponsors, so A is unsponsored.
+	\end{itemize}
+	We conclude that the unique stable matching in the market is $\big\{ (A,\varnothing), (B,Y), (C,Z), (D,X) \big\}$.
+\end{enumerate}
+\fi
+
+
 \end{document}
