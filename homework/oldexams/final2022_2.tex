@@ -239,23 +239,23 @@ $$u_i(k,t,\theta) = k_T - \theta_i k_i^2 - t_i.$$
 	\begin{align*}
 		t_i^{VCG}(\theta) &= - v_j(k^*(\theta),\theta_j) + v_j(\bar{k}(\theta), \theta_j)
 		\\
-		&= - \left( \frac{1}{\theta_i} + \frac{1}{\theta_j} - \frac{\theta_j}{(\theta_j)^2} \right) + \left( \frac{1}{1} + \frac{1}{2 \theta_j} - \frac{\theta_j}{2\theta_j^2} \right)
+		&= - \left( \frac{1}{\theta_i} + \frac{1}{\theta_j} - \frac{\theta_j}{(\theta_j)^2} \right) + \left( \frac{1}{1} + \frac{1}{2 \theta_j} - \frac{\theta_j}{(2\theta_j)^2} \right)
 		\\
-		&= 1-\frac{1}{\theta_i} = 1-k^*_i(\theta).
+		&= 1-\frac{1}{\theta_i} + \frac{1}{4\theta_j}.
 	\end{align*}
-	So each person is supposed to exert $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$ effort and pay $t_i^{VCG}(\theta) = 1-k^*_i(\theta)$ to the slacker jar. Note that the payment only depends on own type and effort and not on the other player's type. 
+	So each person is supposed to exert $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$ effort and pay $t_i^{VCG}(\theta) = 1-\frac{1}{\theta_i} + \frac{1}{4\theta_j}$ to the slacker jar. 
 	
 	It is trivial to check that it is then optimal for both players to behave according to their type (the students can simply state that this is a property of the VCG mechanism):
 	\begin{align*}
 		&\max_{\hat{\theta}_i \in [1,2]} \left\{ k^*_T(\hat{\theta}_i,\theta_j) - \theta_i (k^*_i(\hat{\theta}_i,\theta_j))^2 - t_i^{VCG}(\hat{\theta}_i,\theta_j) \right\}
 		\\ \iff
-		&\max_{\hat{\theta}_i \in [1,2]} \left\{ \frac{1}{\hat{\theta}_i} + \frac{1}{\theta_j} - \frac{\theta_i}{\left(\hat{\theta}_i \right)^2} - \left( 1 - \frac{1}{\hat{\theta}_i} \right) \right\}
+		&\max_{\hat{\theta}_i \in [1,2]} \left\{ \frac{1}{\hat{\theta}_i} + \frac{1}{\theta_j} - \frac{\theta_i}{\left(\hat{\theta}_i \right)^2} - \left( 1 - \frac{1}{\hat{\theta}_i } + \frac{1}{4\theta_j} \right) \right\}
 		\\ \Rightarrow
 		&\text{FOC:} -\frac{2}{\left( \hat{\theta}_i \right)^2} + \frac{2\theta_i}{\left( \hat{\theta}_i \right)^3} = 0
 		\Rightarrow \hat{\theta}_i = \theta_i.
 	\end{align*}
 
-	\item The first question asks whether players' payments are always non-negative in the mechanism; the second question asks whether the mechanism is ex post budget balanced. Since $t_i^{VCG}(\theta) = 1-k^*_i(\theta)$ and $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$, it follows that $t_i^{VCG}(\theta) \geq 0$ for all $\theta$, meaning that payments from players to the jar are always positive and the players would never be expected to take from the jar.
+	\item The first question asks whether players' payments are always non-negative in the mechanism; the second question asks whether the mechanism is ex post budget balanced. Since $t_i^{VCG}(\theta) = 1-\frac{1}{\theta_i} + \frac{1}{4\theta_j} \geq 1-k^*_i(\theta)$ and $k_i^*(\theta) = \frac{1}{\theta_i} \in \left[ \frac{1}{2}, 1 \right]$, it follows that $t_i^{VCG}(\theta) \geq 0$ for all $\theta$, meaning that payments from players to the jar are always positive and the players would never be expected to take from the jar.
 	
 	\item The VCG transfer rule is carefully crafted to provide the required incentives to the players. If they anticipate receiving some benefit from tipping the jar -- like being able to afford a better dinner -- this distorts the incentives to exert effort/report type. In particular, the players would be more willing to tip the jar and exert less effort compared to what the VCG mechanism expects. Donating the jar money to charity would not be subject to such concerns (assuming the players are selfish enough to not care about charity donations on the same scale as personal well-being).
 \end{enumerate}
