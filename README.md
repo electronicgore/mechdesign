@@ -7,12 +7,26 @@ This repo contains lecture slides, homework and exam problems with solutions.
 * You can get the compiled files [here](https://starkov.site/research.html).
 * Video lectures covering broadly the 2020 version of this material can be found [on youtube](https://www.youtube.com/playlist?list=PL4pUs4P_j1WasI0kO99OgNNd_hJwpct4D).
 
-**NOTE:** lecture slides contain some copyrighted pictures used under fair use in slides but not redistributed in this repo. This means that an attempt to compile slides will in some cases yield errors. When this happens, find and comment out the relevant `includegraphics` lines.
+**NOTE:** some lecture slides contain copyrighted pictures, used under fair use in slides but not redistributed in this repo. This means that an attempt to compile slides will in some cases yield errors. When this happens, find and comment out the relevant `includegraphics` lines.
 
-**Current version:** Fall 2022.
+**Current version:** Fall 2024.
 
 
 # Changelog:
+
+## 2024:
+
+* Minor updates on most slides
+
+* Rehashed problem sets using some old exam problems
+
+
+## 2023:
+
+* Minor updates on most slides
+
+* Rehashed problem sets using some old exam problems
+
 
 ## 2022:
 
