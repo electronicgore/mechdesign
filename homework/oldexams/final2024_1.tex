@@ -1,0 +1,314 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2024} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{final2024_1_frontpage.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions 
+The solutions below are instructional, as opposed to ``perfect responses''. Their goal is to show the students the direction they were intended to take in their approach to the problems. The solutions may not provide exhaustive responses to all questions, and conversely, may include discussions that were not expected from the students.
+	\else	
+Write up your answers to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+\section{Danish Graffiti}
+% evidence, corrinfo, trivial
+Alex has been detained by the police on suspicion of painting a graffiti on a metro train. The police know where and when this happened and are trying to establish whether Alex is the one who painted the graffiti or not. 
+Explain, from a mechanism design standpoint, which tools the police can use to elicit this information.
+
+\ifsolutions
+\subsection*{Solutions}
+The police is the designer, Alex is the player in possession of private information (their involvement in the crime).
+The options the police has are:
+\begin{itemize}
+	\item \textbf{Cross-verification mechanism:} if Alex claims to have been elsewhere at the time of the crime and a witness (who is unaware of Alex' report) can corroborate the story, this could prove innocence, whereas diverging stories suggest guilt. 
+	\item \textbf{Evidence}: ask Alex to procure evidence of innocence -- photos, receipts, phone GPS data that prove Alex was elsewhere at the time of the crime. As we discussed in class, if such evidence is likely to exist in case of innocence, the failure to present it becomes a strong indicator of guilt.
+	\item \textbf{Transfers}: if the true artist would take some pride in claiming ownership of the graffiti (and is thus slightly more willing to admit guilt than an innocent Alex to accept the blame), the police could design transfers exploiting this variation in preferences. This transfer could, for example, be implemented with monetary means (by fine-tuning the size of a fine or a bail), time cost (time spent in detention denying the guilt), or the expected punishment should the case be sent to court.
+\end{itemize}
+\fi 
+
+
+
+
+\section{Overbooking}
+
+United Airlines has oversold flight UA 944 from Chicago to Frankfurt, selling more flight reservations than there are seats in the airplane. The flight is supposed to depart in 30 minutes, and you are the airport gate worker, who has to deal with this mess. You are going to try, on behalf of United, to offer compensation to some of the travelers at the gate if they agree to forfeit their flight booking (or get bumped to a later flight).
+
+There are $N$ identically-looking travelers, all flying alone, and two seats that need to be bought back. Your best guess is that all travelers' required compensation levels are somewhere between \$0 and \$3000 (but obviously, you do not know what those are).
+
+\begin{enumerate}
+	\item What are the desired conditions that your mechanism should satisfy in this setting?
+	
+	\item Derive an efficient mechanism that satisfies the conditions you outlined in part 1.
+	
+	\item Explain why an efficient mechanism is indeed the optimal one across all mechanisms that satisfy the conditions from part 1, or argue why not if it is not.
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solutions}
+\begin{enumerate}
+	\item The primary goal is that the mechanism must buy (at least) two seats back; implementing any other allocation is not an acceptable option. We can call this the \textbf{feasibility constraint}. Then, as usual, we want the mechanism to be \textbf{incentive compatible} -- BIC or DSIC in this multi-player setting. Further, we want the buyback mechanism to be (interim) \textbf{individually rational}, since all travelers have an option of not participating in it and insisting on the airline honoring their booking. One may also explicitly require \textbf{limited liability} -- that the mechanism can only pay travelers and cannot demand money from them, but this will be subsumed by the IR constraint. Finally, since you are acting on behalf of United, we want to mechanism to pay out as small of a compensation as possible. This is equivalent to requiring that the mechanism minimizes the budget deficit or \textbf{maximizes revenue}.
+	
+	\item We have considered three efficient mechanisms: VCG, gVCG, and AGV. Note that VCG would not work, since it would (if derived as we did in class) require travelers to pay, and thus violate IR; the same applies to AGV. We can, however, try gVCG, since it is efficient, DSIC, IIR, and revenue-maximizing among all such of mechanisms.
+	
+	Let $\theta_i \sim U[0, 3000]$ denote traveler $i$'s cost of forfeiting their booking. Traveler $i$'s utility function can be written as $u_i(k,t,\theta) = -\theta_i k_i - t_i$, where $k_i \in [0,1]$ is the probability that $i$ gets the compensation and skips the flight, and $t_i$ is the payment \emph{from} player $i$ (for sake of consistency with the notation in the course). The designer's (your, on behalf of United) utility is $u_0(k,\theta) = - \max \left\{0, C \left( 2 - \sum_{i=1}^N k_i(\theta) \right) \right\}$, with the idea being that if the issue is not resolved (less than two seats are bought back), then the airline incurs some large loss $C > 3000$ per unhappy consumer.\footnote{It is acceptable to expliticly assume some $C < 3000$; then the optimal mechanism will be slightly different.}
+	
+	The efficient allocation rule $k^*(\theta)$ then is such that $k_i = 1$ for the travelers with the two lowest costs $\theta_i$, and $k_i=0$ for everyone else. To derive the transfers, we first need to calculate the least charitable types of all players. For player $i$, it is given by
+	\begin{align*}
+		\theta^{LCT}_i &\in \arg \min_{\theta_i \in [0,3000]} \mathbb{E}_{\theta_{-i}} \left[ \sum_{j=0}^{N} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta_i) \right]
+		\\
+		&= \arg \min_{\theta_i \in [0,3000]} \mathbb{E}_{\theta_{-i}} \left[ - \sum_{j=0}^N \theta_j k_j^*(\theta_i, \theta_{-i})  \right] ,
+	\end{align*}
+	where $\underline{U}_i (\theta_i) =0$ is $i$'s reservation utility (from taking the flight and not incurring the cancellation cost). Note that $k^*_j(\theta)$ is increasing in $\theta_i$ -- if $i$ has a higher cancellation cost, it becomes more likely that $j$ will be the one to get the compensation instead. Therefore, the expression above is minimized by the highest type: $\theta^{LCT}_i = 3000$.
+	
+	We can now derive the gVCG transfers using the expression from lectures:
+	\begin{align*}
+		t_i^{GVCG} (\theta) \equiv& \sum_{j \neq i} v_j (k^*(\theta^{LCT}_i,\theta_{-i}),\theta_j) + v_i (k^*(\theta^{LCT}_i,\theta_{-i}),\theta^{LCT}_i) -
+		\\& - \sum_{j \neq i} v_j (k^*(\theta_i,\theta_{-i}),\theta_j) - \underline{U}_i (\theta^{LCT}_i)
+		\\
+		=& \begin{cases}
+			- \theta_{-i}^{(2)} & \text{ if } k^*_i(\theta) = 1,
+			\\
+			0 & \text{ otherwise },
+		\end{cases}
+	\end{align*}
+	where $\theta_{-i}^{(2)}$ is the second-lowest cost among all travelers excluding $i$. In effect, we have obtained the third-price procurement auction, where all travelers submit their bids (what the minimal price is that they are willing to accept in exchange for not flying), two lowest bids win and receive third-lowest bid as their compensation amount.
+	
+	\item The question of why an efficient mechanism (one implementing the efficient allocation rule $k^*(\theta)$) is optimal (maximizes the expected revenue/minimizes expected cost) amounts to asking why distorting the allocation rule away from the efficient one can not help increase revenue, contrary to what we saw in the Myerson's optimal mechanism/optimal auction. We can answer by considering different deviations from efficiency:
+	\begin{itemize}
+		\item Buying back more than two seats would come at a greater expense, and is thus not optimal.
+		\item Buying back fewer than two seats would violate the primary objective/the feasibility constraint. 
+		\item Treating different travelers asymmetrically is not optimal, since all travelers are symmetric.
+		\item Buying back from travelers with not-the-two-lowest costs would likely result in a non-monotone allocation rule, and is thus not possible (such an allocation rule would not be implementable).
+	\end{itemize}
+\end{enumerate}
+
+\fi 
+
+
+
+
+\section{Learning through Pricing}
+% optmech, easy+difficult; part 3 is the screener
+
+Jerry is walking out of his hotel in the morning, past an ice cream vendor. The vendor can offer him an ice cream now, and again in the evening, when Jerry returns after a day of exploring the city. Denote these two opportunities as $j = 1,2$. Jerry's valuation of an ice cream cone is $\theta \sim U[0,1]$, same on both opportunities, privately known to him.\footnote{Specifically, Jerry would still have valuation $\theta$ for a second ice cream in the evening if he already bought one in the morning. But he does not want to buy more than one cone at a given time.}
+
+At each opportunity $j \in \{1,2\}$, the vendor chooses price $p_j$ to offer to Jerry; Jerry then chooses whether to buy the ice cream or not, $a_j \in \{0,1\}$. The vendor's flow utility is given by $u_{V,j} (p_j,a_j) = p_j a_j$; Jerry's flow utility is given by $u_{J,j} (p_j,a_j,\theta) = a_j(\theta - p_j)$. Both players are forward-looking, and in the morning ($t=1$) each player $i \in \{V,J\}$ maximizes $u_{i,1} + u_{i,2}$. 
+%Jerry wants at most one ice cream per day (so if he buys in the morning, he will not buy in the evening: $a_1 + a_2 \leq 1$).
+
+\begin{enumerate}
+	\item Suppose Jerry rejected some price $p_1$, from which the vendor infers that his valuation is at most $\bar{\theta}$. Derive the optimal mechanism for $t=2$. (Show formally why a fixed-price mechanism is optimal, as opposed to a menu of lotteries.)
+	
+	\item Suppose Jerry accepted some price $p_1$, from which the vendor infers that his valuation is at least $\bar{\theta}$. Derive the optimal mechanism for $t=2$.
+	
+	\item Derive threshold $\bar{\theta}(p_1)$, below which Jerry rejects first price $p_1$ in equilibrium.
+	
+	\item Derive the optimal price $p_1$. Conclude how the whole two-period mechanism looks like, including the respective threshold $\bar{\theta}$, and the respective mechanisms for $t=2$.
+	
+	\item How does the vendor's profit in this mechanism compare to that in the static optimal mechanism (where the vendor is forced to set the same price)? Explain intuitively why.
+	%Does there exist a better (for the vendor) selling mechanism than offering two fixed prices? Provide an intuitive argument for how it could look like if it exists or for why it does not.
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solutions}
+
+\begin{enumerate}
+	\item Fix some $\bar{\theta}$. We will derive a direct mechanism $(k_2(\theta),t_2(\theta))$ for $\theta \in [0,\bar{\theta}]$, where $k_2$ is the sale probability, and $t_2$ is the transfer (so $u_{J,j} \left( k_j,t_j,\theta \right) = \theta k_j - t_j$). For this direct mechanism to be implementable in the real-world interaction described in the problem, the mechanism must be ex post IR (Jerry can walk away after hearing the price).%, and $t_2(\theta) = p_2 k_2(\theta)$ for some price $p_2$.
+	
+	Follow the standard algorithm for the Myerson optimal mechanism (see the slides/lecture notes). Show that $k_2(\theta)$ must be weakly increasing. Show the ERP:
+	\begin{align*}
+		&U_{J,2}(\theta) \equiv u_{J,2} \left( k_2(\theta),t_2(\theta),\theta \right) 
+		= U_{J,2}(0) + \int_0^\theta k_2(s) ds
+		\\
+		\Rightarrow &
+		t_2(\theta) = \theta k_2(\theta) - \int_0^\theta k_2(s) ds - U_{J,2}(0).
+	\end{align*}
+	The optimal mechanism trivially sets $U_{J,2}(0) = 0$ (if Jerry has no value for the ice cream, he walks away without buying or paying anything). Given that, the vendor's expected revenue is
+	\begin{align*}
+		\mathbb{E}u_{V,2} = \mathbb{E} t_2(\theta) 
+		&= \mathbb{E} \left[ \theta k_2(\theta) - \int_0^\theta k_2(s) ds \right]
+		\\
+		&= \int_0^{\bar{\theta}} \left[ \theta k_2(\theta) - \int_0^\theta k_2(s) ds \right] \phi_{\bar{\theta}} (\theta) d\theta 
+		\\
+		&= \int_0^{\bar{\theta}} k_2(\theta) \left[ \theta - \frac{1-\Phi_{\bar{\theta}}(\theta)}{\phi_{\bar{\theta}}(\theta)} \right] \phi_{\bar{\theta}} (\theta) d\theta
+		\\
+		&= \int_0^{\bar{\theta}} k_2(\theta) \left[ 2\theta - \bar{\theta} \right] \phi_{\bar{\theta}} (\theta) d\theta
+	\end{align*}
+	where $\Phi_{\bar{\theta}} = \frac{\theta}{\bar{\theta}}$ and $\phi_{\bar{\theta}} = \frac{1}{\bar{\theta}}$ are the respective cdf and pdf of the $U[0,\bar{\theta}]$ distribution.
+	
+	Maximizing the expression above over allocation rules $k_2$, we get $k_2^*(\theta) = \mathbb{I} \left\{ \theta \geq \frac{\bar{\theta}}{2} \right\}$, and plugging this into the expression for transfers above, we get $t_2(\theta) = \frac{\bar{\theta}}{2} \cdot \mathbb{I} \left\{ \theta \geq \frac{\bar{\theta}}{2} \right\}$. This mechanism is equivalent to setting a fixed price $p_2 = \frac{\bar{\theta}}{2}$.
+	
+	\item Repeating the steps above, we get a fixed-price mechanism with $p_2 = \max \left\{ \frac{1}{2}, \bar{\theta} \right\}$. Specifically, if $\bar{\theta} > \frac{1}{2}$, then the sale happens with probability one, but the vendor knows that Jerry's valuation is at least $\bar{\theta}$, so can safely set the price at $\bar{\theta}$.
+	
+	\item Suppose the vendor expects Jerry to agree to buy in the morning at price $p_1$ if and only if $\theta \geq \bar{\theta}$. Then if Jerry buys, his overall utility given true type $\theta$ is given by
+	\begin{align*}
+		u_{J,1} + u_{J,2} = \theta - p_1 + \max \left\{ 0, \theta - \max \left\{ \frac{1}{2}, \bar{\theta} \right\} \right\}.
+	\end{align*}
+	If Jerry decides to pass, his overall utility is
+	\begin{align*}
+		u_{J,1} + u_{J,2} = 0 + \max \left\{ 0, \theta - \frac{\bar{\theta}}{2} \right\}.
+	\end{align*}
+	
+	We can see that in equilibrium, if the indifferent type $\theta = \bar{\theta}$ buys in $t=1$, he will get utility zero in $t=2$ (from either not buying, or buying at $p_2=\bar{\theta}$), and utility $\bar{\theta} - \frac{\bar{\theta}}{2}$ in $t=2$ if he rejects in $t=1$, so the indifference condition for type $\bar{\theta}$ at $t=1$ is
+	\begin{align*}
+		\bar{\theta} - p_1 + 0 = \bar{\theta} - \frac{\bar{\theta}}{2},
+	\end{align*}
+	implying $\bar{\theta} = 2p_1$. To abide by the boundary of the type distribution, we can write $\bar{\theta}(p_1) = \min \{1, 2p_1 \}$.
+	
+	%Comparing these utilities, we get that:
+	%\begin{itemize}
+	%	\item if $p_1 < \frac{\bar{\theta}}{2}$, then Jerry buys iff $\theta \geq p_1$. The latter implies that in equilibrium, it must be that $\bar{\theta} = p_1$, which contradicts $p_1 < \frac{\bar{\theta}}{2}$.
+	%	\item If $p_1 > \frac{\bar{\theta}}{2}$, then Jerry buys iff $\theta \geq p_1 + \max \left\{ \frac{1}{2}, \bar{\theta} \right\}$. The latter implies that in equilibrium, it must be that $\bar{\theta} = p_1 + \max \left\{ \frac{1}{2}, \bar{\theta} \right\} \geq p_1 + \frac{1}{2}$, which contradicts $p_1 > \frac{\bar{\theta}}{2}$.
+	%	\item If $p_1 = \frac{\bar{\theta}}{2}$, then Jerry is indifferent whenever $\theta \in \left[ \frac{\bar{\theta}}{2}, \max \left\{ \frac{1}{2}, \bar{\theta} \right\} \right]$. Hence an equilibrium with $\bar{\theta} = 2p_1$ is possible, if $p_1 \leq 1/2$.
+	%\end{itemize}
+	%We conclude that $\bar{\theta}(p_1) = \min \{1, 2p_1 \}$.
+	
+	\item Note that it never makes sense for the vendor to set price $p_1$ higher than $1/2$, since in that case Jerry does not buy in the morning for any $\theta$, and the vendor does not learn anything either.
+	Suppose then that $p_1 < 1/2$ (and so $\bar{\theta} = 2p_1$). The vendor's revenue/profit depending on $\theta$ is as follows:
+	\begin{enumerate}
+		\item In the first period, the vendor receives $p_1$ if $\theta \geq \bar{\theta} = 2p_1$ and zero otherwise.
+		\item In the second period, the vendor receives $p_2 = \frac{\bar{\theta}}{2} = p_1$ if Jerry passes in the first period but buys in the second, i.e., if $\theta < \bar{\theta}$ and $\theta > p_2$, which is equivalent to $\theta \in (p_1, 2p_1]$.
+		\item In the second period, the vendor receives $p_2 = \max \left\{ \frac{1}{2}, \bar{\theta} \right\} = \left\{ \frac{1}{2}, 2p_1 \right\}$ if Jerry buys in both periods, i.e., if $\theta \geq \max \left\{ \bar{\theta}, p_2 \right\} = p_2 = \max \left\{ \frac{1}{2}, 2p_1 \right\}$.
+	\end{enumerate}
+	
+	The vendor's expected total profit given price $p_1 < 1/2$ is then given by
+	\begin{align*}
+		\mathbb{E} \left[ u_{V,1} + u_{V,2} \right] 
+		&= \int_0^1 \left[ 
+		p_1 \mathbb{I}\left\{ \theta \geq 2p_1 \right\} 
+		+ p_1 \mathbb{I} \left\{ \theta \in [p_1, 2p_1) \right\} 
+		+ \max \left\{ \frac{1}{2}, 2p_1 \right\} \mathbb{I} \left\{ \theta \geq \max \left\{ \frac{1}{2}, \bar{\theta} \right\} \right\} 
+		\right] \phi(\theta) d\theta 
+		\\&= \int_0^1 \left[ 
+		p_1 \mathbb{I}\left\{ \theta \geq p_1 \right\} 
+		+ \max \left\{ \frac{1}{2}, 2p_1 \right\} \mathbb{I} \left\{ \theta \geq \max \left\{ \frac{1}{2}, 2p_1 \right\} \right\} 
+		\right] \phi(\theta) d\theta 
+		\\
+		&= \int_{p_1}^1 p_1 d\theta +
+		\int_{\max \left\{ \frac{1}{2}, 2p_1 \right\}}^{1} \max \left\{ \frac{1}{2}, 2p_1 \right\} d\theta 
+		\\
+		&= p_1(1-p_1) + \max \left\{ \frac{1}{2}, 2p_1 \right\} \left( 1 - \max \left\{ \frac{1}{2}, 2p_1 \right\} \right)
+		%= \frac{1}{4} + p_1 - 2p_1^2,
+		\\
+		&= \begin{cases}
+			\frac{1}{4} + p_1 - p_1^2 & \text{ if } p_1 \leq \frac{1}{4},
+			\\
+			3p_1 - 5p_1^2 & \text{ if } p_1 \geq \frac{1}{4}.
+		\end{cases}
+	\end{align*}
+	which is maximized by $p_1 = 0.3$. Then $\bar{\theta} = 0.6$, and in the evening, the vendor charges prices $p_2 = 0.6$ if Jerry bought in the morning, and $p_2 = 0.3$ if he did not.
+	
+	\item From the calculations above, the vendor's profit in this dynamic mechanism is $0.45$. If the vendor had to commit to a constant price, this would be the problem from the lecture notes, where the optimal price is $p = \frac{1}{2}$. The expected profit per period is then given by $\mathbb{E}u_{V,j} = p \cdot \mathbb{P} \left\{ \theta > p \right\} = \frac{1}{4}$, and the overall expected profit would be $\frac{1}{2} > 0.45$.
+	
+	An obvious difference is that in the dynamic setting, the vendor can utilize the information from the first period to adjust the price (price discriminate) in the second period. Intuition suggests then that the profit should be higher in the dynamic setting, yet the comparison above shows that this is not the case. The reason is that Jerry takes vendor's learning into account in the first period and adjusts his behavior to signal that his valuation is low by sometimes forgoing a purchase that would be myopically beneficial (i.e, when $\theta > p_1$).
+	
+	This ``signaling motive'' in Jerry's behavior has a strong negative effect on the vendor's profits in a dynamic mechanism, enough to overpower the benefits from price discrimination. The vendor would thus benefit from the ability to commit to a constant price and to not utilize the information revealed by past purchases. This is a version of the Coase conjecture.\footnote{\url{https://en.wikipedia.org/wiki/Coase_conjecture}}
+	Alternatively, the vendor could potentially do even better if they could commit in the first period to some two-period mechanism (in contrast, in this problem, the vendor chooses second-period prices on the spot, as opposed to committing to them in advance).
+\end{enumerate}
+
+\fi 
+
+
+\end{document}

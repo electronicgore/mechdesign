@@ -1,0 +1,341 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+\usepackage{multirow}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Re-exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2024} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{final2024_2_frontpage.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your answers to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+
+\section{Flexible Pricing Based on the Needs of Your Business}
+% evidence, FDPD, trivial
+
+Firm A is an advertising agency that wants to buy some data about consumers' behavior, tastes, and habits. Firm B is a consumer-facing business that collects and stores and sells such data. It offers firm A an opportunity to access B's data via an API (so in a way, that will let B see what data, and how much of it, A is retrieving).
+
+In order to quote the price, firm B asks A to submit a complete description of what data it needs and how it will be used. Suppose that there is no scope for A to misrepresent its needs, since in that case B can impose restrictions on the API -- limit the kinds of data A gets access to, the scope, the query limit, etc -- in a way that would render the data useless for A.
+
+Explain how firm B will price the access to its data for firm A. Explain how the surplus generated by firm A from the data will be split between firms A and B. Be as formal as you can. Be explicit about any assumptions that you make.
+
+\ifsolutions
+\subsection*{Solutions}
+Since A is unable to misrepresent its needs, it cannot lie about its valuation $\theta$ for the data. This means that B can ask A to report its valuation $\theta$ for B's data (and support it with the relevant project description), and then ask A to pay price $p=\theta$ to access the data. Firm A would be exactly indifferent between revealing its needs truthfully and obtaining profit $\theta-p=0$, and doing anything else (misrepresenting its needs and/or walking away), which yields zero. The whole surplus generated by firm A is then appropriated by firm B.
+\fi 
+
+
+
+
+\section{Hip Fashion}
+%binary screening, tricky+difficult
+
+A fashion firm caters to two types of consumers: the rich and the poor $\theta \in \{R,P\}$. Here $R,P \in \mathbb{R}_{++}$ represent the consumers' baseline willingness to pay, and $R>P$. However, the poor want to look rich, while the rich want to downshift and look poor (and humble). Let $k(\theta)$ denote the probability that a consumer of type $\theta$ buys a given clothing item and $p(\theta)$ denote the price they pay for it. Then the overall product valuation of consumers of type $\theta$ is increasing in $k(\theta')$, where $\theta'$ is the type opposite of $\theta$ (i.e., $\theta' \in \{R,P\}$, $\theta' \neq \theta$) and decreasing in $k(\theta)$. I.e., consumers are willing to pay more for the product often bought by the other group and rarely bought by their own group. 
+The share of rich consumers in the population is given by $\phi \in (0,1)$. 
+
+\begin{enumerate}
+	\item Suppose the consumers' expected utilities are given by
+	\begin{align*}
+		u(x,\theta) = k(\theta) \cdot \theta \cdot \left( k(\theta')-k(\theta) \right) - k(\theta)p(\theta).
+	\end{align*} 
+	Derive a selling mechanism that is incentive compatible and individually rational (for the consumers), and maximizes the expected profit of the fashion firm.
+	
+	\item Suppose the consumers' expected utilities are given by
+	\begin{align*}
+		u(x,\theta) = k(\theta) \cdot \left( \theta + k(\theta')-k(\theta) \right) - k(\theta)p(\theta).
+	\end{align*} 
+	Derive a selling mechanism that is incentive compatible and individually rational (for the consumers), and maximizes the expected profit of the fashion firm.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solutions}
+We think of direct mechanisms, in which a consumer reports their type and gets the opportunity to buy the product with probability $k(\theta)$ at price $p(\theta)$. In other words, the firm is able to ration -- a consumer is not guaranteed to be able to buy the product if they are willing to pay the price.
+
+\begin{enumerate}
+	\item Given a mechanism, let $t(\theta) \equiv k(\theta)p(\theta)$ denote the [expected] transfer from group $\theta$. Further, let $v(\theta) \equiv \theta \cdot \left( k(\theta')-k(\theta) \right)$ denote the overall valuation for the item by the consumers from group $\theta$.
+	Then $u(x,\theta) = k(\theta)v(\theta) - t(\theta)$.
+	The constraints that an IC and IR mechanism must satisfy are as follows:
+	\begin{align*}
+		(IC_R:) \qquad v(R)k(R) - t(R) &\geq v(R)k(P) - t(P) \\
+		(IC_P:) \qquad v(P)k(P) - t(P) &\geq v(P)k(R) - t(R) \\
+		(IR_R:) \qquad v(R)k(R) - t(R) &\geq 0 \\
+		(IR_P:) \qquad v(P)k(P) - t(P) &\geq 0.
+	\end{align*}
+	
+	Adding together the inequalities $IC_R$ and $IC_P$ and rearranging, we get that $\Big( v(R) - v(P) \Big) \Big( k(R) - k(P) \Big) \geq 0$. At the same time, from the definitions of $v(\theta)$, we can see that $v(R) \geq v(P)$ if and only if $k(R) \leq k(P)$. Hence, the only way the two IC constraints can be satisfied is if $k(R) = k(P)$. This would imply $v(\theta) = 0$, and, hence, $k(\theta) = p(\theta) = 0$ for both $\theta \in \{R,P\}$. We conclude that the only IC(+IR) mechanism yields zero profit to the firm.
+	
+	\item Let $v(\theta) \equiv \theta + k(\theta')-k(\theta)$ denote the overall valuation for the item by the consumers from group $\theta$. Then the IC and IR conditions can be stated as above. The IC conditions still imply that $\Big( v(R) - v(P) \Big) \Big( k(R) - k(P) \Big) \geq 0$. Observe that since $R>P$, if $v(R) < v(P)$, then the definition of $v(\theta)$ implies $k(R) > k(P)$, which violates the IC conditions, so there are no IC mechanisms with $v(R) < v(P)$.
+	
+	Suppose then without loss that $v(R) \geq v(P)$. 
+	Then we can follow the standard algorithm for binary screening problems.
+	\begin{enumerate}
+		\item If the $IC_R$ and $IR_P$ conditions hold, then the $IR_R$ condition holds automatically and may thus be ignored.
+		
+		\item As mentioned above, the $IC_R$ and $IC_P$ conditions together imply that $k(R) \geq k(P)$, hence the latter must hold in any IC mechanism.
+		
+		\item If $IC_R$ binds, then $t(R)-t(P) = v(R) (k(R)-k(P))$, so $IC_P$ amounts to $v(P)k(P) + v(R) (k(R)-k(P)) \geq v(P)k(R)$, which holds because we must have $k(R) \geq k(P)$. Therefore, if $IC_R$ binds and $k(R) \geq k(P)$ holds, then $IC_P$ holds automatically and can be ignored.
+		
+		\item The $IR_P$ constraint must bind in the optimal mechanism, since if it doesn't, the firm can increase $t(P)$, which will increase the expected revenue without interfering with other constraints. Similarly, the $IC_R$ constraint must bind too, otherwise we could increase $t(R)$.
+	\end{enumerate}
+	We are left with the following problem for the firm:
+	\begin{align*}
+		\max_{k(R),k(P),t(R),t(P)} &\left\{ \phi t(R) + (1-\phi) t(P) \right\} 
+		\\
+		(IC_R:) \quad &v(R)k(R) - t(R) = v(R)k(P) - t(P) 
+		\\
+		(IR_P:) \quad &v(P)k(P) - t(P) = 0
+		\\
+		(MON:)	\quad &k(R) \geq k(P).
+	\end{align*}
+	From $IR_P$, $t(P) = v(P)k(P)$; and then from $IC_R$: $t(R) = v(R)(k(R)-k(P)) + v(P)k(P)$. The firm's expected profit is then given by
+	\begin{align*}
+		\mathbb{E}u_0 &= 
+		\phi v(R)(k(R)-k(P)) + v(P)k(P) 
+		\\
+		&= \phi \Big( R + k(P) - k(R) \Big) (k(R)-k(P)) + \Big( P + k(R) - k(P) \Big) k(P)
+		\\
+		&= P k(P) + \Big( k(R) - k(P) \Big) \Big( (1+\phi)k(P) -\phi k(R) + \phi R \Big)
+		%\\
+		%&= -\phi \Big( k(R) - k(P) \Big)^2 + \Big( k(R) - k(P) \Big) \Big( \phi R + k(P) \Big) + Pk(P)
+	\end{align*}
+	This can be maximized over $k(R),k(P)$ subject to the constraint $k(R) \geq k(P)$, as well as the boundary conditions $k(\theta) \in [0,1]$. One can use the Karush-Kuhn-Tucker approach to do that.
+	
+	The derivatives of the objective function w.r.t. the variables of choice are:
+	\begin{align*}
+		\frac{\partial \mathbb{E}u_0}{\partial k(R)} &= (1+2\phi)k(P) -2\phi k(R) + \phi R
+		\\
+		\frac{\partial \mathbb{E}u_0}{\partial k(P)} &= P - 2(1+\phi)k(P) + (1+2\phi) k(R) - \phi R
+		\\
+		&= P + k(R) - k(P) - \Big( (1+2\phi)k(P) -2\phi k(R) + \phi R \Big)
+	\end{align*}
+	One possible case is $\frac{\partial \mathbb{E}u_0}{\partial k(R)} \leq 0$. Then $\frac{\partial \mathbb{E}u_0}{\partial k(P)} > 0$ (since $P>0$, $k(R)\geq k(P)$). The firm then wants to decrease $k(R)$ and increase $k(P)$, so the constraint $k(R)\geq k(P)$ would imply that $k(R) = k(P) = k$. But then $\frac{\partial \mathbb{E}u_0}{\partial k(R)} \leq 0$ implies $k \leq - \phi R$ -- a contradiction with $k \geq 0$. This case is, thus, not possible.
+	
+	Hence $\frac{\partial \mathbb{E}u_0}{\partial k(R)} > 0$, so $k(R)=1$ in the optimal mechanism. Then, seeing as $\frac{\partial \mathbb{E}u_0}{\partial k(P)}$ is decreasing in $k(P)$, if we denote the root of $\frac{\partial \mathbb{E}u_0}{\partial k(P)}=0$ as $\hat{k}(P)$, then in the optimal mechanism, $k(P) = \min \left\{ \max \left\{ \hat{k}(P), 0 \right\}, 1 \right\}$.
+	Since $\hat{k}(P) = \frac{P-\phi R + 1+2\phi}{2(1+\phi)}$ can be anywhere on the real line depending on the values of $\phi,P,R$, this is the final answer. In the end, we have:
+	\begin{align*}
+		k(R) &= 1,
+		\\
+		k(P) &= \min \left\{ \max \left\{ \frac{P-\phi R + 1+2\phi}{2(1+\phi)}, 0 \right\}, 1 \right\},
+		\\
+		p(R) &= \frac{t(R)}{k(R)} = (R + k(P) - 1) (1-k(P)) + (P + 1 - k(P)) k(P)
+		\\
+		p(P) &= \frac{t(P)}{k(P)} = P + 1 - k(P).
+	\end{align*}
+\end{enumerate}
+\fi 
+
+
+
+\section{Rockets}
+%Procurement Auction with Correlated Values
+
+The military of a country wants to procure a new orbital launch system (i.e., a rocket, to launch its military satellites). There are two companies that have the potential to meet the demand: ArianeGroup and Boeing, $i \in \{A,B\}$. Each company has some estimate of the cost of the new rocket programme, $\theta_i \in \{1,2,3\}$, in EUR billions. These estimates are private, but not independent, since costs of both companies depend on the actual complexity of the programme, which is not fully understood by the military (suppose, however, that each company's estimate of their cost is correct on average). It is widely believed that the costs of the two companies are distributed as follows:
+\begin{center}
+	\begin{tabular}{c  c | c | c | c |}
+		\multicolumn{2}{c}{\multirow{2}{*}{$\phi(\theta_A,\theta_B)$}} & \multicolumn{3}{c}{$\theta_B$} \\
+		&& $1$ 				& $2$	& $3$				\\ \hline
+		\multirow{3}{*}{$\theta_A$} &
+		$1$	& $\frac{1}{6}$	& $\frac{1}{10}$	& $\frac{1}{20}$	\\ \hline
+		&$2$	& $\frac{1}{10}$& $\frac{1}{6}$		& $\frac{1}{10}$	\\ \hline
+		&$3$	& $\frac{1}{20}$& $\frac{1}{10}$	& $\frac{1}{6}$		\\ \hline
+	\end{tabular}
+\end{center}
+
+Derive a direct BIC and interim IR mechanism that asks the companies about their cost levels, assigns the project to the lowest-cost company (break ties fairly), and minimizes the expected cost to the military.
+
+%\emph{Bonus question: if you can, derive a mechanism that yields exactly zero expected utility to all types of both companies.}
+%Explain how such a mechanism could be implemented in the real world.
+
+\emph{Note: this problem is computationally intensive. You are encouraged to calculate numerical approximations of logs instead of trying to obtain exact expressions.}
+
+
+\ifsolutions
+\subsection*{Solutions}
+
+We can use the Cremer-McLean approach, since types $\theta_i$ of the two players are correlated, so we can screen on information, as opposed to the cost.
+We know the required allocation rule (as usual, the tie-breaking rule is insubstantial):
+\begin{align*}
+	k(\theta) = \begin{cases}
+		A & \text{ if } \theta_A \leq \theta_B,
+		\\
+		B & \text{ if } \theta_A > \theta_B.
+	\end{cases}
+\end{align*}
+
+The Cremer-McLean approach suggests that we can implement this allocation rule using transfers of the form 
+$$t_i(\theta) = C_{i,1} - C_{i,2} \hat{t}_i(\theta)$$ 
+for some $C_{i,1}, C_{i,2}$, where $\hat{t}_i(\theta) \equiv \log \left( \phi(\theta_{-i} | \theta_i) \right) $ is the ``truth-revealing transfer'' (see lectures).
+The game is symmetric, so the beliefs $\phi(\cdot|\theta_i)$ are as follows
+% and the respective $\hat{t}_i$
+\begin{center}
+	\begin{tabular}{c  c | c | c | c |}
+		\multicolumn{2}{c}{\multirow{2}{*}{$\phi(\theta_{-i}|\theta_i)$}} & \multicolumn{3}{c}{$\theta_{-i}$} \\
+		&& $1$ 				& $2$	& $3$				\\ \hline
+		\multirow{3}{*}{$\theta_i$} &
+		$1$	& $\frac{10}{19}$	& $\frac{6}{19}$	& $\frac{3}{19}$	\\ \hline
+		&$2$	& $\frac{3}{11}$& $\frac{5}{11}$		& $\frac{3}{11}$	\\ \hline
+		&$3$	& $\frac{3}{19}$& $\frac{6}{19}$	& $\frac{10}{19}$		\\ \hline
+	\end{tabular}
+\end{center}
+With three types for each player, we have a total of 6 IC conditions for type $\theta$ to not be willing to mimic type $\theta'$. E.g., for type $\theta=1$ to not report type $\theta'=2$, the following should hold (due to symmetry, we let $C_1 \equiv C_{i,1}$ and $C_2 \equiv C_{i,2}$ for $i \in \{A,B\}$):
+\begin{align*}
+	\frac{10}{19}\left( -\frac{1}{2} - C_{1} + C_{2} \log \left( \frac{10}{19} \right) \right) 
+	+ \frac{6}{19}\left( -1 - C_{1} + C_{2} \log \left( \frac{6}{19} \right) \right) 
+	+ \frac{3}{19}\left( -1 - C_{1} + C_{2} \log \left( \frac{3}{19} \right) \right)
+	\geq 
+	\\
+	\frac{10}{19}\left( - C_{1} + C_{2} \log \left( \frac{3}{11} \right) \right)
+	+ \frac{6}{19}\left( -\frac{1}{2} - C_{1} + C_{2} \log \left( \frac{5}{11} \right) \right)
+	+ \frac{3}{19}\left( -1 - C_{1} + C_{2} \log \left( \frac{3}{11} \right) \right),
+\end{align*}
+where each side presents the expected utility (w.r.t. $i$'s interim belief over $\theta_{-i}$) consisting of $i$'s costs of developing the rocket whenever it wins the auction, net of transfer to the mechanism (which will have to be negative to satisfy the IR constraints).
+
+Note that $C_1$ cancels out from both sides of this and other conditions.
+Each IC condition can then be reduced to a condition on $C_2$ (where all logs are approximated numerically):
+\begin{align*}
+	(\theta \to \theta':)
+	\\
+	(1 \to 2:)\quad& C_2 \geq 6.7
+	\\
+	(1 \to 3:)\quad& C_2 \geq 3.415
+	\\
+	(2 \to 1:)\quad& C_2 \geq -12.376
+	\\
+	(2 \to 3:)\quad& C_2 \geq 12.376
+	\\
+	(3 \to 1:)\quad& C_2 \geq -10.24
+	\\
+	(3 \to 2:)\quad& C_2 \geq -20.1
+\end{align*}
+We see that to satisfy all IC constraints, it must be that $C_2 \geq 12.376$. Let $C_2 = 12.376$.
+To find $C_1$, calculate the expected utilities of the three types given $C_2 = 13$, assuming they report truthfully:
+\begin{align*}
+	\mathbb{E} U_i(1) &= C_1 - 6.075
+	\\
+	\mathbb{E} U_i(2) &= C_1 - 6.735
+	\\
+	\mathbb{E} U_i(2) &= C_1 - 6.128
+\end{align*}
+Hence for the mechanism to be IR, we must have $C_1 \geq 6.735$, while to minimize the cost to the military, $C_1$ must be as low as possible. Hence $C_2 = 12.376$ and $C_1 = 6.735$.
+
+The above constitutes an acceptable answer. One can notice, however, that this mechanism leaves some surplus to types 1 and 3 of both firms, and thus does not minimize the procurement cost for the military. This can be addressed by making $C_1 = C_1(\theta_{-i})$ a function of the other player's report (since this would not affect $i$'s reporting incentives). Then we can solve the system 
+\begin{align*}
+	\mathbb{E} U_i(1) &= 0 &\iff&&
+	\frac{10}{19} C_1(1) + \frac{6}{19} C_1(2) + \frac{3}{19} C_1(3) &= 6.075
+	\\
+	\mathbb{E} U_i(2) &= 0 &\iff&&
+	\frac{3}{11} C_1(1) + \frac{5}{11} C_1(2) + \frac{3}{11} C_1(3) &= 6.735
+	\\
+	\mathbb{E} U_i(3) &= 0 &\iff&&
+	\frac{3}{19} C_1(1) + \frac{6}{19} C_1(2) + \frac{10}{19} C_1(3) &= 6.128
+\end{align*}
+to obtain $C_1 \approx (4.588,\, 9.225,\, 4.732)$.
+\fi 
+
+
+
+\end{document}
