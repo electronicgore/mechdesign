@@ -1,0 +1,300 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Re-exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{final2023_2_frontpage.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+
+\section{Spiteful exchange}
+% VCG/gVCG simple
+Carl stole a coral from Clara; Clara stole Carl's clarinet. 
+Once everything's been said and done, they are debating whether to exchange the stolen items back, $k \in \{0,1\}$. Carl's own valuation for getting back the clarinet and returning the coral is given by $\theta_1$, which is his private information. Clara's analogous valuation for returning the clarinet and recovering the coral is $\theta_2$. Both players, however, are spiteful, so they want to maximize own value and minimize the other person's value. In the end, Carl's utility function $u_1$ and Clara's $u_2$ are given by
+\begin{align*}
+	u_1(k,t,\theta) &= \theta_1 k(\theta) - \alpha \theta_2 k(\theta) - t_1(\theta),
+	\\
+	u_2(k,t,\theta) &= \theta_2 k(\theta) - \alpha \theta_1 k(\theta) - t_2(\theta),
+\end{align*}
+where $\alpha$ is the common animosity parameter, and $t_i$ represent transfers to the mechanism.
+
+Propose a welfare-maximizing mechanism (describe it fully and explain how you derived it) for each of the following cases:
+\begin{enumerate}
+	\item $\alpha=1$;
+	\item $\alpha \in (0,1)$;
+	\item $\alpha>1$.
+\end{enumerate}
+Would the resulting mechanisms be individually rational and/or budget balanced?
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item Welfare is given by 
+	\begin{align*}
+		v_1(k,\theta) + v_2(k,\theta) &= \theta_1 k(\theta) - \alpha \theta_2 k(\theta) + \theta_2 k(\theta) - \alpha \theta_1 k(\theta)
+		\\
+		&=(1-\alpha)(\theta_1+\theta_2) k(\theta)
+		\\
+		&=0.
+	\end{align*}
+	If $\alpha=1$, welfare does not depend on the allocation or the transfers, hence no mechanism can improve on the status quo $k=0, t_i=0$ for $i\in\{1,2\}$. This ``trivial mechanism'' is both IR and BB.
+	
+	\item If $\alpha \in (0,1)$, then welfare equals $(1-\alpha)(\theta_1+\theta_2) k(\theta)$, hence the efficient allocation rule is $k^*(\theta) = \mathbb{I} \left\{ \theta_1+\theta_2 > 0 \right\}$ (if $\theta_1+\theta_2=0$, either $k\in \{0,1\}$ can be selected). We can then use the VCG transfers to support it:
+	\begin{align*}
+		t^{VCG}_1(\theta) &= (\theta_2 - \alpha \theta_1) \cdot \left( \mathbb{I}\left\{\theta_2 - \alpha\theta_1 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 > 0\right\} \right),
+		\\
+		t^{VCG}_2(\theta) &= (\theta_1 - \alpha \theta_2) \cdot \left( \mathbb{I}\left\{\theta_1 - \alpha\theta_2 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 > 0\right\} \right).
+	\end{align*}
+	The resulting mechanism $(k^*,t^{VCG})$ would be budget balanced, but not individually rational. 
+	Another option would be to use the gVCG mechanism, which would be IR, but not necessarily BB.
+	
+	\item If $\alpha > 1$, then welfare equals $-(\alpha-1)(\theta_1+\theta_2) k(\theta)$, hence the efficient allocation rule is $k^*(\theta) = \mathbb{I} \left\{ \theta_1+\theta_2 < 0 \right\}$. We can again use the VCG transfers to support it:
+	\begin{align*}
+		t^{VCG}_1(\theta) &= (\theta_2 - \alpha \theta_1) \cdot \left( \mathbb{I}\left\{\theta_2 - \alpha\theta_1 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 < 0\right\} \right),
+		\\
+		t^{VCG}_2(\theta) &= (\theta_1 - \alpha \theta_2) \cdot \left( \mathbb{I}\left\{\theta_1 - \alpha\theta_2 > 0\right\} - \mathbb{I}\left\{\theta_1 + \theta_2 < 0\right\} \right).
+	\end{align*}
+	The resulting mechanism $(k^*,t^{VCG})$ would again be budget balanced, but not individually rational. 
+\end{enumerate}
+\fi
+
+
+
+\section{Layered Persuasion}
+% persuasion
+Rita is a prime minister and Sigurd is her economic advisor. Rita has to make a decision $a \in \{ l,r \}$ on the next year's state budget: whether to let her ministers spend as much as they need within reason ($a=l$) or to restrict spending to reduce the government debt ($a=r$). Whichever is preferred depends on the economic conditions $\omega \in \{L,R\}$: if the economy is lagging behind the trend ($\omega=L$), then a fiscal stimulus is preferred, while if it is raging over and above the trend ($\omega=R$), then a restrictive policy can be imposed without much harm. 
+Sigurd agrees on the broad approach, but is overall more biased towards the restrictive policy, since he is driven by pure economic growth considerations and is not trying to appease the electorate. 
+The per-period utility functions $u_R(a,\omega), u_S(a,\omega)$ of the two players can be captured in a stylized way as follows, with $\alpha > 1$ being the parameter that captures the misalignment between the two players:
+\begin{center}
+	\begin{tabular}{c | c | c |}
+		$(u_R,u_S)$ 	& $\omega = L$ 	& $\omega = R$ \\ \hline
+		$a=l$ 			& $(\alpha,1)$ 	& $(0,0)$		\\ \hline
+		$a=r$			& $(0,0)$	 	& $(1,\alpha)$	\\ \hline
+	\end{tabular}
+\end{center}
+
+Sigurd does not know $\omega$ precisely in any period, but has a private belief $\theta \equiv \mathbb{P}\{\omega=R\}$ that represents the probability he assigns to the state being $R$ in period $t$. From Rita's point of view, $\theta \sim \text{i.i.d.}U[0,1]$ (unconditional on state).
+
+Sigurd engages in Bayesian Persuasion: he commits to a recommendation strategy (a mapping $\sigma$ from beliefs $\theta \in [0,1]$ to actions $a \in \{l,r\}$)\footnote{In particular, in this problem you can restrict attention to pure strategies, where after every $\theta$, Sigurd sends one of the two recommendations for sure, but never randomizes between the two recommendations.} 
+before making up his mind on the issue (before he observes $\theta$). You are to derive the optimal persuasion strategy, following the steps as presented below.
+\begin{enumerate}
+	\item Suppose Rita knows Sigurd's belief $\theta$, so her belief also assigns probability $\theta$ to $\omega=R$. For which values of $\theta$ does Rita choose action $a=r$?
+	
+	\item Given your answer above, which communication strategy $\sigma$ would Rita optimally choose (for Sigurd to follow) if she could? Denote it as $\hat{\sigma}$.
+	
+	\item Given $\alpha>1$, explain intuitively in which direction do you think Sigurd would like to distort his communication strategy relative to Rita's preferred one you derived above? 
+	(Denote his optimal strategy as $\sigma^*$. Would there exist $\theta$ such that $\sigma^*(\theta)=l$ and $\hat{\sigma}=r$? Would there exist $\theta$ such that $\sigma^*(\theta)=r$ and $\hat{\sigma}=l$? Both? Neither?)
+	
+	\item Suppose Rita does not know $\theta$ exactly, but believes that it is distributed according to some cdf $\Phi$ (which can be the prior distribution, $U[0,1]$, or some interim distribution after hearing Sigurd's recommendation). How does Rita's decision depend on $\Phi$?
+	
+	\emph{Hint: In particular, Rita knows the expectation $\mathbb{E}[\theta|\Phi]$ of $\theta$ with respect to distribution $\Phi$. For which values of $\mathbb{E}[\theta|\Phi]$ does she choose action $a=r$?}
+	
+	\item Suppose Sigurd uses a cutoff communication strategy: for some $\bar{\theta} \in [0,1]$,
+	\begin{align*}
+		\sigma(\theta) = \begin{cases}
+			l & \text{ if } \theta < \bar{\theta},
+			\\
+			r & \text{ if } \theta \geq \bar{\theta}.
+		\end{cases}
+	\end{align*}
+	Given what you learned about Rita's optimal decision strategy in the previous question, calculate Sigurd's (ex ante) expected utility as a function of $\bar{\theta}$ (and $\alpha$) and derive the optimal $\bar{\theta}$ (as a function of $\alpha$).
+	
+	\item Explain intuitively why the communication strategy you derived above is or is not globally optimal for Sigurd (among all strategies, including the non-cutoff ones).
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item Rita's expected utility given $\theta$ and $a$ is given by
+	\begin{align*}
+		\mathbb{E}[u_R(a,\omega)|\theta] &= \begin{cases}
+			\theta \cdot 0 + (1-\theta) \cdot \alpha & \text{ if } a=l, \\
+			\theta \cdot 1 + (1-\theta) \cdot 0 & \text{ if } a=r;
+		\end{cases}
+		\\
+		&= \begin{cases}
+			(1-\theta) \alpha & \text{ if } a=l, \\
+			\theta & \text{ if } a=r.
+		\end{cases}
+	\end{align*}
+	Hence $a=r$ is optimal if and only if $\theta \geq (1-\theta) \alpha \iff \theta \geq \frac{\alpha}{1+\alpha}$. Denote this action rule as $\hat{a}(\theta)$.
+	
+	\item While full information (induced by perfect communication strategy $\sigma(\theta)=\theta$) is always a weakly dominant option for Rita, she only needs enough information to decide on the action. In order to make her preferred action given by $\hat{a}(\theta)$, she only needs to know whether $\theta$ is above or below $\frac{\alpha}{1+\alpha}$. Hence the following communication strategy is optimal for her (in the sense of giving her the same expected utility as perfect information):
+	\begin{align*}
+		\hat{\sigma}(\theta) = \begin{cases}
+			l & \text{ if } \theta < \frac{\alpha}{1+\alpha},
+			\\
+			r & \text{ if } \theta \geq \frac{\alpha}{1+\alpha}.
+		\end{cases}
+	\end{align*}
+	
+	\item By the argument similar to the above, Sigurd prefers $a=r$ whenever $\theta \geq \frac{1}{1+\alpha}$, which is a lower cutoff than for Rita. I.e., for low $\theta$, both Sigurd and Rita prefer $a=l$; for average $\theta$ Sigurd prefers $a=r$ and Rita prefers $a=l$; and for high $\theta$ both prefer $a=r$. Hence intuitively, Sigurd would like to induce $a=r$ more frequently than Rita would prefer it, and he can achieve it by sending message $\sigma^*(\theta)=r$ for some of the ``average'' $\theta$ mentioned above (for which $\hat{\sigma}(\theta)=l$). The converse would not hold, since Sigurd never wants to induce $l$ when Rita prefers $r$.
+	
+	\item Part 1 implies that Rita's expected utility $\mathbb{E}[u_R(a,\omega)|\theta]$ given $\theta$ is linear in $\theta$, hence we get:
+	\begin{align*}
+		\mathbb{E}[u_R(a,\omega)|\Phi] &= \begin{cases}
+			\mathbb{E}[ (1-\theta)\alpha |\Phi] & \text{ if } a=l, \\
+			\mathbb{E}[ \theta |\Phi] & \text{ if } a=r;
+		\end{cases}
+		\\
+		&= \begin{cases}
+			\Big(1- \mathbb{E}[\theta|\Phi] \Big) \alpha & \text{ if } a=l, \\
+			\mathbb{E}[\theta|\Phi] & \text{ if } a=r.
+		\end{cases}
+	\end{align*}
+	So we get the same best response as in part 1: $a=r$ is optimal if $\mathbb{E}[\theta|\Phi] \geq \frac{\alpha}{1+\alpha}$, and $a=l$ is optimal otherwise. 
+	
+	\item Given $\bar{\theta}$, let $\bar{\theta}_l \equiv \mathbb{E} \Big[ \theta \mid \theta \in [0,\bar{\theta}] \Big] = \frac{\bar{\theta}}{2}$ and $\bar{\theta}_r \equiv \mathbb{E} \Big[ \theta \mid \theta \in [\bar{\theta},1] \Big] = \frac{1+\bar{\theta}}{2}$ denote the expectations of $\theta$ conditional on the two messages $\sigma \in \{l,r\}$ produced by the cutoff communication strategy. Further, note that the probability of message $\sigma=l$ being sent equals $\mathbb{P}\{\sigma=l\} = \mathbb{P}\{ \theta \in [0,\bar{\theta}] \} = \bar{\theta}$, and so the probability of message $\sigma=r$ is $\mathbb{P}\{\sigma=r\} = 1-\bar{\theta}$. Finally, let $a^*(\sigma)$ denote Rita's strategy described in the previous part, given message $\sigma$ and $\bar{\theta}$.
+	
+	Then Sigurd's ex ante expected payoff given $\bar{\theta}$ is given by
+	\begin{align*}
+		\mathbb{E}[u_S(a^*(\sigma), \omega) | \Phi,\bar{\theta}]
+		&= \mathbb{P}\{\sigma=l\} \cdot \left( \mathbb{I} \left\{ \bar{\theta}_l < \frac{\alpha}{1+\alpha} \right\} \cdot (1-\bar{\theta}_l)
+		+ \mathbb{I} \left\{ \bar{\theta}_l \geq \frac{\alpha}{1+\alpha} \right\} \cdot \alpha \bar{\theta}_l \right) 
+		\\
+		&\hphantom{=} + \mathbb{P}\{\sigma=r\} \cdot \left( \mathbb{I} \left\{ \bar{\theta}_r < \frac{\alpha}{1+\alpha} \right\} \cdot (1-\bar{\theta}_r)
+		+ \mathbb{I} \left\{ \bar{\theta}_r \geq \frac{\alpha}{1+\alpha} \right\} \cdot \alpha \bar{\theta}_r \right) 
+		\\
+		&= \bar{\theta} \cdot \left( \mathbb{I} \left\{ \bar{\theta} < \frac{2\alpha}{1+\alpha} \right\} \cdot \left( 1-\frac{\bar{\theta}}{2} \right)
+		+ \mathbb{I} \left\{ \bar{\theta} \geq \frac{2\alpha}{1+\alpha} \right\} \cdot \alpha \frac{\bar{\theta}}{2} \right) 
+		\\
+		&\hphantom{=} + (1-\bar{\theta}) \cdot \left( \mathbb{I} \left\{ \bar{\theta} < \frac{\alpha-1}{1+\alpha} \right\} \cdot \frac{1-\bar{\theta}}{2} 
+		+ \mathbb{I} \left\{ \bar{\theta} \geq \frac{\alpha-1}{1+\alpha} \right\} \cdot \alpha \frac{1+\bar{\theta}}{2} \right) 
+		\\
+		&= \begin{cases}
+			\frac{1}{2} & \text{ if } \bar{\theta} < \frac{\alpha-1}{\alpha+1},
+			\\
+			\frac{1}{2} \left(\alpha + 2 \bar{\theta} - (1+\alpha) \bar{\theta}^2\right) & \text{ if } \bar{\theta} \geq \frac{\alpha-1}{\alpha+1}.
+		\end{cases}
+	\end{align*}
+	(Note that since $\alpha>1$, we have $\frac{2\alpha}{\alpha+1}>1$.)
+	We can see that Sigurd's expected utility is given by $\frac{1}{2}$ for low values of $\bar{\theta}$ and by a concave parabola in $\bar{\theta}$ for high values of $\bar{\theta}$. Hence in principle, there are four possible types of $\bar{\theta}$ that maximize this expected utility:
+	\begin{enumerate}
+		\item $\bar{\theta} \in \left[ 0, \frac{\alpha-1}{\alpha+1} \right)$: any value in the interval yields expected utility equal to $\frac{1}{2}$;
+		\item $\bar{\theta} = \frac{\alpha-1}{\alpha+1}$: corner solution that may maximize the parabolic part;
+		\item $\bar{\theta} = \frac{1}{1+\alpha}$: interior maximizer of the parabolic part if inside $\left[ \frac{\alpha-1}{\alpha+1}, 1 \right]$;
+		\item $\bar{\theta} = 1$: corner solution that may maximize the parabolic part.
+	\end{enumerate}
+	Option (d) can be ignored since it yields utility $\frac{1}{2}$ to Sigurd, same as option (a). Option (b) dominates option (a), since $\frac{1}{2} \left(\alpha + 2 \bar{\theta} - (1+\alpha) \bar{\theta}^2\right)$ evaluated at $\bar{\theta} = \frac{\alpha-1}{\alpha+1}$ is strictly greater than $\frac{1}{2}$ whenever $\alpha > 1$, which is true by assumption. For $\alpha < 2$, option (c) maximizes the parabolic part and hence dominates option (b). 
+	Altogether, the optimal strategy for Sigurd is thus given by
+	\begin{align*}
+		\bar{\theta}^* 
+		%= \max \left\{ \frac{\alpha-1}{\alpha+1}, \frac{1}{1+\alpha} \right\}.
+		= \frac{ \max \{ \alpha-1 , 1 \} }{\alpha+1}.
+	\end{align*}
+	
+	\item By the ``revelation principle'' for persuasion mechanisms, Sigurd never needs to send more than two messages with $\sigma$: he can only induce two actions by Rita, $a \in \{l,r\}$, hence any other persuasion mechanism/communication strategy can be reduced to one that only sends two recommendations $\sigma \in \{l,r\}$. The fact that the partition strategy is then optimal can be a bit tedious to prove formally, but the intuitive idea is that both Sigurd and Rita prefer $a=l$ after low $\theta$ and $a=r$ after high $\theta$, so deviating from the suggested partitional communication strategy (by, e.g., sending $\sigma=r$ after low $\theta$ or $\sigma=l$ after high $\theta$) would neither help Sigurd's expected utility, nor relax Rita's IC/obedience constraints.	
+\end{enumerate}
+\fi 
+
+
+
+\end{document}

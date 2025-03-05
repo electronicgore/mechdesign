@@ -1,0 +1,260 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Mechanism Design} % Course/class
+\newcommand{\instructor}{Fall 2023} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{final2023_1_frontpage.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. State explicitly all the assumptions that you make. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc for results and proofs contained therein.
+
+Some questions are open ended in that they may not have a unique correct answer. Make as much progress as you can. It is recommended that you look through all problems and questions before beginning to solve the exam. Remember that even if you cannot solve some of the early questions in a given problem, you may still be able to answer later questions. 
+\fi}
+
+
+
+\section{Benevolence}
+% fundamentals
+Mark would like to go to the store and buy some KEX chocolate wafers, they cost $p$ kroner each, and Mark's value from wafers is given by $\sqrt{\theta k}$, where $k$ is the quantity he buys, and $\theta \sim U[1,7]$ is his privately known preference parameter. Unfortunately, he has no money and has to ask Mary to lend him some. Mary incurs cost $t$ from lending amount $t$ (she knows that's a loan she will not see repaid), but she loves Mark and is happy when he's happy, so she also receives value $\sqrt{\theta k}$ from his consumption. Mark, on the other hand, also feels guilty to ask for money like this, and also incurs cost $t$.
+In the end, both Mark's utility $u_1$ and Mary's utility $u_0$ are given by
+\begin{align*}
+	u_0(k,t,\theta) = u_1(k,t,\theta) = \sqrt{\theta k} - t.
+\end{align*}
+
+\begin{enumerate}
+	\item Design an IC mechanism that Mary could offer to Mark that maximizes her expected utility $\mathbb{E}[u_0]$. 
+	\item Give an example of an indirect mechanism that would be equivalent to what you derived above and would be reasonable enough to use in the real world.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item Since both players have perfectly aligned interests, Mary can offer Mark to simply choose any $(k,t)$ he prefers. Mark will choose an option that maximizes $u_1$ given $\theta$, hence it will also maximize Mary's utility $u_0$.
+	
+	We can find $(k(\theta),t(\theta))$ that maximize Mark's utility $u_1$ given $\theta$, subject to the funding constraint $t(\theta) \geq p k(\theta)$:
+	\begin{align*}
+		(k^*(\theta),t^*(\theta)) &\in \arg\max_{k,t} \left\{ \sqrt{\theta k} - t \right\}
+		\\
+		\text{s.t. } & t \geq p k.
+		\\
+		\Rightarrow 
+		t^*(\theta) &= p k^*(\theta),
+		\\
+		k^*(\theta) &\in \arg\max_{k} \left\{ \sqrt{\theta k} - pk \right\}
+		\\
+		\Rightarrow
+		k^*(\theta) &= \frac{\theta}{4p^2}.
+	\end{align*}
+	So the optimal direct mechanism is given by $(k^*(\theta),t^*(\theta)) = \left( \frac{\theta}{4p^2}, \frac{\theta}{4p} \right)$.
+	
+	\item As mentioned above, Mary can simply let Mark name the amount $t$ he would like to borrow, and let him go buy KEX chocolate wafers with all of the named amount. An even less direct mechanism would be to give Mark direct access to Mary's credit card or any other payment method for sake of this purchase.
+\end{enumerate}
+\fi
+
+
+
+\section{Student admissions}
+% VCG/SPA, evidence, fundamentals
+European Institute for Education, Innovation, and Organization (EIEIO) is trying to establish its student recruitment and admission strategy. To do so, it has set up a panel of esteemed Economists, including you.
+
+It was decided (as a modeling assumption) to rank all high school graduates according to ability and assign rank $\theta_i \in [0,1]$ to every graduate, with $\theta_i=1$ being the highest-ability graduate and $\theta_i=0$ the lowest-ability (so by construction, $\theta_i \sim U[0,1]$ in the population of graduates).
+Let $k_i \in \{0,1\}$ denote whether student $i$ is accepted into the program. Suppose for simplicity that EIEIO can accept at most one student $i$ out of $N$ applicants into the program and gets benefit equal to $\theta_i$ from doing so. In other words: $\sum_{i=1}^N k_i \leq 1$ and the institute's utility function is $u_0(k,\theta) = \sum_{i=1}^N k_i \theta_i$. Therefore, the goal is to select the student with the highest $\theta_i$ out of the pool of applicants $i \in \{1,...,N\}$.
+
+\begin{enumerate}
+	\item David G. argues that able students have higher valuation for a spot at EIEIO: applicant $i$'s utility is $u_i(k,\theta_i) = \theta_i k_i$. Does there exist an incentive compatible (BIC or DSIC) mechanism that achieves the goal of selecting the best candidate without using transfers? If yes, give an example; if no, explain why.
+	
+	\item Eddie D. argues that all applicants have taken the state exam when they graduated from high school, and grades from this exam are a good enough proxy for $\theta_i$. He mentioned that we could develop a DSIC mechanism that achieves the goal by asking the students to show their grades from the state exam. Eddie had to leave the meeting before he could explain his idea, and now the panel is hoping that you can fill in the gaps. Please explain the mechanism that Eddie had in mind and verify that it is indeed DSIC and achieves the goal (to the extent that the correlation between the grade and $\theta_i$ allows).
+	
+	\item Roger M. says that Eddie's mechanism will not work because in EIEIO's home country, universities are legally not allowed to base their admission decisions on the results of the state exam. He suggests that we use payments to screen applicants and argues that $u_i(k,t,\theta) = \theta_i k_i - t_i$, and the mechanism should maximize $u_0(k,t,\theta) = \sum_{i=1}^N \left[ \theta_i k_i + t_i \right]$, but this idea has not gained traction among the panel. 
+	
+	William V., in particular, agrees with Roger that payments could be used, but argues that the EIEIO is non-profit and should not care about maximizing revenue. Derive a BIC (or DSIC) mechanism with transfers that maximizes $u_0(k,\theta) = \sum_{i=1}^N \theta_i k_i$ for all $\theta$.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+%solutions
+\begin{enumerate}
+	\item There exists no such BIC/DSIC mechanism. By the revelation principle, we can without loss of generality look at direct mechanisms. In such a direct mechanism, reporting a higher type $\theta_i$ would always result in $i$ getting the slot with a weakly higher (and in some cases strictly higher) probability. Hence all applicants $i$ would strictly want to misreport their types as being $\hat{\theta}_i=1$, since all else equal, this yields the highest probability of getting a slot. (Writing out the IC conditions of any two types $\theta_i''>\theta_i'$ of $i$ can help see this formally.)
+	
+	\item Consider the following mechanism: every applicant $i$ reports their grade $g_i$ from the state exam and shows the official grade certificate; then the applicant who has submitted and proved the highest grade gets accepted into the program (if no applicants submit proved grades then no one gets accepted).
+	Then it is optimal for every applicant to report their grade truthfully and to submit the proof: doing so results in a strictly positive probability of being admitted, while a misreported grade would not be proved by the grade certificate, thereby leading to the applicant not getting admitted, and witholding proof would lead to the same result.
+	So there is no strictly profitable deviation ex post. This mechanism then selects the applicant with the highest grade $g_i$, which is approximately the same as selecting the applicant with the highest ability $\theta_i$ if the two are highly correlated.
+	
+	\item One can see that maximizing $u_0(k,\theta) = \sum_{i=1}^N \theta_i k_i$ for all $\theta$ is exactly the objective of the class of efficient mechanisms considered in class. VCG or gVCG would be appropriate for this problem, and, if applied correctly, both would yield the second-price auction as the final mechanism: applicant $i$ with the highest reported valuation $\theta_i$ gets the spot and pays the transfer equal to the second-highest valuation $\theta_{(2)} \equiv \max_{j \neq i} \theta_j$; all other applicants pay nothing (and do not get the spot). 
+\end{enumerate}
+\fi
+
+
+
+\section{Teams and sponsors}
+% stable matchings
+There are four racing teams without sponsors in Formula 0: Abarth,
+Bentley, Caterpillar, and Dacia (referred to respectively as A, B, C,
+and D). There are three sponsors looking to invest in racing teams in
+exchange for exposure and marketing activities: XFT Technologies,
+Yggdrasil Finance, and Zero Energy (X, Y, and Z, respectively).
+The sponsorship contracts in Formula 0 are standard in terms of sums and
+responsibilities, but different teams and sponsors may prefer different
+partners, due to differences in values and vision.
+
+Both teams and sponsors are very secretive about their preferences, but
+it is known that everyone has a very clear ranking over potential
+partners (and each wants exactly one partner). Further, the following 
+information has been revealed through interviews and leaks:
+\begin{itemize}
+	\item all three sponsors and all four teams want to find a partner more
+	than to stay independent/uninvolved;
+	\item sponsor Y is by far the most preferred option for teams B and D;
+	\item sponsor Y itself favors B over the other teams;
+	\item sponsor Z, conversely, said they had no talks with B or D, and
+	among the other two teams, it is generally understood that they favor a
+	deal with C;
+	\item team C ranks Z over X, but it is not clear where Y stands in this
+	ranking;
+	\item sponsor X suffered from an internal leak, suggesting that their
+	marketing team ranked C over D over B over A.
+\end{itemize}
+You are a correspondent for an autosport website, and your editor asked
+you to write an article ``This is how the sponsorships will play out in
+F0''. The information is incomplete, but your editor insists that it
+allows to learn at least something about how the final matching will
+look like.
+
+\begin{enumerate}
+	\item You decided to start by speculating. Complete the players'
+	rankings (in any way that is consistent with the information provided) and find a
+	stable matching in this market.
+	
+	\item Your editor is not happy with speculation and says you should not make
+	any assumptions about preferences except for those given above. What can
+	you answer to the following questions about the stable matching in this
+	market, based only on the information given above:
+	\begin{enumerate}
+		\item Whom will Y sponsor?
+		\item Who will sponsor team C?
+		\item Who will sponsor team A?
+	\end{enumerate}
+	(Explain how you obtained your answers.)
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item For part 1, the student should present a complete strict ranking for every player. The simplest way to then find a stable matching is to run a deferred acceptance algorithm. If so, the student should mention which side of the market proposes and which accepts, but the step-by-step solution of the algorithm is not required, and neither is a proof of why the resulting matching is stable, only the matching itself has to be presented. If the student does not use the DA algorithm, then it should be explained why the matching is stable. 
+	
+	Part 1 can be skipped if the student finds and characterizes the unique stable matching in part 2.
+	
+	\item We cannot run the DA algorithm to find a stable matching since we do not know the players' preferences perfectly, and hence cannot properly simulate the offers and the acceptance decisions. However, we can find a stable matching in a series of claims as follows:
+	\begin{itemize}
+		\item Y must sponsor B, since for any other matching, $(Y,B)$ would be a blocking pair (since both players are each other's top choices).
+		\item Z must sponsor C by the same logic (once we remove Y and B from the market).
+		\item The only remaining sponsor is then X, who will match with team D. This is because C is not available and D is X's second-best choice, while D prefers to match with X over staying unsponsored like all teams do (and Y,Z are unavailable by the arguments above).
+		\item Finally, A is the only team left in the market with no sponsors, so A is unsponsored.
+	\end{itemize}
+	We conclude that the unique stable matching in the market is $\big\{ (A,\varnothing), (B,Y), (C,Z), (D,X) \big\}$.
+\end{enumerate}
+\fi
+
+
+\end{document}
